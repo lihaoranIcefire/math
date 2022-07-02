@@ -1,0 +1,868 @@
+
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>MATLAB_Project1</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-07-02"><meta name="DC.source" content="MATLAB_Project1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">% Problem 1</span>
+format <span class="string">rat</span>;
+<span class="comment">% (a)</span>
+B = [
+ 1  -2    0   0   -9   -8;
+ 3  -5   -4   1  -29  -27;
+-1   2    0   1   11   11;
+-4   6   82  -6   32   26
+];
+<span class="comment">% (b)</span>
+B(2,:) = B(2,:) - 3 * B(1,:)
+B(3,:) = B(3,:) + B(1,:)
+B(4,:) = B(4,:) + 4 * B(1,:)
+B(4,:) = B(4,:) + 2 * B(2,:)
+B([3 4],:) = B([4 3],:)
+<span class="comment">% (c)</span>
+B(3,:) = B(3,:) / 74
+B(3,:) = B(3,:) + 2/37 * B(4,:)
+B(2,:) = B(2,:) - B(4,:)
+B(2,:) = B(2,:) + 4 * B(3,:)
+B(1,:) = B(1,:) + 2 * B(2,:)
+<span class="comment">% (d)</span>
+rref(B)
+<span class="comment">% (e)</span>
+<span class="comment">% The solution of this system in parametric vector form is</span>
+<span class="comment">% x1 = 17 * x5 - 20</span>
+<span class="comment">% x2 = 4 * x5 - 6</span>
+<span class="comment">% x3 = 0</span>
+<span class="comment">% x4 = -2 * x5 + 3</span>
+<span class="comment">% x5 is free</span>
+
+clear;
+
+<span class="comment">% Problem 2</span>
+format <span class="string">rat</span>
+<span class="comment">% (a)</span>
+syms <span class="string">a</span>
+syms <span class="string">b</span>
+<span class="comment">% (b)</span>
+A = [
+1 3;
+3 8
+]
+rref(A)
+<span class="comment">% (c)</span>
+B = [
+8 -5 a;
+4  1 b
+]
+rref(B)
+<span class="comment">% w1 = a/28 + 5*b/28</span>
+<span class="comment">% w2 = 2*b/7 - a/7</span>
+
+clear;
+
+<span class="comment">% Problem 3</span>
+format <span class="string">rat</span>;
+<span class="comment">% (a)</span>
+A = [
+ 1   1   1    2   -2;
+-4  -3  -7  -17    4;
+ 2   3   0   -3  -12;
+ 3   2   2    7   15
+]
+rref(A)
+<span class="comment">% (b)</span>
+<span class="comment">% The fourth column is not a pivot column</span>
+<span class="comment">% (c)</span>
+<span class="comment">% Suppose these vectors are v1, v2, v3, v4, v5. If we let the free variable x4 = 1, then a linear dependence could be -3 * v1 + 3 * v2 - 2 * v3 + v4 = 0</span>
+<span class="comment">% (d)</span>
+<span class="comment">% The linear system Ax = 0 has nontrivial solution</span>
+<span class="comment">% (e)</span>
+<span class="comment">% Yes, since there is a pivot in every row</span>
+
+clear;
+
+<span class="comment">% Problem 4</span>
+format <span class="string">short</span>
+<span class="comment">% (a)</span>
+A = [
+cos(pi/10)  -sin(pi/10);
+sin(pi/10)   cos(pi/10)
+]
+<span class="comment">% (b)</span>
+B = [
+cos(pi/12)  -sin(pi/12);
+sin(pi/12)   cos(pi/12)
+]
+A * B - B * A
+<span class="comment">% (c)</span>
+<span class="comment">% rotation operations commute</span>
+<span class="comment">% (d)</span>
+C = A * B
+t = acos(C(1,1))
+format <span class="string">rat</span>;
+t / pi
+<span class="comment">% (e)</span>
+format <span class="string">short</span>;
+A1 = [
+cos(-pi/10)  -sin(-pi/10);
+sin(-pi/10)   cos(-pi/10)
+]
+A1 - inv(A)
+<span class="comment">% (f)</span>
+L0 = [
+1  0;
+0 -1
+]
+L1 = A * L0 * A1
+<span class="comment">% (g)</span>
+L1 * L0 - L0 * L1
+<span class="comment">% (h)</span>
+D = L1 * L0
+t = acos(D(1,1))
+format <span class="string">rat</span>;
+t / pi
+
+clear;
+
+<span class="comment">% Problem 5</span>
+format <span class="string">rat</span>;
+<span class="comment">% (a)</span>
+A = [
+2  1  8;
+6  4  3;
+5  2  5
+]
+B = [A  eye(3,3)]
+C = rref(B)
+C(:,[4,5,6])
+<span class="comment">% (b)</span>
+inv(A)
+
+clear;
+
+<span class="comment">% Problem 6</span>
+format <span class="string">rat</span>;
+<span class="comment">% (a)</span>
+A = [
+  1   0   0  0;
+-10   5   0  0;
+ 11   0  -3  0;
+ -4  12  -7  2
+]
+B = [
+-1   2   0   1;
+ 2   2   3   3;
+ 0   1  -1  -1;
+ 2  -1   3   1
+]
+det(A)
+det(B)
+<span class="comment">% (b)</span>
+<span class="comment">% Cofactor expansion</span>
+<span class="comment">% (c)</span>
+C = A * B
+det(C)
+<span class="comment">% (d)</span>
+<span class="comment">% det(C) = det(A) * det(B)</span>
+
+clear;
+
+<span class="comment">% Problem 7</span>
+<span class="comment">% (a)</span>
+syms <span class="string">a</span> <span class="string">b</span> <span class="string">c</span> <span class="string">d</span>
+A = [
+a  b;
+c  d
+]
+<span class="comment">% (b)</span>
+inv(A)
+<span class="comment">% (c)</span>
+syms <span class="string">e</span> <span class="string">f</span> <span class="string">g</span> <span class="string">h</span> <span class="string">i</span>
+B = [
+a  b  c
+d  e  f
+g  h  i
+]
+inv(B)
+<span class="comment">% (d)</span>
+det(B) * inv(B)
+</pre><pre class="codeoutput">
+B =
+
+  Columns 1 through 5
+
+       1             -2              0              0             -9       
+       0              1             -4              1             -2       
+      -1              2              0              1             11       
+      -4              6             82             -6             32       
+
+  Column 6
+
+      -8       
+      -3       
+      11       
+      26       
+
+
+B =
+
+  Columns 1 through 5
+
+       1             -2              0              0             -9       
+       0              1             -4              1             -2       
+       0              0              0              1              2       
+      -4              6             82             -6             32       
+
+  Column 6
+
+      -8       
+      -3       
+       3       
+      26       
+
+
+B =
+
+  Columns 1 through 5
+
+       1             -2              0              0             -9       
+       0              1             -4              1             -2       
+       0              0              0              1              2       
+       0             -2             82             -6             -4       
+
+  Column 6
+
+      -8       
+      -3       
+       3       
+      -6       
+
+
+B =
+
+  Columns 1 through 5
+
+       1             -2              0              0             -9       
+       0              1             -4              1             -2       
+       0              0              0              1              2       
+       0              0             74             -4             -8       
+
+  Column 6
+
+      -8       
+      -3       
+       3       
+     -12       
+
+
+B =
+
+  Columns 1 through 5
+
+       1             -2              0              0             -9       
+       0              1             -4              1             -2       
+       0              0             74             -4             -8       
+       0              0              0              1              2       
+
+  Column 6
+
+      -8       
+      -3       
+     -12       
+       3       
+
+
+B =
+
+  Columns 1 through 5
+
+       1             -2              0              0             -9       
+       0              1             -4              1             -2       
+       0              0              1             -2/37          -4/37    
+       0              0              0              1              2       
+
+  Column 6
+
+      -8       
+      -3       
+      -6/37    
+       3       
+
+
+B =
+
+  Columns 1 through 5
+
+       1             -2              0              0             -9       
+       0              1             -4              1             -2       
+       0              0              1              0              0       
+       0              0              0              1              2       
+
+  Column 6
+
+      -8       
+      -3       
+       0       
+       3       
+
+
+B =
+
+  Columns 1 through 5
+
+       1             -2              0              0             -9       
+       0              1             -4              0             -4       
+       0              0              1              0              0       
+       0              0              0              1              2       
+
+  Column 6
+
+      -8       
+      -6       
+       0       
+       3       
+
+
+B =
+
+  Columns 1 through 5
+
+       1             -2              0              0             -9       
+       0              1              0              0             -4       
+       0              0              1              0              0       
+       0              0              0              1              2       
+
+  Column 6
+
+      -8       
+      -6       
+       0       
+       3       
+
+
+B =
+
+  Columns 1 through 5
+
+       1              0              0              0            -17       
+       0              1              0              0             -4       
+       0              0              1              0              0       
+       0              0              0              1              2       
+
+  Column 6
+
+     -20       
+      -6       
+       0       
+       3       
+
+
+ans =
+
+  Columns 1 through 5
+
+       1              0              0              0            -17       
+       0              1              0              0             -4       
+       0              0              1              0              0       
+       0              0              0              1              2       
+
+  Column 6
+
+     -20       
+      -6       
+       0       
+       3       
+
+
+A =
+
+       1              3       
+       3              8       
+
+
+ans =
+
+       1              0       
+       0              1       
+
+ 
+B =
+ 
+[8, -5, a]
+[4,  1, b]
+ 
+ 
+ans =
+ 
+[1, 0, a/28 + (5*b)/28]
+[0, 1,   (2*b)/7 - a/7]
+ 
+
+A =
+
+       1              1              1              2             -2       
+      -4             -3             -7            -17              4       
+       2              3              0             -3            -12       
+       3              2              2              7             15       
+
+
+ans =
+
+       1              0              0              3              0       
+       0              1              0             -3              0       
+       0              0              1              2              0       
+       0              0              0              0              1       
+
+
+A =
+
+    0.9511   -0.3090
+    0.3090    0.9511
+
+
+B =
+
+    0.9659   -0.2588
+    0.2588    0.9659
+
+
+ans =
+
+     0     0
+     0     0
+
+
+C =
+
+    0.8387   -0.5446
+    0.5446    0.8387
+
+
+t =
+
+    0.5760
+
+
+ans =
+
+      11/60    
+
+
+A1 =
+
+    0.9511    0.3090
+   -0.3090    0.9511
+
+
+ans =
+
+   1.0e-15 *
+
+         0         0
+         0   -0.1110
+
+
+L0 =
+
+     1     0
+     0    -1
+
+
+L1 =
+
+    0.8090    0.5878
+    0.5878   -0.8090
+
+
+ans =
+
+         0   -1.1756
+    1.1756         0
+
+
+D =
+
+    0.8090   -0.5878
+    0.5878    0.8090
+
+
+t =
+
+    0.6283
+
+
+ans =
+
+       1/5     
+
+
+A =
+
+       2              1              8       
+       6              4              3       
+       5              2              5       
+
+
+B =
+
+  Columns 1 through 5
+
+       2              1              8              1              0       
+       6              4              3              0              1       
+       5              2              5              0              0       
+
+  Column 6
+
+       0       
+       0       
+       1       
+
+
+C =
+
+  Columns 1 through 5
+
+       1              0              0            -14/51         -11/51    
+       0              1              0              5/17          10/17    
+       0              0              1              8/51          -1/51    
+
+  Column 6
+
+      29/51    
+     -14/17    
+      -2/51    
+
+
+ans =
+
+     -14/51         -11/51          29/51    
+       5/17          10/17         -14/17    
+       8/51          -1/51          -2/51    
+
+
+ans =
+
+     -14/51         -11/51          29/51    
+       5/17          10/17         -14/17    
+       8/51          -1/51          -2/51    
+
+
+A =
+
+       1              0              0              0       
+     -10              5              0              0       
+      11              0             -3              0       
+      -4             12             -7              2       
+
+
+B =
+
+      -1              2              0              1       
+       2              2              3              3       
+       0              1             -1             -1       
+       2             -1              3              1       
+
+
+ans =
+
+     -30       
+
+
+ans =
+
+     -12       
+
+
+C =
+
+      -1              2              0              1       
+      20            -10             15              5       
+     -11             19              3             14       
+      32              7             49             41       
+
+
+ans =
+
+     360       
+
+ 
+A =
+ 
+[a, b]
+[c, d]
+ 
+ 
+ans =
+ 
+[ d/(a*d - b*c), -b/(a*d - b*c)]
+[-c/(a*d - b*c),  a/(a*d - b*c)]
+ 
+ 
+B =
+ 
+[a, b, c]
+[d, e, f]
+[g, h, i]
+ 
+ 
+ans =
+ 
+[ (e*i - f*h)/(a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g), -(b*i - c*h)/(a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g),  (b*f - c*e)/(a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g)]
+[-(d*i - f*g)/(a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g),  (a*i - c*g)/(a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g), -(a*f - c*d)/(a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g)]
+[ (d*h - e*g)/(a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g), -(a*h - b*g)/(a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g),  (a*e - b*d)/(a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g)]
+ 
+ 
+ans =
+ 
+[e*i - f*h, c*h - b*i, b*f - c*e]
+[f*g - d*i, a*i - c*g, c*d - a*f]
+[d*h - e*g, b*g - a*h, a*e - b*d]
+ 
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+% Problem 1
+format rat;
+% (a)
+B = [
+ 1  -2    0   0   -9   -8;
+ 3  -5   -4   1  -29  -27;
+-1   2    0   1   11   11;
+-4   6   82  -6   32   26
+];
+% (b)
+B(2,:) = B(2,:) - 3 * B(1,:)
+B(3,:) = B(3,:) + B(1,:)
+B(4,:) = B(4,:) + 4 * B(1,:)
+B(4,:) = B(4,:) + 2 * B(2,:)
+B([3 4],:) = B([4 3],:)
+% (c)
+B(3,:) = B(3,:) / 74
+B(3,:) = B(3,:) + 2/37 * B(4,:)
+B(2,:) = B(2,:) - B(4,:)
+B(2,:) = B(2,:) + 4 * B(3,:)
+B(1,:) = B(1,:) + 2 * B(2,:)
+% (d)
+rref(B)
+% (e)
+% The solution of this system in parametric vector form is
+% x1 = 17 * x5 - 20
+% x2 = 4 * x5 - 6
+% x3 = 0
+% x4 = -2 * x5 + 3
+% x5 is free
+
+clear;
+
+% Problem 2
+format rat
+% (a)
+syms a
+syms b
+% (b)
+A = [
+1 3;
+3 8
+]
+rref(A)
+% (c)
+B = [
+8 -5 a;
+4  1 b
+]
+rref(B)
+% w1 = a/28 + 5*b/28
+% w2 = 2*b/7 - a/7
+
+clear;
+
+% Problem 3
+format rat;
+% (a)
+A = [
+ 1   1   1    2   -2;
+-4  -3  -7  -17    4;
+ 2   3   0   -3  -12;
+ 3   2   2    7   15
+]
+rref(A)
+% (b)
+% The fourth column is not a pivot column
+% (c)
+% Suppose these vectors are v1, v2, v3, v4, v5. If we let the free variable x4 = 1, then a linear dependence could be -3 * v1 + 3 * v2 - 2 * v3 + v4 = 0
+% (d)
+% The linear system Ax = 0 has nontrivial solution
+% (e)
+% Yes, since there is a pivot in every row
+
+clear;
+
+% Problem 4
+format short
+% (a)
+A = [
+cos(pi/10)  -sin(pi/10);
+sin(pi/10)   cos(pi/10)
+]
+% (b)
+B = [
+cos(pi/12)  -sin(pi/12);
+sin(pi/12)   cos(pi/12)
+]
+A * B - B * A
+% (c)
+% rotation operations commute
+% (d)
+C = A * B
+t = acos(C(1,1))
+format rat;
+t / pi
+% (e)
+format short;
+A1 = [
+cos(-pi/10)  -sin(-pi/10);
+sin(-pi/10)   cos(-pi/10)
+]
+A1 - inv(A)
+% (f)
+L0 = [
+1  0;
+0 -1
+]
+L1 = A * L0 * A1
+% (g)
+L1 * L0 - L0 * L1
+% (h)
+D = L1 * L0
+t = acos(D(1,1))
+format rat;
+t / pi
+
+clear;
+
+% Problem 5
+format rat;
+% (a)
+A = [
+2  1  8;
+6  4  3;
+5  2  5
+]
+B = [A  eye(3,3)]
+C = rref(B)
+C(:,[4,5,6])
+% (b)
+inv(A)
+
+clear;
+
+% Problem 6
+format rat;
+% (a)
+A = [
+  1   0   0  0;
+-10   5   0  0;
+ 11   0  -3  0;
+ -4  12  -7  2
+]
+B = [
+-1   2   0   1;
+ 2   2   3   3;
+ 0   1  -1  -1;
+ 2  -1   3   1
+]
+det(A)
+det(B)
+% (b)
+% Cofactor expansion
+% (c)
+C = A * B
+det(C)
+% (d)
+% det(C) = det(A) * det(B)
+
+clear;
+
+% Problem 7
+% (a)
+syms a b c d
+A = [
+a  b;
+c  d
+]
+% (b)
+inv(A)
+% (c)
+syms e f g h i
+B = [
+a  b  c
+d  e  f
+g  h  i
+]
+inv(B)
+% (d)
+det(B) * inv(B)
+##### SOURCE END #####
+--></body></html>
