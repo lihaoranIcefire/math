@@ -806,11 +806,31 @@ div.code-toolbar > .toolbar > .toolbar-item > span:focus {
 </style><script>window.MathJax = {     tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] } ,     startup: {     pageReady() {       return MathJax.startup.defaultPageReady().then(function () {          window.mweb_mathjax_ready_val = 'yes';          if(window.mweb_mathjax_ready !== undefined){ mweb_mathjax_ready(); }       });     }   }};document.addEventListener('DOMContentLoaded', function(event) {    if (typeof Prism != 'undefined') {         Prism.highlightAll();     }});window.mweb_mathjax_ready_val = '';function theMWebMathJaxRenderIsReady(key){ return window.mweb_mathjax_ready_val; }</script><script>window.MathJax = { tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] } }; </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script> <style>body{max-width:808px; padding:24px;}</style></head><body><div id='markdown_content' class='markdown-body'><h1><a id="worksheet-0125" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Worksheet 01/25</h1>
 <!-- Problems 6, 8, 9, 10, 13, 15, 20, 23 -->
 <h2><a id="s11-1-19" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(\S11.1\), 19</h2>
-<p>Find an equation of the set of points equidistant from the points \((2, 1, 0)\) and \((4, –1, –3)\)</p>
+<p>Find an equation of the set of points equidistant from the points \((2, 1, 0)\) and \((4, –1, –3)\).</p>
 <div style="margin-top: 200px;"></div>
 <h2><a id="s11-1-20" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(\S11.1\), 20</h2>
-<p>Find an equation of the set of points twice as far from the origin as from the point \((-1, 1, 1)\). Show that the set of points is a sphere and find its center.</p>
+<p>Find an equation of the set of points twice as far from the origin as from the point \((-1, 1, 1)\). Show that the set of points is a sphere and find its center and radius.</p>
 <div style="margin-top: 200px;"></div>
 <h2><a id="s11-1-22" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(\S11.1\), 22</h2>
 <p>Find the midpoint of the line segment joining the points \((3, 7, 11)\) and \((–9, 8, 31)\). Can you determine the coordinates of the two points that divide this segment into three equal parts?</p>
+  <h1>Math Diagram</h1>
+
+<canvas id="mathCanvas" width="300" height="200" style="border:1px solid #000;"></canvas>
+
+<script>
+  // JavaScript code to draw on the canvas
+  var canvas = document.getElementById("mathCanvas");
+  var ctx = canvas.getContext("2d");
+
+  // Draw a circle
+  ctx.beginPath();
+  ctx.arc(100, 100, 50, 0, 2 * Math.PI);
+  ctx.stroke();
+
+  // Draw a line
+  ctx.moveTo(100, 100);
+  ctx.lineTo(200, 100);
+  ctx.stroke();
+</script>
+
 </div></body></html>
