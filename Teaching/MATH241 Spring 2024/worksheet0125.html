@@ -15,23 +15,113 @@
 <li>
 <p>Evaluate the following integrals:<br />
 a. \(\displaystyle\int xe^xdx\)<br />
-b. \(\displaystyle\int\sin^4x\cos xdx\)<br />
-c. \(\displaystyle\int\ln xdx\)<br />
-d. \(\displaystyle\int\sin^2xdx\)<br />
-e. \(\displaystyle\int\sqrt{1-x^2}dx\)</p>
+This uses <strong>integration by parts</strong></p>
+\[\begin{align*}
+\int xe^xdx&amp;=\int xd(e^x)=xe^x-\int e^xdx=xe^x-e^x+C
+\end{align*}
+\]
+<p>b. \(\displaystyle\int\sin^4x\cos xdx\)<br />
+This uses <strong>\(u\)-sub</strong> by \(u=\sin x\)</p>
+\[\begin{align*}
+\int\sin^4x\cos xdx=\int\sin^4xd(\sin x)=\int u^4du=\dfrac{1}{5}u^5+C=\dfrac{1}{5}\sin^5x+C
+\end{align*}
+\]
+<p>c. \(\displaystyle\int\ln xdx\)<br />
+This uses <strong>integration by parts</strong></p>
+\[\begin{align*}
+\int\ln xdx=x\ln x-\int\dfrac{1}{x}dx=x\ln x-x+C
+\end{align*}
+\]
+<p>d. \(\displaystyle\int\sin^2xdx\)<br />
+This uses the <strong>half angle formula</strong> \(\sin^2x=\dfrac{1-\cos(2x)}{2}dx\)</p>
+\[\begin{align*}
+\int\sin^2xdx&amp;=\int\dfrac{1-\cos(2x)}{2}dx=\int\dfrac{1}{2}dx-\int\dfrac{\cos(2x)}{2}dx\\
+&amp;=\dfrac{1}{2}x-\dfrac{\sin(2x)}{4}+C
+\end{align*}
+\]
+<p>e. \(\displaystyle\int\sqrt{1-x^2}dx\)<br />
+This uses <strong>trig-sub</strong> by \(x=\cos t\), so \(t=\arccos(x)\), and</p>
+\[\begin{align*}
+\int\sqrt{1-x^2}dx&amp;=\int\sqrt{1-\cos^2t}d(\cos t)=\int\sin t\cdot(\sin t)dt=-\int\sin^2tdt\\
+&amp;=-\dfrac{1}{2}t+\dfrac{\sin(2t)}{4}+C=-\dfrac{1}{2}\arccos(x)+\dfrac{\sin(2\arccos(x))}{4}+C
+\end{align*}
+\]
 </li>
 <li>
 <p>Parametrize the following curves:<br />
-a. The circle centered at the origin with radius 3.<br />
-b. The circle centered at \((1, 2)\) with radius 2.<br />
-c. The graph of the function \(y = x^2\).<br />
+a. The circle centered at the origin with radius 3.</p>
+\[\begin{cases}
+x=3\cos t \\
+y=3\sin t
+\end{cases}
+\]
+<p>for \(0\leq t\leq 2\pi\).<br />
+b. The circle centered at \((1, 2)\) with radius 2.</p>
+\[\begin{cases}
+x=1+2\cos t \\
+y=2+2\sin t
+\end{cases}
+\]
+<p>for \(0\leq t\leq 2\pi\). In general, a parametrization of the circle of radius \(r\) centered at \((a,b)\) could be</p>
+\[\begin{cases}
+x=a+r\cos t \\
+y=b+r\sin t
+\end{cases}
+\]
+<p>for \(0\leq t\leq 2\pi\).<br />
+c. The graph of the function \(y = x^2\).</p>
+\[\begin{cases}
+x=t \\
+y=t^2
+\end{cases}
+\]
+<p>for \(-\infty&lt;t&lt;\infty\).<br />
 d. The ellipse given by the equation \(\dfrac{x^2}{4} + \dfrac{y^2}{9} = 1\).</p>
+\[\begin{cases}
+x=2\cos t \\
+y=3\sin t
+\end{cases}
+\]
+<p>for \(0\leq t\leq 2\pi\). In general, a parametrization of \(\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1\) could be</p>
+\[\begin{cases}
+x=a\cos t \\
+y=b\sin t
+\end{cases}
+\]
+<p>for \(0\leq t\leq 2\pi\).</p>
 </li>
 <li>
 <p>(\(\S11.1\), 20) Find an equation of the set of points twice as far from the origin as from the point \((-1, 1, 1)\). Show that the set of points is a sphere and find its center and radius.</p>
+<p>Denote \(O=(0,0,0)\), \(P=(-1,1,1)\), and <strong>assume</strong> \(Q=(x,y,z)\) is a point in the set of points twice as far from the \(O\) as from the point \(P\), then we know that \(|OQ|=2|PQ|\), thus we get an equation</p>
+\[\sqrt{(x-0)^2+(y-0)^2+(z-0)^2}=2\sqrt{(x+1)^2+(y-1)^2+(z-1)^2}
+\]
+<p>Square both sides we got</p>
+\[x^2+y^2+z^2=4\left[(x+1)^2+(y-1)^2+(z-1)^2\right]
+\]
+<p>Expand the terms we have</p>
+\[x^2+y^2+z^2=4x^2+8x+4+4y^2-8y+4+4z^2-8z+4
+\]
+<p>Cancel \(x^2+y^2+z^2\) on both sides</p>
+\[0=3x^2+8x+4+3y^2-8y+4+3z^2-8z+4
+\]
+<p>Complete the squares we have</p>
+\[3\left(x+\frac{4}{3}\right)^2+3\left(y-\frac{4}{3}\right)^2+3\left(z-\frac{4}{3}\right)^2=3\cdot3\cdot\left(\frac{4}{3}\right)^2-3\cdot4=4
+\]
+<p>Finally divide 3 on both sides</p>
+\[\left(x+\frac{4}{3}\right)^2+\left(y-\frac{4}{3}\right)^2+\left(z-\frac{4}{3}\right)^2=\frac{4}{3}
+\]
+<p>Recall that the equation of a sphere of radius \(r\) centered at \((x_0,y_0,z_0)\) is</p>
+\[(x-x_0)^2+(y-y_0)^2+(z-z_0)^2=r^2
+\]
+<p>So this set of points is the sphere of radius \(\sqrt{\dfrac{4}{3}}\) centered at \(\left(-\dfrac{4}{3},\dfrac{4}{3},\dfrac{4}{3}\right)\)</p>
 </li>
-</ol>
-<div style="margin-top: 200px;"></div>
-<ol start="4">
-<li>(\(\S11.1\), 22) Find the midpoint of the line segment joining the points \((3, 7, 11)\) and \((–9, 8, 31)\). Can you determine the coordinates of the two points that divide this segment into three equal parts?</li>
+<li>
+<p>(\(\S11.1\), 22) Find the midpoint of the line segment joining the points \((3, 7, 11)\) and \((–9, 8, 31)\). Can you determine the coordinates of the two points that divide this segment into three equal parts?</p>
+<p>The midpoint is of \(P=(x_0,y_0,z_0)\) and \(Q=(x_1,y_1,z_1)\) is</p>
+\[\left(\dfrac{x_0+x_1}{2},\dfrac{y_0+y_1}{2},\dfrac{z_0+z_1}{2}\right)
+\]
+<p>and the two points dividing \(PQ\) into three equal parts are</p>
+\[\left(\dfrac{2x_0+x_1}{3},\dfrac{2y_0+y_1}{3},\dfrac{2z_0+z_1}{3}\right),\quad\left(\dfrac{x_0+2x_1}{3},\dfrac{y_0+2y_1}{3},\dfrac{z_0+2z_1}{3}\right)
+\]
+</li>
 </ol>
