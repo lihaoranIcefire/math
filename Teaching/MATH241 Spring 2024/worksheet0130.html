@@ -1,0 +1,98 @@
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+
+<h3><a id="worksheet-0130" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Worksheet 01/30</h3>
+<!--
+Problems
+11.2: 3, 13, 17, 20, 27, 28
+11.3: 5, 7, 9, 13, 17, 23, 33
+11.4: 3, 6, 7, 9, 10, 13, 15
+-->
+<ol>
+<li>
+<p>Suppose \(P=(0,-1,3)\), \(Q=(\sqrt{2},0,2)\)<br />
+a. Write \(\overrightarrow{PQ}\) as a vector in the form \(a\mathbf i+b\mathbf j+c\mathbf k\).</p>
+\[\overrightarrow{PQ} = (\sqrt2-0)\mathbf i+(0-(-1))\mathbf j+(2-3)\mathbf k=\sqrt2\mathbf i+\mathbf j-\mathbf k
+\]
+<p>b. Find the length of the vector \(\overrightarrow{PQ}\).</p>
+\[\|\overrightarrow{PQ}\|=\sqrt{(\sqrt2)^2+1^2+(-1)^2}=\sqrt4=2
+\]
+<p>c. Find the unit vector having the same direction as \(\overrightarrow{PQ}\).<br />
+The unit vector having the same direction as \(\overrightarrow{PQ}\) is</p>
+\[\mathbf u = \dfrac{\overrightarrow{PQ}}{\|\overrightarrow{PQ}\|}=\dfrac{\sqrt2\mathbf i+\mathbf j-\mathbf k}{2}=\dfrac{1}{\sqrt2}\mathbf i+\dfrac{1}{2}\mathbf j-\dfrac{1}{2}\mathbf k
+\]
+</li>
+<li>
+<p>Suppose \(\mathbf a=\sqrt6\mathbf i+\mathbf j-\mathbf k\), \(\mathbf b=2\mathbf j+\mathbf k\).<br />
+a. Find the angle \(\theta\) between \(\mathbf a\) and the positive \(x\) axis.<br />
+The angle between \(\mathbf a\) and the positive \(x\) axis is the angle between \(\mathbf a\) and \(\mathbf i\), so</p>
+\[\cos\theta=\dfrac{\mathbf a\cdot\mathbf i}{|\mathbf a||\mathbf i|}=\dfrac{\sqrt6\cdot1+1\cdot0+(-1)\cdot0}{\sqrt{(\sqrt6)^2+1^2+(-1)^2}\sqrt{1^2+0^2+0^2}}=\dfrac{\sqrt6}{\sqrt8\cdot1}=\dfrac{\sqrt3}{2}
+\]
+<p>Therefore \(\theta=\dfrac{\pi}{6}\).<br />
+b. Find \(\operatorname{pr}_{\mathbf a}\mathbf b\).</p>
+\[\operatorname{pr}_{\mathbf a}\mathbf a=\dfrac{\mathbf a\cdot\mathbf b}{|\mathbf a|^2}\mathbf a=\dfrac{\sqrt6\cdot0+1\cdot2+(-1)\cdot1}{((\sqrt6)^2+1^2+(-1)^2)}\mathbf a=\dfrac{1}{8}\mathbf a=\dfrac{\sqrt6}{8}\mathbf i+\dfrac{1}{8}\mathbf j-\dfrac{1}{8}\mathbf k
+\]
+</li>
+<li>
+<p>(\(\S11.4\), 10) Find a vector perpendicular to both \(\mathbf i-3\mathbf j+2\mathbf k\) and \(-2\mathbf i+\mathbf j-5\mathbf k\).</p>
+<p>By the right hand rule, the product</p>
+\[\begin{align*}
+&amp;(\mathbf i-3\mathbf j+2\mathbf k)\times(-2\mathbf i+\mathbf j-5\mathbf k)\\
+&amp;=\left|\begin{matrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+1&amp;-3&amp;2\\
+-2&amp;1&amp;-5\\
+\end{matrix}\right|=\left|\begin{matrix}
+-3&amp;2\\
+1&amp;-5\\
+\end{matrix}\right|\mathbf i-\left|\begin{matrix}
+1&amp;2\\
+-2&amp;-5\\
+\end{matrix}\right|\mathbf j+\left|\begin{matrix}
+1&amp;-3\\
+-2&amp;1\\
+\end{matrix}\right|\mathbf k\\
+&amp;=((-3)\cdot(-5)-2\cdot1)\mathbf i-(1\cdot(-5))-2\cdot(-2)\mathbf j+(1\cdot1-(-3)\cdot(-2))\mathbf k\\
+&amp;=13\mathbf i+\mathbf j-5\mathbf k
+\end{align*}
+\]
+<p>is perpendicular to both vectors</p>
+</li>
+<li>
+<p>(\(\S11.2\), 28) Two tugboats are pulling an ocean freighter as shown in Figure. If one tugboat exerts a force of 1000 pounds on the cable tied at \(A\), what force must be exerted on the cable tied to the other tugboat at \(B\) if the freighter is to move along the line \(l\)?<br />
+<img src="assets/Two_tugboats.png" alt="Two_tugboats" /></p>
+</li>
+<li>
+<p>(\(\S11.2\), 27) Three children tug on a ball located at \(O\). One child pulls with a force of 20 pounds in the direction of the negative y axis. Another child pulls with a force of 100 pounds at an angle of \(\pi/3\) with the positive \(x\) axis. If the total force exerted on the ball is to be \(\mathbf 0\), find the force \(\mathbf F\) with which the third child should pull and the tangent of the angle \(\theta\) between the positive \(x\) axis and the direction in which the third child should pull.<br />
+<img src="https://github.com/lihaoranIcefire/math/blob/master/Teaching/MATH241%20Spring%202024/Pictures/Three_children_tug.png" alt="Three_children_tug" /></p>
+</li>
+</ol>
+<p>Assume \(\mathbf F=a\mathbf i+b\mathbf j\). We see the force in the first quadrant is</p>
+\[\mathbf F_1=100(\cos(\pi/3)\mathbf i+\sin(\pi/3)\mathbf j)=100(1/2\mathbf i+\sqrt3/2\mathbf j)=50\mathbf i+50\sqrt3\mathbf j
+\]
+<p>and  the force in the fourth quadrant is</p>
+\[\mathbf F_2=-20\mathbf j
+\]
+<p>Since the total force should be \(\mathbf 0\), we have equation</p>
+\[\mathbf F+\mathbf F_1+\mathbf F_2=\mathbf 0\iff\begin{cases}
+a+50=0\\
+b+50\sqrt3-20=0
+\end{cases}
+\]
+<p>From which we may solve</p>
+\[\mathbf F=(-50)\mathbf i+(20-50\sqrt3)\mathbf j
+\]
+<p>Therefore</p>
+\[|\mathbf F|=\sqrt{(-50)^2+(20-50\sqrt3)^2}
+\]
+<p>and</p>
+\[\theta=\cos^{-1}\left(\dfrac{\mathbf F\cdot\mathbf i}{|\mathbf F||\mathbf i|}\right)=\cos^{-1}\left(\dfrac{-50}{\sqrt{(-50)^2+(20-50\sqrt3)^2}}\right)
+\]
