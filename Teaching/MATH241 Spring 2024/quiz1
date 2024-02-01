@@ -1,0 +1,27 @@
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+
+<h3><a id="quiz-1-0201" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quiz 1 - 02/01</h3>
+<ol>
+<li>
+<p>Find all constants \(c\) for which the vectors \((c,1,-2)\) and \((c,2,2)\) are perpendicular.</p>
+<p>Suppose \(\mathbf a=(c,1,-2)\) and \(\mathbf b=(c,2,2)\), for them to be perpendicular, we need the dot product \(\mathbf a\cdot\mathbf b\) to be zero, therefore</p>
+\[\mathbf a\cdot\mathbf b=0\Rightarrow c\cdot c+1\cdot2+(-2)\cdot2=c^2-2=0\Rightarrow c=\pm\sqrt2
+\]
+</li>
+<li>
+<p>Find the center and radius of the sphere \(x^2+y^2+z^2-2x+2y-5=0\).</p>
+<p>First we complete the squares, the equation becomes</p>
+\[(x^2-2x+1)+(y^2+2y+1)+z^2-5-1-1=0\Rightarrow(x-1)^2+(y+1)^2+z^2=7
+\]
+<p>Therefore the center and the radius of the sphere are \((1,-1,0)\) and \(\sqrt7\).</p>
+</li>
+</ol>
