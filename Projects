@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link href="https://ShashankSule.github.io/website/assets/css/style.css" type="text/css" rel="stylesheet"></link>
+		<link href="https://fonts.googleapis.com/css?family=Cutive+Mono" rel="stylesheet"> 
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css">
+		<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+		<title>Haoran's Space</title>
+	</head>
+	<body>
+		<div id="main">
+			<div id="nav">
+				<a href="https://lihaoranicefire.github.io/math/index.html" class=>Home</a> ·
+				<a href="https://lihaoranicefire.github.io/math/Research.html" class=>Research</a> ·
+				<a href="https://lihaoranicefire.github.io/math/Projects.html" class=current>Projects</a> ·
+				<a href="https://lihaoranicefire.github.io/math/Teaching.html" class=>Teaching</a>
+			</div>
+			<h2>The Erdős Institute Data Science Bootcamp</h2>
+			<ul>
+				<li><a href="https://github.com/lihaoranIcefire/erdosFall2022_Thanos_Haoran">The Erdős Institute Data Science Bootcamp</a></li>
+			</ul>
+			<h2>Computation package for multiple polylogarithms</h2>
+			<ul>
+				<li><a href="">LogToolKit</a></li>
+			</ul>
+			<h2>The minesweeper game</h2>
+			<ul>
+				<li><a href="https://github.com/lihaoranIcefire/math/tree/master/Minesweeper">Minesweeper</a></li>
+			</ul>
+		</div>
+
+		<div id="footer">
+		</div>
+	</body>
+</html>
