@@ -1,0 +1,52 @@
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+
+
+<h1><a id="database-cheat-cheat" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Database cheat-cheat</h1>
+<h2><a id="mysql" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>MySQL</h2>
+<h3><a id="commands-and-usages" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Commands and usages</h3>
+<ul>
+<li><code>CASE</code> function
+<pre><code class="language-plain_text">CASE
+    WHEN condition1 THEN value1
+    WHEN condition2 THEN value2
+    ELSE value_if_else
+END
+</code></pre>
+</li>
+<li><code>IF</code> function
+<pre><code class="language-plain_text">IF(condition, value_if_true, value_if_false)
+</code></pre>
+</li>
+<li><code>LPAD</code>/<code>RPAD</code> function, it left/right pads strings
+<pre><code class="language-plain_text">LPAD(string, length, lpad_string)
+</code></pre>
+</li>
+<li><code>CONCAT</code> function, it concat strings
+<pre><code class="language-plain_text">CONCAT(expression1, expression2, ...)
+</code></pre>
+</li>
+</ul>
+<h2><a id="pandas-numpy" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pandas &amp; Numpy</h2>
+<ul>
+<li><code>np.where</code> function
+<pre><code class="language-plain_text">np.where(condition, value_if_true, value_if_false)
+</code></pre>
+</li>
+</ul>
+<h2><a id="q-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q &amp; A</h2>
+<h3><a id="q-how-do-you-rewrite-datetime" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: How do you rewrite datetime?</h3>
+<p>In MySQL</p>
+<pre><code class="language-plain_text">CONCAT(YEAR(dateTime), '-', LPAD(MONTH(dateTime), 2, '0'))
+</code></pre>
+<p>In Pandas</p>
+<pre><code class="language-plain_text">dateTime.dt.strftime(%Y-%m)
+</code></pre>
