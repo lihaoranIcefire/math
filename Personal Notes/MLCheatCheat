@@ -1,0 +1,332 @@
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+
+
+<h1><a id="ml-cheat-cheat" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ML cheat-cheat</h1>
+<h2><a id="q-what-is-overfitting-and-how-to-avoid-overfitting" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is overfitting? And how to avoid overfitting?</h2>
+<p>Overfitting is a common issue in ML, where the model not only learns the basis pattern of the training data, but also captures the noise and random fluctuations, which makes it fail to generalize to new, unseen data.</p>
+<p>To avoid overfitting, we can do the following:</p>
+<ol>
+<li>Regularization</li>
+<li>Tuning the hyper-parameters</li>
+<li>Cross validation</li>
+<li>Data augmentation: Generating new data from original ones using transformations</li>
+<li>Feature selection</li>
+<li>Early stopping: Prevent the model from learning too much from the noises</li>
+</ol>
+<h2><a id="q-how-to-deal-with-unbalanced-data-set" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: How to deal with unbalanced data set?</h2>
+<ol>
+<li>Use accuracy, recall, precision, f1 score, AUROC, etc. more nuanced evaluation</li>
+<li>Resampling: More samples from the smaller class</li>
+<li>Adjusting costs: Higher costs for smaller class</li>
+<li>Adjust decision threshold</li>
+</ol>
+<h2><a id="q-what-is-bias-variance-tradeoff" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is <em>bias-variance tradeoff</em></h2>
+<p>Suppose \(y = f(x) + \epsilon\) is the real function (assume \(E[\epsilon]=0\), \(Var[\epsilon]=\sigma^2\) and \(\epsilon\) is independent) and \(\hat f(x)\) is the model. Then the <em>total error</em> is equal to</p>
+\[\begin{align*}
+E[(y-\hat f)^2] &amp;= E[y^2]-2E[y\hat f]+E[\hat f^2]\\
+&amp;= E[(f+\epsilon)^2]-2E[(f+\epsilon)\hat f]+Var[\hat f]+E[\hat f]^2\\
+&amp;= E[f^2]+2E[f]E[\epsilon]+E[\epsilon^2]-2E[f]E[\hat f]-2E[\epsilon]E[\hat f]+Var[\hat f]+E[\hat f]^2\\
+&amp;= E[f^2]+\sigma^2-2E[f]E[\hat f]+Var[\hat f]+E[\hat f]^2\\
+&amp;= E[(f-\hat f)^2]+Var[\hat f]+\sigma^2\\
+&amp;= E[(f-\hat f)^2]+Var[\hat f]+\sigma^2\\
+\end{align*}
+\]
+<p>Here \(\sigma^2\) is referred to as the <em>irreducible error</em>, so we have the simplified version</p>
+\[\text{total error = bias$^2$ + Variance + irreducible error}
+\]
+<p>When underfitting the model, the model tends to be too simple so that the bias is huge. When overfitting the model (e.g., using a linear equation approximate a quadratic), the model tends to be too complex, so the variance within is great (e.g., use a high polynomial to approximate a linear relation with small random noise). Therefore, there is no way to get rid of both, one has to make the tradeoff between bias and variance so that both aren't too significant.</p>
+<h2><a id="q-what-is-the-difference-between-generative-models-and-discriminative-models" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is the difference between generative models and discriminative models</h2>
+<p>Generatice models learns the joint probability distribution \(P(X,Y)\), and is to understand the training data is generated, and is able to generate new samples, which is good for image/text generation and data synthesis. It is generally more challenging to train and requires a large number of parameters.</p>
+<p>Discriminative models learns the conditional probility distribution \(P(Y|X)\), which is used to classifications, for example, sentiment analysis, spam detection, image classification, etc. It struggles with missing data, and often easier to train and uses less data.</p>
+<h2><a id="q-what-is-the-difference-between-l1-lasso-and-l2-ridge-regularizations" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is the difference between L1(lasso) and L2(Ridge) regularizations</h2>
+<p><em>L1 regularization</em> measures the absolute sum of the parameters, which get rid of irrelavent(less informative) features, so it automatically select informative features, thus induces sparsity in the model</p>
+<p><em>L2 regularization</em> measures the square sum of parameters, which controls the magnitude of the parameters, thus mitigating the effect of multicollinearity, and it is more computationally efficient.</p>
+<h2><a id="q-why-does-regularization-work-and-why-don-t-we-do-l3-l4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: Why does regularization work and why don't we do L3, L4</h2>
+<p>Regularization works by introducing penalty term into the loss function to prevent overfitting. L3, L4 is more complicated yet the impact seem to diminish when the order of regularization terms increases, so it is not worth the cost.</p>
+<h2><a id="q-what-is-the-confusion-matrix" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is the confusion matrix</h2>
+<p>The <em>confusion matrix</em> is the \(2\times2\) contingency table, where the first row is the predicted value, and first column is the actual value</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Positive</th>
+<th>Negative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Positive</td>
+<td>TP</td>
+<td>FN</td>
+</tr>
+<tr>
+<td>Negative</td>
+<td>FP</td>
+<td>TN</td>
+</tr>
+</tbody>
+</table>
+<p>We define</p>
+<ul>
+<li><em>Accuracy</em> = \(\dfrac{TP+TN}{TP+FP+FN+TN}\)<br />
+Accuracy is used if the dataset is balanced and equally distributed, e.g. spam detection</li>
+<li><em>Precision</em> = \(\dfrac{TP}{TP+FP}\)<br />
+Precision is used if the cost for false positive is high, e.g. Fraud detection</li>
+<li><em>Recall(Sensitivity)</em> = \(\dfrac{TP}{TP+FN}\)<br />
+Recall is used if the cost for false negative is high, e.g. disease detection</li>
+<li><em>F1 score</em> = harmonic mean of Precision and Recall, i.e.</li>
+</ul>
+\[\text{F1 score} = \dfrac{2}{\dfrac{1}{\text{Precision}}+\dfrac{1}{\text{Recall}}} = 2\dfrac{\text{Precision}\times\text{Recall}}{\text{Precision}+\text{Recall}}
+\]
+<p>F1 score is the single metric of both the precision and recall which balances the Precision-Recall tradeoff by taking both into account, especially if there is an uneven class distribution, e.g. search engine ranking for relevance</p>
+<h2><a id="q-what-is-aurocaurcc-and-when-should-we-use-it" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is AUROC/AURCC? And when should we use it</h2>
+<p><em>Receivers operating characteristic curve(ROC)</em> is the plot of recall against (1-recall), and the diagonal line means a total random model.</p>
+<p><em>Area under ROC(AUROC)</em> measures a comprehensive classifier's performance, if it is 0.5, and it is like random, if it is 1, then it is outstanding discrimination. For example, predicting customer churn.</p>
+<h2><a id="q-what-is-r-2" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is \(R^2\)?</h2>
+<p><em>Coefficient of determination(\(R^2\))</em> is defined to be \(1-\dfrac{\sum_i(y_i-f_i)^2}{\sum_i(y_i-\bar y)^2}\). If \(R^2=0\), it means the model have worst predictions since it is a constant average prediction, if \(R^2=1\), then the model is accurate.</p>
+<h2><a id="q-when-should-we-use-log-loss" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: When should we use log-loss</h2>
+<p><em>Log-loss(or Cross-entropy loss)</em> is defined as</p>
+\[-\dfrac{1}{N}\sum_{i=1}^N\sum_{j=1}^My_{ij}\log(p_{ij})
+\]
+<p>Log-loss ranges from 0 to \(\infty\), with 0 being the perfect score. We use log-loss when we have a probability estimate of distribution of the classes.</p>
+<h2><a id="q-what-is-mse-and-when-should-we-use-it" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is MSE and when should we use it?</h2>
+<p><em>Mean squared error(MSE)</em> is defined as</p>
+\[\dfrac{1}{N}\sum_{i=1}^N(y_i-\hat y_i)^2
+\]
+<p>It is used squares to penalize the larger erros more, thus more sensitive to the outliers, it is usually used when predicting a continuous variable with regressions, like house price, temperature, etc. MSE is the most common lost for linear regression.</p>
+<h2><a id="q-what-is-cross-entropy-relative-entropy-and-kl-divergence-and-how-are-they-related-what-are-the-intuitions" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is cross-entropy, relative entropy and KL divergence? And how are they related? What are the intuitions?</h2>
+<p>We think of the useful information content of an event \(E\) as \(\log\left(\dfrac{1}{p(E)}\right)=-\log(p(E))\)</p>
+<p>Suppose \(P,Q\) are two random variables, \(P\) is the actual distribution and \(Q\) is the prediction</p>
+<p><em>Entropy</em> of \(P\) is defined to be</p>
+\[H(P)=-E_P[\log P]=-\sum_ip_i\log(p_i)
+\]
+<p><em>Cross-entropy loss</em> is defined to be</p>
+\[H(P,Q)=-E_P[\log Q]=-\sum_ip_i\log(q_i)
+\]
+<p>is the surprise using \(Q\) given the actual distribution is \(P\)</p>
+<p><em>Relative entropy(KL convergence)</em> is defined to be</p>
+\[D_{KL}(P||Q)=\sum_ip_i\log\left(\dfrac{p_i}{q_i}\right)=H(P,Q)-H(P)
+\]
+<p>This is always nonnegative (<em>Gibb's inequality</em>) since</p>
+\[\begin{align*}
+-D_{KL}(P||Q)&amp;=\sum_ip_i\ln\left(\dfrac{q_i}{p_i}\right)\\
+&amp;\leq\sum_ip_i\left(\dfrac{q_i}{p_i}-1\right)\\
+&amp;=\sum_iq_i-\sum_ip_i\\
+&amp;=0
+\end{align*}
+\]
+<p>So the minimum of the cross entropy \(H(P)\) is attained \(\iff P=Q\)</p>
+<p>Note that cross entropy and relative entropy measures the same because the entropy of \(P\) is fixed</p>
+<h2><a id="q-what-is-the-loss-function-of-svm" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is the loss function of SVM?</h2>
+<p><em>Supported vector machine(SVM)</em> is a supervised learning algorithm used for classification and regression tasks which use a hyperplane(hypersurface) to separate data into different classes. It needs to maximize margin while not still classify the data points correctly, thus uses the <em>hinge loss</em></p>
+\[\ell(y,f(x))=\max(0,1-y\cdot f(x))
+\]
+<p>Where \(y=\pm1\) is a true/false label and \(f(x)\) is the score function from the prediction. When they are of</p>
+<ul>
+<li>the same sign and \(|f(x)|\geq1\), then the hinge loss is 0</li>
+<li>opposite signs or the same sign but \(|f(x)|&lt;1\), then los increases linearly with \(f(x)\)</li>
+</ul>
+<h2><a id="q-why-do-we-need-a-bia-term-in-dnn-what-is-the-intuition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: Why do we need a bia term in DNN, what is the intuition?</h2>
+<p>To handle non-zero inputs, so as to accomodate when the actual input is absent and there are some non-zero input features. To provide an appropriate threshold.</p>
+<h2><a id="q-what-is-back-propagation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is back propagation</h2>
+<p>It is the use of chain rule and gradient descent to update weights and biases</p>
+<h2><a id="q-what-are-gradient-vanishing-and-gradient-exploding-and-how-to-resolve-them" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What are gradient vanishing and gradient exploding and how to resolve them?</h2>
+<p><em>Gradient vanishing</em> is mostly caused by choosing the wrong activation functions(like sigmoid, tanh) for which the gradients become really small at extreme values, or if there too many layers. To resolve it, we can choose activation functions like ReLU, perform batch normalization for each layer, or to skip connections (<em>Residual networks</em>)</p>
+<p><em>Gradient exploding</em> is mostly caused by bad weight initializations, or large learning rate. We can resolve this by have a better weight initializations and smaller learning rates, or gradient clipping</p>
+<h2><a id="q-why-cannot-we-set-all-weights-to-0-from-the-start-for-dnn" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: Why cannot we set all weights to 0 from the start for DNN?</h2>
+<ul>
+<li>To break the symmetry at all directions</li>
+<li>To prevent identical updates every time</li>
+<li>To prevent vanishing gradient</li>
+</ul>
+<p>We could try random initializations with small values</p>
+<h2><a id="q-why-is-dnn-better-at-fitting-data-than-logistic-regression-in-general" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: Why is DNN better at fitting data than logistic regression in general?</h2>
+<ul>
+<li>DNN can model highly non-linear relationships with the data</li>
+<li>It learns hierarchical representations of the features</li>
+<li>DNN can be used for a variety of complex tasks</li>
+</ul>
+<h2><a id="q-what-is-dropout-why-does-it-work-and-how-do-you-dropout" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is dropout, why does it work and how do you dropout</h2>
+<p><em>Dropout</em> is the method of randomly setting up a fraction of neurons in a layer to 0, this prevents overfitting by introducing variability so that the network cannot rely too much on specific neurons for the entire training period</p>
+<h2><a id="q-what-is-batch-norm-why-does-it-work-and-how-do-you-do-it" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is batch norm, why does it work and how do you do it</h2>
+<p><em>Batch norming</em> is the method of subtract the mean and divide by standard deviation of the mini batch (scaling and shifting), this reduces the risk of gradient vanishing, exploding, it helps reduce the sensitivity to initialization, and guarantees a more stable and steady learning process</p>
+<h2><a id="q-what-are-the-pros-and-cons-of-common-activations-functions" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What are the pros and cons of common activations functions</h2>
+<ul>
+<li><code>sigmoid</code><br />
+Pros:
+<ul>
+<li>smooth gradient</li>
+<li>values range from 0 to 1, useful for binary classification<br />
+Cons:</li>
+<li>gradient vanishing</li>
+<li>output not zero-centered</li>
+</ul>
+</li>
+<li><code>tanh</code><br />
+Pros:
+<ul>
+<li>smooth gradient</li>
+<li>values range from -1 to 1, useful for binary classification</li>
+<li>zero-centered output<br />
+Cons:</li>
+<li>gradient vanishing</li>
+</ul>
+</li>
+<li><code>relu</code><br />
+Pros:
+<ul>
+<li>no gradient vanishing</li>
+<li>promotes sparse activation<br />
+Cons:</li>
+<li>&quot;dying relu&quot; issues where the neurons are inactive with negative input</li>
+<li>output not zero-centered</li>
+</ul>
+</li>
+<li><code>leaky relu</code><br />
+Pros:
+<ul>
+<li>no gradient vanishing</li>
+<li>no &quot;dying relu&quot; issues<br />
+Cons:</li>
+<li>output not zero-centered</li>
+<li>the leaky parameter needs to be tuned</li>
+</ul>
+</li>
+</ul>
+<h2><a id="q-why-do-we-need-non-linear-activation-function" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: Why do we need non-linear activation function</h2>
+<p>Without non-linearity, it will become a complete linear model, which is much less acurate. According to Uniform approximation theorem, a neuron network with non-linear activation function is capable of learning any continuous function. It also prevents &quot;dying neuron&quot; where the learning process stops because they always outputs the same values</p>
+<h2><a id="q-what-is-the-difference-between-differnet-optimizers" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is the difference between differnet optimizers?</h2>
+<ul>
+<li><em>Stochastic gradient descent(SGD)</em> is to update the parameter according to individual gradient<br />
+Gradient descent is</li>
+</ul>
+\[\theta_{t+1}=\theta_t-\lambda\cdot\nabla L(\theta_t)
+\]
+<p>And SGD is when \(L(\theta)=\dfrac{1}{N}\sum_iL_i(\theta)\)</p>
+<ul>
+<li><em>Momentum</em> \(v\) is defined by</li>
+</ul>
+\[\begin{cases}
+v_{t+1}=\beta\cdot v_t+(1-\beta)\cdot\nabla L(\theta_t)\\
+\theta_{t+1}=\theta_t-\lambda\cdot v_{t+1}
+\end{cases}
+\]
+<p>This includes the &quot;inertia&quot; from the previous momentums and gradients, it helps accelerate convergence in the direction of persistent gradient, and reduce oscillations.</p>
+<ul>
+<li><em>Adaptive gradient(Adagrad)</em> is mathematically described by</li>
+</ul>
+\[\begin{cases}
+G_{t+1}=G_t+|\nabla L(\theta_t)|^2\\
+\theta_{t+1}=\theta_t-\dfrac{\lambda}{\sqrt{G_{t+1}+\epsilon}}\cdot \nabla L(\theta_{t+1})
+\end{cases}
+\]
+<p>\(G_t\) is the accumulated squared gradients (like the second momentum). This method ensures that the learning rate doesn't get too small when having really large gradients. This method is good with sparse data but might overly reduce learning rate when encountering some frequently occuring features with large gradients.</p>
+<ul>
+<li><em>Root mean squared propagation(RMSprop)</em> is slightly changing Adagrad</li>
+</ul>
+\[\begin{cases}
+G_{t+1}=\beta\cdot G_t+(1-\beta)|\nabla L(\theta_t)|^2\\
+\theta_{t+1}=\theta_t-\dfrac{\lambda}{\sqrt{G_{t+1}+\epsilon}}\cdot \nabla L(\theta_{t+1})
+\end{cases}
+\]
+<p>This method helps mitigate the problem of diminishing learning rate</p>
+<ul>
+<li><em>Adaptive moment estimate(Adam)</em> combines momentum and RMSProp</li>
+</ul>
+\[\begin{cases}
+m_{t+1}=\beta_1\cdot m_t+(1-\beta_1)\cdot\nabla L(\theta_t)\\
+v_{t+1}=\beta_2v_t+|\nabla L(\theta_t)|^2\\
+\hat m_{t+1} = \dfrac{m_t}{1-\beta_1^{t+1}}\\
+\hat v_{t+1} = \dfrac{v_t}{1-\beta_2^{t+1}}\\
+\theta_{t+1}=\theta_t-\dfrac{\lambda}{\sqrt{\hat v_{t+1}+\epsilon}}\cdot \hat m_{t+1}
+\end{cases}
+\]
+<p>The normalization prevents bias from early initialization (for example, \(m_0=v_0=0\), dividing \(1-\beta_1,1-\beta_2\) could make them less biased, as time progress, \(\beta^t\) has exponential decay and goes to 0 and has no effect in normalizing)</p>
+<h2><a id="q-what-are-the-pros-and-cons-of-bgd-and-sgd-what-is-the-influence-of-batch-size" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What are the pros and cons of BGD and SGD, what is the influence of batch size</h2>
+<p><em>Batch gradient descent(BGD)</em> updates the features each time by compute the average of the gradient of the batch. This is more stable and acurate, but takes more time and computationally inefficient, so not suitable for large data sets.</p>
+<p><em>Stochastic gradient descent(SGD)</em> updates the features each time by randomly selecting a data point and use its gradient. This is a lot faster, but induce more noise, but could be helpful for local extrema.</p>
+<p>One way to combine both is to use mini-batch GD.</p>
+<h2><a id="q-what-is-the-impact-of-the-magnitude-of-learning-rates-and-how-to-choose-the-right-learning-rate" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is the impact of the magnitude of learning rates? And How to choose the right learning rate?</h2>
+<p>If the learning rate is too big, it is unstable, and likely to overshooting the minimum, oscillate and diverge, the loss function could explode.</p>
+<p>If the learning rate is too small, it is too slow in convergence, and vulnerable to noises, and may get stuck in a local minimum</p>
+<p>To Choose the ideal learning rate we can</p>
+<ul>
+<li>Try random and grid search</li>
+<li>Try visualize the loss function</li>
+<li>Try cross validation</li>
+</ul>
+<h2><a id="q-how-to-deal-with-the-problem-of-plateau-and-saddle-point" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: How to deal with the problem of plateau and saddle point?</h2>
+<p>The <em>problem of plateau</em> describes when the loss function is flat over some region so there is nearly zero gradient. This may cause slow convergence and very difficult to escape</p>
+<p>A <em>saddle point</em> may induce misleading gradient, so there is a directional challenge</p>
+<p>We can try some learning rates adaptations, we can try some random initializations and we can use some second order methods which may give some information of the curvature of the loss function.</p>
+<h2><a id="q-what-is-transfer-learning-and-when-does-it-make-sense" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is transfer learning and when does it make sense</h2>
+<p><em>Transfer learning</em> is an ML technique of using the model of a task as a starting point on a different but related task.</p>
+<p>It makes sense when</p>
+<ul>
+<li>There are limited data</li>
+<li>There tasks have similar domains</li>
+<li>It can save computation resource</li>
+<li>You can fine tune the model that adapt the specific nuances</li>
+<li>It is good for image classification and NLP</li>
+</ul>
+<h2><a id="q-what-will-happen-when-we-have-correlated-variables-and-how-could-we-solve-these-issues" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What will happen when we have correlated variables and how could we solve these issues</h2>
+<p>Having correlated variables will cause multicolinearity, with unstable coefficient estimate and bigger standard errors</p>
+<p>We can do PCA, feature selection, try Ridge regularization, and correlation analysis</p>
+<h2><a id="q-what-is-interaction-variables-and-why-should-we-use-it" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is interaction variables and why should we use it?</h2>
+<p>For example the linear model</p>
+\[y = \epsilon+\beta_1\text{experience}+\beta_2\text{education}
+\]
+<p>could be change to</p>
+\[y = \epsilon+\beta_1\text{experience}+\beta_2\text{education}+\beta_{12}\text{experience}\cdot\text{education}
+\]
+<p>This helps handling the nonlinearity to better fit the data</p>
+<h2><a id="q-what-is-gmm-and-what-is-the-relation-between-gmm-and-kmeans" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is GMM, and what is the relation between GMM and KMeans?</h2>
+<p><em>Gaussian mixture model(GMM)</em> trains on a data set of mixture of Gaussian distributions with different weights</p>
+\[P(x) = \sum_i\pi_i\cdot N(x,\mu_i,\Sigma_i)
+\]
+<p>We use <em>expectation-maximization(EM)</em> algorithm, first we randomly choose weights, means and variances, then find the probability of the occurrence a data point, and update the parameters by maximizing the log-likelihood</p>
+<p>We should choose KMeans if the data are more balanced and equally sized, and it gives a hard assignment. GMM can be used if the clusters has different shapes, it gives a soft assignment.</p>
+<p>K-Means can be considered a special case of GMM with spherical, isotropic (equal variance) Gaussian components and equal weights.</p>
+<h2><a id="q-what-are-the-objectives-of-decision-tree-learning" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What are the objectives of decision tree learning?</h2>
+<p><em>Classification tree</em> predicts the label of the outcome. It tries to lower the <em>Gini impurity</em> \(I_G\) or the entropy. Where</p>
+\[I_G(p)=\sum_ip_i(1-p_i)=\sum_i(p_i-p_i^2)=1-\sum_ip_i^2
+\]
+<p>\(I_G(p)\) is between 0 and 1, if \(I_G(p)=0\), then it is of a single class, if it is \(1-\dfrac{1}{N}\), it is evenly distributed.</p>
+<p><em>Regression tree</em> predict a numerical value of the outcome. It tries to reduce the MSE</p>
+<h2><a id="q-how-regression-and-classification-decision-trees-split-nodes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: How regression and classification decision trees split nodes?</h2>
+<ol>
+<li>Feature selection: Choose the feature that could maximally reduce MSE/Gini impurity when split into two child nodes.</li>
+<li>Threshold selection: Find the threshold that achieves lowest MSE/Gini impurity within the node</li>
+<li>Splitting: Split the node into two child nodes according to the threshold.</li>
+<li>Repeat</li>
+</ol>
+<h2><a id="q-how-to-prevent-overfitting-in-dt" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: How to prevent overfitting in DT?</h2>
+<h2><a id="q-how-to-do-regularization-in-dt" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: How to do regularization in DT?</h2>
+<h2><a id="q-what-are-the-different-types-of-ensemble-learning-what-is-the-advantages" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What are the different types of ensemble learning? What is the advantages?</h2>
+<p><em>Ensemble learning</em> refers to having several base models (also known as weak learners, which are slightly better than random), and then combine all the predictions from the base models.</p>
+<p><em>Bagging</em> is to create multiple instances of the same model which are trained on different subsets of the training data and make predictions, then take average for regressions, or choose the majority vote of individual predictions for classifications. For example, random forest uses bagging.</p>
+<p><em>Boosting</em> is the create a sequence of base models, where each subsequent model corrects the errors from the previous one, and put weight on each instances base performance on previous rounds. For example, gradient boosting, XGBoost.</p>
+<h2><a id="q-what-is-the-pros-and-cons-of-gbdt-and-random-forest" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is the pros and cons of gbdt and random forest?</h2>
+<p>Random forest is robust and less sensitive to noises, whereas gradient boosting decision tree (gbdt) is more accurate and more interpretable.</p>
+<p>Random forest can reduce variance since it has random selection the subsets and features, so it less overfitting, reducing the vairance. It doesn't necessarily reduce bias though.</p>
+<h2><a id="q-what-is-the-fundamental-hypothesis-of-naive-bayes-principal" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is the fundamental hypothesis of Naive Bayes principal?</h2>
+<p>The conditional independence of feature giving the class labels</p>
+<h2><a id="q-what-is-lda-and-qda-and-what-are-the-hypotheses" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What is LDA and QDA, and what are the hypotheses?</h2>
+<p><em>Linear discriminant analysis(LDA)</em></p>
+<p><em>Quadratic discriminant analysis(QDA)</em></p>
+<h2><a id="q-what-are-some-common-kernel-functions-for-svm" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q: What are some common kernel functions for svm</h2>
+<ul>
+<li>Linear kernel: \(K(\mathbf x,\mathbf y)=\mathbf x^T\cdot \mathbf y\)</li>
+<li>Polynomial kernel: \(K(\mathbf x,\mathbf y)=(\mathbf x^T\cdot \mathbf y+\mathbf c)^d\)</li>
+<li>Gaussian kernel</li>
+<li>Sigmoid kernel</li>
+</ul>
