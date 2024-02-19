@@ -1,0 +1,80 @@
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+
+<h3><a id="exam-1-0219" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exam 1 - 02/19</h3>
+<ol>
+<li>Consider the vectors \(\mathbf u=\mathbf i-\mathbf j+2\mathbf k\) and \(\mathbf v=2\mathbf i-\mathbf j+3\mathbf k\) and the point  \(A=(1,2,1)\).<br />
+a. (15 pts) Find an equation of the plane that passes through \(A\) and is parallel to both \(\mathbf u\) and \(\mathbf v\).<br />
+First notice that a plane \(\pi\) is parallel to both \(\mathbf u\) and \(\mathbf v\iff\pi\) is perpendicular to \(\mathbf u\times\mathbf v\), so we choose normal vector to be
+\[\mathbf n=\mathbf u\times\mathbf v=-\mathbf i+\mathbf j+\mathbf k
+\]
+Therefore the plane that passes through \(A\) and is parallel to both \(\mathbf u\) and \(\mathbf v\) is
+\[-(x-1)+(y-2)+(z-1)=0
+\]
+b. (10 pts) Find the projection of \(\mathbf u\) onto \(\mathbf v\)
+\[\operatorname{pr}_{\mathbf v}\mathbf u=\dfrac{\mathbf u\cdot\mathbf v}{\|\mathbf v\|^2}\mathbf v=\dfrac{9}{14}\mathbf v=\left(\dfrac{18}{14},-\dfrac{9}{14},\dfrac{27}{14}\right)=\left(\dfrac{9}{7},-\dfrac{9}{14},\dfrac{27}{14}\right)
+\]
+</li>
+<li>Consider the points \(A=(1,2,-1)\), \(B=(0,1,2)\), and \(C=(2,3,1)\).<br />
+a. (15 pts) Find the distance from \(A\) to the line through \(B\) and \(C\).<br />
+First we find a direction vector \(\mathbf L=\overrightarrow{BC}=(2,2,-1)\), then we compute \(\overrightarrow{AB}=(-1,-1,3)\) and \(\overrightarrow{AB}\times\mathbf L=-5\mathbf i+5\mathbf j\). Therefore distance from \(A\) to the line \(\ell\) through \(B\) and \(C\) is
+\[\operatorname{dist}(A,\ell)=\dfrac{\|\overrightarrow{AB}\times\mathbf L\|}{\|\mathbf L\|}=\dfrac{\sqrt{50}}{\sqrt{9}}=\dfrac{5}{3}\sqrt2
+\]
+b. (10 pts) Find the angle between vectors \(\overrightarrow{AB}\) and \(\overrightarrow{AC}\).<br />
+First we evaluate \(\overrightarrow{AC}=(1,1,2)\), assume the angle between \(\overrightarrow{AB}\) and \(\overrightarrow{AC}\) is \(\theta\), then we have
+\[\cos\theta=\dfrac{|\overrightarrow{AB}\cdot\overrightarrow{AB}|}{\|\overrightarrow{AB}\|\|\overrightarrow{AC}\|}=\dfrac{4}{\sqrt{11}\sqrt6}=\dfrac{4}{\sqrt{66}}\Rightarrow\theta=\cos^{-1}\left(\dfrac{4}{\sqrt{66}}\right)
+\]
+</li>
+<li>The velocity of the particle in space at time \(t\) is given by \(\mathbf v(t)=(t^2-2)\mathbf i-2t\mathbf j-2t\mathbf k\).<br />
+a. (10 pts) Given the initial position \(\mathbf r(0)=(0,0,1)\), find the position of the particle at time \(t=1\).<br />
+By Fundametal Theorem of Calculus, we know
+\[\mathbf r(1)-\mathbf r(0)=\int_0^1\mathbf v(t)dt
+\]
+So
+\[\begin{align*}
+\mathbf r(1)&amp;=\mathbf r(0)+\int_0^1\mathbf v(t)dt\\
+&amp;=(0,0,1)+\int_0^1(t^2-2)\mathbf i-2t\mathbf j-2t\mathbf kdt\\
+&amp;=(0,0,1)+\left.\left(\dfrac{1}{3}t^3-2t\right)\mathbf i-t^2\mathbf j-t^2\mathbf k\right|_0^1\\
+&amp;=(0,0,1)+\left(\dfrac{1}{3}-2,1,-1\right)-(0,0,0)\\
+&amp;=\left(-\dfrac{5}{3},-1,0\right)
+\end{align*}
+\]
+b. (15 pts) Find the length of the curve traced by this particle from \(t=0\) to \(t=1\).<br />
+The length of the curve traced by this particle from \(t=0\) to \(t=1\) is
+\[\begin{align*}
+L&amp;=\int_0^1\|\mathbf v(t)\|dt\\
+&amp;=\int_0^1\sqrt{(t^2-2)^2+(-2t)^2+(-2t)^2}dt\\
+&amp;=\int_0^1\sqrt{t^4-4t^2+4+4t^2+4t^2}dt\\
+&amp;=\int_0^1\sqrt{t^4+4t^2+4}dt\\
+&amp;=\int_0^1\sqrt{(t^2+2)^2}dt\\\
+&amp;=\int_0^1(t^2+2)dt\\
+&amp;=\left.\dfrac{1}{3}t^3+2t\right|_0^1\\
+&amp;=\dfrac{1}{3}+2=\dfrac{7}{2}
+\end{align*}
+\]
+</li>
+<li>a. (13pts) Determine if the parametrizaiton \(\mathbf r(t)=(t-\sin t\mathbf i)-(\cos t)\mathbf j-\mathbf k\) with \(0\leq t\leq4\pi\), is smooth, piece-wise smooth or neither.<br />
+First take the derivative
+\[\mathbf r'(t)=(1-\cos t)\mathbf i+\sin t\mathbf j
+\]
+We can easily see that \(\mathbf r'(0)=\mathbf r'(2\pi)=\mathbf r'(4\pi)=\mathbf 0\), so \(\mathbf r\) is only a piece-wise smooth parametrization.<br />
+b. (13 pts) Find the curve of this curve at \(t=\frac{\pi}{2}\). Simplify your answer.<br />
+First we know \(\mathbf v(t)=\mathbf r'(t)=(1-\cos t)\mathbf i+\sin t\mathbf j\) and compute
+\[\mathbf a(t)=\mathbf v'(t)=\sin t\mathbf i+\cos t\mathbf j
+\]
+So
+\[\mathbf v\times\mathbf a=((1-\cos t)\cos t-\sin^2t)\mathbf k=(\cos t-1)\mathbf k
+\]
+Therefore the curvature at \(t=\frac{\pi}{2}\) is
+\[\kappa\left(\frac{\pi}{2}\right)=\dfrac{\|\mathbf v\times\mathbf a\|}{\|\mathbf v\|^3}=\dfrac{|\cos t-1|}{1^3}=\left|\cos\left(\frac{\pi}{2}\right)-1\right|=1
+\]
+</li>
+</ol>
