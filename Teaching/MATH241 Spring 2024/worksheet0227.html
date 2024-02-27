@@ -1,0 +1,113 @@
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+
+
+<h3><a id="worksheet-0227" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Worksheet 02/27</h3>
+<!--
+Problems
+13.3: 7, 13, 19, 23, 24, 25, 31, 37, 43
+13.4: 3, 5, 7, 11, 13, 17, 20, 21, 23, 43
+-->
+<ol>
+<li>
+<p>Suppose \(x=r\cos\theta, y=r\sin\theta\).<br />
+a. Compute \(\frac{\partial(x,y)}{\partial(r,\theta)}=\left|\begin{matrix} \frac{\partial x}{\partial r}&amp;\frac{\partial x}{\partial \theta}\\ \frac{\partial y}{\partial r}&amp;\frac{\partial y}{\partial \theta} \end{matrix}\right|=\frac{\partial x}{\partial r}\frac{\partial y}{\partial \theta}-\frac{\partial x}{\partial \theta}\frac{\partial y}{\partial r}\)<br />
+First we evaluate</p>
+\[\begin{cases}
+\dfrac{\partial x}{\partial r}=\cos\theta \\
+\dfrac{\partial y}{\partial \theta}=r\cos\theta \\
+\dfrac{\partial x}{\partial \theta}=-r\sin\theta \\
+\dfrac{\partial y}{\partial r}=\sin\theta
+\end{cases}
+\]
+<p>So</p>
+\[\frac{\partial x}{\partial r}\frac{\partial y}{\partial \theta}-\frac{\partial x}{\partial \theta}\frac{\partial y}{\partial r}=\cos\theta\cdot r\cos\theta-(-r\sin\theta)\cdot\sin\theta=r\cos^2\theta+r\sin^2\theta=r(\cos^2\theta+\sin^2\theta)=r
+\]
+<p>b. Express \(r,\theta\) in terms of \(x,y\)<br />
+If we get rid of \(\theta\) by considering \(x^2+y^2=r^2\cos^2\theta+r^2\sin^2\theta=r^2\), so \(r=\sqrt{x^2+y^2}\).<br />
+If we get rid of \(r\) by considering \(\dfrac{y}{x}=\dfrac{r\sin\theta}{r\cos\theta}=\tan\theta\), so \(\theta=\tan^{-1}(y/x)\).<br />
+c. Compute \(\frac{\partial(r,\theta)}{\partial(x,y)}=\left|\begin{matrix} \frac{\partial r}{\partial x}&amp;\frac{\partial r}{\partial y}\\ \frac{\partial \theta}{\partial x}&amp;\frac{\partial \theta}{\partial y} \end{matrix}\right|=\frac{\partial r}{\partial x}\frac{\partial \theta}{\partial y}-\frac{\partial r}{\partial y}\frac{\partial \theta}{\partial x}\)<br />
+First we calculate</p>
+\[\begin{cases}
+\dfrac{\partial r}{\partial x}=\dfrac{x}{\sqrt{x^2+y^2}} \\
+\dfrac{\partial \theta}{\partial y}=\dfrac{1}{1+\dfrac{y^2}{x^2}}\cdot\dfrac{1}{x} \\
+\dfrac{\partial r}{\partial y}=\dfrac{y}{\sqrt{x^2+y^2}} \\
+\dfrac{\partial \theta}{\partial x}=\dfrac{1}{1+\dfrac{y^2}{x^2}}\cdot\left(-\dfrac{y}{x^2}\right)
+\end{cases}
+\]
+<p>So \(\frac{\partial r}{\partial x}\frac{\partial \theta}{\partial y}-\frac{\partial r}{\partial y}\frac{\partial \theta}{\partial x}=\frac{1}{\sqrt{x^2+y^2}}\). We see that \(\frac{\partial(x,y)}{\partial(r,\theta)}\) and \(\frac{\partial(r,\theta)}{\partial(x,y)}\) are reciprocal of each other.</p>
+</li>
+<li>
+<p>Suppose \(\displaystyle f(x,y)=\int_{x^2}^{x+y}\sin t^2dt\).<br />
+a. Evaluate \(f_x\)<br />
+b. Evaluate \(f_{y}\)<br />
+c. Evaluate \(f_{yx}\) and \(f_{xy}\)</p>
+<p>Suppose \(F\) is the antiderivative of \(g=\sin(t^2)\), namely \(F'=g\), and we see that \(\displaystyle f(x,y)=\int_{x^2}^{x+y}g(t)dt=F(x+y)-F(x^2)\), then</p>
+\[\begin{align*}
+f_x&amp;=\dfrac{\partial}{\partial x}\left[F(x+y)-F(x^2)\right]\\
+&amp;=F'(x+y)\cdot1-F'(x^2)\cdot 2x\\
+&amp;=g(x+y)-2xg(x^2)\\
+&amp;=\sin[(x+y)^2]-2x\sin(x^4)
+\end{align*}
+\]
+\[\begin{align*}
+f_y&amp;=\dfrac{\partial}{\partial y}\left[F(x+y)-F(x^2)\right]\\
+&amp;=F'(x+y)\cdot1-0\\
+&amp;=g(x+y)\\
+&amp;=\sin[(x+y)^2]
+\end{align*}
+\]
+\[f_{xy}=f_{yx}=\dfrac{\partial}{\partial x}f_y=\dfrac{\partial}{\partial x}\sin[(x+y)^2]=\cos[(x+y)^2]\cdot2(x+y)\cdot 1=2(x+y)\cos[(x+y)^2]
+\]
+</li>
+<li>
+<p>Suppose \(z=z(x,y)\) is implicitly a function of \(x\) and \(y\) that satisfies the following equations, evaluate \(\partial z/\partial x\).<br />
+a. \(z+x\sin z=y\ln x\)<br />
+Take \(\frac{\partial}{\partial x}\) on both sides, we get</p>
+\[z_x+\frac{\partial}{\partial x}(x\sin z)=y\cdot\frac{1}{x}
+\]
+<p>Which then simplifies to</p>
+\[z_x+\sin z+x\cos z\cdot z_x=\frac{y}{x}
+\]
+<p>From which we may solve \(z_x=\dfrac{\frac{y}{x}-\sin z}{1+x\cos z}\)<br />
+b. \(x^2+yz-\cos(xyz^2)=\ln 3\)<br />
+Take \(\frac{\partial}{\partial x}\) on both sides, we get</p>
+\[2x+yz_x+\sin(xyz^2)\cdot(yz^2+xy\cdot2z\cdot z_x)=0
+\]
+<p>From which we may solve \(z_x=\dfrac{-2x-yz^2\sin(xyz^2)}{y+2xyz\sin(xyz^2)}\)</p>
+</li>
+<li>
+<p>Find the first partial derivatives of \(f\) at the origin</p>
+\[f(x,y,z)=\begin{cases}
+\dfrac{x^2\sin x+(1+x^2y^3)z^2}{x^2+2y^3+z}, &amp;(x,y,z)\neq(0,0,0)\\
+0, &amp;(x,y,z)=(0,0,0)
+\end{cases}
+\]
+<p>We compute the first derivatives at the origin by definition.</p>
+\[f_x(0,0,0)=\lim_{x\to 0}\dfrac{f(x,0,0)-f(0,0,0)}{x-0}=\lim_{x\to 0}\dfrac{\frac{x^2\sin x}{x^2}-0}{x-0}=\lim_{x\to 0}\dfrac{\sin x}{x}=1
+\]
+\[f_y(0,0,0)=\lim_{y\to 0}\dfrac{f(0,y,0)-f(0,0,0)}{y-0}=\lim_{y\to 0}\dfrac{0-0}{y-0}=0
+\]
+\[f_z(0,0,0)=\lim_{z\to 0}\dfrac{f(0,0,z)-f(0,0,0)}{z-0}=\lim_{z\to 0}\dfrac{\frac{z^2}{z}-0}{z-0}=\lim_{z\to 0}1=1
+\]
+</li>
+<li>
+<p>A small heat-sensitive robot is exploring the \(xy\)-plane. The temperature at \((x, y)\) in \(^\circ C\) is \(f(x, y) = xy + x^2(y-2)\). where \(x\) and \(y\) are in meters. Now the robot is following the trajectory \(\mathbf r(t) = t\mathbf i + t^2\mathbf j\), where \(t\) is in seconds. At any instant \(t\) how fast is the temperature changing with respect to time?</p>
+<p>The change of rate of temperature with respect to time is \(\dfrac{df}{dt}\), and we know the position is parametrized by \(x=t, y=t^2\), apply chain rule, we know</p>
+\[\begin{align*}
+\dfrac{df}{dt}&amp;=\dfrac{\partial f}{\partial x}\dfrac{dx}{dt}+\dfrac{\partial f}{\partial y}\dfrac{dy}{dt}\\
+&amp;=(y+2x(y-2))\cdot1+(x+x^2)\cdot2t\\
+&amp;=(t^2+2t(t^2-2))\cdot1+(t+t^2)\cdot2t\\
+&amp;=4t^3+3t^2-4t
+\end{align*}
+\]
+</li>
+</ol>
