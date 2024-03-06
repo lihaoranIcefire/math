@@ -1,15 +1,1026 @@
-<h3>Worksheets</h3>
-<a href="https://lihaoranicefire.github.io/math/Teaching/MATH241 Spring 2024/worksheet0125.html">Worksheet 01/25</a><br>
-<a href="https://lihaoranicefire.github.io/math/Teaching/MATH241 Spring 2024/worksheet0130.html">Worksheet 01/30</a><br>
-<a href="https://lihaoranicefire.github.io/math/Teaching/MATH241 Spring 2024/worksheet0206.html">Worksheet 02/06</a><br>
-<a href="https://lihaoranicefire.github.io/math/Teaching/MATH241 Spring 2024/worksheet0213.html">Worksheet 02/13</a><br>
-<a href="https://lihaoranicefire.github.io/math/Teaching/MATH241 Spring 2024/worksheet0222.html">Worksheet 02/22</a><br>
-<a href="https://lihaoranicefire.github.io/math/Teaching/MATH241 Spring 2024/worksheet0227.html">Worksheet 02/27</a><br>
-<a href="https://lihaoranicefire.github.io/math/Teaching/MATH241 Spring 2024/worksheet0305.html">Worksheet 03/05</a>
-<h3>Quizzes</h3>
-<a href="https://lihaoranicefire.github.io/math/Teaching/MATH241 Spring 2024/quiz1.html">Quiz 1 - 02/01</a><br>
-<a href="https://lihaoranicefire.github.io/math/Teaching/MATH241 Spring 2024/quiz2.html">Quiz 2 - 02/08</a><br>
-<a href="https://lihaoranicefire.github.io/math/Teaching/MATH241 Spring 2024/quiz3.html">Quiz 3 - 02/15</a><br>
-<a href="https://lihaoranicefire.github.io/math/Teaching/MATH241 Spring 2024/quiz4.html">Quiz 4 - 02/29</a>
-<h3>Exams</h3>
-<a href="https://lihaoranicefire.github.io/math/Teaching/MATH241 Spring 2024/exam1.html">Exam 1 - 02/19</a>
+<script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<style>
+.accordion > input[type="checkbox"] {
+	position: absolute;
+	left: -100vw;
+}
+.accordion .content {
+	overflow-y: hidden;
+	height: 0;
+	transition: height 0.3s ease;
+}
+.accordion > input[type="checkbox"]:checked ~ .content {
+	height: auto;
+	overflow: visible;
+}
+.accordion label {
+	display: block;
+}
+body {
+	font: 16px/1.5em "Overpass", "Open Sans", Helvetica, sans-serif;
+	color: #333;
+	font-weight: 300;
+}
+.accordion {
+	margin-bottom: 1em;
+}
+.accordion > input[type="checkbox"]:checked ~ .content {
+	padding: 15px;
+	border: 1px solid #e8e8e8;
+	border-top: 0;
+}
+.accordion .handle {
+	margin: 0;
+	font-size: 1.125em;
+	line-height: 1.2em;
+}
+.accordion label {
+	color: #333;
+	cursor: pointer;
+	font-weight: normal;
+	padding: 15px;
+	background: #e8e8e8;
+}
+.accordion label:hover,
+.accordion label:focus {
+	background: #d8d8d8;
+}
+.accordion .handle label:before {
+	font-family: 'Material Icons';
+    content: "\e5cf";
+	display: inline-block;
+	margin-right: 10px;
+	font-size: 1.5em;
+	line-height: 1.5em;
+	vertical-align: middle;
+}
+.accordion > input[type="checkbox"]:checked ~ .handle label:before {
+	content: '\e5ce';
+}
+/*
+   Demo purposes only
+*/
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+body {
+	padding: 40px;
+}
+a {
+	color: #06c;
+}
+p {
+	margin: 0 0 1em;
+}
+h1 {
+	margin: 0 0 1.5em;
+	font-weight: 600;
+	font-size: 1.5em;
+}
+.accordion {
+	max-width: 120em;
+}
+.accordion p:last-child {
+	margin-bottom: 0;
+}
+</style>
+
+
+
+
+
+
+
+
+<h1>Worksheets</h1>
+
+<section class="accordion">
+<input type="checkbox" name="collapse" id="handle1">
+<h2 class="handle">
+<label for="handle1">Worksheet 01/25</label>
+</h2>
+<div class="content">
+<!-- Problems 6, 8, 9, 10, 13, 15, 20, 23 -->
+<ol>
+<li>
+<p>Evaluate the following integrals:<br />
+a. \(\displaystyle\int xe^xdx\)<br />
+This uses <strong>integration by parts</strong></p>
+\[\begin{align*}
+\int xe^xdx&amp;=\int xd(e^x)=xe^x-\int e^xdx=xe^x-e^x+C
+\end{align*}
+\]
+<p>b. \(\displaystyle\int\sin^4x\cos xdx\)<br />
+This uses <strong>\(u\)-sub</strong> by \(u=\sin x\)</p>
+\[\begin{align*}
+\int\sin^4x\cos xdx=\int\sin^4xd(\sin x)=\int u^4du=\dfrac{1}{5}u^5+C=\dfrac{1}{5}\sin^5x+C
+\end{align*}
+\]
+<p>c. \(\displaystyle\int\ln xdx\)<br />
+This uses <strong>integration by parts</strong></p>
+\[\begin{align*}
+\int\ln xdx=x\ln x-\int\dfrac{1}{x}dx=x\ln x-x+C
+\end{align*}
+\]
+<p>d. \(\displaystyle\int\sin^2xdx\)<br />
+This uses the <strong>half angle formula</strong> \(\sin^2x=\dfrac{1-\cos(2x)}{2}\)</p>
+\[\begin{align*}
+\int\sin^2xdx&amp;=\int\dfrac{1-\cos(2x)}{2}dx=\int\dfrac{1}{2}dx-\int\dfrac{\cos(2x)}{2}dx\\
+&amp;=\dfrac{1}{2}x-\dfrac{\sin(2x)}{4}+C
+\end{align*}
+\]
+<p>e. \(\displaystyle\int\sqrt{1-x^2}dx\)<br />
+This uses <strong>trig-sub</strong> by \(x=\cos t\), so \(t=\arccos(x)\), and</p>
+\[\begin{align*}
+\int\sqrt{1-x^2}dx&amp;=\int\sqrt{1-\cos^2t}d(\cos t)=\int\sin t\cdot(\sin t)dt=-\int\sin^2tdt\\
+&amp;=-\dfrac{1}{2}t+\dfrac{\sin(2t)}{4}+C=-\dfrac{1}{2}\arccos(x)+\dfrac{\sin(2\arccos(x))}{4}+C
+\end{align*}
+\]
+</li>
+<li>
+<p>Parametrize the following curves:<br />
+a. The circle centered at the origin with radius 3.</p>
+\[\begin{cases}
+x=3\cos t \\
+y=3\sin t
+\end{cases}
+\]
+<p>for \(0\leq t\leq 2\pi\).<br />
+b. The circle centered at \((1, 2)\) with radius 2.</p>
+\[\begin{cases}
+x=1+2\cos t \\
+y=2+2\sin t
+\end{cases}
+\]
+<p>for \(0\leq t\leq 2\pi\). In general, a parametrization of the circle of radius \(r\) centered at \((a,b)\) could be</p>
+\[\begin{cases}
+x=a+r\cos t \\
+y=b+r\sin t
+\end{cases}
+\]
+<p>for \(0\leq t\leq 2\pi\).<br />
+c. The graph of the function \(y = x^2\).</p>
+\[\begin{cases}
+x=t \\
+y=t^2
+\end{cases}
+\]
+<p>for \(-\infty&lt;t&lt;\infty\).<br />
+d. The ellipse given by the equation \(\dfrac{x^2}{4} + \dfrac{y^2}{9} = 1\).</p>
+\[\begin{cases}
+x=2\cos t \\
+y=3\sin t
+\end{cases}
+\]
+<p>for \(0\leq t\leq 2\pi\). In general, a parametrization of \(\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1\) could be</p>
+\[\begin{cases}
+x=a\cos t \\
+y=b\sin t
+\end{cases}
+\]
+<p>for \(0\leq t\leq 2\pi\).</p>
+</li>
+<li>
+<p>(\(\S11.1\), 20) Find an equation of the set of points twice as far from the origin as from the point \((-1, 1, 1)\). Show that the set of points is a sphere and find its center and radius.</p>
+<p>Denote \(O=(0,0,0)\), \(P=(-1,1,1)\), and <strong>assume</strong> \(Q=(x,y,z)\) is a point in the set of points twice as far from the \(O\) as from the point \(P\), then we know that \(|OQ|=2|PQ|\), thus we get an equation</p>
+\[\sqrt{(x-0)^2+(y-0)^2+(z-0)^2}=2\sqrt{(x+1)^2+(y-1)^2+(z-1)^2}
+\]
+<p>Square both sides we got</p>
+\[x^2+y^2+z^2=4\left[(x+1)^2+(y-1)^2+(z-1)^2\right]
+\]
+<p>Expand the terms we have</p>
+\[x^2+y^2+z^2=4x^2+8x+4+4y^2-8y+4+4z^2-8z+4
+\]
+<p>Cancel \(x^2+y^2+z^2\) on both sides</p>
+\[0=3x^2+8x+4+3y^2-8y+4+3z^2-8z+4
+\]
+<p>Complete the squares we have</p>
+\[3\left(x+\frac{4}{3}\right)^2+3\left(y-\frac{4}{3}\right)^2+3\left(z-\frac{4}{3}\right)^2=3\cdot3\cdot\left(\frac{4}{3}\right)^2-3\cdot4=4
+\]
+<p>Finally divide 3 on both sides</p>
+\[\left(x+\frac{4}{3}\right)^2+\left(y-\frac{4}{3}\right)^2+\left(z-\frac{4}{3}\right)^2=\frac{4}{3}
+\]
+<p>Recall that the equation of a sphere of radius \(r\) centered at \((x_0,y_0,z_0)\) is</p>
+\[(x-x_0)^2+(y-y_0)^2+(z-z_0)^2=r^2
+\]
+<p>So this set of points is the sphere of radius \(\sqrt{\dfrac{4}{3}}\) centered at \(\left(-\dfrac{4}{3},\dfrac{4}{3},\dfrac{4}{3}\right)\)</p>
+</li>
+<li>
+<p>(\(\S11.1\), 22) Find the midpoint of the line segment joining the points \((3, 7, 11)\) and \((–9, 8, 31)\). Can you determine the coordinates of the two points that divide this segment into three equal parts?</p>
+<p>Suppose \(P=(x_0,y_0,z_0)\) and \(Q=(x_1,y_1,z_1)\). The midpoint is of \(PQ\) is</p>
+\[\left(\dfrac{x_0+x_1}{2},\dfrac{y_0+y_1}{2},\dfrac{z_0+z_1}{2}\right)
+\]
+<p>and the two points dividing \(PQ\) into three equal parts are</p>
+\[\left(\dfrac{2x_0+x_1}{3},\dfrac{2y_0+y_1}{3},\dfrac{2z_0+z_1}{3}\right),\quad\left(\dfrac{x_0+2x_1}{3},\dfrac{y_0+2y_1}{3},\dfrac{z_0+2z_1}{3}\right)
+\]
+<p>Therefore, the mid point of \((3, 7, 11)\) and \((–9, 8, 31)\) is</p>
+\[\left(\dfrac{3+(-9)}{2},\dfrac{7+8}{2},\dfrac{11+31}{2}\right)=\left(-3,\dfrac{15}{2},21\right)
+\]
+<p>and the two thrid points are</p>
+\[\left(\dfrac{2\cdot3+(-9)}{3},\dfrac{2\cdot7+81}{3},\dfrac{2\cdot11+31}{3}\right)=\left(-1,\dfrac{22}{3},\dfrac{53}{3}\right)
+\]
+\[\left(\dfrac{3+2\cdot(-9)}{3},\dfrac{7+2\cdot8}{3},\dfrac{11+2\cdot31}{3}\right)=\left(-5,\dfrac{23}{3},\dfrac{73}{3}\right)
+\]
+</li>
+</ol>
+</div>
+</section>
+
+<section class="accordion">
+<input type="checkbox" name="collapse" id="handle1">
+<h2 class="handle">
+<label for="handle1">Worksheet 01/30</label>
+</h2>
+<div class="content">
+<!--
+Problems
+11.2: 3, 13, 17, 20, 27, 28
+11.3: 5, 7, 9, 13, 17, 23, 33
+11.4: 3, 6, 7, 9, 10, 13, 15
+-->
+<ol>
+<li>
+<p>Suppose \(P=(0,-1,3)\), \(Q=(\sqrt{2},0,2)\)<br />
+a. Write \(\overrightarrow{PQ}\) as a vector in the form \(a\mathbf i+b\mathbf j+c\mathbf k\).</p>
+\[\overrightarrow{PQ} = (\sqrt2-0)\mathbf i+(0-(-1))\mathbf j+(2-3)\mathbf k=\sqrt2\mathbf i+\mathbf j-\mathbf k
+\]
+<p>b. Find the length of the vector \(\overrightarrow{PQ}\).</p>
+\[\|\overrightarrow{PQ}\|=\sqrt{(\sqrt2)^2+1^2+(-1)^2}=\sqrt4=2
+\]
+<p>c. Find the unit vector having the same direction as \(\overrightarrow{PQ}\).<br />
+The unit vector having the same direction as \(\overrightarrow{PQ}\) is</p>
+\[\mathbf u = \dfrac{\overrightarrow{PQ}}{\|\overrightarrow{PQ}\|}=\dfrac{\sqrt2\mathbf i+\mathbf j-\mathbf k}{2}=\dfrac{1}{\sqrt2}\mathbf i+\dfrac{1}{2}\mathbf j-\dfrac{1}{2}\mathbf k
+\]
+</li>
+<li>
+<p>Suppose \(\mathbf a=\sqrt6\mathbf i+\mathbf j-\mathbf k\), \(\mathbf b=2\mathbf j+\mathbf k\).<br />
+a. Find the angle \(\theta\) between \(\mathbf a\) and the positive \(x\) axis.<br />
+The angle between \(\mathbf a\) and the positive \(x\) axis is the angle between \(\mathbf a\) and \(\mathbf i\), so</p>
+\[\cos\theta=\dfrac{\mathbf a\cdot\mathbf i}{\|\mathbf a\|\|\mathbf i\|}=\dfrac{\sqrt6\cdot1+1\cdot0+(-1)\cdot0}{\sqrt{(\sqrt6)^2+1^2+(-1)^2}\sqrt{1^2+0^2+0^2}}=\dfrac{\sqrt6}{\sqrt8\cdot1}=\dfrac{\sqrt3}{2}
+\]
+<p>Therefore \(\theta=\dfrac{\pi}{6}\).<br />
+b. Find \(\operatorname{pr}_{\mathbf a}\mathbf b\).</p>
+\[\operatorname{pr}_{\mathbf a}\mathbf a=\dfrac{\mathbf a\cdot\mathbf b}{\|\mathbf a\|^2}\mathbf a=\dfrac{\sqrt6\cdot0+1\cdot2+(-1)\cdot1}{((\sqrt6)^2+1^2+(-1)^2)}\mathbf a=\dfrac{1}{8}\mathbf a=\dfrac{\sqrt6}{8}\mathbf i+\dfrac{1}{8}\mathbf j-\dfrac{1}{8}\mathbf k
+\]
+</li>
+<li>
+<p>(\(\S11.4\), 10) Find a vector perpendicular to both \(\mathbf i-3\mathbf j+2\mathbf k\) and \(-2\mathbf i+\mathbf j-5\mathbf k\).</p>
+<p>By the right hand rule, the product</p>
+\[\begin{align*}
+&amp;(\mathbf i-3\mathbf j+2\mathbf k)\times(-2\mathbf i+\mathbf j-5\mathbf k)\\
+&amp;=\left|\begin{matrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+1&amp;-3&amp;2\\
+-2&amp;1&amp;-5\\
+\end{matrix}\right|=\left|\begin{matrix}
+-3&amp;2\\
+1&amp;-5\\
+\end{matrix}\right|\mathbf i-\left|\begin{matrix}
+1&amp;2\\
+-2&amp;-5\\
+\end{matrix}\right|\mathbf j+\left|\begin{matrix}
+1&amp;-3\\
+-2&amp;1\\
+\end{matrix}\right|\mathbf k\\
+&amp;=((-3)\cdot(-5)-2\cdot1)\mathbf i-(1\cdot(-5))-2\cdot(-2)\mathbf j+(1\cdot1-(-3)\cdot(-2))\mathbf k\\
+&amp;=13\mathbf i+\mathbf j-5\mathbf k
+\end{align*}
+\]
+<p>is perpendicular to both vectors</p>
+</li>
+<li>
+<p>(\(\S11.2\), 28) Two tugboats are pulling an ocean freighter as shown in Figure. If one tugboat exerts a force of 1000 pounds on the cable tied at \(A\), what force must be exerted on the cable tied to the other tugboat at \(B\) if the freighter is to move along the line \(l\)?<br />
+<img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/Two_tugboats.png" alt="Two_tugboats" /></p>
+<p>Suppose the forces from tugboat \(A\) and \(B\) are denoted by \(\mathbf F_{A}\) and \(\mathbf F_{B}\) respectively, so we have</p>
+\[\mathbf F_{A}=1000(\cos(\pi/6)\mathbf i+\sin(\pi/6)\mathbf j)=500\sqrt3\mathbf i+500\mathbf j
+\]
+<p>Since tugboat forms a clockwise (instead of counterclockwise) angle with \(l\), we get</p>
+\[\mathbf F_{B}=\|\mathbf F_B\|(\cos(-\pi/4)\mathbf i+\sin(-\pi/4)\mathbf j)=\|\mathbf F_B\|\dfrac{\sqrt2}{2}\mathbf i-\|\mathbf F_B\|\dfrac{\sqrt2}{2}\mathbf j
+\]
+<p>To pull the freighter along \(l\), the total force</p>
+\[\mathbf F_{A}+\mathbf F_B=\left(500\sqrt3+\|\mathbf F_B\|\dfrac{\sqrt2}{2}\right)\mathbf i+\left(500-\|\mathbf F_B\|\dfrac{\sqrt2}{2}\right)\mathbf j
+\]
+<p>must have zero \(\mathbf j\) component, therefore</p>
+\[500-\|\mathbf F_B\|\dfrac{\sqrt2}{2}=0\Rightarrow\|\mathbf F_B\|=\dfrac{500}{\sqrt2/2}=500\sqrt2
+\]
+<p>The unit would be pounds.</p>
+</li>
+<li>
+<p>(\(\S11.2\), 27) Three children tug on a ball located at \(O\). One child pulls with a force of 20 pounds in the direction of the negative y axis. Another child pulls with a force of 100 pounds at an angle of \(\pi/3\) with the positive \(x\) axis. If the total force exerted on the ball is to be \(\mathbf 0\), find the force \(\mathbf F\) with which the third child should pull and the tangent of the angle \(\theta\) between the positive \(x\) axis and the direction in which the third child should pull.<br />
+<img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/Three_children_tug.png" alt="Three_children_tug" /></p>
+<p>Assume \(\mathbf F=a\mathbf i+b\mathbf j\). We see the force in the first quadrant is</p>
+\[\mathbf F_1=100(\cos(\pi/3)\mathbf i+\sin(\pi/3)\mathbf j)=100(1/2\mathbf i+\sqrt3/2\mathbf j)=50\mathbf i+50\sqrt3\mathbf j
+\]
+<p>and  the force to the negative \(y\) axis is</p>
+\[\mathbf F_2=-20\mathbf j
+\]
+<p>Since the total force should be \(\mathbf 0\), we have equation</p>
+\[\mathbf F+\mathbf F_1+\mathbf F_2=\mathbf 0\iff\begin{cases}
+a+50=0\\
+b+50\sqrt3-20=0
+\end{cases}
+\]
+<p>From which we may solve</p>
+\[\mathbf F=(-50)\mathbf i+(20-50\sqrt3)\mathbf j
+\]
+<p>Therefore</p>
+\[\|\mathbf F\|=\sqrt{(-50)^2+(20-50\sqrt3)^2}
+\]
+<p>and</p>
+\[\theta=\cos^{-1}\left(\dfrac{\mathbf F\cdot\mathbf i}{\|\mathbf F\|\|\mathbf i\|}\right)=\cos^{-1}\left(\dfrac{-50}{\sqrt{(-50)^2+(20-50\sqrt3)^2}}\right)
+\]
+</li>
+</ol>
+</div>
+</section>
+
+<section class="accordion">
+<input type="checkbox" name="collapse" id="handle1">
+<h2 class="handle">
+<label for="handle1">Worksheet 02/06</label>
+</h2>
+<div class="content">
+<!--
+Problems
+11.5: 5, 7, 8, 9, 12, 15, 17, 19, 20, 21, 23
+11.6: 3, 6, 8, 9, 10, 11, 12, 13, 23, 26, 29, 30
+12.1: 15, 19, 20, 21, 23, 25
+-->
+<ol>
+<li>
+<p>Find parametric and symmetric equations for the line containing the points (-1, 1, 0) and (-2, 5, 7).</p>
+<p>Recall that the symmetric equation for the line passing through \((x_0,y_0,z_0)\) with line vector \((a,b,c)\) is</p>
+\[\dfrac{x-x_0}{a}=\dfrac{y-y_0}{b}=\dfrac{z-z_0}{c}
+\]
+<p>Suppose \(P=(-1, 1, 0)\) and \(Q=(-2, 5, 7)\), the line vector \(\mathbf L=\overrightarrow{PQ}=(-1,4,7)\), so the symmetric equation of this line could be</p>
+\[\dfrac{x+1}{-1}=\dfrac{y-1}{4}=\dfrac{z}{7}
+\]
+</li>
+<li>
+<p>(\(\S 11.5\), 20) Find the distance \(D\) from the point \((2, 1, 0)\) to the line with equations \(x=-2\), \(y+1=z\).</p>
+<p>We can pick any point on the line, say \(P=(-2,0,1)\), and assume \(Q=(2,1,0)\). We also know the line vector to be \(\mathbf L=(0,1,1)\) from the symmetric line equation \(\ell\). Therefore</p>
+\[\operatorname{dist}(Q,\ell)=\dfrac{\|\overrightarrow{PQ}\times\mathbf L\|}{\|\mathbf L\|}=\dfrac{\|(4,1,-1)\times(0,1,1)\|}{\|(0,1,1)\|}=\dfrac{\|(2,-4,4)\|}{\|(0,1,1)\|}=\dfrac{6}{\sqrt2}=3\sqrt2
+\]
+</li>
+<li>
+<p>Decide whether the following planes meet or not<br />
+a. \(2x+y-z=10\) and \(4x+2y-2z=10\)<br />
+b. \(2x+y-z=10\) and \(4x+2y-2z=20\)<br />
+c. \(2x+y-z=10\) and \(4x+2y-z=10\)</p>
+<p>Suppose \(\pi_1,\pi_2\) are two plane equations with normal vectors \(\mathbf n_1,\mathbf n_2\) respectively, then exactly one of the following 3 statements is true:</p>
+<ul>
+<li>\(\pi_1,\pi_2\) are non-parallel and intersect at a line</li>
+<li>\(\pi_1,\pi_2\) are parallel and overlapping</li>
+<li>\(\pi_1,\pi_2\) are parallel yet non-overlapping</li>
+</ul>
+<p>And \(\pi_1,\pi_2\) are overlapping when the whole equation of \(\pi_1\) is an exact multiple of that of \(\pi_2\). Also recall that</p>
+\[\pi_1\parallel\pi_2\iff\mathbf n_1\parallel\mathbf n_2,\qquad\pi_1\perp\pi_2\iff\mathbf n_1\perp\mathbf n_2
+\]
+<p>a. normal vectors \(\mathbf n_1=(2,1,-1)\) is half of \(\mathbf n_2=(4,2,-2)\), so \(\mathbf n_1\parallel\mathbf n_2\Rightarrow\pi_1\parallel\pi_2\), however, \(4x+2y-2z=10\) is not an exact multiple of \(2x+y-z=10\). So they are parallel yet non-overlapping.<br />
+b. Like part a., we have \(\mathbf n_1\parallel\mathbf n_2\Rightarrow\pi_1\parallel\pi_2\), and we see that \(4x+2y-2z=20\) is exactly twice of \(2x+y-z=10\), so these two equations describes the same set of points, i.e., they are overlapping.<br />
+c. \(\mathbf n_1=(2,1,-1)\) is not a multiple of \(\mathbf n_2=(4,2,-1)\), so they are not parallel and intersect at a line.</p>
+</li>
+<li>
+<p>(\(\S 11.6\), 6) Find an equation of the plane that contains the points \((2, -1, 4)\), \((5, 3, 5)\), and \((2, 4, 3)\).</p>
+<p>Suppose \(P=(2, -1, 4)\), \(Q=(5, 3, 5)\) and \(R=(2, 4, 3)\), then we can choose the normal vector to this plane to be</p>
+\[\mathbf n=\overrightarrow{PQ}\times\overrightarrow{PR}=(3,4,1)\times(0,5,-1)=(-9,3,15)
+\]
+<p>since \(\mathbf n\) must be perpendicular to both \(\overrightarrow{PQ}\), \(\overrightarrow{PR}\). So the plane equation would be</p>
+\[-9(x-2)+3(y+1)+15(z-4)=0
+\]
+</li>
+<li>
+<p>(\(\S 11.6\), 13) Find the distance \(D\) between the point \((3, -1, 4)\) and the plane \(2x - y + z = 5\).</p>
+<p>We can choose any point on the plane, say \(P=(1,1,4)\), and assume \(Q=(3,-1,4)\), we know the normal vector is \(\mathbf n=(2,-1,1)\) from the plane equation \(\pi\). Therefore</p>
+\[D=\operatorname{dist}(P,\pi)=\dfrac{|\overrightarrow{PQ}\cdot\mathbf n|}{\|\mathbf n\|}=\dfrac{|(2,-2,0)\cdot(2,-1,1)|}{\|(2,-1,1)\|}=\dfrac{6}{\sqrt6}=\sqrt6
+\]
+</li>
+<li>
+<p>(\(\S 11.6\), 11) Let \(l\) be the intersection of the two planes \(2x - 3y + 4z = 2\) and \(x - z = 1\)<br />
+a. Find a vector equation of \(l\).</p>
+<p>First we know that the normal vectors for planes \(2x - 3y + 4z = 2\) and \(x - z = 1\) are \(\mathbf n_1=(2,-3,4)\) and \(\mathbf n_2=(1,0,-1)\). Note that \(\mathbf L\) are perpendicular to both \(\mathbf n_1,\mathbf n_2\), so it can be chosen to be the cross product</p>
+\[\mathbf L=\mathbf n_1\times\mathbf n_2=(2,-3,4)\times(1,0,-1)=(3,6,3)
+\]
+<p>We can also choose any point on the line \(l\), say \(P_0=(1,0,0)\), then the vector equation of \(l\) would be</p>
+\[\mathbf r(t)=P_0+t\mathbf L=(1,0,0)+t(3,6,3)=(1+3t,6t,3t)
+\]
+<p>b. Find an equation of the plane that is perpendicular to \(l\) and contains the point \((-9, 12, 14)\).</p>
+<p>Suppose the plane that is perpendicular to \(l\) and contains the point \(P=(-9, 12, 14)\) is denoted \(\pi\), then a choice of normal vector could simply be the line vector of \(l\), i.e. \(\mathbf n=\mathbf L=(3,6,3)\), so the plane equation of \(\pi\) would be</p>
+\[3(x+9)+6(y-12)+3(z-14)=0
+\]
+</li>
+<li>
+<p>(\(\S 11.6\), 23) Show that the points \((2, 3, 2)\), \((1, -1, -3)\), \((1, 0, -1)\), and \((5, 9, 5)\) all lie on the same plane.</p>
+<p>Suppose \(P_0=(2, 3, 2)\), \(P_1=(1, -1, -3)\), \(P_2=(1, 0, -1)\), and \(P_3=(5, 9, 5)\), we just need to show that \(\overrightarrow{P_0P_1}\), \(\overrightarrow{P_0P_2}\), \(\overrightarrow{P_0P_3}\) lies on the same plane, which is equivalent to that the triple product \((\overrightarrow{P_0P_1}\times\overrightarrow{P_0P_2})\cdot\overrightarrow{P_0P_3}\) being zero. And we see that</p>
+\[(\overrightarrow{P_0P_1}\times\overrightarrow{P_0P_2})\cdot\overrightarrow{P_0P_3}=((-1,-4,-5)\times(-1,-3,-3))\cdot(3,6,3)=(-3,2,-1)\cdot(3,6,3)=0
+\]
+<p>Therefore these four points indeed lie on the same plane.</p>
+</li>
+</ol>
+</div>
+</section>
+
+<section class="accordion">
+<input type="checkbox" name="collapse" id="handle1">
+<h2 class="handle">
+<label for="handle1">Worksheet 02/13</label>
+</h2>
+<div class="content">
+<!--
+Problems
+12.2: 3, 4, 9
+12.3: 8, 10, 21, 27, 31, 32, 35, 39, 47-49
+12.4: 3, 7, 11, 13-20, 21, 22
+12.5: 2, 3, 7, 13, 15, 16, 17-24
+12.6: 2, 9, 10, 13, 19, 25, 27, 29
+-->
+<ol>
+<li>
+<p>Find smooth parametrizations for the following curves described<br />
+a. The line segment from \((9,1,3)\) to \((-1,2,3)\). (Can you use this to find the two points that divide this line segment into three equal parts)<br />
+Suppose \(P=(9,1,3)\) and \(Q=(-1,2,3)\), then a smooth parametrization of the line segment \(PQ\) could be</p>
+\[\mathbf r(t)=(1-t)P+tQ=(9(1-t)+(-1)t,(1-t)+2t,3(1-t)+3t)=(9-10t,1+t,3),\qquad 0\leq t\leq 1
+\]
+<p>Note that \(\mathbf r(0)=P\) and \(\mathbf r(1)=Q\), so the two third points should be \(\mathbf r(1/3)\) and \(\mathbf r(2/3)\).<br />
+b. The quarter circle in the \(xy\) plane whose endpoints are \((1,0)\) and \((0,-1)\) and whose center is the origin.</p>
+\[\mathbf r(t)=(\cos t,\sin t),\qquad \dfrac{3\pi}{2}\leq t\leq2\pi
+\]
+<p>c. The graph of the function \(f(x)=x^2+3\).</p>
+\[\mathbf r(t)=(t,t^2+3),\qquad -\infty&lt;t&lt;\infty
+\]
+</li>
+<li>
+<p>(\(\S12.5\), 15) Suppose \(\mathbf r(t)=e^t\mathbf i+e^{-t}\mathbf j+\sqrt2t\mathbf k\).<br />
+a. Show \(\|\mathbf r'(t)\|=e^t+e^{-t}\).<br />
+First we know \(\mathbf r'(t)=e^t\mathbf i-e^{-t}\mathbf j+\sqrt2\mathbf k\), hence</p>
+\[\|\mathbf r'(t)\|=\sqrt{e^{2t}+e^{-2t}+2}=\sqrt{(e^t+e^{-t})^2}=e^t+e^{-t}
+\]
+<p>b. Find the tangent and normal vectors \(\mathbf T\) and \(\mathbf N\).</p>
+\[\mathbf T(t)=\dfrac{\mathbf r'(t)}{\|\mathbf r'(t)\|}=\dfrac{e^t\mathbf i-e^{-t}\mathbf j+\sqrt2\mathbf k}{e^t+e^{-t}}
+\]
+<p>Computation of \(\mathbf N(t)\) is tedious (so NOT tested), but first we see that</p>
+\[\mathbf T'(t)=\dfrac{(e^t\mathbf i+e^{-t}\mathbf j)(e^t+e^{-t})-(e^t\mathbf i-e^{-t}\mathbf j+\sqrt2\mathbf k)(e^t-e^{-t})}{(e^t+e^{-t})^2}=\dfrac{2\mathbf i+2\mathbf j-\sqrt2(e^{t}-e^{-t})\mathbf k}{(e^t+e^{-t})^2}
+\]
+<p>Therefore</p>
+\[\mathbf N(t)=\dfrac{\mathbf T'(t)}{\|\mathbf T'(t)\|}=\dfrac{2\mathbf i+2\mathbf j-\sqrt2(e^{t}-e^{-t})\mathbf k}{\|2\mathbf i+2\mathbf j-\sqrt2(e^{t}-e^{-t})\mathbf k\|}=\dfrac{2\mathbf i+2\mathbf j-\sqrt2(e^{t}-e^{-t})\mathbf k}{\sqrt{2(e^t-e^{-t})^2+8}}=\dfrac{2\mathbf i+2\mathbf j-\sqrt2(e^{t}-e^{-t})\mathbf k}{\sqrt{2(e^t+e^{-t})^2}}=\dfrac{2\mathbf i+2\mathbf j-\sqrt2(e^{t}-e^{-t})\mathbf k}{\sqrt2(e^t+e^{-t})}
+\]
+<p>c. Find the tangential and normal components \(\mathbf a_T\) and \(\mathbf a_N\).<br />
+First recall that \(\mathbf r'(t)=\mathbf v(t)\) is the velocity, and that \(\mathbf a(t)=\mathbf v'(t)=e^t\mathbf i+e^{-t}\mathbf j\), so</p>
+\[\mathbf a_T=\dfrac{|\mathbf v\cdot\mathbf a|}{\|\mathbf v\|}=\dfrac{e^{2t}-e^{-2t}}{e^t+e^{-t}}=\dfrac{(e^{t}-e^{-t})(e^{t}+e^{-t})}{e^t+e^{-t}}=e^{t}-e^{-t}
+\]
+\[\mathbf a_T=\dfrac{|\mathbf v\times\mathbf a|}{\|\mathbf v\|}=\dfrac{\|-\sqrt2e^{-t}\mathbf i+\sqrt2e^t\mathbf j+2\mathbf k\|}{e^t+e^{-t}}=\dfrac{\sqrt{2(e^{2t}+e^{-2t})+4}}{e^t+e^{-t}}=\dfrac{\sqrt{2(e^{t}+e^{-t})^2}}{e^t+e^{-t}}=\dfrac{\sqrt2(e^{t}+e^{-t})}{e^t+e^{-t}}=\sqrt2
+\]
+</li>
+<li>
+<p>An object starts traveling along a smooth curve \(C\) at time \(t=0\) and comes to a stop at \(t=2\). Suppose its acceleration is \(\mathbf a(t)=e^t\mathbf i+e^{-t}\mathbf j\), initial velocity is \(\mathbf v_0=\mathbf i-\mathbf j+\sqrt2\mathbf k\), and initial position is \(\mathbf r_0=\mathbf i+\mathbf j\).</p>
+<p>a. Find the position \(\mathbf r(t)\), velocity \(\mathbf v(t)\), and speed \(\|\mathbf v(t)\|\) of this object respect to time.<br />
+By Foundamental theorem of Calculus we know</p>
+\[\mathbf v(t)-\mathbf v(0)=\int_0^t\mathbf a(t)dt,\qquad\mathbf r(t)-\mathbf r(0)=\int_0^t\mathbf v(t)dt
+\]
+<p>We also know that \(\mathbf v(0)=\mathbf v_0=\mathbf i-\mathbf j+\sqrt2\mathbf k\) and \(\mathbf r(0)=\mathbf r_0=\mathbf i+\mathbf j\), so</p>
+\[\begin{align*}
+\mathbf v(t)&amp;=\mathbf v_0+\int_0^t\mathbf a(t)dt\\
+&amp;=\mathbf i-\mathbf j+\sqrt2\mathbf k+\int_0^te^t\mathbf i+e^{-t}\mathbf jdt\\
+&amp;=\mathbf i-\mathbf j+\sqrt2\mathbf k+\left.\left(e^t\mathbf i-e^{-t}\mathbf j\right)\right|_{0}^t\\
+&amp;=\mathbf i-\mathbf j+\sqrt2\mathbf k+\left(e^t\mathbf i-e^{-t}\mathbf j\right)-\left(\mathbf i-\mathbf j\right)\\
+&amp;=e^t\mathbf i-e^{-t}\mathbf j+\sqrt2\mathbf k\\
+\end{align*}
+\]
+<p>and that</p>
+\[\begin{align*}
+\mathbf r(t)&amp;=\mathbf r_0+\int_0^t\mathbf v(t)dt\\
+&amp;=(\mathbf i+\mathbf j)+\int_0^te^t\mathbf i-e^{-t}\mathbf j+\sqrt2\mathbf kdt\\
+&amp;=(\mathbf i+\mathbf j)+\left.\left(e^t\mathbf i+e^{-t}\mathbf j+\sqrt2t\mathbf k\right)\right|_0^t\\
+&amp;=(\mathbf i+\mathbf j)+\left(e^t\mathbf i+e^{-t}\mathbf j+\sqrt2t\mathbf k\right)-\left(\mathbf i+\mathbf j\right)\\
+&amp;=e^t\mathbf i+e^{-t}\mathbf j+\sqrt2t\mathbf k
+\end{align*}
+\]
+<p>b. Find the length \(L\) of the curve \(C\).</p>
+\[L=\int_0^2\|\mathbf r'(t)\|dt=\int_0^2e^t+e^{-t}dt=\left.e^t-e^{-t}\right|_0^2=e^2-e^{-2}
+\]
+<p>c. Which is bigger and why? \(\|\mathbf r(2)-\mathbf r(0)\|\) or \(L\).<br />
+Recall that</p>
+\[\int_a^b\|\mathbf r'(t)\|dt\geq\|\mathbf r(b)-\mathbf r(a)\|
+\]
+<p>Equality holds if and only if \(r\) describes a straight line. So in this case \(L\) is bigger as \(C\) is not a straight line and</p>
+\[L=\int_0^2\|\mathbf r'(t)\|dt&gt;\|\mathbf r(2)-\mathbf r(0)\|
+\]
+</li>
+<li>
+<p>(\(\S12.6\), 25) Find the point on the graph of \(y=e^x\) at which the curvature is maximum and show why.<br />
+First we define a parametrization of the graph \(\mathbf r(t)=(t,e^t),\,t\in\mathbb R\), so \(\mathbf v(t)=\mathbf r'(t)=(1,e^t)\), \(\mathbf a(t)=\mathbf v'(t)=(0,e^t)\), we can then compute its curvature</p>
+\[\kappa(t)=\dfrac{\|\mathbf v\times\mathbf a\|}{\|\mathbf v\|^3}=\dfrac{\|e^t\mathbf k\|}{\sqrt{1+e^{2t}}^3}=\dfrac{e^t}{(1+e^{2t})^{3/2}}
+\]
+<p>To find its maximum, we take the derivative</p>
+\[\kappa'(t)=\dfrac{e^t(1+e^{2t})^{3/2}-e^t\frac{3}{2}(1+e^{2t})^{1/2}2e^{2t}}{(1+e^{2t})^{3}}=\dfrac{e^t(1+e^{2t})-e^t\frac{3}{2}2e^{2t}}{(1+e^{2t})^{5/2}}=\dfrac{e^t(1-2e^{2t})}{(1+e^{2t})^{5/2}}
+\]
+<p>Set it equal to zero, we have \(1-2e^{2t}=0\), and solve for \(t=\dfrac{1}{2}\ln\left(\dfrac{1}{2}\right)\).</p>
+</li>
+</ol>
+</div>
+</section>
+
+<section class="accordion">
+<input type="checkbox" name="collapse" id="handle1">
+<h2 class="handle">
+<label for="handle1">Worksheet 02/22</label>
+</h2>
+<div class="content">
+<!--
+Problems
+13.1: 15, 17, 18, 20, 21, 23, 31, 33-37, 41, 43, 47, 65, 67, 70
+13.2: 3, 9, 10, 11, 13, 14, 18
+-->
+<ol>
+<li>
+<p>Sketch the following surfaces<br />
+a. An ellipsoid with longest radius along \(y\)-axis and give an example<br />
+One such example could be \(x^2+\dfrac{y^2}{4}+z^2=1\).<br />
+b. A parabolic sheet parallel to the \(z\)-axis and give an example<br />
+One such example could be \(y=x^2\).<br />
+c. A cylinder parallel to the \(x\)-axis and give an example<br />
+One such example could be \(y^2+z^2=1\).<br />
+d. \(x^2-y^2+z^2=0\)<br />
+This surface equation can be turn into \(y^2=x^2+z^2\) which is a double cone.<br />
+e. \(y=x^2+2z^2\)<br />
+This is a paraboloid.<br />
+f. A level surface of \(f(x,y,z)=x^2+y^2-z\)<br />
+The level surfaces are \(f(x,y,z)=x^2+y^2-z=c\) for arbitrary \(c\), this is a collections of paraboloids \(z=x^2+y^2-c\) with \(z\)-intercept \((0,0,-c)\)<br />
+g. The graph of \(f(x,y)=\sqrt{4-x^2-y^2}\)<br />
+This is the upper hemisphere of radius 2 centered at the origin.<br />
+<img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/worksheet0222-1.png" alt="worksheet0222-1" width="1000" height="500"/></p>
+</li>
+<li>
+<p>What are the intersections of the surfaces like?<br />
+a. \(x^2+y^2=4\) and \(x^2+y^2+z^2=25\)<br />
+The intersection of a cylinder and a sphere with bigger radius is two circles.<br />
+b. \(z=x^2\) and \(z=10\)<br />
+The intersection of a parabolic sheet with plane parallel to it is two lines.<br />
+c. \(x=y^2\) and \(z=10\)<br />
+The intersection of a parabolic sheet with plane perpendicular to it is a parabola.<br />
+d. \(x+y-z=5\) and \(x+y+2z=10\)<br />
+Since the normal vectors \(\mathbf n_1=(1,1,-1)\), \(\mathbf n_2=(1,1,2)\) are not parallel, they meet in a line.<br />
+<img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/worksheet0222-2.png" alt="worksheet0222-2" width="1300" height="300"/></p>
+</li>
+<li>
+<p>Suppose a particle is moving through space has trajectory \(\mathbf r(t)=(\frac{t^2}{2}-\ln t)\mathbf i-\mathbf j+2t\mathbf k\).<br />
+a. At what time does particle strike the plane \(2x-y+z=4\)? What is the particle's position and velocity at that instant?<br />
+Recall in general, a particle with trajectory \(\mathbf r(t)=x(t)\mathbf i+y(t)\mathbf j+z(t)\mathbf j\) strikes a surface \(F(x,y,z)=0\) if \(F(x(t),y(t),z(t))=0\). In this case, we need to solve for \(t\) from \(2(\frac{t^2}{2}-\ln t)-(-1)+(2t)=4\), which simplifies to \(t^2+2t-2\ln t=3\), from which we can guess the answer is \(t=1\), meanwhile, we know that \(\mathbf v(t)=\mathbf r'(t)=(t-\frac{1}{t})\mathbf i+2\mathbf k\). So the position, velocity at that instant are \(\mathbf r(1)=\frac{1}{2}\mathbf i-\mathbf j+2\mathbf k\) and \(\mathbf v(t)=2\mathbf k\)<br />
+b. Find the length of the trajectory of the particle from \(t=1\) to \(t=3\).<br />
+The length \(L\) is</p>
+\[\begin{align*}
+\int_1^3\|\mathbf v(t)\|dt&amp;=\int_1^3\sqrt{\left(t-\frac{1}{t}\right)^2+2^2}dt\\
+&amp;=\int_1^3\sqrt{\left(t+\frac{1}{t}\right)^2}dt\\
+&amp;=\int_1^3\left|t+\frac{1}{t}\right|dt\\
+&amp;=\int_1^3t+\frac{1}{t}dt\\
+&amp;=\left.\frac{t^2}{2}+\ln t\right|_1^3\\
+&amp;=\left(\frac{9}{2}-\ln 3\right)-\frac{1}{2}=4-\ln 3
+\end{align*}
+\]
+<p>c. Decide whether \(\mathbf r(t)\) is a smooth parametrization for \(t&gt;0\).<br />
+Since \(\mathbf r'(t)=(t-\frac{1}{t})\mathbf i+2\mathbf k\), so \(\mathbf r'(t)\) can never be zero due to its last coordinate. So it is indeed a smooth parametrization.</p>
+</li>
+<li>
+<p>Suppose \(A=(2,1,3)\) and the line \(\ell\) given by \(\dfrac{x-1}{2}=-y=\dfrac{z-2}{3}\)<br />
+a. Find the equation of the plane that contains point \(A\) and \(\ell\).<br />
+We see that \(B=(1,0,2)\) is a point on \(\ell\) and its direction vector could be \(\mathbf L=(2,-1,3)\). To find the normal vector \(\mathbf n\) of the plane, we simply take the cross product \(\overrightarrow{AB}\times\mathbf L=-4\mathbf i+\mathbf j+3\mathbf k\), so the plane equation is</p>
+\[-4(x-2)+(y-1)+3(z-3)=0
+\]
+<p>b. Find the equation of the plane that contains point \(A\) and parallel to \(\ell\).<br />
+We now the normal vector should be parallel to \(\ell\), so can choose \(\mathbf n=\mathbf L\), so the plane equation is</p>
+\[2(x-2)-(y-1)+3(z-3)=0
+\]
+</li>
+</ol>
+</div>
+</section>
+
+<section class="accordion">
+<input type="checkbox" name="collapse" id="handle1">
+<h2 class="handle">
+<label for="handle1">Worksheet 02/27</label>
+</h2>
+<div class="content">
+<!--
+Problems
+13.3: 7, 13, 19, 23, 24, 25, 31, 37, 43
+13.4: 3, 5, 7, 11, 13, 17, 20, 21, 23, 43
+-->
+<ol>
+<li>
+<p>Suppose \(x=r\cos\theta, y=r\sin\theta\).<br />
+a. Compute \(\frac{\partial(x,y)}{\partial(r,\theta)}=\left|\begin{matrix} \frac{\partial x}{\partial r}&amp;\frac{\partial x}{\partial \theta}\\ \frac{\partial y}{\partial r}&amp;\frac{\partial y}{\partial \theta} \end{matrix}\right|=\frac{\partial x}{\partial r}\frac{\partial y}{\partial \theta}-\frac{\partial x}{\partial \theta}\frac{\partial y}{\partial r}\)<br />
+First we evaluate</p>
+\[\begin{cases}
+\dfrac{\partial x}{\partial r}=\cos\theta \\
+\dfrac{\partial y}{\partial \theta}=r\cos\theta \\
+\dfrac{\partial x}{\partial \theta}=-r\sin\theta \\
+\dfrac{\partial y}{\partial r}=\sin\theta
+\end{cases}
+\]
+<p>So</p>
+\[\frac{\partial x}{\partial r}\frac{\partial y}{\partial \theta}-\frac{\partial x}{\partial \theta}\frac{\partial y}{\partial r}=\cos\theta\cdot r\cos\theta-(-r\sin\theta)\cdot\sin\theta=r\cos^2\theta+r\sin^2\theta=r(\cos^2\theta+\sin^2\theta)=r
+\]
+<p>b. Express \(r,\theta\) in terms of \(x,y\)<br />
+We get rid of \(\theta\) by considering \(x^2+y^2=r^2\cos^2\theta+r^2\sin^2\theta=r^2\), so \(r=\sqrt{x^2+y^2}\).<br />
+We get rid of \(r\) by considering \(\dfrac{y}{x}=\dfrac{r\sin\theta}{r\cos\theta}=\tan\theta\), so \(\theta=\tan^{-1}(y/x)\).<br />
+c. Compute \(\frac{\partial(r,\theta)}{\partial(x,y)}=\left|\begin{matrix} \frac{\partial r}{\partial x}&amp;\frac{\partial r}{\partial y}\\ \frac{\partial \theta}{\partial x}&amp;\frac{\partial \theta}{\partial y} \end{matrix}\right|=\frac{\partial r}{\partial x}\frac{\partial \theta}{\partial y}-\frac{\partial r}{\partial y}\frac{\partial \theta}{\partial x}\)<br />
+First we calculate</p>
+\[\begin{cases}
+\dfrac{\partial r}{\partial x}=\dfrac{x}{\sqrt{x^2+y^2}} \\
+\dfrac{\partial \theta}{\partial y}=\dfrac{1}{1+\dfrac{y^2}{x^2}}\cdot\dfrac{1}{x} \\
+\dfrac{\partial r}{\partial y}=\dfrac{y}{\sqrt{x^2+y^2}} \\
+\dfrac{\partial \theta}{\partial x}=\dfrac{1}{1+\dfrac{y^2}{x^2}}\cdot\left(-\dfrac{y}{x^2}\right)
+\end{cases}
+\]
+<p>So \(\frac{\partial r}{\partial x}\frac{\partial \theta}{\partial y}-\frac{\partial r}{\partial y}\frac{\partial \theta}{\partial x}=\frac{1}{\sqrt{x^2+y^2}}\). We see that \(\frac{\partial(x,y)}{\partial(r,\theta)}\) and \(\frac{\partial(r,\theta)}{\partial(x,y)}\) are reciprocal of each other.</p>
+</li>
+<li>
+<p>Suppose \(\displaystyle f(x,y)=\int_{x^2}^{x+y}\sin t^2dt\).<br />
+a. Evaluate \(f_x\)<br />
+b. Evaluate \(f_{y}\)<br />
+c. Evaluate \(f_{yx}\) and \(f_{xy}\)</p>
+<p>Suppose \(F\) is the antiderivative of \(g=\sin(t^2)\), namely \(F'=g\), and we see that \(\displaystyle f(x,y)=\int_{x^2}^{x+y}g(t)dt=F(x+y)-F(x^2)\), then</p>
+\[\begin{align*}
+f_x&amp;=\dfrac{\partial}{\partial x}\left[F(x+y)-F(x^2)\right]\\
+&amp;=F'(x+y)\cdot1-F'(x^2)\cdot 2x\\
+&amp;=g(x+y)-2xg(x^2)\\
+&amp;=\sin[(x+y)^2]-2x\sin(x^4)
+\end{align*}
+\]
+\[\begin{align*}
+f_y&amp;=\dfrac{\partial}{\partial y}\left[F(x+y)-F(x^2)\right]\\
+&amp;=F'(x+y)\cdot1-0\\
+&amp;=g(x+y)\\
+&amp;=\sin[(x+y)^2]
+\end{align*}
+\]
+\[f_{xy}=f_{yx}=\dfrac{\partial}{\partial x}f_y=\dfrac{\partial}{\partial x}\sin[(x+y)^2]=\cos[(x+y)^2]\cdot2(x+y)\cdot 1=2(x+y)\cos[(x+y)^2]
+\]
+</li>
+<li>
+<p>Suppose \(z=z(x,y)\) is implicitly a function of \(x\) and \(y\) that satisfies the following equations, evaluate \(\partial z/\partial x\).<br />
+a. \(z+x\sin z=y\ln x\)<br />
+Take \(\frac{\partial}{\partial x}\) on both sides, we get</p>
+\[z_x+\frac{\partial}{\partial x}(x\sin z)=y\cdot\frac{1}{x}
+\]
+<p>Which then simplifies to</p>
+\[z_x+\sin z+x\cos z\cdot z_x=\frac{y}{x}
+\]
+<p>From which we may solve \(z_x=\dfrac{\frac{y}{x}-\sin z}{1+x\cos z}\)<br />
+b. \(x^2+yz-\cos(xyz^2)=\ln 3\)<br />
+Take \(\frac{\partial}{\partial x}\) on both sides, we get</p>
+\[2x+yz_x+\sin(xyz^2)\cdot(yz^2+xy\cdot2z\cdot z_x)=0
+\]
+<p>From which we may solve \(z_x=\dfrac{-2x-yz^2\sin(xyz^2)}{y+2xyz\sin(xyz^2)}\)</p>
+</li>
+<li>
+<p>Find the first partial derivatives of \(f\) at the origin</p>
+\[f(x,y,z)=\begin{cases}
+\dfrac{x^2\sin x+(1+x^2y^3)z^2}{x^2+2y^3+z}, &amp;(x,y,z)\neq(0,0,0)\\
+0, &amp;(x,y,z)=(0,0,0)
+\end{cases}
+\]
+<p>We compute the first derivatives at the origin by definition.</p>
+\[f_x(0,0,0)=\lim_{x\to 0}\dfrac{f(x,0,0)-f(0,0,0)}{x-0}=\lim_{x\to 0}\dfrac{\frac{x^2\sin x}{x^2}-0}{x-0}=\lim_{x\to 0}\dfrac{\sin x}{x}=1
+\]
+\[f_y(0,0,0)=\lim_{y\to 0}\dfrac{f(0,y,0)-f(0,0,0)}{y-0}=\lim_{y\to 0}\dfrac{0-0}{y-0}=0
+\]
+\[f_z(0,0,0)=\lim_{z\to 0}\dfrac{f(0,0,z)-f(0,0,0)}{z-0}=\lim_{z\to 0}\dfrac{\frac{z^2}{z}-0}{z-0}=\lim_{z\to 0}1=1
+\]
+</li>
+<li>
+<p>A small heat-sensitive robot is exploring the \(xy\)-plane. The temperature at \((x, y)\) in \(^\circ C\) is \(f(x, y) = xy + x^2(y-2)\). where \(x\) and \(y\) are in meters. Now the robot is following the trajectory \(\mathbf r(t) = t\mathbf i + t^2\mathbf j\), where \(t\) is in seconds. At any instant \(t\) how fast is the temperature changing with respect to time?</p>
+<p>The change of rate of temperature with respect to time is \(\dfrac{df}{dt}\), and we know the position is parametrized by \(x=t, y=t^2\), apply chain rule, we know</p>
+\[\begin{align*}
+\dfrac{df}{dt}&amp;=\dfrac{\partial f}{\partial x}\dfrac{dx}{dt}+\dfrac{\partial f}{\partial y}\dfrac{dy}{dt}\\
+&amp;=(y+2x(y-2))\cdot1+(x+x^2)\cdot2t\\
+&amp;=(t^2+2t(t^2-2))\cdot1+(t+t^2)\cdot2t\\
+&amp;=4t^3+3t^2-4t
+\end{align*}
+\]
+</li>
+</ol>
+</div>
+</section>
+
+<section class="accordion">
+<input type="checkbox" name="collapse" id="handle1">
+<h2 class="handle">
+<label for="handle1">Worksheet 03/05</label>
+</h2>
+<div class="content">
+<!--
+Problems
+13.5: 7, 13, 16, 17
+13.6: 3, 7, 13, 17, 19, 22, 23, 25, 29, 31, 37, 41, 46, 48, 51, 63, 64
+13.7: 3, 7, 9, 11, 12
+13.8: 3, 7, 16, 20, 25-28, 39-42 
+-->
+<ol>
+<li>
+<p>Suppose the room temperature in \(^\circ C\) is \(f(x,y,z)=xy+x^2(y-2)-\dfrac{1}{z}\), and a fly is at \((1,2,1)\).<br />
+a. If the fly is flying in the direction of \(\mathbf i+\mathbf j+\mathbf k\), what instantaneous temperature change does it experience?<br />
+b. The fly really needs to cool down, which direction should it fly into?</p>
+<p>a. First we evaluate the gradient</p>
+\[\nabla f=(f_x,f_y,f_z)=\left(y+2x(y-2),x+x^2,\frac{1}{z^2}\right)
+\]
+<p>so \(\nabla f(1,2,1)=(2,2,1)\), and we also need to normalize \(\mathbf i+\mathbf j+\mathbf k\) to get the direction vector</p>
+\[\mathbf u=\dfrac{\mathbf i+\mathbf j+\mathbf k}{\|\mathbf i+\mathbf j+\mathbf k\|}=\dfrac{\mathbf i+\mathbf j+\mathbf k}{\sqrt3}=\left(\frac{1}{\sqrt3},\frac{1}{\sqrt3},\frac{1}{\sqrt3}\right)
+\]
+<p>So the instantaneous temperature change is the directional derivative</p>
+\[D_{\mathbf u}f(1,2,1)=\nabla f(1,2,1)\cdot\mathbf u=\frac{5}{\sqrt3}
+\]
+<p>b. Recall that if we suppose \(\theta\) is the angle between \(\nabla f\) and \(\mathbf u\), then</p>
+\[D_{\mathbf u}f=\nabla f\cdot\mathbf u=\|\nabla f\|\|\mathbf u\|\cos\theta=\|\nabla f\|\cos\theta
+\]
+<p>So to cool down, it should go in the direction of \(-\nabla f=(-2,-2,-1)\) so that \(\theta=\pi\) and \(\cos\theta=-1\) where \(D_{\mathbf u}f\) is the smallest, and the temperature decreases the fastest.</p>
+</li>
+<li>
+<p>Suppose you have a function \(f(x, y)\) and you believe that \(\nabla f(1, 2) = 4\mathbf i+3\mathbf j\). Your friend tells you that they believe that they have a unit vector \(\mathbf u\) with \(D_{\mathbf u}f(1, 2) = 6\). Explain why you cannot both be correct.</p>
+<p>First we notice that</p>
+\[D_{\mathbf u}f=\|\nabla f\|\cos\theta\leq\|\nabla f\|=\sqrt{4^2+3^2}=5
+\]
+<p>Therefore \(D_{\mathbf u}f\) cannot possible be \(6\), which would exceed \(5\).</p>
+</li>
+<li>
+<p>Find the equation of the tangent plane of the surface \(xyz=1\) at \((\frac{1}{2},-2,-1)\)?</p>
+<p>Recall in general if we have a surface equation \(F(x,y,z)=c\), we can think of this as a level surface, and we know the normal vector to it is \(\nabla F\).</p>
+<p>In this case \(\nabla F=(F_x,F_y,f_z)=(yz,xz,xy)\), so the normal vector is \(\nabla F(\frac{1}{2},-2,-1)=(2,-\frac{1}{2},-1)\), so the tangent plane equation is</p>
+\[2\left(x-\frac{1}{2}\right)-\frac{1}{2}(y+2)-(z+1)=0
+\]
+</li>
+<li>
+<p>Find the equation of the tangent plane of the graph \(f(x,y)=y^2e^x\) at \((0,-3,9)\).</p>
+<p>First we realize the surface equation of the graph \(z=f(x,y)\) is</p>
+\[F(x,y,z)=f(x,y)-z=y^2e^x-z=0
+\]
+<p>so \(\nabla F=(F_x,F_y,F_z)=(f_x,f_y,-1)=(y^2e^x,2ye^x,-1)\) and the normal vector should be \(\nabla F(0,-3,9)=(9,-6,-1)\), so the tangent plane equation is</p>
+\[9x-6(y+3)-(z-9)=0
+\]
+<p>There is another way of considering the tangent vector \((1,0,f_x)\) in the \(x\) direction and the tangent vector \((0,1,f_y)\) in the \(y\) direction, so the normal vector is the cross product which equal to \((-f_x,-f_y,1)\).</p>
+</li>
+<li>
+<p>Use tangent plane approximation to approxiate the following numbers<br />
+a. \(\sqrt[4]{(1.9)^3+(2.1)^3}\)<br />
+b. \(\tan^{-1}(1.21)\ln(0.9)\)</p>
+<p>Recall the tangent plane approximation is when \((x,y,z)\) and \((x_0,y_0,z_0)\) are close, then</p>
+\[f(x,y,z)\approx f(x_0,y_0,z_0)+f_x(x_0,y_0,z_0)(x-x_0)+f_y(x_0,y_0,z_0)(y-y_0)+f_z(x_0,y_0,z_0)(z-z_0)
+\]
+<p>a. We can choose \(f(x,y)=\sqrt[4]{x^3+y^3}\) and \((x_0,y_0)=(2,2)\)<br />
+b. We can choose \(f(x,y)=\tan^{-1}(x^2)\ln(y)\) and \((x_0,y_0)=(1,1)\)<br />
+The reason that we didn't choose \(f(x,y)=\tan^{-1}(x)\ln(y)\) and \((x_0,y_0)=(1,1)\) here is so that \((x,y)\) and \((x_0,y_0)\) are closer, which means more accurate approximation.</p>
+</li>
+<li>
+<p>Find the critical points of \(f(x)=x^2y-2xy+2y^2-15y\), and decide which yields relative maximum/minimum values, which are saddle points.</p>
+<p>First we evaluate \(\nabla f=(f_x,f_y)=(2xy-2y, x^2-2x+4y-15)\), then we solve \(\nabla f=\mathbf 0\)</p>
+\[\nabla f=\mathbf 0\iff\begin{cases}
+f_x=0\\
+f_y=0
+\end{cases}\iff\begin{cases}
+2xy-2y=0\\
+x^2-2x+4y-15=0
+\end{cases}\iff\begin{cases}
+2y(x-1)=0\\
+x^2-2x+4y-15=0
+\end{cases}
+\]
+<p>From the first equation we know that \(x=1\) or \(y=0\), plug these into the second equation, we find all the critical points, which are</p>
+\[(1,4),(-3,0),(5,0)
+\]
+<p>Test discriminant</p>
+\[D(x,y)=f_{xx}f_{yy}-f_{xy}^2=2y\cdot4-(2x-2)^2=8y-4(x-1)^2
+\]
+<p>on these three points, we know that \(f\) takes relative minimum value at \((1,4)\) because \(D(1,4)&gt;0\) and \(f_{xx}(1,4)&gt;0\), and \((-3,0),(5,0)\) are both saddle points because \(D(-3,0)&lt;0,D(5,0)&lt;0\)</p>
+</li>
+</ol>
+</div>
+</section>
+
+
+
+
+
+
+
+
+<h1>Quizzes</h1>
+
+<section class="accordion">
+<input type="checkbox" name="collapse" id="handle1">
+<h2 class="handle">
+<label for="handle1">Quiz 1 - 02/01</label>
+</h2>
+<div class="content">
+<ol>
+<li>
+<p>Find all constants \(c\) for which the vectors \((c,1,-2)\) and \((c,2,2)\) are perpendicular.</p>
+<p>Suppose \(\mathbf a=(c,1,-2)\) and \(\mathbf b=(c,2,2)\), for them to be perpendicular, we need the dot product \(\mathbf a\cdot\mathbf b\) to be zero, therefore</p>
+\[\mathbf a\cdot\mathbf b=0\Rightarrow c\cdot c+1\cdot2+(-2)\cdot2=c^2-2=0\Rightarrow c=\pm\sqrt2
+\]
+</li>
+<li>
+<p>Find the center and radius of the sphere \(x^2+y^2+z^2-2x+2y-5=0\).</p>
+<p>First we complete the squares, the equation becomes</p>
+\[(x^2-2x+1)+(y^2+2y+1)+z^2-5-1-1=0\Rightarrow(x-1)^2+(y+1)^2+z^2=7
+\]
+<p>Therefore the center and the radius of the sphere are \((1,-1,0)\) and \(\sqrt7\).</p>
+</li>
+</ol>
+</div>
+</section>
+
+<section class="accordion">
+<input type="checkbox" name="collapse" id="handle1">
+<h2 class="handle">
+<label for="handle1">Quiz 2 - 02/08</label>
+</h2>
+<div class="content">
+<ol>
+<li>
+<p>Find the distance between the point \((3, 1, 2)\) and the line given by the vector equation</p>
+\[\mathbf r(t) = (2 − t)\mathbf i - 2t\mathbf j + (5 + t)\mathbf k
+\]
+<p>We can pick a point \(P_0\) on the line \(\ell\), say \(P_0=\mathbf r(0)=(2,0,5)\), assume \(P=(3,1,2)\), and we also know the directional vector to be \(\mathbf L=(-1,-2,1)\), so</p>
+\[\operatorname{dist}(P_0,\ell)=\dfrac{\|\overrightarrow{P_0P}\times\mathbf L\|}{\|\mathbf L\|}=\dfrac{\|(1,1-3)\times(-1,-2,1)\|}{\|(-1,-2,1)\|}=\dfrac{\|(-5,2,-1)\|}{\|(-1,-2,1)\|}=\dfrac{\sqrt{30}}{\sqrt6}=\sqrt5
+\]
+</li>
+<li>
+<p>Find the point at which the line with parametric equations</p>
+\[\begin{cases}
+x = 15 − 3t\\
+y = 1\\
+z = 4t
+\end{cases}
+\]
+<p>meets the plane \(x + 8y − 3z = 8\).</p>
+<p>First plug the parametrization</p>
+\[    \begin{cases}
+    x = 15 − 3t\\
+    y = 1\\
+    z = 4t
+    \end{cases}
+\]
+<p>into the plane equation \(x+8y-3z=8\), we get</p>
+\[(15-3t)+8\cdot1-3\cdot4t=0
+\]
+<p>and solve for \(t=1\). Then plug \(t=1\) back into the parametrization to have the intersection point \((15-3\cdot1,1,4\cdot1)=(12,1,4)\)</p>
+</li>
+</ol>
+</div>
+</section>
+
+<section class="accordion">
+<input type="checkbox" name="collapse" id="handle1">
+<h2 class="handle">
+<label for="handle1">Quiz 3 - 02/15</label>
+</h2>
+<div class="content">
+<ol>
+<li>Find the length of the curve parametrized by
+\[\mathbf r(t)=(t\sin t+\cos t)\mathbf i+(-t\cos t+\sin t)\mathbf j+t^2\mathbf k,\qquad0\leq t\leq 2
+\]
+First we see
+\[\mathbf r'(t)=(\sin t+t\cos t-\sin t)\mathbf i+(-\cos t+t\sin t+\cos t)\mathbf j+2t\mathbf k=t\cos t\mathbf i+t\sin t\mathbf j+2t\mathbf k
+\]
+so
+\[\|\mathbf r'(t)\|=\sqrt{(t\cos t)^2+(t\sin t)^2+(2t)^2}=\sqrt{5t^2}=\sqrt5|t|
+\]
+Therefore the length of the curve is
+\[L=\int_0^2\|\mathbf r'(t)\|dt=\int_0^2\sqrt5|t|dt=\int_0^2\sqrt5tdt=2\sqrt5
+\]
+</li>
+<li>Find a parametrization for the line segment connecting points \(A=(1,2,-1)\) and \(B=(2,3,-1)\).<br />
+First we compute the direction vector \(\mathbf L=\overrightarrow{AB}=(1,1,0)\), so a parametrization for the line segment \(AB\) could be
+\[\mathbf r(t)=A+t\mathbf L=(1+t,2+t,-1),\qquad0\leq t\leq1
+\]
+</li>
+</ol>
+</div>
+</section>
+
+<section class="accordion">
+<input type="checkbox" name="collapse" id="handle1">
+<h2 class="handle">
+<label for="handle1">Quiz 4 - 02/29</label>
+</h2>
+<div class="content">
+<ol>
+<li>
+<p>Find \(\lim\limits_{(x,y)\to(0,0)}\dfrac{2xy}{x^2+y^2}\) or show it does not exist.</p>
+<p>Consider the path \(y=mx\), then we have</p>
+\[\lim\limits_{(x,y)\to(0,0)}\dfrac{2xy}{x^2+y^2}=\lim\limits_{(x,y)\to(0,0)}\dfrac{2x(mx)}{x^2+(mx)^2}=\lim\limits_{(x,y)\to(0,0)}\dfrac{2mx^2}{x^2+m^2x^2}=\lim\limits_{(x,y)\to(0,0)}\dfrac{2mx^2}{x^2(1+m^2)}=\lim\limits_{(x,y)\to(0,0)}\dfrac{2m}{1+m^2}=\dfrac{2m}{1+m^2}
+\]
+<p>which depends on \(m\), so the limit doesn't exist.</p>
+</li>
+<li>
+<p>Suppose \(f(x,y,z)=\ln(1+x^2y)\cos(xz)\). Evaluate \(\frac{\partial f}{\partial x}(1,1,\frac{\pi}{2})\)</p>
+</li>
+</ol>
+<p>First we evaluate</p>
+\[\begin{align*}
+\frac{\partial f}{\partial x}&amp;=\frac{\partial }{\partial x}\ln(1+x^2y)\cdot\cos(xz)+\ln(1+x^2y)\cdot\frac{\partial }{\partial x}\cos(xz)\\
+&amp;=\frac{1}{1+x^2y}\frac{\partial }{\partial x}(1+x^2y)\cdot\cos(xz)+\ln(1+x^2y)\cdot(-\sin(xz))\frac{\partial }{\partial x}(xz)\\
+&amp;=\frac{1}{1+x^2y}(2xy)\cdot\cos(xz)+\ln(1+x^2y)\cdot(-\sin(xz))\cdot z\\
+&amp;=\frac{2xy\cos(xz)}{1+x^2y}-\ln(1+x^2y)\sin(xz)z
+\end{align*}
+\]
+<p>then evaluate \(\frac{\partial f}{\partial x}\) at \((1,1,\frac{\pi}{2})\), we have</p>
+\[\begin{align*}
+\frac{\partial f}{\partial x}\left(1,1,\frac{\pi}{2}\right)&amp;=\frac{2\cdot1\cdot1\cos(1\cdot\frac{\pi}{2})}{1+1^2\cdot1}-\ln(1+1^2\cdot1)\sin\left(1\cdot\frac{\pi}{2}\right)\frac{\pi}{2}\\
+&amp;=0-\ln(2)\frac{\pi}{2}\\
+&amp;=-\ln(2)\frac{\pi}{2}
+\end{align*}
+\]
+</div>
+</section>
+
+
+
+
+
+
+<h1>Exams</h1>
+
+<section class="accordion">
+<input type="checkbox" name="collapse" id="handle1">
+<h2 class="handle">
+<label for="handle1">Exam 1 - 02/19</label>
+</h2>
+<div class="content">
+<ol>
+<li>Consider the vectors \(\mathbf u=\mathbf i-\mathbf j+2\mathbf k\) and \(\mathbf v=2\mathbf i-\mathbf j+3\mathbf k\) and the point  \(A=(1,2,1)\).<br />
+a. (15 pts) Find an equation of the plane that passes through \(A\) and is parallel to both \(\mathbf u\) and \(\mathbf v\).<br />
+First notice that a plane \(\pi\) is parallel to both \(\mathbf u\) and \(\mathbf v\iff\pi\) is perpendicular to \(\mathbf u\times\mathbf v\), so we choose normal vector to be
+\[\mathbf n=\mathbf u\times\mathbf v=-\mathbf i+\mathbf j+\mathbf k
+\]
+Therefore the plane that passes through \(A\) and is parallel to both \(\mathbf u\) and \(\mathbf v\) is
+\[-(x-1)+(y-2)+(z-1)=0
+\]
+b. (10 pts) Find the projection of \(\mathbf u\) onto \(\mathbf v\)
+\[\operatorname{pr}_{\mathbf v}\mathbf u=\dfrac{\mathbf u\cdot\mathbf v}{\|\mathbf v\|^2}\mathbf v=\dfrac{9}{14}\mathbf v=\left(\dfrac{18}{14},-\dfrac{9}{14},\dfrac{27}{14}\right)=\left(\dfrac{9}{7},-\dfrac{9}{14},\dfrac{27}{14}\right)
+\]
+</li>
+<li>Consider the points \(A=(1,2,-1)\), \(B=(0,1,2)\), and \(C=(2,3,1)\).<br />
+a. (15 pts) Find the distance from \(A\) to the line through \(B\) and \(C\).<br />
+First we find a direction vector \(\mathbf L=\overrightarrow{BC}=(2,2,-1)\), then we compute \(\overrightarrow{AB}=(-1,-1,3)\) and \(\overrightarrow{AB}\times\mathbf L=-5\mathbf i+5\mathbf j\). Therefore distance from \(A\) to the line \(\ell\) through \(B\) and \(C\) is
+\[\operatorname{dist}(A,\ell)=\dfrac{\|\overrightarrow{AB}\times\mathbf L\|}{\|\mathbf L\|}=\dfrac{\sqrt{50}}{\sqrt{9}}=\dfrac{5}{3}\sqrt2
+\]
+b. (10 pts) Find the angle between vectors \(\overrightarrow{AB}\) and \(\overrightarrow{AC}\).<br />
+First we evaluate \(\overrightarrow{AC}=(1,1,2)\), assume the angle between \(\overrightarrow{AB}\) and \(\overrightarrow{AC}\) is \(\theta\), then we have
+\[\cos\theta=\dfrac{\overrightarrow{AB}\cdot\overrightarrow{AB}}{\|\overrightarrow{AB}\|\|\overrightarrow{AC}\|}=\dfrac{4}{\sqrt{11}\sqrt6}=\dfrac{4}{\sqrt{66}}\Rightarrow\theta=\cos^{-1}\left(\dfrac{4}{\sqrt{66}}\right)
+\]
+</li>
+<li>The velocity of the particle in space at time \(t\) is given by \(\mathbf v(t)=(t^2-2)\mathbf i-2t\mathbf j-2t\mathbf k\).<br />
+a. (10 pts) Given the initial position \(\mathbf r(0)=(0,0,1)\), find the position of the particle at time \(t=1\).<br />
+By Fundametal Theorem of Calculus, we know
+\[\mathbf r(1)-\mathbf r(0)=\int_0^1\mathbf v(t)dt
+\]
+So
+\[\begin{align*}
+\mathbf r(1)&amp;=\mathbf r(0)+\int_0^1\mathbf v(t)dt\\
+&amp;=(0,0,1)+\int_0^1(t^2-2)\mathbf i-2t\mathbf j-2t\mathbf kdt\\
+&amp;=(0,0,1)+\left.\left(\dfrac{1}{3}t^3-2t\right)\mathbf i-t^2\mathbf j-t^2\mathbf k\right|_0^1\\
+&amp;=(0,0,1)+\left(\dfrac{1}{3}-2,1,-1\right)-(0,0,0)\\
+&amp;=\left(-\dfrac{5}{3},-1,0\right)
+\end{align*}
+\]
+b. (15 pts) Find the length of the curve traced by this particle from \(t=0\) to \(t=1\).<br />
+The length of the curve traced by this particle from \(t=0\) to \(t=1\) is
+\[\begin{align*}
+L&amp;=\int_0^1\|\mathbf v(t)\|dt\\
+&amp;=\int_0^1\sqrt{(t^2-2)^2+(-2t)^2+(-2t)^2}dt\\
+&amp;=\int_0^1\sqrt{t^4-4t^2+4+4t^2+4t^2}dt\\
+&amp;=\int_0^1\sqrt{t^4+4t^2+4}dt\\
+&amp;=\int_0^1\sqrt{(t^2+2)^2}dt\\\
+&amp;=\int_0^1(t^2+2)dt\\
+&amp;=\left.\dfrac{1}{3}t^3+2t\right|_0^1\\
+&amp;=\dfrac{1}{3}+2=\dfrac{7}{2}
+\end{align*}
+\]
+</li>
+<li>a. (13pts) Determine if the parametrizaiton \(\mathbf r(t)=(t-\sin t)\mathbf i-(\cos t)\mathbf j-\mathbf k\) with \(0\leq t\leq4\pi\), is smooth, piece-wise smooth or neither.<br />
+First take the derivative
+\[\mathbf r'(t)=(1-\cos t)\mathbf i+\sin t\mathbf j
+\]
+We can easily see that \(\mathbf r'(0)=\mathbf r'(2\pi)=\mathbf r'(4\pi)=\mathbf 0\), so \(\mathbf r\) is only a piece-wise smooth parametrization.<br />
+b. (13 pts) Find the curve of this curve at \(t=\frac{\pi}{2}\). Simplify your answer.<br />
+First we know \(\mathbf v(t)=\mathbf r'(t)=(1-\cos t)\mathbf i+\sin t\mathbf j\) and compute
+\[\mathbf a(t)=\mathbf v'(t)=\sin t\mathbf i+\cos t\mathbf j
+\]
+So
+\[\mathbf v\times\mathbf a=((1-\cos t)\cos t-\sin^2t)\mathbf k=(\cos t-1)\mathbf k
+\]
+Therefore the curvature at \(t=\frac{\pi}{2}\) is
+\[\kappa\left(\frac{\pi}{2}\right)=\dfrac{\|\mathbf v\times\mathbf a\|}{\|\mathbf v\|^3}=\dfrac{|\cos t-1|}{\sqrt{(1-\cos t)^2+\sin^2t}^3}=\dfrac{|0-1|}{\sqrt{1+1}^3}=\dfrac{1}{2^{3/2}}
+\]
+</li>
+</ol>
+</div>
+</section>
