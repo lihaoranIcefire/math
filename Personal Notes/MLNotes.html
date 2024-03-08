@@ -1,12 +1,12 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Machine Learning Notes</title><style>/* copy from https://github.com/sindresorhus/github-markdown-css/ */
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MLNotes</title><style>/* copy from https://github.com/sindresorhus/github-markdown-css/ */
 
-html,body{background-color: #2d2d2d;}
+html,body{background-color: #feffff;}
 
 .markdown-body {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   line-height: 1.5;
-  color: #cccccc;
+  color: #333333;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
   font-size: 16px;
   line-height: 1.5;
@@ -20,7 +20,7 @@ html,body{background-color: #2d2d2d;}
 }
 
 .markdown-body figure{margin:0;padding:0; display:table;}
-.markdown-body figure figcaption{font-size:92%; text-align:center; color:#999999;}
+.markdown-body figure figcaption{font-size:92%; text-align:center; color:#09844f;}
 
 .markdown-body .anchor {
   float: left;
@@ -39,7 +39,7 @@ html,body{background-color: #2d2d2d;}
 .markdown-body h4 .octicon-link,
 .markdown-body h5 .octicon-link,
 .markdown-body h6 .octicon-link {
-  color: #66cccc;
+  color: #0595bf;
   vertical-align: middle;
   visibility: hidden;
 }
@@ -75,10 +75,10 @@ html,body{background-color: #2d2d2d;}
   font-weight: bolder;
 }
 .markdown-body strong{
-  color: #f99157;
+  color: #333333;
 }
 .markdown-body em{
-  color: #ffcc66;
+  color: #333333;
 }
 
 .markdown-body h1 {
@@ -128,10 +128,10 @@ html,body{background-color: #2d2d2d;}
 }
 
 .markdown-body a {
-  color: #99cc99;
+  color: #0366dd;
   text-decoration: none;
 }
-.markdown-body mjx-container[jax="SVG"] > svg a{fill:#99cc99;stroke: #99cc99;}
+.markdown-body mjx-container[jax="SVG"] > svg a{fill:#0366dd;stroke: #0366dd;}
 
 .markdown-body a:hover {
   text-decoration: underline;
@@ -170,10 +170,10 @@ html,body{background-color: #2d2d2d;}
   padding: 3px 5px;
   font: 12px SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
   line-height: 12px;
-  color: #999999;
+  color: #09844f;
   vertical-align: middle;
-  background-color: #333333;
-  border: 1px solid #494949;
+  background-color: #f7f8f8;
+  border: 1px solid #e1e2e2;
   border-radius: 3px;
 }
 
@@ -315,14 +315,14 @@ html,body{background-color: #2d2d2d;}
   height: .25em;
   padding: 0;
   margin: 24px 0;
-  background-color: #494949;
+  background-color: #e1e2e2;
   border: 0;
 }
 
 .markdown-body blockquote {
   padding: 0 1em;
-  color: #9b9b9b;
-  border-left: .25em solid #f2777a;
+  color: #636363;
+  border-left: .25em solid #bbbbbb;
 }
 
 .markdown-body blockquote>:first-child {
@@ -352,33 +352,33 @@ html,body{background-color: #2d2d2d;}
 .markdown-body h1,
 .markdown-body h2 {
   padding-bottom: .3em;
-  border-bottom: 1px solid #434343;
-  color: #66cccc;
+  border-bottom: 1px solid #e7e8e8;
+  color: #0595bf;
 }
 
 .markdown-body h2 {
   font-size: 1.5em;
-  color: #66cccc;
+  color: #0595bf;
 }
 
 .markdown-body h3 {
   font-size: 1.25em;
-  color: #66cccc;
+  color: #0595bf;
 }
 
 .markdown-body h4 {
   font-size: 1em;
-  color: #66cccc;
+  color: #0595bf;
 }
 
 .markdown-body h5 {
   font-size: .875em;
-  color: #66cccc;
+  color: #0595bf;
 }
 
 .markdown-body h6 {
   font-size: .85em;
-  color: #66cccc;
+  color: #0595bf;
 }
 
 .markdown-body ol,
@@ -436,20 +436,20 @@ html,body{background-color: #2d2d2d;}
 .markdown-body table td,
 .markdown-body table th {
   padding: 6px 13px;
-  border: 1px solid #717171;
+  border: 1px solid #b9baba;
 }
 
 .markdown-body table tr {
-  background-color: #2d2d2d;
-  border-top: 1px solid #717171;
+  background-color: #feffff;
+  border-top: 1px solid #b9baba;
 }
 
 .markdown-body table th {
-  background-color: #434343;
+  background-color: #e7e8e8;
 }
 
 .markdown-body table tr:nth-child(2n) {
-  background-color: #323232;
+  background-color: #f8f9f9;
 }
 
 .markdown-body img,.markdown-body video {
@@ -469,8 +469,8 @@ html,body{background-color: #2d2d2d;}
   padding: .2em .4em;
   margin: 0;
   font-size: 85%;
-  background-color: #333333;
-  color: #999999;
+  background-color: #f7f8f8;
+  color: #09844f;
   border-radius: 3px;
 }
 
@@ -503,7 +503,7 @@ html,body{background-color: #2d2d2d;}
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: #333333;
+  background-color: #f7f8f8;
   border-radius: 3px;
 }
 
@@ -517,7 +517,7 @@ html,body{background-color: #2d2d2d;}
   word-wrap: normal;
   background-color: initial;
   border: 0;
-  color: #999999;
+  color: #09844f;
 }
 
 .markdown-body .task-list-item {
@@ -536,15 +536,15 @@ html,body{background-color: #2d2d2d;}
 .markdown-body .task-list-item input[type="checkbox"]{
 -webkit-appearance: none;-moz-appearance: none;appearance: none;
 width: 14px; height: 14px;outline: none;
-border: 1px solid #99cc99;border-radius: 2px; 
+border: 1px solid #0366dd;border-radius: 2px; 
 }
 .markdown-body .task-list-item input[type="checkbox"]:checked {
-  background:no-repeat center/80% url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20fill%3D%22%2399cc99%22%20d%3D%22M173.898%20439.404l-166.4-166.4c-9.997-9.997-9.997-26.206%200-36.204l36.203-36.204c9.997-9.998%2026.207-9.998%2036.204%200L192%20312.69%20432.095%2072.596c9.997-9.997%2026.207-9.997%2036.204%200l36.203%2036.204c9.997%209.997%209.997%2026.206%200%2036.204l-294.4%20294.401c-9.998%209.997-26.207%209.997-36.204-.001z%22%2F%3E%3C%2Fsvg%3E") ;
+  background:no-repeat center/80% url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20fill%3D%22%230366dd%22%20d%3D%22M173.898%20439.404l-166.4-166.4c-9.997-9.997-9.997-26.206%200-36.204l36.203-36.204c9.997-9.998%2026.207-9.998%2036.204%200L192%20312.69%20432.095%2072.596c9.997-9.997%2026.207-9.997%2036.204%200l36.203%2036.204c9.997%209.997%209.997%2026.206%200%2036.204l-294.4%20294.401c-9.998%209.997-26.207%209.997-36.204-.001z%22%2F%3E%3C%2Fsvg%3E") ;
 }
 
 .markdown-body section.footnotes{
     margin-top:48px;
-    border-top:solid 1px #494949;
+    border-top:solid 1px #e1e2e2;
     padding-top:0px;
 }
 
@@ -597,7 +597,7 @@ pre[class*="language-"] {
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-    background-color: #333333;
+    background-color: #f7f8f8;
 }
 
 /* Inline code */
@@ -611,11 +611,11 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-    color: #48be66;
+    color: #8e9c92;
 }
 
 .token.punctuation {
-    color: #8b86c9;
+    color: #2834ce;
 }
 
 .token.namespace {
@@ -629,7 +629,7 @@ pre[class*="language-"] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-    color: #8b86c9;
+    color: #2834ce;
 }
 
 .token.selector,
@@ -638,7 +638,7 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.inserted {
-    color: #e6424b;
+    color: #d32d26;
 }
 
 .token.operator,
@@ -652,18 +652,18 @@ pre[class*="language-"] {
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-    color: #c33795;
+    color: #bc319c;
 }
 
 .token.function,
 .token.class-name {
-    color: #67878e;
+    color: #967d41;
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-    color: #d38e63;
+    color: #784830;
 }
 
 .token.important,
@@ -698,7 +698,7 @@ pre[class*="language-"].line-numbers > code {
   left: -3.8em;
   width: 3em; /* works for line-numbers below 1000 lines */
   letter-spacing: -1px;
-  border-right: 1px solid #6b6b6b;
+  border-right: 1px solid #bfc0c0;
 
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -714,7 +714,7 @@ pre[class*="language-"].line-numbers > code {
 
     .line-numbers-rows > span:before {
       content: counter(linenumber);
-      color: #6b6b6b;
+      color: #bfc0c0;
       display: block;
       padding-right: 0.8em;
       text-align: right;
@@ -803,24 +803,36 @@ div.code-toolbar > .toolbar > .toolbar-item > span:focus {
   color: inherit;
   text-decoration: none;
 }
-</style><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script><script>!function(){if("undefined"!=typeof Prism&&"undefined"!=typeof document){var e=[],t={},n=function(){};Prism.plugins.toolbar={};var a=Prism.plugins.toolbar.registerButton=function(n,a){var r;r="function"==typeof a?a:function(e){var t;return"function"==typeof a.onClick?((t=document.createElement("button")).type="button",t.addEventListener("click",(function(){a.onClick.call(this,e)}))):"string"==typeof a.url?(t=document.createElement("a")).href=a.url:t=document.createElement("span"),a.className&&t.classList.add(a.className),t.textContent=a.text,t},n in t?console.warn('There is a button with the key "'+n+'" registered already.'):e.push(t[n]=r)},r=Prism.plugins.toolbar.hook=function(a){var r=a.element.parentNode;var l=a.element.classList;if(l.contains('language-mermaid') || l.contains('language-echarts') || l.contains('language-plantuml')){return;} if(r&&/pre/i.test(r.nodeName)&&!r.parentNode.classList.contains("code-toolbar")){var o=document.createElement("div");o.classList.add("code-toolbar"),r.parentNode.insertBefore(o,r),o.appendChild(r);var i=document.createElement("div");i.classList.add("toolbar");var l=e,d=function(e){for(;e;){var t=e.getAttribute("data-toolbar-order");if(null!=t)return(t=t.trim()).length?t.split(/\s*,\s*/g):[];e=e.parentElement}}(a.element);d&&(l=d.map((function(e){return t[e]||n}))),l.forEach((function(e){var t=e(a);if(t){var n=document.createElement("div");n.classList.add("toolbar-item"),n.appendChild(t),i.appendChild(n)}})),o.appendChild(i)}};a("label",(function(e){var t=e.element.parentNode;if(t&&/pre/i.test(t.nodeName)&&t.hasAttribute("data-label")){var n,a,r=t.getAttribute("data-label");try{a=document.querySelector("template#"+r)}catch(e){}return a?n=a.content:(t.hasAttribute("data-url")?(n=document.createElement("a")).href=t.getAttribute("data-url"):n=document.createElement("span"),n.textContent=r),n}})),Prism.hooks.add("complete",r)}}();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.css"><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script><style>div.code-toolbar > .toolbar > .toolbar-item > a, div.code-toolbar > .toolbar > .toolbar-item > button, div.code-toolbar > .toolbar > .toolbar-item > span {padding: 4px .5em; background: #f5f2f0; background: rgba(224, 224, 224, 0.4);}</style><script>window.MathJax = {     tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] } ,     startup: {     pageReady() {       return MathJax.startup.defaultPageReady().then(function () {          window.mweb_mathjax_ready_val = 'yes';          if(window.mweb_mathjax_ready !== undefined){ mweb_mathjax_ready(); }       });     }   }};document.addEventListener('DOMContentLoaded', function(event) {    if (typeof Prism != 'undefined') {         Prism.highlightAll();     }});window.mweb_mathjax_ready_val = '';function theMWebMathJaxRenderIsReady(key){ return window.mweb_mathjax_ready_val; }</script><script>window.MathJax = { tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] } }; </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script> <style>body{max-width:808px; padding:24px;}</style></head><body><div id='markdown_content' class='markdown-body'>
-<h1><a id="machine-learning-notes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Machine Learning Notes</h1>
-<h2><a id="data-collection" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Collection</h2>
-<h2><a id="data-preprocessing" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Preprocessing</h2>
-<h3><a id="data-scaling-and-standardizing" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data scaling and standardizing</h3>
-<h4><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h4>
-\[X\mapsto\dfrac{X-\bar X}{\sigma}
+</style><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script><script>!function(){if("undefined"!=typeof Prism&&"undefined"!=typeof document){var e=[],t={},n=function(){};Prism.plugins.toolbar={};var a=Prism.plugins.toolbar.registerButton=function(n,a){var r;r="function"==typeof a?a:function(e){var t;return"function"==typeof a.onClick?((t=document.createElement("button")).type="button",t.addEventListener("click",(function(){a.onClick.call(this,e)}))):"string"==typeof a.url?(t=document.createElement("a")).href=a.url:t=document.createElement("span"),a.className&&t.classList.add(a.className),t.textContent=a.text,t},n in t?console.warn('There is a button with the key "'+n+'" registered already.'):e.push(t[n]=r)},r=Prism.plugins.toolbar.hook=function(a){var r=a.element.parentNode;var l=a.element.classList;if(l.contains('language-mermaid') || l.contains('language-echarts') || l.contains('language-plantuml')){return;} if(r&&/pre/i.test(r.nodeName)&&!r.parentNode.classList.contains("code-toolbar")){var o=document.createElement("div");o.classList.add("code-toolbar"),r.parentNode.insertBefore(o,r),o.appendChild(r);var i=document.createElement("div");i.classList.add("toolbar");var l=e,d=function(e){for(;e;){var t=e.getAttribute("data-toolbar-order");if(null!=t)return(t=t.trim()).length?t.split(/\s*,\s*/g):[];e=e.parentElement}}(a.element);d&&(l=d.map((function(e){return t[e]||n}))),l.forEach((function(e){var t=e(a);if(t){var n=document.createElement("div");n.classList.add("toolbar-item"),n.appendChild(t),i.appendChild(n)}})),o.appendChild(i)}};a("label",(function(e){var t=e.element.parentNode;if(t&&/pre/i.test(t.nodeName)&&t.hasAttribute("data-label")){var n,a,r=t.getAttribute("data-label");try{a=document.querySelector("template#"+r)}catch(e){}return a?n=a.content:(t.hasAttribute("data-url")?(n=document.createElement("a")).href=t.getAttribute("data-url"):n=document.createElement("span"),n.textContent=r),n}})),Prism.hooks.add("complete",r)}}();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.css"><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script><style>div.code-toolbar > .toolbar > .toolbar-item > a, div.code-toolbar > .toolbar > .toolbar-item > button, div.code-toolbar > .toolbar > .toolbar-item > span {padding: 4px .5em; background: #f5f2f0; background: rgba(224, 224, 224, 0.4);}</style><script>window.MathJax = {     tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] } ,     startup: {     pageReady() {       return MathJax.startup.defaultPageReady().then(function () {          window.mweb_mathjax_ready_val = 'yes';          if(window.mweb_mathjax_ready !== undefined){ mweb_mathjax_ready(); }       });     }   }};document.addEventListener('DOMContentLoaded', function(event) {    if (typeof Prism != 'undefined') {         Prism.highlightAll();     }});window.mweb_mathjax_ready_val = '';function theMWebMathJaxRenderIsReady(key){ return window.mweb_mathjax_ready_val; }</script><script>window.MathJax = { tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] } }; </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script> <style>body{max-width:808px; padding:24px;}</style></head><body><div id='markdown_content' class='markdown-body'><h1><a id="machine-learning-notes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Machine Learning Notes</h1>
+<h2><a id="table-of-contents" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table of contents</h2>
+<ol>
+<li><a href="#DataCleaning">Data Cleaning</a></li>
+<li><a href="#DataPreprocessing">Data Preprocessing</a>
+<ol>
+<li><a href="#DataScalingandStandardizing">Data Scaling and Standardizing</a></li>
+<li><a href="#Pipeline">Pipeline</a></li>
+<li><a href="#Imputation">Imputation</a></li>
+</ol>
+</li>
+<li><a href="#SupervisedLearning">Supervised Learning</a></li>
+<li><a href="#UnsupervisedLearning">Unsupervised Learning</a></li>
+</ol>
+<h2><a id="data-cleaning-a-name-datacleaning-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Cleaning <a name="DataCleaning"></a></h2>
+<h2><a id="data-preprocessing-a-name-datapreprocessing-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Preprocessing <a name="DataPreprocessing"></a></h2>
+<h3><a id="data-scaling-and-standardizing-a-name-datascalingandstandardizing-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Scaling And Standardizing <a name="DataScalingandStandardizing"></a></h3>
+<h6><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h6>
+\[x_i\leftarrow\dfrac{x_i-\mu}{\sigma}
 \]
-<h4><a id="pros-cons" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros &amp; Cons</h4>
+<h6><a id="pros-cons" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros &amp; Cons</h6>
 <p>Dataset will be normalized, avoid unbalanced dataset</p>
-<h4><a id="example" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h4>
+<h6><a id="example" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h6>
 <p><code>sklearn.StandardScaler</code></p>
-<h3><a id="pipelines" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pipelines</h3>
-<h4><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h4>
+<h3><a id="pipelines-a-name-pipeline-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pipelines <a name="Pipeline"></a></h3>
+<h5><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h5>
 <p>A <em>pipeline</em> is a series of data processing components arranged sequentially, each component in the pipeline performs a specific task.</p>
-<h4><a id="pros-cons" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros &amp; Cons</h4>
+<h6><a id="pros-cons" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros &amp; Cons</h6>
 <p>This process streamlines the workflow, makes it easier to combine and expriment different algorithms and models.</p>
-<h4><a id="example" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h4>
+<h6><a id="example" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h6>
 <p>Learning cubic polynomial \(y=\beta_0+\beta_1x+\beta_2x^2+\beta_3x^3+\epsilon\)</p>
 <pre><code class="language-plain_text">from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import PolynomialFeatures
@@ -832,20 +844,93 @@ pipe = Pipeline([
 ])
 </code></pre>
 <p><code>PolynomialFeatures</code> generate higher powers \(x^n\) from \(x\).</p>
-<h3><a id="imputation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Imputation</h3>
-<h4><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h4>
+<h3><a id="imputation-a-name-imputation-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Imputation <a name="Imputation"></a></h3>
+<h5><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h5>
 <p>The process of replace missing values is known as data <em>imputation</em></p>
-<h4><a id="examples" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h4>
+<h5><a id="examples" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h5>
 <ul>
 <li>Constant imputation: replace with contants</li>
 <li>Linear interpolation/Regression Imputation: replace using a regression model</li>
-<li>median/mean/mode/(sample statistic) imputation: replace with median/mean/mode</li>
+<li>median/mean/mode/(sample statistic) imputation: replace with median/mean/mode/(sample statistic)</li>
 <li>forward/backward fill: replace with previous/next value</li>
 <li>KNN: replace using the mode the closest \(k\) neighbors</li>
 </ul>
-<p>Note: you should not use the predictions or test data set to imputate training data set</p>
-<pre><code class="language-plain_text">dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+<h5><a id="remark" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remark</h5>
+<p>You should not use the labels or test data set to imputate training data set</p>
+<h2><a id="supervised-learning-a-name-supervisedlearning-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supervised Learning <a name="SupervisedLearning"></a></h2>
+<h6><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h6>
+<p>Given dataset \(\{(\mathbf x_i,y_i)\}_{i=1}^N\), \(\mathbf x_i\) are <em>feature vectors</em>, its entries are called <em>features</em>, and \(y_i\) are <em>labels</em>.</p>
+<h3><a id="k-fold-cross-validation-grid-search" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(k\)-fold cross validation &amp; grid search</h3>
+<h5><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h5>
+<p><em>\(k\)-fold cross validation</em> divide the dataset into \(k\) subsets. Train the model on \(k-1\) subsets independently \(k\) times by single out each as the validation set. And eventually take the average of the parameters.<br />
+<em>Grid search</em> provide an array of values for each parameter and test model with every value and choose the best one.</p>
+<h5><a id="example" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h5>
+<pre><code class="language-plain_text">from sklearn.neighbors import KNeighborsRegressor
+from sklearn.model_selection import KFold
+from sklearn.metrics import mean_squared_error
+
+GridSearchCV(
+    cv = KFold(n_splits=5, random_state=30293, shuffle=True),
+    estimator = KNeighborsRegressor(),
+    param_grid = {
+        'n_neighbors': range(1, 50),
+        'weights': ['uniform', 'distance']
+    },
+    scoring = 'neg_mean_squared_error'
+)
 </code></pre>
-<h2><a id="supervised-learning" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supervised Learning</h2>
-<h2><a id="unsupervised-learning" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unsupervised Learning</h2>
-<h2><a id="reinforcement-learning" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reinforcement Learning</h2>
+<h3><a id="gradient-descent" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gradient descent</h3>
+<h5><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h5>
+<p>The method of <em>gradient descent</em> is to decrease the loss function \(\ell\), as \(\beta\leftarrow\beta-\alpha\nabla(\beta)\).<br />
+Some common adjustments are</p>
+<ul>
+<li>Mini-batch gradient descent: instead of use the entire dataset, cycling through mini batches to generate gradients.</li>
+<li>Stochastic gradient descent: Randomly generates learning rates \(\alpha\).
+<ul>
+<li>Pros: Avoid of being stuck in a local minimum</li>
+</ul>
+</li>
+</ul>
+<h3><a id="k-nearest-neighbors-classifier" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(k\)-Nearest neighbors classifier</h3>
+<h5><a id="defintion" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Defintion</h5>
+<p>The <em>\(k\)-nearest neighbors</em> algorithm assigns the most likely label from the nearest neighbors.</p>
+<h3><a id="logistic-regression" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Logistic regression</h3>
+<h5><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h5>
+<p><em>Logistic regression</em> is for binary classification by \(p(x)=\dfrac{1}{1+e^{-\beta x}}\)</p>
+<h3><a id="confusion-matrix" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Confusion matrix</h3>
+<h5><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h5>
+<p>ROC, gain/lift charts</p>
+<h3><a id="decision-trees" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Decision trees</h3>
+<h5><a id="pros-cons" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros &amp; Cons</h5>
+<ul>
+<li>Pros
+<ul>
+<li>Very fast and very needs little data preprocessing</li>
+</ul>
+</li>
+<li>Cons
+<ul>
+<li>This algorithm is greedy, so might not create an optimal tree</li>
+<li>Decision trees have orthogonal boundaries, which might not be ideal</li>
+<li>Decision trees are sensitive to training data</li>
+</ul>
+</li>
+</ul>
+<h5><a id="gini-impurity" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gini impurity</h5>
+<p><em>Gini impurity</em> \(I_G\) is defined by</p>
+\[I_G(p)=\sum_ip_i(1-p_i)=\sum_i(p_i-p_i^2)=1-\sum_ip_i^2
+\]
+<p>\(I_G(p)\) is between 0 and 1, if \(I_G(p)=0\), then it is of a single class, if it is \(1-\dfrac{1}{N}\), it is evenly distributed.</p>
+<h5><a id="cart-algorithm" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CART algorithm</h5>
+<p>The <em>CART</em> (Classification and Regression Trees) algorithm is a decision tree-based algorithm that can be used for both classification and regression problems in machine learning. It works by recursively partitioning the training data into smaller subsets using binary splits.</p>
+<h4><a id="random-forest" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Random Forest</h4>
+<p>The <em>random forest</em> model is made by building many different decision trees. These trees are made &quot;different&quot; through a variety of random perturbations. Finally take the average of each trees</p>
+<h3><a id="time-series" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Time series</h3>
+<h5><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h5>
+<p>A <em>time series</em> is a sequence of data points \(\{(\mathbf x_t,y_t)\}\) where \(\mathbf x_t\) is a collection of features and \(y_t\) is a numeric variable of interest, and \(t\) stands for time.</p>
+<h4><a id="forecast" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Forecast</h4>
+<h5><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h5>
+<p>A <em>forecast</em> is \(y_T=f(X_T,T|\{y_t\}_{t&lt;T})+\epsilon_T\)</p>
+<h5><a id="baseline-forecasting-models" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Baseline forecasting models</h5>
+<h2><a id="unsupervised-learning-a-name-unsupervisedlearning-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unsupervised Learning <a name="UnsupervisedLearning"></a></h2>
+</div></body></html>
