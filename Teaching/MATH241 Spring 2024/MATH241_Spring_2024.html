@@ -948,17 +948,18 @@ First we compute the direction vector \(\mathbf L=\overrightarrow{AB}=(1,1,0)\),
 &amp;=\frac{ve^z}{x^2+y^2}-\frac{4u(x+y)e^z}{(x^2+y^2)^2}
 \end{align*}
 \]
-<pre><code class="language-mermaid">graph TD;
-w --&gt; x;
-w --&gt; y;
-w --&gt; z;
-x --&gt; xu(u);
-x --&gt; xv(v);
-y --&gt; yu(u);
-y --&gt; yv(v);
-z --&gt; zu(u);
-z --&gt; zv(v);
-</code></pre>
+<pre class="mermaid">
+graph TD;
+w --> x;
+w --> y;
+w --> z;
+x --> xu(u);
+x --> xv(v);
+y --> yu(u);
+y --> yv(v);
+z --> zu(u);
+z --> zv(v);
+</pre>
 </li>
 <li>
 <p>(5 pts) Let \(f(x,y,z) = xe^{y^2-z^2}\). Find the unit vector \(\mathbf u\) for which \(D_{\mathbf u}(1,1,−1)\) is maximum.<br />
