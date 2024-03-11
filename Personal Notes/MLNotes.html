@@ -926,11 +926,48 @@ Some common adjustments are</p>
 <h4><a id="random-forest" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Random Forest</h4>
 <p>The <em>random forest</em> model is made by building many different decision trees. These trees are made &quot;different&quot; through a variety of random perturbations. Finally take the average of each trees</p>
 <h3><a id="time-series" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Time series</h3>
-<h5><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h5>
-<p>A <em>time series</em> is a sequence of data points \(\{(\mathbf x_t,y_t)\}\) where \(\mathbf x_t\) is a collection of features and \(y_t\) is a numeric variable of interest, and \(t\) stands for time.</p>
-<h4><a id="forecast" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Forecast</h4>
-<h5><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h5>
-<p>A <em>forecast</em> is \(y_T=f(X_T,T|\{y_t\}_{t&lt;T})+\epsilon_T\)</p>
-<h5><a id="baseline-forecasting-models" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Baseline forecasting models</h5>
+<ol>
+<li>A <em>time series</em> is a sequence of data points \(\{(\mathbf x_t,y_t)\}\) where \(\mathbf x_t\) is a collection of features, \(y_t\) is a numeric variable of interest, and \(t\) stands for time.</li>
+<li>A model for time series is a series of random variables \(\{y_t\}_{t\in T}\), where \(y_t\) only depends on \(\mathbf x_t,t\), and \(\mathbf x_t\) is a collection of features that only depends on \(t\).</li>
+<li>A <em>forecast</em> is \(y_t=f(\mathbf x_t,t|\{y_\tau\}_{\tau&lt;t})+\epsilon_t\).</li>
+</ol>
+<h4><a id="stationary-models" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stationary models</h4>
+<ol>
+<li>A model for time series is <em>strictly stationary</em> if \(y_{t_1},\cdots,y_{t_n}\) and \(y_{t_1+\tau},\cdots,y_{t_n+\tau}\) has the same joint probability distribution for any \(n,\tau,t_1,\cdots, t_n\). In particular, we would have
+<ul>
+<li>\(E(y_t)=\mu\) and \(\operatorname{Var}(y_t)=\sigma^2\).</li>
+<li>The joint distribution of \(y_{t_1},\cdots,y_{t_n}\) only depends on \(t_{i+1}-t_i\), these are referred to as the <em>lags</em>.</li>
+</ul>
+</li>
+<li>A model for time series is <em>stationary</em> if
+\[E(y_t)=\mu,\qquad\operatorname{Cov}(y_t,y_\tau)=\gamma(\tau)
+\]
+here \(\gamma(\tau)\) is called the <em>autovariance</em>, and note that \(\operatorname{Var}(y_t)=\gamma(0)=\sigma^2\)</li>
+</ol>
+<h5><a id="examples" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h5>
+<ol>
+<li></li>
+</ol>
+<h4><a id="baseline-forecasting-models" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Baseline forecasting models</h4>
+<ul>
+<li>without trend nor seasonality
+<ul>
+<li><em>Average forecast</em> by taking average of all history. For this to work, the \(y_t\) must be independent and identically distributed, this is refered to as the <em>white noise</em></li>
+<li><em>Naive forecast</em> by using the last observation. This is for random walk</li>
+</ul>
+</li>
+<li>with trend but not seasonality
+<ul>
+<li>Linear trend forecast.</li>
+<li>Random walk with drift.</li>
+</ul>
+</li>
+<li>with seasonality but not trend
+<ul>
+<li>seasonal average model</li>
+<li>seasonal naive model</li>
+</ul>
+</li>
+</ul>
 <h2><a id="unsupervised-learning-a-name-unsupervisedlearning-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unsupervised Learning <a name="UnsupervisedLearning"></a></h2>
 </div></body></html>
