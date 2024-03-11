@@ -5,6 +5,15 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
 </script>
 
+
+
+
+
+
+
+
+
+
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 <style>
@@ -1050,6 +1059,114 @@ First we know \(\mathbf v(t)=\mathbf r'(t)=(1-\cos t)\mathbf i+\sin t\mathbf j\)
 <p>Therefore the curvature at \(t=\frac{\pi}{2}\) is</p>
 \[\kappa\left(\frac{\pi}{2}\right)=\dfrac{\|\mathbf v\times\mathbf a\|}{\|\mathbf v\|^3}=\dfrac{|\cos t-1|}{\sqrt{(1-\cos t)^2+\sin^2t}^3}=\dfrac{|0-1|}{\sqrt{1+1}^3}=\dfrac{1}{2^{3/2}}
 \]
+</li>
+</ol>
+</div>
+</section>
+<section class="accordion">
+<input type="checkbox" name="Exam 2 - 03/11" id="exam2">
+<h2 class="handle">
+<label for="exam2">Exam 2 - 03/11</label>
+</h2>
+<div class="content">
+<ol>
+<li>
+<p>a. (15 pts) Approximate \(\sqrt{(2.01)^3+(0.98)^3}\) using the tangent plane approximation. Simplify your answer.<br />
+First we realize that we can pick \(f(x,y)=\sqrt{x^3+y^3}\) and \((x_0,y_0)=(2,1)\), so \(f_x=\dfrac{3x^2}{\sqrt{x^3+y^3}}\), \(f_y=\dfrac{3y^2}{\sqrt{x^3+y^3}}\) and \(f(2,1)=3\), \(f_x(2,1)=4\), \(f_y(2,1)=1\). So the tangent plane approximation is</p>
+\[\begin{align*}
+\sqrt{(2.01)^3+(0.98)^3}=f(2.01,0.98)&amp;\approx f(2,1)+f_x(2,1)(2.01-2)+f_y(2,1)(0.98-1)\\
+&amp;=3+4\cdot0.01+1\cdot(-0.02)\\
+&amp;=3.02
+\end{align*}
+\]
+<p>b. (10 pts) Find the direction, as a unit vector, in which the function \(x^2y+y^2e^x\) decreases most rapidly at \((0,1)\). What is this minimum directional derivative?<br />
+First assume \(f(x,y)=x^2y+y^2e^x\), then \(\nabla f=(f_x,f_y)=(2xy+y^2e^x,x^2+2ye^x)\), and \(\nabla f(0,1)=(1,2)\). To achieve minimum directional derivative, we may choose the direction to be</p>
+\[\mathbf u=\dfrac{-\nabla f(0,1)}{\|\nabla f(0,1)\|}=\dfrac{-(1,2)}{\sqrt{1^2+2^2}}=\left(-\dfrac{1}{\sqrt5},-\dfrac{2}{\sqrt5}\right)
+\]
+<p>and that \(D_{\mathbf u}f=-\|\nabla f(0,1)\|=-\sqrt5\)</p>
+</li>
+<li>
+<p>Consider \(f(x,y)=\dfrac{y^6}{x^4+y^6}\).<br />
+a. (13 pts) Evaluate the limit or show it does not exist: \(\lim\limits_{(x,y)\to(0,0)}f(x,y)\).<br />
+First try the path \(y=mx\), we have</p>
+\[\lim\limits_{x\to0}f(x,mx)=\lim\limits_{x\to0}\dfrac{m^6x^6}{x^4+m^6x^6}=\lim\limits_{x\to0}\dfrac{m^6x^6}{x^4(1+m^6x^2)}=\lim\limits_{x\to0}\dfrac{m^6x^2}{1+m^6x^2}=\dfrac{0}{1+0}=0
+\]
+<p>Other other hand, if we try the path \(x=0\), we get</p>
+\[\lim\limits_{y\to0}f(0,y)=\lim\limits_{y\to0}\dfrac{y^6}{0^4+y^6}=\lim\limits_{y\to0}1=1
+\]
+<p>These two limits don't agree, so the limit \(\lim\limits_{(x,y)\to(0,0)}f(x,y)\) cannot possibly exist.<br />
+b. (12 pts) Given \(x=u+v^2\), and \(y=u-v\), use Chain Rule to find \(\dfrac{\partial f}{\partial  v}\). Your answer may be in terms of \(u,x,y,z\). You <strong>must</strong> use the Chain Rule for this problem.</p>
+ <pre class="mermaid">
+ graph TD;
+ f --> x;
+ f --> y;
+ x --> xu(u);
+ x --> xv(v);
+ y --> yu(u);
+ y --> yv(v);
+ </pre>
+\[\begin{align*}
+\frac{\partial f}{\partial v}&amp;=\frac{\partial f}{\partial x}\frac{\partial x}{\partial v}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial v}\\
+&amp;=\left(-\frac{4x^3y^6}{(x^4+y^6)^2}\right)\cdot\left(2v\right)+\left(\frac{6y^5(x^4+y^6)-y^6\cdot 6y^5}{(x^4+y^6)^2}\right)\cdot\left(-1\right)\\
+&amp;=\frac{-6x^4y^5-8x^3y^6v}{(x^4+y^6)^2}
+\end{align*}
+\]
+</li>
+<li>
+<p>Consider the function \(f(x,y)=x^2-4xy+y^3\).<br />
+a. (11 pts) Determine all critical points of \(f(x,y)\).<br />
+First we evaluate \(\nabla f=(f_x,f_y)=(2x-4y,-4x+3y^2)\). Then we need to solve</p>
+\[\nabla f=\mathbf 0\iff\begin{cases}
+f_x=0\\
+f_y=0
+\end{cases}\iff\begin{cases}
+2x-4y=0,&amp;(\clubsuit1)\\
+-4x+3y^2=0,&amp;(\clubsuit2)
+\end{cases}
+\]
+<p>Solve for \(x\) from \((\clubsuit1)\) as \(x=2y\) and plug it into \((\clubsuit2)\), we get \(-4(2y)+3y^2=0\), from which we can solve \(y=0\) or \(y=\frac{8}{3}\), and then plug these back into \(x=2y\), we get \(x=0\) or \(x=\frac{16}{3}\). So the critical points of \(f\) are \((0,0)\) and \((\frac{16}{3},\frac{8}{3})\).<br />
+b. (15 pts) Determine if each critical point is a local maximum, a local minimum or a saddle point.<br />
+First we evaluate</p>
+\[\begin{cases}
+f_{xx}=2\\
+f_{yy}=6y\\
+f_{xy}=-4
+\end{cases}
+\]
+<p>and the discriminant</p>
+\[D(x,y)=f_{xx}f_{yy}-f_{xy}^2=2\cdot(6y)-(-4)^2=12y-16
+\]
+<p>We test all critical points and find that</p>
+\[\begin{cases}
+D(0,0)=-16&lt;0\\
+D(\frac{16}{3},\frac{8}{3})=16,\quad f_x(\frac{16}{3},\frac{8}{3})=2&gt;0
+\end{cases}
+\]
+<p>Therefore \((0,0)\) is a saddle point, and \((\frac{16}{3},\frac{8}{3})\) is a local extreme point.</p>
+</li>
+<li>
+<p>(25 pts) Using Lagrange Multiplier's method find the minimum and maximum distance from teh point \((5,0)\) to the points on the ellipse \(4x^2+9y^2=36\). Assume these minimum and maximum values exist.</p>
+<p>Fisrt we identify the objective function is the distance \(f(x,y)=\sqrt{(x-5)^2+y^2}\) and the constraint function is \(g(x,y)=4x^2+9y^2\), then we need to solve</p>
+\[\begin{cases}
+\nabla=\lambda\nabla g\\
+g=c
+\end{cases}\iff\begin{cases}
+\dfrac{x-5}{\sqrt{(x-5)^2+y^2}}=\lambda\cdot 8x, &amp;(\clubsuit1)\\
+\dfrac{y}{\sqrt{(x-5)^2+y^2}}=\lambda\cdot 18y, &amp;(\clubsuit2)\\
+4x^2+9y^2=36,&amp;(\clubsuit3)
+\end{cases}
+\]
+<ul>
+<li>If we assume \(\lambda\neq0,y\neq0\), then \((\clubsuit1)\div(\clubsuit2)\) gives us</li>
+</ul>
+\[\dfrac{x-5}{y}=\dfrac{4x}{9y}\Rightarrow\dfrac{x-5}{1}=\dfrac{4x}{9}
+\]
+<p>From which we can solve \(x=9\), plug this into \((\clubsuit3)\), we get \(y^2=36-4\times9^2&lt;0\) which gives us no solutions. We still need to discuss the cases where \(\lambda=0\) or \(y=0\).</p>
+<ul>
+<li>If \(\lambda=0\), then \((\clubsuit1)\) gives us \(x-5=0\Rightarrow x=5\) and \((\clubsuit2)\) gives us \(y=0\), how ever \(x=5,y=0\) is not a solution of \(4x^2+9y^2=36\).</li>
+<li>If \(y=0\), then \((\clubsuit2)\) becomes trivial and \((\clubsuit3)\) gives us \(4x^2=36\) from which we get \(x=\pm 3\).</li>
+</ul>
+<p>In total we get two solutions \((3,0)\) and \((-3,0)\). So they are extreme value points. Since \(f(3,0)=2\) and \(f(-3,0)=8\) are the minimum and maximum distance from the point \((5,0)\) to the ellipse.</p>
 </li>
 </ol>
 </div>
