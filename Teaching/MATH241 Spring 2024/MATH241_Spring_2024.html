@@ -1145,27 +1145,25 @@ D(\frac{16}{3},\frac{8}{3})=16,\quad f_x(\frac{16}{3},\frac{8}{3})=2&gt;0
 </li>
 <li>
 <p>(25 pts) Using Lagrange Multiplier's method find the minimum and maximum distance from teh point \((5,0)\) to the points on the ellipse \(4x^2+9y^2=36\). Assume these minimum and maximum values exist.</p>
-<p>Fisrt we identify the objective function is the distance \(f(x,y)=\sqrt{(x-5)^2+y^2}\) and the constraint function is \(g(x,y)=4x^2+9y^2\), then we need to solve</p>
+<p>Fisrt we identify the objective function is the square of the distance \(f(x,y)=(x-5)^2+y^2\) and the constraint function is \(g(x,y)=4x^2+9y^2\), then we need to solve</p>
 \[\begin{cases}
-\nabla=\lambda\nabla g\\
+\nabla f=\lambda\nabla g\\
 g=c
 \end{cases}\iff\begin{cases}
-\dfrac{x-5}{\sqrt{(x-5)^2+y^2}}=\lambda\cdot 8x, &amp;(\clubsuit1)\\
-\dfrac{y}{\sqrt{(x-5)^2+y^2}}=\lambda\cdot 18y, &amp;(\clubsuit2)\\
+2(x-5)=\lambda\cdot 8x, &amp;(\clubsuit1)\\
+2y=\lambda\cdot 18y, &amp;(\clubsuit2)\\
 4x^2+9y^2=36,&amp;(\clubsuit3)
 \end{cases}
 \]
+<p>Factorize \((\clubsuit2)\) we have \(y(18\lambda-2)=0\), so either \(y=0\) or \(18\lambda-2\)</p>
 <ul>
-<li>If we assume \(\lambda\neq0,y\neq0\), then \((\clubsuit1)\div(\clubsuit2)\) gives us</li>
-</ul>
-\[\dfrac{x-5}{y}=\dfrac{4x}{9y}\Rightarrow\dfrac{x-5}{1}=\dfrac{4x}{9}
+<li>If \(y=0\), plug it into \((\clubsuit3)\), we have \(4x^2=36\Rightarrow x=\pm3\). Plug this into \((clubsuit1)\), we can always solve \(\lambda=\dfrac{2(x-5)}{8x}\) since \(x\neq0\).</li>
+<li>If \(18\lambda-2=0\Rightarrow\lambda=\frac{1}{9}\), plug it into \((\clubsuit1)\), we have \(2(x-5)=\frac{1}{9}8x\), from which we can solve \(x=9\), but if we plug it into \((\clubsuit3)\), we end up with
+\[4\cdot9^2+9y^2=36\Rightarrow 36+y^2=4\Rightarrow y^2=-32
 \]
-<p>From which we can solve \(x=9\), plug this into \((\clubsuit3)\), we get \(y^2=36-4\times9^2&lt;0\) which gives us no solutions. We still need to discuss the cases where \(\lambda=0\) or \(y=0\).</p>
-<ul>
-<li>If \(\lambda=0\), then \((\clubsuit1)\) gives us \(x-5=0\Rightarrow x=5\) and \((\clubsuit2)\) gives us \(y=0\), how ever \(x=5,y=0\) is not a solution of \(4x^2+9y^2=36\).</li>
-<li>If \(y=0\), then \((\clubsuit2)\) becomes trivial and \((\clubsuit3)\) gives us \(4x^2=36\) from which we get \(x=\pm 3\).</li>
+which is impossible.</li>
 </ul>
-<p>In total we get two solutions \((3,0)\) and \((-3,0)\). So they are extreme value points. Since \(f(3,0)=2\) and \(f(-3,0)=8\) are the minimum and maximum distance from the point \((5,0)\) to the ellipse.</p>
+<p>So the possible extreme value points are \((3,0)\) and \((-3,0)\). Test the distance of both points, we have \(\sqrt{f(3,0)}=2\) and \(\sqrt{f(-3,0)}=8\) are the minimum and maximum distance from \((5,0)\) to the ellipse.</p>
 </li>
 </ol>
 </div>
