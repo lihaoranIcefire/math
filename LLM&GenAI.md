@@ -21,11 +21,13 @@ Types of RNN
 - many-to-many (equal): name entity recognition
 - many-to-many (unequal): machine translation
 
-Due to the number of layers in the deep neural network, the gradients as  continuous matrix multiplications because of the chain rule will shrink exponentially if they start from small values (<1) and will blow up if they start from large values (>1)
+Due to the number of layers in the deep neural network, the gradients as  continuous matrix multiplications because of the chain rule will shrink exponentially if they start from small values (<1) and will blow up if they start from large values (>1). This is called the *vanishing or exploding gradient problem*.
 
 ## Long Short Term Memory
+*Long short term memory (LSTM)* is a special kind of RNN, designed to avoid long-term dependency problem. All RNN have the form of a chain of repeating modules of neural network. In standard RNNs, this repeating module has a single `tanh` layer, whereas LSRMs has four, interacting as below
+![enter image description here](https://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-chain.png)
 
 ## Gated Recurrent Unit
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2NzcwMjE5M119
+eyJoaXN0b3J5IjpbLTk0NjA0MTQ4M119
 -->
