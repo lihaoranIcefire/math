@@ -18,6 +18,8 @@ Types of RNN
 - many-to-many (equal): name entity recognition
 - many-to-many (unequal): machine translation
 
+The loss function is the sum of losses of all time steps.
+
 Due to the number of layers in the deep neural network, the gradients as  continuous matrix multiplications because of the chain rule will shrink exponentially if they start from small values (<1) and will blow up if they start from large values (>1). This is called the *vanishing or exploding gradient problem*.
 
 ## Long Short Term Memory
@@ -37,6 +39,16 @@ $$
 Here $\sigma$ is the sigmoid function, $f_t, i_t, o_t$ are the forget, input, output factors, $C_t$ is the cell state.
 
 ## Gated Recurrent Unit
+*Gated recurrent unit (GRU)* is a variant of LSTM that has a simpler internal structure, and uses gating mechanisms to control and manage the flow of information between cells in the neural network.
+
+$$
+\begin{cases}
+z_t=\sigma(W_{zh}h_{t-1}+W_{zx}x_t) \\
+r_t=\sigma(W_{rh}h_{t-1}+W_{rx}x_t) \\
+\tilde h_t=\tanh(W_{hh}r_th_{t-1}+W_{hx}x_t) \\
+h_t=(1-z_t)h_{t-1}+z_t\tilde h_t \\
+\end{cases}
+$$
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTE0NjE4NDI1XX0=
+eyJoaXN0b3J5IjpbLTE4MjE3MzU4MTddfQ==
 -->
