@@ -36,7 +36,7 @@ h_t=o_t\tanh(C_t)
 \end{cases}
 $$
 
-Here $\sigma$ is the sigmoid function, $f_t, i_t, o_t$ are the forget, input, output factors, $C_t$ is the cell state.
+Here $\sigma$ is the sigmoid function, $f_t, i_t, o_t$ are the forget, input, output gates, $C_t$ is the cell state, and $h_t$ is the hidden state.
 
 ## Gated Recurrent Unit
 *Gated recurrent unit (GRU)* is a variant of LSTM that has a simpler internal structure, and uses gating mechanisms to control and manage the flow of information between cells in the neural network.
@@ -49,6 +49,18 @@ r_t=\sigma(W_{rh}h_{t-1}+W_{rx}x_t) \\
 h_t=(1-z_t)h_{t-1}+z_t\tilde h_t \\
 \end{cases}
 $$
+
+Here $r_t,\tilde h_t$ are the relevance, update gates.
+
+Other variants includes
+|Bidirectional (BRNN)|Deep (DRNN)|
+|--|--|
+|![BRNN](https://stanford.edu/~shervine/teaching/cs-230/illustrations/bidirectional-rnn-ltr.png?e3e66fae56ea500924825017917b464a)|![DRNN](https://stanford.edu/~shervine/teaching/cs-230/illustrations/deep-rnn-ltr.png?f57da6de44ddd4709ad3b696cac6a912)|
+
+## Word representations
+There are two main ways of presenting words
+1. 1-hot representation
+2. word embedding
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MjE3MzU4MTddfQ==
+eyJoaXN0b3J5IjpbMTIyNzAxMjQxN119
 -->
