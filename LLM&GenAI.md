@@ -5,7 +5,7 @@
 ## Recurrent Neural Network
 A *recurrent neural network (RNN)* is a class of neural networks that discover the sequential nature of the input data. Inputs could be text, speech, time series, etc.
 
-The architecture is $\sin(x)=4y$
+The architecture is
 
 $$
 \begin{cases}
@@ -20,6 +20,12 @@ Types of RNN
 - many-to-one: sentiment classification
 - many-to-many (equal): name entity recognition
 - many-to-many (unequal): machine translation
+
+Due to the number of layers in the deep neural network, the gradients as  continuous matrix multiplications because of the chain rule will shrink exponentially if they start from small values (<1) and will blow up if they start from large values (>1)
+
+## Long Short Term Memory
+
+## Gated Recurrent Unit
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU5MzgzMzQ0Ml19
+eyJoaXN0b3J5IjpbLTM2NzcwMjE5M119
 -->
