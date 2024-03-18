@@ -85,20 +85,20 @@ $$
 
 3. computing softmax probabilities for all words is computationally expensive. To address this, *negative sampling* transforms the objective into a binary classification problem that instead of predicting context words directly, the model is trained to distinguish between positive (actual context words, label $y=1$) and negative (randomly sampled noise, label $y=0$) examples. Concretely, we use probabilities
 
-	$$
-	\begin{align*}
-	p(y=1|w_o,w_i)&=\sigma(e_o\cdot e_i)\\
-	p(y=0|w_o,w_i)&=1-\sigma(e_o\cdot e_i)=\sigma(-e_o\cdot e_i)
-	\end{align*}
-	$$
+$$
+\begin{align*}
+p(y=1|w_o,w_i)&=\sigma(e_o\cdot e_i)\\
+p(y=0|w_o,w_i)&=1-\sigma(e_o\cdot e_i)=\sigma(-e_o\cdot e_i)
+\end{align*}
+$$
 	
 	Here $\sigma(x)=\dfrac{1}{1+e^{-x}}$ is the sigmoidal function. We define the loss to be
 
-	$$
-	\mathcal L=-\sum_{i,o}\log p(y=1|w_o,w_i)+\sum_{i,o}\sum_{w\sim Q}\log p(y=0|w,w_i)
-	$$
+$$
+\mathcal L=-\sum_{i,o}\log p(y=1|w_o,w_i)+\sum_{i,o}\sum_{w\sim P_n}\log p(y=0|w,w_i)
+$$
 	
-	Here 
+	Here $w\sim P_n$ is a negative sampled noised words, and $P_n(w)=U(w)^{3/4}/Z$ is the zipfian's law, $U$ meaning word frequency.
 
 #### Pros & Cons
 1. skip-gram is better suited for rare words because rare words often have unique contexts.
@@ -116,5 +116,5 @@ $$
 
 Where $f$ is a weighting function such that $X_{ij}=0\Rightarrow f(X_{ij})=0$. Given the symmetry of $e,\theta$, the final word embedding is $\dfrac{e_w+\theta_w}{2}$.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc4NjE1ODkxN119
+eyJoaXN0b3J5IjpbMTE3MzQzNTA2OF19
 -->
