@@ -91,11 +91,13 @@ $$
 	p(y=0|w_o,w_i)&=1-\sigma(e_o\cdot e_i)=\sigma(-e_o\cdot e_i)
 	\end{align*}
 	$$
+	
 	Here $\sigma(x)=\dfrac{1}{1+e^{-x}}$ is the sigmoidal function. We define the loss to be
 
 	$$
 	\mathcal L=-\sum_{i,o}\log p(y=1|w_o,w_i)+\sum_{i,o}\sum_{w\sim Q}\log p(y=0|w,w_i)
 	$$
+	
 	Here 
 
 #### Pros & Cons
@@ -114,5 +116,5 @@ $$
 
 Where $f$ is a weighting function such that $X_{ij}=0\Rightarrow f(X_{ij})=0$. Given the symmetry of $e,\theta$, the final word embedding is $\dfrac{e_w+\theta_w}{2}$.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTM2MTgxNjE3XX0=
+eyJoaXN0b3J5IjpbMTc4NjE1ODkxN119
 -->
