@@ -62,7 +62,11 @@ There are two main ways of presenting words
 1. 1-hot representation, denoted $o_w$
 2. word embedding, denoted $e_w$.
 
-The *embedding matrix* $E$ such that $e_w = Eo_w$ can be learnt using target/context likelihood models.
+The *embedding matrix* $E$ such that $e_w = Eo_w$ can be learnt using target/context likelihood models by defining the conditional probability as
+
+$$
+p(w_o|w_i)=\frac{\exp(e_{w_o}\cdot e_{w_i})}{\sum_{w\in V}\exp(e_w\cdot e_{w_i})}
+$$
 
 ### Word2Vec
 *word2vec* is a framework aimed at learning word embeddings by estimating the likelihood that a given word is surrounded by other words, popular models include
@@ -70,16 +74,31 @@ The *embedding matrix* $E$ such that $e_w = Eo_w$ can be learnt using target/con
 1. *skip-gram* maximize
 
 $$
-\sum_i\log p(w_j:\text{$j$ is in the neighborhood of $i$}|w_i)
+\frac{1}{T}\sum_{t=1}^T\sum_{\substack{-c\leq j\leq c\\j\neq0}}\log p(w_{t+j}|w_t)
 $$
 
 2. *continuous bag-of-words (CBOW)* maximize
 
 $$
-\sum_i\log p(w_i|w_j:\text{$j$ is in the neighborhood of $i$})
+\frac{1}{T}\sum_{t=1}^T\sum_{\substack{-c\leq j\leq c\\j\neq0}}\log p(w_t|w_{t+j})
 $$
 
-> Pros & Cons
+3. computing softmax probabilities for all words is computationally expensive. To address this, *negative sampling* transforms the objective into a binary classification problem that instead of predicting context words directly, the model is trained to distinguish between positive (actual context words, label $y=1$) and negative (randomly sampled noise, label $y=0$) examples. Concretely, we use probabilities
+$$
+\begin{align*}
+p(y=1|w_o,w_i)&=\sigma(e_o\cdot e_i)\\
+p(y=0|w_o,w_i)&=1-\sigma(e_o\cdot e_i)=\sigma(-e_o\cdot e_i)
+\end{align*}
+$$
+Here $\sigma(x)=\dfrac{1}{1+e^{-x}}$ is the sigmoidal function. We define the loss to be
+
+$$
+\mathcal L=-\sum_{i,o}\log p(y=1|w_o,w_i)+\sum_{i,o}\sum_{w\sim Q}\log p(y=0|w,w_i)
+$$
+
+Here 
+
+#### Pros & Cons
 1. skip-gram is better suited for rare words because rare words often have unique contexts.
 2.  skip-gram is known for capturing fine-grained semantic relationships between words. Since it learns separate embeddings for each word, which can represent subtle semantic nuances and capture relationships between words that may appear in diverse contexts.
 3. CBOW is faster to train. Since it aggregates context information from multiple words to predict a single target word. This approach tends to be computationally more efficient, especially for large vocabularies.
@@ -93,7 +112,7 @@ $$
 J(\theta)=\frac{1}{2}\sum_{i,j}f(X_{ij})(\theta_i\cdot e_j+b_i+b_j'-\log(X_{ij}))^2
 $$
 
-Where $f$ is a weighting function such that $X_{ij}=0\Rightarrow f(X_{ij})=0$.
+Where $f$ is a weighting function such that $X_{ij}=0\Rightarrow f(X_{ij})=0$. Given the symmetry of $e,\theta$, the final word embedding is $\dfrac{e_w+\theta_w}{2}$.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTQ1Nzg5NzQ2XX0=
+eyJoaXN0b3J5IjpbLTUwOTk4MDgxM119
 -->
