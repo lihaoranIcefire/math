@@ -59,8 +59,36 @@ Other variants includes
 
 ## Word representations
 There are two main ways of presenting words
-1. 1-hot representation
-2. word embedding
+1. 1-hot representation, denoted $o_w$
+2. word embedding, denoted $e_w$.
+
+The *embedding matrix* $E$ such that $e_w = Eo_w$ can be learnt using target/context likelihood models.
+
+### Word2Vec
+*word2vec* is a framework aimed at learning word embeddings by estimating the likelihood that a given word is surrounded by other words, popular models include
+
+1. *skip-gram* maximize
+$$
+\sum_i\log p(w_j:\text{$j$ is in the neighborhood of $i$}|w_i)
+$$
+2. *continuous bag-of-words (CBOW)* maximize
+$$
+\sum_i\log p(w_i|w_j:\text{$j$ is in the neighborhood of $i$})
+$$
+
+> Pros & Cons
+1. skip-gram is better suited for rare words because rare words often have unique contexts.
+2.  skip-gram is known for capturing fine-grained semantic relationships between words. Since it learns separate embeddings for each word, which can represent subtle semantic nuances and capture relationships between words that may appear in diverse contexts.
+3. CBOW is faster to train. Since it aggregates context information from multiple words to predict a single target word. This approach tends to be computationally more efficient, especially for large vocabularies.
+4. CBOW performs better for frequent words because it average context vectors. Frequent words tend to occur in various contexts, and CBOW can effectively aggregate this information to learn robust representations for these words.
+5. skip-gram tends to perform better with larger datasets, while CBOW may perform better with smaller datasets.
+
+### GloVe
+*GloVe (global vectors)* is a word embedding technique that uses a co-occurence matrix $X$ where each $X_{ij}$ denotes the number of times that a target $i$ occurred with a context $j$. Its cost function is
+$$
+J(\theta)=\frac{1}{2}\sum_{i,j}f(X_{ij})(\theta_i\cdot e_j+b_i+b_j'-\log(X_{ij}))^2
+$$
+Where $f$ is a weighting function such that $X_{ij}=0\Rightarrow f(X_{ij})=0$.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIyNzAxMjQxN119
+eyJoaXN0b3J5IjpbMTQ5MDYzNjg2OF19
 -->
