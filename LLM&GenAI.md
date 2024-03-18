@@ -74,29 +74,29 @@ $$
 1. *skip-gram* maximize
 
 $$
-\frac{1}{T}\sum_{t=1}^T\sum_{\substack{-c\leq j\leq c\\j\neq0}}\log p(w_{t+j}|w_t)
+\frac{1}{T}\sum_{t=1}^T\sum_{-c\leq j\leq c,j\neq0}\log p(w_{t+j}|w_t)
 $$
 
 2. *continuous bag-of-words (CBOW)* maximize
 
 $$
-\frac{1}{T}\sum_{t=1}^T\sum_{\substack{-c\leq j\leq c\\j\neq0}}\log p(w_t|w_{t+j})
+\frac{1}{T}\sum_{t=1}^T\sum_{-c\leq j\leq c,j\neq0}\log p(w_t|w_{t+j})
 $$
 
 3. computing softmax probabilities for all words is computationally expensive. To address this, *negative sampling* transforms the objective into a binary classification problem that instead of predicting context words directly, the model is trained to distinguish between positive (actual context words, label $y=1$) and negative (randomly sampled noise, label $y=0$) examples. Concretely, we use probabilities
-$$
-\begin{align*}
-p(y=1|w_o,w_i)&=\sigma(e_o\cdot e_i)\\
-p(y=0|w_o,w_i)&=1-\sigma(e_o\cdot e_i)=\sigma(-e_o\cdot e_i)
-\end{align*}
-$$
-Here $\sigma(x)=\dfrac{1}{1+e^{-x}}$ is the sigmoidal function. We define the loss to be
 
-$$
-\mathcal L=-\sum_{i,o}\log p(y=1|w_o,w_i)+\sum_{i,o}\sum_{w\sim Q}\log p(y=0|w,w_i)
-$$
+	$$
+	\begin{align*}
+	p(y=1|w_o,w_i)&=\sigma(e_o\cdot e_i)\\
+	p(y=0|w_o,w_i)&=1-\sigma(e_o\cdot e_i)=\sigma(-e_o\cdot e_i)
+	\end{align*}
+	$$
+	Here $\sigma(x)=\dfrac{1}{1+e^{-x}}$ is the sigmoidal function. We define the loss to be
 
-Here 
+	$$
+	\mathcal L=-\sum_{i,o}\log p(y=1|w_o,w_i)+\sum_{i,o}\sum_{w\sim Q}\log p(y=0|w,w_i)
+	$$
+	Here 
 
 #### Pros & Cons
 1. skip-gram is better suited for rare words because rare words often have unique contexts.
@@ -114,5 +114,5 @@ $$
 
 Where $f$ is a weighting function such that $X_{ij}=0\Rightarrow f(X_{ij})=0$. Given the symmetry of $e,\theta$, the final word embedding is $\dfrac{e_w+\theta_w}{2}$.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUwOTk4MDgxM119
+eyJoaXN0b3J5IjpbNTM2MTgxNjE3XX0=
 -->
