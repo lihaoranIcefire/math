@@ -68,10 +68,13 @@ The *embedding matrix* $E$ such that $e_w = Eo_w$ can be learnt using target/con
 *word2vec* is a framework aimed at learning word embeddings by estimating the likelihood that a given word is surrounded by other words, popular models include
 
 1. *skip-gram* maximize
+
 $$
 \sum_i\log p(w_j:\text{$j$ is in the neighborhood of $i$}|w_i)
 $$
+
 2. *continuous bag-of-words (CBOW)* maximize
+
 $$
 \sum_i\log p(w_i|w_j:\text{$j$ is in the neighborhood of $i$})
 $$
@@ -85,10 +88,12 @@ $$
 
 ### GloVe
 *GloVe (global vectors)* is a word embedding technique that uses a co-occurence matrix $X$ where each $X_{ij}$ denotes the number of times that a target $i$ occurred with a context $j$. Its cost function is
+
 $$
 J(\theta)=\frac{1}{2}\sum_{i,j}f(X_{ij})(\theta_i\cdot e_j+b_i+b_j'-\log(X_{ij}))^2
 $$
+
 Where $f$ is a weighting function such that $X_{ij}=0\Rightarrow f(X_{ij})=0$.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ5MDYzNjg2OF19
+eyJoaXN0b3J5IjpbOTQ1Nzg5NzQ2XX0=
 -->
