@@ -851,14 +851,6 @@ a. \(\displaystyle\int_{0}^2\int_0^{\sqrt{4-y^2}}xdxdy\).</p>
  <img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/worksheet0314-2.png" alt="worksheet0314-2"  width="700" height=auto/></p>
  </div>
 </li>
-</ol>
-<!--
-3. Find the volume of ``V`` of the region.
-    a. The solid region bounded above by the parabolic sheet ``z = 1-x^2``, below by the ``xy`` plane, and on the sides by the planes ``y = –1`` and ``y = 2``.
-    b. The solid region in the first octant bounded by the paraboloid ``z = x^2 + y^2``, the plane ``x + y = 1``, and the coordinate planes.
-    c. The region between ``x=y^2`` and ``x=32-y^2``.
--->
-<ol start="3">
 <li>
 <p>Consider the sum of two vertical simply iterated integrals:</p>
 \[\int_{0}^{\sqrt2/2}\int_0^xx^2+y^2dydx+\int_{\sqrt2/2}^{1}\int_0^{\sqrt{1-x^2}}x^2+y^2dydx
@@ -924,6 +916,96 @@ x^2+y^2=4,(\clubsuit3)
 <p>So the extreme values might appear on \((0,2)\) or \((0,-2)\), and since \(f(0,2)=5\) and \(f(0,-2)=-3\). We know that the minimum and maximum of \(f\) over the disc \(x^2+y^2\leq4\) are \(f(0,-1)=-4\) and \(f(0,2)=5\) respectively.</p>
 </li>
 </ol>
+</div>
+</section>
+<section class="accordion">
+<input type="checkbox" name="Worksheet 03/26" id="worksheet0326">
+<h2 class="handle">
+<label for="worksheet0326">Worksheet 03/26</label>
+</h2>
+<div class="content">
+<!--
+Problems
+14.2: 1, 5, 7, 9, 13, 18, 23, 25, 27, 29 
+--> 
+<ol>
+<li>Find the volume of \(V\) of the region.<br />
+a. The solid region bounded above by the parabolic sheet \(z = 1-x^2\), below by the \(xy\) plane, and on the sides by the planes \(y = –1\) and \(y = 2\).<br />
+First we see that the intersection between \(z=1-x^2\) and the \(xy\) plane is \(x=\pm1\). So
+\[\begin{align*}
+V&amp;=\int_{-1}^2\int_{-1}^11-x^2dxdy\\
+&amp;=\left(\int_{-1}^11-x^2dx\right)\left(\int_{-1}^21dy\right)\\
+&amp;=\left[\left.x-\frac{x^3}{3}\right|_{-1}^1\right]\cdot3\\
+&amp;=\frac{4}{3}\cdot 3=4
+\end{align*}
+\]
+b. The solid region bounded by the upper hemisphere with radius 2 and \(z=\sqrt{3x^2+3y^2}\).<br />
+First we know the polar equations of the upper heimsphere and the single cone are \(z=\sqrt{4-x^2-y^2}=\sqrt{4-r^2}\) and \(z=\sqrt{3x^2+3y^2}=\sqrt3r\), and so the intersection would be \(\sqrt{4-r^2}=\sqrt3r\Rightarrow r=1\), so \(R\) would be the unit circle, and
+\[\begin{align*}
+V&amp;=\int_0^{2\pi}\int_0^1(\sqrt{4-r^2}-\sqrt3r)rdrd\theta\\
+&amp;=\left(\int_0^1(\sqrt{4-r^2}-\sqrt3r)rdr\right)\left(\int_0^{2\pi}1d\theta\right)\\
+&amp;=\left(\int_0^1r\sqrt{4-r^2}-\sqrt3r^2dr\right)\cdot2\pi\\
+&amp;=2\pi\int_0^1r\sqrt{4-r^2}dr-2\pi\int_0^1\sqrt3r^2dr\\
+&amp;=-\pi\int_4^3\sqrt{u}du-\frac{2\pi\sqrt3}{3}\\
+&amp;=\frac{2\pi}{3}(8-3\sqrt3)-\frac{2\pi\sqrt3}{3}\\
+&amp;=\left(\frac{16}{3}-\frac{8\sqrt3}{3}\right)\pi\\
+\end{align*}
+\]
+Here we use \(u\)-sub of \(u=4-r^2\).<br />
+c. The solid region in the first octant bounded by the paraboloid \(z = x^2 + y^2\), the plane \(x + y = 1\), and the coordinate planes.
+\[\begin{align*}
+V&amp;=\int_{0}^1\int_{0}^{1-y}x^2+y^2dxdy\\
+&amp;=\int_{0}^1\left[\left.\frac{x^3}{3}+xy^2\right|_{0}^{1-y}\right]dy\\
+&amp;=\int_{0}^1\frac{(1-y)^3}{3}+(1-y)y^2dy\\
+&amp;=\frac{1}{6}
+\end{align*}
+\]
+d. The solid region bounded by the paraboloid \(z=4-x^2-y^2\) and the plane \(z=3\).<br />
+First we see the intersection between \(z=4-x^2-y^2\) and \(z=3\) is \(x^2+y^2=1\)
+\[\begin{align*}
+V&amp;=\int_0^{2\pi}\int_{0}^1(4-r^2-3)rdrd\theta\\
+&amp;=\left(\int_{0}^1(4-r^2-3)rdr\right)\left(\int_0^{2\pi}1d\theta\right)\\
+&amp;=\frac{1}{4}\cdot2\pi=\frac{\pi}{2}
+\end{align*}
+\]
+e. The solid region between \(x=y^2\) and \(x=32-y^2\), \(z=-1\) and \(z=2\).<br />
+First we see the intersection between \(x=y^2\) and \(x=32-y^2\) is \(y=\pm4\). So
+\[\begin{align*}
+V&amp;=\int_{-4}^4\int_{y^2}^{32-y^2}2-(-1)dxdy\\
+&amp;=\int_{-4}^4\left[\left.3x\right|_{y^2}^{32-y^2}\right]dy\\
+&amp;=\int_{-4}^4 96-6y^2dy\\
+&amp;=512
+\end{align*}
+\]
+</li>
+</ol>
+<div class="slider">
+<img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/worksheet0326-1.png" alt="worksheet0326-1" width="1000" height=auto/></p>
+</div>
+<ol start="2">
+<li>Change the integral to an iterated integral in polar coordinates, and then evaluate it.<br />
+a. \(\displaystyle\int_0^1\int_0^{\sqrt{1-x^2}}e^{-(x^2+y^2)}dydx\).
+\[\begin{align*}
+\int_0^1\int_0^{\sqrt{1-x^2}}e^{-(x^2+y^2)}dydx&amp;=\int_0^{\pi/2}\int_0^1e^{-r^2}rdrd\theta\\
+&amp;=\left(\int_0^1e^{-r^2}rdr\right)\left(\int_0^{\pi/2}1d\theta\right)\\
+&amp;=\left(\int_0^1\frac{1}{2}e^{-u}du\right)\cdot2\pi\\
+&amp;=\pi(1-e^{-1})
+\end{align*}
+\]
+Here we use \(u\)-sub of \(u=r^2\).<br />
+b. \(\displaystyle\int_{3/\sqrt2}^3\int_0^{\sqrt{9-x^2}}\dfrac{1}{\sqrt{x^2+y^2}}dydx\).<br />
+First we may convert \(x=3/\sqrt2\) into polar coordinates \(r\cos\theta=3/\sqrt2\Rightarrow r=\frac{3}{\sqrt2}\sec\theta\). And the intersection between this and \(r=3\) would be \(\frac{3}{\sqrt2}\sec\theta=3\Rightarrow \sec\theta=\sqrt2\Rightarrow\theta=\frac{\pi}{4}\). So
+\[\begin{align*}
+\int_{3/\sqrt2}^3\int_0^{\sqrt{9-x^2}}\dfrac{1}{\sqrt{x^2+y^2}}dydx&amp;=\int_0^{\pi/4}\int_{\frac{3}{\sqrt2}\sec\theta}^3\frac{1}{r}rdrd\theta\\
+&amp;=\int_0^{\pi/4}3-\frac{3}{\sqrt2}\sec\theta d\theta\\
+&amp;=\frac{3\pi}{4}-\frac{3}{\sqrt2}\ln(\sqrt2+1)
+\end{align*}
+\]
+</li>
+</ol>
+<div class="slider">
+<img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/worksheet0326-2.png" alt="worksheet0326-2" width="1000" height=auto/></p>
+</div>
 </div>
 </section>
 <h1><a id="quizzes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quizzes</h1>
