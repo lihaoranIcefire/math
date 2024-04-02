@@ -1008,6 +1008,78 @@ First we may convert \(x=3/\sqrt2\) into polar coordinates \(r\cos\theta=3/\sqrt
 </div>
 </div>
 </section>
+<section class="accordion">
+<input type="checkbox" name="Worksheet 04/02" id="worksheet0302">
+<h2 class="handle">
+<label for="worksheet0402">Worksheet 04/02</label>
+</h2>
+<div class="content">
+<!--
+Problems
+14.4: 7, 10, 11, 15, 16, 17, 19, 21, 23, 27, 30
+14.5: 5, 8, 11, 14-29, 32, 33, 37
+14.6: 7, 8-22
+--> 
+<ol>
+<li>
+<p>Set up the triple integral for the volume of the solid region bounded above by the circular paraboloid \(z = 4(x^2 + y^2)\), below by the plane \(z = –2\), and on the sides by the parabolic sheet \(y = x^2\) and the plane \(y = x\).</p>
+\[\begin{align*}
+\operatorname{Vol}(D)&amp;=\iiint_D1dV=\iint_R\int_{-2}^{4(x^2+y^2)}1dzdA\\
+&amp;=\int_0^1\int_{x^2}^x\int_{-2}^{4(x^2+y^2)}1dzdydx
+\end{align*}
+\]
+</li>
+<li>
+<p>Set up the triple integral for the volume of the solid region bounded above by the elliptic paraboloid \(z = 2x^2 + 3y^2\), on the sides by the parabolic sheet \(y^2 = 1 - x\) and the plane \(x = 0\), and below by the plane \(z = 0\).</p>
+\[\begin{align*}
+\operatorname{Vol}(D)&amp;=\iiint_D1dV=\iint_R\int_{0}^{2x^2+3y^2}1dzdA\\
+&amp;=\int_{-1}^1\int_0^{1-y^2}\int_{0}^{2x^2+3y^2}1dzdxdy
+\end{align*}
+\]
+</li>
+<li>
+<p>Convert the integral \(\displaystyle\iiint_Dyz\,dV\) into cylindrical coordinates, where \(D\) is the solid region in the first octant bounded by the sphere \(x^2 + y^2 + z^2 = 1\), the circular cylinder \(r = \cos\theta\), and the planes \(y = 0\) and \(z=0\).</p>
+\[\begin{align*}
+\iiint_DyzdV&amp;=\iint_R\int_0^{\sqrt{1-x^2-y^2}}yzdzdA\\
+&amp;=\int_0^{\pi/2}\int_0^{\cos\theta}\int_0^{\sqrt{1-r^2}}r\sin\theta\cdot rdzdrd\theta
+\end{align*}
+\]
+</li>
+<li>
+<p>Set up but do not evaluate the iterated triple integral in cylindrical coordinates for the volume of \(D\), where \(D\) is the solid in the first octant, below the paraboloid \(z = 2-x^2-y^2\) and above the cone \(z = \sqrt{x^2 + y^2}\).</p>
+<p>First we solve the intersection of \(z = 2-x^2-y^2\) and \(z = \sqrt{x^2 + y^2}\). Which implies \(2-x^2-y^2=\sqrt{x^2 + y^2}\iff2-r^2=r\iff (r-1)(r+2)=0\Rightarrow r=1\) (\(r=-2\) is discarded since \(r\) is non-negative).</p>
+\[\begin{align*}
+\operatorname{Vol}(D)&amp;=\iiint_D1dV=\int_0^{\pi/2}\int_0^1\int_r^{2-r^2}rdzdrd\theta
+\end{align*}
+\]
+</li>
+<li>
+<p>Set up the triple integral for the volume of the solid region bounded above by the sphere \(x^2 + y^2 + z^2 = 4z\) and below by the upper half of the cone \(z^2 = x^2 + y^2\).</p>
+<p>Note that</p>
+\[x^2 + y^2 + z^2 = 4z\iff \rho^2 = 4\rho\cos\theta\iff \rho=4\cos\theta
+\]
+<p>and</p>
+\[z=\sqrt{x^2+y^2}\iff z=r\iff\rho\cos\phi=\sin\phi\iff\tan\phi=1\iff\phi=\frac{\pi}{4}
+\]
+<p>Therefore</p>
+\[\begin{align*}
+\operatorname{Vol}(D)&amp;=\iiint_D1dV=\int_0^{2\pi}\int_0^{\pi/4}\int_0^{4\cos\theta} \rho^2\sin\phi d\rho d\phi d\theta
+\end{align*}
+\]
+</li>
+<li>
+<p>Sketch the solid inside \(x^2+y^2=4\), outside of \(x^2+y^2+z^2=1\), below \(\rho=2\sqrt3\sec\phi\) and above the \(xy\)-plane.</p>
+<p>Note that</p>
+\[\rho=2\sqrt3\sec\phi\iff\rho=2\sqrt3\frac{1}{\cos\phi}\iff\rho\cos\theta=2\sqrt3\iff z=2\sqrt3
+\]
+<p>is a plane.</p>
+ <div class="slider">
+ <img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/worksheet0402.png" alt="worksheet0402" width="1000" height=auto/></p>
+ </div>
+</li>
+</ol>
+</div>
+</section>
 <h1><a id="quizzes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quizzes</h1>
 <section class="accordion">
 <input type="checkbox" name="Quiz 1 - 02/01" id="quiz1">
