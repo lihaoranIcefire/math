@@ -1070,11 +1070,11 @@ Problems
 <li>
 <p>Sketch the solid inside \(x^2+y^2=4\), outside of \(x^2+y^2+z^2=1\), below \(\rho=2\sqrt3\sec\phi\) and above the \(xy\)-plane.</p>
 <p>Note that</p>
-\[\rho=2\sqrt3\sec\phi\iff\rho=2\sqrt3\frac{1}{\cos\phi}\iff\rho\cos\theta=2\sqrt3\iff z=2\sqrt3
+\[\rho=2\sqrt3\sec\phi\iff\rho=2\sqrt3\frac{1}{\cos\phi}\iff\rho\cos\phi=2\sqrt3\iff z=2\sqrt3
 \]
 <p>is a plane.</p>
  <div class="slider">
- <img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/worksheet0402-6.png" alt="worksheet0402-6" width="1000" height=auto/></p>
+ <img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/worksheet0402-6.png" alt="worksheet0402-6" width="300" height=auto/></p>
  </div>
 </li>
 </ol>
@@ -1270,6 +1270,44 @@ First evaluate the gradient</p>
 </ol>
 <div class="slider">
 <img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/quiz6-1&2.png" alt="quiz6-1&2"  width="600" height=auto/></p>
+</div>
+</div>
+</section>
+<section class="accordion">
+<input type="checkbox" name="Quiz 7 - 04/04" id="quiz7">
+<h2 class="handle">
+<label for="quiz7">Quiz 7 - 04/04</label>
+</h2>
+<div class="content">
+<ol>
+<li>
+<p>(5 pts) Compute the volume of the solid \(E\) which lies above \(z = 0\), below the plane \(x + y + 2z = 4\) and inside the cylinder \(x^2 + y^2 = 1\). As usual, you must include a diagram. Evaluate and simplify.</p>
+\[\begin{align*}
+\operatorname{Vol}(E)&amp;=\iiint_E1dV=\iint_R\int_0^{2-\frac{x}{2}-\frac{y}{2}}1dzdA\\
+&amp;=\int_0^{2\pi}\int_0^1\int_0^{2-\frac{r\cos\theta}{2}-\frac{r\sin\theta}{2}}rdzdrd\theta\\
+&amp;=\int_0^{2\pi}\int_0^1r\left(2-\frac{r\cos\theta}{2}-\frac{r\sin\theta}{2}\right)drd\theta\\
+&amp;=\int_0^{2\pi}1-\frac{\cos\theta}{6}-\frac{\sin\theta}{6}d\theta\\
+&amp;=2\pi
+\end{align*}
+\]
+</li>
+<li>
+<p>(5 pts) Let \(E\) be the solid bounded above by the sphere \(x^2 + y^2 + z^2 = 4z\), and below by the upper nappe of the cone \(z^2 = x^2 +y^2\). Write down an iterated double integral in spherical coordinates for \(\displaystyle\iiint_E(x^2 +y^2)dV\). As usual, you must include a diagram. Do <strong>NOT</strong> evaluate the integral.</p>
+<p>Note that</p>
+\[x^2 + y^2 + z^2 = 4z\iff \rho^2 = 4\rho\cos\phi\iff \rho=4\cos\phi
+\]
+<p>and</p>
+\[z=\sqrt{x^2+y^2}\iff z=r\iff\rho\cos\phi=\sin\phi\iff\tan\phi=1\iff\phi=\frac{\pi}{4}
+\]
+<p>Therefore</p>
+\[\begin{align*}
+\iiint_E(x^2+y^2)dV=\int_0^{2\pi}\int_0^{\pi/4}\int_0^{4\cos\phi} (\rho\sin\theta)^2\rho^2\sin\phi d\rho d\phi d\theta
+\end{align*}
+\]
+</li>
+</ol>
+<div class="slider">
+<img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/quiz7.png" alt="quiz7" width="1000" height=auto/></p>
 </div>
 </div>
 </section>
