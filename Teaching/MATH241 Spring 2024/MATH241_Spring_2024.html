@@ -1498,3 +1498,78 @@ which is impossible.</li>
 </ol>
 </div>
 </section>
+<section class="accordion">
+<input type="checkbox" name="Exam 3 - 04/08" id="exam3">
+<h2 class="handle">
+<label for="exam3">Exam 3 - 04/08</label>
+</h2>
+<div class="content">
+<ol>
+<li>
+<p>An object occupies the solid \(E\) bounded by the paraboloid \(z=x^2+y^2\) and above by the plane \(z=2\). The mass density of this object at every point is its distance to the origin.<br />
+a. (15 pts) First, set up a triple integral equal to the total mass of this object. Then turn this triple integral into an iterated triple integral in Cartesian coordinates. Do not evaluate the integral.<br />
+First we see that the density is \(f(x,y,z)=\sqrt{x^2+y^2+z^2}\), and the intersection between \(z=x^2+y^2\), \(z=2\) is the circle \(x^2+y^2=2\). Therefore the total mass is</p>
+\[\iiint_Ef(x,y,z)dV=\int_{-\sqrt2}^{\sqrt2}\int_{-\sqrt{2-x^2}}^{\sqrt{2-x^2}}\int_{x^2+y^2}^2\sqrt{x^2+y^2+z^2}\,dzdydx
+\]
+<p>in Cartesian coordinates.<br />
+b. (10 pts) Turn the triple inntegral in teh previous part into an iterated triple integral in Cylindrical coordinates. Do not evaluate.<br />
+Note that the intersection circle is \(r=\sqrt2\), so the total mass is</p>
+\[\int_0^{2\pi}\int_0^{\sqrt2}\int_{r^2}^2\sqrt{r^2+z^2}\cdot rdzdrd\theta
+\]
+</li>
+<li>
+<p>a. (12 pts) Let \(E\) be the sloid that lies above teh cone \(z=\sqrt{3x^2+3y^2}\), inside the sphere \(x^2+y^2+z^2=3\) and outside the sphere \(r^2+z^2=1\). Sketch a diagram and set up an iterated triple integral in Spherical coordinates that is equal to \(\displaystyle\iiint_ExyzdV\). Do not evaluate.<br />
+In spherical coordinates, the cone \(z=\sqrt{3x^2+3y^2}\) becomes \(z=\sqrt3\rho\sin\phi\), and the two spheres become \(\rho=2\), \(\rho=1\). Therefore</p>
+\[\iiint_ExyzdV=\int_1^2\int_0^\pi\int_0^{2\pi} (\rho\sin\phi\cos\theta)(\rho\sin\phi\sin\theta)(\rho\cos\phi)\cdot\rho^2\sin\phi \,drd\phi d\theta
+\]
+<p>b. (14pts) Evaluate \(\displaystyle\int_0^{\sqrt\pi/2}\int_y^{\sqrt\pi/2}\cos(x^2)\,dxdy\).<br />
+We need to change the order of integration to evaluate this double iterated integral. First we see that the domain of integration \(R\) is the triangle enclosed by origin, \((\sqrt\pi/2,0)\) and \((\sqrt\pi/2,\pi/2)\), so</p>
+\[\begin{align*}
+\int_0^{\sqrt\pi/2}\int_y^{\sqrt\pi/2}\cos(x^2)dxdy&amp;=\int_0^{\sqrt\pi/2}\int_0^x\cos(x^2)dydx\\
+&amp;=\int_0^{\sqrt\pi/2}x\cos(x^2)dx\\
+&amp;=\int_{0^2}^{(\sqrt\pi/2)^2}\frac{1}{2}\cos(u)du\\
+&amp;=\left.\frac{1}{2}\sin(u)\right|_0^{\pi/4}\\
+&amp;=\frac{\sqrt2}{4}
+\end{align*}
+\]
+<p>Here we use \(u\)-sub with \(u=x^2\).</p>
+</li>
+<li>
+<p>Consider part of the surface given by \(x^2+z^2=4\) that lies between \(y=1\) and \(y=4\).<br />
+a. (10 pts) Draw a reasonable sketch of this surface and find a parametrization for this surface.<br />
+A parametrization for this surface could be</p>
+\[\mathbf r(y,\theta)=2\cos\theta\mathbf i+y\mathbf j+2\sin\theta\mathbf k,\qquad y\in[1,4],\,\theta\in[0,2\pi]
+\]
+<p>b. (15 pts) Find the equation of the plane tangent to this surface at \((2,2,0)\).<br />
+First we evaluate \(\mathbf r_y=\mathbf j\), \(\mathbf r_\theta=-2\sin\theta\mathbf i+2\cos\theta\mathbf k\)<br />
+The normal vector to the tangent plane at \((2,2,0)\) is</p>
+\[\mathbf r_y\times\mathbf r_\theta=\mathbf j\times(2\mathbf k)=2\mathbf i
+\]
+<p>So the tangent plane equation is</p>
+\[2(x-2)=0
+\]
+</li>
+<li>
+<p>(25 pts) Consider the region \(R\) in the \(xy\)-plane given by \(x^2+4y^2\leq1\). Using an appropriate change of variables to evaluate \(\displaystyle\iint_Rx^2+y^2dA\).</p>
+<p>We use change of variables \(x=u\), \(y=v/2\), so that the jacobian is \(\frac{\partial(x,y)}{\partial(u,v)}=\frac{1}{2}\), and \(S\) is the unit circle \(u^2+v^2\leq 1\), hence</p>
+\[\iint_Rx^2+y^2dA=\iint_S\left(u^2+\frac{v^2}{4}\right)\cdot\frac{1}{2}dA
+\]
+<p>Then turn this into polar coordinates</p>
+\[\begin{align*}
+\iint_S\left(u^2+\frac{v^2}{4}\right)\cdot\frac{1}{2}dA&amp;=\int_0^{2\pi}\int_0^1\left(r^2\cos^2\theta+\frac{r^2\sin^2\theta}{4}\right)\cdot\frac{1}{2}rdrd\theta\\
+&amp;=\int_0^{2\pi}\int_0^1\frac{r^3\cos^2\theta}{2}drd\theta+\int_0^{2\pi}\int_0^1\frac{r^3\sin^2\theta}{8}drd\theta\\
+&amp;=\left(\int_0^{2\pi}\cos^2\theta d\theta\right)\left(\int_0^1\frac{r^3}{2}dr\right)+\left(\int_0^{2\pi}\sin^2\theta d\theta\right)\left(\int_0^1\frac{r^3}{8}dr\right)\\
+&amp;=\left(\int_0^{2\pi}\frac{\cos(2\theta)+1}{2} d\theta\right)\left(\int_0^1\frac{r^3}{2}dr\right)+\left(\int_0^{2\pi}\frac{1-\cos(2\theta)}{2}d\theta\right)\left(\int_0^1\frac{r^3}{8}dr\right)\\
+&amp;=\left(\pi\right)\left(\frac{1}{8}\right)+\left(\pi\right)\left(\frac{1}{32}\right)\\
+&amp;=\frac{5\pi}{32}
+\end{align*}
+\]
+</li>
+</ol>
+<!--
+<div class="slider">
+<img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/quiz6-1&2.png" alt="quiz6-1&2"  width="600" height=auto/></p>
+</div>
+-->
+</div>
+</section>
