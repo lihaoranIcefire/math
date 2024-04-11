@@ -1080,6 +1080,85 @@ Problems
 </ol>
 </div>
 </section>
+<section class="accordion">
+<input type="checkbox" name="Worksheet 04/11" id="worksheet0411">
+<h2 class="handle">
+<label for="worksheet0411">Worksheet 04/11</label>
+</h2>
+<div class="content">
+<!--
+Problems
+14.8: 5, 8, 9-12, 18-21, 23-25
+14.9: 5-15, 17, 19, 20
+15.1: 2, 4, 5, 10, 11, 12, 17, 20, 21-25, 27
+-->
+<ol>
+<li>
+<p>Determine whether \(\mathbf F\) is the gradient of some function \(f\). If it is, find such a function \(f\).<br />
+a. \(\mathbf F(x,y)=e^y\mathbf i+(xe^y+x+y)\mathbf j\).<br />
+Since \(\dfrac{\partial}{\partial y}(e^y)-\dfrac{\partial}{\partial x}(xe^y+x+y)=(e^y)-(e^y+1)=-1\neq0\), so \(\mathbf F\) is not conservative, and there is not such function \(f\) with \(\nabla f=\mathbf F\).<br />
+b. \(\mathbf F(x,y)=e^y\mathbf i+(xe^y+y)\mathbf j\).<br />
+First we check that \(\dfrac{\partial}{\partial y}(e^y)-\dfrac{\partial}{\partial x}(xe^y+y)=(e^y)-(e^y)=0\), so \(\mathbf F\) is conservative and there exists a function \(f\) with \(\nabla f=\mathbf F\). It is not hard to guess one such potential function \(f(x,y)=xe^y+\frac{y^2}{2}\)<br />
+c. \(\mathbf F(x,y,z)=(yz+y+z+1)\mathbf i+(xz+x+z+1)\mathbf j+(xy+x+y+1)\mathbf k\).<br />
+First we check that</p>
+\[\begin{align*}
+\operatorname{curl}\mathbf F=\nabla\times\mathbf F&amp;=\left|\begin{matrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+\frac{\partial}{\partial x}&amp;\frac{\partial}{\partial y}&amp;\frac{\partial}{\partial z}\\
+(yz+y+z+1)&amp;(xz+x+z+1)&amp;(xy+x+y+1)
+\end{matrix}\right|\\
+&amp;=[(x+1)-(x+1)]\mathbf i-[(y+1)-(y+1)]\mathbf j+[(z+1)-(z+1)]\mathbf k\\
+&amp;=\mathbf 0
+\end{align*}
+\]
+<p>So \(\mathbf F\) is conservative. To find the potential function \(f\), first we have</p>
+\[f(x,y,z)=\int f_xdx=\int(yz+y+z+1)dx=xyz+xy+xz+x+g(y,z)\quad(\clubsuit 1)
+\]
+<p>If we take \(\frac{\partial}{\partial y}\) on both sides, we get</p>
+\[xz+x+z+1=f_y=xz+x+g_y\Rightarrow g_y=z+1
+\]
+<p>So we have</p>
+\[g=\int g_ydy=\int(z+1)dy=yz+y+h(z)
+\]
+<p>Put this back in \((\clubsuit 1)\) we have</p>
+\[f(x,y,z)=\int f_xdx=\int(yz+y+z+1)dx=xyz+xy+xz+yz+x+y+h(z)\quad(\clubsuit 2)
+\]
+<p>And then take \(\frac{\partial}{\partial z}\) on both sides, we get</p>
+\[xy+x+y+1=f_z=xy+x+y+h'(z)\Rightarrow h'(z)=1
+\]
+<p>So</p>
+\[h(z)=\int h'(z)dz=\int1dz=z+C
+\]
+<p>Put this back \((\clubsuit 2)\) we have</p>
+\[f(x,y,z)=\int f_xdx=\int(yz+y+z+1)dx=xyz+xy+xz+yz+x+y+z+C
+\]
+<p>Where \(C\) is any constant, and this give all possible potential functions of \(\mathbf F\).</p>
+</li>
+<li>
+<p>Given \(f(x,y,z)=x^2y^3+xz\).<br />
+a. Calculate \(\nabla f\).</p>
+\[\nabla f=f_x\mathbf i+f_y\mathbf j+f_z\mathbf k=(2xy^3+z)\mathbf i+(3x^2y^2)\mathbf j+x\mathbf k
+\]
+<p>b. Calculate \(\nabla\times(\nabla f)\).</p>
+\[\begin{align*}
+\operatorname{curl}\mathbf F=\nabla\times\mathbf F&amp;=\left|\begin{matrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+\frac{\partial}{\partial x}&amp;\frac{\partial}{\partial y}&amp;\frac{\partial}{\partial z}\\
+(2xy^3+z)&amp;(3x^2y^2)&amp;x
+\end{matrix}\right|\\
+&amp;=(0-0)\mathbf i-(1-1)\mathbf j+(6xy^2-6xy^2)\mathbf k\\
+&amp;=\mathbf 0
+\end{align*}
+\]
+<p>c. Without doing any work do you think you would have got the same result for a different \(f(x, y, z)\)?<br />
+First we recall that</p>
+\[\operatorname{curl}\mathbf F=0\iff\mathbf F=\nabla f\text{, for some function }f\iff f\text{ is conservative}
+\]
+<p>Since \(\nabla f=\nabla f\), namely \(f\) is the potential function of the vector field \(\nabla f\), so \(\nabla f\) is conservative, and therefore \(\nabla\times(\nabla f)=\operatorname{curl}(\nabla f)=\mathbf 0\).</p>
+</li>
+</ol>
+</div>
+</section>
 <h1><a id="quizzes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quizzes</h1>
 <section class="accordion">
 <input type="checkbox" name="Quiz 1 - 02/01" id="quiz1">
@@ -1518,9 +1597,9 @@ Note that the intersection circle is \(r=\sqrt2\), so the total mass is</p>
 \]
 </li>
 <li>
-<p>a. (12 pts) Let \(E\) be the sloid that lies above teh cone \(z=\sqrt{3x^2+3y^2}\), inside the sphere \(x^2+y^2+z^2=3\) and outside the sphere \(r^2+z^2=1\). Sketch a diagram and set up an iterated triple integral in Spherical coordinates that is equal to \(\displaystyle\iiint_ExyzdV\). Do not evaluate.<br />
-In spherical coordinates, the cone \(z=\sqrt{3x^2+3y^2}\) becomes \(z=\sqrt3\rho\sin\phi\), and the two spheres become \(\rho=2\), \(\rho=1\). Therefore</p>
-\[\iiint_ExyzdV=\int_1^2\int_0^\pi\int_0^{2\pi} (\rho\sin\phi\cos\theta)(\rho\sin\phi\sin\theta)(\rho\cos\phi)\cdot\rho^2\sin\phi \,drd\phi d\theta
+<p>a. (12 pts) Let \(E\) be the sloid that lies above the cone \(z=\sqrt{3x^2+3y^2}\), inside the sphere \(x^2+y^2+z^2=3\) and outside the sphere \(r^2+z^2=1\). Sketch a diagram and set up an iterated triple integral in Spherical coordinates that is equal to \(\displaystyle\iiint_ExyzdV\). Do not evaluate.<br />
+In spherical coordinates, the cone \(z=\sqrt{3x^2+3y^2}\) becomes \(z=\sqrt3\rho\sin\phi\), and the two spheres become \(\rho=\sqrt3\), \(\rho=1\). Therefore</p>
+\[\iiint_ExyzdV=\int_1^{\sqrt3}\int_0^\pi\int_0^{2\pi} (\rho\sin\phi\cos\theta)(\rho\sin\phi\sin\theta)(\rho\cos\phi)\cdot\rho^2\sin\phi \,drd\phi d\theta
 \]
 <p>b. (14pts) Evaluate \(\displaystyle\int_0^{\sqrt\pi/2}\int_y^{\sqrt\pi/2}\cos(x^2)\,dxdy\).<br />
 We need to change the order of integration to evaluate this double iterated integral. First we see that the domain of integration \(R\) is the triangle enclosed by origin, \((\sqrt\pi/2,0)\) and \((\sqrt\pi/2,\pi/2)\), so</p>
@@ -1549,6 +1628,11 @@ The normal vector to the tangent plane at \((2,2,0)\) is</p>
 \[2(x-2)=0
 \]
 </li>
+</ol>
+<div class="slider">
+<img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/exam3-3a.png" alt="exam3-3a"  width="600" height=auto/></p>
+</div>
+<ol start="4">
 <li>
 <p>(25 pts) Consider the region \(R\) in the \(xy\)-plane given by \(x^2+4y^2\leq1\). Using an appropriate change of variables to evaluate \(\displaystyle\iint_Rx^2+y^2dA\).</p>
 <p>We use change of variables \(x=u\), \(y=v/2\), so that the jacobian is \(\frac{\partial(x,y)}{\partial(u,v)}=\frac{1}{2}\), and \(S\) is the unit circle \(u^2+v^2\leq 1\), hence</p>
@@ -1566,10 +1650,3 @@ The normal vector to the tangent plane at \((2,2,0)\) is</p>
 \]
 </li>
 </ol>
-<!--
-<div class="slider">
-<img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Teaching/MATH241%20Spring%202024/Pictures/quiz6-1&2.png" alt="quiz6-1&2"  width="600" height=auto/></p>
-</div>
--->
-</div>
-</section>
