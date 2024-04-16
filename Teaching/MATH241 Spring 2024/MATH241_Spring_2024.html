@@ -1159,6 +1159,73 @@ First we recall that</p>
 </ol>
 </div>
 </section>
+<section class="accordion">
+<input type="checkbox" name="Worksheet 04/16" id="worksheet0416">
+<h2 class="handle">
+<label for="worksheet0416">Worksheet 04/16</label>
+</h2>
+<div class="content">
+<!--
+Problems
+15.2: 1-30, 32-35
+15.3: 1-10
+-->
+<ol>
+<li>
+<p>Evaluate \(\displaystyle\int_C(2xy-5yz)ds\), where \(C\) is segment from \((1,0,1)\) to \((0,3,2)\).</p>
+<p>Recall a parametrization for the segment from \(P\) to \(Q\) could be \(\mathbf r(t)=P+t\overrightarrow{PQ}\) for \(0\leq t\leq1\). So a parametrization for \(C\) here could be \(\mathbf r(t)=(1,0,1)+t(-1,3,1)=(1-t,3t,1+t)\) for \(0\leq t\leq1\), so</p>
+\[\|\mathbf r'(t)\|=\sqrt{x'(t)^2+y'(t)^2+z'(t)^2}=\sqrt{(-1)^2+3^2+1^2}=\sqrt{11}
+\]
+<p>And then</p>
+\[\begin{align*}
+\int_C(2xy-5yz)ds&amp;=\int_0^1(2(1-t)(3t)-5(3t)(1+t))\sqrt{11}dt\\
+&amp;=\int_0^1(-9t-21t^2)\sqrt{11}dt\\
+&amp;=\left(-\frac{9}{2}-7\right)\sqrt{11}
+\end{align*}
+\]
+</li>
+<li>
+<p>Evaluate \(\displaystyle\int_Cxydx+ydy\) where \(C\) is the line segment going from \((0,0)\) to \((2,4)\).</p>
+<p>A parametrization for \(C\) here could be \(\mathbf r(t)=(0,0)+t(2,4)=(2t,4t)\) for \(0\leq t\leq1\), so</p>
+\[\begin{align*}
+\int_Cxydx+ydy&amp;=\int_0^1x(t)y(t)x'(t)dt+y(t)y'(t)dt\\
+&amp;=\int_0^1(2t)(4t)2dt+(4t)4dt\\
+&amp;=\int_0^1(16t^2+16t)dt\\
+&amp;=\frac{16}{3}+8
+\end{align*}
+\]
+</li>
+<li>
+<p>Evaluate \(\displaystyle\int_C\dfrac{x}{1+x^2+y^2+z^2}dx+\dfrac{y}{1+x^2+y^2+z^2}dy+\dfrac{z}{1+x^2+y^2+z^2}dz\) where \(C\) is parametrized by \(\mathbf r(t)=t\mathbf i+t^2\mathbf j+t^4\mathbf k\) for \(0\leq t\leq1\).</p>
+<p>It is not hard to guess the potential function \(f\) since</p>
+\[\nabla\left(\frac{1}{2}\ln(1+x^2+y^2+z^2)\right)=\left(\dfrac{x}{1+x^2+y^2+z^2},\dfrac{y}{1+x^2+y^2+z^2},\dfrac{z}{1+x^2+y^2+z^2}\right)
+\]
+<p>Therefore by FTOLI,</p>
+\[\begin{align*}
+\int_C\dfrac{x}{1+x^2+y^2+z^2}dx+\dfrac{y}{1+x^2+y^2+z^2}dy+\dfrac{z}{1+x^2+y^2+z^2}dz&amp;=f(\mathbf r(1))-f(\mathbf r(0))\\
+&amp;=f(1,1,1) - f(0,0,0)\\
+&amp;=\frac{1}{2}\ln(1+1^2+1^2+1^2)-\frac{1}{2}\ln(1)\\
+&amp;=\frac{1}{2}\ln4=\ln2
+\end{align*}
+\]
+</li>
+<li>
+<p>Evaluate \(\displaystyle\int_C2xydx+x^2dy+1dz\) where \(C\) is the curve parametrized by \(\mathbf r(t)=t^2\mathbf i-t\mathbf j+(2t+1)\mathbf k\) for \(1\leq t\leq 3\).</p>
+<p>It is not hard to guess the potential function \(f\) since</p>
+\[\nabla\left(x^2y+z\right)=\left(2xy,x^2,1\right)
+\]
+<p>Therefore by FTOLI,</p>
+\[\begin{align*}
+\int_C2xydx+x^2dy+1dz&amp;=f(\mathbf r(3))-f(\mathbf r(1))\\
+&amp;=f(9,-3,7) - f(1,-1,3)\\
+&amp;=(9^2\cdot3+7) - (1^2(-1)+3)\\
+&amp;=-236-2=-238
+\end{align*}
+\]
+</li>
+</ol>
+</div>
+</section>
 <h1><a id="quizzes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quizzes</h1>
 <section class="accordion">
 <input type="checkbox" name="Quiz 1 - 02/01" id="quiz1">
