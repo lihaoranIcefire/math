@@ -1468,11 +1468,11 @@ First evaluate the gradient</p>
 <p>(10 pts) Consider the vector field \(\mathbf F(x, y) = y\mathbf i + \frac{2y}{1+y^2}\mathbf j\). Let \(C\) be part of the circle \(x^2+y^2 = 4\) that lies in the first quadrant, oriented from \((0, 2)\) to \((2, 0)\). Evaluate and simplify:</p>
 \[\int_C\mathbf F(x, y)\cdot d\mathbf r
 \]
-<p>A parametrization of \(C\) could be \(\mathbf r(t)=2\cos t\mathbf i-2\sin t\mathbf j\) for \(0\leq t\leq\frac{\pi}{2}\), so \(x(t)=2\cos t\), \(y(t)=-2\sin t\), and</p>
+<p>A parametrization of \(C\) could be \(\mathbf r(t)=2\cos t\mathbf i+2\sin t\mathbf j\) for \(0\leq t\leq\frac{\pi}{2}\), so \(x(t)=2\cos t\), \(y(t)=2\sin t\), and since the orientation is reversed, so</p>
 \[\begin{align*}
-\int_C\mathbf F(x, y)\cdot d\mathbf r&amp;=\int_0^{\pi/2}\mathbf F(x(t),y(t))\cdot\mathbf r'(t)dt\\
-&amp;=\int_0^{\pi/2}\left(-2\sin t\mathbf i+\frac{4\sin t}{1+(-2\sin t)^2}\mathbf j\right)\cdot(-2\sin t\mathbf i-2\cos t\mathbf j)dt\\
-&amp;=\int_0^{\pi/2}\left(4\sin^2t-\frac{8\cos t\sin t}{1+4\sin^2t}\right)dt\\
+\int_C\mathbf F(x, y)\cdot d\mathbf r&amp;=-\int_0^{\pi/2}\mathbf F(x(t),y(t))\cdot\mathbf r'(t)dt\\
+&amp;=-\int_0^{\pi/2}\left(2\sin t\mathbf i+\frac{4\sin t}{1+(2\sin t)^2}\mathbf j\right)\cdot(-2\sin t\mathbf i+2\cos t\mathbf j)dt\\
+&amp;=-\int_0^{\pi/2}\left(-4\sin^2t+\frac{8\cos t\sin t}{1+4\sin^2t}\right)dt\\
 &amp;=\int_0^{\pi/2}4\sin^2tdt-\int_0^{\pi/2}\frac{8\cos t\sin t}{1+4\sin^2t}dt\\
 &amp;=\int_0^{\pi/2}2(1-\cos(2t))dt-\int_0^{\pi/2}\frac{8\cos t\sin t}{1+4\sin^2t}dt\\
 &amp;=\left.2t-\sin(2t)\right|_{0}^{\pi/2}-\int_{1+4\sin^2(0)}^{1+4\sin^2(\pi/2)}\frac{1}{u}du\\
