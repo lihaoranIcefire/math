@@ -12,7 +12,6 @@ import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.mi
 
 
 
-
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 <style>
@@ -1220,6 +1219,103 @@ Problems
 &amp;=f(9,-3,7) - f(1,-1,3)\\
 &amp;=(9^2\cdot3+7) - (1^2(-1)+3)\\
 &amp;=-236-2=-238
+\end{align*}
+\]
+</li>
+</ol>
+</div>
+</section>
+<section class="accordion">
+<input type="checkbox" name="Worksheet 04/23" id="worksheet0423">
+<h2 class="handle">
+<label for="worksheet0423">Worksheet 04/23</label>
+</h2>
+<div class="content">
+<!--
+Problems
+15.4: 1-21
+15.5: 1-14
+15.6: 5-15
+-->
+<ol>
+<li>
+<p>Evalute \(\displaystyle\int_Cxy\,dx+\left(\frac{1}{2}x^2+xy\right)dy\), where \(C\) is composed of the interval \([-1,1]\) on the \(x\) axis and the top half of the ellipse \(x^2+4y^2=1\).</p>
+<p>Suppose \(D\) is the upper half of the ellipse \(x^2+4y^2=1\), it is easy to see that \(C\) is the boundary of \(D\), so by Green's theorme, we have</p>
+\[\begin{align*}
+\int_Cxy\,dx+\left(\frac{1}{2}x^2+xy\right)dy&amp;=\iint_D\left(x+y-x\right)dA\\
+&amp;=\int_{-1}^1\int_0^{\frac{\sqrt{1-x^2}}{2}}ydydx\\
+&amp;=\int_{-1}^1\frac{1-x^2}{8}dx\\
+&amp;=\frac{1}{6}
+\end{align*}
+\]
+</li>
+<li>
+<p>Evaluate \(\displaystyle\int_Ce^x\sin y\,dx+e^x\cos y\,dy\), where \(C\) is composed of the graph of \(\sqrt{x}+\sqrt{y}=5\) and intervals \([0,25]\) on the \(x\) and \(y\) axes, and assume \(C\) is oriented counterclockwise.</p>
+<p>We see that \(C\) is closed, so we cam apply Green's Theorem</p>
+\[\displaystyle\int_Ce^x\sin y\,dx+e^x\cos y\,dy=\iint_D\left(\frac{\partial}{\partial x}(e^x\cos y)-\frac{\partial}{\partial y}(e^x\sin y)\right)dA=\iint_D0dA=0
+\]
+</li>
+<li>
+<p>Find the area of the region bounded by the sinusoidal curve \(C\) parametrized by</p>
+\[\mathbf r(t)=\sin(2t)\mathbf i+\sin t\mathbf j\text{ for }0\leq t\leq\pi
+\]
+<p>The area \(D\) enclosed by \(C\) is equal to</p>
+\[\begin{align*}
+\iint_D1dA&amp;=\int_Cxdy\\
+&amp;=\int_0^\pi\sin(2t)d\sin t\\
+&amp;=\int_0^\pi\sin(2t)\cos tdt\\
+&amp;=\int_0^\pi2\sin t\cos^2 tdt\\
+&amp;=\int_{\cos(0)}^{\cos(\pi)}-2u^2du\\
+&amp;=\left.-\frac{2}{3}u^3\right|_1^{-1}\\
+&amp;=\frac{4}{3}
+\end{align*}
+\]
+<p>Here we assume \(u=\cos t\).</p>
+</li>
+<li>
+<p>Evaluate \(\int_{\Sigma}g(x,y,z)dS\), given<br />
+a. \(g(x,y,z)=z^2\) and \(\Sigma\) is the part of the cone \(z=\sqrt{x^2+y^2}\) between planes \(z=1\) and \(z=3\).<br />
+We choose parametrization \(\mathbf r(r,\theta)=(r\cos\theta, r\sin\theta, r)\), where \(1\leq r\leq3\), \(0\leq\theta\leq 2\pi\). So</p>
+\[\mathbf r_r\times\mathbf r_\theta=\left|
+\begin{matrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+\cos\theta&amp;\sin\theta&amp;1\\
+-r\cos\theta&amp;r\sin\theta&amp;0
+\end{matrix}
+\right|=-r\sin\theta\mathbf i-r\cos\theta\mathbf j+r\mathbf k
+\]
+<p>Therefore \(\|\mathbf r_r\times\mathbf r_\theta\|=\sqrt2r\), and</p>
+\[\begin{align*}
+\int_{\Sigma}g(x,y,z)dS&amp;=\int_0^{2\pi}\int_1^3r^2\cdot\sqrt2rdrd\theta\\
+&amp;=\left(\int_0^{2\pi}1d\theta\right)\left(\int_1^3\sqrt2r^3dr\right)\\
+&amp;=2\pi\cdot20\sqrt2=40\sqrt2\pi\\
+\end{align*}
+\]
+<p>b. \(g(x,y,z)=z(x^2+y^2)\), and \(\Sigma\) is the hemisphere given by \(z=\sqrt{4-x^2-y^2}\).<br />
+We choose parametrization \(\mathbf r(\theta,\phi)=(2\sin\phi\cos\theta, 2\sin\phi\sin\theta, 2\cos\phi)\), where \(0\leq\theta\leq2\pi, 0\leq\phi\leq\pi/2\). \(\|\mathbf r_\theta\times\mathbf r_\phi\|=2^2\sin\phi=4\sin\phi\), and</p>
+\[\begin{align*}
+\int_{\Sigma}g(x,y,z)dS&amp;=\int_0^{2\pi}\int_0^{\pi/2}2\cos\phi(2\sin\phi)^2\cdot 4\sin\phi d\phi d\theta\\
+&amp;=\left(\int_0^{2\pi}1d\theta\right)\left(\int_0^{\pi/2}32\cos\phi\sin^3\phi d\phi\right)\\
+&amp;=2\pi\cdot\int_{\sin(0)}^{\sin(\pi/2)}32 u^3du\\
+&amp;=16\pi
+\end{align*}
+\]
+<p>Here we assume \(u=\sin\phi\).<br />
+c. \(g(x,y,z)=x\) and \(\Sigma\) is the part of the plane \(2x+3y+z=6\) in the first octant.<br />
+We choose parametrization \(\mathbf r(x,y)=(x,y,6-2x-3y)\), where \((x,y)\in D\) and \(D\) is the triangle on the \(xy\)-plane with vertices \((0,0)\), \((3,0)\) and \((0,2)\). So</p>
+\[\mathbf r_x\times\mathbf r_y=\left|
+\begin{matrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+1&amp;0&amp;-2\\
+0&amp;1&amp;-3
+\end{matrix}
+\right|=2\mathbf i+3\mathbf j+\mathbf k
+\]
+<p>Therefore \(\|\mathbf r_x\times\mathbf r_y\|=\sqrt{14}\), and</p>
+\[\begin{align*}
+\int_{\Sigma}g(x,y,z)dS&amp;=\int_0^3\int_0^{2-\frac{2}{3}x}x\cdot\sqrt{14}dydx\\
+&amp;=\int_0^3\sqrt{14}x\left(2-\frac{2}{3}x\right)dx\\
+&amp;=3\sqrt{14}
 \end{align*}
 \]
 </li>
