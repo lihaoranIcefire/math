@@ -12,6 +12,7 @@ import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.mi
 
 
 
+
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 <style>
@@ -1576,6 +1577,47 @@ First evaluate the gradient</p>
 \end{align*}
 \]
 <p>Here we are assuming \(u=1+4\sin^2t\).</p>
+</li>
+</ol>
+</div>
+</section>
+<section class="accordion">
+<input type="checkbox" name="Quiz 9 - 04/25" id="quiz9">
+<h2 class="handle">
+<label for="quiz9">Quiz 9 - 04/25</label>
+</h2>
+<div class="content">
+<ol>
+<li>
+<p>(5 pts) Find a potential function for the vector field \(\mathbf F(x,y,z)=y^2\mathbf i+(2xy+\sin(3z))\mathbf j+3y\cos(3z)\mathbf k\). Show your work completely and clearly.</p>
+<p>First we have</p>
+\[f(x,y,z)=\int f_xdx=\int y^2dx=xy^2+g(y,z),\quad(\clubsuit1)
+\]
+<p>Take \(\frac{\partial}{\partial y}\) on both sides of \((\clubsuit1)\) we get</p>
+\[2xy+\sin(3z)=f_y=2xy+g_y
+\]
+<p>So we have \(g_y=\sin(3z)\), and</p>
+\[g(y,z)=\int\sin(3z)dy=y\sin(3z)+h(z)
+\]
+<p>Put this back into \((\clubsuit1)\) we get</p>
+\[f(x,y,z)=xy^2+y\sin(3z)+h(z),\quad(\clubsuit2)
+\]
+<p>Take \(\frac{\partial}{\partial z}\) on both sides of \((\clubsuit2)\) we get</p>
+\[3y\cos(z)=f_z=3y\cos(z)+h'(z)
+\]
+<p>So \(h'(z)=0\Rightarrow h(z)=C\), put this back into \((\clubsuit2)\) we finally have \(f=xy^2+y\sin(3z)+C\), where \(C\) is an arbitrary constant.</p>
+</li>
+<li>
+<p>(5 pts) Let \(C\) be the triangle with vertices \((0, 0)\), \((0, 1)\), \((1, 1)\) oriented clockwise, and let \(\mathbf F = (x^2 + 3y)\mathbf i + 2xy\mathbf j\). Turn the line integral \(\displaystyle\int_C \mathbf F\cdot d\mathbf r\) into an iterated double integral in rectangular coordinates. Do not evaluate!</p>
+<p>The region enclosed by \(C\) is \(D\), the triangle with vertices \((0, 0)\), \((0, 1)\), \((1, 1)\), since \(C\) is closed and oriented clockwise, we may apply Green's Theorem</p>
+\[\begin{align*}
+\int_C \mathbf F\cdot d\mathbf r&amp;=-\iint_D\left[\frac{\partial }{\partial x}(2xy) - \frac{\partial }{\partial y}(x^2+3y)\right]dA\\
+&amp;=-\iint_D(2y-3)dA\\
+&amp;=-\int_0^1\int_0^y(2y-3)dxdy\\
+&amp;=-\int_0^1y(2y-3)dy\\
+&amp;=\frac{5}{6}
+\end{align*}
+\]
 </li>
 </ol>
 </div>
