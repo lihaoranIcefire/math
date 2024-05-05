@@ -1882,3 +1882,90 @@ The normal vector to the tangent plane at \((2,2,0)\) is</p>
 \]
 </li>
 </ol>
+</div>
+</section>
+<section class="accordion">
+<input type="checkbox" name="Exam 4 - 05/03" id="exam4">
+<h2 class="handle">
+<label for="exam4">Exam 4 - 05/03</label>
+</h2>
+<div class="content">
+<ol>
+<li>
+<p>(25 pts) Let \(\Sigma\) be the sphere given by \(\rho=2\) oriented inward. Using an appropriate theorem evaluate the following surface integral. Name the applicable theorem.</p>
+\[\iint_\Sigma((x^2-e^{yz})\mathbf i+(z^5-2xy)\mathbf j+(z+y^2)\mathbf k)\cdot\mathbf ndS
+\]
+<p>We should use Divergence Theorem. Suppose the ball enclosed by \(\Sigma\) is denoted by \(B\), then</p>
+\[\begin{align*}
+\iint_\Sigma((x^2-e^{yz})\mathbf i+(z^5-2xy)\mathbf j+(z+y^2)\mathbf k)\cdot\mathbf ndS&amp;=\iiint_B\left(\frac{\partial}{\partial x}(x^2-e^{yz})+\frac{\partial}{\partial y}(z^5-2xy)+\frac{\partial}{\partial z}(z+y^2)\right)dV\\
+&amp;=\iiint_B\left(2x-2x+1\right)dV\\
+&amp;=\iiint_B 1dV\\
+&amp;=\int_0^{2\pi}\int_0^\pi\int_0^2\rho^2\sin\phi d\rho d\phi d\theta\\
+&amp;=\left(\int_0^{2\pi}1 d\theta\right)\left(\int_0^\pi\sin\phi d\phi\right)\left(\int_0^2\rho^2 d\rho\right)\\
+&amp;=2\pi\cdot2\cdot\frac{2^3}{3}=\frac{32\pi}{3}
+\end{align*}
+\]
+</li>
+<li>
+<p>(25 pts) Let \(\Sigma\) be the portion of the parabloid \(z=1-x^2-y^2\) that lies above the \(xy\)-plane oriented downward. Let \(\mathbf F(x,y,z)=(x+y)\mathbf i-(z-y)\mathbf j+(e^z+x)\mathbf k\). Use Stokes' Theorem to turn \(\displaystyle\iint_\Sigma\operatorname{curl}\mathbf F\cdot \mathbf ndS\) into a line integral. Turn this line integral into a definite single integral. Perform all the calculations, but do not evaluate the final definite integral.</p>
+<p>First we find the intersection of the parabloid and \(xy\)-plane, which is the circle \(C:x^2+y^2=1\), we can parametrize it as \(\mathbf r(t)=\cos t\mathbf i+\sin t\mathbf j\), \(0\leq t\leq 2\pi\), so \(\mathbf r'(t)=-\sin t\mathbf i+\cos t\mathbf j\), and</p>
+\[\begin{align*}
+\iint_\Sigma\operatorname{curl}\mathbf F\cdot \mathbf ndS&amp;=\int_C\mathbf F\cdot d\mathbf r\\
+&amp;=\int_0^{2\pi}\left[(\cos t+\sin t)\mathbf i-(-\sin t)\mathbf j+(1+\cos t)\mathbf k\right]\cdot[-\sin t\mathbf i+\cos t\mathbf j]dt\\
+&amp;=\int_0^{2\pi}\left[-\sin t(\cos t+\sin t)+\cos t\sin t\right]dt\\
+&amp;=-\int_0^{2\pi}\sin^2tdt\\
+\end{align*}
+\]
+</li>
+<li>
+<p>Consider the vector field \(\mathbf F(x,y)=(1+3x^2y+2yx)\mathbf i+(x^3+x^2)\mathbf j\).<br />
+a. (10 pts) Without finding a potential function, show \(\mathbf F\) is conservative.</p>
+\[\begin{align*}
+\operatorname{curl}\mathbf F&amp;=\left|\begin{matrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+\frac{\partial}{\partial x}&amp;\frac{\partial}{\partial y}&amp;\frac{\partial}{\partial z}\\
+1+3x^2y+2yx&amp;x^3+x^2&amp;0
+\end{matrix}\right|\\
+&amp;=\left(\frac{\partial}{\partial x}(x^3+x^2)-\frac{\partial}{\partial y}(1+3x^2y+2yx)\right)\mathbf k\\
+&amp;=\left((3x^2+2x)-(3x^2+2x))\right)\mathbf k\\
+&amp;=\mathbf0
+\end{align*}
+\]
+<p>We have proved that \(\mathbf F\) is conservative.<br />
+b. (10 pts) Find a potential function for \(\mathbf F\). Show your work completely and clearly.<br />
+Suppose \(f\) is a potential function, then</p>
+\[f(x,y)=\int f_xdx=\int 1+3x^2y+2yxdx=x+x^3y+x^2y+g(y)\quad (\clubsuit)
+\]
+<p>Take \(\frac{\partial}{\partial y}\) on both sides of \((\clubsuit)\) we get</p>
+\[x^3+x^2=f_y=x^3+x^2+g_y\Rightarrow g_y=0\Rightarrow g=C
+\]
+<p>\(C\) is some constant. Put this back into \((\clubsuit)\) we have \(f(x,y)=x+x^3y+x^2y+C\).<br />
+c. (6 pts) Evaluate \(\displaystyle\int_C\mathbf F\cdot d\mathbf r\), where \(C\) is an unknown smooth curve from \((1,0)\) to \((-1,1)\).<br />
+By FTOLI, we have</p>
+\[\int_C\mathbf F\cdot d\mathbf r=f(-1,1) - f(1,0)=(-1+(-1)^3\cdot1+(-1)^2\cdot1)-(1)=-2
+\]
+</li>
+<li>
+<p>(25 pts) Let \(C\) be the curve of intersection of the cylinder \(x^2+y^2=4\) and the hemisphere \(z=\sqrt{5-x^2-y^2}\).<br />
+Suppose \(C\) is the intersection of the cylinder and the hemisphere, we know that \(z=\sqrt{5-x^2-y^2}=\sqrt{5-4}=1\), so we may parametrize \(C\) as \(\mathbf r(t)=2\cos t\mathbf i+2\sin t\mathbf j+\mathbf k\), \(0\leq t\leq2\pi\). Hence \(\mathbf r'(t)=-2\sin t\mathbf i+2\cos t\mathbf j\) and \(\|\mathbf r'(t)\|=2\).<br />
+a. The mass density of a wire positioned at \(C\) at every point is the distance from the point to the origin. Write down a line integral that is equal to the total mass of this wire. Turn this line integral into a single definite integral. Do not evaluate the integral.<br />
+The density function \(f(x,y,z)=\sqrt{x^2+y^2+z^2}\), and the total mass is</p>
+\[\begin{align*}
+\int_Cfds&amp;=\int_0^{2\pi}\sqrt{(2\cos t)^2+(2\sin t)^2+1^2}\cdot\|\mathbf r'(t)\|dt\\
+&amp;=\int_0^{2\pi}\sqrt5\cdot2dt\\
+&amp;=4\sqrt5\pi
+\end{align*}
+\]
+<p>b. Suppose \(C\) is oriented clockwise when viewed from above. Turn \(\displaystyle\int_C(x\mathbf i+x\mathbf j-\mathbf k)\cdot d\mathbf r\) into a single definite integral. Perform all operations, but do not evaluate the integral.<br />
+Since \(C\) is oriented clockwise, we have</p>
+\[\begin{align*}
+\int_C(x\mathbf i+x\mathbf j-\mathbf k)\cdot d\mathbf r&amp;=-\int_0^{2\pi}(2\cos t\mathbf i+2\cos t\mathbf j-\mathbf k)\cdot\mathbf r'(t)dt\\
+&amp;=-\int_0^{2\pi}(2\cos t\mathbf i+2\cos t\mathbf j-\mathbf k)\cdot(-2\sin t\mathbf i+2\cos t\mathbf j)dt\\
+&amp;=-\int_0^{2\pi}-4\cos t\sin t+4\cos^2tdt\\
+&amp;=\int_0^{2\pi}4\cos t\sin t-4\cos^2tdt\\
+\end{align*}
+\]
+</li>
+</ol>
+</div>
+</section>
