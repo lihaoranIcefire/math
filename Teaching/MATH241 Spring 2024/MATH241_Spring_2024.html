@@ -11,8 +11,6 @@ import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.mi
 
 
 
-
-
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 <style>
@@ -1895,14 +1893,14 @@ The normal vector to the tangent plane at \((2,2,0)\) is</p>
 <p>(25 pts) Let \(\Sigma\) be the sphere given by \(\rho=2\) oriented inward. Using an appropriate theorem evaluate the following surface integral. Name the applicable theorem.</p>
 \[\iint_\Sigma((x^2-e^{yz})\mathbf i+(z^5-2xy)\mathbf j+(z+y^2)\mathbf k)\cdot\mathbf ndS
 \]
-<p>We should use Divergence Theorem. Suppose the ball enclosed by \(\Sigma\) is denoted by \(B\), then</p>
+<p>We should use Divergence Theorem. Suppose the ball enclosed by \(\Sigma\) is denoted by \(B\), and note that the orientation is inward, so</p>
 \[\begin{align*}
-\iint_\Sigma((x^2-e^{yz})\mathbf i+(z^5-2xy)\mathbf j+(z+y^2)\mathbf k)\cdot\mathbf ndS&amp;=\iiint_B\left(\frac{\partial}{\partial x}(x^2-e^{yz})+\frac{\partial}{\partial y}(z^5-2xy)+\frac{\partial}{\partial z}(z+y^2)\right)dV\\
-&amp;=\iiint_B\left(2x-2x+1\right)dV\\
-&amp;=\iiint_B 1dV\\
-&amp;=\int_0^{2\pi}\int_0^\pi\int_0^2\rho^2\sin\phi d\rho d\phi d\theta\\
-&amp;=\left(\int_0^{2\pi}1 d\theta\right)\left(\int_0^\pi\sin\phi d\phi\right)\left(\int_0^2\rho^2 d\rho\right)\\
-&amp;=2\pi\cdot2\cdot\frac{2^3}{3}=\frac{32\pi}{3}
+\iint_\Sigma((x^2-e^{yz})\mathbf i+(z^5-2xy)\mathbf j+(z+y^2)\mathbf k)\cdot\mathbf ndS&amp;=-\iiint_B\left(\frac{\partial}{\partial x}(x^2-e^{yz})+\frac{\partial}{\partial y}(z^5-2xy)+\frac{\partial}{\partial z}(z+y^2)\right)dV\\
+&amp;=-\iiint_B\left(2x-2x+1\right)dV\\
+&amp;=-\iiint_B 1dV\\
+&amp;=-\int_0^{2\pi}\int_0^\pi\int_0^2\rho^2\sin\phi d\rho d\phi d\theta\\
+&amp;=-\left(\int_0^{2\pi}1 d\theta\right)\left(\int_0^\pi\sin\phi d\phi\right)\left(\int_0^2\rho^2 d\rho\right)\\
+&amp;=-2\pi\cdot2\cdot\frac{2^3}{3}=-\frac{32\pi}{3}
 \end{align*}
 \]
 </li>
