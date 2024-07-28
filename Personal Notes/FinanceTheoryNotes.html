@@ -5,8 +5,70 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Notes - Options, Futures and Other Derivatives (John Hull)</title>
-<link rel="stylesheet" href="sidebar.css">
 <style>
+/* Style for sidebar */
+.sidebar {
+    /* height: 100%; */
+    height: calc(100vh - 40px);
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    padding-top: 20px;
+    padding-bottom: 100px;
+    overflow-y: auto;
+}
+  
+/* Style for sidebar items */
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+}
+
+/* Style for focus */
+.sidebar a:focus {
+    outline: none; /* Remove the default focus outline */
+    color: black;
+    position: relative;
+    background-color: #fff;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: #fff;
+}
+
+/* Style for active */
+.sidebar a:active {
+    outline: none; /* Remove the default focus outline */
+    color: black;
+    position: relative;
+    background-color: #fff;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: #fff;
+}
+/* Style for hovering */
+.sidebar a:hover {
+    color: black;
+    background: #fff;
+    outline: none;
+    position: relative;
+    background-color: #aaa;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+/* Style for content */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
+/* Hide all content sections by default */
+.section {
+    display: none;
+}
 .sidebar a.active {
     color: black;
     background-color: #aaa;
@@ -25,6 +87,10 @@ b, strong {
 
 i, em {
     color: orchid;
+}
+/* style for header colors */
+h1, h2, h3, h4, h5, h6 {
+    color: #00bfff;
 }
 </style>
 </head>
@@ -130,6 +196,10 @@ i, em {
 </div>
 <div id="section3" class="section">
 <h2><a id="chapter-3-hedging-strategies-using-futures" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 3 - Hedging strategies using futures</h2>
+<h3><a id="3-1-basic-principles" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1 - Basic principles</h3>
+<ul>
+<li>short/long hedge</li>
+</ul>
 </div>
 <div id="section4" class="section">
 <h2><a id="chapter-4-interest-rates" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 4 - Interest rates</h2>
@@ -182,6 +252,7 @@ i, em {
 <div id="section20" class="section">
 <h2><a id="chapter-20-volatility-smiles-and-volatility-surfaces" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 20 - Volatility smiles and volatility surfaces</h2>
 </div>
+        
 
 
 
