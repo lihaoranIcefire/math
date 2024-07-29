@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ming's Exercise Schedule</title>
+<style>
+/* Style for sidebar */
+.sidebar {
+    /* height: 100%; */
+    height: calc(100vh - 40px);
+    width: 130px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    padding-top: 20px;
+    padding-bottom: 100px;
+    overflow-y: auto;
+}
+  
+/* Style for sidebar items */
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+}
+
+/* Style for focus */
+.sidebar a:focus {
+    outline: none; /* Remove the default focus outline */
+    color: black;
+    position: relative;
+    background-color: #fff;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: #fff;
+}
+
+/* Style for active */
+.sidebar a:active {
+    outline: none; /* Remove the default focus outline */
+    color: black;
+    position: relative;
+    background-color: #fff;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: #fff;
+}
+/* Style for hovering */
+.sidebar a:hover {
+    color: black;
+    background: #fff;
+    outline: none;
+    position: relative;
+    background-color: #aaa;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+/* Style for content */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
+/* Hide all content sections by default */
+.section {
+    display: none;
+}
+.sidebar a.active {
+    color: black;
+    background-color: #aaa;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+/* Styles for the text body, bold and italic text */
+body {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    font-family: "Poppins", serif;
+}
+b, strong {
+    color: orange;
+}
+
+i, em {
+    color: orchid;
+}
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;800&display=swap");
+ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    flex-wrap: wrap;
+    list-style: none;
+
+    li {
+        display: flex;
+        width: 4rem;
+        height: 2rem;
+        margin: 0.01rem;
+        flex-flow: column;
+        padding: 0.3rem;
+        font-weight: 300;
+        font-size: 0.8rem;
+        box-sizing: border-box;
+        box-shadow: 0 8px 32px 0 rgba(142, 142, 144, 0.37);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        time {
+            font-size: 1rem;
+            margin: 0 0 1rem 0;
+            font-weight: 500;
+        }
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+<a href="#section1" class="active">Year 2024</a>
+</div>
+
+<div class="content">
+
+    
+<div id="section1" class="section">
+
+<ul>
+<li><time datetime="2024-07-29">07/29&nbsp;<span style="color: red;">&check;</span></time></li>
+<li><time datetime="2024-07-30">07/30</time></li>
+<li><time datetime="2024-07-31">07/31</time></li>
+<li><time datetime="2024-08-01">08/01</time></li>
+<li><time datetime="2024-08-02">08/02</time></li>
+<li><time datetime="2024-08-03">08/03</time></li>
+<li><time datetime="2024-08-04">08/04</time></li>
+<li><time datetime="2024-08-05">08/05</time></li>
+<li><time datetime="2024-08-06">08/06</time></li>
+<li><time datetime="2024-08-07">08/07</time></li>
+<li><time datetime="2024-08-08">08/08</time></li>
+<li><time datetime="2024-08-09">08/09</time></li>
+<li><time datetime="2024-08-10">08/10</time></li>
+<li><time datetime="2024-08-11">08/11</time></li>
+<li><time datetime="2024-08-12">08/12</time></li>
+<li><time datetime="2024-08-13">08/13</time></li>
+<li><time datetime="2024-08-14">08/14</time></li>
+<li><time datetime="2024-08-15">08/15</time></li>
+<li><time datetime="2024-08-16">08/16</time></li>
+<li><time datetime="2024-08-17">08/17</time></li>
+<li><time datetime="2024-08-18">08/18</time></li>
+<li><time datetime="2024-08-19">08/19</time></li>
+<li><time datetime="2024-08-20">08/20</time></li>
+<li><time datetime="2024-08-21">08/21</time></li>
+<li><time datetime="2024-08-22">08/22</time></li>
+<li><time datetime="2024-08-23">08/23</time></li>
+<li><time datetime="2024-08-24">08/24</time></li>
+<li><time datetime="2024-08-25">08/25</time></li>
+<li><time datetime="2024-08-26">08/26</time></li>
+<li><time datetime="2024-08-27">08/27</time></li>
+<li><time datetime="2024-08-28">08/28</time></li>
+<li><time datetime="2024-08-29">08/29</time></li>
+<li><time datetime="2024-08-30">08/30</time></li>
+<li><time datetime="2024-08-31">08/31</time></li>
+<li><time datetime="2024-09-01">09/01</time></li>
+<li><time datetime="2024-09-02">09/02</time></li>
+<!-- <li class="today"><time datetime="2024-02-19">19</time>Final Exam</li> -->
+</ul>
+
+</div>
+        
+
+
+
+<script>
+document.querySelectorAll('.sidebar a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Remove active class from all links
+        document.querySelectorAll('.sidebar a').forEach(item => {
+            item.classList.remove('active');
+        });
+        // Add active class to the clicked link
+        this.classList.add('active');
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.display = 'none';
+        });
+        // Show the clicked section
+        const targetSection = document.querySelector(this.getAttribute('href'));
+        if (targetSection) {
+            targetSection.style.display = 'block';
+        }
+    });
+});
+// Display the first section by default
+document.querySelector('#section1').style.display = 'block';
+</script>
+</body>
+
+</html>
