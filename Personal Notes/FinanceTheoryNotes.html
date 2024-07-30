@@ -200,9 +200,106 @@ h1, h2, h3, h4, h5, h6 {
 <ul>
 <li>short/long hedge</li>
 </ul>
+<h3><a id="3-2-arguments-against-hedging" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.2 - Arguments against hedging</h3>
+<ul>
+<li>shareholder hedge themselves</li>
+<li>if not hedging practices, it leads to fluctuation of profit margins</li>
+<li>hedging can offset gain so that it leads to a worse outcome</li>
+</ul>
+<h3><a id="3-3-basis-risk" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.3 - Basis risk</h3>
+<ul>
+<li>Basis = Spot price of asset to be hedged - Futures price of contract used</li>
+</ul>
+<h3><a id="3-4-cross-hedging" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.4 - Cross hedging</h3>
+<ul>
+<li>cross hedging</li>
+<li>hedge ratio, minimum variance hedge ratio, hedge effectiveness, optimal number of contracts</li>
+<li>tailing the hedge</li>
+</ul>
+<h3><a id="3-5-stock-index-futures" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.5 - Stock index futures</h3>
+<ul>
+<li>stock index</li>
+<li>Dow Jones Industrial Average</li>
+<li>Standard &amp; Poor's 500 (S&amp;P500)</li>
+<li>Nasdaq-100</li>
+</ul>
+<h3><a id="3-6-stack-and-roll" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.6 - Stack and roll</h3>
+<h3><a id="appendix-capital-asset-pricing-model-capm" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Appendix - Capital asset pricing model (CAPM)</h3>
+<ul>
+<li>systematic/nonsystematic risk</li>
+<li>Expected return on asset = \(R_F+\beta(R_M-R_F)\), \(R_M\) is the return on the market, \(R_F\) is the return on a risk-free investment, \(\beta\) is a parameter measuring systematic risk</li>
+<li>assumptions for CAPM</li>
+</ul>
 </div>
 <div id="section4" class="section">
 <h2><a id="chapter-4-interest-rates" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 4 - Interest rates</h2>
+<h3><a id="4-1-types-of-rates" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.1 - Types of rates</h3>
+<ul>
+<li>credit risk, credit spread</li>
+<li>treasury rates</li>
+<li>overnight rates: (effective) federal funds rate, SONIA, ESTER, SARON, TONAR</li>
+<li>repo rates (very slightly below fed funds rate, but secured): overnight repo, term repos, SOFR</li>
+</ul>
+<h3><a id="4-2-reference-rates" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2 - Reference rates</h3>
+<ul>
+<li>LIBOR</li>
+<li>The new reference rates, US (SOFR), other countries (overnight rates)</li>
+<li>Longer rates are determined from overnight rates by compounding them daily. The (annualized) interest rate for a period of \(D\) days is \(\left[\left(1+r_1\frac{d_1}{360}\right)\cdots\left(1+r_n\frac{d_n}{360}\right)-1\right]\times\frac{360}{D}\)</li>
+<li>new reference rates are essentially risk-free, so it face the problem of incorprating redit spread</li>
+</ul>
+<h3><a id="4-3-the-risk-free-rate" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.3 - The risk-free rate</h3>
+<ul>
+<li>Banks don't use treasury rates as the risk-free rates for pricing the derivatives, instead they use the overnight rates</li>
+</ul>
+<h3><a id="4-4-measuring-interest-rates" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.4 - Measuring interest rates</h3>
+<ul>
+<li>compounding frequency: annually/semiannually/quarterly/monthly/weekly/daily. Suppose it is \(m\), then after \(n\) years, the terminal value of an investment of \(A\) at an interest rate of \(r\) per annum is \(A\left(1+\frac{r}{m}\right)^{mn}\)</li>
+<li>equivalent annual interest rate. \(A\left(1+\frac{r_1}{m_1}\right)^{m_1n}=A\left(1+\frac{r_2}{m_2}\right)^{m_2n}\Rightarrow r_2=m_2\left[\left(1+\frac{r_1}{m_1}\right)^{m_1/m_2}-1\right]\)</li>
+<li>countinuous compounding: \(Ae^{rn}\)</li>
+<li>\(Ae^{r_en}=A\left(1+\frac{r}{m}\right)^{mn}\Rightarrow r_e=m\ln\left(1+\frac{r}{m}\right),\quad r=m(e^{r_e/m}-1)\)</li>
+</ul>
+<h3><a id="4-5-zero-rates" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.5 - zero rates</h3>
+<ul>
+<li>bond with coupon</li>
+<li>\(n\)-year zero-coupon/spot/zero rate: no intermediate payments</li>
+</ul>
+<h3><a id="4-6-bond-pricing" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.6 - Bond pricing</h3>
+<ul>
+<li>principal or par value or face value. Suppose the (annualized) zero rates for maturities is \(r_1,\cdots,r_{mn}\), the coupon interest rate is \(c\), bond price \(B=A\left[\frac{c}{m}e^{-\frac{r_1}{m}}+\cdots+\left(1+\frac{c}{m}\right)e^{-\frac{r_{mn}}{m}}\right]\)</li>
+<li>bond yield: the single discount rate \(r\) such that \(A\left[\frac{c}{m}e^{-\frac{r}{m}}+\cdots+\left(1+\frac{c}{m}\right)e^{-\frac{r}{m}}\right]=B\)</li>
+<li>par yield: \(c\) such that \(A\left[\frac{c}{m}e^{-\frac{r_1}{m}}+\cdots+\left(1+\frac{c}{m}\right)e^{-\frac{r_{mn}}{m}}\right]=A\)</li>
+</ul>
+<h3><a id="4-7-determining-zero-rates" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.7 - Determining zero rates</h3>
+<ul>
+<li>bootstrap method</li>
+<li>zero curve</li>
+</ul>
+<h3><a id="4-8-forward-rates" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.8 - Forward rates</h3>
+<ul>
+<li>Suppose \(r_1\), \(r_2\) are the zero rates for maturities \(t_1\), \(t_2\), and \(r_f\) is the forward interest rate for the period of time between \(t_1\) and \(t_2\), then \(Ae^{r_1t_1}e^{r_f(t_2-t_1)}=Ae^{r_2t_2}\Rightarrow r_f=\frac{r_2t_2-r_1t_1}{t_2-t_1}=r_2+(r_2-r_1)\frac{t_1}{t_2-t_1}\)</li>
+<li>instantaneous forward rate for a maturity of \(t\): \(r_f=r+t\frac{\partial r}{\partial t}\)</li>
+</ul>
+<h3><a id="4-9-forward-rate-agreements-fra" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.9 - Forward rate agreements (FRA)</h3>
+<h3><a id="4-10-duration" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.10 - Duration</h3>
+<ul>
+<li>Suppose the bond provides the holder with cash flows \(c_i\) at time \(t_i\) (\(1\leq i\leq n\)), and bond yield is \(y\) (continuously compounded), then bond price \(B=\sum_{i=1}^nc_ie^{-yt_i}\)</li>
+<li>The duration is \(D=\sum_{i=1}^nt_i\frac{c_ie^{-yt_i}}{B}\) is the weighted sum of times</li>
+<li>When a small change \(\Delta y\) in the yield \(\Delta B=\frac{dB}{dy}\Delta y=-\Delta y\sum_{i=1}^nt_ic_ie^{-yt_i}=-BD\Delta y\Rightarrow\frac{\Delta B}{B}=-D\Delta y\) describes the percentage changes in the bond price</li>
+<li>If \(y\) is expressed with a compounding frequency of \(m\) times per year, then \(B=\sum_{i=1}^nc_i\left(1+\frac{y}{m}\right)^{-mt_i},\quad D=\sum_{i=1}^nt_i\frac{c_i\left(1+\frac{y}{m}\right)^{-mt_i}}{B},\quad \frac{\Delta B}{B}=-\frac{D\Delta y}{1+y/m}\)</li>
+<li>modified duration \(D^*=\frac{D}{1+y/m}\) so that \(\frac{\Delta B}{B}=-D^*\Delta y\)</li>
+<li>dollar duration: \(D_\$=BD^*\) is product of modified duration and bond price so that \(\Delta B=-D_\$\Delta y\)</li>
+<li>The duration of a bond portfolio can be defined as a weighted average of the durations of the individual bonds, with weights being proportional to the value of the bond prices.</li>
+</ul>
+<h3><a id="4-11-convexity" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.11 - Convexity</h3>
+<ul>
+<li>The duration relationship applies only to small changes in yields</li>
+<li>convexity \(C=\frac{1}{B}\frac{d^2B}{dy^2}=\frac{\sum_{i=1}^nc_it_i^2e^{-yt_i}}{B}\) Then \(\Delta B=\frac{dB}{dy}\Delta y+\frac{1}{2}\frac{d^2B}{dy^2}\Delta y^2\Rightarrow \frac{\Delta B}{B}=-D\Delta y+\frac{C}{2}\Delta y^2\)</li>
+</ul>
+<h3><a id="4-12-theories-of-the-term-structure-of-interest-rates" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.12 - Theories of the term structure of interest rates</h3>
+<ul>
+<li>liquidity preference theory</li>
+<li>net interest income</li>
+</ul>
 </div>
 <div id="section5" class="section">
 <h2><a id="chapter-5-determination-of-forward-and-futures-prices" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 5 - Determination of forward and futures prices</h2>
@@ -252,6 +349,7 @@ h1, h2, h3, h4, h5, h6 {
 <div id="section20" class="section">
 <h2><a id="chapter-20-volatility-smiles-and-volatility-surfaces" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 20 - Volatility smiles and volatility surfaces</h2>
 </div>
+
         
 
 
