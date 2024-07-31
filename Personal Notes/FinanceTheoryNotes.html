@@ -307,6 +307,7 @@ h1, h2, h3, h4, h5, h6 {
 </div>
 <div id="section5" class="section">
 <h2><a id="chapter-5-determination-of-forward-and-futures-prices" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 5 - Determination of forward and futures prices</h2>
+<h3><a id="5-1" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5.1 -</h3>
 </div>
 <div id="section6" class="section">
 <h2><a id="chapter-6-interest-rate-futures" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 6 - Interest rate futures</h2>
@@ -334,6 +335,118 @@ h1, h2, h3, h4, h5, h6 {
 </div>
 <div id="section14" class="section">
 <h2><a id="chapter-14-wiener-processes-and-ito-s-lemma" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 14 - Wiener processes and Ito's lemma</h2>
+<h3><a id="14-1-the-markov-property" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>14.1 - The markov property</h3>
+<ul>
+<li>markov process is a stochastic process that only depends on the current value and time, not the history</li>
+</ul>
+<h3><a id="14-2-continuous-time-stochastic-processes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>14.2 - Continuous-time stochastic processes</h3>
+<h4><a id="wiener-process-or-brownian-motion" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>wiener process or brownian motion</h4>
+<p>Suppose \(\mathcal N(\mu,\sigma^2)\) stands for the normal distribution of mean \(\mu\) and variance \(\sigma^2\). \(z\) is a wiener process if it has the following two properties</p>
+<ul>
+<li>Property 1. The change of \(\Delta z\) in a small perod of time \(\Delta t\) is \(\Delta z\sim\mathcal N(0,\Delta t)\)</li>
+<li>Property 2. The values of \(\Delta z\) for two different short intervals of time are independent</li>
+</ul>
+<p>Property 2 implies that \(z\) follows a markov process. Together with Property 1, we can deduce \(z(t_2)-z(t_1)\sim\mathcal N(0,t_2-t_1)\)<br />
+When \(\Delta t\) is small, \(\sqrt{\Delta t}\) is much bigger than \(\Delta t\), so</p>
+<ol>
+<li>The expected length of path followed by \(z\) in any time interval is infinite</li>
+<li>The expected number of times \(z\) equals any particular value in any time interval is infinite</li>
+</ol>
+<h4><a id="generalized-wiener-process" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>generalized wiener process</h4>
+<p>Suppose \(dz\sim\mathcal N(0,dt)\), the generalized wiener process \(x\) is such that \(dx=adt+bdz\) Where \(a\) is the drift rate and \(b\) is the variance rate. We can deduce</p>
+\[\Delta x=a\Delta t+b\Delta z,\quad \Delta z\sim\mathcal N(0,\Delta t)
+\]
+<p>Thus \(\Delta x\sim\mathcal N(a\Delta t,b^2\Delta t)\) and \(x(t_2)-x(t_1)\sim\mathcal N(a(t_2-t_1), b^2(t_2-t_1))\)</p>
+<h4><a id="ito-process" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ito process</h4>
+<p>\(dx=a(x,t)dt+b(x,t)dz\)<br />
+So for small \(\Delta t\), \(\Delta x=a(x,t)\Delta t+b(x,t)\Delta z\) with \(\Delta z\sim\mathcal N(0,\Delta t)\). This is still a markov process</p>
+<h3><a id="14-3-the-process-for-a-stock-price" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>14.3 - The process for a stock price</h3>
+<ul>
+<li>If we assume the expected return and the volatility (uncertain) are constant. Then the stock price should satisfy \(\frac{dS}{S}=\mu dt+\sigma dz\Rightarrow dS=\mu Sdt+\sigma Sdz\) \(\mu\) is the stock's expected rate of return, \(\sigma\) is the volatility of the stock price. \(\sigma^2\) is referred to as its variacne rate.</li>
+<li>In a risk-neutral work, \(\mu\) equals the risk-free rate \(r\)</li>
+<li>This is known as geometric brownian motion, and the discrete-time version of the model is \(\frac{\Delta S}{S}=\mu\Delta t+\sigma\Delta z,\quad \Delta z\sim\mathcal N(0,\Delta t)\) \(\frac{\Delta S}{S}\sim\mathcal N(\mu\Delta t,\sigma^2\Delta t)\) is the return in a period of time \(\Delta t\)</li>
+<li>monte carlo simulation</li>
+</ul>
+<h3><a id="14-4-the-parameters" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>14.4 - The parameters</h3>
+<ul>
+<li>\(\mu\) should increase if the risk is higher or the interest rates are higher</li>
+<li>\(\sigma\) should be approximately the standard deviation of the stock price in 1 year</li>
+<li>\(\sigma\) is critically important to the determination of value of many derivatives</li>
+</ul>
+<h3><a id="14-5-correlated-processes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>14.5 - Correlated processes</h3>
+<p>Suppose</p>
+\[dx_1=a_1dt+b_1dz_1,\quad dx_2=a_2dt+b_2dz_2
+\]
+<p>And \(dz_1,dz_2\) have correlation \(\rho\). In practice we can set</p>
+\[dz_1=u\sqrt{dt},\quad dz_2=(\rho u+\sqrt{1-\rho^2}v)\sqrt{dt}
+\]
+<p>Where \(u,v\sim\mathcal N(0,1)\)</p>
+<h3><a id="14-6-ito-s-lemma" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>14.6 - Ito's lemma</h3>
+<p>Suppose \(x\) follows ito process<br />
+\(dx=a(x,t)dt+b(x,t)dz,\quad dz\sim\mathcal N(0,dt)\)<br />
+Then \(G=G(x,t)\) as a function of \(x,t\) follows the ito process</p>
+\[dG=\left(\frac{\partial G}{\partial x}a+\frac{\partial G}{\partial t}+\frac{1}{2}\frac{\partial^2 G}{\partial x^2}b^2\right)dt+\frac{\partial G}{\partial x}bdz
+\]
+<p>So if \(G\) is a function of \(S, t\), then</p>
+\[dG=\left(\frac{\partial G}{\partial S}\mu S+\frac{\partial G}{\partial t}+\frac{1}{2}\frac{\partial^2 G}{\partial S^2}\sigma^2S^2\right)dt+\frac{\partial G}{\partial S}\sigma Sdz
+\]
+<h4><a id="application-to-forward-contracts" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Application to forward contracts</h4>
+<p><strong>NEED WORK</strong></p>
+<h3><a id="14-7-the-lognormal-property" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>14.7 - The lognormal property</h3>
+<p>Consider \(G=\ln S\), then we have</p>
+\[dG=\left(\mu-\frac{\sigma^2}{2}\right)dt+\sigma dz
+\]
+<p>So</p>
+\[\ln S_T-\ln S_0\sim\mathcal N\left(\left(\mu-\frac{\sigma^2}{2}\right)T, \sigma^2T\right)\Rightarrow\ln S_T\sim\mathcal N\left(\ln S_0+\left(\mu-\frac{\sigma^2}{2}\right)T, \sigma^2T\right)
+\]
+<h3><a id="14-8-fractional-brownian-motion" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>14.8 - Fractional brownian motion</h3>
+<p>Suppose \(dx=\sigma dz\) with \(x_0=0\), \(z\) is a wienner process, then \(E(x_t-x_s)=0\) and</p>
+\[\begin{align*}
+E((x_t-x_s)^2)&amp;=E(x_t^2)+E(x_s^2)-2E(x_tx_s)\\
+&amp;=E(x_t^2)+E(x_s^2)-2E((x_t-x_s+x_s)x_s)\\
+&amp;=E(x_t^2)+E(x_s^2)-2E((x_t-x_s)x_s)-2E(x_s^2)\\
+&amp;=E(x_t^2)-E(x_s^2)\\
+&amp;=\sigma^2t-\sigma^2s\\
+&amp;=\sigma^2(t-s)
+\end{align*}
+\]
+<p>here \(x_t-x_s\) and \(x_s\) are uncorrelated. In a fractional or fractal brownian motion, we assume</p>
+\[E((x_t-x_s)^2)=\sigma^2(t-s)^{2H}
+\]
+<p>\(H\) is the Hurst exponent. When \(H=0.5\), it becomes a regular brownian motion. Also</p>
+\[E(x_tx_s)=\frac{1}{2}\left(E(x_t^2)+E(x_s^2)-E((x_t-x_s)^2)\right)=\frac{1}{2}\sigma^2[t^{2H}+s^{2H}-(t-s)^{2H}]
+\]
+<p>So the correlation between \(x_t\) and \(x_s\) is</p>
+\[\frac{\sigma^2[t^{2H}+s^{2H}-(t-s)^{2H}]}{2s^Ht^H}
+\]
+<p>Fractional brownian motoin is non-markov. If \(t&gt;s&gt;u\)</p>
+\[\begin{align*}
+E[(x_t-x_s)(x_s-x_u)]&amp;=E[x_tx_s-x_s^2-x_tx_u+x_sx_u]\\
+&amp;=\frac{\sigma^2}{2}[(t-u)^{2H}-(t-s)^{2H}-(s-u)^{2H}]
+\end{align*}
+\]
+<p>When \(H\) or time steps decreases, the volatity increases, so the process becomes more noisy</p>
+<h3><a id="appendix-a-nonrigorous-derivation-of-ito-s-lemma" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Appendix - A nonrigorous derivation of ito's lemma</h3>
+\[\Delta G=\frac{\partial G}{\partial x}\Delta x+\frac{\partial G}{\partial t}\Delta t+\frac{1}{2}\frac{\partial^2 G}{\partial x^2}\Delta x^2+\frac{\partial^2 G}{\partial x\partial t}\Delta x\Delta t+\frac{1}{2}\frac{\partial^2 G}{\partial t^2}\Delta t^2
+\]
+<p>and<br />
+\(\Delta x=a(x,t)\Delta t+b(x,t)\Delta z,\quad \Delta z\sim\mathcal N(0,\Delta t)\)<br />
+so \(\Delta x^2=b^2\Delta z^2+a^2\Delta t^2+2ab\Delta z\Delta t=b^2\Delta z^2+O(\Delta t)\), substitute to get</p>
+\[\Delta G=\frac{\partial G}{\partial x}\Delta x+\frac{\partial G}{\partial t}\Delta t+\frac{1}{2}\frac{\partial^2 G}{\partial x^2}b^2\Delta z^2+O(\Delta t)
+\]
+<p>And we know that \(E(\Delta z^2)=\Delta t\), \(Var(\Delta z^2)=2\Delta t^2\). As \(\Delta t\to0\), \(\Delta t^2/\Delta t\) is getting smaller, so \(dz^2=dt\) becomes nonstochastic, therefore we have</p>
+\[\begin{align*}
+dG&amp;=\frac{\partial G}{\partial x}dx+\frac{\partial G}{\partial t}dt+\frac{1}{2}\frac{\partial^2 G}{\partial x^2}b^2dt\\
+&amp;=\frac{\partial G}{\partial x}(adt+bdz)+\frac{\partial G}{\partial t}dt+\frac{1}{2}\frac{\partial^2 G}{\partial x^2}b^2dt\\
+&amp;=\left(\frac{\partial G}{\partial x}a+\frac{\partial G}{\partial t}+\frac{1}{2}\frac{\partial^2 G}{\partial x^2}b^2\right)dt+\frac{\partial G}{\partial x}bdz\\
+\end{align*}
+\]
+<p>When \(dx=adt+\sum_{i=1}^mb_idz_i\), we have</p>
+\[dG=\left(\frac{\partial G}{\partial x}a+\frac{\partial G}{\partial t}+\frac{1}{2}\frac{\partial^2 G}{\partial x^2}\sum_{i=1}^m\sum_{j=1}^mb_ib_j\rho_{ij}\right)dt+\sum_{i=1}^m\frac{\partial G}{\partial x_i}b_idz_i
+\]
+<p>Here \(\rho_{ij}\) is the correlation coefficient between \(dz_1,dz_j\). When \(G\) is a function of variables \(x_1,x_2,\dots,x_n,t\) and \(dx_i = a_i dt + b_i dz_i\), we have</p>
+\[dG=\left(\sum_{i=1}^n\frac{\partial G}{\partial x_i}a_i+\frac{\partial G}{\partial t}+\sum_{i=1}^n\sum_{j=1}^n\frac{1}{2}\frac{\partial^2 G}{\partial x_ix_j}b_ib_j\rho_{ij}\right)dt+\sum_{i=1}^n\frac{\partial G}{\partial x_i}b_idz_i
+\]
 </div>
 <div id="section15" class="section">
 <h2><a id="chapter-15-the-black-scholes-merton-model" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 15 - The Black-Scholes-Merton model</h2>
