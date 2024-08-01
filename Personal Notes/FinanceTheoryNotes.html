@@ -365,7 +365,7 @@ they can lend money</li>
 <h3><a id="5-5-known-income" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5.5 - Known income</h3>
 <p>Consider an investment asset will provide a perfectly predictable income with a present value of \(I\) during the life of a forward contract, we have<br />
 \(F_0 = (S_0 - I)e^{rT}\)</p>
-<h3><a id="5-6-known-yield-a-name-knownyield-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5.6 - Known yield <a name="KnownYield"></a></h3>
+<h3><a id="5-6-known-yield-a-name-5-6knownyield-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5.6 - Known yield <a name="5.6KnownYield"></a></h3>
 <p>Suppose the known yield of the forward contract is \(q\), compounded continuously, to make sure there is no positive net gain from selling and reinvesting in the asset, we need \(S_0e^{rT}=e^{qT}F_0\Rightarrow F_0=S_0e^{(r-q)T}\)</p>
 <h3><a id="5-7-valuing-forward-contracts" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5.7 - Valuing forward contracts</h3>
 <p>Suppose in addition \(K\) is the delivery price negotiated some time ago when the forward contract was purchased which delivers in \(T\) years, \(f\) is the value (if it were be sold) of the forward contract today and \(F_0\) is the price of the forward contract that delivery in \(T\) years, then<br />
@@ -385,9 +385,47 @@ If the forward contract has a known yield \(y\), then<br />
 <li>index arbitrage, program trading</li>
 </ul>
 <h3><a id="5-10-forward-and-futures-contracts-on-currencies" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5.10 - Forward and futures contracts on currencies</h3>
-<p>\(S_0\) is the spot exchange rate in domestic currency, \(r_f\) is the value of the foreign risk-free interest rate when money is invested for time \(T\). \(r\) is the domestic risk-free rate when money is invested for this period of time. The relationship between \(F_0\) and S0 is<br />
+<p>\(S_0\) is the spot exchange rate in domestic currency, \(r_f\) is the value of the foreign risk-free interest rate when money is invested for time \(T\). \(r\) is the domestic risk-free rate when money is invested for this period of time. The relationship between \(F_0\) and \(S_0\) is<br />
 \(F_0 = S_0e^{(r-r_f)T}\)<br />
-The equation the same as the for known yeild in <a href="#Knownyield">Known yield</a></p>
+The equation the same as the for known yeild in <a href="#5.6Knownyield">5.6</a>, because a foreign currency can be regarded as an investment asset paying a known yield. The yield is the risk-free rate of interest in the foreign currency</p>
+<h3><a id="5-11-futures-on-commodities" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5.11 - Futures on commodities</h3>
+<p>Storage costs can be treated as negative income. If \(U\) is the peresent value of all storage costs, then<br />
+\(F_0 = (S_0 + U) e^{rT}\)<br />
+If the storage costs incurred at any time are proportional to the price of the commodity, then can be treated as negative yield, so<br />
+\(F_0 = S_0 e^{(r+u)T}\)<br />
+Consumption commodities usually provide not income, but subject to significant storage costs.</p>
+<h4><a id="convenience-yield" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Convenience yield</h4>
+<p>\(F_0e^{yT} = (S_0+U)e^{rT}\)<br />
+or<br />
+\(F_0e^{yT} = S_0e^{(r+u)T}\)<br />
+If shortages are more likely occur or if the inventories are low, the convenience yield is higher</p>
+<h3><a id="5-12-the-cost-of-carry" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5.12 - The cost of carry</h3>
+<p>The cost of carry \(c\) is</p>
+<ul>
+<li>\(r\) for a non-divident-paying stock</li>
+<li>\(r-q\) for a stock with divident yield rate \(q\)</li>
+<li>\(r-r_f\) for a currency</li>
+<li>\(r-q+u\) for a commodity that provides income at rate \(q\) and requires storage costs at rate \(u\)</li>
+</ul>
+<p>If \(y\) is the convenience yield rate, we then have<br />
+\(F_0=S_0e^{(c-y)T}\)<br />
+For futures contract, the party with the short position can choose to deliver at any time in a certain period (giving intention to deliver in a few days' notice). If \(c&gt;y\), the party with short position will deliver as early as possible, if \(c&lt;y\), the party with short position will deliver as late as possible</p>
+<h3><a id="5-14-futures-prices-and-expected-future-spot-prices" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5.14 - Futures prices and expected future spot prices</h3>
+<h4><a id="keynes-and-hicks-argument" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Keynes and Hicks' argument</h4>
+<ul>
+<li>Expected future spot price</li>
+<li>If hedgers hold short positions and speculators hold long positions, the futures prices will be above the expected spot prices</li>
+<li>If hedgers hold long positions and speculators hold short positions, the futures prices will be below the expected spot prices</li>
+</ul>
+<h4><a id="risk-and-return" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Risk and return</h4>
+<p>The modern approach is based on relationship between risk and expected return in the economy. Suppose \(k\) is an investor's required return rate. Then the present value of this investment is<br />
+\(-F_0e^{-rT}+\mathbb E(S_T)e^{-kT}\)<br />
+So the futures contract should be priced at \(F_0 = \mathbb E(S_T)e^{(r-k)T}\). If the return is</p>
+<ul>
+<li>uncorrelated with the stock market, then \(k=r\Rightarrow F_0=\mathbb E(S_T)\)</li>
+<li>positively correlated with the stock market, then \(k&gt;r\Rightarrow F_0&lt;\mathbb E(S_T)\). This is known as normal backwardation</li>
+<li>negatively correlated with the stock market, then \(k&lt;r\Rightarrow F_0&gt;\mathbb E(S_T)\). This is known as contango</li>
+</ul>
 </div>
 <div id="section6" class="section">
 <h2><a id="chapter-6-interest-rate-futures" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 6 - Interest rate futures</h2>
