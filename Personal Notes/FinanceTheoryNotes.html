@@ -387,7 +387,7 @@ If the forward contract has a known yield \(y\), then<br />
 <h3><a id="5-10-forward-and-futures-contracts-on-currencies" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5.10 - Forward and futures contracts on currencies</h3>
 <p>\(S_0\) is the spot exchange rate in domestic currency, \(r_f\) is the value of the foreign risk-free interest rate when money is invested for time \(T\). \(r\) is the domestic risk-free rate when money is invested for this period of time. The relationship between \(F_0\) and \(S_0\) is<br />
 \(F_0 = S_0e^{(r-r_f)T}\)<br />
-The equation the same as the for known yeild in <a href="#5.6Knownyield">5.6</a>, because a foreign currency can be regarded as an investment asset paying a known yield. The yield is the risk-free rate of interest in the foreign currency</p>
+The equation the same as the for known yeild in <a href="#5.6KnownYield">5.6</a>, because a foreign currency can be regarded as an investment asset paying a known yield. The yield is the risk-free rate of interest in the foreign currency</p>
 <h3><a id="5-11-futures-on-commodities" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5.11 - Futures on commodities</h3>
 <p>Storage costs can be treated as negative income. If \(U\) is the peresent value of all storage costs, then<br />
 \(F_0 = (S_0 + U) e^{rT}\)<br />
@@ -429,6 +429,25 @@ So the futures contract should be priced at \(F_0 = \mathbb E(S_T)e^{(r-k)T}\). 
 </div>
 <div id="section6" class="section">
 <h2><a id="chapter-6-interest-rate-futures" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 6 - Interest rate futures</h2>
+<h3><a id="6-1-day-count-and-quotation-conventions" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.1 - Day count and quotation conventions</h3>
+<p>Day count between dates is defined as<br />
+\(\frac{\text{Number of days between dates}}{\text{Number of days in reference period}}\)<br />
+Three day count conventions commonly used in the US are</p>
+<ul>
+<li>Actual / actual (in period)</li>
+<li>30 / 360</li>
+<li>Actual / 360<br />
+And the interest earned between dates is<br />
+\(\text{Day count}\times\text{Interest earned in reference period}\)</li>
+</ul>
+<h4><a id="price-quotations-of-u-s-treasury-bills" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Price Quotations of U.S. Treasury Bills</h4>
+<p>Suppose the face value of a treasury bill is 100, \(P\) is the quoted price (or \(P/100\) as discount rate), \(n\) is the remaining life measured in calendar days, \(Y\) is the cash price (or present value), then<br />
+\(Y=100-100\times\frac{P}{100}\times\frac{n}{360}\Leftrightarrow P=\frac{360}{n}(F-Y)\)</p>
+<h4><a id="price-quotations-of-u-s-treasury-bonds" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Price Quotations of U.S. Treasury Bonds</h4>
+<p>Treasury bond prices in the United States are quoted in dollars and thirty-seconds of a dollar. For example: 120-15 or \(120\frac{5}{32}\). We have<br />
+\(\text{cash price (or dirty price)} = \text{quoted price (or clean price)} + \text{Accrued interest since last coupon date}\)<br />
+The interest is accrued using the face value and day count</p>
+<h3><a id="6-2-treasury-bond-futures" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.2 - Treasury bond futures</h3>
 </div>
 <div id="section7" class="section">
 <h2><a id="chapter-7-swaps" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 7 - Swaps</h2>
@@ -516,7 +535,7 @@ the forward price at a general time \(t\), \(S\) is the stock price at time \(t\
 \[dF=\left(e^{r(T-t)}\mu S-Sre^{r(T-t)}\right)dt+e^{r(T-t)}\sigma Sdz=(\mu-r)Fdt+\sigma Fdz
 \]
 <p>is a geometric brownian motion. It has the same volatility as \(S\) and an expected growth rate of \(\mu - r\) rather than \(\mu\).</p>
-<h3><a id="14-7-the-lognormal-property" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>14.7 - The lognormal property</h3>
+<h3><a id="14-7-the-lognormal-property-a-name-14-7lognormalproperty-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>14.7 - The lognormal property <a name="14.7LogNormalProperty"></a></h3>
 <p>Consider \(G=\ln S\), then we have</p>
 \[dG=\left(\mu-\frac{\sigma^2}{2}\right)dt+\sigma dz
 \]
@@ -574,6 +593,24 @@ dG&amp;=\frac{\partial G}{\partial x}dx+\frac{\partial G}{\partial t}dt+\frac{1}
 </div>
 <div id="section15" class="section">
 <h2><a id="chapter-15-the-black-scholes-merton-model" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 15 - The Black-Scholes-Merton model</h2>
+<h3><a id="15-1-lognormal-property-of-stock-prices" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>15.1 - Lognormal property of stock prices</h3>
+<p>Recall from <a href="#14.7LogNormalProperty">14.7</a></p>
+\[\ln S_T\sim\mathcal N\left(\ln S_0+\left(\mu-\frac{\sigma^2}{2}\right)T, \sigma^2T\right)
+\]
+<p>so that<br />
+\(\mathbb E(S_T)=S_0e^{\mu T}\)<br />
+\(\mathrm{Var}(S_T) = S_0^2e^{2\mu T}(e^{\sigma^2T}-1)\)</p>
+<h3><a id="15-2-the-distribution-of-the-rate-of-return" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>15.2 - The distribution of the rate of return</h3>
+<p>Suppose the continuously compounded rate of return per annum realized between time 0 and \(T\) is \(x\), then \(S_T=S_0e^{xT}\Rightarrow x=\frac{1}{T}\ln\frac{S_T}{S_0}\), hence<br />
+\(x\sim\mathcal N\left(\mu-\frac{\sigma^2}{2},\frac{\sigma^2}{T}\right)\)</p>
+<h3><a id="15-3-the-expected-return" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>15.3 - The expected return</h3>
+<p>Greater risk or higher level of interest rate would mean higher expected return \(\mu\).</p>
+<p>Note that \(\mathbb E(x)=\mu-\frac{\sigma^2}{2}&lt;\mu\). This is because ambiguity about what expected return is. In the sense of arithmetic mean we have<br />
+\(\ln[\mathbb E(S_T)]=\ln(S_0)+\mu T\)<br />
+however in the sense of geometric mean we have<br />
+\(\mathbb E[\ln(S_T)]=\ln(S_0)+E(x)T\)<br />
+In fact \(\ln[\mathbb E(S_T)]&gt;\mathbb E[\ln(S_T)]\) since \(\ln\) is a concave function (Jensen's inequality), so \(E(x)&lt;\mu\)</p>
+<h3><a id="15-4-volatility" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>15.4 - Volatility</h3>
 </div>
 <div id="section16" class="section">
 <h2><a id="chapter-16-employee-stock-options" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 16 - Employee stock options</h2>
