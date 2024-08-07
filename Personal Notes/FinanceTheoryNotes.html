@@ -460,6 +460,50 @@ The interest is accrued using the face value and day count</p>
 </div>
 <div id="section10" class="section">
 <h2><a id="chapter-10-mechanics-of-options-markets" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 10 - Mechanics of options markets</h2>
+<h3><a id="10-2-option-positions" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>10.2 - Option positions</h3>
+<p>Suppose the strike price is \(K\) and the terminal price is \(S_T\), the payoff for european option is</p>
+<ul>
+<li>long call \(\max(S_T-K,0)\)</li>
+<li>short call \(-\max(S_T-K,0)\)</li>
+<li>long put \(\max(K-S_T,0)\)</li>
+<li>short put \(-\max(K-S_T,0)\)</li>
+</ul>
+<h3><a id="10-3-underlying-assets" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>10.3 - Underlying assets</h3>
+<p>options on stock/ETP/currency/stock index/futures</p>
+<h3><a id="10-4-specification-of-stock-options" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>10.4 - Specification of stock options</h3>
+<ul>
+<li>expiration dates</li>
+<li>strike prices</li>
+<li>option class</li>
+<li>option series</li>
+<li>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>in the money</th>
+<th>at the money</th>
+<th>out of the money</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>call</td>
+<td>\(S&gt;K\)</td>
+<td>\(S=K\)</td>
+<td>\(S&lt;K\)</td>
+</tr>
+<tr>
+<td>put</td>
+<td>\(S&lt;K\)</td>
+<td>\(S=K\)</td>
+<td>\(S&gt;K\)</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>intrinsic/time value</li>
+</ul>
 </div>
 <div id="section11" class="section">
 <h2><a id="chapter-11-properties-of-stock-options" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 11 - Properties of stock options</h2>
@@ -587,7 +631,7 @@ dG&amp;=\frac{\partial G}{\partial x}dx+\frac{\partial G}{\partial t}dt+\frac{1}
 <p>When \(dx=adt+\sum_{i=1}^mb_idz_i\), we have</p>
 \[dG=\left(\frac{\partial G}{\partial x}a+\frac{\partial G}{\partial t}+\frac{1}{2}\frac{\partial^2 G}{\partial x^2}\sum_{i=1}^m\sum_{j=1}^mb_ib_j\rho_{ij}\right)dt+\sum_{i=1}^m\frac{\partial G}{\partial x_i}b_idz_i
 \]
-<p>Here \(\rho_{ij}\) is the correlation coefficient between \(dz_1,dz_j\). When \(G\) is a function of variables \(x_1,x_2,\dots,x_n,t\) and \(dx_i = a_i dt + b_i dz_i\), we have</p>
+<p>Here \(\rho_{ij}\) is the correlation coefficient between \(dz_i,dz_j\). When \(G\) is a function of variables \(x_1,x_2,\dots,x_n,t\) and \(dx_i = a_i dt + b_i dz_i\), we have</p>
 \[dG=\left(\sum_{i=1}^n\frac{\partial G}{\partial x_i}a_i+\frac{\partial G}{\partial t}+\sum_{i=1}^n\sum_{j=1}^n\frac{1}{2}\frac{\partial^2 G}{\partial x_ix_j}b_ib_j\rho_{ij}\right)dt+\sum_{i=1}^n\frac{\partial G}{\partial x_i}b_idz_i
 \]
 </div>
@@ -611,6 +655,21 @@ however in the sense of geometric mean we have<br />
 \(\mathbb E[\ln(S_T)]=\ln(S_0)+E(x)T\)<br />
 In fact \(\ln[\mathbb E(S_T)]&gt;\mathbb E[\ln(S_T)]\) since \(\ln\) is a concave function (Jensen's inequality), so \(E(x)&lt;\mu\)</p>
 <h3><a id="15-4-volatility" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>15.4 - Volatility</h3>
+<p>To estimate the volatility of a stock price empirically, we observe \(n+1\) times with prices \(S_0,S_1,\cdots,S_n\) and suppose \(\tau\) is the length of time interval in years. The the estimate<br />
+\(s=\sqrt{\frac{\sum_{i=1}^n(u_i-\bar u)^2}{n-1}}\)<br />
+is the sample standard deviation of \(u_i=\ln(S_i/S_{i-1})\)</p>
+<p>The standard deviation of \(u_i\) is \(\sigma\sqrt\tau\), and \(\hat\sigma=s/\sqrt\tau\) is an unbiased estimator of \(\sigma\) of standard error</p>
+\[\frac{\sigma}{\sqrt{n-1}}\sqrt{(n-1)-\frac{2\Gamma(\frac{n}{2})^2}{\Gamma(\frac{n-1}{2})^2}}\approx\frac{\sigma}{\sqrt{2(n-1)}}\approx\hat\sigma/\sqrt{2n}
+\]
+<p>Which uses<br />
+\(\frac{\Gamma(\frac{n}{2})}{\Gamma(\frac{n-1}{2})}=\sqrt{\frac{n-1}{2}}\left(1-\frac{1}{4(n-1)}+O\left(\frac{1}{n^2}\right)\right)\)<br />
+If \(D\) is the amount of the dividend in some period, then \(u_i=\ln\frac{S_i+D}{S_{i-1}}\)</p>
+<p>Research shows that volatility is much higher when the exchange is open for trading than when it is closed. We calculate</p>
+\[\text{Volatility per annum}=\text{Volatility per trading day}\times\sqrt\text{Number of trading days per annum}
+\]
+<p>The life of an option is<br />
+\(T=\frac{\text{Number of trading days until option maturity}}{252}\)<br />
+Where the number of trading days in a year is usually assumed to be 252</p>
 </div>
 <div id="section16" class="section">
 <h2><a id="chapter-16-employee-stock-options" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 16 - Employee stock options</h2>
