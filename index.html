@@ -58,13 +58,21 @@ function showSection(sectionId) {
     // Hide all sections
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => section.classList.remove('active'));
+    
     // Show the selected section
-    document.getElementById(sectionId).classList.add('active');
+    const selectedSection = document.getElementById(sectionId);
+    selectedSection.classList.add('active');
+	
+	setTimeout(() => {
+        window.scrollBy(0, -1000); // Scroll the window up so that the page is at the top
+    }, 0);
+    
     // Update the navigation to highlight the current section
     const navLinks = document.querySelectorAll('#nav a');
     navLinks.forEach(link => link.classList.remove('current'));
     document.querySelector(`#nav a[href='#${sectionId}']`).classList.add('current');
 }
+
 // Show the first section by default
 document.addEventListener("DOMContentLoaded", function() {
     showSection('home');
@@ -95,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <!-- Sections -->
 
-<div id="home" class="section active">
+<div id="home" class="section">
 
 
 
@@ -141,7 +149,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 <h2 id="publications">Publications</h2>
-<p>
 <ul>
 <li><u><a href="https://arxiv.org/abs/2203.11588">The Lie coalgebra of multiple polylogarithms</a></u>, J. Algebra, vol. 645, pp. 164-182.<br>
     <a href="https://www.mathi.uni-heidelberg.de/~zgreenberg/">Zachary Greenberg</a>,
@@ -153,7 +160,6 @@ document.addEventListener("DOMContentLoaded", function() {
     Zachary Greenberg, Dani Kaufman, Haoran Li, Christian K. Zickert
 </li>
 </ul>
-</p>
 
 <h2 id="notes">Notes</h2>
 <ul>
@@ -187,11 +193,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <h2 id="undergradThesis">Undergraduate thesis</h2>
 <ul><li><a href="https://lihaoranicefire.github.io/math/Polynomials_Disguised_in_Different_Senarios.pdf">Polynomials Disguised in Different Senarios</a></li></ul>
-</div>
-</div>
 
-<div id="footer">
-</div>
 
 
 </div>
@@ -228,6 +230,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <li><a href="https://github.com/lihaoranIcefire/math/tree/master/Minesweeper">Minesweeper</a></li>
 </ul>
 </div>
+
 
 
 </div>
@@ -280,6 +283,12 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 
 
+
+
+
 </body>
+
+
+
 
 </html>
