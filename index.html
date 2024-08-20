@@ -1,41 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<link href="https://lihaoranIcefire.github.io/math/style.css" type="text/css" rel="stylesheet"></link>
-		<link href="https://fonts.googleapis.com/css?family=Cutive+Mono" rel="stylesheet"> 
-		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css">
-		<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-		<title>Haoran's Space</title>
-	</head>
-	<body>
-		<div id="main">
-			<div id="nav">
-				<a href="https://lihaoranicefire.github.io/math/index.html" class=current>Home</a> ·
-				<a href="https://lihaoranicefire.github.io/math/Research.html" class=>Research</a> ·
-				<a href="https://lihaoranicefire.github.io/math/Projects.html" class=>Projects</a> ·
-				<a href="https://lihaoranicefire.github.io/math/Teaching.html" class=>Teaching</a>
-			</div>
-			<div id="content-left">
-				<h2>About me</h2>
-				<p><img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Selfie.png" width="300" align="right" style="border-radius:10%" /></p>
-				<p>
-					I am Haoran Li(李浩然), or Harrison Li, as students like to call me, I am currently a sixth-year PhD student in the <a href="https://www.math.umd.edu/">math department</a> at university of Maryland. My advisor is <a href="https://www.math.umd.edu/~zickert/">Christian Zickert</a>. My area of research focuses on <a href="https://en.wikipedia.org/wiki/Polylogarithm">polylogarithms</a> and their applications within number theory. Before coming to the United States, I went to <a href="https://www.sysu.edu.cn/sysuen/">Sun Yat-sen university</a> and got my Bachelor's degree in mathematics.
-				</p>
 
-				<p>
-					Over the past few years, I have been greatly inspired by the advancements in artificial intelligence, igniting a passion to apply my mathematical expertise to real-world problems.
-				</p>
 
-				<p>
-					Here is my latest <a href="https://lihaoranicefire.github.io/math/Resume.pdf">CV</a>. Please contact me via my email: <u>haoranli@umd.edu</u>.
-				</p>
-			</div>
-		</div>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haoran Li's homepage</title>
 
-		<div id="footer">
-		</div>
-	</body>
+
+<style>
+body {
+	margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 50pt;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:100%;
+	line-height:200%;
+    font-size: 14pt;
+    font-weight: 20px;
+}
+/* unvisited and visited links */
+a:link, a:visited {
+	text-decoration: none;
+	color: rgb(128,0,0);
+}
+a:hover	{
+	text-decoration: underline;
+    color: rgb(0, 0, 255);
+}
+/* Basic styles for the navigation and sections */
+#nav {
+    text-align: center;
+    font-size: 30px;
+}
+/* Style for the links in the navigation */
+#nav a {
+    text-align: center;
+    margin: 0 10px;
+    text-decoration: none;
+}
+#nav a.current {
+    font-weight: bold;
+}
+/* Hide all sections by default and only show the active section */
+.section {
+    display: none;
+}
+.section.active {
+    display: block;
+}
+</style>
+<script>
+// JavaScript function to switch between sections
+function showSection(sectionId) {
+    // Hide all sections
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => section.classList.remove('active'));
+    // Show the selected section
+    document.getElementById(sectionId).classList.add('active');
+    // Update the navigation to highlight the current section
+    const navLinks = document.querySelectorAll('#nav a');
+    navLinks.forEach(link => link.classList.remove('current'));
+    document.querySelector(`#nav a[href='#${sectionId}']`).classList.add('current');
+}
+// Show the first section by default
+document.addEventListener("DOMContentLoaded", function() {
+    showSection('home');
+});
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+
+
+<body>
+
+
+
+
+<!-- Navigation -->
+
+
+<div id="nav">
+<a href="#home" onclick="showSection('home')">Home</a> ·
+<a href="#research" onclick="showSection('research')">Research</a> ·
+<a href="#projects" onclick="showSection('projects')">Projects</a> ·
+<a href="#teaching" onclick="showSection('teaching')">Teaching</a>
+</div>
+
+
+
+
+
+<!-- Sections -->
+
+<div id="home" class="section active">
+
+
+
+<h1>About</h1>
+<p>
+    <img src="https://raw.githubusercontent.com/lihaoranIcefire/math/master/Selfie.png" width="300" align="right" style="border-radius:10%; margin:10px;">
+</p>
+<p>
+    My name is Haoran Li(李浩然), or Harrison Li, as students like to call me,
+    I am currently a sixth-year PhD student in the <a href="https://www.math.umd.edu/">math department</a> at university of Maryland.
+    My advisor is <a href="https://www.math.umd.edu/~zickert/">Christian K. Zickert</a>.
+    My area of research focuses on <a href="https://en.wikipedia.org/wiki/Polylogarithm">polylogarithms</a> and their applications within number theory.
+    Before coming to the United States, I went to <a href="https://www.sysu.edu.cn/sysuen/">Sun Yat-sen university</a> and got my Bachelor's degree in mathematics.
+</p>
+<p>
+    Over the past few years, I have been greatly inspired by the advancements in artificial intelligence,
+    igniting a passion to apply my mathematical expertise to real-world problems.
+</p>
+<p>
+    Here is my latest <a href="https://lihaoranicefire.github.io/math/Resume.pdf">CV</a>. Please contact me via my email: <u>haoranli@umd.edu</u>.
+</p>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="research" class="section">
+
+
+
+<h2 id="publications">Publications</h2>
+<p>
+<ul>
+<li><u><a href="https://arxiv.org/abs/2203.11588">The Lie coalgebra of multiple polylogarithms</a></u>, J. Algebra, vol. 645, pp. 164-182.<br>
+    <a href="https://www.mathi.uni-heidelberg.de/~zgreenberg/">Zachary Greenberg</a>,
+    <a href="https://www.math.ku.dk/english/about/news/new-names/dani-kaufman-postdoc/">Dani Kaufman</a>,
+    Haoran Li,
+    <a href="https://www.math.umd.edu/~zickert/">Christian K. Zickert</a>
+</li>
+<li><u><a href="https://arxiv.org/abs/2211.08337">Hopf algebras of multiple polylogarithms, and holomorphic 1-forms</a></u>, preprint<br>
+    Zachary Greenberg, Dani Kaufman, Haoran Li, Christian K. Zickert
+</li>
+</ul>
+</p>
+
+<h2 id="notes">Notes</h2>
+<ul>
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/STAT600.pdf">STAT600 Probability Theory I</a></li> -->
+<li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH602.pdf">MATH602 Homological algebra</a></li>
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH606.pdf">MATH606 Algebraic Geometry I</a></li> -->
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH607.pdf">MATH607 Algebraic Geometry II</a></li> -->
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH620.pdf">MATH620 Algebraic Number Theory I</a></li> -->
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH621.pdf">MATH621 Algebraic Number Theory II</a></li> -->
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH673.pdf">MATH673 Partial Differential Equations I</a></li> -->
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH674.pdf">MATH674 Partial Differential Equations II</a></li> -->
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH730.pdf">MATH730 Fundamental Concepts of Topology</a></li> -->
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH734.pdf">MATH734 Algebraic Topology</a></li> -->
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH742.pdf">MATH742 Geometric Analysis</a></li> -->
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH744.pdf">MATH744 Lie Groups I</a></li> -->
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH808F.pdf">MATH808F Modular Forms</a></li> -->
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH848G.pdf">MATH848G Index Theory on Manifolds</a></li> -->
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH848I.pdf">MATH848I Exterior Differential Systems</a></li> -->
+<li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH808K.pdf">MATH808K Algebraic K-Theory</a></li>
+<li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH808K_BrauerGroups.pdf">MATH808K Algebraic K-Theory, Brauer Groups</a></li>
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH808Q.pdf">MATH808Q Abelian Varieties</a></li> -->
+<li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH848T.pdf">MATH848T Scissors Congruence, Spectral Sequences, Hilbert’s Third Problem</a></li>
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH808V.pdf">MATH808V Shimura Varieties</a></li> -->
+<!-- <li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH868C_2018Fall.pdf">MATH868C 2018Fall Several Complex Variables</a></li> -->
+<li><a href="https://lihaoranicefire.github.io/math/Course Notes/MATH868C_2020Fall.pdf">MATH868C 2020Fall Several Complex Variables</a></li>
+
+<li><a href="https://lihaoranicefire.github.io/math/Personal Notes/一元五次方程不可解之证明.pdf">一元五次方程不可解之证明</a></li>
+<li><a href="https://lihaoranicefire.github.io/math/Personal Notes/习题集.pdf">习题集</a></li>
+<li><a href="https://lihaoranicefire.github.io/math/miscellaneous.html">Miscellaneous</a></li>
+</ul>
+
+<h2 id="undergradThesis">Undergraduate thesis</h2>
+<ul><li><a href="https://lihaoranicefire.github.io/math/Polynomials_Disguised_in_Different_Senarios.pdf">Polynomials Disguised in Different Senarios</a></li></ul>
+</div>
+</div>
+
+<div id="footer">
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="projects" class="section">
+
+
+
+<h2>The Erdős Institute Data Science Bootcamp</h2>
+<ul>
+<li><a href="https://github.com/lihaoranIcefire/erdosFall2022_Thanos_Haoran">The Erdős Institute Data Science Bootcamp</a></li>
+</ul>
+<h2>Computation package for multiple polylogarithms</h2>
+<ul>
+<li><a href="https://github.com/lihaoranIcefire/math/blob/master/LogToolkit.nb">LogToolKit</a></li>
+</ul>
+<h2>The minesweeper game</h2>
+<ul>
+<li><a href="https://github.com/lihaoranIcefire/math/tree/master/Minesweeper">Minesweeper</a></li>
+</ul>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="teaching" class="section">
+
+
+
+<h2><a id="instructor" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instructor</h2>
+<ul>
+<li><a href="https://lihaoranicefire.github.io/math/Teaching/MATH240%20Summer%202024/MATH240_Summer_2024.html">MATH240</a>, Summer 2024, Instructor</li>
+<li>MATH240, Summer 2023, Instructor</li>
+<li>MATH240, Summer 2022, Instructor</li>
+<li><a href="https://lihaoranicefire.github.io/math/Teaching/MATH121%20Fall%202019/MATH121_Fall_2019.html">MATH121</a>, Fall 2019, Instructor</li>
+</ul>
+<!-- course coordinator: Timothy J. Pilachowski -->
+<h2><a id="ta" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>TA</h2>
+<ul>
+<li><a href="https://lihaoranicefire.github.io/math/Teaching/MATH241%20Spring%202024/MATH241_Spring_2024.html">MATH241</a>, Spring 2024, TA, taught by Roohollah Ebrahimian</li>
+<li><a href="https://lihaoranicefire.github.io/math/Teaching/MATH241_Fall_2023.pdf">MATH241</a>, Fall 2023, TA, taught by Justin Wyss-Gallifent</li>
+<li><a href="https://lihaoranicefire.github.io/math/Teaching/MATH141/MATH141.html">MATH141</a>, Spring 2023, TA, taught by James Conway</li>
+<li>MATH241, Fall 2022, TA, taught by Kendall Williams</li>
+<li>MATH141, Spring 2022, TA, taught by Denny Gulick</li>
+<li>MATH432, Fall 2021, Grader, taught by Christian K. Zickert</li>
+<li>MATH240, Fall 2021, TA, taught by Allan Yashinski</li>
+<li>MATH406, Summer 2021, Grader, taught by Justin Wyss-Gallifent</li>
+<li>STAT400, Spring 2021, TA, taught by Gunatilleka Mestiyage Don Danul Kavindr</li>
+<li><a href="https://lihaoranicefire.github.io/math/Teaching/STAT400%20Fall%202020/STAT400_Fall_2020.html">STAT400</a>, Fall 2020, TA, taught by Hatice Sahinoglu</li>
+<li>MATH141 and MATH115, Summer 2020, Tutor, taught by Jianlong Liu, JT Rustad, Ishfaaq Mohammed Imtiyas and Danielle Middlebrooks</li>
+<li>STAT100, Spring 2020, TA, taught by Matthew Griffin</li>
+<li>MATH246 &amp; MATH241, Summer 2019, Tutor, taught by Amin Gholampour and Jacky Chong</li>
+<li>MATH115, Spring 2019, TA, taught by Raluca Rosca</li>
+<li>STAT400, Fall 2018, TA, taught by Casey Cremins</li>
+</ul>
+</div>
+
+
+</div>
+
+
+</body>
+
 </html>
