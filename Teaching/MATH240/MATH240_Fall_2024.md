@@ -107,6 +107,7 @@ h1 {
 
 
 
+<!--
 <section class="accordion">
 <input type="checkbox" name="SuggestedProblems" id="SuggestedProblems">
 <h2 class="handle">
@@ -152,6 +153,7 @@ h1 {
 
 </div>
 </section>
+-->
 
 
 
@@ -215,7 +217,7 @@ h1 {
 	\end{bmatrix}
 	\end{align*}
 	$$
-	Notice that $R_2$ reads
+	Notice that $R_2$ now reads
 	$$
 	0=0x_1+0x_2+0x_3=23
 	$$
