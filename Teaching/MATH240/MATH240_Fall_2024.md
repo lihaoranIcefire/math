@@ -179,47 +179,47 @@ h1 {
 <li>\(\S\) 1.1: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 24, 25, 27-34, 35, 37, 39, 41</li>
 -->
 
-First we get the augmented matrix of the linear system
-$$
-\begin{cases}
-3x_1+ 6x_2-3x_3=6\\
--2x_1-4x_2-3x_3=-1\\
-3x_1+ 6x_2-2x_3=10
-\end{cases}
-$$
-which is
-$$
-\begin{align*}
-&\begin{bmatrix}
-3&6&-3&6\\
--2&-4&-3&-1\\
-3&6&-2&10\\
-\end{bmatrix}
-\xrightarrow{(\frac{1}{3})R_1}
-\begin{bmatrix}
-1&2&-1&2\\
--2&-4&-3&-1\\
-3&6&-2&10\\
-\end{bmatrix}
-\xrightarrow{\substack{2R_1+R_2\\(-3)R_1+R_2}}
-\begin{bmatrix}
-1&2&-1&2\\
-0&0&-5&3\\
-0&0&1&4\\
-\end{bmatrix}\\
-&\xrightarrow{5R_3+R_2}
-\begin{bmatrix}
-1&2&-1&2\\
-0&0&0&23\\
-0&0&1&4\\
-\end{bmatrix}
-\end{align*}
-$$
-Notice that $R_2$ reads
-$$
-0=0x_1+0x_2+0x_3=23
-$$
-which is impossible, therefore the original linear system has no solutions
+1. Use elementary row operations to determine if the linear system is consistent or not.
+	$$
+	\begin{cases}
+	3x_1+ 6x_2-3x_3=6\\
+	-2x_1-4x_2-3x_3=-1\\
+	3x_1+ 6x_2-2x_3=10
+	\end{cases}
+	$$
+	First we get the augmented matrix of the linear system
+	$$
+	\begin{align*}
+	&\begin{bmatrix}
+	3&6&-3&6\\
+	-2&-4&-3&-1\\
+	3&6&-2&10\\
+	\end{bmatrix}
+	\xrightarrow{(\frac{1}{3})R_1}
+	\begin{bmatrix}
+	1&2&-1&2\\
+	-2&-4&-3&-1\\
+	3&6&-2&10\\
+	\end{bmatrix}
+	\xrightarrow{\substack{2R_1+R_2\\(-3)R_1+R_2}}
+	\begin{bmatrix}
+	1&2&-1&2\\
+	0&0&-5&3\\
+	0&0&1&4\\
+	\end{bmatrix}\\
+	&\xrightarrow{5R_3+R_2}
+	\begin{bmatrix}
+	1&2&-1&2\\
+	0&0&0&23\\
+	0&0&1&4\\
+	\end{bmatrix}
+	\end{align*}
+	$$
+	Notice that $R_2$ reads
+	$$
+	0=0x_1+0x_2+0x_3=23
+	$$
+	which is impossible, therefore the original linear system has no solutions
 
 
 </div>
