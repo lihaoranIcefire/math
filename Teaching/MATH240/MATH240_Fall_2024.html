@@ -1,14 +1,11 @@
 <script type="text/javascript" async
 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
-
 <script type="module">
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
 </script>
-
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-
 <style>
 .accordion > input[type="checkbox"] {
 	position: absolute;
@@ -100,18 +97,13 @@ h1 {
 	overflow-y: hidden;
 }
 </style>
-
 <h1>MATH240 Fall 2024</h1>
-
-
-
 <section class="accordion">
 <input type="checkbox" name="SuggestedProblems" id="SuggestedProblems">
 <h2 class="handle">
 <label for="SuggestedProblems">Suggested Problems</label>
 </h2>
 <div class="content">
-
 <ul>
 <li>\(\S\) 1.1: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 24, 25, 27-34, 35, 37, 39, 41</li>
 <li>\(\S\) 1.2: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25-34, 35, 37, 41, 43</li>
@@ -149,24 +141,21 @@ computation)</li>
 <li>\(\S\) 7.2: 1, 3, 5, 7, 9, 11, 13, 15, 17, 21-31</li>
 <li>\(\S\) 7.4: 1, 3, 5, 7, 9, 11, 15</li>
 </ul>
-
 </div>
 </section>
-
-
-
 <section class="accordion">
 <input type="checkbox" name="08/27" id="0827">
 <h2 class="handle">
 <label for="0827">08/27</label>
 </h2>
 <div class="content">
-
+<!--
 <ul>
 <li>Self introduction: name, major, hobby, learning goal.</li>
 <li>ADS accommodation: requests must be reported to the instructor.</li>
 <li>Quizzes: 20 minutes at end of Thursday discussions, 11 quizzes in total, and 2 will be dropped, no make ups regardless of any excuses.</li>
 <li>Office hours: 4pm-5pm, Tuesdays &amp; Thursdays, MATH0206</li>
+<li>Email: haoranli@umd.edu</li>
 <li>Format: First I would like to make a super quick review if necessary, then I will address any problems from the homework or the lecture, after that, there are problems suggested by the instructor that we can go through.</li>
 <li>Remark: Please do come to the discussions. It is a great chance for you to work on problems with others and get immediate feedbacks.</li>
 <li>Applications: physics, machine learning, fourier analysis</li>
@@ -175,9 +164,44 @@ computation)</li>
 <h4><a id="suggested-exercises" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Suggested Exercises</h4>
 <ul>
 <li>\(\S\) 1.1: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 24, 25, 27-34, 35, 37, 39, 41</li>
-</ul>
-
-
+-->
+<p>First we get the augmented matrix of the linear system</p>
+\[\begin{cases}
+3x_1+ 6x_2-3x_3=6\\
+-2x_1-4x_2-3x_3=-1\\
+3x_1+ 6x_2-2x_3=10
+\end{cases}
+\]
+<p>which is</p>
+\[\begin{align*}
+&amp;\begin{bmatrix}
+3&amp;6&amp;-3&amp;6\\
+-2&amp;-4&amp;-3&amp;-1\\
+3&amp;6&amp;-2&amp;10\\
+\end{bmatrix}
+\xrightarrow{(\frac{1}{3})R_1}
+\begin{bmatrix}
+1&amp;2&amp;-1&amp;2\\
+-2&amp;-4&amp;-3&amp;-1\\
+3&amp;6&amp;-2&amp;10\\
+\end{bmatrix}
+\xrightarrow{\substack{2R_1+R_2\\(-3)R_1+R_2}}
+\begin{bmatrix}
+1&amp;2&amp;-1&amp;2\\
+0&amp;0&amp;-5&amp;3\\
+0&amp;0&amp;1&amp;4\\
+\end{bmatrix}\\
+&amp;\xrightarrow{5R_3+R_2}
+\begin{bmatrix}
+1&amp;2&amp;-1&amp;2\\
+0&amp;0&amp;0&amp;23\\
+0&amp;0&amp;1&amp;4\\
+\end{bmatrix}
+\end{align*}
+\]
+<p>Notice that \(R_2\) reads</p>
+\[0=0x_1+0x_2+0x_3=23
+\]
+<p>which is impossible, therefore the original linear system has no solutions</p>
 </div>
 </section>
-
