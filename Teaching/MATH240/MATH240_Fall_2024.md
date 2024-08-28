@@ -107,7 +107,7 @@ h1 {
 
 
 
-<!--
+
 <section class="accordion">
 <input type="checkbox" name="SuggestedProblems" id="SuggestedProblems">
 <h2 class="handle">
@@ -153,7 +153,7 @@ h1 {
 
 </div>
 </section>
--->
+
 
 
 
@@ -165,21 +165,20 @@ h1 {
 <div class="content">
 
 <!--
-<ul>
-<li>Self introduction: name, major, hobby, learning goal.</li>
-<li>ADS accommodation: requests must be reported to the instructor.</li>
-<li>Quizzes: 20 minutes at end of Thursday discussions, 11 quizzes in total, and 2 will be dropped, no make ups regardless of any excuses.</li>
-<li>Office hours: 4pm-5pm, Tuesdays &amp; Thursdays, MATH0206</li>
-<li>Email: haoranli@umd.edu</li>
-<li>Format: First I would like to make a super quick review if necessary, then I will address any problems from the homework or the lecture, after that, there are problems suggested by the instructor that we can go through.</li>
-<li>Remark: Please do come to the discussions. It is a great chance for you to work on problems with others and get immediate feedbacks.</li>
-<li>Applications: physics, machine learning, fourier analysis</li>
-<li>Reminder: always check the answer for the case of a unique solution.</li>
-</ul>
-<h4><a id="suggested-exercises" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Suggested Exercises</h4>
-<ul>
-<li>\(\S\) 1.1: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 24, 25, 27-34, 35, 37, 39, 41</li>
+- Self introduction: name, major, hobby, learning goal.
+- ADS accommodation: requests must be reported to the instructor.
+- Quizzes: 20 minutes at end of Thursday discussions, 11 quizzes in total, and 2 will be dropped, no make ups regardless of any excuses.
+- Office hours: 4pm-5pm, Tuesdays & Thursdays, MATH0206
+- Email: haoranli@umd.edu
+- Format: First I would like to make a super quick review if necessary, then I will address any problems from the homework or the lecture, after that, there are problems suggested by the instructor that we can go through.
+- Remark: Please do come to the discussions. It is a great chance for you to work on problems with others and get immediate feedbacks.
+- Applications: physics, machine learning, fourier analysis
+- Reminder: always check the answer for the case of a unique solution.
+
+#### Suggested Exercises
+- $\S$ 1.1: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 24, 25, 27-34, 35, 37, 39, 41
 -->
+
 
 1. Use elementary row operations to determine if the linear system is consistent or not.
 	$$
@@ -223,6 +222,78 @@ h1 {
 	$$
 	which is impossible, therefore the original linear system has no solutions
 
+
+</div>
+</section>
+
+
+
+
+<section class="accordion">
+<input type="checkbox" name="08/29" id="0829">
+<h2 class="handle">
+<label for="0829">08/29</label>
+</h2>
+<div class="content">
+
+#### Quiz 1
+
+1. Using elementary row operations and showing your operations, determine the unique solution to the system by putting the augmented matrix in RREF. You must show all your steps using row operations. You will NOT receive full credit if you use other methods such as backwards substitution anywhere in your work.
+
+$$
+\begin{align*}
+& \begin{bmatrix}
+1 & -2 & 1 & -7 \\
+3 & -7 & -5 & -18 \\
+-1 & 3 & 4 & 7 \\
+\end{bmatrix}
+\xrightarrow{\substack{-3R_1 + R_2\\R_1 + R_3}}
+\begin{bmatrix}
+1 & -2 & 1 & -7 \\
+0 & -1 & -8 & 3 \\
+0 & 1 & 5 & 0 \\
+\end{bmatrix}
+\xrightarrow{R_2 + R_3}
+\begin{bmatrix}
+1 & -2 & 1 & -7 \\
+0 & -1 & -8 & 3 \\
+0 & 0 & -3 & 3 \\
+\end{bmatrix}\\
+&\xrightarrow{-R_3/3}
+\begin{bmatrix}
+1 & -2 & 1 & -7 \\
+0 & -1 & -8 & 3 \\
+0 & 0 & 1 & -1 \\
+\end{bmatrix}
+\xrightarrow{\substack{-R_3 + R_1\\R_3 + R_2}}
+\begin{bmatrix}
+1 & -2 & 0 & -6 \\
+0 & -1 & 0 & -5 \\
+0 & 0 & 1 & -1 \\
+\end{bmatrix}
+\xrightarrow{-2R_2 + R_1}
+\begin{bmatrix}
+1 & 0 & 0 & 4 \\
+0 & -1 & 0 & -5 \\
+0 & 0 & 1 & -1 \\
+\end{bmatrix}\\
+&\xrightarrow{-R_2}
+\begin{bmatrix}
+1 & 0 & 0 & 4 \\
+0 & 1 & 0 & 5 \\
+0 & 0 & 1 & -1 \\
+\end{bmatrix}
+\end{align*}
+$$
+
+Therefore the solution set to this linear system is
+$$
+\begin{cases}
+x_1=4\\
+x_2=5\\
+x_3=-1
+\end{cases}
+$$
 
 </div>
 </section>
