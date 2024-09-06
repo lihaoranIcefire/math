@@ -1,800 +1,160 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MLNotes</title><style>/* copy from https://github.com/sindresorhus/github-markdown-css/ */
-
-html,body{background-color: #2d2d2d;}
-
-.markdown-body {
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  line-height: 1.5;
-  color: #cccccc;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
-  font-size: 1rem;
-  word-wrap: break-word;
-}
-
-.markdown-body .octicon {
-  display: inline-block;
-  fill: currentColor;
-  vertical-align: text-bottom;
-}
-
-.markdown-body figure{margin:0;padding:0; display:table;}
-.markdown-body figure figcaption{font-size:92%; text-align:center; color:#999999;}
-
-.markdown-body .anchor {
-  float: left;
-  line-height: 1;
-  margin-left: -1.25rem;
-  padding-right: 0.25rem;
-}
-
-.markdown-body .anchor:focus {
-  outline: none;
-}
-
-.markdown-body h1 .octicon-link,
-.markdown-body h2 .octicon-link,
-.markdown-body h3 .octicon-link,
-.markdown-body h4 .octicon-link,
-.markdown-body h5 .octicon-link,
-.markdown-body h6 .octicon-link {
-  color: #66cccc;
-  vertical-align: middle;
-  visibility: hidden;
-}
-
-.markdown-body h1:hover .anchor,
-.markdown-body h2:hover .anchor,
-.markdown-body h3:hover .anchor,
-.markdown-body h4:hover .anchor,
-.markdown-body h5:hover .anchor,
-.markdown-body h6:hover .anchor {
-  text-decoration: none;
-}
-
-.markdown-body details {
-  display: block;
-}
-
-.markdown-body summary {
-  display: list-item;
-}
-
-.markdown-body a {
-  background-color: initial;
-}
-
-.markdown-body a:active,
-.markdown-body a:hover {
-  outline-width: 0;
-}
-
-.markdown-body strong {
-  font-weight: inherit;
-  font-weight: bolder;
-}
-.markdown-body strong{
-  color: #f99157;
-}
-.markdown-body em{
-  color: #ffcc66;
-}
-
-.markdown-body img {
-  border-style: none;
-}
-
-.markdown-body code,
-.markdown-body kbd,
-.markdown-body pre {
-  font-family: monospace,monospace;
-  font-size: 0.9rem;
-}
-
-.markdown-body hr {
-  box-sizing: initial;
-  height: 0;
-  overflow: visible;
-}
-
-.markdown-body input {
-  font: inherit;
-  margin: 0;
-}
-
-.markdown-body input {
-  overflow: visible;
-}
-
-.markdown-body [type=checkbox] {
-  box-sizing: border-box;
-  padding: 0;
-}
-
-.markdown-body * {
-  box-sizing: border-box;
-}
-
-.markdown-body input {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.markdown-body a {
-  color: #99cc99;
-  text-decoration: none;
-}
-.markdown-body mjx-container[jax="SVG"] > svg a{fill:#99cc99;stroke: #99cc99;}
-
-.markdown-body a:hover {
-  text-decoration: underline;
-}
-
-.markdown-body strong {
-  font-weight: 600;
-}
-
-.markdown-body hr:after,
-.markdown-body hr:before {
-  display: table;
-  content: "";
-}
-
-.markdown-body hr:after {
-  clear: both;
-}
-
-.markdown-body table {
-  border-spacing: 0;
-  border-collapse: collapse;
-}
-
-.markdown-body td,
-.markdown-body th {
-  padding: 0;
-}
-
-.markdown-body details summary {
-  cursor: pointer;
-}
-
-.markdown-body kbd {
-  display: inline-block;
-  padding: 0.1875rem 0.3125rem;
-  font: 0.75rem SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
-  line-height: 0.75rem;
-  color: #999999;
-  vertical-align: middle;
-  background-color: #333333;
-  border: 1px solid #494949;
-  border-radius: 0.1875rem;
-}
-
-.markdown-body p {
-  margin-top: 0;
-  margin-bottom: 0.625rem;
-}
-
-.markdown-body blockquote {
-  margin: 0;
-}
-
-.markdown-body ol,
-.markdown-body ul {
-  padding-left: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.markdown-body ol ol,
-.markdown-body ul ol {
-  list-style-type: lower-roman;
-}
-
-.markdown-body ol ol ol,
-.markdown-body ol ul ol,
-.markdown-body ul ol ol,
-.markdown-body ul ul ol {
-  list-style-type: lower-alpha;
-}
-
-.markdown-body dd {
-  margin-left: 0;
-}
-
-.markdown-body code,
-.markdown-body pre {
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
-  font-size: 0.75rem;
-}
-
-.markdown-body pre {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.markdown-body input::-webkit-inner-spin-button,
-.markdown-body input::-webkit-outer-spin-button {
-  margin: 0;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-.markdown-body:after,
-.markdown-body:before {
-  display: table;
-  content: "";
-}
-
-.markdown-body:after {
-  clear: both;
-}
-
-.markdown-body>:first-child {
-  margin-top: 0!important;
-}
-
-.markdown-body>:last-child {
-  margin-bottom: 0!important;
-}
-
-.markdown-body a:not([href]) {
-  color: inherit;
-  text-decoration: none;
-}
-
-.markdown-body blockquote,
-.markdown-body details,
-.markdown-body dl,
-.markdown-body ol,
-.markdown-body p,
-.markdown-body pre,
-.markdown-body table,
-.markdown-body ul {
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
-
-.markdown-body hr {
-  height: .25rem;
-  padding: 0;
-  margin: 1.5rem 0;
-  background-color: #494949;
-  border: 0;
-}
-
-.markdown-body blockquote {
-  padding: 0 1rem;
-  color: #9b9b9b;
-  border-left: .25rem solid #f2777a;
-}
-
-.markdown-body blockquote>:first-child {
-  margin-top: 0;
-}
-
-.markdown-body blockquote>:last-child {
-  margin-bottom: 0;
-}
-
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
-  line-height: 1.25;
-}
-
-.markdown-body h1 {
-  font-size: 2em;
-}
-
-.markdown-body h1,
-.markdown-body h2 {
-  padding-bottom: .3rem;
-  border-bottom: 1px solid #434343;
-  color: #66cccc;
-}
-
-.markdown-body h2 {
-  font-size: 1.5rem;
-  color: #66cccc;
-}
-
-.markdown-body h3 {
-  font-size: 1.25rem;
-  color: #66cccc;
-}
-
-.markdown-body h4 {
-  font-size: 1rem;
-  color: #66cccc;
-}
-
-.markdown-body h5 {
-  font-size: .875rem;
-  color: #66cccc;
-}
-
-.markdown-body h6 {
-  font-size: .85rem;
-  color: #66cccc;
-}
-
-.markdown-body ol,
-.markdown-body ul {
-  padding-left: 2rem;
-}
-
-.markdown-body ol ol,
-.markdown-body ol ul,
-.markdown-body ul ol,
-.markdown-body ul ul {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.markdown-body li {
-  word-wrap: break-all;
-}
-
-.markdown-body li>p {
-  margin-top: 1rem;
-}
-
-.markdown-body li+li {
-  margin-top: .25rem;
-}
-
-.markdown-body dl {
-  padding: 0;
-}
-
-.markdown-body dl dt {
-  padding: 0;
-  margin-top: 1rem;
-  font-size: 1rem;
-  font-style: italic;
-  font-weight: 600;
-}
-
-.markdown-body dl dd {
-  padding: 0 1rem;
-  margin-bottom: 1rem;
-}
-
-.markdown-body table {
-  display: block;
-  width: 100%;
-  overflow: auto;
-}
-
-.markdown-body table th {
-  font-weight: 600;
-}
-
-.markdown-body table td,
-.markdown-body table th {
-  padding: 0.375rem 0.75rem;
-  border: 1px solid #717171;
-}
-
-.markdown-body table tr {
-  background-color: #2d2d2d;
-  border-top: 1px solid #717171;
-}
-
-.markdown-body table th {
-  background-color: #434343;
-}
-
-.markdown-body table tr:nth-child(2n) {
-  background-color: #323232;
-}
-
-.markdown-body img,.markdown-body video {
-  max-width: 100%;
-  box-sizing: initial;
-}
-
-.markdown-body img[align=right] {
-  padding-left: 1.25rem;
-}
-
-.markdown-body img[align=left] {
-  padding-right: 1.25rem;
-}
-
-.markdown-body code {
-  padding: .2rem .4rem;
-  margin: 0;
-  font-size: 85%;
-  background-color: #333333;
-  color: #999999;
-  border-radius: 0.1875rem;
-}
-
-.markdown-body pre {
-  word-wrap: normal;
-}
-
-.markdown-body pre>code {
-  padding: 0;
-  margin: 0;
-   font-size: 100%;
-  word-break: normal;
-  white-space: pre;
-  background: transparent;
-  border: 0;
-}
-
-.markdown-body .highlight {
-  margin-bottom: 1rem;
-}
-
-.markdown-body .highlight pre {
-  margin-bottom: 0;
-  word-break: normal;
-}
-
-.markdown-body .highlight pre,
-.markdown-body pre {
-  padding: 1rem;
-  overflow: auto;
-  font-size: 85%;
-  line-height: 1.45;
-  background-color: #333333;
-  border-radius: 0.1875rem;
-}
-
-.markdown-body pre code {
-  display: inline;
-  max-width: auto;
-  padding: 0;
-  margin: 0;
-  overflow: visible;
-  line-height: inherit;
-  word-wrap: normal;
-  background-color: initial;
-  border: 0;
-  color: #999999;
-}
-
-.markdown-body .task-list-item {
-  list-style-type: none;
-}
-
-.markdown-body .task-list-item+.task-list-item {
-  margin-top: 0.1875rem;
-}
-
-.markdown-body .task-list-item input {
-  margin: 0 .2rem .25rem -1.6rem;
-  vertical-align: middle;
-}
-
-.markdown-body .task-list-item input[type="checkbox"]{
--webkit-appearance: none;-moz-appearance: none;appearance: none;
-width: 0.875rem; height: 0.875rem;outline: none;
-border: 1px solid #99cc99;border-radius: 2px; 
-}
-.markdown-body .task-list-item input[type="checkbox"]:checked {
-  background:no-repeat center/80% url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20fill%3D%22%2399cc99%22%20d%3D%22M173.898%20439.404l-166.4-166.4c-9.997-9.997-9.997-26.206%200-36.204l36.203-36.204c9.997-9.998%2026.207-9.998%2036.204%200L192%20312.69%20432.095%2072.596c9.997-9.997%2026.207-9.997%2036.204%200l36.203%2036.204c9.997%209.997%209.997%2026.206%200%2036.204l-294.4%20294.401c-9.998%209.997-26.207%209.997-36.204-.001z%22%2F%3E%3C%2Fsvg%3E") ;
-}
-
-.markdown-body section.footnotes{
-    margin-top:3rem;
-    border-top:solid 1px #494949;
-    padding-top:0px;
-}
-
-@media (prefers-color-scheme: dark) {
-  .markdown-body mark{color: #111;}
-}
-
-/* PrismJS 1.23.0
-https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
-/**
- * prism.js default theme for JavaScript, CSS and HTML
- * Based on dabblet (http://dabblet.com)
- * @author Lea Verou
- */
-
-
-code[class*="language-"],
-pre[class*="language-"] {
-    color: black;
-    background: none;
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    text-align: left;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
-}
-
-@media print {
-    code[class*="language-"],
-    pre[class*="language-"] {
-        text-shadow: none;
-    }
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-    padding: 1rem;
-    margin: .5rem 0;
-    overflow: auto;
-}
-
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-    background-color: #333333;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-    padding: .1rem;
-    border-radius: .3rem;
-    white-space: normal;
-}
-
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-    color: #48be66;
-}
-
-.token.punctuation {
-    color: #8b86c9;
-}
-
-.token.namespace {
-    opacity: .7;
-}
-
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
-    color: #8b86c9;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-    color: #e6424b;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-    color: #$$codeBlockColor$$;
-}
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-    color: #c33795;
-}
-
-.token.function,
-.token.class-name {
-    color: #67878e;
-}
-
-.token.regex,
-.token.important,
-.token.variable {
-    color: #d38e63;
-}
-
-.token.important,
-.token.bold {
-    font-weight: bold;
-}
-.token.italic {
-    font-style: italic;
-}
-
-.token.entity {
-    cursor: help;
-}
-
-
-pre[class*="language-"].line-numbers {
-  position: relative;
-  padding-left: 3.8rem;
-  counter-reset: linenumber;
-}
-
-pre[class*="language-"].line-numbers > code {
-  position: relative;
-  white-space: inherit;
-}
-
-.line-numbers .line-numbers-rows {
-  position: absolute;
-  pointer-events: none;
-  top: 0;
-  font-size: 100%;
-  left: -3.8rem;
-  width: 3rem; /* works for line-numbers below 1000 lines */
-  letter-spacing: -1px;
-  border-right: 1px solid #6b6b6b;
-
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-}
-
-  .line-numbers-rows > span {
+<!DOCTYPE html>
+<html lang="en">
+
+<script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notes - Options, Futures and Other Derivatives (John Hull)</title>
+<style>
+/* Style for sidebar */
+.sidebar {
+    /* height: 100%; */
+    height: calc(100vh - 40px);
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    padding-top: 20px;
+    padding-bottom: 100px;
+    overflow-y: auto;
+}
+  
+/* Style for sidebar items */
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
     display: block;
-    counter-increment: linenumber;
-  }
-
-    .line-numbers-rows > span:before {
-      content: counter(linenumber);
-      color: #6b6b6b;
-      display: block;
-      padding-right: 0.8rem;
-      text-align: right;
-    }
-
-
-</style><style>.mweb-charts{background:#fff;}
-body{ box-sizing: border-box;
-    margin: 0 auto;}
-@media print{
-    pre, code, pre code {
-     overflow: visible !important;
-     white-space: pre-wrap !important;       /* css-3 */
-     white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
-     white-space: -pre-wrap !important;      /* Opera 4-6 */
-     white-space: -o-pre-wrap !important;    /* Opera 7 */
-     word-wrap: break-word !important;       /* Internet Explorer 5.5+ */
-    }
-    html,body{margin:0;padding:4px;}
 }
 
-
-
-div.code-toolbar {
-  position: relative;
+/* Style for focus */
+.sidebar a:focus {
+    outline: none; /* Remove the default focus outline */
+    color: black;
+    position: relative;
+    background-color: #fff;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: #fff;
 }
 
-div.code-toolbar > .toolbar {
-  position: absolute;
-  z-index: 10;
-  top: .3em;
-  right: .2em;
-  transition: opacity 0.3s ease-in-out;
-  opacity: 0;
+/* Style for active */
+.sidebar a:active {
+    outline: none; /* Remove the default focus outline */
+    color: black;
+    position: relative;
+    background-color: #fff;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: #fff;
 }
+/* Style for hovering */
+.sidebar a:hover {
+    color: black;
+    background: #fff;
+    outline: none;
+    position: relative;
+    background-color: #aaa;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+/* Style for content */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
+/* Hide all content sections by default */
+.section {
+    display: none;
+}
+.sidebar a.active {
+    color: black;
+    background-color: #aaa;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+/* Styles for the text body, bold and italic text */
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+a {
+    color: rgb(255, 1, 196);
+}
+b, strong {
+    color: orange;
+}
+i, em {
+    color: orchid;
+}
+/* style for header colors */
+h1, h2, h3, h4, h5, h6 {
+    color: #00bfff;
+}
+/* style for table */
+table {
+    border-collapse: collapse;
+}
+th, td, tr {
+    border: 1px solid;
+    text-align: center;
+    padding: 5px;
+    font-weight: 400
+}
+</style>
+</head>
 
-div.code-toolbar:hover > .toolbar {
-  opacity: 1;
-}
+<body>
 
-/* Separate line b/c rules are thrown out if selector is invalid.
-   IE11 and old Edge versions don't support :focus-within. */
-div.code-toolbar:focus-within > .toolbar {
-  opacity: 1;
-}
+<div class="sidebar">
+<a href="#section0" class="active">Content</a>
+<a href="#section1">Chapter 1</a>
+<a href="#section2">Chapter 2</a>
+<a href="#section3">Chapter 3</a>
+<a href="#section4">Chapter 4</a>
+<a href="#section5">Chapter 5</a>
+<a href="#section6">Chapter 6</a>
+<a href="#section7">Chapter 7</a>
+<a href="#section8">Chapter 8</a>
+<a href="#section9">Chapter 9</a>
+<a href="#section10">Chapter 10</a>
+<a href="#section11">Chapter 11</a>
+<a href="#section12">Chapter 12</a>
+<a href="#section13">Chapter 13</a>
+<a href="#section14">Chapter 14</a>
+<a href="#section15">Chapter 15</a>
+<a href="#section16">Chapter 16</a>
+<a href="#section17">Chapter 17</a>
+<a href="#section18">Chapter 18</a>
+<a href="#section19">Chapter 19</a>
+<a href="#section20">Chapter 20</a>
+</div>
 
-div.code-toolbar > .toolbar > .toolbar-item {
-  display: inline-block;
-}
+<div class="content">
 
-div.code-toolbar > .toolbar > .toolbar-item > a {
-  cursor: pointer;
-}
 
-div.code-toolbar > .toolbar > .toolbar-item > button {
-  background: none;
-  border: 0;
-  color: inherit;
-  font: inherit;
-  line-height: normal;
-  overflow: visible;
-  padding: 0;
-  -webkit-user-select: none; /* for button */
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
 
-div.code-toolbar > .toolbar > .toolbar-item > a,
-div.code-toolbar > .toolbar > .toolbar-item > button,
-div.code-toolbar > .toolbar > .toolbar-item > span {
-  color: inherit;
-  font-size: .8em;
-  padding: 4px .5em;
-  background: #f5f2f0;
-  background: rgba(224, 224, 224, 0.4);
-  box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);
-  border-radius: .5em;
-}
 
-div.code-toolbar > .toolbar > .toolbar-item > a:hover,
-div.code-toolbar > .toolbar > .toolbar-item > a:focus,
-div.code-toolbar > .toolbar > .toolbar-item > button:hover,
-div.code-toolbar > .toolbar > .toolbar-item > button:focus,
-div.code-toolbar > .toolbar > .toolbar-item > span:hover,
-div.code-toolbar > .toolbar > .toolbar-item > span:focus {
-  color: inherit;
-  text-decoration: none;
-}
-</style><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script><script>!function(){if("undefined"!=typeof Prism&&"undefined"!=typeof document){var e=[],t={},n=function(){};Prism.plugins.toolbar={};var a=Prism.plugins.toolbar.registerButton=function(n,a){var r;r="function"==typeof a?a:function(e){var t;return"function"==typeof a.onClick?((t=document.createElement("button")).type="button",t.addEventListener("click",(function(){a.onClick.call(this,e)}))):"string"==typeof a.url?(t=document.createElement("a")).href=a.url:t=document.createElement("span"),a.className&&t.classList.add(a.className),t.textContent=a.text,t},n in t?console.warn('There is a button with the key "'+n+'" registered already.'):e.push(t[n]=r)},r=Prism.plugins.toolbar.hook=function(a){var r=a.element.parentNode;var l=a.element.classList;if(l.contains('language-mermaid') || l.contains('language-echarts') || l.contains('language-plantuml')){return;} if(r&&/pre/i.test(r.nodeName)&&!r.parentNode.classList.contains("code-toolbar")){var o=document.createElement("div");o.classList.add("code-toolbar"),r.parentNode.insertBefore(o,r),o.appendChild(r);var i=document.createElement("div");i.classList.add("toolbar");var l=e,d=function(e){for(;e;){var t=e.getAttribute("data-toolbar-order");if(null!=t)return(t=t.trim()).length?t.split(/\s*,\s*/g):[];e=e.parentElement}}(a.element);d&&(l=d.map((function(e){return t[e]||n}))),l.forEach((function(e){var t=e(a);if(t){var n=document.createElement("div");n.classList.add("toolbar-item"),n.appendChild(t),i.appendChild(n)}})),o.appendChild(i)}};a("label",(function(e){var t=e.element.parentNode;if(t&&/pre/i.test(t.nodeName)&&t.hasAttribute("data-label")){var n,a,r=t.getAttribute("data-label");try{a=document.querySelector("template#"+r)}catch(e){}return a?n=a.content:(t.hasAttribute("data-url")?(n=document.createElement("a")).href=t.getAttribute("data-url"):n=document.createElement("span"),n.textContent=r),n}})),Prism.hooks.add("complete",r)}}();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.css"><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script><style>div.code-toolbar > .toolbar > .toolbar-item > a, div.code-toolbar > .toolbar > .toolbar-item > button, div.code-toolbar > .toolbar > .toolbar-item > span {padding: 4px .5em; background: #f5f2f0; background: rgba(224, 224, 224, 0.4);}</style><script>window.MathJax = {     tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] } ,     startup: {     pageReady() {       return MathJax.startup.defaultPageReady().then(function () {          window.mweb_mathjax_ready_val = 'yes';          if(window.mweb_mathjax_ready !== undefined){ mweb_mathjax_ready(); }       });     }   }};document.addEventListener('DOMContentLoaded', function(event) {    if (typeof Prism != 'undefined') {         Prism.highlightAll();     }});window.mweb_mathjax_ready_val = '';function theMWebMathJaxRenderIsReady(key){ return window.mweb_mathjax_ready_val; }</script><script>window.MathJax = { tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] } }; </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script> <style>body{max-width:808px; padding:24px;}</style></head><body><div id='markdown_content' class='markdown-body'><h1><a id="machine-learning-notes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Machine Learning Notes</h1>
-<h2><a id="table-of-contents" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table of contents</h2>
-<ol>
-<li><a href="#DataCleaning">Data Cleaning</a></li>
-<li><a href="#DataPreprocessing">Data Preprocessing</a>
-<ol>
-<li><a href="#DataScalingandStandardizing">Data scaling and standardizing</a></li>
-<li><a href="#Imputation">Imputation</a></li>
-<li><a href="#Pipeline">Pipeline</a></li>
-</ol>
-</li>
-<li><a href="#SupervisedLearning">Supervised Learning</a>
-<ol>
-<li><a href="#BiasVarianceTradeOff">Bias-variance trade-off</a></li>
-<li><a href="#kFoldCrossValidation&amp;GridSearch">\(k\)-fold cross validation &amp; grid search</a></li>
-<li><a href="#GradientDescent">Gradient descent</a></li>
-<li><a href="#Regularization">Regularization</a></li>
-<li><a href="#ConfusionMatrix">Confusion matrix</a></li>
-<li><a href="#kNN">\(k\)-nearest neighbors</a></li>
-<li><a href="#LinearAndLogisticRegression">Linear and logistic regression</a></li>
-<li><a href="#SupportedVectorMachine">Supported vector machine</a></li>
-<li><a href="#BayesBasedClassifiers">Bayes' based classifiers</a></li>
-<li><a href="#DecisionTrees">Decision trees</a></li>
-<li><a href="#TimeSeries">Time series</a></li>
-</ol>
-</li>
-<li><a href="#UnsupervisedLearning">Unsupervised Learning</a>
-<ol>
-<li><a href="#PrincipalComponentsAnalysis">Principal components analysis</a></li>
-<li><a href="#tDistributedStochasticNeighborEmbedding">\(t\)-distributed stochastic neighbor embedding</a></li>
-<li><a href="#kMeansClustering">\(k\) means clustering</a></li>
-<li><a href="#HierarchicalClustering">Hierarchical clustering</a></li>
-</ol>
-</li>
-<li><a href="#NeuralNetworks">Neural Networks</a></li>
-<li><a href="#TransformerModel">Transformer model</a></li>
-</ol>
-<h2><a id="data-cleaning-a-name-datacleaning-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Cleaning <a name="DataCleaning"></a></h2>
-<h2><a id="data-preprocessing-a-name-datapreprocessing-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Preprocessing <a name="DataPreprocessing"></a></h2>
-<h3><a id="data-scaling-and-standardizing-a-name-datascalingandstandardizing-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data scaling And standardizing <a name="DataScalingandStandardizing"></a></h3>
+<div id="section0" class="section">
+<h1><a id="machine-learning-notes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Machine Learning Notes</h1>
+</div>
+<div id="section1" class="section">
+<h2><a id="data-preprocessing" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Preprocessing</h2>
+<h3><a id="data-scaling-and-standardizing" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data scaling And standardizing</h3>
 \[x_i\leftarrow\dfrac{x_i-\mu}{\sigma}
 \]
 <h4><a id="pros-cons" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros &amp; Cons</h4>
 <p>Dataset will be normalized, avoid unbalanced dataset</p>
 <h4><a id="usage" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h4>
 <p><code>sklearn.StandardScaler</code></p>
-<h3><a id="imputation-a-name-imputation-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Imputation <a name="Imputation"></a></h3>
+<h3><a id="imputation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Imputation</h3>
 <p>The process of replace missing values is known as data <em>imputation</em></p>
 <h4><a id="examples" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h4>
 <ul>
@@ -806,7 +166,7 @@ div.code-toolbar > .toolbar > .toolbar-item > span:focus {
 </ul>
 <h6><a id="remark" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remark</h6>
 <p>You should not use the labels or test data set to imputate training data set</p>
-<h3><a id="pipelines-a-name-pipeline-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pipelines <a name="Pipeline"></a></h3>
+<h3><a id="pipelines" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pipelines</h3>
 <h5><a id="definition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Definition</h5>
 <p>A <em>pipeline</em> is a series of data processing components arranged sequentially, each component in the pipeline performs a specific task.</p>
 <h6><a id="pros-cons" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros &amp; Cons</h6>
@@ -823,9 +183,11 @@ pipe = Pipeline([
 ])
 </code></pre>
 <p><code>PolynomialFeatures</code> generate higher powers \(x^n\) from \(x\).</p>
-<h2><a id="supervised-learning-a-name-supervisedlearning-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supervised Learning <a name="SupervisedLearning"></a></h2>
+</div>
+<div id="section2" class="section">
+<h2><a id="supervised-learning" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supervised Learning</h2>
 <p>Given dataset \(\{(\mathbf x_i,\mathbf y_i)\}_{i=1}^N\), where \(\mathbf x_i\) are <em>feature vectors</em>, its entries are called <em>features</em>, and \(\mathbf y_i\) are <em>labels</em> or <em>predictions</em>. Assume \(\mathbf y=f(\mathbf x)+\mathbf\epsilon\) where \(f\) is a continuous function and \(\mathbf\epsilon\) is random noise (\(E(\mathbf \epsilon)=\mathbf 0\)). <em>Supervised learning</em> is the process of using a machine learning algorithm to &quot;learn&quot; \(f\) from the dataset, and make predictions.</p>
-<h3><a id="bias-variance-trade-off-a-name-biasvariancetradeoff-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bias-variance trade-off <a name="BiasVarianceTradeOff"></a></h3>
+<h3><a id="bias-variance-trade-off" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bias-variance trade-off</h3>
 <p>Suppose \(y = f(x) + \epsilon\) is the real function (\(E[\epsilon]=0\), \(Var[\epsilon]=\sigma^2\)) and \(\hat f(x)\) is the model. Then the <em>total error</em> is equal to</p>
 \[\begin{align*}
 E[(y-\hat f)^2] &amp;= E[y^2]-2E[y\hat f]+E[\hat f^2]\\
@@ -841,7 +203,7 @@ E[(y-\hat f)^2] &amp;= E[y^2]-2E[y\hat f]+E[\hat f^2]\\
 \]
 <h6><a id="remark" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remark</h6>
 <p>When underfitting the model, the model tends to be too simple so that the bias is huge. When overfitting the model (e.g., using a linear equation approximate a quadratic), the model tends to be too complex, so the variance within is great (e.g., use a high polynomial to approximate a linear relation with small random noise). Therefore, there is no way to get rid of both, one has to make the tradeoff between bias and variance so that both aren't too significant.</p>
-<h3><a id="k-fold-cross-validation-grid-search-a-name-kfoldcrossvalidation-gridsearch-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(k\)-fold cross validation &amp; grid search <a name="kFoldCrossValidation&GridSearch"></a></h3>
+<h3><a id="k-fold-cross-validation-grid-search" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(k\)-fold cross validation &amp; grid search</h3>
 <ol>
 <li><em>\(k\)-fold cross validation</em> divide the dataset into \(k\) subsets. Train the model on \(k-1\) subsets independently \(k\) times by single out each as the validation set. And eventually take the average of the parameters.</li>
 <li><em>Grid search</em> provide an array of values for each parameter and test model with every value and choose the best one.</li>
@@ -867,7 +229,7 @@ GridSearchCV(
 <li>Dataset size is too small. This can lead to deficiencies in both model fitting and estimation.</li>
 <li>Model training time is too long. It might not worth the time.</li>
 </ol>
-<h3><a id="gradient-descent-a-name-gradientdescent-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gradient descent <a name="GradientDescent"></a></h3>
+<h3><a id="gradient-descent" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gradient descent</h3>
 <p>The method of <em>gradient descent</em> is to decrease the loss function \(\ell\) by \(\beta\leftarrow\beta-\alpha\nabla(\beta)\).<br />
 Some common adjustments are</p>
 <ol>
@@ -917,11 +279,11 @@ v_{t+1}=\beta_2v_t+|\nabla L(\theta_t)|^2\\
 \]
 The normalization prevents bias from early initialization (for example, \(m_0=v_0=0\), dividing \(1-\beta_1,1-\beta_2\) could make them less biased, as time progress, \(\beta^t\) has exponential decay and goes to 0 and has no effect in normalizing).</li>
 </ul>
-<h3><a id="regularization-a-name-regularization-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Regularization <a name="Regularization"></a></h3>
+<h3><a id="regularization" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Regularization</h3>
 <p>Regularization is adding penalty terms to reduce the loss function. It controls the magnitude of the feature vector \(\beta\)</p>
 <ol>
-<li><em>Ridge regularization</em> is to add \(\lambda\|\beta\|_2^2\)</li>
-<li><em>Lasso regularization</em> is to add \(\lambda\|\beta\|_1\)</li>
+<li><em>Ridge regularization</em> is to add $\lambda|\beta|_2^2$</li>
+<li><em>Lasso regularization</em> is to add $\lambda|\beta|_1$</li>
 </ol>
 <h4><a id="pros-cons" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros &amp; Cons</h4>
 <ol>
@@ -929,8 +291,8 @@ The normalization prevents bias from early initialization (for example, \(m_0=v_
 <li>Ridge is better if it depends on almost all the features, because it handles colinearity better. However it is computationally costly with a large number of predictors</li>
 </ol>
 <h4><a id="elastic-net" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Elastic net</h4>
-<p>Sometimes it might be better to simply use the <em>elastic net</em> regurlarization which add \(\lambda_1\|\beta\|_1+\lambda_2\|\beta\|_2^2\)</p>
-<h3><a id="confusion-matrix-a-name-confusionmatrix-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Confusion matrix <a name="ConfusionMatrix"></a></h3>
+<p>Sometimes it might be better to simply use the <em>elastic net</em> regurlarization which add $\lambda_1|\beta|_1+\lambda_2|\beta|_2^2$</p>
+<h3><a id="confusion-matrix" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Confusion matrix</h3>
 <p>The <em>confusion matrix</em> is the \(2\times2\) contingency table, where the rows are the predicted values, and columns are the actual values.</p>
 <table>
 <thead>
@@ -971,9 +333,9 @@ Recall is used if the cost for false negative is high, e.g. disease detection</l
 <p><em>Area under ROC (AUROC)</em> measures a comprehensive classifier's performance, if it is 0.5, and it is like random, if it is 1, then it is outstanding discrimination. For example, predicting customer churn.</p>
 <p><em>Coefficient of determination (\(R^2\))</em> is defined to be \(1-\dfrac{\sum_i(y_i-\hat y_i)^2}{\sum_i(y_i-\bar y)^2}\). If \(R^2=0\), it means the model have worst predictions since it is a constant average prediction, if \(R^2=1\), then the model is accurate.</p>
 <p>GAIN/LIFT charts</p>
-<h3><a id="k-nearest-neighbors-a-name-knn-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(k\)-nearest neighbors <a name="kNN"></a></h3>
+<h3><a id="k-nearest-neighbors" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(k\)-nearest neighbors</h3>
 <p>The <em>\(k\)-nearest neighbors</em> algorithm assigns the most likely label from the nearest neighbors.</p>
-<h3><a id="linear-and-logistic-regression-a-name-linearandlogisticregression-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Linear and logistic regression <a name="LinearAndLogisticRegression"></a></h3>
+<h3><a id="linear-and-logistic-regression" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Linear and logistic regression</h3>
 <p><em>Logistic regression</em> used in binary classification by \(p(x)=\dfrac{1}{1+e^{-\beta x}}\).</p>
 <h4><a id="interaction-terms-in-linear-regression" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Interaction terms in linear regression</h4>
 <p>When you have categorical vairables, you should add interaction terms since it might has a impact on other variables.</p>
@@ -995,23 +357,23 @@ Recall is used if the cost for false negative is high, e.g. disease detection</l
 <li><em>Tree regression</em> use MSE as loss function</li>
 <li><em>Supported vector regression</em></li>
 </ol>
-<h3><a id="supported-vector-machine-a-name-supportedvectormachine-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supported vector machine <a name="SupportedVectorMachine"></a></h3>
+<h3><a id="supported-vector-machine" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supported vector machine</h3>
 <p>In binary classification, given a dataset \(\{(\mathbf x_i,y_i)\}_{i=1}^N\), where \(y_i=\pm1\) is the label. Naively, <em>supported vector machine</em> is used to find a border that maximize the margin between two classes.</p>
 <h4><a id="hard-margin" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hard margin</h4>
-<p>If the data is linear separable, we wish to find a hyperplane \(\mathbf w\cdot\mathbf x-b=\mathbf0\) that separate these two classes with maximal margin. Equivalently, it is to solve the following problem: Find \(\mathbf w\) and \(b\) that minimize \(\|\mathbf w\|_2^2\) and subject to</p>
+<p>If the data is linear separable, we wish to find a hyperplane \(\mathbf w\cdot\mathbf x-b=\mathbf0\) that separate these two classes with maximal margin. Equivalently, it is to solve the following problem: Find \(\mathbf w\) and \(b\) that minimize $|\mathbf w|_2^2$ and subject to</p>
 \[y_i(\mathbf w\cdot\mathbf x_i-b)\geq 1
 \]
 <p>The geometric interpretation depends on the fact:</p>
 \[\text{The distance between the origin and the plane $\mathbf w\cdot\mathbf x-b=0$ is $\frac{|b|}{\|\mathbf w\|_2}$}
 \]
-<p>We want to choose \(\mathbf w,b\) such that \(\mathbf w\cdot\mathbf x-b=1\), \(\mathbf w\cdot\mathbf x-b=-1\) barely touches two classes. So the margin between each class and the border would be \(\frac{1}{\|\mathbf w\|_2}\). Note that this max-margin hyperplane is completely determined by those \(\mathbf x_i\) that lie nearset to it, they are called <em>support vectors</em>.</p>
+<p>We want to choose \(\mathbf w,b\) such that \(\mathbf w\cdot\mathbf x-b=1\), \(\mathbf w\cdot\mathbf x-b=-1\) barely touches two classes. So the margin between each class and the border would be $\frac{1}{|\mathbf w|_2}$. Note that this max-margin hyperplane is completely determined by those \(\mathbf x_i\) that lie nearset to it, they are called <em>support vectors</em>.</p>
 <h4><a id="hinge-loss" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hinge loss</h4>
 <p>The <em>hinge loss</em> is a function like \(\ell(y)=\max(0,1-t\cdot y)\).</p>
 <h4><a id="soft-margin" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Soft margin</h4>
 <p>If the dataset is not linearly separable, we introduce the <em>hinge function</em> \(\max(0,1-y_i(\mathbf w\cdot\mathbf x_i-b))\), this penalize data on the wrong side of the margin. We can define a loss function</p>
 \[\lambda\|\mathbf w\|_2^2+\frac{1}{N}\sum_{i=1}^N\max(0,1-y_i(\mathbf w\cdot\mathbf x_i-b))
 \]
-<p>If \(\lambda\) is small, then it is basically hard-margin SVM. A soft-margin optimization problem could be to minimize \(\lambda\|\mathbf w\|_2^2+\frac{1}{N}\sum_{i=1}^N\zeta_i\) subject to</p>
+<p>If \(\lambda\) is small, then it is basically hard-margin SVM. A soft-margin optimization problem could be to minimize $\lambda|\mathbf w|<em>2^2+\frac{1}{N}\sum</em>{i=1}^N\zeta_i$ subject to</p>
 \[y_i(\mathbf w\cdot\mathbf x_i-b)\geq 1-\zeta_i,\quad \zeta_i\geq0
 \]
 <h4><a id="nonlinear-kernels" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Nonlinear kernels</h4>
@@ -1023,13 +385,13 @@ Note that for example if we choose \(\varphi(x_1,x_2)=(x_1^2,\sqrt2x_1x_2,x_2^2)
 \[\varphi(\mathbf x)\cdot\varphi(\mathbf y)=x_1^2x_2^+2x_1x_2y_2y_2+y_1^2y_2^2=(x_1y_1+x_2y_2)^2=(\mathbf x\cdot\mathbf y)^2
 \]
 </li>
-<li>Gaussian Radial Kernel: \(\kappa(\mathbf x_i,\mathbf x_j)=\exp(-\gamma\|\mathbf x_i-\mathbf x_j\|_2^2)\).</li>
+<li>Gaussian Radial Kernel: $\kappa(\mathbf x_i,\mathbf x_j)=\exp(-\gamma|\mathbf x_i-\mathbf x_j|_2^2)$.</li>
 <li>Sigmoid: \(\kappa(\mathbf x_i,\mathbf x_j)=\tanh(\gamma\mathbf x_i\cdot\mathbf x_j+r)\).</li>
 </ol>
 <p>We can solve the dual optimization problem.</p>
-<h3><a id="bayes-based-classifiers-a-name-bayesbasedclassifiers-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bayes' based classifiers <a name="BayesBasedClassifiers"></a></h3>
+<h3><a id="bayes-based-classifiers" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bayes' based classifiers</h3>
 <h4><a id="linear-discriminant-analysis-lda" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Linear discriminant analysis (LDA)</h4>
-<p>Assume \(X|y=c\sim\mathcal N(\mu_c,\sigma^2)\), in the case where \(X\) has one feature, we have</p>
+<p>Assume $X|y=c\sim\mathcal N(\mu_c,\sigma^2)$, in the case where \(X\) has one feature, we have</p>
 \[f_c(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu_c)^2}{2\sigma^2}\right)
 \]
 <p>Then Bayes' rule tells us</p>
@@ -1040,17 +402,17 @@ Note that for example if we choose \(\varphi(x_1,x_2)=(x_1^2,\sqrt2x_1x_2,x_2^2)
 \]
 \[\hat\sigma^2=\frac{1}{N-C}\sum_{c=1}^C\sum_{y_i=c}(X_i-\hat\mu_c)^2
 \]
-<p>We make predictions by choosing \(c\) rendering maximum likelihood \(P(y=c|X)\), this is equivalent to choose largest <em>discriminant function</em></p>
+<p>We make predictions by choosing \(c\) rendering maximum likelihood $P(y=c|X)$, this is equivalent to choose largest <em>discriminant function</em></p>
 \[\delta_c(X)=X\frac{\mu_c}{\sigma^2}-\frac{\mu_c^2}{2\sigma^2}+\log(\pi_c)
 \]
-<p>Here we should use \(\hat\mu_c,\hat\sigma\). In the case where \(X\) has \(m\) features, we have \(X|y=c\sim\mathcal N(\mu_c,\Sigma)\), and</p>
+<p>Here we should use \(\hat\mu_c,\hat\sigma\). In the case where \(X\) has \(m\) features, we have $X|y=c\sim\mathcal N(\mu_c,\Sigma)$, and</p>
 \[f_c(\mathbf x)=\frac{1}{(2\pi)^{m/2}|\Sigma|^{1/2}}\exp\left(-\frac{1}{2}(\mathbf x-\mu_c)^T\Sigma^{-1}(\mathbf x-\mu_c)\right)
 \]
 <p>And the discriminant function will be</p>
 \[\delta_c(X)X^T\Sigma^{-1}\mu_c-\frac{1}{2}\mu_c^T\Sigma^{-1}\mu_c+\log(\pi_c)
 \]
 <h4><a id="quadratic-discriminant-analysis-qda" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quadratic discriminant analysis (QDA)</h4>
-<p>Assume \(X|y=c\sim\mathcal N(\mu_c,\Sigma_c)\), we get discriminant</p>
+<p>Assume $X|y=c\sim\mathcal N(\mu_c,\Sigma_c)$, we get discriminant</p>
 \[\begin{align*}
 \delta_c(X)&amp; = -\frac{1}{2} \left( X - \mu_c \right)^T \Sigma_c^{-1}  \left(X- \mu_c  \right) - \frac{1}{2}\log\left(|\Sigma_c| \right) + \log(\pi_c)\\
 &amp;= -\frac{1}{2} X^{T} \sigma^{-1}_c X + X^{T} \sigma^{-1}_c \mu_c - \frac{1}{2} \mu_c^T \sigma_c^{-1} \mu_c - \frac{1}{2}\log\left(|\Sigma_c| \right) + \log(\pi_c)
@@ -1074,7 +436,7 @@ Note that for example if we choose \(\varphi(x_1,x_2)=(x_1^2,\sqrt2x_1x_2,x_2^2)
 <li>LDA works better if the data can be mostly separated by linear decision boundaries. QDA works better if the decision boundaries are not linear.</li>
 <li>If we have really small amount of data, we can use naive Bayes model. This in general a decent classifier.</li>
 </ol>
-<h3><a id="decision-trees-a-name-decisiontrees-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Decision trees <a name="DecisionTrees"></a></h3>
+<h3><a id="decision-trees" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Decision trees</h3>
 <h4><a id="pros-cons" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros &amp; Cons</h4>
 <ul>
 <li>Pros
@@ -1122,8 +484,6 @@ Note that for example if we choose \(\varphi(x_1,x_2)=(x_1^2,\sqrt2x_1x_2,x_2^2)
 <p>The <em>CART</em> (Classification and Regression Trees) algorithm is a decision tree-based algorithm that can be used for both classification and regression problems in machine learning. It works by recursively partitioning the training data into smaller subsets using binary splits.</p>
 <h4><a id="random-forest" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Random Forest</h4>
 <p>The <em>random forest</em> model is made by building many different decision trees. These trees are made &quot;different&quot; through a variety of random perturbations. Finally take the average of all trees.</p>
-<h4><a id="bagging-and-pasting" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bagging and pasting</h4>
-<p><em>Bagging</em> and <em>pasting</em> are two ways to generate random forest. Where bagging is with replacement and pasting is without replacement. In general people tend to use bagging as a default. The reason is that bagging requires less data.</p>
 <h4><a id="boosting" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Boosting</h4>
 <p>A statistical learning algorithm is said to be a</p>
 <ul>
@@ -1148,10 +508,10 @@ w_i\exp(\alpha_j), \hat y^{(j)}_i\neq y_i
 <h4><a id="gradient-boosting" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gradient boosting</h4>
 <p><em>Gradient boosting</em> is iteratively building an ensenble of weak learners where a learner is directly trained to model the previous learner's errors. Suppose we have built the first \(j\) weak learners, we build the \(j+1\)-th weak learner by trained to learn to predict ther residual \(r_j\) of the previous learner, and set \(h_{j+1}(X)=\hat r_j\) as its estimate of the residual, and then calculate the residual of this weak learner \(r_{j+1}=r_j-h_j(X)\). By the end the strong learner \(h(X)\) found is the sum of all the weak learners \(h_j(X)\).</p>
 <p><em>XGBoost (extreme Gradient boosting)</em> is a specific implementation of gradient boosting that is optimized for performance, efficiency, and scalability. So it is very popular.</p>
-<h3><a id="time-series-a-name-timeseries-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Time series <a name="TimeSeries"></a></h3>
+<h3><a id="time-series" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Time series</h3>
 <ol>
 <li>A <em>time series</em> is a sequence of data points \(\{(\mathbf x_t,y_t)\}\) where \(\mathbf x_t\) is a collection of features, \(y_t\) is a numeric variable of interest, and \(t\) stands for time.</li>
-<li>Given a time series \(\{(\mathbf x_{t_i},y_{t_i})\}_{i=1}^n\), a <em>forecast</em> is \(y_t=f(\mathbf x_t,t|\{y_\tau\}_{\tau&lt;t})+\epsilon_t\).</li>
+<li>Given a time series \(\{(\mathbf x_{t_i},y_{t_i})\}_{i=1}^n\), a <em>forecast</em> is $y_t=f(\mathbf x_t,t|{y_\tau}_{\tau&lt;t})+\epsilon_t$.</li>
 <li>A model for time series is a series of random variables \(\{y_t\}_{t\in T}\), where \(y_t\) only depends on \(\mathbf x_t,t\), and \(\mathbf x_t\) is a collection of features that only depends on \(t\).</li>
 </ol>
 <h4><a id="baseline-forecasting-models" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Baseline forecasting models</h4>
@@ -1214,25 +574,27 @@ here \(\gamma(\tau)\) is called the <em>autovariance</em>, and note that \(\oper
 </li>
 <li>An autoregressive integrated moving average model (ARIMA(\(p,d,q\))) is a time series that its \(d\)-th difference is an ARMA(\(p,q\)).</li>
 </ol>
-<h2><a id="unsupervised-learning-a-name-unsupervisedlearning-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unsupervised Learning <a name="UnsupervisedLearning"></a></h2>
-<h3><a id="principal-components-analysis-a-name-principalcomponentsanalysis-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Principal components analysis <a name="PrincipalComponentsAnalysis"></a></h3>
+</div>
+<div id="section3" class="section">
+<h2><a id="unsupervised-learning" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unsupervised Learning</h2>
+<h3><a id="principal-components-analysis" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Principal components analysis</h3>
 <p><em>Principal components analysis (PCA)</em> is a <em>dimension reduction</em> algorithm. Thinking in terms of optimization, its goal is to project into a lower dimensional space in a way that maximizes variance. A heuristic algorithm would be</p>
 <ol>
 <li>Center the dataset so that each feature has zero mean.</li>
 <li>Find the direction with highest variance, this produces the first principal component.</li>
 <li>Orthogoanl to the first \(k\) principal components, find a direction that maximizes variance, choose as the next principal component.</li>
 </ol>
-<p>The goal is to find \(\mathbf w=(w_1,\cdots,w_m)^T\) such that \(\|\mathbf w\|_2=1\) such that</p>
+<p>The goal is to find \(\mathbf w=(w_1,\cdots,w_m)^T\) such that $|\mathbf w|_2=1$ such that</p>
 \[\operatorname{Var}(X\mathbf w)=E(\mathbf w^TX^TX\mathbf w)=\mathbf w^TE(X^TX)\mathbf w=\mathbf w^T\Sigma\mathbf w
 \]
 <p>Here \(\Sigma\) is the covariance matrix of \(X\). This is the set up for <em>singular value decomposition</em>. The entries of \(\mathbf w\) is the <em>explained variance</em>. To choose the approriate number of principal components, we can look at the curve of explained variance vs number of principal components. Principal components are linear combinations of the original features, the bigger the \(w_l\), the more prominant \(X_l\) is in the this principal component.</p>
-<h3><a id="t-distributed-stochastic-neighbor-embedding-a-name-tdistributedstochasticneighborembedding-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(t\)-distributed stochastic neighbor embedding <a name="tDistributedStochasticNeighborEmbedding"></a></h3>
+<h3><a id="t-distributed-stochastic-neighbor-embedding" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(t\)-distributed stochastic neighbor embedding</h3>
 <p><em>\(t\)-distributed stochastic neighbor embedding (tSNE)</em> typically reduce the dimension of the set of \(m\) features down to 2 to 3 for visualization. Suppose \(y_i\) is a low dimensional projection of \(x_i\), we could define conditional probabilities</p>
 \[p_{j|i}=\frac{\exp(-\|x_i-x_j\|^2/2\sigma_i^2)}{\sum_{k\neq i}\exp(-\|x_i-x_k\|^2/2\sigma_i^2)}
 \]
 \[q_{j|i}=\frac{(1+\|y_i-y_j\|^2)^{-1}}{\sum_{k\neq i}(1+\|y_i-y_k\|^2)^{-1}}
 \]
-<p>Assuming \(p_{i|i}=q_{i|i}=0\). \(p_{j|i}\) and \(q_{j|i}\) are expected to be close. We can choose the cost function to be KL convergence, this would optimize \(y_i\)'s.</p>
+<p>Assuming $p_{i|i}=q_{i|i}=0$. $p_{j|i}$ and $q_{j|i}$ are expected to be close. We can choose the cost function to be KL convergence, this would optimize \(y_i\)'s.</p>
 <h4><a id="pros-cons" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros &amp; Cons</h4>
 <ol>
 <li>Since it is stochastic, it generates slightly different results each time.</li>
@@ -1240,7 +602,7 @@ here \(\gamma(\tau)\) is called the <em>autovariance</em>, and note that \(\oper
 <li>The magnitude of the distances between clusters shouldn't be interpreted.</li>
 <li>tSNE results should not be used as statistical evidence or proof of something, and it sometimes can produce clusters that aren't actually true. Thus it is always a good practice to run it a few times to ensure that the cluster persists.</li>
 </ol>
-<h3><a id="k-means-clustering-a-name-kmeansclustering-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(k\) means clustering <a name="kMeansClustering"></a></h3>
+<h3><a id="k-means-clustering" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(k\) means clustering</h3>
 <p><em>\(k\) means clustering</em> tries to divide a dataset into \(k\) clusters. Start with random guess of \(k\) centroids. Then group all points according to distance to the centroids. Recalculate the centroid as the average of each group. Repeat these steps until you see no change of groups.</p>
 <h4><a id="how-to-choose-the-best-k" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to choose the best \(k\)?</h4>
 <p>Typically we run the algorithm multiple times examing the behaviour of the model depending on different values of \(k\) according to some metric, and then choose the best.</p>
@@ -1256,17 +618,19 @@ And need to find the &quot;elbow&quot; in the graph.</li>
 b/a-1, a&gt;b
 \end{cases}
 \]
-Where \(a=\dfrac{1}{|I|-1}\sum_{i\in I,i\neq j}d(x_i,d_j)\) is the average of the distances between \(x_i\) and other points with indices in \(I\) and \(b=\min\limits_{J\neq I}\dfrac{1}{|J|}\sum_{j\in J}d(x_i,x_j)\) is the minimal average of distances between \(x_i\) with all points with indices in some \(J\neq I\). Note that this score ranges from -1 to 1. The higher the score, the better the clustering.</li>
+Where $a=\dfrac{1}{|I|-1}\sum_{i\in I,i\neq j}d(x_i,d_j)$ is the average of the distances between \(x_i\) and other points with indices in \(I\) and $b=\min\limits_{J\neq I}\dfrac{1}{|J|}\sum_{j\in J}d(x_i,x_j)$ is the minimal average of distances between \(x_i\) with all points with indices in some \(J\neq I\). Note that this score ranges from -1 to 1. The higher the score, the better the clustering.</li>
 </ol>
 <p>We can use it to generate <em>silhouette plots</em>.</p>
-<h3><a id="hierarchical-clustering-a-name-hierarchicalclustering-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hierarchical clustering <a name="HierarchicalClustering"></a></h3>
+<h3><a id="hierarchical-clustering" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hierarchical clustering</h3>
 <p><em>Hierarchical clustering</em> starts with each point as its own cluster and work its way up by merging clusters, generating a <em>dendrogram</em>, to have a measure for deciding when to merge clusters, we need cluster <em>linkage</em></p>
 <ol>
 <li><em>single linkage</em>. The minimal distance between two points in two clusters.</li>
 <li><em>complete linkage</em>. The maximal distance between two points in two clusters.</li>
 <li><em>centroid linkage</em>. The distance between centroids.</li>
 </ol>
-<h2><a id="neural-networks-a-name-neuralnetworks-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Neural Networks <a name="NeuralNetworks"></a></h2>
+</div>
+<div id="section4" class="section">
+<h2><a id="neural-networks" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Neural Networks</h2>
 <p>Start with \(n\) observations with \(m\) features</p>
 <h4><a id="perceptron" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Perceptron</h4>
 <p>A <em>perceptron</em> is to neutron is as a artificial neural network is to an actual neural network. With a predefined <em>activation function</em> (some non linear function) It output</p>
@@ -1288,10 +652,45 @@ Where \(a=\dfrac{1}{|I|-1}\sum_{i\in I,i\neq j}d(x_i,d_j)\) is the average of th
 \]
 <h3><a id="long-short-term-memory" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Long short-term memory</h3>
 <p><em>Long short-term memory (LSTM)</em> improve RNN model that overcomes the the issue of vanishing gradient and capture the long term dependencies much better than RNN.</p>
-<h3><a id="transformer-model-a-name-transformermodel-a" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Transformer model <a name="TransformerModel"></a></h3>
+<h3><a id="transformer-model" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Transformer model</h3>
 <ol>
 <li>Input embedding</li>
 <li>Positional embedding</li>
 <li>Multi-head Attention</li>
 </ol>
-</div></body></html>
+</div>
+
+
+
+
+
+
+</div>
+
+<script>
+document.querySelectorAll('.sidebar a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Remove active class from all links
+        document.querySelectorAll('.sidebar a').forEach(item => {
+            item.classList.remove('active');
+        });
+        // Add active class to the clicked link
+        this.classList.add('active');
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.display = 'none';
+        });
+        // Show the clicked section
+        const targetSection = document.querySelector(this.getAttribute('href'));
+        if (targetSection) {
+            targetSection.style.display = 'block';
+        }
+    });
+});
+// Display the first section by default
+document.querySelector('#section0').style.display = 'block';
+</script>
+</body>
+
+</html>

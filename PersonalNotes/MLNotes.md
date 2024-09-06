@@ -1,36 +1,18 @@
+<div id="section0" class="section">
+
 # Machine Learning Notes
 
-## Table of contents
-1. [Data Cleaning](#DataCleaning)
-2. [Data Preprocessing](#DataPreprocessing)
-    1. [Data scaling and standardizing](#DataScalingandStandardizing)
-    2. [Imputation](#Imputation)
-    3. [Pipeline](#Pipeline)
-3. [Supervised Learning](#SupervisedLearning)
-    1. [Bias-variance trade-off](#BiasVarianceTradeOff)
-    2. [$k$-fold cross validation & grid search](#kFoldCrossValidation&GridSearch)
-    3. [Gradient descent](#GradientDescent)
-    4. [Regularization](#Regularization)
-    5. [Confusion matrix](#ConfusionMatrix)
-    6. [$k$-nearest neighbors](#kNN)
-    7. [Linear and logistic regression](#LinearAndLogisticRegression)
-    8. [Supported vector machine](#SupportedVectorMachine)
-    9. [Bayes' based classifiers](#BayesBasedClassifiers)
-    10. [Decision trees](#DecisionTrees)
-    11. [Time series](#TimeSeries)
-4. [Unsupervised Learning](#UnsupervisedLearning)
-    1. [Principal components analysis](#PrincipalComponentsAnalysis)
-    2. [$t$-distributed stochastic neighbor embedding](#tDistributedStochasticNeighborEmbedding)
-    3. [$k$ means clustering](#kMeansClustering)
-    4. [Hierarchical clustering](#HierarchicalClustering)
-5. [Neural Networks](#NeuralNetworks)
-6. [Transformer model](#TransformerModel)
+</div>
 
-## Data Cleaning <a name="DataCleaning"></a>
 
-## Data Preprocessing <a name="DataPreprocessing"></a>
 
-### Data scaling And standardizing <a name="DataScalingandStandardizing"></a>
+
+
+<div id="section1" class="section">
+
+## Data Preprocessing
+
+### Data scaling And standardizing
 $$
 x_i\leftarrow\dfrac{x_i-\mu}{\sigma}
 $$
@@ -41,7 +23,7 @@ Dataset will be normalized, avoid unbalanced dataset
 #### Usage
 `sklearn.StandardScaler`
 
-### Imputation <a name="Imputation"></a>
+### Imputation
 The process of replace missing values is known as data *imputation*
 
 #### Examples
@@ -54,7 +36,7 @@ The process of replace missing values is known as data *imputation*
 ###### Remark
 You should not use the labels or test data set to imputate training data set
 
-### Pipelines <a name="Pipeline"></a>
+### Pipelines
 
 ##### Definition
 A *pipeline* is a series of data processing components arranged sequentially, each component in the pipeline performs a specific task.
@@ -76,12 +58,25 @@ pipe = Pipeline([
 ```
 `PolynomialFeatures` generate higher powers $x^n$ from $x$.
 
+</div>
 
-## Supervised Learning <a name="SupervisedLearning"></a>
+
+
+
+
+
+
+
+
+
+
+<div id="section2" class="section">
+
+## Supervised Learning
 
 Given dataset $\{(\mathbf x_i,\mathbf y_i)\}_{i=1}^N$, where $\mathbf x_i$ are *feature vectors*, its entries are called *features*, and $\mathbf y_i$ are *labels* or *predictions*. Assume $\mathbf y=f(\mathbf x)+\mathbf\epsilon$ where $f$ is a continuous function and $\mathbf\epsilon$ is random noise ($E(\mathbf \epsilon)=\mathbf 0$). *Supervised learning* is the process of using a machine learning algorithm to "learn" $f$ from the dataset, and make predictions.
 
-### Bias-variance trade-off <a name="BiasVarianceTradeOff"></a>
+### Bias-variance trade-off
 
 Suppose $y = f(x) + \epsilon$ is the real function ($E[\epsilon]=0$, $Var[\epsilon]=\sigma^2$) and $\hat f(x)$ is the model. Then the *total error* is equal to
 $$
@@ -102,7 +97,7 @@ $$
 ###### Remark
 When underfitting the model, the model tends to be too simple so that the bias is huge. When overfitting the model (e.g., using a linear equation approximate a quadratic), the model tends to be too complex, so the variance within is great (e.g., use a high polynomial to approximate a linear relation with small random noise). Therefore, there is no way to get rid of both, one has to make the tradeoff between bias and variance so that both aren't too significant.
 
-### $k$-fold cross validation & grid search <a name="kFoldCrossValidation&GridSearch"></a>
+### $k$-fold cross validation & grid search
 
 1. *$k$-fold cross validation* divide the dataset into $k$ subsets. Train the model on $k-1$ subsets independently $k$ times by single out each as the validation set. And eventually take the average of the parameters.
 2. *Grid search* provide an array of values for each parameter and test model with every value and choose the best one.
@@ -129,7 +124,7 @@ When should you not use cross-validation, and use simple validation instead?
 1. Dataset size is too small. This can lead to deficiencies in both model fitting and estimation.
 2. Model training time is too long. It might not worth the time.
 
-### Gradient descent <a name="GradientDescent"></a>
+### Gradient descent
 The method of *gradient descent* is to decrease the loss function $\ell$ by $\beta\leftarrow\beta-\alpha\nabla(\beta)$.
 Some common adjustments are
 1. *Mini-batch gradient descent*: instead of use the entire dataset, cycling through mini batches to generate gradients.
@@ -179,7 +174,7 @@ Some common adjustments are
     $$
     The normalization prevents bias from early initialization (for example, $m_0=v_0=0$, dividing $1-\beta_1,1-\beta_2$ could make them less biased, as time progress, $\beta^t$ has exponential decay and goes to 0 and has no effect in normalizing).
 
-### Regularization <a name="Regularization"></a>
+### Regularization
 Regularization is adding penalty terms to reduce the loss function. It controls the magnitude of the feature vector $\beta$
 1. *Ridge regularization* is to add $\lambda\|\beta\|_2^2$
 2. *Lasso regularization* is to add $\lambda\|\beta\|_1$
@@ -191,7 +186,7 @@ Regularization is adding penalty terms to reduce the loss function. It controls 
 #### Elastic net
 Sometimes it might be better to simply use the *elastic net* regurlarization which add $\lambda_1\|\beta\|_1+\lambda_2\|\beta\|_2^2$
 
-### Confusion matrix <a name="ConfusionMatrix"></a>
+### Confusion matrix
 The *confusion matrix* is the $2\times2$ contingency table, where the rows are the predicted values, and columns are the actual values.
 
 ||Positive|Negative|
@@ -221,10 +216,10 @@ F1 score is the single metric of both the precision and recall which balances th
 
 GAIN/LIFT charts
 
-### $k$-nearest neighbors <a name="kNN"></a>
+### $k$-nearest neighbors
 The *$k$-nearest neighbors* algorithm assigns the most likely label from the nearest neighbors.
 
-### Linear and logistic regression <a name="LinearAndLogisticRegression"></a>
+### Linear and logistic regression
 *Logistic regression* used in binary classification by $p(x)=\dfrac{1}{1+e^{-\beta x}}$.
 
 #### Interaction terms in linear regression
@@ -246,7 +241,7 @@ We could also try simply lasso regularization.
 2. *Tree regression* use MSE as loss function
 3. *Supported vector regression* 
 
-### Supported vector machine <a name="SupportedVectorMachine"></a>
+### Supported vector machine
 In binary classification, given a dataset $\{(\mathbf x_i,y_i)\}_{i=1}^N$, where $y_i=\pm1$ is the label. Naively, *supported vector machine* is used to find a border that maximize the margin between two classes.
 
 #### Hard margin
@@ -287,7 +282,7 @@ Sometimes it is very hard to separate data, we consider transformations $\varphi
 
 We can solve the dual optimization problem.
 
-### Bayes' based classifiers <a name="BayesBasedClassifiers"></a>
+### Bayes' based classifiers
 
 #### Linear discriminant analysis (LDA)
 Assume $X|y=c\sim\mathcal N(\mu_c,\sigma^2)$, in the case where $X$ has one feature, we have
@@ -345,7 +340,7 @@ To estimate $f^{i}_c$ we assume some kind of distribution and hten estimate the 
 2. LDA works better if the data can be mostly separated by linear decision boundaries. QDA works better if the decision boundaries are not linear.
 3. If we have really small amount of data, we can use naive Bayes model. This in general a decent classifier.
 
-### Decision trees <a name="DecisionTrees"></a>
+### Decision trees
 
 #### Pros & Cons
 - Pros
@@ -432,7 +427,7 @@ $$
 
 *XGBoost (extreme Gradient boosting)* is a specific implementation of gradient boosting that is optimized for performance, efficiency, and scalability. So it is very popular.
 
-### Time series <a name="TimeSeries"></a>
+### Time series
 
 1. A *time series* is a sequence of data points $\{(\mathbf x_t,y_t)\}$ where $\mathbf x_t$ is a collection of features, $y_t$ is a numeric variable of interest, and $t$ stands for time.
 2. Given a time series $\{(\mathbf x_{t_i},y_{t_i})\}_{i=1}^n$, a *forecast* is $y_t=f(\mathbf x_t,t|\{y_\tau\}_{\tau<t})+\epsilon_t$.
@@ -484,9 +479,23 @@ The $d$-th differences $\nabla^{d}y_t=\nabla^{d-1}y_t-\nabla^{d-1}y_{t-1}$ often
     $$
 3. An autoregressive integrated moving average model (ARIMA($p,d,q$)) is a time series that its $d$-th difference is an ARMA($p,q$).
 
-## Unsupervised Learning <a name="UnsupervisedLearning"></a>
+</div>
 
-### Principal components analysis <a name="PrincipalComponentsAnalysis"></a>
+
+
+
+
+
+
+
+
+
+
+<div id="section3" class="section">
+
+## Unsupervised Learning
+
+### Principal components analysis
 *Principal components analysis (PCA)* is a *dimension reduction* algorithm. Thinking in terms of optimization, its goal is to project into a lower dimensional space in a way that maximizes variance. A heuristic algorithm would be
 1. Center the dataset so that each feature has zero mean.
 2. Find the direction with highest variance, this produces the first principal component.
@@ -498,7 +507,7 @@ $$
 $$
 Here $\Sigma$ is the covariance matrix of $X$. This is the set up for *singular value decomposition*. The entries of $\mathbf w$ is the *explained variance*. To choose the approriate number of principal components, we can look at the curve of explained variance vs number of principal components. Principal components are linear combinations of the original features, the bigger the $w_l$, the more prominant $X_l$ is in the this principal component.
 
-### $t$-distributed stochastic neighbor embedding <a name="tDistributedStochasticNeighborEmbedding"></a>
+### $t$-distributed stochastic neighbor embedding
 
 *$t$-distributed stochastic neighbor embedding (tSNE)* typically reduce the dimension of the set of $m$ features down to 2 to 3 for visualization. Suppose $y_i$ is a low dimensional projection of $x_i$, we could define conditional probabilities
 $$
@@ -515,7 +524,7 @@ Assuming $p_{i|i}=q_{i|i}=0$. $p_{j|i}$ and $q_{j|i}$ are expected to be close. 
 3. The magnitude of the distances between clusters shouldn't be interpreted.
 4. tSNE results should not be used as statistical evidence or proof of something, and it sometimes can produce clusters that aren't actually true. Thus it is always a good practice to run it a few times to ensure that the cluster persists.
 
-### $k$ means clustering <a name="kMeansClustering"></a>
+### $k$ means clustering
 *$k$ means clustering* tries to divide a dataset into $k$ clusters. Start with random guess of $k$ centroids. Then group all points according to distance to the centroids. Recalculate the centroid as the average of each group. Repeat these steps until you see no change of groups.
 
 #### How to choose the best $k$?
@@ -537,13 +546,26 @@ Typically we run the algorithm multiple times examing the behaviour of the model
 
 We can use it to generate *silhouette plots*.
 
-### Hierarchical clustering <a name="HierarchicalClustering"></a>
+### Hierarchical clustering
 *Hierarchical clustering* starts with each point as its own cluster and work its way up by merging clusters, generating a *dendrogram*, to have a measure for deciding when to merge clusters, we need cluster *linkage*
 1. *single linkage*. The minimal distance between two points in two clusters.
 2. *complete linkage*. The maximal distance between two points in two clusters.
 3. *centroid linkage*. The distance between centroids.
 
-## Neural Networks <a name="NeuralNetworks"></a>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div id="section4" class="section">
+
+## Neural Networks
 Start with $n$ observations with $m$ features
 
 #### Perceptron
@@ -576,7 +598,9 @@ $$
 ### Long short-term memory
 *Long short-term memory (LSTM)* improve RNN model that overcomes the the issue of vanishing gradient and capture the long term dependencies much better than RNN.
 
-### Transformer model <a name="TransformerModel"></a>
+### Transformer model
 1. Input embedding
 2. Positional embedding
 3. Multi-head Attention
+
+</div>
