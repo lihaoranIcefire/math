@@ -510,12 +510,15 @@ Here $\Sigma$ is the covariance matrix of $X$. This is the set up for *singular 
 ### $t$-distributed stochastic neighbor embedding
 
 *$t$-distributed stochastic neighbor embedding (tSNE)* typically reduce the dimension of the set of $m$ features down to 2 to 3 for visualization. Suppose $y_i$ is a low dimensional projection of $x_i$, we could define conditional probabilities
+
 $$
 p_{j|i}=\frac{\exp(-\|x_i-x_j\|^2/2\sigma_i^2)}{\sum_{k\neq i}\exp(-\|x_i-x_k\|^2/2\sigma_i^2)}
 $$
+
 $$
 q_{j|i}=\frac{(1+\|y_i-y_j\|^2)^{-1}}{\sum_{k\neq i}(1+\|y_i-y_k\|^2)^{-1}}
 $$
+
 Assuming $p_{i|i}=q_{i|i}=0$. $p_{j|i}$ and $q_{j|i}$ are expected to be close. We can choose the cost function to be KL convergence, this would optimize $y_i$'s.
 
 #### Pros & Cons
