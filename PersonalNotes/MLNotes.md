@@ -496,16 +496,21 @@ The $d$-th differences $\nabla^{d}y_t=\nabla^{d-1}y_t-\nabla^{d-1}y_{t-1}$ often
 ## Unsupervised Learning
 
 ### Principal components analysis
-*Principal components analysis (PCA)* is a *dimension reduction* algorithm. Thinking in terms of optimization, its goal is to project into a lower dimensional space in a way that maximizes variance. A heuristic algorithm would be
-1. Center the dataset so that each feature has zero mean.
-2. Find the direction with highest variance, this produces the first principal component.
-3. Orthogoanl to the first $k$ principal components, find a direction that maximizes variance, choose as the next principal component.
 
-The goal is to find $\mathbf w=(w_1,\cdots,w_m)^T$ such that $\|\mathbf w\|_2=1$ such that
+*Principal components analysis (PCA)* is a *dimension reduction* algorithm. Its goal is to project into a lower dimensional space that maximizes variance.
+
+Suppose $\{\mathbf x_i\}_{i=1}^N$ are feature vectors, $X=\begin{bmatrix}\mathbf x_1&\cdots&\mathbf x_N\end{bmatrix}$. $\Sigma=X^TX$ is the covariance matrix. A heuristic algorithm could be
+
+1. Center the dataset so that each feature has zero mean $\iff\sum\mathbf x_i=\mathbf0$
+2. Induction on $k$. Choose the $k$-th weight vector $\mathbf w_k\in\mathbb R^N$, $\|\mathbf w_k\|=1$ as the direction that maximizes variance, orthogoanl to the first $k-1$ weight vectors
+
+This is the set up for *singular value decomposition* since
+
 $$
-\operatorname{Var}(X\mathbf w)=E(\mathbf w^TX^TX\mathbf w)=\mathbf w^TE(X^TX)\mathbf w=\mathbf w^T\Sigma\mathbf w
+(X\mathbf w)^T(X\mathbf w)=\mathbf w^TX^TX\mathbf w=\mathbf w^T\Sigma\mathbf w
 $$
-Here $\Sigma$ is the covariance matrix of $X$. This is the set up for *singular value decomposition*. The entries of $\mathbf w$ is the *explained variance*. To choose the approriate number of principal components, we can look at the curve of explained variance vs number of principal components. Principal components are linear combinations of the original features, the bigger the $w_l$, the more prominant $X_l$ is in the this principal component.
+
+The $k$-th principal component of $\mathbf x_i$ is $\mathbf x_i\cdot\mathbf w_k$. The *explained variances* are the eigenvalues of $\Sigma$.
 
 ### $t$-distributed stochastic neighbor embedding
 

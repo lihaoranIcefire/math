@@ -126,6 +126,9 @@ th, td, tr {
 
 
 
+
+
+
 <div id="section0" class="section">
 <h1><a id="machine-learning-notes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Machine Learning Notes</h1>
 </div>
@@ -562,16 +565,16 @@ here \(\gamma(\tau)\) is called the <em>autovariance</em>, and note that \(\oper
 <div id="section3" class="section">
 <h2><a id="unsupervised-learning" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unsupervised Learning</h2>
 <h3><a id="principal-components-analysis" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Principal components analysis</h3>
-<p><em>Principal components analysis (PCA)</em> is a <em>dimension reduction</em> algorithm. Thinking in terms of optimization, its goal is to project into a lower dimensional space in a way that maximizes variance. A heuristic algorithm would be</p>
+<p><em>Principal components analysis (PCA)</em> is a <em>dimension reduction</em> algorithm. Its goal is to project into a lower dimensional space that maximizes variance.</p>
+<p>Suppose \(\{\mathbf x_i\}_{i=1}^N\) are feature vectors, \(X=\begin{bmatrix}\mathbf x_1&amp;\cdots&amp;\mathbf x_N\end{bmatrix}\). \(\Sigma=X^TX\) is the covariance matrix. A heuristic algorithm could be</p>
 <ol>
-<li>Center the dataset so that each feature has zero mean.</li>
-<li>Find the direction with highest variance, this produces the first principal component.</li>
-<li>Orthogoanl to the first \(k\) principal components, find a direction that maximizes variance, choose as the next principal component.</li>
+<li>Center the dataset so that each feature has zero mean \(\iff\sum\mathbf x_i=\mathbf0\)</li>
+<li>Induction on \(k\). Choose the \(k\)-th weight vector \(\mathbf w_k\in\mathbb R^N\), $|\mathbf w_k|=1$ as the direction that maximizes variance, orthogoanl to the first \(k-1\) weight vectors</li>
 </ol>
-<p>The goal is to find \(\mathbf w=(w_1,\cdots,w_m)^T\) such that $|\mathbf w|_2=1$ such that</p>
-\[\operatorname{Var}(X\mathbf w)=E(\mathbf w^TX^TX\mathbf w)=\mathbf w^TE(X^TX)\mathbf w=\mathbf w^T\Sigma\mathbf w
+<p>This is the set up for <em>singular value decomposition</em> since</p>
+\[(X\mathbf w)^T(X\mathbf w)=\mathbf w^TX^TX\mathbf w=\mathbf w^T\Sigma\mathbf w
 \]
-<p>Here \(\Sigma\) is the covariance matrix of \(X\). This is the set up for <em>singular value decomposition</em>. The entries of \(\mathbf w\) is the <em>explained variance</em>. To choose the approriate number of principal components, we can look at the curve of explained variance vs number of principal components. Principal components are linear combinations of the original features, the bigger the \(w_l\), the more prominant \(X_l\) is in the this principal component.</p>
+<p>The \(k\)-th principal component of \(\mathbf x_i\) is \(\mathbf x_i\cdot\mathbf w_k\). The <em>explained variances</em> are the eigenvalues of \(\Sigma\).</p>
 <h3><a id="t-distributed-stochastic-neighbor-embedding" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(t\)-distributed stochastic neighbor embedding</h3>
 <p><em>\(t\)-distributed stochastic neighbor embedding (tSNE)</em> typically reduce the dimension of the set of \(m\) features down to 2 to 3 for visualization. Suppose \(y_i\) is a low dimensional projection of \(x_i\), we could define conditional probabilities</p>
 \[p_{j|i}=\frac{\exp(-\|x_i-x_j\|^2/2\sigma_i^2)}{\sum_{k\neq i}\exp(-\|x_i-x_k\|^2/2\sigma_i^2)}
@@ -643,6 +646,7 @@ Where $a=\dfrac{1}{|I|-1}\sum_{i\in I,i\neq j}d(x_i,d_j)$ is the average of the 
 <li>Multi-head Attention</li>
 </ol>
 </div>
+
 
 
 
