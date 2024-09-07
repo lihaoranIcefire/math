@@ -74,11 +74,11 @@ pipe = Pipeline([
 
 ## Supervised Learning
 
-Given dataset $\{(\mathbf x_i,\mathbf y_i)\}_{i=1}^N$, where $\mathbf x_i$ are *feature vectors*, its entries are called *features*, and $\mathbf y_i$ are *labels* or *predictions*. Assume $\mathbf y=f(\mathbf x)+\mathbf\epsilon$ where $f$ is a continuous function and $\mathbf\epsilon$ is random noise ($E(\mathbf \epsilon)=\mathbf 0$). *Supervised learning* is the process of using a machine learning algorithm to "learn" $f$ from the dataset, and make predictions.
+Given observations $\{(\mathbf x^{(i)},\mathbf y^{(i)})\}_{i=1}^N$, where $\mathbf x^{(i)}$ are *feature vectors*, its entries are called *features*, and $\mathbf y^{(i)}$ are *labels* or *predictions*. Assume $\mathbf y=f(\mathbf x)+\mathbf\epsilon$ is the true relation, where $f(\mathbf x)=f(\mathbf\theta;\mathbf x)$ is a (typically continuous) parametrized function and $\mathbf\epsilon$ is a random noise (typically $E(\mathbf \epsilon)=\mathbf 0$). *Supervised learning* is to "learn" $f$ through a *model* $\hat f$ and make predictions $\hat{\mathbf y}$.
 
 ### Bias-variance trade-off
 
-Suppose $y = f(x) + \epsilon$ is the real function ($E[\epsilon]=0$, $Var[\epsilon]=\sigma^2$) and $\hat f(x)$ is the model. Then the *total error* is equal to
+Suppose $E[\epsilon]=0$, $Var[\epsilon]=\sigma^2$. The expected total error is
 $$
 \begin{align*}
 E[(y-\hat f)^2] &= E[y^2]-2E[y\hat f]+E[\hat f^2]\\
@@ -94,8 +94,16 @@ $$
 \text{total error = bias$^2$ + Variance + irreducible error}
 $$
 
-###### Remark
-When underfitting the model, the model tends to be too simple so that the bias is huge. When overfitting the model (e.g., using a linear equation approximate a quadratic), the model tends to be too complex, so the variance within is great (e.g., use a high polynomial to approximate a linear relation with small random noise). Therefore, there is no way to get rid of both, one has to make the tradeoff between bias and variance so that both aren't too significant.
+When underfitting the model, the model is too simple so that the bias is huge (e.g., using a linear equation approximate a quadratic). When overfitting the model, the model is too complex, so the variance is great (e.g., use a high-degree polynomial to approximate a linear relation with small random noise). One has to make tradeoff between bias and variance so that both aren't significant.
+
+### Objective & Loss function
+
+To improve the model, we need loss functions
+- *Mean squared error (MSE)*: $L(\theta)=\frac{1}{N}\sum_i(y_i-\hat y_i)^2$ is often used in regression
+- *Logistic Loss*: $L(\theta)=-\frac{1}{N}$
+
+But to prevent overfitting, we also include a regularization term $\Omega(\theta)$. The objective function is then the sum of $L(\theta)$ and $\Omega(\theta)$
+
 
 ### $k$-fold cross validation & grid search
 
@@ -358,18 +366,18 @@ $$
 $I_G(p)$ is between 0 and 1, if $I_G(p)=0$, then it is of a single class, if it is $1-\dfrac{1}{N}$, it is evenly distributed.
 
 #### Cross entropy
-The information content of an event $E$ is quantified as $\log\left(\dfrac{1}{p(E)}\right)=-\log(p(E))$.
+The *information content (surprisal)* of an event $A$ is quantified as $\log\left(\dfrac{1}{P(A)}\right)=-\log P(A)$. The expected surprisal of $A$ is $-P(A)\log P(A)$
 
-Suppose $P,Q$ are two random variables, $P$ is the actual distribution and $Q$ is the prediction
+Suppose $P,Q$ are two probability distribution, $P$ is the actual distribution and $Q$ is the predicted distribution
 
 *Entropy* of $P$ is defined to be
 $$
-H(P)=-E_P[\log P]=-\sum_ip_i\log(p_i)
+H(P)=-\mathbb E_P[\log P]=-\sum_ip_i\log(p_i)
 $$
 
 *Cross-entropy loss* is defined to be
 $$
-H(P,Q)=-E_P[\log Q]=-\sum_ip_i\log(q_i)
+H(P,Q)=-\mathbb E_P[\log Q]=-\sum_ip_i\log(q_i)
 $$
 which measures the discrepancy using $Q$ as predictions given the actual distribution is $P$.
 
@@ -546,11 +554,11 @@ Assuming $p_{i|i}=q_{i|i}=0$. $p_{j|i}$ and $q_{j|i}$ are expected to be close. 
 3. The magnitude of the distances between clusters shouldn't be interpreted.
 4. tSNE results should not be used as statistical evidence or proof of something, and it sometimes can produce clusters that aren't actually true. Thus it is always a good practice to run it a few times to ensure that the cluster persists.
 
-### $k$ means clustering
-*$k$ means clustering* tries to divide a dataset into $k$ clusters. Start with random guess of $k$ centroids. Then group all points according to distance to the centroids. Recalculate the centroid as the average of each group. Repeat these steps until you see no change of groups.
+### $K$ means clustering
+*$K$ means clustering* tries to divide a dataset into $k$ clusters. Start with random guess of $k$ centroids. Then group all points according to distance to the centroids. Recalculate the centroid as the average of each group. Repeat these steps until you see no change of groups.
 
-#### How to choose the best $k$?
-Typically we run the algorithm multiple times examing the behaviour of the model depending on different values of $k$ according to some metric, and then choose the best.
+#### How to choose the best $K$?
+Typically we run the algorithm multiple times examing the behaviour of the model depending on different values of $K$ according to some metric, and then choose the best.
 1. The *elbow method*. We first calculate the *inertia* of the resulting clustering, which is defined to be
     $$
     \sum_{i=1}^n\operatorname{dist}(X^{(i)},c^{(i)})^2
