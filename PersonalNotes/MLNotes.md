@@ -509,7 +509,7 @@ $$
 $$
 Denote $A=\begin{bmatrix}\mathbf x^{(1)}\\\vdots\\\mathbf x^{(N)}\end{bmatrix}$, and $\bar A$ whose $q$-th column consists of only $\mathbb EX_q$, then the covariance matrix is
 $$
-\Sigma=\text{Cov}(\mathbf X,\mathbf X)=\mathbb E[(\mathbf X-\mathbb E\mathbf X)^T(\mathbf X-\mathbb E\mathbf X)]=\frac{1}{p-1}(A-\bar A)^T(A-\bar A)
+\Sigma=\text{Cov}(\mathbf X,\mathbf X)=\mathbb E[(\mathbf X-\mathbb E\mathbf X)^T(\mathbf X-\mathbb E\mathbf X)]=\frac{1}{N-1}(A-\bar A)^T(A-\bar A)
 $$
 A heuristic algorithm could be
 
