@@ -495,22 +495,36 @@ The $d$-th differences $\nabla^{d}y_t=\nabla^{d-1}y_t-\nabla^{d-1}y_{t-1}$ often
 
 ## Unsupervised Learning
 
-### Principal components analysis
+### Principal components analysis (Following scikit-learn)
 
 *Principal components analysis (PCA)* is a *dimension reduction* algorithm. Its goal is to project into a lower dimensional space that maximizes variance.
 
-Suppose $\{\mathbf x_i\}_{i=1}^N$ are feature vectors, $X=\begin{bmatrix}\mathbf x_1&\cdots&\mathbf x_N\end{bmatrix}$. $\Sigma=X^TX$ is the covariance matrix. A heuristic algorithm could be
-
-1. Center the dataset so that each feature has zero mean $\iff\sum\mathbf x_i=\mathbf0$
-2. Induction on $k$. Choose the $k$-th weight vector $\mathbf w_k\in\mathbb R^N$, $\|\mathbf w_k\|=1$ as the direction that maximizes variance, orthogoanl to the first $k-1$ weight vectors
-
-This is the set up for *singular value decomposition* since
-
+Suppose there are $N$ observations
 $$
-(X\mathbf w)^T(X\mathbf w)=\mathbf w^TX^TX\mathbf w=\mathbf w^T\Sigma\mathbf w
+\{\mathbf x^{(i)}=(x^{(i)}_1,\cdots,x^{(i)}_p)\}_{i=1}^N
 $$
+of $p$ features $\mathbf X=(X_1,\cdots,X_p)$, then
+$$
+\mathbb EX_q=\frac{1}{N}\sum_{i=1}^Nx^{(i)}_q, \quad \text{Cov}(X_q,X_r)=\mathbb E[(X_q-\mathbb EX_q)(X_r-\mathbb EX_r)]
+$$
+Denote $A=\begin{bmatrix}\mathbf x^{(1)}\\\vdots\\\mathbf x^{(N)}\end{bmatrix}$, and $\bar A$ whose $q$-th column consists of only $\mathbb EX_q$, then the covariance matrix is
+$$
+\Sigma=\text{Cov}(\mathbf X,\mathbf X)=\mathbb E[(\mathbf X-\mathbb E\mathbf X)^T(\mathbf X-\mathbb E\mathbf X)]=\frac{1}{p-1}(A-\bar A)^T(A-\bar A)
+$$
+A heuristic algorithm could be
 
-The $k$-th principal component of $\mathbf x_i$ is $\mathbf x_i\cdot\mathbf w_k$. The *explained variances* are the eigenvalues of $\Sigma$.
+1. Center the dataset so that each feature has zero mean $\iff A\leftarrow A-\bar A$
+2. Induction on $k$. Choose the $k$-th weight vector $\mathbf w^{(k)}=(w^{(k)}_1,\cdots, w^{(k)}_N)^T\in\mathbb R^N$ such that
+    $$\|\mathbf w^{(k)}\|=1, \qquad \mathbf w^{(k)}\perp\mathbf w^{(i)},\quad\forall i<k$$
+    that maximizes variance
+    $$\text{Var}(\mathbf X^T\mathbf w^{(k)})=(\mathbf w^{(k)})^T\text{Var}(\mathbf X)\mathbf w^{(k)}=(\mathbf w^{(k)})^T\Sigma\mathbf w^{(k)}$$
+
+This is just *singular value decomposition* for $A-\bar A$. Suppose
+$$A-\bar A=V^TSW$$
+is the singular decomposition, then
+$$\Sigma=W^T\frac{S^2}{N-1}W$$
+
+The $k$-th principal component of $\mathbf x^{(i)}$ is $\mathbf x^{(i)}\cdot\mathbf w^{(k)}$. The *explained variances* are the diagonal elements in $\dfrac{S^2}{N-1}$.
 
 ### $t$-distributed stochastic neighbor embedding
 
