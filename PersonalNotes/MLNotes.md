@@ -415,6 +415,8 @@ The *CART* (Classification and Regression Trees) algorithm is a decision tree-ba
 #### Random Forest
 The *random forest* model is made by building many different decision trees. These trees are made "different" through a variety of random perturbations. Finally take the average of all trees.
 
+[XGBoost Tutorials](https://xgboost.readthedocs.io/en/stable/tutorials/model.html)
+
 #### Boosting
 A statistical learning algorithm is said to be a
 - *weak learner* if it does slightly better thant random guessing.
