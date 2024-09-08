@@ -1,3 +1,15 @@
+<div class="content">
+
+
+
+
+
+
+
+
+
+
+
 <div id="section0" class="section">
 
 # Machine Learning Notes
@@ -74,19 +86,21 @@ pipe = Pipeline([
 
 ## Supervised Learning
 
-Given observations $\{(\mathbf x^{(i)},\mathbf y^{(i)})\}_{i=1}^N$, where $\mathbf x^{(i)}$ are *feature vectors*, its entries are called *features*, and $\mathbf y^{(i)}$ are *labels* or *predictions*. Assume $\mathbf y=f(\mathbf x)+\mathbf\epsilon$ is the true relation, where $f(\mathbf x)=f(\mathbf\theta;\mathbf x)$ is a (typically continuous) parametrized function and $\mathbf\epsilon$ is a random noise (typically $E(\mathbf \epsilon)=\mathbf 0$). *Supervised learning* is to "learn" $f$ through a *model* $\hat f$ and make predictions $\hat{\mathbf y}$.
+Given observations $\{(\mathbf x^{(i)},\mathbf y^{(i)})\}_{i=1}^N$, where $\mathbf x^{(i)}$ are *feature vectors*, its entries are called *features*, and $\mathbf y^{(i)}$ are *labels* or *predictions*. Assume $\mathbf y=f(\mathbf x)+\boldsymbol\epsilon$ is the true relation, where $f(\mathbf x)=f(\boldsymbol\theta;\mathbf x)$ is a (typically continuous) parametrized function and $\boldsymbol\epsilon$ is a random noise (typically $\mathbb E(\boldsymbol\epsilon)=\mathbf 0$ and independent). *Supervised learning* is to "learn" a *model* $\hat f(\hat{\boldsymbol\theta})$ of $f(\boldsymbol\theta)$ and make predictions $\hat{\mathbf y}=\hat f(\hat{\boldsymbol\theta};\mathbf x)$.
 
 ### Bias-variance trade-off
 
-Suppose $E[\epsilon]=0$, $Var[\epsilon]=\sigma^2$. The expected total error is
+Suppose $\mathbb E[\boldsymbol\epsilon]=\mathbf 0$. The expected total error is
 $$
 \begin{align*}
-E[(y-\hat f)^2] &= E[y^2]-2E[y\hat f]+E[\hat f^2]\\
-&= E[(f+\epsilon)^2]-2E[(f+\epsilon)\hat f]+V[\hat f]+E[\hat f]^2\\
-&= E[f^2]+2E[f]E[\epsilon]+E[\epsilon^2]-2E[f]E[\hat f]-2E[\epsilon]E[\hat f]+V[\hat f]+E[\hat f]^2\\
-&= E[f^2]+\sigma^2-2E[f]E[\hat f]+V[\hat f]+E[\hat f]^2\\
-&= E[(f-\hat f)^2]+V[\hat f]+\sigma^2\\
-&= E[(f-\hat f)^2]+V[\hat f]+\sigma^2\\
+\mathbb E[\|\mathbf y-\hat{\mathbf y}\|^2] &= \mathbb E[\|f+\boldsymbol\epsilon-\hat f\|^2]\\
+&=\mathbb E[\|f-\hat f\|^2]-2\mathbb E[(f-\hat f)\cdot\boldsymbol\epsilon]+\mathbb E[\|\boldsymbol\epsilon\|^2]\\
+&=\mathbb E[\|f-\hat f\|^2]-2\mathbb E[f-\hat f]\cdot\mathbb E[\boldsymbol\epsilon]+\mathbb E[\|\boldsymbol\epsilon\|^2]\\
+&=\mathbb E[\|f-\mathbb E\hat f+\mathbb E\hat f-\hat f\|^2]+\mathbb E[\|\boldsymbol\epsilon\|^2]\\
+&=\mathbb E[\|f-\mathbb E\hat f\|^2]+2\mathbb E[(f-\mathbb E\hat f)\cdot(\mathbb E\hat f-\hat f)]+\mathbb E[\|\mathbb E\hat f-\hat f\|^2]+\mathbb E[\|\boldsymbol\epsilon\|^2]\\
+&=\|f-\mathbb E\hat f\|^2+2(f-\mathbb E\hat f)\cdot\mathbb E[\mathbb E\hat f-\hat f]+\mathbb E[\|\mathbb E\hat f\|^2-2\mathbb E\hat f\cdot\hat f+\|\hat f\|^2]+\mathbb E[\|\boldsymbol\epsilon\|^2]\\
+&=\|f-\mathbb E\hat f\|^2+\mathbb E[\|\hat f\|^2]-\|\mathbb E\hat f\|^2+\mathbb E[\|\boldsymbol\epsilon\|^2]\\
+&=\|f-\mathbb E\hat f\|^2+\text{Var}[\hat f]+\mathbb E[\|\boldsymbol\epsilon\|^2]\\
 \end{align*}
 $$
 Here $\sigma^2$ is referred to as the *irreducible error*, so we have the simplified version
@@ -99,8 +113,8 @@ When underfitting the model, the model is too simple so that the bias is huge (e
 ### Objective & Loss function
 
 To improve the model, we need loss functions
-- *Mean squared error (MSE)*: $L(\theta)=\frac{1}{N}\sum_i(y_i-\hat y_i)^2$ is often used in regression
-- *Logistic Loss*: $L(\theta)=-\frac{1}{N}$
+- *Mean squared error (MSE)*: $L(\theta)=\displaystyle\frac{1}{N}\sum_{i=1}^N\|\mathbf y^{(i)}-\hat{\mathbf y}^{(i)}\|^2$. Used in regression
+- *Logistic Loss or Cross-Entropy Loss*: $L(\theta)=\displaystyle-\frac{1}{N}\sum_iy_i\log p_i+(1-y_i)\log(1-p_i)$. Used in binary classification. Or $L(\theta)=$. Used in multiclass classification
 
 But to prevent overfitting, we also include a regularization term $\Omega(\theta)$. The objective function is then the sum of $L(\theta)$ and $\Omega(\theta)$
 
@@ -366,22 +380,17 @@ $$
 $I_G(p)$ is between 0 and 1, if $I_G(p)=0$, then it is of a single class, if it is $1-\dfrac{1}{N}$, it is evenly distributed.
 
 #### Cross entropy
-The *information content (surprisal)* of an event $A$ is quantified as $\log\left(\dfrac{1}{P(A)}\right)=-\log P(A)$. The expected surprisal of $A$ is $-P(A)\log P(A)$
-
-Suppose $P,Q$ are two probability distribution, $P$ is the actual distribution and $Q$ is the predicted distribution
-
-*Entropy* of $P$ is defined to be
+The *information content (surprisal)* of an event $A$ is quantified as $\log\left(\dfrac{1}{P(A)}\right)=-\log P(A)$. The expected surprisal of $A$ is $-P(A)\log P(A)$. The *Entropy* under $P$ is the sum of expected surprisal
 $$
 H(P)=-\mathbb E_P[\log P]=-\sum_ip_i\log(p_i)
 $$
-
-*Cross-entropy loss* is defined to be
+The *Cross-entropy* of $Q$ under $P$ is
 $$
 H(P,Q)=-\mathbb E_P[\log Q]=-\sum_ip_i\log(q_i)
 $$
 which measures the discrepancy using $Q$ as predictions given the actual distribution is $P$.
 
-*Relative entropy (KL convergence)* is defined to be
+The *(KL convergence)* of $P$ from $Q$ is
 $$
 D_{KL}(P||Q)=\sum_ip_i\log\left(\dfrac{p_i}{q_i}\right)=H(P,Q)-H(P)
 $$
@@ -632,5 +641,16 @@ $$
 1. Input embedding
 2. Positional embedding
 3. Multi-head Attention
+
+</div>
+
+
+
+
+
+
+
+
+
 
 </div>
