@@ -122,13 +122,6 @@ th, td, tr {
 </div>
 
 <div class="content">
-
-
-
-
-
-
-
 <div id="section0" class="section">
 <h1><a id="machine-learning-notes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Machine Learning Notes</h1>
 </div>
@@ -165,31 +158,41 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model.LinearRegression
 
 pipe = Pipeline([
-    ('poly', PolynomialFeatures(3, interaction_only=False, include_bias=False)),
-    ('reg', LinearRegression(copy_X=True))
+('poly', PolynomialFeatures(3, interaction_only=False, include_bias=False)),
+('reg', LinearRegression(copy_X=True))
 ])
 </code></pre>
 <p><code>PolynomialFeatures</code> generate higher powers \(x^n\) from \(x\).</p>
 </div>
 <div id="section2" class="section">
 <h2><a id="supervised-learning" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supervised Learning</h2>
-<p>Given dataset \(\{(\mathbf x_i,\mathbf y_i)\}_{i=1}^N\), where \(\mathbf x_i\) are <em>feature vectors</em>, its entries are called <em>features</em>, and \(\mathbf y_i\) are <em>labels</em> or <em>predictions</em>. Assume \(\mathbf y=f(\mathbf x)+\mathbf\epsilon\) where \(f\) is a continuous function and \(\mathbf\epsilon\) is random noise (\(E(\mathbf \epsilon)=\mathbf 0\)). <em>Supervised learning</em> is the process of using a machine learning algorithm to &quot;learn&quot; \(f\) from the dataset, and make predictions.</p>
+<p>Given Dataset \(D=\{(\mathbf x^{(i)},\mathbf y^{(i)})\}_{i=1}^N\), where \(\mathbf x^{(i)}\) are <em>feature vectors</em>, its entries are called <em>features</em>, and \(\mathbf y^{(i)}\) are <em>labels</em> or <em>predictions</em>. Assume \(\mathbf y=f(\mathbf x)+\boldsymbol\epsilon\) is the true relation, where \(f\) is a (typically continuous) function and \(\boldsymbol\epsilon\) is a random noise (typically \(\mathbb E(\boldsymbol\epsilon)=\mathbf 0\) and independent). <em>Supervised learning</em> is to &quot;learn&quot; a <em>model</em> \(\hat f\) of \(f\) and make predictions \(\hat{\mathbf y}=\hat f(\mathbf x)\).</p>
 <h3><a id="bias-variance-trade-off" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bias-variance trade-off</h3>
-<p>Suppose \(y = f(x) + \epsilon\) is the real function (\(E[\epsilon]=0\), \(Var[\epsilon]=\sigma^2\)) and \(\hat f(x)\) is the model. Then the <em>total error</em> is equal to</p>
+<p>Suppose \(\mathbb E[\boldsymbol\epsilon]=\mathbf 0\), \(\hat f(\mathbf x)=\hat f(\mathbf x;D)\) with \(D\) sampled from joint probability distribution of \((\mathbf X,\boldsymbol\epsilon)\). Consider the expected total error at a fixed test input \(\mathbf x\) (so $\mathbb E=\mathbb E_{\mathbf X,\boldsymbol\epsilon|\mathbf X=\mathbf x}$)</p>
 \[\begin{align*}
-E[(y-\hat f)^2] &amp;= E[y^2]-2E[y\hat f]+E[\hat f^2]\\
-&amp;= E[(f+\epsilon)^2]-2E[(f+\epsilon)\hat f]+V[\hat f]+E[\hat f]^2\\
-&amp;= E[f^2]+2E[f]E[\epsilon]+E[\epsilon^2]-2E[f]E[\hat f]-2E[\epsilon]E[\hat f]+V[\hat f]+E[\hat f]^2\\
-&amp;= E[f^2]+\sigma^2-2E[f]E[\hat f]+V[\hat f]+E[\hat f]^2\\
-&amp;= E[(f-\hat f)^2]+V[\hat f]+\sigma^2\\
-&amp;= E[(f-\hat f)^2]+V[\hat f]+\sigma^2\\
+\mathbb E[\|\mathbf y-\hat{\mathbf y}\|^2] &amp;= \mathbb E[\|f+\boldsymbol\epsilon-\hat f\|^2]\\
+&amp;=\mathbb E[\|f-\hat f\|^2]-2\mathbb E[(f-\hat f)\cdot\boldsymbol\epsilon]+\mathbb E[\|\boldsymbol\epsilon\|^2]\\
+&amp;=\mathbb E[\|f-\hat f\|^2]-2\mathbb E[f-\hat f]\cdot\mathbb E[\boldsymbol\epsilon]+\mathbb E[\|\boldsymbol\epsilon\|^2]\\
+&amp;=\mathbb E[\|f-\mathbb E\hat f+\mathbb E\hat f-\hat f\|^2]+\mathbb E[\|\boldsymbol\epsilon\|^2]\\
+&amp;=\mathbb E[\|f-\mathbb E\hat f\|^2]+2\mathbb E[(f-\mathbb E\hat f)\cdot(\mathbb E\hat f-\hat f)]+\mathbb E[\|\mathbb E\hat f-\hat f\|^2]+\mathbb E[\|\boldsymbol\epsilon\|^2]\\
+&amp;=\|f-\mathbb E\hat f\|^2+2(f-\mathbb E\hat f)\cdot\mathbb E[\mathbb E\hat f-\hat f]+\mathbb E[\|\mathbb E\hat f\|^2-2\mathbb E\hat f\cdot\hat f+\|\hat f\|^2]+\mathbb E[\|\boldsymbol\epsilon\|^2]\\
+&amp;=\|f-\mathbb E\hat f\|^2+\mathbb E[\|\hat f\|^2]-\|\mathbb E\hat f\|^2+\mathbb E[\|\boldsymbol\epsilon\|^2]\\
+&amp;=\|f-\mathbb E\hat f\|^2+\text{Var}[\hat f]+\mathbb E[\|\boldsymbol\epsilon\|^2]\\
 \end{align*}
 \]
 <p>Here \(\sigma^2\) is referred to as the <em>irreducible error</em>, so we have the simplified version</p>
 \[\text{total error = bias$^2$ + Variance + irreducible error}
 \]
-<h6><a id="remark" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remark</h6>
-<p>When underfitting the model, the model tends to be too simple so that the bias is huge. When overfitting the model (e.g., using a linear equation approximate a quadratic), the model tends to be too complex, so the variance within is great (e.g., use a high polynomial to approximate a linear relation with small random noise). Therefore, there is no way to get rid of both, one has to make the tradeoff between bias and variance so that both aren't too significant.</p>
+<p>When underfitting the model, the model is too simple so that the model bias is huge (e.g., using a linear equation approximate a quadratic). When overfitting the model, the model is too complex, so the model variance is great (e.g., use a high-degree polynomial to approximate a linear relation with small random noise). One has to make tradeoff between bias and variance so that both aren't significant.</p>
+<h3><a id="objective-loss-function" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Objective &amp; Loss function</h3>
+<p>To improve the model, we need loss functions</p>
+<ul>
+<li><em>Mean squared error (MSE)</em>: $\displaystyle\frac{1}{N}\sum_{i=1}^N|\mathbf y^{(i)}-\hat{\mathbf y}^{(i)}|^2$. Used in regression</li>
+<li><em>Mean Absolute Error (MAE)</em>: $\displaystyle\frac{1}{N}\sum_{i=1}^N|\mathbf y^{(i)}-\hat{\mathbf y}^{(i)}|$.</li>
+<li><em>Root Mean Square Error (RMSE)</em>: $\displaystyle\sqrt{\frac{1}{N}\sum_{i=1}^N|\mathbf y^{(i)}-\hat{\mathbf y}^{(i)}|^2}$.</li>
+<li><em>Logistic Loss or Cross-Entropy Loss</em>: \(\displaystyle-\sum_i[y_i\log(\hat p_i)+(1-y_i)\log(1-\hat p_i)]\). Used in binary classification. Or \(\displaystyle-\sum_{c=1}^C\sum_{i}y_{i,c}\log(\hat p_{i,c})\). Used in multiclass classification</li>
+</ul>
+<p>But to prevent overfitting, we also include a regularization term \(\Omega(\theta)\). The objective function is then the sum of \(L(\theta)\) and \(\Omega(\theta)\)</p>
 <h3><a id="k-fold-cross-validation-grid-search" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(k\)-fold cross validation &amp; grid search</h3>
 <ol>
 <li><em>\(k\)-fold cross validation</em> divide the dataset into \(k\) subsets. Train the model on \(k-1\) subsets independently \(k\) times by single out each as the validation set. And eventually take the average of the parameters.</li>
@@ -201,13 +204,13 @@ from sklearn.model_selection import KFold
 from sklearn.metrics import mean_squared_error
 
 GridSearchCV(
-    cv = KFold(n_splits=5, random_state=30293, shuffle=True),
-    estimator = KNeighborsRegressor(),
-    param_grid = {
-        'n_neighbors': range(1, 50),
-        'weights': ['uniform', 'distance']
-    },
-    scoring = 'neg_mean_squared_error'
+cv = KFold(n_splits=5, random_state=30293, shuffle=True),
+estimator = KNeighborsRegressor(),
+param_grid = {
+    'n_neighbors': range(1, 50),
+    'weights': ['uniform', 'distance']
+},
+scoring = 'neg_mean_squared_error'
 )
 </code></pre>
 <h6><a id="remark" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remark</h6>
@@ -445,16 +448,14 @@ Note that for example if we choose \(\varphi(x_1,x_2)=(x_1^2,\sqrt2x_1x_2,x_2^2)
 \]
 <p>\(I_G(p)\) is between 0 and 1, if \(I_G(p)=0\), then it is of a single class, if it is \(1-\dfrac{1}{N}\), it is evenly distributed.</p>
 <h4><a id="cross-entropy" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cross entropy</h4>
-<p>The information content of an event \(E\) is quantified as \(\log\left(\dfrac{1}{p(E)}\right)=-\log(p(E))\).</p>
-<p>Suppose \(P,Q\) are two random variables, \(P\) is the actual distribution and \(Q\) is the prediction</p>
-<p><em>Entropy</em> of \(P\) is defined to be</p>
-\[H(P)=-E_P[\log P]=-\sum_ip_i\log(p_i)
+<p>The <em>information content (surprisal)</em> of an event \(A\) is quantified as \(\log\left(\dfrac{1}{P(A)}\right)=-\log P(A)\). The expected surprisal of \(A\) is \(-P(A)\log P(A)\). The <em>Entropy</em> under \(P\) is the sum of expected surprisal</p>
+\[H(P)=-\mathbb E_P[\log P]=-\sum_ip_i\log(p_i)
 \]
-<p><em>Cross-entropy loss</em> is defined to be</p>
-\[H(P,Q)=-E_P[\log Q]=-\sum_ip_i\log(q_i)
+<p>The <em>Cross-entropy</em> of \(Q\) under \(P\) is</p>
+\[H(P,Q)=-\mathbb E_P[\log Q]=-\sum_ip_i\log(q_i)
 \]
 <p>which measures the discrepancy using \(Q\) as predictions given the actual distribution is \(P\).</p>
-<p><em>Relative entropy (KL convergence)</em> is defined to be</p>
+<p>The <em>(KL convergence)</em> of \(P\) from \(Q\) is</p>
 \[D_{KL}(P||Q)=\sum_ip_i\log\left(\dfrac{p_i}{q_i}\right)=H(P,Q)-H(P)
 \]
 <p>This is always nonnegative (<em>Gibb's inequality</em>) since</p>
@@ -573,7 +574,7 @@ here \(\gamma(\tau)\) is called the <em>autovariance</em>, and note that \(\oper
 \[\mathbb EX_q=\frac{1}{N}\sum_{i=1}^Nx^{(i)}_q, \quad \text{Cov}(X_q,X_r)=\mathbb E[(X_q-\mathbb EX_q)(X_r-\mathbb EX_r)]
 \]
 <p>Denote \(A=\begin{bmatrix}\mathbf x^{(1)}\\\vdots\\\mathbf x^{(N)}\end{bmatrix}\), and \(\bar A\) whose \(q\)-th column consists of only \(\mathbb EX_q\), then the covariance matrix is</p>
-\[\Sigma=\text{Cov}(\mathbf X,\mathbf X)=\mathbb E[(\mathbf X-\mathbb E\mathbf X)^T(\mathbf X-\mathbb E\mathbf X)]=\frac{1}{p-1}(A-\bar A)^T(A-\bar A)
+\[\Sigma=\text{Cov}(\mathbf X,\mathbf X)=\mathbb E[(\mathbf X-\mathbb E\mathbf X)^T(\mathbf X-\mathbb E\mathbf X)]=\frac{1}{N-1}(A-\bar A)^T(A-\bar A)
 \]
 <p>A heuristic algorithm could be</p>
 <ol>
@@ -602,10 +603,10 @@ is the singular decomposition, then<br />
 <li>The magnitude of the distances between clusters shouldn't be interpreted.</li>
 <li>tSNE results should not be used as statistical evidence or proof of something, and it sometimes can produce clusters that aren't actually true. Thus it is always a good practice to run it a few times to ensure that the cluster persists.</li>
 </ol>
-<h3><a id="k-means-clustering" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(k\) means clustering</h3>
-<p><em>\(k\) means clustering</em> tries to divide a dataset into \(k\) clusters. Start with random guess of \(k\) centroids. Then group all points according to distance to the centroids. Recalculate the centroid as the average of each group. Repeat these steps until you see no change of groups.</p>
-<h4><a id="how-to-choose-the-best-k" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to choose the best \(k\)?</h4>
-<p>Typically we run the algorithm multiple times examing the behaviour of the model depending on different values of \(k\) according to some metric, and then choose the best.</p>
+<h3><a id="k-means-clustering" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(K\) means clustering</h3>
+<p><em>\(K\) means clustering</em> tries to divide a dataset into \(k\) clusters. Start with random guess of \(k\) centroids. Then group all points according to distance to the centroids. Recalculate the centroid as the average of each group. Repeat these steps until you see no change of groups.</p>
+<h4><a id="how-to-choose-the-best-k" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to choose the best \(K\)?</h4>
+<p>Typically we run the algorithm multiple times examing the behaviour of the model depending on different values of \(K\) according to some metric, and then choose the best.</p>
 <ol>
 <li>The <em>elbow method</em>. We first calculate the <em>inertia</em> of the resulting clustering, which is defined to be
 \[\sum_{i=1}^n\operatorname{dist}(X^{(i)},c^{(i)})^2
@@ -659,16 +660,8 @@ Where $a=\dfrac{1}{|I|-1}\sum_{i\in I,i\neq j}d(x_i,d_j)$ is the average of the 
 <li>Multi-head Attention</li>
 </ol>
 </div>
-
-
-
-
-
-
-
-
-
 </div>
+
 
 <script>
 document.querySelectorAll('.sidebar a').forEach(link => {
