@@ -86,11 +86,11 @@ pipe = Pipeline([
 
 ## Supervised Learning
 
-Given observations $\{(\mathbf x^{(i)},\mathbf y^{(i)})\}_{i=1}^N$, where $\mathbf x^{(i)}$ are *feature vectors*, its entries are called *features*, and $\mathbf y^{(i)}$ are *labels* or *predictions*. Assume $\mathbf y=f(\mathbf x)+\boldsymbol\epsilon$ is the true relation, where $f(\mathbf x)=f(\boldsymbol\theta;\mathbf x)$ is a (typically continuous) parametrized function and $\boldsymbol\epsilon$ is a random noise (typically $\mathbb E(\boldsymbol\epsilon)=\mathbf 0$ and independent). *Supervised learning* is to "learn" a *model* $\hat f(\hat{\boldsymbol\theta})$ of $f(\boldsymbol\theta)$ and make predictions $\hat{\mathbf y}=\hat f(\hat{\boldsymbol\theta};\mathbf x)$.
+Given Dataset $D=\{(\mathbf x^{(i)},\mathbf y^{(i)})\}_{i=1}^N$, where $\mathbf x^{(i)}$ are *feature vectors*, its entries are called *features*, and $\mathbf y^{(i)}$ are *labels* or *predictions*. Assume $\mathbf y=f(\mathbf x)+\boldsymbol\epsilon$ is the true relation, where $f$ is a (typically continuous) function and $\boldsymbol\epsilon$ is a random noise (typically $\mathbb E(\boldsymbol\epsilon)=\mathbf 0$ and independent). *Supervised learning* is to "learn" a *model* $\hat f$ of $f$ and make predictions $\hat{\mathbf y}=\hat f(\mathbf x)$.
 
 ### Bias-variance trade-off
 
-Suppose $\mathbb E[\boldsymbol\epsilon]=\mathbf 0$. The expected total error is
+Suppose $\mathbb E[\boldsymbol\epsilon]=\mathbf 0$, $\hat f(\mathbf x)=\hat f(\mathbf x;D)$ with $D$ sampled from joint probability distribution of $(\mathbf X,\boldsymbol\epsilon)$. Consider the expected total error at a fixed test input $\mathbf x$ (so $\mathbb E=\mathbb E_{\mathbf X,\boldsymbol\epsilon|\mathbf X=\mathbf x}$)
 $$
 \begin{align*}
 \mathbb E[\|\mathbf y-\hat{\mathbf y}\|^2] &= \mathbb E[\|f+\boldsymbol\epsilon-\hat f\|^2]\\
@@ -108,7 +108,7 @@ $$
 \text{total error = bias$^2$ + Variance + irreducible error}
 $$
 
-When underfitting the model, the model is too simple so that the bias is huge (e.g., using a linear equation approximate a quadratic). When overfitting the model, the model is too complex, so the variance is great (e.g., use a high-degree polynomial to approximate a linear relation with small random noise). One has to make tradeoff between bias and variance so that both aren't significant.
+When underfitting the model, the model is too simple so that the model bias is huge (e.g., using a linear equation approximate a quadratic). When overfitting the model, the model is too complex, so the model variance is great (e.g., use a high-degree polynomial to approximate a linear relation with small random noise). One has to make tradeoff between bias and variance so that both aren't significant.
 
 ### Objective & Loss function
 
