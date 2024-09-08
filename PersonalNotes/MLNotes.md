@@ -113,8 +113,10 @@ When underfitting the model, the model is too simple so that the model bias is h
 ### Objective & Loss function
 
 To improve the model, we need loss functions
-- *Mean squared error (MSE)*: $L(\theta)=\displaystyle\frac{1}{N}\sum_{i=1}^N\|\mathbf y^{(i)}-\hat{\mathbf y}^{(i)}\|^2$. Used in regression
-- *Logistic Loss or Cross-Entropy Loss*: $L(\theta)=\displaystyle-\frac{1}{N}\sum_iy_i\log p_i+(1-y_i)\log(1-p_i)$. Used in binary classification. Or $L(\theta)=$. Used in multiclass classification
+- *Mean squared error (MSE)*: $\displaystyle\frac{1}{N}\sum_{i=1}^N\|\mathbf y^{(i)}-\hat{\mathbf y}^{(i)}\|^2$. Used in regression
+- *Mean Absolute Error (MAE)*: $\displaystyle\frac{1}{N}\sum_{i=1}^N\|\mathbf y^{(i)}-\hat{\mathbf y}^{(i)}\|$.
+- *Root Mean Square Error (RMSE)*: $\displaystyle\sqrt{\frac{1}{N}\sum_{i=1}^N\|\mathbf y^{(i)}-\hat{\mathbf y}^{(i)}\|^2}$.
+- *Logistic Loss or Cross-Entropy Loss*: $\displaystyle-\sum_i[y_i\log(\hat p_i)+(1-y_i)\log(1-\hat p_i)]$. Used in binary classification. Or $\displaystyle-\sum_{c=1}^C\sum_{i}y_{i,c}\log(\hat p_{i,c})$. Used in multiclass classification
 
 But to prevent overfitting, we also include a regularization term $\Omega(\theta)$. The objective function is then the sum of $L(\theta)$ and $\Omega(\theta)$
 
