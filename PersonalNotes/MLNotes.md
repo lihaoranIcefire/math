@@ -254,6 +254,20 @@ $$
 &=\mathbb P(Z_1\geq Z_0)
 \end{align*}
 $$
+Suppose $\{Z_0^{(i)}\}_{i=1}^{n_0}\sim\hat Y|Y=0$, $\{Z_1^{(j)}\}_{j=1}^{n_1}\sim\hat Y|Y=1$ are (independent) samples, then an unbiased estimator of AUC is $\dfrac{U}{n_0n_1}$, where
+$$
+U=\sum_{i=1}^{n_0}\sum_{j=1}^{n_1}\mathbf 1_{Z_1^{(j)}\geq Z_0^{(i)}}=n_0n_1+\frac{n_0(n_0+1)}{2}-R_1
+$$
+Note that this is precisely the *Wilcoxon-Mann-Whitney (WMW)* $U$-statistic. Where $R_1$ is the sum of ranks $Z_0^{(i)}$ in all of $Z$'s
+
+- Proof: Suppose the ranks of $Z_0^{(i)}$ are $r_1<\cdots<r_{n_0}$, then $R=r_1+\cdots+ r_{n_0}$ and 
+    $$
+    \begin{align*}
+    U&=(n_0+n_1-r_{n_0})+(n_0+n_1-1-r_{n_0-1})+\cdots+(n_0+n_1-(n_0-1)-r_1)\\
+    &=n_0(n_0+n_1)-R_1-\frac{n_0(n_0-1)}{2}\\
+    &=n_0n_1+\frac{n_0(n_0+1)}{2}-R_1
+    \end{align*}
+    $$
 
 *Coefficient of determination ($R^2$)* is defined to be $1-\dfrac{\sum_i(y_i-\hat y_i)^2}{\sum_i(y_i-\bar y)^2}$. If $R^2=0$, it means the model have worst predictions since it is a constant average prediction, if $R^2=1$, then the model is accurate.
 
