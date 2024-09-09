@@ -118,6 +118,10 @@ th, td, tr {
 
 <body>
 
+
+
+
+
 <div class="sidebar">
 <a href="#section0" class="active">Content</a>
 <a href="#section1">Data Preprocessing</a>
@@ -125,6 +129,14 @@ th, td, tr {
 <a href="#section3">Unsupervised Learning</a>
 <a href="#section4">Neural Networks</a>
 </div>
+
+
+
+
+
+
+
+
 
 <div class="content">
 <div id="section0" class="section">
@@ -324,9 +336,53 @@ Recall is used if the cost for false negative is high, e.g. disease detection</l
 \[\text{F1 score} = \dfrac{2}{\dfrac{1}{\text{Precision}}+\dfrac{1}{\text{Recall}}} = 2\dfrac{\text{Precision}\times\text{Recall}}{\text{Precision}+\text{Recall}}
 \]
 <p>F1 score is the single metric of both the precision and recall which balances the Precision-Recall tradeoff by taking both into account, especially if there is an uneven class distribution, e.g. search engine ranking for relevance.</p>
-<p><em>Receivers operating characteristic curve (ROC)</em> is the plot of recall against (1-specificity), and the diagonal line means a total random model.</p>
-<p><em>Area under ROC (AUROC)</em> measures a comprehensive classifier's performance, if it is 0.5, and it is like random, if it is 1, then it is outstanding discrimination. For example, predicting customer churn.</p>
-<p><em>Coefficient of determination (\(R^2\))</em> is defined to be \(1-\dfrac{\sum_i(y_i-\hat y_i)^2}{\sum_i(y_i-\bar y)^2}\). If \(R^2=0\), it means the model have worst predictions since it is a constant average prediction, if \(R^2=1\), then the model is accurate.</p>
+<h3><a id="roc" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ROC</h3>
+<p>In binary classification, \(\hat Y\) is usually a continuous random variable. <em>Receivers operating characteristic curve (ROC)</em> is the parametrized curve \((\text{fpr}(t),\text{tpr}(t))\), \(t\in\mathbb R\) where</p>
+<ul>
+<li>
+<p>$\displaystyle\text{tpr(t)}=\frac{TP}{TP+FN}=\mathbb P(\hat Y\geq t|Y=1)$ is true positive rate (recall)</p>
+</li>
+<li>
+<p>$\displaystyle\text{fpr(t)}=\frac{FP}{FP+TN}=\mathbb P(\hat Y\geq t|Y=0)$ is false positive rate (1-specificity)</p>
+</li>
+<li>
+<p>\(t\) is cut-off</p>
+</li>
+</ul>
+<p>It is not hard to conclude</p>
+<ul>
+<li>A total random model corresponds to the diagonal line, where \(\hat Y\) is independent of \(Y\) and thus \(\text{tpr}(t)=\text{fpr}(t)=\mathbb P(\hat Y\geq t)\)</li>
+<li>The perfect model corresponds to two segments \((0,0)\to(0,1)\) and \((0,1)\to(1,1)\), where \(\mathbb P(\hat Y\geq t_0)=\mathbb P(Y=1)\) for some \(t_0\), and \(\text{tpr}(t)=1,\text{fpr}(t)=0\)</li>
+<li>\(\text{tpr}(-\infty)=\text{fpr}(-\infty)=1\), \(\text{tpr}(\infty)=\text{fpr}(\infty)=0\), \(\text{tpr},\text{fpr}\) are non-increasing</li>
+</ul>
+<p>The <em>Area under ROC (AUROC/AUC)</em> measures a comprehensive classifier's performance, if it is \(\frac{1}{2}\), and it is like random, if it is 1, then it is outstanding discrimination. AUC is equal to the probability that a classifier will rank a randomly chosen positive instance higher than a randomly chosen negative one. Suppose $Z_1\sim\hat Y|Y=1$ has cdf \(1-\text{tpr}\) and $Z_0\sim\hat Y|Y=0$ has cdf \(1-\text{fpr}\) are independent</p>
+\[\begin{align*}
+\text{AUC}&amp;=\int_0^1ydx=\int_{+\infty}^{-\infty}\text{tpr}(t)d\text{fpr}(t)\\
+&amp;=\int_{+\infty}^{-\infty}\text{tpr}(t)\text{fpr}'(t)dt\\
+&amp;=\int_{+\infty}^{-\infty}\left(-\int_t^\infty\text{tpr}'(s)ds\right)\text{fpr}'(t)dt\\
+&amp;=\int_{-\infty}^\infty\int_{-\infty}^\infty\text{tpr}'(s)\text{fpr}'(t)\mathbf 1_{s\geq t}(s,t)dsdt\\
+&amp;=\mathbb P(Z_1\geq Z_0)
+\end{align*}
+\]
+<p>Suppose ${Z_0^{(i)}}<em>{i=1}^{n_0}\sim\hat Y|Y=0$, ${Z_1^{(j)}}</em>{j=1}^{n_1}\sim\hat Y|Y=1$ are (independent) samples, then an unbiased estimator of AUC is \(\dfrac{U}{n_0n_1}\), where</p>
+\[U=\sum_{i=1}^{n_0}\sum_{j=1}^{n_1}\mathbf 1_{Z_1^{(j)}\geq Z_0^{(i)}}=n_0n_1+\frac{n_0(n_0+1)}{2}-R_0
+\]
+<p>Note that this is precisely the <em>Wilcoxon-Mann-Whitney (WMW)</em> \(U\)-statistic. Where \(R_0\) is the sum of ranks \(Z_0^{(i)}\) in all of \(Z\)'s</p>
+<ul>
+<li>Proof: Suppose the ranks of \(Z_0^{(i)}\) are \(r_1&lt;\cdots&lt;r_{n_0}\), then \(R_0=r_1+\cdots+ r_{n_0}\) and
+\[\begin{align*}
+U&amp;=(n_0+n_1-r_{n_0})+(n_0+n_1-1-r_{n_0-1})+\cdots+(n_0+n_1-(n_0-1)-r_1)\\
+&amp;=n_0(n_0+n_1)-R_1-\frac{n_0(n_0-1)}{2}\\
+&amp;=n_0n_1+\frac{n_0(n_0+1)}{2}-R_0
+\end{align*}
+\]
+</li>
+</ul>
+<h3><a id="r-squared" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>R Squared</h3>
+<p><em>Total sum of squares</em> \(SS_{tot}=\sum_i(y_i-\bar y)^2\)</p>
+<p><em>Residual sum of squares</em> \(SS_{res}=\sum_i(y_i-\hat y)^2\)</p>
+<p><em>Coefficient of determination (\(R^2\))</em> is defined to be \(1-\dfrac{SS_{res}}{SS_{tot}}\)</p>
+<p>If \(R^2=0\), it means the model have worst predictions since it is a constant average prediction, if \(R^2=1\), then the model is accurate.</p>
 <p>GAIN/LIFT charts</p>
 <h3><a id="k-nearest-neighbors" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>\(k\)-nearest neighbors</h3>
 <p>The <em>\(k\)-nearest neighbors</em> algorithm assigns the most likely label from the nearest neighbors.</p>
@@ -477,6 +533,7 @@ Note that for example if we choose \(\varphi(x_1,x_2)=(x_1^2,\sqrt2x_1x_2,x_2^2)
 <p>The <em>CART</em> (Classification and Regression Trees) algorithm is a decision tree-based algorithm that can be used for both classification and regression problems in machine learning. It works by recursively partitioning the training data into smaller subsets using binary splits.</p>
 <h4><a id="random-forest" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Random Forest</h4>
 <p>The <em>random forest</em> model is made by building many different decision trees. These trees are made &quot;different&quot; through a variety of random perturbations. Finally take the average of all trees.</p>
+<p><a href="https://xgboost.readthedocs.io/en/stable/tutorials/model.html">XGBoost Tutorials</a></p>
 <h4><a id="boosting" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Boosting</h4>
 <p>A statistical learning algorithm is said to be a</p>
 <ul>
@@ -666,6 +723,16 @@ Where $a=\dfrac{1}{|I|-1}\sum_{i\in I,i\neq j}d(x_i,d_j)$ is the average of the 
 </ol>
 </div>
 </div>
+
+
+
+
+
+
+
+
+
+
 
 
 <script>

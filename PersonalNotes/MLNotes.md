@@ -232,6 +232,8 @@ $$
 $$
 F1 score is the single metric of both the precision and recall which balances the Precision-Recall tradeoff by taking both into account, especially if there is an uneven class distribution, e.g. search engine ranking for relevance.
 
+### ROC
+
 In binary classification, $\hat Y$ is usually a continuous random variable. *Receivers operating characteristic curve (ROC)* is the parametrized curve $(\text{fpr}(t),\text{tpr}(t))$, $t\in\mathbb R$ where
 - $\displaystyle\text{tpr(t)}=\frac{TP}{TP+FN}=\mathbb P(\hat Y\geq t|Y=1)$ is true positive rate (recall)
 
@@ -269,7 +271,16 @@ Note that this is precisely the *Wilcoxon-Mann-Whitney (WMW)* $U$-statistic. Whe
     \end{align*}
     $$
 
-*Coefficient of determination ($R^2$)* is defined to be $1-\dfrac{\sum_i(y_i-\hat y_i)^2}{\sum_i(y_i-\bar y)^2}$. If $R^2=0$, it means the model have worst predictions since it is a constant average prediction, if $R^2=1$, then the model is accurate.
+
+### R Squared
+
+*Total sum of squares* $SS_{tot}=\sum_i(y_i-\bar y)^2$
+
+*Residual sum of squares* $SS_{res}=\sum_i(y_i-\hat y)^2$
+
+*Coefficient of determination ($R^2$)* is defined to be $1-\dfrac{SS_{res}}{SS_{tot}}$
+
+If $R^2=0$, it means the model have worst predictions since it is a constant average prediction, if $R^2=1$, then the model is accurate.
 
 GAIN/LIFT charts
 
