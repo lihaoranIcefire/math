@@ -232,9 +232,13 @@ $$
 $$
 F1 score is the single metric of both the precision and recall which balances the Precision-Recall tradeoff by taking both into account, especially if there is an uneven class distribution, e.g. search engine ranking for relevance.
 
-*Receivers operating characteristic curve (ROC)* is the plot of recall against (1-specificity), and the diagonal line means a total random model.
+In binary classification, $\hat Y$ is usually a continuous random variable. *Receivers operating characteristic curve (ROC)* is the plot of true positive rate (recall) against false positive rate (1-specificity) as the cut-off varies
+$$
+\text{tpr(t)}=\frac{TP}{TP+FN}=\frac{\mathbb P(\hat Y>t,Y>t)}{\mathbb P(Y>t)},\quad \text{fpr(t)}=\frac{FP}{FP+TN}=\frac{\mathbb P(\hat Y>t,Y<t)}{\mathbb P(Y<t)}
+$$
+The diagonal line corresponds to a total random model.
 
-*Area under ROC (AUROC)* measures a comprehensive classifier's performance, if it is 0.5, and it is like random, if it is 1, then it is outstanding discrimination. For example, predicting customer churn.
+*Area under ROC (AUROC/AUC)* measures a comprehensive classifier's performance, if it is 0.5, and it is like random, if it is 1, then it is outstanding discrimination. For example, predicting customer churn.
 
 *Coefficient of determination ($R^2$)* is defined to be $1-\dfrac{\sum_i(y_i-\hat y_i)^2}{\sum_i(y_i-\bar y)^2}$. If $R^2=0$, it means the model have worst predictions since it is a constant average prediction, if $R^2=1$, then the model is accurate.
 
