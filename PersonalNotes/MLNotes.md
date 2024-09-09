@@ -232,13 +232,28 @@ $$
 $$
 F1 score is the single metric of both the precision and recall which balances the Precision-Recall tradeoff by taking both into account, especially if there is an uneven class distribution, e.g. search engine ranking for relevance.
 
-In binary classification, $\hat Y$ is usually a continuous random variable. *Receivers operating characteristic curve (ROC)* is the plot of true positive rate (recall) against false positive rate (1-specificity) as the cut-off varies
-$$
-\text{tpr(t)}=\frac{TP}{TP+FN}=\frac{\mathbb P(\hat Y>t,Y>t)}{\mathbb P(Y>t)},\quad \text{fpr(t)}=\frac{FP}{FP+TN}=\frac{\mathbb P(\hat Y>t,Y<t)}{\mathbb P(Y<t)}
-$$
-The diagonal line corresponds to a total random model.
+In binary classification, $\hat Y$ is usually a continuous random variable. *Receivers operating characteristic curve (ROC)* is the parametrized curve $(\text{fpr}(t),\text{tpr}(t))$, $t\in\mathbb R$ where
+- $\displaystyle\text{tpr(t)}=\frac{TP}{TP+FN}=\mathbb P(\hat Y\geq t|Y=1)$ is true positive rate (recall)
 
-*Area under ROC (AUROC/AUC)* measures a comprehensive classifier's performance, if it is 0.5, and it is like random, if it is 1, then it is outstanding discrimination. For example, predicting customer churn.
+- $\displaystyle\text{fpr(t)}=\frac{FP}{FP+TN}=\mathbb P(\hat Y\geq t|Y=0)$ is false positive rate (1-specificity) 
+
+- $t$ is cut-off
+
+It is not hard to conclude
+- A total random model corresponds to the diagonal line, where $\hat Y$ is independent of $Y$ and thus $\text{tpr}(t)=\text{fpr}(t)=\mathbb P(\hat Y\geq t)$
+- The perfect model corresponds to two segments $(0,0)\to(0,1)$ and $(0,1)\to(1,1)$, where $\mathbb P(\hat Y\geq t_0)=\mathbb P(Y=1)$ for some $t_0$, and $\text{tpr}(t)=1,\text{fpr}(t)=0$
+- $\text{tpr}(-\infty)=\text{fpr}(-\infty)=1$, $\text{tpr}(\infty)=\text{fpr}(\infty)=0$, $\text{tpr},\text{fpr}$ are non-increasing
+
+The *Area under ROC (AUROC/AUC)* measures a comprehensive classifier's performance, if it is $\frac{1}{2}$, and it is like random, if it is 1, then it is outstanding discrimination. AUC is equal to the probability that a classifier will rank a randomly chosen positive instance higher than a randomly chosen negative one. Suppose $Z_1\sim\hat Y|Y=1$ has cdf $1-\text{tpr}$ and $Z_0\sim\hat Y|Y=0$ has cdf $1-\text{fpr}$ are independent
+$$
+\begin{align*}
+\text{AUC}&=\int_0^1ydx=\int_{+\infty}^{-\infty}\text{tpr}(t)d\text{fpr}(t)\\
+&=\int_{+\infty}^{-\infty}\text{tpr}(t)\text{fpr}'(t)dt\\
+&=\int_{+\infty}^{-\infty}\left(-\int_t^\infty\text{tpr}'(s)ds\right)\text{fpr}'(t)dt\\
+&=\int_{-\infty}^\infty\int_{-\infty}^\infty\text{tpr}'(s)\text{fpr}'(t)\mathbf 1_{s\geq t}(s,t)dsdt\\
+&=\mathbb P(Z_1\geq Z_0)
+\end{align*}
+$$
 
 *Coefficient of determination ($R^2$)* is defined to be $1-\dfrac{\sum_i(y_i-\hat y_i)^2}{\sum_i(y_i-\bar y)^2}$. If $R^2=0$, it means the model have worst predictions since it is a constant average prediction, if $R^2=1$, then the model is accurate.
 
