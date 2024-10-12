@@ -1,4 +1,11 @@
-# Quant Interview Questions
+# Quant Prep
+
+- [Brain Teaser](#brain-teaser)
+- [Mathematics](#mathematics)
+- [Statistics](#statistics)
+- [Finance](#finance)
+
+## Brain Teaser
 
 **Q:** One hundred tigers and one sheep are put on a magic island that only has grass. Tigers can eat grass, but they would rather eat sheep. Assume: A. Each time only one tiger can eat one sheep, and that tiger itself will become a sheep after it eats the seep. B. All tigers are smart and perfectly rational and they want to survive. So will the sheep be eaten?
 
@@ -7,6 +14,18 @@
 **Q:** Four people, $A,B,C$ and $D$ need to get across a river. The only way to cross the river is by an old bridge, which holds at most 2 people at a time. Being dark, they can't cross the bridge without a torch, of which they only have one. So each pair can only walk at the speed of the slower person. They need to get all of them across to the other side as quckly as poosible. $A$ is the slowerst and takes 10 minutes to cross; $B$ takes 5 minutes; $C$ takes 2 minutes; and $D$ takes 1 minute. What is the minimum time to get all of them across to the other side?
 
 **A:**
+
+**Q:** Suppose that you are blind-folded in a room and told that there are 1000 coins on the floor. 980 of the coins have tails up and the other 20 coins have heads up. Can you separate the coins into two piles so to guarantee both piles have euqal number of heads? Asssume that you cannot tell a coin's side by touching it, but you are allowed to turn over any number of coins.
+
+**A:**
+
+**Q:** One hundred prisoners are given the chance to be set free tomorrow. They are all told that each will be given a red or blue hat to wear. Each prisoner can see everyone else's hat but not his own. The hat colors are assigned randomly and once the hats are placed on the top of each prisoner's head they cannot communicate with one another in any form, or else they are immediately executed. The prisoners will be called out in random order and the prisoner called out will guess the color of his hat. Each prisoner declares the color of his hat so that everyone else can hear it. If a prisoner guesses correctly the color of his hat, he is set free immediately; otherwise he is executed.
+
+They are given the night to come up with a strategy among themselves to save as many prisoners as possible. What is the best strategy they can adopt and how many prisoners can they guarantee to save? What if there are 3 possible hat colors?
+
+**Q:** Seven prisoners are given the chance to be set free tomorrow. An executioner will put a hat on each prisoner's head. Each hat can be one of the seven colors of the rainbow and the hat colors are assigned completely at the executioner's discretion. Every prisoner can see that hat colors of the other six prisoners, but not his own. They cannot communicate with others in any form, or else they are immediately executed. Then each prisoner writes down his guess of his own hat color. If at least one prisoner correctly guesses the color of his hat, they all will be set free immediately; otherwise they will be executed. They are given the night to come up with a strategy. Is there a strategy that they can guarantee that they will be set free?
+
+## Mathematics
 
 **Q:** Can you pack 53 bricks of dimensions $1\times1\times4$ into a $6\times6\times6$ box?
 
@@ -39,21 +58,11 @@ $$
 
 **A:**
 
-**Q:** Suppose that you are blind-folded in a room and told that there are 1000 coins on the floor. 980 of the coins have tails up and the other 20 coins have heads up. Can you separate the coins into two piles so to guarantee both piles have euqal number of heads? Asssume that you cannot tell a coin's side by touching it, but you are allowed to turn over any number of coins.
-
-**A:**
-
 **Q:** A sultan has captured 50 wise men. He has a glass currently standing bottom down. Every minute he calls one of the wise men who can choose either to turn it over (set it upside down or bottom down) or to do nothing. The wise men will be called randomly, possibly for an infinite number of times. When someone called to the sultan correctly states that all wise men have already been called to the sultan at least once, everyone goes free. But if his statement is wrong, the sultan puts everyone to death. The wise men are allwed to communicate only once before they get imprisoned into separate rooms (one per room). Design a strategy that lets the wise men go free.
 
 **A:**
 
 **Q:** You are holding two glass balls in a 100-story building. If a ball is thrown out of the window, it will not break if the floor number is less than $X$, and it will always break if the floor number is equal to or greater tan $X$. You would like to determine $X$. What is the strategy that will minimize the number of drops for the worst case scenario?
-
-**Q:** One hundred prisoners are given the chance to be set free tomorrow. They are all told that each will be given a red or blue hat to wear. Each prisoner can see everyone else's hat but not his own. The hat colors are assigned randomly and once the hats are placed on the top of each prisoner's head they cannot communicate with one another in any form, or else they are immediately executed. The prisoners will be called out in random order and the prisoner called out will guess the color of his hat. Each prisoner declares the color of his hat so that everyone else can hear it. If a prisoner guesses correctly the color of his hat, he is set free immediately; otherwise he is executed.
-
-They are given the night to come up with a strategy among themselves to save as many prisoners as possible. What is the best strategy they can adopt and how many prisoners can they guarantee to save? What if there are 3 possible hat colors?
-
-**Q:** Seven prisoners are given the chance to be set free tomorrow. An executioner will put a hat on each prisoner's head. Each hat can be one of the seven colors of the rainbow and the hat colors are assigned completely at the executioner's discretion. Every prisoner can see that hat colors of the other six prisoners, but not his own. They cannot communicate with others in any form, or else they are immediately executed. Then each prisoner writes down his guess of his own hat color. If at least one prisoner correctly guesses the color of his hat, they all will be set free immediately; otherwise they will be executed. They are given the night to come up with a strategy. Is there a strategy that they can guarantee that they will be set free?
 
 **Q:** At a theater ticket office, $2n$ people are waiting to buy tickets. $n$ of them have only $\$5$ bills and the other $n$ people have only $\$10$ bills. Then ticket seller has no change to start with. If each person buys one $\$5$ ticket, what is the probability that all people will be able to buy tickets without having to change positions?
 
@@ -107,6 +116,10 @@ $$
 $$
 
 **Q:** You play a game with a biased coin where there is a 40% chance of heads and 60% chance of tails. You may place a bet; If heads is flipped then you receive your bet back plus the same in winnings. If tails is flipped then you lose your bet. You have $\$10$ and you want to turn this into $\$20$ by continuously betting $\$1$ at a time, walking away when you either have a total of $\$20$ or are bankrupt. What is the probability you will leave with $\$20$?
+
+## Statistics
+
+## Finance
 
 Let's denote
 - $T$: maturity date
