@@ -4,6 +4,7 @@
 - [Mathematics](#mathematics)
 - [Statistics](#statistics)
 - [Finance](#finance)
+- [Coding](#coding)
 
 ## Brain Teaser
 
@@ -125,14 +126,14 @@ Let's denote
 - $T$: maturity date
 - $t$: the current time
 - $\tau=T-t$: time to maturity
-- $S$ stock price at the $t$
+- $S$: stock price at the $t$
 - $r$: continuous risk-free interest rate
 - $u$: continuous dividend yield
 - $\sigma$: annulaized asset volality
 - $c,C,p,P$: price of a european/american call, european/american put
 - $D$: present value of future dividends
 - $K$: strike price
-- $PV$: present value at $t$
+- $PV$: present value
 
 **Q:** How do vanilla european/american option prices change when $S,K,\tau,\sigma,r,D$ changes?
 
@@ -145,3 +146,81 @@ Let's denote
 |$\sigma \uparrow$|$\uparrow$|$\uparrow$|$\uparrow$|$\uparrow$|
 |$r \uparrow$|$\uparrow$|$\downarrow$|$\uparrow$|$\downarrow$|
 |$D \uparrow$|$\downarrow$|$\uparrow$|$\downarrow$|$\uparrow$|
+
+**Q:** Why should you never exercise an american call on a non-dividend paying stock before maturity?
+
+**A:**
+
+**Q:** A european put option on a non-dividend paying stock with strike price $\$80$ is currently priced at $\$8$ and a put option on the same stock with strike price $\$90$ is priced at $\$9$. Is there an arbitrage opportunity existing in thesee two options?
+
+**Q:** Derive Black-Scholes-Merton differential equation
+
+**A:** Suppose stock price $S$ is log-normal
+$$
+dS=\mu Sdt+\sigma SdW
+$$
+and $V=V(S,t)$ is a derivative, then by ito's lemma
+$$
+dV=\left(\frac{\partial V}{\partial t}+\mu S\frac{\partial V}{\partial S}+\frac{1}{2}\sigma^2S^2\frac{\partial^2 V}{\partial S^2}\right)dt+\sigma S\frac{\partial V}{\partial S}dW
+$$
+Consider portfolio $\Pi=V-\frac{\partial V}{\partial S}S$, then
+$$
+d\Pi=dV-\frac{\partial V}{\partial S}dS=\left(\frac{\partial V}{\partial t}+\sigma^2S^2\frac{1}{2}\frac{\partial^2 V}{\partial S^2}\right)dt
+$$
+Since there are diffusion term, this should have risk-free rate of return: $dV=r\left(V-\dfrac{\partial V}{\partial S}\right)dt$. Therefore
+$$
+\frac{\partial V}{\partial t}+rS\frac{\partial V}{\partial S}+\frac{1}{2}\sigma^2S^2\frac{\partial^2 V}{\partial S^2}=rV
+$$
+This is the Black-Scholes-Merton differential equation.
+
+**Q:** Explain Feynman-Kac theorem (see [https://math.nyu.edu/~kohn/pde.finance/2015/section1.pdf](https://math.nyu.edu/~kohn/pde.finance/2015/section1.pdf))
+
+**A:** Suppose
+$$
+dX_t=\mu(X_t,t)dt+\sigma(X_t,t)dW_t
+$$
+And
+$$
+u(x,t)=\mathbb E\left[e^{-\int_t^Tr(X_\tau,\tau)d\tau}\phi(X_T)+\int_t^Te^{-\int_t^\tau r(X_s,s)ds}f(X_\tau,\tau)\middle|X_t=x\right]
+$$
+Where
+- $\mu$ is the shift
+- $\sigma$ is the volatility
+- $r$ is the interest rate
+- $X_t$ is the price of the derivative at time $t$
+- $W_t$ is a Wiener process
+- $f$ is the running payoff
+- $\phi$ is the final time payoff
+
+Then $u$ solves
+$$
+\frac{\partial u}{\partial t}(x,t)+\mu(x,t)\frac{\partial u}{\partial x}(x,t)+\frac{1}{2}\sigma(x,t)^2\frac{\partial^2 u}{\partial x^2}(x,t)-r(x,t)u(x,t)+f(x,t)=0,\quad u(x,T)=\phi(x)
+$$
+
+## Coding
+
+**Q**: `bisect_left` & `bisect_right` on a sorted list
+
+**A**:
+
+```python
+def bisect_left(a, x, lo=0, hi=len(a)):
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if a[mid] < x:
+            lo = mid + 1
+        else:
+            hi = mid
+    return lo
+```
+
+```python
+def bisect_right(a, x, lo=0, hi=len(a)):
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if x < a[mid]:
+            hi = mid
+        else:
+            lo = mid + 1
+    return lo
+```
