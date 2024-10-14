@@ -184,7 +184,7 @@ $$
 u(x,t)=\mathbb E\left[e^{-\int_t^Tr(X_\tau,\tau)d\tau}\phi(X_T)+\int_t^Te^{-\int_t^\tau r(X_s,s)ds}f(X_\tau,\tau)\middle|X_t=x\right]
 $$
 Where
-- $\mu$ is the shift
+- $\mu$ is the mean return rate
 - $\sigma$ is the volatility
 - $r$ is the interest rate
 - $X_t$ is the price of the derivative at time $t$
@@ -196,6 +196,8 @@ Then $u$ solves
 $$
 \frac{\partial u}{\partial t}(x,t)+\mu(x,t)\frac{\partial u}{\partial x}(x,t)+\frac{1}{2}\sigma(x,t)^2\frac{\partial^2 u}{\partial x^2}(x,t)-r(x,t)u(x,t)+f(x,t)=0,\quad u(x,T)=\phi(x)
 $$
+
+**Q:** Explain the solution to Black-Scholes-Merton equation (see [https://www.math.cmu.edu/~gautam/sj/teaching/2016-17/944-scalc-finance1/pdfs/ch4-rnm.pdf](https://www.math.cmu.edu/~gautam/sj/teaching/2016-17/944-scalc-finance1/pdfs/ch4-rnm.pdf))
 
 ## Coding
 
