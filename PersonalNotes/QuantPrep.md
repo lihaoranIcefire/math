@@ -8,7 +8,8 @@
 
 ## Brain Teaser
 
-**Q:** One hundred tigers and one sheep are put on a magic island that only has grass. Tigers can eat grass, but they would rather eat sheep. Assume: A. Each time only one tiger can eat one sheep, and that tiger itself will become a sheep after it eats the seep. B. All tigers are smart and perfectly rational and they want to survive. So will the sheep be eaten?
+#### Question:
+One hundred tigers and one sheep are put on a magic island that only has grass. Tigers can eat grass, but they would rather eat sheep. Assume: A. Each time only one tiger can eat one sheep, and that tiger itself will become a sheep after it eats the seep. B. All tigers are smart and perfectly rational and they want to survive. So will the sheep be eaten?
 
 **A:**
 
@@ -147,6 +148,10 @@ Let's denote
 |$r \uparrow$|$\uparrow$|$\downarrow$|$\uparrow$|$\downarrow$|
 |$D \uparrow$|$\downarrow$|$\uparrow$|$\downarrow$|$\uparrow$|
 
+**Q:** Explain call-put parity
+
+**A:** $c+Ke^{-r\tau}=p+S-D$, where if we suppose $Se^{(r-y)\tau}+De^{r\tau}=Se^{r\tau}\Rightarrow S-D=Se^{-y\tau}$.
+
 **Q:** Why should you never exercise an american call on a non-dividend paying stock before maturity?
 
 **A:**
@@ -199,30 +204,114 @@ $$
 
 **Q:** Explain the solution to Black-Scholes-Merton equation (see [https://www.math.cmu.edu/~gautam/sj/teaching/2016-17/944-scalc-finance1/pdfs/ch4-rnm.pdf](https://www.math.cmu.edu/~gautam/sj/teaching/2016-17/944-scalc-finance1/pdfs/ch4-rnm.pdf))
 
+**A:** Solutions to the Black-Scholes-Merton model of european call and put are
+$$
+c = Se^{-y\tau}N(d_+) - Ke^{-r\tau}N(d_-),\quad p = Ke^{-r\tau}N(-d_-) - Se^{-y\tau}N(-d_+)
+$$
+Where $d_{\pm}=\dfrac{\ln(\frac{S}{K})+(r-y\pm\frac{\sigma^2}{2})\tau}{\sigma\sqrt\tau}$
+
+**Q:** Explain the Greek letters
+
+**A:**
+
+- Delta $\Delta$: partial derivative with respect to $S$
+$$
+\frac{\partial c}{\partial S}=e^{-y\tau}N(d_+),\quad\frac{\partial p}{\partial S}=-e^{-y\tau}N(-d_+)
+$$
+- Gamma $\Gamma$: second partial derivative with respect to $S$
+$$
+\frac{\partial^2 c}{\partial S^2}=,\quad \frac{\partial^2 p}{\partial S^2}=
+$$
+- Theta $\Theta$: partial derivative with respect to $t$
+$$
+\frac{\partial c}{\partial t}=-\frac{\partial c}{\partial\tau}=,\quad
+$$
+- vega $\nu$: partial derivative with respect to $\sigma$
+$$
+\frac{\partial c}{\partial \sigma}=,\quad
+$$
+- rho $\rho$: partial derivative with respect to $r$
+$$
+\frac{\partial c}{\partial r}=,\quad
+$$
+
+We need the following straightforward yet useful identity
+$$
+Se^{-y\tau}N'(d_+) = Ke^{-r\tau}N'(d_-)
+$$
+
 ## Coding
 
-**Q**: `bisect_left` & `bisect_right` on a sorted list
-
-**A**:
+### Binary search
 
 ```python
-def bisect_left(a, x, lo=0, hi=len(a)):
-    while lo < hi:
-        mid = (lo + hi) // 2
-        if a[mid] < x:
-            lo = mid + 1
-        else:
-            hi = mid
-    return lo
+def bisect_left(a, x, l=0, r=len(a)):
+    while l < r:
+        m = (l + r) // 2
+        if a[m] < x: l = m + 1
+        else: r = m
+    return l
+
+def bisect_right(a, x, l=0, r=len(a)):
+    while l < r:
+        m = (l + r) // 2
+        if x < a[m]: r = m
+        else: l = m + 1
+    return l
 ```
 
+### Heap (Priority queue)
+
+A heap is an array $a$ such that $a_k\leq a_{2k+1},a_{2k+2}$.
+- the left and right child of $a_k$ is $a_{2k+1},a_{2k+2}$
+- the parent of $a_k$ is $a_{(k-1)/2}$
+- the leaves are $a_{n/2},\cdots,a_{n-1}$
+
 ```python
-def bisect_right(a, x, lo=0, hi=len(a)):
-    while lo < hi:
-        mid = (lo + hi) // 2
-        if x < a[mid]:
-            hi = mid
-        else:
-            lo = mid + 1
-    return lo
+def sift_down(a, p) {
+    '''
+    Sift down the element at p
+    '''
+    while True:
+        n, l, r, i = len(a), 2*p+1, 2*p+2, p
+        if l < n and a[l] < a[i]: i = l
+        if r < n and a[r] <= a[i]: i = r
+        if i == p: break
+        a[i], a[p] = a[p], a[i]
+        p = i
+
+def sift_up(a, k) {
+    '''
+    Sift up the element at k
+    '''
+    while k > 0:
+        n, p = len(a), (k-1)//2
+        if a[p] <= a[k]: break
+        a[k], a[p] = a[p], a[k]
+        k = p
+
+def heapify(a):
+    for i in range(len(a)//2-1, -1):
+        sift_down(a, i)
+
+def heappop(a):
+    if len(a) == 1:
+        a.pop()
+        return
+    a[0] = a.pop()
+    sift_down(a, 0)
+
+def heappush(a, x):
+    a.append(x)
+    sift_up(a, len(a)-1)
+```
+
+### Bitmask
+
+subset of `n` is
+
+```python
+b = n
+while b:
+    b = (b-1) & n
 ```
