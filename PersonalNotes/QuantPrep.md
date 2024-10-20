@@ -260,6 +260,12 @@ def bisect_right(a, x, l=0, r=len(a)):
     return l
 ```
 
+### Sorting
+
+```python
+def merge_sort(a):
+```
+
 ### Heap (Priority queue)
 
 A heap is an array $a$ such that $a_k\leq a_{2k+1},a_{2k+2}$.
