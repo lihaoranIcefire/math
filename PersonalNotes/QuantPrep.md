@@ -172,7 +172,7 @@ Consider portfolio $\Pi=V-\frac{\partial V}{\partial S}S$, then
 $$
 d\Pi=dV-\frac{\partial V}{\partial S}dS=\left(\frac{\partial V}{\partial t}+\sigma^2S^2\frac{1}{2}\frac{\partial^2 V}{\partial S^2}\right)dt
 $$
-Since there are diffusion term, this should have risk-free rate of return: $dV=r\left(V-\dfrac{\partial V}{\partial S}\right)dt$. Therefore
+Since there are diffusion term, this should have risk-free rate of return: $d\Pi=r\left(V-\dfrac{\partial V}{\partial S}S\right)dt$. Therefore
 $$
 \frac{\partial V}{\partial t}+rS\frac{\partial V}{\partial S}+\frac{1}{2}\sigma^2S^2\frac{\partial^2 V}{\partial S^2}=rV
 $$
