@@ -242,6 +242,13 @@ $$
 
 ## Coding
 
+### Master theorem for divide-and-conquer recurrences
+
+A problem with $n$ inputs that can be split into $a$ subproblems with $n/b$ inputs in each subproblem, then the running time is $T(n)=aT(n/b)+f(n)$, where $a\geq1$, $b>1$, $f(n)\geq0$.
+- If $f(n)=O(n^{\log_ba-\epsilon})$, then $T(n)=\Theta(n^{\log_ba})$
+- If $f(n)=\Theta(n^{\log_ba}\log^kn)$ for some $k\geq0$, then $T(n)=\Theta(n^{\log_ba}\log^{k+1}n)$
+- If $f(n)=\Omega(n^{\log_ba+\epsilon})$, then $T(n)=\Theta(f(n))$
+
 ### Binary search
 
 ```python
