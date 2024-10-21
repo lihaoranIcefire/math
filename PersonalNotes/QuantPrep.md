@@ -328,3 +328,7 @@ b = n
 while b:
     b = (b-1) & n
 ```
+
+### Random
+
+Knuth shuffle
