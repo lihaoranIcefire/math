@@ -119,6 +119,34 @@ $$
 
 **Q:** You play a game with a biased coin where there is a 40% chance of heads and 60% chance of tails. You may place a bet; If heads is flipped then you receive your bet back plus the same in winnings. If tails is flipped then you lose your bet. You have $\$10$ and you want to turn this into $\$20$ by continuously betting $\$1$ at a time, walking away when you either have a total of $\$20$ or are bankrupt. What is the probability you will leave with $\$20$?
 
+Properties of characteristic functions $\varphi_X(t)=E[e^{itx}]$
+- If $X\sim\mathcal N(\mu,\sigma^2)$, $\varphi_X(t)=e^{it\mu-\frac{1}{2}\sigma^2t^2}$
+- $E[X^k]=\frac{1}{i^k}\varphi^{(k)}_X(0)$
+- $\varphi_{c_1X_1+\cdots c_nX_n+b}(t)=e^{itb}\varphi_{X_1}(c_1t)\cdots\varphi_{X_n}(c_nt)$ if $X_i$ are independent
+- $\varphi_{X,Y}(s,t)=\varphi_X(s)\varphi_Y(t)$ if $X,Y$ are independent
+
+**Q:** What is the law of large numbers?
+
+**A:**
+
+Weak form: $\dfrac{(X_1+\cdots+X_n)}{n}\xrightarrow{P}\mu$
+
+Proof: Chebychev's inequality $P(|\bar X - \mu|\geq\epsilon)\leq\dfrac{\sigma^2}{n\epsilon^2}$
+
+Strong form (Needs $E[X_i^4]<\infty$): $\dfrac{(X_1+\cdots+X_n)}{n}\xrightarrow{\text{a.s.}}\mu$
+
+Proof: Assume $\mu=0$, Chebychev's inequality $P(|S_n|\geq n\epsilon)\leq\dfrac{E[S_n^4]}{(n\epsilon)^4}\leq\dfrac{C}{\epsilon^4n^2}$ and then Borel-Cantelli lemma
+
+**Q:** What is central limit theorem? Does it imply law of large numbers?
+
+**A:** $X_i$ are i.i.d. with $E[X_i]=\mu$, $Var[X_i]=\sigma^2$
+
+$$
+Z_n=\frac{\dfrac{X_1+\cdots+X_n}{n}-\mu}{\sigma/\sqrt n}\xrightarrow{\mathcal D}\mathcal N(0,1)
+$$
+
+Note that $Z_n=\sum_i\dfrac{1}{\sqrt n}Y_i$, where $Y_i=\dfrac{X_i-\mu}{\sigma}$. Then use charateristic function on this.
+
 ## Statistics
 
 ## Finance
