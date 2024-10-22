@@ -147,6 +147,10 @@ $$
 
 Note that $Z_n=\sum_i\dfrac{1}{\sqrt n}Y_i$, where $Y_i=\dfrac{X_i-\mu}{\sigma}$. Then use charateristic function on this.
 
+**Q:** How do you generated a random variables that follow $\mathcal N(\mu,\sigma^2)$
+
+**Q:** Variance reduction techniques to improve the efficiency of Monte Carlo simulation
+
 ## Statistics
 
 ## Finance
