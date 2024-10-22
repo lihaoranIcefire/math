@@ -367,8 +367,7 @@ class UnionFind:
             self.parent[x] = self.find(self.parent[x])
         return self.parent[x]
     def union(self, x, y):
-        rx = self.find(x)
-        ry = self.find(y)
+        rx, ry = self.find(x), self.find(y)
         if rx == ry: return
         if self.rank[rx] < self.rank[ry]:
             self.parent[rx] = ry
