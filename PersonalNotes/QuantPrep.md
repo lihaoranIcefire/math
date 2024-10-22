@@ -267,10 +267,26 @@ def bisect_right(a, x, l=0, r=len(a)):
     return l
 ```
 
+Binary search without knowing the size of the array.
+$$
+[1], [2,3], [4,7],[8,15],\cdots,[2^k,2^{k+1}-1]
+$$
+
 ### Sorting
 
 ```python
-def merge_sort(a):
+def merge_sort(a, l=0, r=len(a)):
+    if l + 1 >= r: return
+    m = (l + r) // 2
+    merge_sort(a, l, m)
+    merge_sort(a, m, r)
+    j, k, A = l, m, []
+    while j < m and k < r:
+        if a[j] < a[k]:
+            A.append(a[j]); j += 1
+        else:
+            A.append(a[k]); k += 1
+    a[l:r] = A + a[j:m] + a[k:r]
 ```
 
 ### Heap (Priority queue)
@@ -283,7 +299,7 @@ A heap is an array $a$ such that $a_k\leq a_{2k+1},a_{2k+2}$.
 ```python
 def sift_down(a, p) {
     '''
-    Sift down the element at p
+    Sift down the element at p, and return it
     '''
     while True:
         n, l, r, i = len(a), 2*p+1, 2*p+2, p
@@ -292,16 +308,18 @@ def sift_down(a, p) {
         if i == p: break
         a[i], a[p] = a[p], a[i]
         p = i
+    return a[p]
 
-def sift_up(a, k) {
+def sift_up(a, p) {
     '''
-    Sift up the element at k
+    Sift up the element at p, and return it
     '''
-    while k > 0:
-        n, p = len(a), (k-1)//2
-        if a[p] <= a[k]: break
-        a[k], a[p] = a[p], a[k]
-        k = p
+    while p > 0:
+        n, i = len(a), (p-1)//2
+        if a[i] <= a[p]: break
+        a[i], a[p] = a[p], a[i]
+        p = i
+    return a[k]
 
 def heapify(a):
     for i in range(len(a)//2-1, -1):
@@ -309,17 +327,18 @@ def heapify(a):
 
 def heappop(a):
     if len(a) == 1:
-        a.pop()
-        return
+        return a.pop()
     a[0] = a.pop()
-    sift_down(a, 0)
+    return sift_down(a, 0)
 
 def heappush(a, x):
     a.append(x)
-    sift_up(a, len(a)-1)
+    return sift_up(a, len(a)-1)
 ```
 
 ### Bitmask
+
+`(i+j) % 2` is the same as `i ^ j`
 
 subset of `n` is
 
