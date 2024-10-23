@@ -137,6 +137,14 @@ Properties of Fourier transform
 - $\widehat{f^{(n)}(x)}=(2\pi i\xi)^n\hat f(\xi)$
 - $\widehat{x^nf(x)}=(\frac{i}{2\pi})^n\hat f^{(n)}(\xi)$
 
+Common distributions
+- binomial distribution
+- geometric distribution
+- negative binomial distribution
+- Poisson distribution
+- Poisson process
+- Exponential distribution
+
 **Q:** What is the law of large numbers?
 
 **A:**
@@ -166,6 +174,15 @@ Note that $Z_n=\sum_i\dfrac{1}{\sqrt n}Y_i$, where $Y_i=\dfrac{X_i-\mu}{\sigma}$
 - Low-discrepancy sequence: 
 
 ## Statistics
+
+t distribution: $\dfrac{\bar X-\mu}{s/\sqrt n}\sim t_{n-p-1}$
+
+chi-squared distribution:
+- Suppose $Z_i\sim\mathcal N(0,1)$, then $\sum_{i=1}^k Z_i^2\sim\chi^2_k$
+- $\sum_{i=1}^n(X_i-\bar X)^2\sim\sigma^2\chi^2_{n-1}$
+- $\sum_{i=1}^n(X_i-\hat X)^2\sim\sigma^2\chi^2_{n-p-1}$
+
+F distribution
 
 ## Finance
 
