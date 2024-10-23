@@ -125,6 +125,18 @@ Properties of characteristic functions $\varphi_X(t)=E[e^{itx}]$
 - $\varphi_{c_1X_1+\cdots c_nX_n+b}(t)=e^{itb}\varphi_{X_1}(c_1t)\cdots\varphi_{X_n}(c_nt)$ if $X_i$ are independent
 - $\varphi_{X,Y}(s,t)=\varphi_X(s)\varphi_Y(t)$ if $X,Y$ are independent
 
+Properties of Fourier transform
+- $\hat f(-\xi)=\overline{\hat f(\xi)}$
+- $\widehat{af(x)+bg(x)}=a\hat f(\xi)+b\hat g(\xi)$
+- $\widehat{f(x-a)}=\hat f(\xi)e^{-2\pi ia\xi}$
+- $\widehat{f(x)e^{2\pi iax}}=\hat f(\xi-a)$
+- $\widehat{f(ax)}=\frac{1}{|a|}\hat f(\frac{\xi}{a})$
+- $\widehat{\hat f(\xi)}=f(-x)$
+- $\widehat{(f*g)(x)}=\hat f(\xi)\hat g(\xi)$
+- $\widehat{f(x)g(x)}=(\hat f*\hat g)(\xi)$
+- $\widehat{f^{(n)}(x)}=(2\pi i\xi)^n\hat f(\xi)$
+- $\widehat{x^nf(x)}=(\frac{i}{2\pi})^n\hat f^{(n)}(\xi)$
+
 **Q:** What is the law of large numbers?
 
 **A:**
@@ -150,6 +162,8 @@ Note that $Z_n=\sum_i\dfrac{1}{\sqrt n}Y_i$, where $Y_i=\dfrac{X_i-\mu}{\sigma}$
 **Q:** How do you generated a random variables that follow $\mathcal N(\mu,\sigma^2)$
 
 **Q:** Variance reduction techniques to improve the efficiency of Monte Carlo simulation
+
+- Low-discrepancy sequence: 
 
 ## Statistics
 
