@@ -184,6 +184,10 @@ chi-squared distribution:
 
 F distribution
 
+**Q:** What is skewness, kurtosis
+
+**A:** They are the third and fourth standardized moment $\tilde\mu_3$, $\tilde\mu_4$, where $\tilde\mu_n=\mathbb E[(\frac{X-\mu}{\sigma})^n]$
+
 ## Finance
 
 Let's denote
@@ -220,6 +224,10 @@ Let's denote
 **A:**
 
 **Q:** A european put option on a non-dividend paying stock with strike price $\$80$ is currently priced at $\$8$ and a put option on the same stock with strike price $\$90$ is priced at $\$9$. Is there an arbitrage opportunity existing in thesee two options?
+
+**Q:** What is the Sharpe ratio
+
+**A:** $\dfrac{\mathbb E(r-r_f)}{\sigma}$
 
 **Q:** Derive Black-Scholes-Merton differential equation
 
