@@ -26,7 +26,7 @@ unipotentMatrixLog::usage = "unipotentMatrixLog[A] is the logarithm of a unipote
 
 
 
-(*---------------------------------------------------
+(*---------------------------------------------------------------------------------------------------------------------------------------------------------
 Reserved symbols:
 x                 :   For symbols in the contraction system
 log               :   For logarithms
@@ -56,7 +56,7 @@ Useful substitution:
 /.{Subscript[Li, N___][X___]:>If[Exponent[{X}[[1]],Variables[{X}[[1]]]][[1]]<1,GoncharovInversion[Reverse[{N}],Reverse[1/{X}]],Subscript[Li, N][X]]}
 /.{Subscript[Li, N___][X___]:>If[Exponent[{X}[[1]],Variables[{X}[[1]]]][[1]]<1,GoncharovInversionModuloPiI[Reverse[{N}],Reverse[1/{X}]],Subscript[Li, N][X]]}
 /.{u1->Subscript[u, 1],u2->Subscript[u, 2],u12->Subscript[u, 1,2],du1->d[Subscript[u, 1]],du2->d[Subscript[u, 2]],du12->d[Subscript[u, 1,2]],v1->Subscript[v, 1],v2->Subscript[v, 2],v12->Subscript[v, 1,2],dv1->d[Subscript[v, 1]],dv2->d[Subscript[v, 2]],dv12->d[Subscript[v, 1,2]]}
----------------------------------------------------*)
+---------------------------------------------------------------------------------------------------------------------------------------------------------*)
 
 
 
