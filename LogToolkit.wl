@@ -16,8 +16,9 @@ matrixCommutator::usage = "matrixCommutator[x, y] is the matrix commutator {x, y
 matrixLieBracket::usage = "matrixLieBracket[x, y] is the Lie bracket [x, y] = x * y - y * x";
 matrixPower::usage = "matrixPower[A, k] is the matrix power A^k";
 nilpotentMatrixExp::usage = "nilpotentMatrixExp[A] is the exponential of a nilpotent matrix A";
-unipotentMatrixInverse::usage = "unipotentMatrixInverse[A] is the inverse of a unipotent matrix A"
-unipotentMatrixLog::usage = "unipotentMatrixLog[A] is the logarithm of a unipotent matrix A"
+unipotentMatrixInverse::usage = "unipotentMatrixInverse[A] is the inverse of a unipotent matrix A";
+unipotentMatrixLog::usage = "unipotentMatrixLog[A] is the logarithm of a unipotent matrix A";
+useSubscript::usage = "useSubscript turns li[{1}, {x_1 x_2}] into -v_1,2, turns li[{n_1, n_2}, {x_1 x_2, x_3}] into Li_2,1[x_1 x_2], ";
 
 
 
@@ -39,6 +40,7 @@ II                :   For iterated integrals
 P                 :   For iterated integrals
 wedgeConstants    :   For wedge product
 tensorConstants   :   For tensor product
+nameHolder        :   For temporary name replacing
 
 Updated protected tags:
 Element : updated for wedge and tensor product
@@ -62,6 +64,7 @@ Useful substitution:
 
 (* ::Section::Closed:: *)
 (*Matrix Operations*)
+
 
 
 matrixCommutator[x_, y_] := x . y . Inverse[x] . Inverse[y];
@@ -112,10 +115,12 @@ unipotentMatrixLog[A_] := Module[{i, n = Dimensions[A][[1]], I, exp, pow},
 
 
 
-useSubscript[d[li[{1}, y_list]]] := -d[Subscript[v, (y[[1]] /. Times -> List /. Subscript[x, t_] -> t /. List -> Sequence)]];
-useSubscript[li[n_list, y_list]] := Subscript[Li, (n /. List -> Sequence)][y /. List -> Sequence];
-useSubscript[Log[y___]] := Subscript[u, (y /. Times -> List /. Subscript[x, t_] -> t /. List -> Sequence)];
-SetAttributes[useSubscript, {Flat, Listable}];
+useSubscript[expr_] := 
+    expr /. {
+        li[{1}, y_List] :> -Subscript[v, (y[[1]] /. Times -> nameHolder /. Subscript[x, t_] -> t /. nameHolder -> Sequence)],
+        li[n_List, y_List] :> Subscript[Li, (n /. List -> Sequence)][y /. List -> Sequence],
+        Log[y___] :> Subscript[u, (y /. Times -> nameHolder /. Subscript[x, t_] -> t /. nameHolder -> Sequence)]
+    }
 
 Unprotect[Element];
 Element[c_, differentialConstants] := True /; NumericQ[c];
@@ -137,7 +142,7 @@ Element[Times[a_, b_], mulConstants] := True /; Element[a, mulConstants] && Elem
 Protect[Element];
 
 d[T_Times] := Sum[ReplacePart[T, k -> d[T[[k]]]], {k, 1, Length[T]}];
-d[P_Power]:=P[[1]]^P[[2]] * Log[P[[1]]] * d[P[[2]]] + P[[1]]^(P[[2]] - 1) * P[[2]] * d[P[[1]]];
+d[P_Power] := P[[1]]^P[[2]] * Log[P[[1]]] * d[P[[2]]] + P[[1]]^(P[[2]] - 1) * P[[2]] * d[P[[1]]];
 d[] := 0;
 d[a___, S_Plus, b___] := d[a, #, b]& /@ S;
 d[c_] := 0 /; Element[c, differentialConstants];
@@ -148,9 +153,10 @@ d[li[n_List, y_List]] := Module[{partial},
             n[[i]] > 1, li[Join[n[[;;i-1]], {n[[i]] - 1}, n[[i+1;;]]], y] * d[Log[y[[i]]]],
             Which[
                 i == Length[n], li[n[[;;-2]], Join[y[[;;-3]], {y[[-2]] * y[[-1]]}]] * d[li[{1}, {y[[i]]}]],
-                i == 1, li[n[[2;;]], y[[2;;]]] * d[li[{1}, {y[[1]]}]] - li[n[[2;;]], Join[{y[[1]] * y[[2]]}, y[[3;;]]]] * (d[li[{1}, {y[[1]]}]] + d[Log[y[[1]]]]),
-                True, (li[Join[n[[;;i-1]], n[[i+1;;]]], Join[y[[;;i-2]], {y[[i-1]] * y[[i]]} ,y[[i+1;;]]]] * d[li[{1}, {y[[i]]}]] - 
-                        li[Join[n[[;;i-1]], n[[i+1;;]]], Join[y[[;;i-1]], {y[[i]] * y[[i+1]]}, y[[i+2;;]]]] * (d[li[{1}, {y[[i]]}]] + d[Log[y[[i]]]]))
+                i == 1, li[n[[2;;]], y[[2;;]]] * d[li[{1}, {y[[1]]}]] -
+                        li[n[[2;;]], Join[{y[[1]] * y[[2]]}, y[[3;;]]]] * (d[li[{1}, {y[[1]]}]] + d[Log[y[[1]]]]),
+                True, li[Join[n[[;;i-1]], n[[i+1;;]]], Join[y[[;;i-2]], {y[[i-1]] * y[[i]]} ,y[[i+1;;]]]] * d[li[{1}, {y[[i]]}]] -
+                      li[Join[n[[;;i-1]], n[[i+1;;]]], Join[y[[;;i-1]], {y[[i]] * y[[i+1]]}, y[[i+2;;]]]] * (d[li[{1}, {y[[i]]}]] + d[Log[y[[i]]]])
             ]
         ]
     ];
@@ -208,7 +214,7 @@ shuffleProduct[t1_tensor, t2_tensor] := tensor[t1[[1]], shuffleProduct[t1[[2;;]]
 
 mul[] := 1;
 mul[a___, S_Plus, b___] := mul[a, #, b]& /@ S;
-mul[a___, S_Times, b___] := S[[1]] * mul[a,S[[2]],b] /; NumericQ[S[[1]]];
+mul[a___, S_Times, b___] := S[[1]] * mul[a, S[[2]], b] /; NumericQ[S[[1]]];
 mul[a___, n_, b___] := n * mul[a, b] /; NumericQ[n];
 mulPow[a_, n_] := mul[ConstantArray[a, n] /. List -> Sequence];
 Unprotect[d];
@@ -222,58 +228,59 @@ SetAttributes[mul, {Flat}];
 (*Variation Matrix*)
 
 
+
 (* ::Subsection::Closed:: *)
 (*Helper functions*)
 
 
 (*KMP algorithm*)
-KMP[pat_,txt_]:=Module[{table,i,j},
-table=Module[{T={1}},
-For[i=2,i<=Length[pat],i++,
-j=T[[i-1]];
-While[j>1&&pat[[j]]!=pat[[i]],j=T[[j-1]]];
-AppendTo[T,If[pat[[j]]==pat[[i]],j+1,j]];
-];
-T
-];
-j=1;
-For[i=1,i<=Length[txt],i++,
-While[j>1&&txt[[i]]!=pat[[j]],j=table[[j-1]]];
-If[txt[[i]]==pat[[j]],j+=1];
-If[j==Length[pat]+1,Return[True,Module]];
-];
-False
+KMP[pat_, txt_] := Module[{table, i, j},
+    table = Module[{T = {1}},
+        For[i = 2, i <= Length[pat], i++,
+            j = T[[i-1]];
+            While[j > 1 && pat[[j]] != pat[[i]], j = T[[j-1]]];
+            AppendTo[T, If[pat[[j]] == pat[[i]], j+1, j]];
+        ];
+        T
+    ];
+    j = 1;
+    For[i = 1, i <= Length[txt], i++,
+        While[j > 1 && txt[[i]] != pat[[j]], j = table[[j-1]]];
+        If[txt[[i]] == pat[[j]], j += 1];
+        If[j == Length[pat] + 1, Return[True, Module]];
+    ];
+    False
 ];
 
 (*Longest common subsequence*)
-LCS[X_,Y_]:=Module[{n=Length[X],m=Length[Y],prev,cur,i,j},
-prev=ConstantArray[0,m+1];
-cur=ConstantArray[0,m+1];
-For[i=1,i<=n,i++,
-For[j=1,j<=m,j++,
-If[X[[i]]===Y[[j]],
-cur[[j+1]]=1+prev[[j]],
-cur[[j+1]]=Max[cur[[j]],prev[[j+1]]]]
-];
-prev=cur
-];
-Length[X]===cur[[m+1]]
+LCS[X_, Y_] := Module[{n = Length[X], m = Length[Y], prev, cur, i, j},
+    prev = ConstantArray[0, m + 1];
+    cur = ConstantArray[0, m + 1];
+    For[i = 1, i <= n, i++,
+        For[j = 1, j <= m, j++,
+            If[X[[i]] === Y[[j]],
+                cur[[j + 1]] = 1 + prev[[j]],
+                cur[[j + 1]] = Max[cur[[j]], prev[[j + 1]]]
+            ]
+        ];
+        prev = cur
+    ];
+    Length[X] == cur[[m + 1]]
 ]
 
+
 (* ::Subsection::Closed:: *)
-(*Log encoding and decoding*)
+(*Log encoding, decoding and and sorting multiple polylogarithms*)
 
 
-(*These modules encode,decode and sort multiple polylogarithms*)
-
-
-encode[Subscript[Li, N___][Y___]]:=Module[{n={N},y={Y},i,indices,min,max},
-For[i=Length[y],i>=1,i--,
-indices=(y[[i]]/.Times->List/.Subscript[x, t_]->t);
-min = Min[indices]; max=Max[indices];
-n=Flatten[Insert[n,ConstantArray[0,max-min],{i+1}]]
-];
-Flatten[Insert[n,ConstantArray[0,min-1],{1}]]
+encode[li[n_List, y_List]] := Module[{i, indices, min, max},
+    For[i = Length[y], i >= 1, i--,
+        indices = (y[[i]] /. Times -> List /. Subscript[x, t_] -> t);
+        min = Min[indices];
+        max = Max[indices];
+        n = Flatten[Insert[n, ConstantArray[0, max - min], {i + 1}]]
+    ];
+    Flatten[Insert[n, ConstantArray[0, min - 1], {1}]]
 ]
 
 
@@ -282,12 +289,13 @@ decode[code_]:=Module[{indices=Join[Flatten[Position[code,_?(#!=0&)]],{Length[co
 \*SubscriptBox[\(x\), \(k\)]\)&/@Range[Length[indices]-1]/.List->Sequence)]];
 
 
-encodingsCompare[l1_,l2_]:=Which[
-Total[l1]!=Total[l2],If[Total[l1]<Total[l2],1,-1],
-Length[l1]!=Length[l2],If[Length[l1]<Length[l2],1,-1],
-True,For[k=d,k>=1,k--,
-Which[l1[[k]]<l2[[k]],Return[1],l1[[k]]>l2[[k]],Return[-1]]
-]]
+encodingsCompare[l1_, l2_] := Which[
+    Total[l1] != Total[l2], If[Total[l1] < Total[l2], 1, -1],
+    Length[l1] != Length[l2], If[Length[l1] < Length[l2], 1, -1],
+    True, For[k = d, k >=1, k--,
+        If[l1[[k]] < l2[[k]], Return[1], Return[-1]]
+    ]
+]
 
 
 encodingsPriorTo[m_]:=Module[{r,result={m}},
@@ -302,8 +310,12 @@ True,result=Join[result,encodingsPriorTo[Join[m[[;;r-1]],{0},m[[r+1;;]]]],encodi
 DeleteDuplicates[result]
 ];
 
+
+
 (* ::Subsection::Closed:: *)
 (*Iterated integrals*)
+
+
 
 (*IIToLi and PToLi converts iterated integrals(in the sense of Chen) into multiple polylogarithms*)
 ClearAll[IIToLi,PToLi];
@@ -478,7 +490,6 @@ monodromyMatrix[{i0_Integer,j0_Integer},n_List]:=monodromyMatrix[{i0,j0},n,IIVar
 
 
 
-
 (* ::Section::Closed:: *)
 (*Connection form*)
 
@@ -497,6 +508,8 @@ omega[n_,X_]:=omega[n]/.{Subscript[u, k___]:>Subscript[u, (Flatten[(X[[#]]/.Time
 Omega[n_]:=omega[n]/.{d[X_]->X};
 Omega[n_,X_]:=Omega[n]/.{Subscript[u, k___]:>Subscript[u, (Flatten[(X[[#]]/.Times->List/.Subscript[x, t_]->t)&/@{k}]/.{List->Sequence})],Subscript[v, k___]:>Subscript[v, (Flatten[(X[[#]]/.Times->List/.Subscript[x, t_]->t)&/@{k}]/.{List->Sequence})]};
 
+
+
 (* ::Section::Closed:: *)
 (*Holomorphic and motivic one forms*)
 
@@ -514,21 +527,22 @@ holomorphicOneForm[n_,y_]:=Module[{f=Subscript[x, (#/.Times->List/.Subscript[x, 
 holomorphicOneForm[n]/.{Subscript[u, m___]:>Subscript[u, Seq[ff/@{m}]],Subscript[v, m___]:>Subscript[v, Seq[ff/@{m}]]}]
 
 (*symbolMap computes the symbol of a multiple polylogarithms*)
-ClearAll[symbolMap,symbolMapConstants];
 Unprotect[Element];
-Element[c_,symbolMapConstants]:=True /; NumericQ[c];
-Element[Power[a_,b_],symbolMapConstants]:=True /; (a\[Element]symbolMapConstants\[And]b\[Element]symbolMapConstants);
-Element[Plus[a_,b_],symbolMapConstants]:=True /;  (a\[Element]symbolMapConstants\[And]b\[Element]symbolMapConstants);
-Element[Times[a_,b_],symbolMapConstants]:=True /; (a\[Element]symbolMapConstants\[And]b\[Element]symbolMapConstants);
+Element[c_, symbolMapConstants] := True /; NumericQ[c];
+Element[Power[a_, b_], symbolMapConstants] := True /; Element[a, symbolMapConstants] && Element[b, symbolMapConstants];
+Element[Plus[a_, b_], symbolMapConstants] := True /; Element[a, symbolMapConstants] && Element[b, symbolMapConstants];
+Element[Times[a_, b_], symbolMapConstants] := True /; Element[a, symbolMapConstants] && Element[b, symbolMapConstants];
 Protect[Element];
 symbolMap[Subscript[Li, N___][X___]]:=matrixTensorPower[Omega[{N},{X}]\[Transpose],Total[{N}]][[1,-1]];
-symbolMap[a___,S_Plus,b___]:=symbolMap[a,#,b]&/@S;
-symbolMap[T_Times]:=shuffleProduct@@(symbolMap/@List@@T);
-symbolMap[P_Power]:=shuffleProduct@@ConstantArray[symbolMap[P[[1]]],P[[2]]];
+symbolMap[a___, S_Plus, b___] := symbolMap[a, #, b]& /@ S;
+symbolMap[T_Times] := shuffleProduct@@(symbolMap/@List@@T);
+symbolMap[P_Power] := shuffleProduct@@ConstantArray[symbolMap[P[[1]]],P[[2]]];
 
 
 (* ::Section::Closed:: *)
 (*Coproduct and cobracket*)
+
+
 
 (*GoncharovCoproduct comoputes the coproduct of multiple polylogarithms Hopf algebra with inverses*)
 ClearAll[GoncharovCoproduct];
@@ -599,19 +613,21 @@ LiCobracket[n_,y_]:=GoncharovCobracket[n,y]/.{Subscript[Li, N___][X___]:>If[Expo
 (* ::Section::Closed:: *)
 (*Conjugation & Single-valued Li*)
 
-Unprotect[Conjugate,Re,Im];
-Conjugate[a___,S_Plus,b___]:=Conjugate[a,#,b]&/@S;
-Re[a___,S_Plus,b___]:=Re[a,#,b]&/@S;
-Im[a___,S_Plus,b___]:=Im[a,#,b]&/@S;
-Conjugate[a___,T_Times,b___]:=Conjugate[a,#,b]&/@T;
-Conjugate[P_Power]:=Conjugate[P[[1]]]^P[[2]];
-Protect[Conjugate,Re,Im];
 
 
-(* ::Input::Initialization:: *)
-SingleValuedLi[n_List]:=Module[{V},
-V=GoncharovVariationMatrixModuloPiI[n];
-I^(2Floor[Total[n]/2]-1)/2*unipotentMatrixLog[tauMatrix[n,I] . V . tauMatrix[n,-1] . Conjugate[unipotentMatrixInverse[V]] . tauMatrix[n,I]][[-1,1]]/.{Conjugate[Subscript[Li, m___][x___]]->Subscript[ConjLi, m][x],Conjugate[Log[x___]]->ConjLog[x]}/.{Subscript[Li, m___][x___]->Re[Subscript[Li, m][x]]+I Im[Subscript[Li, m][x]],Log[x___]->Re[Log[x]]+I Im[Log[x]],Subscript[ConjLi, m___][x___]->Re[Subscript[Li, m][x]]-I Im[Subscript[Li, m][x]],ConjLog[x___]->Re[Log[x]]-I Im[Log[x]]}//Expand
+Unprotect[Conjugate, Re, Im];
+Conjugate[a___, S_Plus, b___] := Conjugate[a, #, b]& /@ S;
+Re[a___, S_Plus, b___] := Re[a, #, b]& /@ S;
+Im[a___, S_Plus, b___] := Im[a, #, b]& /@ S;
+Conjugate[a___, T_Times, b___] := Conjugate[a, #, b]& /@ T;
+Conjugate[P_Power] := Conjugate[P[[1]]] ^ P[[2]];
+Protect[Conjugate, Re, Im];
+
+
+SingleValuedLi[n_List] := Module[{V, SV},
+    V = GoncharovVariationMatrixModuloPiI[n];
+    SV = I^(2Floor[Total[n]/2]-1) / 2 * unipotentMatrixLog[tauMatrix[n, I] . V . tauMatrix[n,-1] . Conjugate[unipotentMatrixInverse[V]] . tauMatrix[n,I]]
+    SV[[-1,1]] /. {li[m_List, y_List] :> Re[Li[m, y]] + I * Im[Li[m, y]], Log[y___] :> Re[Log[y]] + I * Im[Log[y]]} // Expand
 ]
 
 
