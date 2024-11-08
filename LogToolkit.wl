@@ -28,6 +28,7 @@ unipotentMatrixLog::usage = "unipotentMatrixLog[A] is the logarithm of a unipote
 
 (*---------------------------------------------------
 Reserved symbols:
+log               :   For logarithms
 Li                :   For multiple polylogarithms
 li                :   For multiple polylogarithms
 L                 :   For multiple polylogarithms
@@ -106,114 +107,113 @@ unipotentMatrixLog[A_] := Module[{i, n = Dimensions[A][[1]], I, exp, pow},
 
 
 (* ::Section::Closed:: *)
-(*Differential*)
+(*d (differential), wedge, tensor, mul (noncommutative multiplication), conversion to subscripts (useSubscript)*)
+
+
+
+useSubscript[d[li[{1}, y_list]]] := -d[Subscript[v, (y[[1]] /. Times -> List /. Subscript[x, t_] -> t /. List -> Sequence)]];
+useSubscript[li[n_list, y_list]] := Subscript[Li, (n /. List -> Sequence)][y /. List -> Sequence];
+useSubscript[Log[y___]] := Subscript[u, (y /. Times -> List /. Subscript[x, t_] -> t /. List -> Sequence)];
+SetAttributes[useSubscript, {Flat, Listable}];
 
 Unprotect[Element];
 Element[c_, differentialConstants] := True /; NumericQ[c];
 Element[Power[a_, b_], differentialConstants] := True /; Element[a, differentialConstants] && Element[b, differentialConstants];
 Element[Plus[a_, b_], differentialConstants] := True /; Element[a, differentialConstants] && Element[b, differentialConstants];
 Element[Times[a_, b_], differentialConstants] := True /; Element[a, differentialConstants] && Element[b, differentialConstants];
+Element[c_, wedgeConstants] := True /; NumericQ[c];
+Element[Power[a_, b_], wedgeConstants] := True /; Element[a, wedgeConstants] && Element[b, wedgeConstants];
+Element[Plus[a_, b_], wedgeConstants] := True /; Element[a, wedgeConstants] && Element[b, wedgeConstants];
+Element[Times[a_, b_], wedgeConstants] := True /; Element[a, wedgeConstants] && Element[b, wedgeConstants];
+Element[c_, tensorConstants] := True /; NumericQ[c];
+Element[Power[a_, b_], tensorConstants] := True /; Element[a, tensorConstants] && Element[b, tensorConstants];
+Element[Plus[a_, b_], tensorConstants] := True /; Element[a, tensorConstants] && Element[b, tensorConstants];
+Element[Times[a_, b_], tensorConstants] := True /; Element[a, tensorConstants] && Element[b, tensorConstants];
+Element[c_, mulConstants] := True /; NumericQ[c];
+Element[Power[a_, b_], mulConstants] := True /; Element[a, mulConstants] && Element[b, mulConstants];
+Element[Plus[a_, b_], mulConstants] := True /; Element[a, mulConstants] && Element[b, mulConstants];
+Element[Times[a_, b_], mulConstants] := True /; Element[a, mulConstants] && Element[b, mulConstants];
 Protect[Element];
+
 d[T_Times] := Sum[ReplacePart[T, k -> d[T[[k]]]], {k, 1, Length[T]}];
 d[P_Power]:=P[[1]]^P[[2]] * Log[P[[1]]] * d[P[[2]]] + P[[1]]^(P[[2]] - 1) * P[[2]] * d[P[[1]]];
 d[] := 0;
 d[a___, S_Plus, b___] := d[a, #, b]& /@ S;
 d[c_] := 0 /; Element[c, differentialConstants];
-d[li[n_List, y_List]] := Module[{i, ind},
-    (*gather the indices*)
-    index = (y[[#]] /. Times -> List /. Subscript[x, t_] -> t /. List -> Sequence)&;
+d[li[n_List, y_List]] := li[{n[[1]] - 1}, y] /; Length[n] == 1 && n[[1]] > 1;
+d[li[n_List, y_List]] := Module[{partial},
     partial = Function[i,
-        If[n[[i]] > 1, li[Join[n[[;;i-1]], {n[[i]] - 1}, n[[i+1;;]]]), y] * d[Subscript[u, index[i]]],
-    Which[i===Length[n],-Subscript[Li, (n[[;;-2]]/.List->Sequence)][(Join[y[[;;-3]],{y[[-2]]y[[-1]]}]/.List->Sequence)]d[Subscript[v, ind[-1]]],
-    i===1,-Subscript[Li, (n[[2;;]]/.List->Sequence)][(y[[2;;]]/.List->Sequence)]d[Subscript[v, ind[1]]]+Subscript[Li, (n[[2;;]]/.List->Sequence)][(Join[{y[[1]]y[[2]]},y[[3;;]]]/.List->Sequence)](d[Subscript[v, ind[1]]]-d[Subscript[u, ind[1]]]),
-    True,-Subscript[Li, (Join[n[[;;i-1]],n[[i+1;;]]]/.List->Sequence)][(Join[y[[;;i-2]],{y[[i-1]]y[[i]]},y[[i+1;;]]]/.List->Sequence)]d[Subscript[v, ind[i]]]+Subscript[Li, (Join[n[[;;i-1]],n[[i+1;;]]]/.List->Sequence)][(Join[y[[;;i-1]],{y[[i]]y[[i+1]]},y[[i+2;;]]]/.List->Sequence)]*(d[Subscript[v, ind[i]]]-d[Subscript[u, ind[i]]])
-    ]]];
+        If[
+            n[[i]] > 1, li[Join[n[[;;i-1]], {n[[i]] - 1}, n[[i+1;;]]]), y] * d[Log[y[[i]]]],
+            Which[
+                i == Length[n], li[n[[;;-2]], Join[y[[;;-3]], {y[[-2]] * y[[-1]]}]] * d[li[{1}, y[[i]]]],
+                i == 1, li[n[[2;;]], y[[2;;]]] * d[li[{1}, y[[1]]]] - li[n[[2;;]], Join[{y[[1]] * y[[2]]}, y[[3;;]]]] * (li[{1}, y[[1]]]] + d[Log[y[[1]]]]),
+                True, (li[Join[n[[;;i-1]], n[[i+1;;]]], Join[y[[;;i-2]], {y[[i-1]] * y[[i]]} ,y[[i+1;;]]]] * d[li[{1}, y[[i]]]] - 
+                        li[Join[n[[;;i-1]], n[[i+1;;]]], Join[y[[;;i-1]], {y[[i]] * y[[i+1]]}, y[[i+2;;]]]] * (d[li[{1}, y[[i]]]] + d[Log[y[[i]]]]))
+            ]
+        ]
+    ];
     Total[partial /@ Range[Length[n]]]
-];
-d[Subscript[Li, N___][Y___]] := d[li[List[N], List[Y]]];
-(*d[Log[Y___]]:=d[Subscript[u, (Y/.Times\[Rule]List/.Subscript[x, t_]->t/.List\[Rule]Sequence)]];*)
-(*d[Subscript[u, n___]]:=Total[(d[Subscript[u, #]]&/@{n})]/;Length[{n}]>1;*)
+] /; Length[n] > 1;
+d[Subscript[Li, N___][Y___]] := d[li[List[N], List[Y]]] // useSubscript;
 SetAttributes[d, {Listable, Protected}];
 
-(* ::Section::Closed:: *)
-(*Wedge*)
+wedge[a___] := a /; Length[{a}] === 1;
+wedge[a___, S_Plus, b___] := wedge[a, #, b]& /@ S;
+wedge[a___, P_Times, b___] := wedge[a, Expand[P], b] /; (Expand[P] =!= P);
+wedge[a___, 0, b___] := 0;
+wedge[a___, Times[b___, s_, c___], d___] := s * wedge[a, Times[b, c], d] /; Element[s, wedgeConstants];
+SetAttributes[wedge, {Flat, Protected}];
+(* wedge product in lexigraphical order *)
+sortedWedge[w___] := Signature[{w}] * wedge@@Sort[{w}];
 
-ClearAll[wedge,wedgeConstants];
-Unprotect[Element];
-(*Element[c_,wedgeConstants]:=True /; (MemberQ[{t},c]);*)
-(*Element[c_,wedgeConstants]:=True /; (c\[Element]\[DoubleStruckCapitalZ] \[Or] c\[Element]\[DoubleStruckCapitalQ] \[Or] c\[Element]\[DoubleStruckCapitalR] \[Or] c\[Element]\[DoubleStruckCapitalC]);*)
-Element[c_,wedgeConstants]:=True /; NumericQ[c];
-Element[Power[a_,b_],wedgeConstants]:=True /; (a\[Element]wedgeConstants\[And]b\[Element]wedgeConstants);
-Element[Plus[a_,b_],wedgeConstants]:=True /;  (a\[Element]wedgeConstants\[And]b\[Element]wedgeConstants);
-Element[Times[a_,b_],wedgeConstants]:=True /; (a\[Element]wedgeConstants\[And]b\[Element]wedgeConstants);
-Protect[Element];
-wedge[a___]:=a /; (Length[{a}]===1);
-wedge[a___,S_Plus,b___]:=wedge[a,#,b]&/@S;
-wedge[a___, P_Times, b___]:= wedge[a, Expand[P], b] /; (Expand[P] =!= P);
-wedge[a___,0,b___] := 0;
-wedge[a___, Times[b___,s_,c___], d___]:=s*wedge[a,Times[b,c],d] /; s\[Element]wedgeConstants;
-SetAttributes[wedge,{Flat,Protected}];
-sortedWedge[w___]:=Signature[{w}]wedge@@Sort[{w}];
-
-(* ::Section::Closed:: *)
-(*Tensor*)
-
-ClearAll[tensor,tensorConstants];
-Unprotect[Element];
-Element[c_,tensorConstants]:=True /; NumericQ[c];
-Element[Power[a_,b_],tensorConstants]:=True /; (a\[Element]tensorConstants\[And]b\[Element]tensorConstants);
-Element[Plus[a_,b_],tensorConstants]:=True /;  (a\[Element]tensorConstants\[And]b\[Element]tensorConstants);
-Element[Times[a_,b_],tensorConstants]:=True /; (a\[Element]tensorConstants\[And]b\[Element]tensorConstants);
-Protect[Element];
-tensor[a___]:=a /; Length[{a}]===1;
-tensor[a___,S_Plus,b___]:=tensor[a,#,b]&/@Expand[S];
-tensor[a___, P_Times, b___]:= tensor[a, Expand[P], b] /; Expand[P] =!= P;
-tensor[a___, P_Power, b___]:= tensor[a, Expand[P], b] /; Expand[P] =!= P;
-tensor[a___,0,b___] := 0;
-tensor[a___, Times[b___,s_,c___], d___]:=s*tensor[a,Times[b,c],d] /; s\[Element]tensorConstants;
-SetAttributes[tensor,{Flat,Protected}];
+tensor[a___] := a /; Length[{a}] === 1;
+tensor[a___, S_Plus, b___] := tensor[a, #, b]& /@ Expand[S];
+tensor[a___, P_Times, b___] := tensor[a, Expand[P], b] /; Expand[P] =!= P;
+tensor[a___, P_Power, b___] := tensor[a, Expand[P], b] /; Expand[P] =!= P;
+tensor[a___, 0, b___] := 0;
+tensor[a___, Times[b___, s_, c___], d___] := s * tensor[a, Times[b, c], d] /; Element[s, tensorConstants];
+SetAttributes[tensor, {Flat, Protected}];
 Unprotect[Times];
-Times[a___,s_tensor,b___,t_tensor,c___]:=Times[a,b,c,tensor@@(s[[#]]t[[#]]&/@Range[Length[s]])] /; Length[s]===Length[t];
+Times[a___, s_tensor, b___, t_tensor, c___] := Times[a, b, c, tensor@@(s[[#]] * t[[#]]& /@ Range[Length[s]])] /; Length[s] === Length[t];
 Protect[Times];
 
-
-ClearAll[matrixTensorDot,matrixTensorPower]
-matrixTensorDot[A_,B_]:=Module[{C=ConstantArray[0,{Dimensions[A][[1]],Dimensions[B][[2]]}],i,j,k},
-If[Dimensions[A][[2]]=!=Dimensions[B][[1]],Throw["Dimensions doesn't match]"]];
-For[i=1, i<= Dimensions[C][[1]],i++,
-For[j=1, j<= Dimensions[C][[2]],j++,
-For[k=1, k<= Dimensions[A][[2]],k++,
-C[[i,j]] += tensor[A[[i,k]],B[[k,j]]]
+(* Matrix tensor multiplication *)
+matrixTensorDot[A_, B_] := Module[{C = ConstantArray[0, {Dimensions[A][[1]], Dimensions[B][[2]]}], i, j, k},
+    If[Dimensions[A][[2]] =!= Dimensions[B][[1]], Throw["Dimensions doesn't match]"]];
+    For[i = 1, i <= Dimensions[C][[1]], i++,
+        For[j = 1, j <= Dimensions[C][[2]], j++,
+            For[k = 1, k <= Dimensions[A][[2]], k++,
+                C[[i,j]] += tensor[A[[i,k]], B[[k,j]]]
+            ]
+        ]
+    ];
+    C
 ]
+
+(* Matrix tensor power *)
+matrixTensorPower[A_, k_] := Module[{n = Dimensions[A][[1]], pow},
+    If[
+        pow = matrixTensorPower[A, Quotient[k, 2]];
+        If[Mod[k, 2] == 0, matrixTensorDot[pow, pow], matrixTensorDot[matrixTensorDot[matrixTensorDot[pow, pow], A]]
+    ]
 ]
-];
-C
-]
-matrixTensorPower[A_,n_]:=Which[n<0 \[Or] Dimensions[A][[1]]=!=Dimensions[A][[2]],Throw["Error"],n===0,IdentityMatrix[Dimensions[A][[1]]],n>0,Nest[matrixTensorDot[A,#]&,A,n-1]];
 
+(* Shuffle Product for tensor products *)
+shuffleProduct[a_, b_] := tensor[a, b] + tensor[b, a];
+shuffleProduct[a_, t_tensor] := tensor[a, t] + Sum[tensor[t[[;;i]], a, t[[i+1;;]]], {i, 1, Length[t]-1}] + tensor[t, a];
+shuffleProduct[t_tensor, b_] := tensor[t, b] + Sum[tensor[t[[;;i]], b, t[[i+1;;]]], {i, 1, Length[t]-1}] + tensor[b, t];
+shuffleProduct[t1_tensor, t2_tensor] := tensor[t1[[1]], shuffleProduct[t1[[2;;]], t2]] + tensor[t2[[1]], shuffleProduct[t1, t2[[2;;]]]];
 
-ClearAll[shuffleProduct];
-shuffleProduct[a_,b_]:=tensor[a,b]+tensor[b,a];
-shuffleProduct[a_,t_tensor]:=tensor[a,t]+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(i = 1\), \(Length[t] - 1\)]\(tensor[t[\([\)\(\(;;\)\(i\)\)\(]\)], a, t[\([\)\(\(i + 1\)\(;;\)\)\(]\)]]\)\)+tensor[t,a];
-shuffleProduct[t_tensor,b_]:=tensor[t,b]+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(i = 1\), \(Length[t] - 1\)]\(tensor[t[\([\)\(\(;;\)\(i\)\)\(]\)], b, t[\([\)\(\(i + 1\)\(;;\)\)\(]\)]]\)\)+tensor[b,t];
-shuffleProduct[t1_tensor, t2_tensor]:=tensor[t1[[1]],shuffleProduct[t1[[2;;]],t2]]+tensor[t2[[1]],shuffleProduct[t1,t2[[2;;]]]];
-
-(* ::Section::Closed:: *)
-(*mul*)
-
-ClearAll[mul,mulPow];
-mul[]:=1;
-mul[a___,S_Plus,b___]:=mul[a,#,b]&/@S;
-mul[a___,S_Times,b___]:=S[[1]]*mul[a,S[[2]],b]/;NumericQ[S[[1]]];
-mul[a___,n_,b___]:=n*mul[a,b]/;NumericQ[n];
-mulPow[a_,n_]:=mul[ConstantArray[a,n]/.List->Sequence];
-SetAttributes[mul,{Flat}];
-d[T_mul]:=\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \(Length[T]\)]\(ReplacePart[T, k -> d[T[\([\)\(k\)\(]\)]]]\)\);
-
-
+mul[] := 1;
+mul[a___, S_Plus, b___] := mul[a, #, b]& /@ S;
+mul[a___, S_Times, b___] := S[[1]] * mul[a,S[[2]],b] /; NumericQ[S[[1]]];
+mul[a___, n_, b___] := n * mul[a, b] /; NumericQ[n];
+mulPow[a_, n_] := mul[ConstantArray[a, n] /. List -> Sequence];
+Unprotect[d];
+d[T_mul] := Sum[ReplacePart[T, k -> d[T[[k]]]], {k, 1, Length[T]}];
+Protect[d];
+SetAttributes[mul, {Flat}];
 
 
 
