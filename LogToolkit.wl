@@ -144,7 +144,7 @@ d[li[n_List, y_List]] := li[{n[[1]] - 1}, y] /; Length[n] == 1 && n[[1]] > 1;
 d[li[n_List, y_List]] := Module[{partial},
     partial = Function[i,
         If[
-            n[[i]] > 1, li[Join[n[[;;i-1]], {n[[i]] - 1}, n[[i+1;;]]]), y] * d[Log[y[[i]]]],
+            n[[i]] > 1, li[Join[n[[;;i-1]], {n[[i]] - 1}, n[[i+1;;]]], y] * d[Log[y[[i]]]],
             Which[
                 i == Length[n], li[n[[;;-2]], Join[y[[;;-3]], {y[[-2]] * y[[-1]]}]] * d[li[{1}, y[[i]]]],
                 i == 1, li[n[[2;;]], y[[2;;]]] * d[li[{1}, y[[1]]]] - li[n[[2;;]], Join[{y[[1]] * y[[2]]}, y[[3;;]]]] * (li[{1}, y[[1]]]] + d[Log[y[[1]]]]),
