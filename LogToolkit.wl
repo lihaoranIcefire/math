@@ -28,6 +28,7 @@ unipotentMatrixLog::usage = "unipotentMatrixLog[A] is the logarithm of a unipote
 
 (*---------------------------------------------------
 Reserved symbols:
+x                 :   For symbols in the contraction system
 log               :   For logarithms
 Li                :   For multiple polylogarithms
 li                :   For multiple polylogarithms
