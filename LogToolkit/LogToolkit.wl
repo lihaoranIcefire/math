@@ -147,7 +147,8 @@ d[P_Power] := P[[1]]^P[[2]] * Log[P[[1]]] * d[P[[2]]] + P[[1]]^(P[[2]] - 1) * P[
 d[] := 0;
 d[a___, S_Plus, b___] := d[a, #, b]& /@ S;
 d[c_] := 0 /; Element[c, differentialConstants];
-d[li[n_List, y_List]] := li[{n[[1]] - 1}, y] /; Length[n] == 1 && n[[1]] > 1;
+
+d[li[{n_Integer}, y_List]] := li[{n - 1}, y] /; n > 1;
 d[li[n_List, y_List]] := Module[{partial},
     partial[i_Integer] = If[n[[i]] > 1,
         li[Join[n[[;;i-1]], {n[[i]] - 1}, n[[i+1;;]]], y] * d[Log[y[[i]]]],
@@ -162,6 +163,7 @@ d[li[n_List, y_List]] := Module[{partial},
     Total[partial /@ Range[Length[n]]]
 ] /; Length[n] > 1;
 d[Subscript[Li, N___][Y___]] := d[li[{N}, {Y}]] // useSubscript;
+
 SetAttributes[d, {Listable, Protected}];
 
 wedge[a___] := a /; Length[{a}] === 1;
@@ -326,48 +328,36 @@ decode[code_] := Module[{indices = Join[Flatten[Position[code, _?(#!=0&)]], {Len
 
 
 (*IIToLi and PToLi converts iterated integrals(in the sense of Chen) into multiple polylogarithms*)
-IIToLi[l_]:=Module[{
-        i, j, n, d, ans, a = Join[{l[[1]]}, DeleteCases[l[[2;;-2]], _?(#===0&)], {l[[-1]]}],
-        K = Join[{1}, Flatten[Position[l[[2;;-2]], _?(#=!=0&), {1}, Heads -> False]] + 1, {Length[l]}]
+IIToLi[args_List] := Module[{
+        k, n, i, m, ans, a,
+        ind = Join[{1}, Flatten[Position[args[[2;;-2]], _?(#=!=0&), {1}, Heads -> False]], {Length[args]}], (* indices for start and end for nonzero args *)
     },
-    n = K[[2;;]] - K[[;;-2]];
-    d = Length[a] - 2;
-    ans = Which[
-        Length[l] === 2, 1,
-        a[[1]] === 0 && a[[-1]] === 0, 0,
-        a[[1]] === 0 && a[[-1]] =!= 0,
-        If[d === 0,
-            (-Log[1 / a[[-1]]]) ^ (n[[1]] - 1) / (n[[1]] - 1)!,
-            (-1)^(n[[1]] + d - 1) * Total[
-                Function[]
-                (i |-> If[i[[1]] === 0, 1, Log[1/a[[-1]]]^i[[1]]]/
-                    i[[1]]! Subscript[
-                    Li, (n[[2 ;;]] + i[[2 ;;]] /. 
-                    List -> Sequence)][(a[[3 ;;]]/a[[2 ;; -2]] /. 
-                    List -> Sequence)] \!\(
-                \*UnderoverscriptBox[\(\[Product]\), \(p = 1\), \(Length[n] - 
-                    1\)]\((Binomial[
-                    n[\([\)\(p + 1\)\(]\)] + i[\([\)\(p + 1\)\(]\)] - 1, 
-                    n[\([\)\(p + 1\)\(]\)] - 1])\)\)) /@ 
-                Flatten[Permutations /@ (IntegerPartitions[n[[1]] + d, {d + 1}] - 1),
-                1]
-            ]
-        ],
-        a[[1]] =!= 0 && a[[-1]] === 0, (-1)^Length[l] * IIToLi[Reverse[l]],
-        a[[1]] =!= 0 && a[[-1]] =!= 0,
-        \!\(
-        \*UnderoverscriptBox[\(\[Sum]\), \(p = 1\), \(Length[
-        n]\)]\(Total[\((i |-> 
-            IIToLi[Join[l[\([\)\(\(;;\)\(K[\([\)\(p\)\(]\)]\)\)\(]\)], 
-                ConstantArray[0, i[\([\)\(1\)\(]\)] + 1]]] IIToLi[
-            Join[ConstantArray[0, i[\([\)\(2\)\(]\)] + 1], 
-                l[\([\)\(\(K[\([\)\(p + 1\)\(]\)]\)\(;;\)\)\(]\)]]])\) /@ 
-        Flatten[Permutations /@ \((IntegerPartitions[
-                n[\([\)\(p\)\(]\)] + 1, {2}] - 1)\), 1]]\)\)
-    ];
-    ans
+    m = Length[ind];
+    a = args[[ ind[[# + 1]] ]] &;
+    n = (ind[[# + 2]] - ind[[# + 1]]) &;
+    Which[
+        m === 0, 1,
+        a[0] === 0 && a[m + 1] === 0, 0,
+        a[0] =!= 0 && a[m + 1] === 0, (-1)^Length[args] * IIToLi[Reverse[args]],
+        a[0] =!= 0 && a[m + 1] =!= 0,
+        Sum[
+            Sum[
+                IIToLi[Join[args[[;; ind[[k]]]], ConstantArray[0, p - 1]]] * IIToLi[Join[ConstantArray[0, n[k] - p - 1], args[[ind[[k + 1]] ;;]]]],
+                {p, 1, n[k] - 1}
+            ],
+            {k, 0, m}
+        ]
+        a[0] === 0 && a[m + 1] =!= 0,
+        Sum[
+            i = partition[[# + 1]] &;
+            (-1)^(n[0] + i[0] + d - 1) * Log[a[[m+1]]]^i[0] / i[0]! *
+            Product[Binomial[n[k] + i[k] - 1, i[k]], {k, 1, m}] *
+            li[(n[#] + i[#] & /@ Range[m]), (a[# + 1] / a[#] & /@ Range[m])]
+            {partition, Flatten[Permutations /@ (IntegerPartitions[n[0] + m, {m + 1}] - 1), 1]}
+        ]
+    ]
 ]
-PToLi[l_] := (-1)^Length[DeleteCases[l[[2;;-2]], _?(#===0&)]] * IIToLi[l];
+PToLi[args_List] := (-1)^Length[DeleteCases[args[[2;;-2]], _?(#===0&)]] * IIToLi[args];
 
 
 (*GoncharovIversion convert multiple polylogarithms involving inverses into multiple polylogarithms that don't*)
