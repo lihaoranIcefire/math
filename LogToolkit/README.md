@@ -37,3 +37,13 @@ $$
 \Phi(I(0;0^{n_0-1},a_{1},0^{n_1-1},\cdots,a_{m},0^{n_m-1};a_{m+1}))=\sum_{i_0+\cdots+i_m=n_0-1}(-1)^{n_0+i_0+m-1}\\
 \dfrac{\log^{i_0}(a_{m+1})}{i_0!}\binom{n_1+i_1-1}{n_1-1}\cdots\binom{n_m+i_m-1}{n_m-1}\operatorname{Li}_{n_1+i_1,\cdots,n_m+i_m}\left(\frac{a_{2}}{a_{1}},\cdots,\frac{a_{m+1}}{a_{m}}\right)
 $$
+
+`GoncharovInversion`: Goncharov's inversion formula for multiple polylogarithms
+$$
+\begin{align*}
+\operatorname{Li}&_{n_d,\cdots,n_1}(x_d^{-1},\cdots,x_1^{-1})\\
+=&-\sum_{r=0}^{d-1}(-1)^{n_{r+1}+\cdots+n_d}\operatorname{Li}_{n_r,\cdots,n_1}(x_r^{-1},\cdots,x_1^{-1})\operatorname{Li}_{n_{r+1},\cdots,n_d}(x_{r+1},\cdots,x_d)-\\
+&\sum_{r=1}^d\sum_{m_1+\cdots+m_d=n_r}(-1)^{n_r+\cdots+n_d+m_{r+1}+\cdots+m_d}\prod_{\substack{1\leq i\leq d\\i\neq r}}\binom{n_i+m_i-1}{n_i-1}B_{m_r}\left(\frac{\log(x_1\cdots x_d)}{2\pi i}\right)\\
+&\frac{(2\pi i)^{m_r}}{m_r!}\operatorname{Li}_{n_{r-1}+m_{r-1},\cdots,n_1+m_1}(x_{r-1}^{-1},\cdots,x_1^{-1})\operatorname{Li}_{n_{r+1}+m_{r+1},\cdots,n_d+m_d}(x_{r+1},\cdots,x_d)
+\end{align*}
+$$

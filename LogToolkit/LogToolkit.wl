@@ -18,8 +18,8 @@ matrixPower::usage = "matrixPower[A, k] is the matrix power A^k";
 nilpotentMatrixExp::usage = "nilpotentMatrixExp[A] is the exponential of a nilpotent matrix A";
 unipotentMatrixInverse::usage = "unipotentMatrixInverse[A] is the inverse of a unipotent matrix A";
 unipotentMatrixLog::usage = "unipotentMatrixLog[A] is the logarithm of a unipotent matrix A";
-useSubscript::usage = "useSubscript turns li[{1}, {x_1 x_2}] into -v_1,2, turns li[{n_1, n_2}, {x_1 x_2, x_3}] into Li_2,1[x_1 x_2], ";
-encode::usage = "encode[li[{n_1, ..., n_d}, {x_}]]";
+useSubscript::usage = "useSubscript turns Li[{1}, {x_1 x_2}] into -v_1,2, turns Li[{n_1, n_2}, {x_1 x_2, x_3}] into Li_2,1[x_1 x_2], ";
+encode::usage = "encode[Li[{n_1, ..., n_d}, {x_}]]";
 
 
 
@@ -31,9 +31,7 @@ encode::usage = "encode[li[{n_1, ..., n_d}, {x_}]]";
 (*---------------------------------------------------------------------------------------------------------------------------------------------------------
 Reserved symbols:
 x                 :   For symbols in the contraction system
-log               :   For logarithms
 Li                :   For multiple polylogarithms
-li                :   For multiple polylogarithms
 L                 :   For multiple polylogarithms
 d                 :   For differential operators
 \[DifferentialD]  :   For differential operators
@@ -118,8 +116,8 @@ unipotentMatrixLog[A_] := Module[{i, n = Dimensions[A][[1]], I, exp, pow},
 
 useSubscript[expr_] := 
     expr /. {
-        li[{1}, y_List] :> -Subscript[v, (y[[1]] /. Times -> nameHolder /. Subscript[x, t_] -> t /. nameHolder -> Sequence)],
-        li[n_List, y_List] :> Subscript[Li, (n /. List -> Sequence)][y /. List -> Sequence],
+        Li[{1}, y_List] :> -Subscript[v, (y[[1]] /. Times -> nameHolder /. Subscript[x, t_] -> t /. nameHolder -> Sequence)],
+        Li[n_List, y_List] :> Subscript[Li, (n /. List -> Sequence)][y /. List -> Sequence],
         Log[y___] :> Subscript[u, (y /. Times -> nameHolder /. Subscript[x, t_] -> t /. nameHolder -> Sequence)]
     }
 
@@ -148,21 +146,21 @@ d[] := 0;
 d[a___, S_Plus, b___] := d[a, #, b]& /@ S;
 d[c_] := 0 /; Element[c, differentialConstants];
 
-d[li[{n_Integer}, y_List]] := li[{n - 1}, y] /; n > 1;
-d[li[n_List, y_List]] := Module[{partial},
+d[Li[{n_Integer}, y_List]] := Li[{n - 1}, y] /; n > 1;
+d[Li[n_List, y_List]] := Module[{partial},
     partial[i_Integer] = If[n[[i]] > 1,
-        li[Join[n[[;;i-1]], {n[[i]] - 1}, n[[i+1;;]]], y] * d[Log[y[[i]]]],
+        Li[Join[n[[;;i-1]], {n[[i]] - 1}, n[[i+1;;]]], y] * d[Log[y[[i]]]],
         Which[
-            i == Length[n], li[n[[;;-2]], Join[y[[;;-3]], {y[[-2]] * y[[-1]]}]] * d[li[{1}, {y[[i]]}]],
-            i == 1, li[n[[2;;]], y[[2;;]]] * d[li[{1}, {y[[1]]}]] -
-                    li[n[[2;;]], Join[{y[[1]] * y[[2]]}, y[[3;;]]]] * (d[li[{1}, {y[[1]]}]] + d[Log[y[[1]]]]),
-            True, li[Join[n[[;;i-1]], n[[i+1;;]]], Join[y[[;;i-2]], {y[[i-1]] * y[[i]]} ,y[[i+1;;]]]] * d[li[{1}, {y[[i]]}]] -
-                    li[Join[n[[;;i-1]], n[[i+1;;]]], Join[y[[;;i-1]], {y[[i]] * y[[i+1]]}, y[[i+2;;]]]] * (d[li[{1}, {y[[i]]}]] + d[Log[y[[i]]]])
+            i == Length[n], Li[n[[;;-2]], Join[y[[;;-3]], {y[[-2]] * y[[-1]]}]] * d[Li[{1}, {y[[i]]}]],
+            i == 1, Li[n[[2;;]], y[[2;;]]] * d[Li[{1}, {y[[1]]}]] -
+                    Li[n[[2;;]], Join[{y[[1]] * y[[2]]}, y[[3;;]]]] * (d[Li[{1}, {y[[1]]}]] + d[Log[y[[1]]]]),
+            True, Li[Join[n[[;;i-1]], n[[i+1;;]]], Join[y[[;;i-2]], {y[[i-1]] * y[[i]]} ,y[[i+1;;]]]] * d[Li[{1}, {y[[i]]}]] -
+                    Li[Join[n[[;;i-1]], n[[i+1;;]]], Join[y[[;;i-1]], {y[[i]] * y[[i+1]]}, y[[i+2;;]]]] * (d[Li[{1}, {y[[i]]}]] + d[Log[y[[i]]]])
         ]
     ];
     Total[partial /@ Range[Length[n]]]
 ] /; Length[n] > 1;
-d[Subscript[Li, N___][Y___]] := d[li[{N}, {Y}]] // useSubscript;
+d[Subscript[Li, N___][Y___]] := d[Li[{N}, {Y}]] // useSubscript;
 
 SetAttributes[d, {Listable, Protected}];
 
@@ -282,7 +280,7 @@ SetAttributes[moduloProducts, {Listable}];
 
 
 
-encode[li[n_List, y_List]] := Module[{i, indices, min, max},
+encode[Li[n_List, y_List]] := Module[{i, indices, min, max},
     For[i = Length[y], i >= 1, i--,
         indices = (y[[i]] /. Times -> List /. Subscript[x, t_] -> t);
         min = Min[indices];
@@ -314,7 +312,7 @@ encodingsPriorTo[m_] := Module[{r, result = {m}},
 ];
 
 decode[code_] := Module[{indices = Join[Flatten[Position[code, _?(#!=0&)]], {Length[code] + 1}]},
-    li[
+    Li[
         DeleteCases[code,0],
         Product[x[k], {k, indices[[#]], indices[[# + 1]] - 1}]& /@ Range[Length[indices] - 1]
     ]
@@ -352,7 +350,7 @@ IIToLi[args_List] := Module[{
             i = partition[[# + 1]] &;
             (-1)^(n[0] + i[0] + d - 1) * Log[a[[m+1]]]^i[0] / i[0]! *
             Product[Binomial[n[k] + i[k] - 1, i[k]], {k, 1, m}] *
-            li[(n[#] + i[#] & /@ Range[m]), (a[# + 1] / a[#] & /@ Range[m])]
+            Li[(n[#] + i[#] & /@ Range[m]), (a[# + 1] / a[#] & /@ Range[m])]
             {partition, Flatten[Permutations /@ (IntegerPartitions[n[0] + m, {m + 1}] - 1), 1]}
         ]
     ]
@@ -360,23 +358,21 @@ IIToLi[args_List] := Module[{
 PToLi[args_List] := (-1)^Length[DeleteCases[args[[2;;-2]], _?(#===0&)]] * IIToLi[args];
 
 
-(*GoncharovIversion convert multiple polylogarithms involving inverses into multiple polylogarithms that don't*)
-GoncharovInversion[n_,x_]:=Module[{d=Length[n],ans=0},
-If[d===0,Return[1,Module]];
-If[d===1,Return[(-1)^(n[[1]]-1) Subscript[Li, n[[1]]][x[[1]]]+(-1)^(n[[1]]-1) (2\[Pi] I)^n[[1]]/n[[1]]! BernoulliB[n[[1]],Log[x[[1]]]/(2\[Pi] I)],Module]];
-ans=-\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(r = 0\), \(d - 1\)]\(
-\*SuperscriptBox[\((\(-1\))\), \(Total[n[\([\)\(\(r + 1\)\(;;\)\)\(]\)]]\)] GoncharovInversion[n[\([\)\(\(;;\)\(r\)\)\(]\)], x[\([\)\(\(;;\)\(r\)\)\(]\)]] 
-\(\*SubscriptBox[\(Li\), \(n[\([\)\(\(r + 1\)\(;;\)\)\(]\)] /. List -> Sequence\)]\)[x[\([\)\(\(r + 1\)\(;;\)\)\(]\)] /. List -> Sequence]\)\)-\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(r = 1\), \(d\)]\(Total[\[IndentingNewLine]\((i |-> \((
-\*UnderoverscriptBox[\(\[Product]\), \(p = 1\), \(r - 1\)]Binomial[n[\([\)\(p\)\(]\)] + i[\([\)\(p\)\(]\)] - 1, n[\([\)\(p\)\(]\)] - 1])\) \((
-\*UnderoverscriptBox[\(\[Product]\), \(p = r + 1\), \(d\)]Binomial[n[\([\)\(p\)\(]\)] + i[\([\)\(p\)\(]\)] - 1, n[\([\)\(p\)\(]\)] - 1])\) 
-\*SuperscriptBox[\((\(-1\))\), \(Total[n[\([\)\(\(r\)\(;;\)\)\(]\)]] + Total[i[\([\)\(\(r + 1\)\(;;\)\)\(]\)]]\)] 
-\*FractionBox[
-SuperscriptBox[\((2  \[Pi]\ I)\), \(i[\([\)\(r\)\(]\)]\)], \(i[\([\)\(r\)\(]\)]!\)] BernoulliB[i[\([\)\(r\)\(]\)], 
-\*FractionBox[\(Log[Times @@ x]\), \(2  \[Pi]\ I\)]] GoncharovInversion[n[\([\)\(\(;;\)\(r - 1\)\)\(]\)] + i[\([\)\(\(;;\)\(r - 1\)\)\(]\)], x[\([\)\(\(;;\)\(r - 1\)\)\(]\)]] 
-\(\*SubscriptBox[\(Li\), \(n[\([\)\(\(r + 1\)\(;;\)\)\(]\)] + i[\([\)\(\(r + 1\)\(;;\)\)\(]\)] /. List -> Sequence\)]\)[x[\([\)\(\(r + 1\)\(;;\)\)\(]\)] /. List -> Sequence])\) /@ Flatten[Permutations /@ \((IntegerPartitions[n[\([\)\(r\)\(]\)] + d, {d}] - 1)\), 1]]\)\);
-ans/.{Subscript[Li][]->1}
+GoncharovInversion[n_List, y_List] := Module[{d = Length[n], r, m, i},
+    If[
+        d == 0, 1,
+        - Sum[
+            (-1)^Total[n[[r+1;;]]] * GoncharovInversion[n[[;;r]], y[[;;r]]] * Li[n[[r+1;;]], y[[r+1;;]]],
+            {r, 0, d - 1}
+        ] - Sum[
+            Sum[
+                (-1) ^ (Total[n[[r;;]]] + Total[m[[r+1;;]]]) * Product[Binomial[n[[i]] + m[[i]] - 1, m[[i]]], {i, Join[Range[r-1], Range[r+1, d]]}] *
+                BernoulliB[m[[r]], Log[Times@@y] / (2*Pi*I)] * GoncharovInversion[n[[;;r-1]] + m[[;;r-1]], y[[;;r-1]]] * Li[n[[r+1;;]] + m[[r+1;;]], y[[r+1;;]]],
+                {m, Flatten[Permutations /@ (IntegerPartitions[n[[r]] + d, {d}] - 1), 1]}
+            ],
+            {r, 1, d}
+        ]
+    ]
 ]
 
 
@@ -447,11 +443,11 @@ Module[{d=Length[n],a,L,V,decode,i,j,k,p},
 Subscript[a, i_]=1/\!\(
 \*UnderoverscriptBox[\(\[Product]\), \(k = i\), \(d\)]
 \*SubscriptBox[\(x\), \(k\)]\);
-decode[code_]:=Module[{r,list={}},
+decode[code_]:=Module[{r,List={}},
 For[r=1,r<=Length[code],r++,
-If[code[[r]]!=0,list=Join[list,{Subscript[a, r]},ConstantArray[0,code[[r]]-1]]]
+If[code[[r]]!=0,List=Join[List,{Subscript[a, r]},ConstantArray[0,code[[r]]-1]]]
 ];
-list
+List
 ];
 L=Join[{{0}},Sort[encodingsPriorTo[n],encodingsCompare]];
 V=IdentityMatrix[Length[L]];
@@ -542,7 +538,7 @@ Omega[n_,X_]:=Omega[n]/.{Subscript[u, k___]:>Subscript[u, (Flatten[(X[[#]]/.Time
 (* ::Section::Closed:: *)
 (*Holomorphic and motivic one forms*)
 
-(*omegaHat computes the connection form of lifted multiple polylogarithms, whereas the entries are motivic one form, and holomorphic differ by constant, and serve as the differential of lifted multiple polylogarithms*)
+(*omegaHat computes the connection form of Lifted multiple polylogarithms, whereas the entries are motivic one form, and holomorphic differ by constant, and serve as the differential of Lifted multiple polylogarithms*)
 omegaHat[n_]:=d[nilpotentMatrixExp[-Omega[n]]] . nilpotentMatrixExp[Omega[n]]+nilpotentMatrixExp[-Omega[n]] . omega[n] . nilpotentMatrixExp[Omega[n]]//Expand;
 
 holomorphicOneForm[n_]:=omegaHat[n][[-1,1]];
@@ -629,9 +625,9 @@ Total[sortedWedge[moduloProducts[leftPart[[#]]],moduloProducts[rightPart[[#]]]]&
 (*GoncharovCobracket comoputes the cobracket of multiple polylogarithms Lie coalgebra with inverses*)
 LiCobracket[n_List, y_List] := GoncharovCobracket[n, y] /. {
     Subscript[Li, N___][X___]
-    li[m_List, z_List] :> If[Exponent[z[[1]], Variables[z[[1]]]][[1]] < 1,
+    Li[m_List, z_List] :> If[Exponent[z[[1]], Variables[z[[1]]]][[1]] < 1,
         moduloProducts[GoncharovInversionModuloPiI[Reverse[m], Reverse[1 / z]]],
-        li[m, z]
+        Li[m, z]
     ]
 };
 
@@ -654,7 +650,7 @@ Protect[Conjugate, Re, Im];
 SingleValuedLi[n_List] := Module[{V, SV},
     V = GoncharovVariationMatrixModuloPiI[n];
     SV = I^(2Floor[Total[n]/2]-1) / 2 * unipotentMatrixLog[tauMatrix[n, I] . V . tauMatrix[n,-1] . Conjugate[unipotentMatrixInverse[V]] . tauMatrix[n,I]];
-    SV[[-1,1]] /. {li[m_List, y_List] :> Re[Li[m, y]] + I * Im[Li[m, y]], Log[y___] :> Re[Log[y]] + I * Im[Log[y]]} // Expand
+    SV[[-1,1]] /. {Li[m_List, y_List] :> Re[Li[m, y]] + I * Im[Li[m, y]], Log[y___] :> Re[Log[y]] + I * Im[Log[y]]} // Expand
 ]
 
 
