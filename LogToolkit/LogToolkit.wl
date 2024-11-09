@@ -31,6 +31,8 @@ encode::usage = "encode[Li[{n_1, ..., n_d}, {x_}]]";
 (*---------------------------------------------------------------------------------------------------------------------------------------------------------
 Reserved symbols:
 x                 :   For symbols in the contraction system
+u                 :   For coordinates in one forms
+v                 :   For coordinates in one forms
 Li                :   For multiple polylogarithms
 L                 :   For multiple polylogarithms
 d                 :   For differential operators
@@ -374,7 +376,7 @@ GoncharovInversion[n_List, y_List] := Module[{d = Length[n], r, m, i},
             {r, 1, d}
         ]
     ]
-]
+] /. {Li[] :> 1}
 
 GoncharovInversionModuloPiI[n_List, y_List] := Module[{d = Length[n], r, m, i},
     If[
@@ -391,7 +393,7 @@ GoncharovInversionModuloPiI[n_List, y_List] := Module[{d = Length[n], r, m, i},
             {r, 1, d}
         ]
     ]
-]
+] /. {Li[] :> 1}
 
 
 
@@ -400,117 +402,122 @@ GoncharovInversionModuloPiI[n_List, y_List] := Module[{d = Length[n], r, m, i},
 
 
 
-IIVariationMatrix[n_List]:=
-Module[{d=Length[n],a,X,firstColumn,V,IIdecode,computeEntry,fun,i,j},
-Subscript[a, i_]=1/\!\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = i\), \(d\)]
-\*SubscriptBox[\(x\), \(k\)]\);
-IIdecode[code_]:=Join@@(If[code[[#]]===0,{},Join[{\!\(
-\*SubsuperscriptBox[\(\[Product]\), \(k = #\), \(Length[code]\)]
-\*SuperscriptBox[
-SubscriptBox[\(x\), \(k\)], \(-1\)]\)},ConstantArray[0,code[[#]]-1]]]&/@Range[Length[code]]);
-fun[l1_,l2_]:=
-Module[{result=0,L={},k},
-If [Length[l2]===0,Return[If[Length[l1]===2,1,Subscript[P,l1]],Module]];
-For[k=2,k<Length[l1],k++,If[l1[[k]]===l2[[1]],L=Join[L,{k}]]];
-For[k=1,k<=Length[L],k++,
-result=result+If[L[[k]]===2,1,Subscript[P,l1[[;;L[[k]]]]]]*fun[l1[[L[[k]];;]],l2[[2;;]]]
-];
-result
-];
-computeEntry[i_,j_]:=fun[Join[{0},firstColumn[[i]],{1}],firstColumn[[j]]];
-firstColumn=Join[{{}},IIdecode/@Sort[encodingsPriorTo[n],encodingsCompare]];
-V=IdentityMatrix[Length[firstColumn]];V[[All,1]]=Subscript[P,Join[{0},#,{1}]]&/@firstColumn;V[[1,1]]=1;
-For[j=2,j<Length[firstColumn],j++,
-For[i=j+1,i<=Length[firstColumn],i++,
-V[[i,j]]=computeEntry[i,j];
-]
-];
-V
-]
-LiVariationMatrix[n_]:=IIVariationMatrix[n]/.{Subscript[P, l_]:>PToLi[l]}
-GoncharovVariationMatrix[n_]:=LiVariationMatrix[n]/.{Subscript[Li, N___][X___]:>If[Exponent[{X}[[1]],Variables[{X}[[1]]]][[1]]<1,GoncharovInversion[Reverse[{N}],Reverse[1/{X}]],Subscript[Li, N][X]]}
-GoncharovVariationMatrixModuloPiI[n_]:=LiVariationMatrix[n]/.{Subscript[Li, N___][X___]:>If[Exponent[{X}[[1]],Variables[{X}[[1]]]][[1]]<1,GoncharovInversionModuloPiI[Reverse[{N}],Reverse[1/{X}]],Subscript[Li, N][X]]}
-IIVariationMatrix[n_List,X_List]:=IIVariationMatrix[n]/.{Subscript[x, k_]:>X[[k]]};
-LiVariationMatrix[n_List,X_List]:=LiVariationMatrix[n]/.{Subscript[x, k_]:>X[[k]]}
-GoncharovVariationMatrix[n_List,X_List]:=GoncharovVariationMatrix[n]/.{Subscript[x, k_]:>X[[k]]}
-GoncharovVariationMatrixModuloPiI[n_List,X_List]:=GoncharovVariationMatrixModuloPiI[n]/.{Subscript[x, k_]:>X[[k]]}
-
-
-tauMatrix[n_List,c_]:=
-Module[{d=Length[n],a,L,V,decode,i,j,k,p},
-Subscript[a, i_]=1/\!\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = i\), \(d\)]
-\*SubscriptBox[\(x\), \(k\)]\);
-decode[code_]:=Module[{r,List={}},
-For[r=1,r<=Length[code],r++,
-If[code[[r]]!=0,List=Join[List,{Subscript[a, r]},ConstantArray[0,code[[r]]-1]]]
-];
-List
-];
-L=Join[{{0}},Sort[encodingsPriorTo[n],encodingsCompare]];
-V=IdentityMatrix[Length[L]];
-For[j=1,j<=Length[L],j++,
-V[[j,j]]=c^Total[L[[j]]];
-];
-V
+IIVariationMatrix[n_List] := Module[{d = Length[n], a, X, firstColumn, V, IIdecode, computeEntry, fun, i, j},
+    a = 1 / Product[x[k], {k, #, d}] &;
+    IIdecode[code_] := Join@@(If[code[[#]] === 0, {}, Join[{Product[1 / x[k], {k, #, Length[code]}]}, ConstantArray[0, code[[#]] - 1]]] & /@ Range[Length[code]]);
+    fun[l1_, l2_] := Module[{result = 0, L = {}, k},
+        If[Length[l2] === 0, Return[If[Length[l1] === 2, 1, P@@l1], Module]];
+        For[k = 2, k < Length[l1], k++,
+            If[l1[[k]] === l2[[1]], L = Join[L, {k}]]
+        ];
+        For[k = 1, k <= Length[L], k++,
+            result = result + If[L[[k]] === 2, 1, P@@l1[[;;L[[k]]]]]] * fun[l1[[L[[k]];;]], l2[[2;;]]]
+        ];
+        result
+    ];
+    computeEntry[i_Integer, j_Integer] := fun[Join[{0}, firstColumn[[i]], {1}], firstColumn[[j]]];
+    firstColumn = Join[{{}}, IIdecode /@ Sort[encodingsPriorTo[n], encodingsCompare]];
+    V = IdentityMatrix[Length[firstColumn]];
+    V[[All, 1]] = P@@Join[{0}, #, {1}]& /@ firstColumn;
+    V[[1, 1]]=1;
+    For[j = 2, j < Length[firstColumn], j++,
+        For[i = j+1, i <= Length[firstColumn], i++,
+            V[[i, j]] = computeEntry[i, j];
+        ]
+    ];
+    V
 ]
 
+LiVariationMatrix[n_List] := IIVariationMatrix[n] /. {P :> PToLi}
 
-monodromyMatrix[{i0_Integer},n_List,V_List]:=
-Module[{d=Length[n],M=IdentityMatrix[Dimensions[V][[1]]],a,INDEX,MONODROMY,i,j,k,vars,exps,mono},
-Subscript[a, i_]=1/\!\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = i\), \(d\)]
-\*SubscriptBox[\(x\), \(k\)]\);
-INDEX[X_]:=Which[X===0,0,X===1,d+1,True,Min[Variables[1/X]/.Subscript[x, i_]->i]];
-(*Computes the extra monodromy of a monomial in an entry in the variation matrix*)
-MONODROMY[Integral_]:=
-Module[{SingularPoints=Integral[[2]][[2;;-2]],p,q=0,startIdx=INDEX[Integral[[2]][[1]]],endIdx=INDEX[Integral[[2]][[-1]]]},
-(-1)^(Length[SingularPoints]-Count[SingularPoints,0]) If[(startIdx*endIdx===0&&DeleteDuplicates[SingularPoints]==={0})||(startIdx*endIdx=!=0&&startIdx<=i0<endIdx&&LCS[DeleteDuplicates[SingularPoints],Join[(Subscript[a, #]&/@Range[i0+1,endIdx-1]),{0}]]),
-(-1)^If[endIdx===0,Length[SingularPoints],0]/Count[SingularPoints,0]!,0
-]
-];
-(*Construct the monodromy matrix*)
-For[j=1,j<Dimensions[V][[1]],j++,
-For[i=j+1,i<=Dimensions[V][[1]],i++,
-mono=MonomialList[V[[i,j]]];
-For[k=1,k<=Length[mono],k++,
-vars=Variables[mono[[k]]];
-exps=Exponent[mono[[k]],vars];
-M[[i,j]]+=Times@@(MONODROMY[vars[[#]]]^exps[[#]]&/@Range[Length[vars]])*mono[[k]]/(Times@@(vars^exps))
-]
-]
-];
-M
-]
-monodromyMatrix[{i0_Integer},n_List]:=monodromyMatrix[{i0},n,IIVariationMatrix[n]];
+GoncharovVariationMatrix[n_List] :=
+    LiVariationMatrix[n] /. {Li[m_List, y_List] :> If[Exponent[y[[1]], Variables[y[[1]]]][[1]] < 1, GoncharovInversion[Reverse[m], Reverse[1 / y]], Li[m, y]]};
+
+GoncharovVariationMatrixModuloPiI[n_List] :=
+    LiVariationMatrix[n] /. {Li[m_List, y_List] :> If[Exponent[y[[1]], Variables[y[[1]]]][[1]] < 1, GoncharovInversionModuloPiI[Reverse[m], Reverse[1 / y]], Li[m, y]]};
+
+IIVariationMatrix[n_List, y_List] := IIVariationMatrix[n] /. {x[k_] :> y[[k]]};
+
+LiVariationMatrix[n_List, y_List] := LiVariationMatrix[n] /. {x[k_] :> y[[k]]};
+
+GoncharovVariationMatrix[n_List, y_List] := GoncharovVariationMatrix[n] /. {x[k_] :> y[[k]]};
+
+GoncharovVariationMatrixModuloPiI[n_List, y_List] := GoncharovVariationMatrixModuloPiI[n] /. {x[k_] :> y[[k]]};
 
 
-monodromyMatrix[{i0_Integer,j0_Integer},n_List,V_List]:=
-Module[{d=Length[n],M=IdentityMatrix[Dimensions[V][[1]]],a,INDEX,MONODROMY,i,j,k,vars,exps,mono},
-Subscript[a, i_]=1/\!\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = i\), \(d\)]
-\*SubscriptBox[\(x\), \(k\)]\);
-INDEX[X_]:=Which[X===0,0,X===1,d+1,True,Min[Variables[1/X]/.Subscript[x, i_]->i]];
-(*Computes the extra monodromy of a monomial in an entry in the variation matrix*)
-MONODROMY[Integral_]:=
-Module[{SingularPoints=Integral[[2]][[2;;-2]],p,q=0,startIdx=INDEX[Integral[[2]][[1]]],endIdx=INDEX[Integral[[2]][[-1]]]},
-(-1)^Length[SingularPoints] Which[startIdx<i0&&endIdx===j0+1&&LCS[SingularPoints,(Subscript[a, #]&/@Range[i0,j0])]&&INDEX[SingularPoints[[1]]]===i0,1,startIdx===i0&&endIdx>j0+1&&LCS[SingularPoints,(Subscript[a, #]&/@Range[i0+1,j0+1])]&&INDEX[SingularPoints[[-1]]]===j0+1,-1,True,0]
-];
-(*Construct the monodromy matrix*)
-For[j=1,j<Dimensions[V][[1]],j++,
-For[i=j+1,i<=Dimensions[V][[1]],i++,
-mono=MonomialList[V[[i,j]]];
-For[k=1,k<=Length[mono],k++,
-vars=Variables[mono[[k]]];
-exps=Exponent[mono[[k]],vars];
-M[[i,j]]+=Times@@(MONODROMY[vars[[#]]]^exps[[#]]&/@Range[Length[vars]])*mono[[k]]/(Times@@(vars^exps))
+tauMatrix[n_List,c_] := Module[{d = Length[n], a, L, V, decode, i, j, k, p},
+    a = 1 / Product[x[k], {k, #, d}] &;
+    decode[code_] := Module[{r, l = {}},
+        For[r = 1, r <= Length[code], r++,
+            If[code[[r]] != 0, l = Join[l, {a[r]}, ConstantArray[0, code[[r]] - 1]]];
+        ];
+        l
+    ];
+    L = Join[{{0}}, Sort[encodingsPriorTo[n], encodingsCompare]];
+    V = IdentityMatrix[Length[L]];
+    For[j = 1, j <= Length[L], j++,
+        V[[j, j]] = c ^ Total[L[[j]]];
+    ];
+    V
 ]
+
+
+monodromyMatrix[{i0_Integer}, n_List, V_List] := Module[{d = Length[n], M = IdentityMatrix[Dimensions[V][[1]]], a, INDEX, MONODROMY, i, j, k, vars, exps, mono},
+    a = 1 / Product[x[k], {k, #, d}] &;
+    INDEX[X_] := Which[X === 0, 0, X === 1, d+1, True, Min[Variables[1 / X] /. x[i_]->i]];
+    (*Computes the extra monodromy of a monomial in an entry in the variation matrix*)
+    MONODROMY[Integral_] := Module[{SingularPoints = Integral[[2]][[2;;-2]], p, q = 0, startIdx = INDEX[Integral[[2]][[1]]], endIdx = INDEX[Integral[[2]][[-1]]]},
+        (-1) ^ (Length[SingularPoints] - Count[SingularPoints,0]) *
+        If[(startIdx * endIdx === 0 && DeleteDuplicates[SingularPoints] === {0}) || 
+            (startIdx * endIdx =!= 0 && startIdx <= i0 < endIdx && LCS[DeleteDuplicates[SingularPoints], Join[(a /@ Range[i0+1, endIdx-1]), {0}]]),
+            (-1) ^ If[endIdx === 0, Length[SingularPoints], 0] / Count[SingularPoints, 0]!, 0
+        ]
+    ];
+    (*Construct the monodromy matrix*)
+    For[j = 1, j < Dimensions[V][[1]], j++,
+        For[i = j+1, i <= Dimensions[V][[1]], i++,
+            mono = MonomialList[V[[i, j]]];
+            For[k = 1, k <= Length[mono], k++,
+                vars = Variables[mono[[k]]];
+                exps = Exponent[mono[[k]], vars];
+                M[[i, j]] += Times@@(MONODROMY[vars[[#]]]^exps[[#]]& /@ Range[Length[vars]]) * mono[[k]] / (Times@@(vars^exps))
+            ]
+        ]
+    ];
+    M
 ]
+
+monodromyMatrix[{i0_Integer}, n_List]:=monodromyMatrix[{i0}, n, IIVariationMatrix[n]];
+
+monodromyMatrix[{i0_Integer, j0_Integer}, n_List, V_List] := Module[{d = Length[n], M = IdentityMatrix[Dimensions[V][[1]]], a, INDEX, MONODROMY, i, j, k, vars, exps, mono},
+    a = 1 / Product[x[k], {k, #, d}] &;
+    INDEX[X_] := Which[X === 0, 0, X === 1, d+1, True, Min[Variables[1 / X] /. x[i_]->i]];
+    (*Computes the extra monodromy of a monomial in an entry in the variation matrix*)
+    MONODROMY[Integral_] := Module[{SingularPoints = Integral[[2]][[2;;-2]], p, q = 0, startIdx = INDEX[Integral[[2]][[1]]], endIdx = INDEX[Integral[[2]][[-1]]]},
+        (-1) ^ Length[SingularPoints] * Which[
+            startIdx < i0 && endIdx === j0+1 && LCS[SingularPoints, (a/@Range[i0, j0])] && INDEX[SingularPoints[[1]]] === i0,
+            1,
+            startIdx === i0 && endIdx > j0+1 && LCS[SingularPoints, (a/@Range[i0+1, j0+1])] && INDEX[SingularPoints[[-1]]] === j0 + 1,
+            -1,
+            True,
+            0
+        ]
+    ];
+    (*Construct the monodromy matrix*)
+    For[j = 1, j < Dimensions[V][[1]], j++,
+        For[i = j+1, i <= Dimensions[V][[1]], i++,
+            mono = MonomialList[V[[i, j]]];
+            For[k = 1, k<= Length[mono], k++,
+                vars = Variables[mono[[k]]];
+                exps = Exponent[mono[[k]], vars];
+                M[[i,j]] += Times@@(MONODROMY[vars[[#]]]^exps[[#]]& /@ Range[Length[vars]]) * mono[[k]] / (Times@@(vars^exps))
+            ]
+        ]
+    ];
+    M
 ];
-M
-];
-monodromyMatrix[{i0_Integer,j0_Integer},n_List]:=monodromyMatrix[{i0,j0},n,IIVariationMatrix[n]];
+
+monodromyMatrix[{i0_Integer, j0_Integer}, n_List] := monodromyMatrix[{i0, j0}, n, IIVariationMatrix[n]];
 
 
 
@@ -518,19 +525,28 @@ monodromyMatrix[{i0_Integer,j0_Integer},n_List]:=monodromyMatrix[{i0,j0},n,IIVar
 (*Connection form*)
 
 (*omega computes the connection form of multiple polylogarithms, Omega removes d*)
-omega[n_]:=Module[{vec,l=(Join[{1},decode/@Sort[encodingsPriorTo[encode[Subscript[Li, (n/.List->Sequence)][(Subscript[x, #]&/@Range[Length[n]]/.List->Sequence)]]],encodingsCompare]]),ComputeColumn,omega,j},
-vec=d[l];
-ComputeColumn[i_]:=Which[i===1,vec-Join[ConstantArray[0,1+Length[n]],vec[[2+Length[n];;]]],2<=i,vec-(vec/.{l[[i]]->0})/.{l[[i]]->1}];omega=ConstantArray[0,{Length[l],Length[l]}];
-For[j=1,j<=Length[l],j++,
-omega[[All,j]]=ComputeColumn[j];
+omega[n_List] := Module[{vec, ComputeColumn, omega, j,
+    l = Join[{1}, decode /@ Sort[encodingsPriorTo[encode[Li[n, x[#]& /@ Range[Length[n]]]]], encodingsCompare]]
+    },
+    vec = d[l];
+    ComputeColumn[i_] := Which[
+        i === 1, vec - Join[ConstantArray[0, 1 + Length[n]], vec[[2 + Length[n];;]]],
+        i >= 2, vec - (vec /. {l[[i]] -> 0}) /. {l[[i]] -> 1}
+    ];
+    omega = ConstantArray[0, {Length[l], Length[l]}];
+    For[j = 1, j <= Length[l], j++,
+        omega[[All, j]] = ComputeColumn[j];
+    ];
+    omega
 ];
-omega
-];
-omega[n_,X_]:=omega[n]/.{Subscript[u, k___]:>Subscript[u, (Flatten[(X[[#]]/.Times->List/.Subscript[x, t_]->t)&/@{k}]/.{List->Sequence})],Subscript[v, k___]:>Subscript[v, (Flatten[(X[[#]]/.Times->List/.Subscript[x, t_]->t)&/@{k}]/.{List->Sequence})]};
 
+omega[n_List, y_List] := omega[n] /. u[k___] :> u @@ Flatten[(y[[#]] /. Times->List /. x[t_]->t) & /@ {k}]
+                                  /. v[k___] :> v @@ Flatten[(y[[#]] /. Times->List /. x[t_]->t) & /@ {k}];
 
-Omega[n_]:=omega[n]/.{d[X_]->X};
-Omega[n_,X_]:=Omega[n]/.{Subscript[u, k___]:>Subscript[u, (Flatten[(X[[#]]/.Times->List/.Subscript[x, t_]->t)&/@{k}]/.{List->Sequence})],Subscript[v, k___]:>Subscript[v, (Flatten[(X[[#]]/.Times->List/.Subscript[x, t_]->t)&/@{k}]/.{List->Sequence})]};
+Omega[n_List] := omega[n] /. d[y_] :> y;
+
+Omega[n_List, y_List] := Omega[n] /. u[k___] :> u @@ Flatten[(y[[#]] /. Times->List /. x[t_]->t) & /@ {k}]
+                                  /. v[k___] :> v @@ Flatten[(y[[#]] /. Times->List /. x[t_]->t) & /@ {k}];
 
 
 
@@ -538,17 +554,17 @@ Omega[n_,X_]:=Omega[n]/.{Subscript[u, k___]:>Subscript[u, (Flatten[(X[[#]]/.Time
 (*Holomorphic and motivic one forms*)
 
 (*omegaHat computes the connection form of Lifted multiple polylogarithms, whereas the entries are motivic one form, and holomorphic differ by constant, and serve as the differential of Lifted multiple polylogarithms*)
-omegaHat[n_]:=d[nilpotentMatrixExp[-Omega[n]]] . nilpotentMatrixExp[Omega[n]]+nilpotentMatrixExp[-Omega[n]] . omega[n] . nilpotentMatrixExp[Omega[n]]//Expand;
+omegaHat[n_List] := d[nilpotentMatrixExp[-Omega[n]]] . nilpotentMatrixExp[Omega[n]] + nilpotentMatrixExp[-Omega[n]] . omega[n] . nilpotentMatrixExp[Omega[n]] // Expand;
 
-holomorphicOneForm[n_]:=omegaHat[n][[-1,1]];
+holomorphicOneForm[n_List] := omegaHat[n][[-1, 1]];
 
-motivicOneForm[n_]:=If[Total[n]===1,-d[Subscript[v, 1]],holomorphicOneForm[n]/(Total[n]-1)];
+motivicOneForm[n_List] := If[Total[n] === 1, -d[v[1]], holomorphicOneForm[n] / (Total[n] - 1)];
 
-motivicOneForm[n_,y_]:=Module[{f=Subscript[x, (#/.Times->List/.Subscript[x, t_]->t/.List->Sequence)]&,ff,Seq=(#/.{List->Sequence})&},ff=((f[y[[#]]]/.{Subscript->List})[[2;;]]/.{List->Sequence})&;
-motivicOneForm[n]/.{Subscript[u, m___]:>Subscript[u, Seq[ff/@{m}]],Subscript[v, m___]:>Subscript[v, Seq[ff/@{m}]]}]
+motivicOneForm[n_List, y_List] := motivicOneForm[n] /. u[m___] :> (y[[#]] /. Times->List /. x[t_]->t) & /@ u[m]
+                                                    /. v[m___] :> (y[[#]] /. Times->List /. x[t_]->t) & /@ v[m];
 
-holomorphicOneForm[n_,y_]:=Module[{f=Subscript[x, (#/.Times->List/.Subscript[x, t_]->t/.List->Sequence)]&,ff,Seq=(#/.{List->Sequence})&},ff=((f[y[[#]]]/.{Subscript->List})[[2;;]]/.{List->Sequence})&;
-holomorphicOneForm[n]/.{Subscript[u, m___]:>Subscript[u, Seq[ff/@{m}]],Subscript[v, m___]:>Subscript[v, Seq[ff/@{m}]]}]
+holomorphicOneForm[n_List, y_List] := holomorphicOneForm[n] /. u[m___] :> (y[[#]] /. Times->List /. x[t_]->t) & /@ u[m]
+                                                            /. v[m___] :> (y[[#]] /. Times->List /. x[t_]->t) & /@ v[m];
 
 (*symbolMap computes the symbol of a multiple polylogarithms*)
 Unprotect[Element];
@@ -557,10 +573,12 @@ Element[Power[a_, b_], symbolMapConstants] := True /; Element[a, symbolMapConsta
 Element[Plus[a_, b_], symbolMapConstants] := True /; Element[a, symbolMapConstants] && Element[b, symbolMapConstants];
 Element[Times[a_, b_], symbolMapConstants] := True /; Element[a, symbolMapConstants] && Element[b, symbolMapConstants];
 Protect[Element];
-symbolMap[Subscript[Li, N___][X___]]:=matrixTensorPower[Omega[{N},{X}]\[Transpose],Total[{N}]][[1,-1]];
+symbolMap[Li[n_List, y_List]] := matrixTensorPower[Transpose[Omega[n, y]], Total[n]][[1, -1]];
+symbolMap[Subscript[Li, N___][Y___]] := symbolMap[Li[{N}, {Y}]];
 symbolMap[a___, S_Plus, b___] := symbolMap[a, #, b]& /@ S;
-symbolMap[T_Times] := shuffleProduct@@(symbolMap/@List@@T);
-symbolMap[P_Power] := shuffleProduct@@ConstantArray[symbolMap[P[[1]]],P[[2]]];
+symbolMap[T_Times] := shuffleProduct @@ (symbolMap /@ List @@ T);
+symbolMap[P_Power] := shuffleProduct @@ ConstantArray[symbolMap[P[[1]]], P[[2]]];
+
 
 
 (* ::Section::Closed:: *)
@@ -569,61 +587,52 @@ symbolMap[P_Power] := shuffleProduct@@ConstantArray[symbolMap[P[[1]]],P[[2]]];
 
 
 (*GoncharovCoproduct comoputes the coproduct of multiple polylogarithms Hopf algebra with inverses*)
-ClearAll[GoncharovCoproduct];
-GoncharovCoproduct[n_,y_]:=Module[{d,a,leftPart,rightPart,V,IIdecode,fun,i,j},
-d=Length[n];Subscript[a, i_]=1/\!\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = i\), \(d\)]
-\*SubscriptBox[\(x\), \(k\)]\);
-IIdecode[code_]:=Join@@(If[code[[#]]===0,{},Join[{\!\(
-\*SubsuperscriptBox[\(\[Product]\), \(k = #\), \(Length[code]\)]
-\*SuperscriptBox[
-SubscriptBox[\(x\), \(k\)], \(-1\)]\)},ConstantArray[0,code[[#]]-1]]]&/@Range[Length[code]]);
-fun[l1_,l2_]:=
-Module[{result=0,L={},k},
-If [Length[l2]===0,Return[If[Length[l1]===2,1,Subscript[P,l1]],Module]];
-For[k=2,k<Length[l1],k++,If[l1[[k]]===l2[[1]],L=Join[L,{k}]]];
-For[k=1,k<=Length[L],k++,
-result=result+If[L[[k]]===2,1,Subscript[P,l1[[;;L[[k]]]]]]*fun[l1[[L[[k]];;]],l2[[2;;]]]
-];
-result
-];
-leftPart=Join[{{}},IIdecode/@Sort[encodingsPriorTo[encode[Subscript[Li, n/.List->Sequence][y/.List->Sequence]]],encodingsCompare]];
-rightPart=(fun[Join[{0},leftPart[[-1]],{1}],leftPart[[#]]]&/@Range[Length[leftPart]])/.{Subscript[P, l_]:>PToLi[l]};
-leftPart=(Subscript[P, Join[{0},#,{1}]]&/@leftPart)/.{Subscript[P, l_]:>PToLi[l]};
-Total[tensor[leftPart[[#]],rightPart[[#]]]&/@Range[Length[leftPart]]]
+GoncharovCoproduct[n_List, y_List] := Module[{d = Length[n], a, leftPart, rightPart, V, IIdecode, fun, i, j},
+    a = 1 / Product[x[k], {k, #, d}] &;
+    IIdecode[code_] := Join@@(If[code[[#]] === 0, {}, Join[{Product[1 / x[k], {k, #, Length[code]}]}, ConstantArray[0, code[[#]] - 1]]] & /@ Range[Length[code]]);
+    fun[l1_, l2_] := Module[{result = 0, L = {}, k},
+        If[Length[l2] === 0, Return[If[Length[l1] === 2, 1, P@@l1], Module]];
+        For[k = 2, k < Length[l1], k++,
+            If[l1[[k]] === l2[[1]], L = Join[L, {k}]]
+        ];
+        For[k = 1, k <= Length[L], k++,
+            result = result + If[L[[k]] === 2, 1, P@@l1[[;;L[[k]]]]]] * fun[l1[[L[[k]];;]], l2[[2;;]]]
+        ];
+        result
+    ];
+    leftPart = Join[{{}}, IIdecode /@ Sort[encodingsPriorTo[encode[Li[n, y]]], encodingsCompare]];
+    rightPart = (fun[Join[{0}, leftPart[[-1]], {1}], leftPart[[#]]] & /@ Range[Length[leftPart]]) /. P :> PToLi;
+    leftPart = (P @@ Join[{0}, #, {1}]) & /@ leftPart /. P :> PToLi;
+    Total[tensor[leftPart[[#]], rightPart[[#]]] & /@ Range[Length[leftPart]]]
 ]
 
 (*GoncharovCoproduct comoputes the coproduct of multiple polylogarithms Hopf algebra without inverses*)
-LiCoproduct[n_,y_]:=GoncharovCoproduct[n,y]/.{Subscript[Li, N___][X___]:>If[Exponent[{X}[[1]],Variables[{X}[[1]]]][[1]]<1,GoncharovInversionModuloPiI[Reverse[{N}],Reverse[1/{X}]],Subscript[Li, N][X]]};
+LiCoproduct[n_List, y_List] := GoncharovCoproduct[n, y] /. Li[m_List, z_List] :>
+    If[Exponent[m[[1]],Variables[z[[1]]]][[1]] < 1, GoncharovInversionModuloPiI[Reverse[m], Reverse[1 / z]], Li[m, z]]};
 
 
 (*GoncharovCobracket comoputes the cobracket of multiple polylogarithms Lie coalgebra with inverses*)
-GoncharovCobracket[n_,y_]:=Module[{d,a,leftPart,rightPart,V,IIdecode,fun,i,j},
-d=Length[n];Subscript[a, i_]=1/\!\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = i\), \(d\)]
-\*SubscriptBox[\(x\), \(k\)]\);
-IIdecode[code_]:=Join@@(If[code[[#]]===0,{},Join[{\!\(
-\*SubsuperscriptBox[\(\[Product]\), \(k = #\), \(Length[code]\)]
-\*SuperscriptBox[
-SubscriptBox[\(x\), \(k\)], \(-1\)]\)},ConstantArray[0,code[[#]]-1]]]&/@Range[Length[code]]);
-fun[l1_,l2_]:=
-Module[{result=0,L={},k},
-If [Length[l2]===0,Return[If[Length[l1]===2,1,Subscript[P,l1]],Module]];
-For[k=2,k<Length[l1],k++,If[l1[[k]]===l2[[1]],L=Join[L,{k}]]];
-For[k=1,k<=Length[L],k++,
-result=result+If[L[[k]]===2,1,Subscript[P,l1[[;;L[[k]]]]]]*fun[l1[[L[[k]];;]],l2[[2;;]]]
-];
-result
-];
-leftPart=Join[{{}},IIdecode/@Sort[encodingsPriorTo[encode[Subscript[Li, n/.List->Sequence][y/.List->Sequence]]],encodingsCompare]];
-rightPart=(fun[Join[{0},leftPart[[-1]],{1}],leftPart[[#]]]&/@Range[Length[leftPart]])/.{Subscript[P, l_]:>PToLi[l]};
-leftPart=(Subscript[P, Join[{0},#,{1}]]&/@leftPart)/.{Subscript[P, l_]:>PToLi[l]};
-Total[sortedWedge[moduloProducts[leftPart[[#]]],moduloProducts[rightPart[[#]]]]&/@Range[Length[leftPart]]]
+GoncharovCobracket[n_List, y_List] := Module[{d = Length[n], a, leftPart, rightPart, V, IIdecode, fun, i, j},
+    a = 1 / Product[x[k], {k, #, d}] &;
+    IIdecode[code_] := Join@@(If[code[[#]] === 0, {}, Join[{Product[1 / x[k], {k, #, Length[code]}]}, ConstantArray[0, code[[#]] - 1]]] & /@ Range[Length[code]]);
+    fun[l1_, l2_] := Module[{result = 0, L = {}, k},
+        If[Length[l2] === 0, Return[If[Length[l1] === 2, 1, P@@l1], Module]];
+        For[k = 2, k < Length[l1], k++,
+            If[l1[[k]] === l2[[1]], L = Join[L, {k}]]
+        ];
+        For[k = 1, k <= Length[L], k++,
+            result = result + If[L[[k]] === 2, 1, P@@l1[[;;L[[k]]]]]] * fun[l1[[L[[k]];;]], l2[[2;;]]]
+        ];
+        result
+    ];
+    leftPart = Join[{{}}, IIdecode /@ Sort[encodingsPriorTo[encode[Li[n, y]]], encodingsCompare]];
+    rightPart=(fun[Join[{0}, leftPart[[-1]], {1}], leftPart[[#]]] & /@ Range[Length[leftPart]]) /. P :> PToLi;
+    leftPart = (P @@ Join[{0}, #, {1}]) & /@ leftPart /. P :> PToLi;
+    Total[sortedWedge[moduloProducts[leftPart[[#]]], moduloProducts[rightPart[[#]]]] & /@ Range[Length[leftPart]]]
 ]
 
 (*GoncharovCobracket comoputes the cobracket of multiple polylogarithms Lie coalgebra with inverses*)
 LiCobracket[n_List, y_List] := GoncharovCobracket[n, y] /. {
-    Subscript[Li, N___][X___]
     Li[m_List, z_List] :> If[Exponent[z[[1]], Variables[z[[1]]]][[1]] < 1,
         moduloProducts[GoncharovInversionModuloPiI[Reverse[m], Reverse[1 / z]]],
         Li[m, z]
