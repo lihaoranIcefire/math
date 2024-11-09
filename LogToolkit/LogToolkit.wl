@@ -366,7 +366,8 @@ GoncharovInversion[n_List, y_List] := Module[{d = Length[n], r, m, i},
             {r, 0, d - 1}
         ] - Sum[
             Sum[
-                (-1) ^ (Total[n[[r;;]]] + Total[m[[r+1;;]]]) * Product[Binomial[n[[i]] + m[[i]] - 1, m[[i]]], {i, Join[Range[r-1], Range[r+1, d]]}] *
+                (-1) ^ (Total[n[[r;;]]] + Total[m[[r+1;;]]]) * (2*Pi*I)^m[[r]] / m[[r]]! *
+                Product[Binomial[n[[i]] + m[[i]] - 1, m[[i]]], {i, Join[Range[r-1], Range[r+1, d]]}] *
                 BernoulliB[m[[r]], Log[Times@@y] / (2*Pi*I)] * GoncharovInversion[n[[;;r-1]] + m[[;;r-1]], y[[;;r-1]]] * Li[n[[r+1;;]] + m[[r+1;;]], y[[r+1;;]]],
                 {m, Flatten[Permutations /@ (IntegerPartitions[n[[r]] + d, {d}] - 1), 1]}
             ],
@@ -375,23 +376,21 @@ GoncharovInversion[n_List, y_List] := Module[{d = Length[n], r, m, i},
     ]
 ]
 
-
-(*GoncharovInversionModuloPiI is just modulo \[Pi] \[ImaginaryI] terms*)
-GoncharovInversionModuloPiI[n_,x_]:=Module[{d=Length[n],ans=0},
-If[d===0,Return[1,Module]];
-If[d===1,Return[(-1)^(n[[1]]-1) Subscript[Li, n[[1]]][x[[1]]]+(-1)^(n[[1]]-1) Log[x[[1]]]^n[[1]]/n[[1]]!,Module]];
-ans=-\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(r = 0\), \(d - 1\)]\(
-\*SuperscriptBox[\((\(-1\))\), \(Total[n[\([\)\(\(r + 1\)\(;;\)\)\(]\)]]\)] GoncharovInversionModuloPiI[n[\([\)\(\(;;\)\(r\)\)\(]\)], x[\([\)\(\(;;\)\(r\)\)\(]\)]] 
-\(\*SubscriptBox[\(Li\), \(n[\([\)\(\(r + 1\)\(;;\)\)\(]\)] /. List -> Sequence\)]\)[x[\([\)\(\(r + 1\)\(;;\)\)\(]\)] /. List -> Sequence]\)\)-\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(r = 1\), \(d\)]\(Total[\[IndentingNewLine]\((i |-> \((
-\*UnderoverscriptBox[\(\[Product]\), \(p = 1\), \(r - 1\)]Binomial[n[\([\)\(p\)\(]\)] + i[\([\)\(p\)\(]\)] - 1, n[\([\)\(p\)\(]\)] - 1])\) \((
-\*UnderoverscriptBox[\(\[Product]\), \(p = r + 1\), \(d\)]Binomial[n[\([\)\(p\)\(]\)] + i[\([\)\(p\)\(]\)] - 1, n[\([\)\(p\)\(]\)] - 1])\) 
-\*SuperscriptBox[\((\(-1\))\), \(Total[n[\([\)\(\(r\)\(;;\)\)\(]\)]] + Total[i[\([\)\(\(r + 1\)\(;;\)\)\(]\)]]\)] 
-\*FractionBox[
-SuperscriptBox[\(Log[Times @@ x]\), \(i[\([\)\(r\)\(]\)]\)], \(i[\([\)\(r\)\(]\)]!\)] GoncharovInversionModuloPiI[n[\([\)\(\(;;\)\(r - 1\)\)\(]\)] + i[\([\)\(\(;;\)\(r - 1\)\)\(]\)], x[\([\)\(\(;;\)\(r - 1\)\)\(]\)]] 
-\(\*SubscriptBox[\(Li\), \(n[\([\)\(\(r + 1\)\(;;\)\)\(]\)] + i[\([\)\(\(r + 1\)\(;;\)\)\(]\)] /. List -> Sequence\)]\)[x[\([\)\(\(r + 1\)\(;;\)\)\(]\)] /. List -> Sequence])\) /@ Flatten[Permutations /@ \((IntegerPartitions[n[\([\)\(r\)\(]\)] + d, {d}] - 1)\), 1]]\)\);
-ans/.{Subscript[Li][]->1}
+GoncharovInversionModuloPiI[n_List, y_List] := Module[{d = Length[n], r, m, i},
+    If[
+        d == 0, 1,
+        - Sum[
+            (-1)^Total[n[[r+1;;]]] * GoncharovInversionModuloPiI[n[[;;r]], y[[;;r]]] * Li[n[[r+1;;]], y[[r+1;;]]],
+            {r, 0, d - 1}
+        ] - Sum[
+            Sum[
+                (-1) ^ (Total[n[[r;;]]] + Total[m[[r+1;;]]]) * Product[Binomial[n[[i]] + m[[i]] - 1, m[[i]]], {i, Join[Range[r-1], Range[r+1, d]]}] *
+                Log[Times@@y]^m[[r]] / m[[r]]! * GoncharovInversionModuloPiI[n[[;;r-1]] + m[[;;r-1]], y[[;;r-1]]] * Li[n[[r+1;;]] + m[[r+1;;]], y[[r+1;;]]],
+                {m, Flatten[Permutations /@ (IntegerPartitions[n[[r]] + d, {d}] - 1), 1]}
+            ],
+            {r, 1, d}
+        ]
+    ]
 ]
 
 
