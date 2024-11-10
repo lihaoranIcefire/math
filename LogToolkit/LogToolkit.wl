@@ -34,9 +34,7 @@ x                 :   For symbols in the contraction system
 u                 :   For coordinates in one forms
 v                 :   For coordinates in one forms
 Li                :   For multiple polylogarithms
-L                 :   For multiple polylogarithms
 d                 :   For differential operators
-\[DifferentialD]  :   For differential operators
 II                :   For iterated integrals
 P                 :   For iterated integrals
 wedgeConstants    :   For wedge product
@@ -46,19 +44,6 @@ nameHolder        :   For temporary name replacing
 Updated protected tags:
 Element : updated for wedge and tensor product
 Conjugate, Re, Im : updated for complex numbers manipulation
-
-Useful substitution:
-/.{Subscript[P, l_]:>PToLi[l]}
-/.{Subscript[Li, 1][X___]:>-Subscript[v, (X/.Times->List/.Subscript[x, t_]->t/.List->Sequence)]}
-/.{Subscript[Li, N___][X___]:>If[Exponent[{X}[[1]],Variables[{X}[[1]]]][[1]]<1,GoncharovInversion[Reverse[{N}],Reverse[1/{X}]],Subscript[Li, N][X]]}
-/.{Subscript[Li, N___][X___]:>If[Exponent[{X}[[1]],Variables[{X}[[1]]]][[1]]<1,GoncharovInversionModuloPiI[Reverse[{N}],Reverse[1/{X}]],Subscript[Li, N][X]]}
-/.{Log[X___]:>Subscript[u, (X/.Times->List/.Subscript[x, t_]->t/.List->Sequence)]}
-/.{Log[X___]:>Total[Subscript[u, #]&/@Flatten@List[X/.Times->List/.Subscript[x, t_]->t]]}
-/.{Subscript[u, k___]:>Subscript[u, (Flatten[(X[[#]]/.Times->List/.Subscript[x, t_]->t)&/@{k}]/.{List->Sequence})],Subscript[v, k___]:>Subscript[v, (Flatten[(X[[#]]/.Times->List/.Subscript[x, t_]->t)&/@{k}]/.{List->Sequence})]}
-/.{Subscript[u, k___]:>Total[Subscript[u, #]&/@{k}]}
-/.{Subscript[Li, N___][X___]:>If[Exponent[{X}[[1]],Variables[{X}[[1]]]][[1]]<1,GoncharovInversion[Reverse[{N}],Reverse[1/{X}]],Subscript[Li, N][X]]}
-/.{Subscript[Li, N___][X___]:>If[Exponent[{X}[[1]],Variables[{X}[[1]]]][[1]]<1,GoncharovInversionModuloPiI[Reverse[{N}],Reverse[1/{X}]],Subscript[Li, N][X]]}
-/.{u1->Subscript[u, 1],u2->Subscript[u, 2],u12->Subscript[u, 1,2],du1->d[Subscript[u, 1]],du2->d[Subscript[u, 2]],du12->d[Subscript[u, 1,2]],v1->Subscript[v, 1],v2->Subscript[v, 2],v12->Subscript[v, 1,2],dv1->d[Subscript[v, 1]],dv2->d[Subscript[v, 2]],dv12->d[Subscript[v, 1,2]]}
 ---------------------------------------------------------------------------------------------------------------------------------------------------------*)
 
 
@@ -148,9 +133,9 @@ d[] := 0;
 d[a___, S_Plus, b___] := d[a, #, b]& /@ S;
 d[c_] := 0 /; Element[c, differentialConstants];
 
-d[Li[{n_Integer}, {y_}]] := Li[{n - 1}, y] * d[Log[y]] /; n > 1;
+d[Li[{n_Integer}, {y_}]] := Li[{n - 1}, {y}] * d[Log[y]] /; n > 1;
 d[Li[n_List, y_List]] := Module[{partial},
-    partial[i_Integer] = If[n[[i]] > 1,
+    partial[i_Integer] := If[n[[i]] > 1,
         Li[Join[n[[;;i-1]], {n[[i]] - 1}, n[[i+1;;]]], y] * d[Log[y[[i]]]],
         Which[
             i == Length[n], Li[n[[;;-2]], Join[y[[;;-3]], {y[[-2]] * y[[-1]]}]] * d[Li[{1}, {y[[i]]}]],
@@ -292,7 +277,7 @@ encode[Li[n_List, y_List]] := Module[{i, indices, min, max},
     Flatten[Insert[n, ConstantArray[0, min - 1], {1}]]
 ]
 
-encodingsCompare[l1_, l2_] := Which[
+encodingsCompare[l1_List, l2_List] := Which[
     Total[l1] != Total[l2], If[Total[l1] < Total[l2], 1, -1],
     Length[l1] != Length[l2], If[Length[l1] < Length[l2], 1, -1],
     True, For[k = d, k >=1, k--,
@@ -300,7 +285,7 @@ encodingsCompare[l1_, l2_] := Which[
     ]
 ];
 
-encodingsPriorTo[m_] := Module[{r, result = {m}},
+encodingsPriorTo[m_List] := Module[{r, result = {m}},
     If[m === ConstantArray[0, Length[m]], Return[{}, Module]];
     For[r = 1, r <= Length[m], r++,
         Which[
@@ -313,7 +298,7 @@ encodingsPriorTo[m_] := Module[{r, result = {m}},
     DeleteDuplicates[result]
 ];
 
-decode[code_] := Module[{indices = Join[Flatten[Position[code, _?(#!=0&)]], {Length[code] + 1}]},
+decode[code_List] := Module[{indices = Join[Flatten[Position[code, _?(#!=0&)]], {Length[code] + 1}]},
     Li[
         DeleteCases[code,0],
         Product[x[k], {k, indices[[#]], indices[[# + 1]] - 1}]& /@ Range[Length[indices] - 1]
@@ -540,13 +525,13 @@ omega[n_List] := Module[{vec, ComputeColumn, omega, j,
     omega
 ];
 
-omega[n_List, y_List] := omega[n] /. u[k___] :> u @@ Flatten[(y[[#]] /. Times->List /. x[t_]->t) & /@ {k}]
-                                  /. v[k___] :> v @@ Flatten[(y[[#]] /. Times->List /. x[t_]->t) & /@ {k}];
+omega[n_List, y_List] := omega[n] /. u[k___] :> u @@ Flatten[(y[[#]] /. Times->List /. x[t___]->t) & /@ {k}]
+                                  /. v[k___] :> v @@ Flatten[(y[[#]] /. Times->List /. x[t___]->t) & /@ {k}];
 
 Omega[n_List] := omega[n] /. d[y_] :> y;
 
-Omega[n_List, y_List] := Omega[n] /. u[k___] :> u @@ Flatten[(y[[#]] /. Times->List /. x[t_]->t) & /@ {k}]
-                                  /. v[k___] :> v @@ Flatten[(y[[#]] /. Times->List /. x[t_]->t) & /@ {k}];
+Omega[n_List, y_List] := Omega[n] /. u[k___] :> u @@ Flatten[(y[[#]] /. Times->List /. x[t___]->t) & /@ {k}]
+                                  /. v[k___] :> v @@ Flatten[(y[[#]] /. Times->List /. x[t___]->t) & /@ {k}];
 
 
 
@@ -560,11 +545,11 @@ holomorphicOneForm[n_List] := omegaHat[n][[-1, 1]];
 
 motivicOneForm[n_List] := If[Total[n] === 1, -d[v[1]], holomorphicOneForm[n] / (Total[n] - 1)];
 
-motivicOneForm[n_List, y_List] := motivicOneForm[n] /. u[m___] :> (y[[#]] /. Times->List /. x[t_]->t) & /@ u[m]
-                                                    /. v[m___] :> (y[[#]] /. Times->List /. x[t_]->t) & /@ v[m];
+motivicOneForm[n_List, y_List] := motivicOneForm[n] /. u[m___] :> (y[[#]] /. Times->List /. x[t___]->t) & /@ u[m]
+                                                    /. v[m___] :> (y[[#]] /. Times->List /. x[t___]->t) & /@ v[m];
 
-holomorphicOneForm[n_List, y_List] := holomorphicOneForm[n] /. u[m___] :> (y[[#]] /. Times->List /. x[t_]->t) & /@ u[m]
-                                                            /. v[m___] :> (y[[#]] /. Times->List /. x[t_]->t) & /@ v[m];
+holomorphicOneForm[n_List, y_List] := holomorphicOneForm[n] /. u[m___] :> (y[[#]] /. Times->List /. x[t___]->t) & /@ u[m]
+                                                            /. v[m___] :> (y[[#]] /. Times->List /. x[t___]->t) & /@ v[m];
 
 (*symbolMap computes the symbol of a multiple polylogarithms*)
 Unprotect[Element];
