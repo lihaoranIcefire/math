@@ -525,13 +525,13 @@ omega[n_List] := Module[{vec, ComputeColumn, omega, j,
     omega
 ];
 
-omega[n_List, y_List] := omega[n] /. u[k___] :> u @@ Flatten[(y[[#]] /. Times->List /. x[t___]->t) & /@ {k}]
-                                  /. v[k___] :> v @@ Flatten[(y[[#]] /. Times->List /. x[t___]->t) & /@ {k}];
+omega[n_List, y_List] := omega[n] /. {u[k___] :> u @@ Flatten[(y[[#]] /. Times->List /. x[t___]->t) & /@ {k}]}
+                                  /. {v[k___] :> v @@ Flatten[(y[[#]] /. Times->List /. x[t___]->t) & /@ {k}]};
 
 Omega[n_List] := omega[n] /. d[y_] :> y;
 
-Omega[n_List, y_List] := Omega[n] /. u[k___] :> u @@ Flatten[(y[[#]] /. Times->List /. x[t___]->t) & /@ {k}]
-                                  /. v[k___] :> v @@ Flatten[(y[[#]] /. Times->List /. x[t___]->t) & /@ {k}];
+Omega[n_List, y_List] := Omega[n] /. {u[k___] :> u @@ Flatten[(y[[#]] /. Times->List /. x[t___]->t) & /@ {k}]}
+                                  /. {v[k___] :> v @@ Flatten[(y[[#]] /. Times->List /. x[t___]->t) & /@ {k}]};
 
 
 
@@ -545,11 +545,11 @@ holomorphicOneForm[n_List] := omegaHat[n][[-1, 1]];
 
 motivicOneForm[n_List] := If[Total[n] === 1, -d[v[1]], holomorphicOneForm[n] / (Total[n] - 1)];
 
-motivicOneForm[n_List, y_List] := motivicOneForm[n] /. u[m___] :> (y[[#]] /. Times->List /. x[t___]->t) & /@ u[m]
-                                                    /. v[m___] :> (y[[#]] /. Times->List /. x[t___]->t) & /@ v[m];
+motivicOneForm[n_List, y_List] := motivicOneForm[n] /. {u[m___] :> (y[[#]] /. Times->List /. x[t___]->t) & /@ u[m]}
+                                                    /. {v[m___] :> (y[[#]] /. Times->List /. x[t___]->t) & /@ v[m]};
 
-holomorphicOneForm[n_List, y_List] := holomorphicOneForm[n] /. u[m___] :> (y[[#]] /. Times->List /. x[t___]->t) & /@ u[m]
-                                                            /. v[m___] :> (y[[#]] /. Times->List /. x[t___]->t) & /@ v[m];
+holomorphicOneForm[n_List, y_List] := holomorphicOneForm[n] /. {u[m___] :> (y[[#]] /. Times->List /. x[t___]->t) & /@ u[m]}
+                                                            /. {v[m___] :> (y[[#]] /. Times->List /. x[t___]->t) & /@ v[m]};
 
 (*symbolMap computes the symbol of a multiple polylogarithms*)
 Unprotect[Element];
