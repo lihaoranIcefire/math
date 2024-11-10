@@ -148,7 +148,7 @@ d[] := 0;
 d[a___, S_Plus, b___] := d[a, #, b]& /@ S;
 d[c_] := 0 /; Element[c, differentialConstants];
 
-d[Li[{n_Integer}, y_List]] := Li[{n - 1}, y] /; n > 1;
+d[Li[{n_Integer}, {y_}]] := Li[{n - 1}, y] * d[Log[y]] /; n > 1;
 d[Li[n_List, y_List]] := Module[{partial},
     partial[i_Integer] = If[n[[i]] > 1,
         Li[Join[n[[;;i-1]], {n[[i]] - 1}, n[[i+1;;]]], y] * d[Log[y[[i]]]],
