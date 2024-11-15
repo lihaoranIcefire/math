@@ -12,13 +12,11 @@ If $n_i > 1$,
 ```
 If $n_i = 1$, we have three different cases
 ```math
-\partial_d\text{Li}_{n_1,\cdots,1}(x_1,\cdots,x_d) = \text{Li}_{n_1,\cdots,n_{d-1}}(x_1,\cdots,x_{d-1}x_d) d\text{Li}_1(x_d)\\
+\partial_d\text{Li}_{n_1,\cdots,1}(x_1,\cdots,x_d) = \text{Li}_{n_1,\cdots,n_{d-1}}(x_1,\cdots,x_{d-1}x_d) d\text{Li}_1(x_d)
 ```
-
 ```math
-\partial_1\text{Li}_{1,\cdots,n_d}(x_1,\cdots,x_n) = \text{Li}_{n_2,\cdots,n_d}(x_2,\cdots,x_d) d\text{Li}_1(x_1) - \text{Li}_{n_2,\cdots,n_d}(x_1x_2,\cdots,x_d)(d\text{Li}_1(x_1) + d\log(x_1))\\
+\partial_1\text{Li}_{1,\cdots,n_d}(x_1,\cdots,x_n) = \text{Li}_{n_2,\cdots,n_d}(x_2,\cdots,x_d) d\text{Li}_1(x_1) - \text{Li}_{n_2,\cdots,n_d}(x_1x_2,\cdots,x_d)(d\text{Li}_1(x_1) + d\log(x_1))
 ```
-
 ```math
 \partial_i\text{Li}_{n_1,\cdots,1,\cdots,n_d}(x_1,\cdots,x_d) = \text{Li}_{n_1,\cdots,\widehat{1},\cdots,n_d}(x_1,\cdots,x_{i-1}x_i,\cdots,x_d)d\text{Li}_1(x_i) - \text{Li}_{n_1,\cdots,\widehat{1},\cdots,n_d}(x_1,\cdots,x_ix_{i+1},\cdots,x_d)(d\text{Li}_1(x_i) + d\log(x_i))
 ```
