@@ -44,6 +44,8 @@ d = \sum_{i=1}^d\partial_i
 \Phi(I(0;0^{n_0-1},a_{1},0^{n_1-1},\cdots,a_{m},0^{n_m-1};a_{m+1}))=\sum_{i_0+\cdots+i_m=n_0-1}(-1)^{n_0+i_0+m-1}\\
 \dfrac{\log^{i_0}(a_{m+1})}{i_0!}\binom{n_1+i_1-1}{n_1-1}\cdots\binom{n_m+i_m-1}{n_m-1}\text{Li}_{n_1+i_1,\cdots,n_m+i_m}\left(\frac{a_{2}}{a_{1}},\cdots,\frac{a_{m+1}}{a_{m}}\right)
 ```
+Note here $\log^0(a_{m+1})$ is taken to be $1$ for $i_0=0$ even if $a_{m+1}=1$
+
 `GoncharovInversion`: Goncharov's inversion formula for multiple polylogarithms
 ```math
 \begin{align*}
@@ -53,3 +55,11 @@ d = \sum_{i=1}^d\partial_i
 &\frac{(2\pi i)^{m_r}}{m_r!}\text{Li}_{n_{r-1}+m_{r-1},\cdots,n_1+m_1}(x_{r-1}^{-1},\cdots,x_1^{-1})\text{Li}_{n_{r+1}+m_{r+1},\cdots,n_d+m_d}(x_{r+1},\cdots,x_d)
 \end{align*}
 ```
+
+## Variation matrix
+
+### Make up of the variation matrix
+For a word $w=\sigma_{j_1}\cdots\sigma_{j_m}$, we define $I^w(a_{i_0};a_{i_1},\cdots,a_{i_n};a_{i_{n+1}})$ to be $0$ if $(j_1,\cdots,j_m)$ is a not subsequence of $(i_1,\cdots,i_n)$ and otherwise the sum of all possible
+\[
+I(a_{i_0};\cdots;a_{j_1})I(a_{j_1};\cdots;a_{j_2})\cdots I(a_{j_m};\cdots;a_{i_{n+1}})
+\]
