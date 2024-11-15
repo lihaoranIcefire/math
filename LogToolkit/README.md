@@ -8,9 +8,9 @@ This is a mathematica scripts that supports many symbolic computations of multip
 
 If $n_i > 1$,
 
-$$
-\partial_i Li_{n_1,\cdots,n_d}(x_1,\cdots,x_d)=Li_{n_1,\cdots,n_i-1,\cdots,n_d}(x_1,\cdots,x_d) d\log(x_i)
-$$
+```math
+\partial_i\operatorname{Li}_{n_1,\cdots,n_d}(x_1,\cdots,x_d)=\operatorname{Li}_{n_1,\cdots,n_i-1,\cdots,n_d}(x_1,\cdots,x_d) d\log(x_i)
+```
 
 If $n_i = 1$, we have three different cases
 
