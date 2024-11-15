@@ -23,7 +23,11 @@ If $n_i = 1$, we have three different cases
 ```math
 d = \sum_{i=1}^d\partial_i
 ```
+
+`encode`: encodes $\text{Li}_{n_1,\cdots,n_d}(x_{i_1\to i_2},\cdots,x_{i_d\to i_{d+1}})$ into $(0^{i_1-1},n_1,0^{i_2-i_1-1},n_2,\cdots,0^{i_d-i_{d-1}-1},n_d,0^{i_{d+1}-i_d-1})$
+
 `IIToLi`: the $\Phi$ map that turns iterated integrals into multiple polylogarithms
+
 ```math
 \Phi(I(a; b)) = 1
 ```
