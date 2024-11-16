@@ -2,7 +2,7 @@
 
 
 
-*LogToolkit.wl* is a mathematica script implemented to support symbolic computations of multiple polylogarithms, detailed in Haoran Li's dissertation [Hopf Algebra of Multiple Polylogarithms and Its Associated One Forms](https://lihaoranicefire.github.io/math/PersonalNotes/HopfAlgebraOfMultiplePolylogarithmsAndItsAssociatedOneForms.pdf)
+*LogToolkit.wl* is a mathematica script implemented to support symbolic computations of multiple polylogarithms, detailed in Haoran Li's dissertation [Hopf Algebra of Multiple Polylogarithms and Its Associated One Forms](https://lihaoranicefire.github.io/math/LogToolKit/HopfAlgebraOfMultiplePolylogarithmsAndItsAssociatedOneForms.pdf)
 
 
 
