@@ -452,32 +452,47 @@ IIdecode[code_List] := Module[{m = code[[1 ;; -2 ;; 2]], n = code[[2 ;; -1 ;; 2]
     If[code[[#]] === 0, {}, Join[{Product[1 / x[k], {k, #, Length[code]}]}, ConstantArray[0, code[[#]] - 1]]] & /@ Range[Length[code]]
 ); *)
 
-IIVariationMatrix[n_List] := Module[{a = 1 / Product[x[k], {k, #, Length[n]}] &, X, firstColumn, complementaryEntry, fun, i, j},
+(* Complementary entry of I(w2) with respect to I(w1), which reads I^w2(w1) *)
+complementaryEntry[w1_List, w2_List: {}, depth_Integer] := Module[{
+        a = 1 / Product[x[r], {r, #, depth}] &,
+        l = Length[w1] / 2, k = Length[w2] / 2,
+        i = w2[[1 ;; -1 ;; 2]], j = w1[[1 ;; -1 ;; 2]], m = w2[[2 ;; -1 ;; 2]], p = w1[[2 ;; -1 ;; 2]],
+        q = {}, pos, Isigma, interpret
+    },
+
+    (* If w2 is not a subsequence of w1, return 0, if so, find {q_r} *)
+    While[Length[q] < k,
+        (* find the next q_r *)
+        pos = Flatten @@ Position[j, i[Length[q]+1]];
+        (* return 0 if find none, else append it to q *)
+        If[pos === {}, Return[0, Module], Append[q, First[pos]];
+    ];
+
+    (* Interpret a word as the actually iterated integral *)
+    interpret[w_List] := Module[{}];
+
+    (* Isigma[r] represent I^{sigma_0^{m_r-1}}(a_{j_{q_r}};...;a_{j_{q_{r+1}}}) *)
+    Isigma[r_Integer] := Module[{result = 0, s},
+        (* if m_r = 1, simply return the itegral *)
+        If[m[r] == 1,
+            Return[interpret @ w1[[ 2*q[r] ;; 2*q[r+1] ]], Module]
+        ];
+        For[s = q[r], s < q[r+1], s++,
+            result += Sum[
+                interpret @ Join[]
+                {u, 0, p[s] - m[r]}
+            ]
+        ]
+        result
+    ];
+
+    (* return the (-1)^{l-k} Isigma[0]...Isigma[k] *)
+    (-1)^(l-k) * Total @ Flatten @ Outer[Times, Isigma /@ Range[0, k]]
+];
+
+IIVariationMatrix[n_List] := Module[{X, firstColumn, fun, i, j},
     (* Construct the words for the first column of the variation matrix *)
     firstColumn = IIdecode /@ Sort[encodingsPriorTo[encode[Li[n, x/@Range[Length[n]]]]], encodingsCompare];
-    
-    (* Complementary entry of I(w2) with respect to I(w1), which read I^w2(w1) *)
-    complementaryEntry[w1_List, w2_List: {}] := Module[{
-            l = Length[w1] / 2, k = Length[w2] / 2,
-            i, j, m, p,
-            r, s,
-            q = {}, pos, chunks = {}, chunk
-        },
-        While[Length[q] < k,
-            pos = Flatten @@ Position[j, i[[Length[q]+1]]];
-            If[pos === {}, Return[0, Module], Append[q, First[pos]];
-        ];
-        Append[chunks, II[w2[[;;j[[q[[1]]]]]]] * II[w2[[j[[q[[-1]]]];;]]]];
-        For[r = 1, r <= Length[q], r++,
-            chunk = 0;
-            For[s = q[[r]], s < q[[r+1]], s++,
-                If[q[[s]] < m[[r]], Return[0]];
-                chunk += Sum[, ]
-            ];
-            Append[chunks];
-        ]
-        (-1)^(l-k) * Total @ Flatten @ Outer[Times, chunks]
-    ];
 
     (* Construct the variation matrix *)
     Table[
