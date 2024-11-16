@@ -132,6 +132,7 @@ then the complementary entry is
 ```math
 (-1)^{l-k}\prod_{r=0}^{k} I^{\sigma_0^{m_r-1}}(a_{j_{q_r}};\cdots;a_{j_{q_{r+1}}})
 ```
-So we implement $I^{\sigma_0^{m_r-1}}(a_{j_{q_r}};\cdots;a_{j_{q_{r+1}}})$ as `Isigma[r]`
-
-$I(a_{j_{q_r}};)$
+So we implement $I^{\sigma_0^{m_r-1}}(a_{j_{q_r}};\cdots;a_{j_{q_{r+1}}})$ as `Isigma[r]`. If $m_r > 1$, it is equal to
+```math
+\sum_{\substack{q_r\leq s<q_{r+1}-1 \\ m_r \leq p_s}}\sum_{u+v=p_s-m_r}I(a_{j_{q_r}};\cdots,a_{j_s},0^u;0)I(0;0^v,a_{j_{s+1}},\cdots;a_{j_{q_{r+1}}})
+```
