@@ -21,6 +21,8 @@ nilpotentMatrixExp::usage = "nilpotentMatrixExp[A] is the exponential of a nilpo
 unipotentMatrixInverse::usage = "unipotentMatrixInverse[A] is the inverse of a unipotent matrix A";
 unipotentMatrixLog::usage = "unipotentMatrixLog[A] is the logarithm of a unipotent matrix A";
 useSubscript::usage = "useSubscript turns Li[{1}, {x[1] x[2]}] into -v_1,2, turns Li[{n1, n2}, {x[1] x[2], x[3]}] into Li_2,1[x_1 x_2, x_3], turns Log[x[1] x[2]] into u_1,2, in general turns A[B] into A_B";
+subsequenceIndices::usage = "Find all possible indices of a matching subsequence, for example subsequenceIndices[{1,1,2,2}, {1,2}] = {{1,3}, {1,4}, {2,3}, {2,4}}"
+
 
 
 
@@ -252,6 +254,13 @@ LCS[X_, Y_] := Module[{n = Length[X], m = Length[Y], prev, cur, i, j},
     Length[X] == cur[[m + 1]]
 ]
 
+(* Find all possible indices of a matching subsequence, for example subsequenceIndices[{1,1,2,2}, {1,2}] = {{1,3}, {1,4}, {2,3}, {2,4}} *)
+subsequenceIndices[seq_List, subseq_List] := 
+    Select[
+        Subsets[Range[Length[seq]], {Length[subseq]}],
+        And @@ Thread[seq[[#]] == subseq]&
+    ];
+
 (*moduloProducts modulo any products in any expression*)
 moduloProducts[expr_] := Module[{},
     If[NumericQ[expr],
@@ -271,42 +280,69 @@ SetAttributes[moduloProducts, {Listable}];
 
 
 
-encode[Li[n_List, y_List]] := Module[{i, indices, min, max, code = n},
-    For[i = Length[y], i >= 1, i--,
-        indices = (y[[i]] /. Times -> List /. x[t_] -> t);
-        min = Min[indices];
-        max = Max[indices];
-        code = Flatten[Insert[code, ConstantArray[0, max - min], {i + 1}]]
-    ];
-    Flatten[Insert[code, ConstantArray[0, min - 1], {1}]]
+(* Multiple polylogarithm encodings *)
+encode[Li[n_List, y_List]] := Module[{m = Length[n], i, code = n},
+    i = Which[
+        # == 0, 0,
+        # == m + 1, (List@@y[[-1]])[[-1]] + 1,
+        True, (List@@y[[#]])[[1]]
+    ]&;
+    { Sequence @@ Join @@ Table[{i[r] - i[r-1] - 1, n[[r]]}, {r, 1, m}], i[m+1] - i[m] - 1 }
 ];
 
-encodingsCompare[l1_List, l2_List] := Which[
-    Total[l1] != Total[l2], If[Total[l1] < Total[l2], 1, -1],
-    Length[l1] != Length[l2], If[Length[l1] < Length[l2], 1, -1],
-    True, For[k = d, k >= 1, k--,
-        If[l1[[k]] < l2[[k]], Return[1], Return[-1]]
+(* Decode multiple polylogarithm code (m_1, n_1, ..., m_d, n_d, m_{d+1}) into Li_{n_1, ..., n_d}(x_{i_1->i_2}, ..., x_{i_d->i_{d+1}}) *)
+decode[{}] = 1;
+decode[code_List] /; code =!= {} := decode[code] = Module[{m, n, i},
+    m = code[[1 ;; -1 ;; 2]];
+    n = code[[2 ;; -1 ;; 2]];
+    (* i_k = m_1 + ... + m_k + k *)
+    i = Accumulate[m + 1];
+    Li[n, MapThread[x @@ Range[#1, #2] &, {Most[i], Rest[i] - 1}]]
+];
+
+encodingsCompare[{}, {}] = 0;
+encodingsCompare[{}, code_List] := 1 /; code =!= {};
+encodingsCompare[code_List, {}] := -1 /; code =!= {};
+encodingsCompare[code1_List, code2_List] := Module[{m1, n1, m2, n2, k},
+    m1 = code1[[1 ;; -1 ;; 2]];
+    n1 = code1[[2 ;; -1 ;; 2]];
+    m2 = code2[[1 ;; -1 ;; 2]];
+    n2 = code2[[2 ;; -1 ;; 2]];
+    Which[
+        Total[n1] != Total[n2],
+        If[Total[n1] < Total[n2], 1, -1],
+
+        Total[m1] + Length[n1] != Total[m2] + Length[n2],
+        If[Total[m1] + Length[n1] < Total[m2] + Length[n2], 1, -1],
+
+        True,
+        For[r = 0, r < Length[code1], r++,
+            If[code1[[-r]] != code2[[-r]], Return[If[code1[[-r]] > code2[[-r]], 1, -1], Module]];
+        ];
+        0
     ]
-];
+] /; code1 =!= {} && code2 =!= {};
 
-encodingsPriorTo[m_List] := Module[{r, result = {m}},
-    If[m === ConstantArray[0, Length[m]], Return[{}, Module]];
-    For[r = 1, r <= Length[m], r++,
+(* Cache recursion results *)
+encodingsPriorTo[{}] = {{}};
+encodingsPriorTo[code_List] /; code =!= {} := encodingsPriorTo[code] = Module[{r, codes = {code}, m, n},
+    m = code[[1 ;; -1 ;; 2]];
+    n = code[[2 ;; -1 ;; 2]];
+    (* zero code should be corresponding to 1 *)
+    If[n === ConstantArray[0, Length[n]], Return[{{}}, Module]];
+    (* encodings in partial_r derivative *)
+    For[r = 1, r <= Length[n], r++,
         Which[
-            m[[r]] === 0, ,
-            m[[r]] > 1, result = Join[result, encodingsPriorTo[Join[m[[;;r-1]], {m[[r]] - 1}, m[[r+1;;]]]]],
-            r === Length[m], result = Join[result, encodingsPriorTo[Join[m[[;;r-1]], {0}]]],
-            True, result = Join[result, encodingsPriorTo[Join[m[[;;r-1]], {0}, m[[r+1;;]]]], encodingsPriorTo[Join[m[[;;r-1]], {m[[r+1]], 0}, m[[r+2;;]]]]]
+            n[[r]] > 1 || Length[n] == 1, codes = Union[codes, encodingsPriorTo[Join[code[[;;2*r-1]], {n[[r]]-1}, code[[2*r+1;;]]]]],
+            r == Length[n], codes = Union[codes, encodingsPriorTo[Join[code[[;;-4]], {m[[r]] + 1 + m[[r+1]]}]]],
+            True, codes = Union[
+                codes,
+                encodingsPriorTo @ Join[code[[;;2*(r-1)]], {m[[r]] + 1 + m[[r+1]]}, code[[2*(r+1);;]]],
+                encodingsPriorTo @ Join[code[[;;2*r-1]], {n[[r+1]], m[[r+1]] + 1 + m[[r+2]]}, code[[2*(r+2);;]]]
+            ]
         ]
     ];
-    DeleteDuplicates[result]
-];
-
-decode[code_List] := Module[{indices = Join[Flatten[Position[code, _?(#!=0&)]], {Length[code] + 1}]},
-    Li[
-        DeleteCases[code,0],
-        Product[x[k], {k, indices[[#]], indices[[# + 1]] - 1}]& /@ Range[Length[indices] - 1]
-    ]
+    Sort[codes, encodingsCompare]
 ];
 
 
@@ -319,10 +355,11 @@ decode[code_List] := Module[{indices = Join[Flatten[Position[code, _?(#!=0&)]], 
 (*IIToLi and PToLi converts iterated integrals(in the sense of Chen) into multiple polylogarithms*)
 IIToLi[args_List] := Module[{
         k, n, i, m, a,
-        ind = Join[{1},
-                    Select[Range[2, Length[args] - 1], args[[#]] =!= 0&],
-                    {Length[args]}
-                    ], (* indices for start, end and for nonzero args *)
+        ind = Join[
+            {1},
+            Select[Range[2, Length[args] - 1], args[[#]] =!= 0&],
+            {Length[args]}
+        ], (* indices for start, end and for nonzero args *)
     },
     m = Length[ind] - 2;
     a = args[[ ind[[# + 1]] ]] &;
@@ -395,40 +432,66 @@ GoncharovInversionModuloPiI[n_List, y_List] := Module[{d = Length[n], r, m, i},
 
 
 
-IIVariationMatrix[n_List] := Module[{a, X, firstColumn, V, IIdecode, computeEntry, fun, i, j},
 
-    (* a[i] := (x[i]...x[d])^(-1) *)
-    a = 1 / Product[x[k], {k, #, Length[n]}] &;
-    IIdecode[code_] := Join@@(If[code[[#]] === 0, {}, Join[{Product[1 / x[k], {k, #, Length[code]}]}, ConstantArray[0, code[[#]] - 1]]] & /@ Range[Length[code]]);
-    fun[l1_, l2_] := Module[{result = 0, L = {}, k},
-        If[Length[l2] === 0, Return[If[Length[l1] === 2, 1, P@@l1], Module]];
-        For[k = 2, k < Length[l1], k++,
-            If[l1[[k]] === l2[[1]], L = Join[L, {k}]]
-        ];
-        For[k = 1, k <= Length[L], k++,
-            result = result + If[L[[k]] === 2, 1, P@@l1[[;;L[[k]]]]] * fun[l1[[L[[k]];;]], l2[[2;;]]]
-        ];
-        result
-    ];
-    
-    computeEntry[i_Integer, j_Integer] := fun[Join[{0}, firstColumn[[i]], {1}], firstColumn[[j]]];
-
-    (* Construct the argument lists for the first column of the variation matrix *)
-    firstColumn = Join[{{}}, IIdecode /@ Sort[encodingsPriorTo[n], encodingsCompare]];
-
-    (* Construct the variation matrix *)
-    V = IdentityMatrix[Length[firstColumn]];
-    V[[All, 1]] = P@@Join[{0}, #, {1}]& /@ firstColumn;
-    V[[1, 1]]=1;
-    For[j = 2, j < Length[firstColumn], j++,
-        For[i = j+1, i <= Length[firstColumn], i++,
-            V[[i, j]] = computeEntry[i, j];
-        ]
-    ];
-    V
+(* Turn an iterated integral into its encoding *)
+IIcode[word_List, depth_Integer] := Module[{i = word[[1 ;; -1 ;; 2]], n = word[[2 ;; -1 ;; 2]] + 1, code = ConstantArray[0, Length[word] + 1]},
+    (* i_{r+1} - i_r *)
+    code[[1 ;; -1 ;; 2]] = Differences[{0, Sequence @@ i, depth + 1}] - 1;
+    code[[2 ;; -1 ;; 2]] = n;
+    code
 ]
 
-LiVariationMatrix[n_List] := IIVariationMatrix[n] /. {P :> PToLi}
+(* Decode an encoding back into an iterated integral *)
+IIdecode[code_List] := Module[{m = code[[1 ;; -2 ;; 2]], n = code[[2 ;; -1 ;; 2]], word = ConstantArray[0, Length[code] - 1]},
+    word[[1 ;; -1 ;; 2]] = Accumulate[m + 1];
+    word[[2 ;; -1 ;; 2]] = n - 1;
+    word
+]
+
+(* Join@@(
+    If[code[[#]] === 0, {}, Join[{Product[1 / x[k], {k, #, Length[code]}]}, ConstantArray[0, code[[#]] - 1]]] & /@ Range[Length[code]]
+); *)
+
+IIVariationMatrix[n_List] := Module[{a = 1 / Product[x[k], {k, #, Length[n]}] &, X, firstColumn, complementaryEntry, fun, i, j},
+    (* Construct the words for the first column of the variation matrix *)
+    firstColumn = IIdecode /@ Sort[encodingsPriorTo[encode[Li[n, x/@Range[Length[n]]]]], encodingsCompare];
+    
+    (* Complementary entry of I(w2) with respect to I(w1), which read I^w2(w1) *)
+    complementaryEntry[w1_List, w2_List: {}] := Module[{
+            l = Length[w1] / 2, k = Length[w2] / 2,
+            i, j, m, p,
+            r, s,
+            q = {}, pos, chunks = {}, chunk
+        },
+        While[Length[q] < k,
+            pos = Flatten @@ Position[j, i[[Length[q]+1]]];
+            If[pos === {}, Return[0, Module], Append[q, First[pos]];
+        ];
+        Append[chunks, II[w2[[;;j[[q[[1]]]]]]] * II[w2[[j[[q[[-1]]]];;]]]];
+        For[r = 1, r <= Length[q], r++,
+            chunk = 0;
+            For[s = q[[r]], s < q[[r+1]], s++,
+                If[q[[s]] < m[[r]], Return[0]];
+                chunk += Sum[, ]
+            ];
+            Append[chunks];
+        ]
+        (-1)^(l-k) * Total @ Flatten @ Outer[Times, chunks]
+    ];
+
+    (* Construct the variation matrix *)
+    Table[
+        Which[
+            i == j, 1
+            i > j, complementaryEntry[firstColumn[[i]], firstColumn[[j]]],
+            True, 0
+        ]
+        {i, 1, Length[firstColumn]},
+        {j, 1, Length[firstColumn]},
+    ]
+]
+
+LiVariationMatrix[n_List] := IIVariationMatrix[n] /. {II :>IIToLi}
 
 GoncharovVariationMatrix[n_List] :=
     LiVariationMatrix[n] /. {Li[m_List, y_List] :> If[Exponent[y[[1]], Variables[y[[1]]]][[1]] < 1, GoncharovInversion[Reverse[m], Reverse[1 / y]], Li[m, y]]};
