@@ -1,5 +1,5 @@
 #include <cmath>
 
-double addNumbers(double a, double b) {
+extern "C" double addNumbers(double a, double b) {
     return a + b;
 }
