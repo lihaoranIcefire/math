@@ -9,32 +9,306 @@ II, Li, du, dv = IndexedBase('II'), IndexedBase('Li'), IndexedBase('du'), Indexe
 
 
 
-class ISymb(Indexed):
-    def __new__(cls, *args):
-        return super().__new__(cls, II, *args)
-    def __init__(self, *args):
-        # self.args[0] is the symbol head II
-        self.m = len(args) // 2 - 1
-        self.i = args[::2]
-        self.n = args[1::2]
+class QQAlgebraic:
+    '''
+    Implementatino of rationally algebraic expression
+    '''
+
+
+
+    def __init__(self, expr):
+        # similify and expand the expr first
+        expr = expand(simplify(expr))
+
+        # test whether the expr is rationally algebraic
+        if not QQAlgebraic.is_algebraic(expr):
+            raise ValueError("This is not algebraic")
+
+        self.expr = expr
+        self.deg = QQAlgebraic.degree(expr)
+
+
+
+    def __eq__(self, other):
+        return self.expr == other.expr
+
+
+
+
+    @staticmethod
+    def is_algebraic(expr):
+        '''
+        Test whether an expression is algebraic
+        '''
+        if expr.is_Add or expr.is_Mul:
+            return all(QQAlgebraic.is_algebraic(arg) for arg in expr.args)
+        elif expr.is_Pow:
+            return QQAlgebraic.is_algebraic(expr.args[0]) and expr.args[1].is_integer and expr.args[1] >= 0
+        
+        return expr.is_rational or expr.is_symbol
+
+
+
+    @staticmethod
+    def degree(expr):
+        '''
+        Get the degree of an ISymb
+        '''
+        if expr.is_Add:
+            return max(QQAlgebraic.degree(arg) for arg in expr.args)
+        elif expr.is_Mul:
+            return sum(QQAlgebraic.degree(arg) for arg in expr.args)
+        elif expr.is_Pow:
+            return QQAlgebraic.degree(expr.args[0]) * expr.args[1]
+        return 1 if expr.is_symbol else 0
+
+
+
+    def __add__(self, other):
+        if isinstance(other, QQAlgebraic):
+            return QQAlgebraic(self.expr + other.expr)
+        if isinstance(other, int) or other.is_rational:
+            return QQAlgebraic(self.expr + other)
+        return NotImplemented
+    def __radd__(self, other):
+        if isinstance(other, QQAlgebraic):
+            return QQAlgebraic(self.expr + other.expr)
+        if isinstance(other, int) or other.is_rational:
+            return QQAlgebraic(self.expr + other)
+        return NotImplemented
+
+    def __mul__(self, other):
+        if isinstance(other, QQAlgebraic):
+            return QQAlgebraic(self.expr * other.expr)
+        if isinstance(other, int) or other.is_rational:
+            return QQAlgebraic(self.expr * other)
+        return NotImplemented
+    def __rmul__(self, other):
+        if isinstance(other, QQAlgebraic):
+            return QQAlgebraic(self.expr * other.expr)
+        if isinstance(other, int) or other.is_rational:
+            return QQAlgebraic(self.expr * other)
+        return NotImplemented
+
+    def __neg__(self):
+        return QQAlgebraic(-self.expr)
+
+    def __pow__(self, other):
+        if isinstance(other, int):
+            if other == 0:
+                return 1
+            elif other == 1:
+                return QQAlgebraic(self.expr)
+            elif other > 1:
+                return QQAlgebraic(self.expr ** other)
+        return NotImplemented
+
+    def __sub__(self, other):
+        if isinstance(other, QQAlgebraic):
+            return QQAlgebraic(self.expr - other.expr)
+        if isinstance(other, int) or other.is_rational:
+            return QQAlgebraic(self.expr - other)
+        return NotImplemented
+    def __rsub__(self, other):
+        if isinstance(other, QQAlgebraic):
+            return QQAlgebraic(-self.expr + other.expr)
+        if isinstance(other, int) or other.is_rational:
+            return QQAlgebraic(-self.expr + other)
+        return NotImplemented
+
+
+
+
+    def _repr_latex_(self):
+        return "$\\displaystyle " + QQAlgebraic._toLaTeX(self.expr) + "$"
+
+    @staticmethod
+    def _toLaTeX(expr):
+        if expr.is_number:
+            LaTeX_string = expr._repr_latex_()
+        elif expr.is_Add:
+            LaTeX_string = f"{'+'.join(QQAlgebraic._toLaTeX(arg) for arg in expr.args)}"
+        elif expr.is_Mul:
+            LaTeX_string = f"{''.join(QQAlgebraic._toLaTeX(arg) for arg in expr.args)}"
+        elif expr.is_Pow:
+            LaTeX_string = f"{QQAlgebraic._toLaTeX(expr.args[0])}^{expr.args[1]}"
+        elif expr.is_symbol:
+            LaTeX_string = expr._repr_latex_()
+
+        return LaTeX_string.replace("$", "").replace("\\displaystyle", "")
+
+
+
+
+class ISymb:
+    '''
+    Implementatino of the I^Symb
+    '''
+
+
+
+    def __init__(self, expr):
+        expr = expand(simplify(expr))
+        if not ISymb.is_ISymb(expr):
+            raise ValueError("This is not an ISymb")
+
+        self.expr = expr
+        self.deg = ISymb.degree(expr)
+
+
+
     def __lt__(self, other):
         pass
-    def toHSymb(self, depth):
+
+
+
+    @staticmethod
+    def is_ISymb(expr):
         '''
-        Turn HSymb into ISymb given depth
+        Test whether an expression is a valid ISymb
         '''
-        if self.m == 1:
-            return 1
-        elif self.i[0] == 0 and self.i[-1] == 0:
-            return 0
-        elif self.i[0] != 0 and self.i[-1] == 0:
-            return (-1)^(sum(self.n) - 1) * ISymb(*self.args[:0:-1]).toHSymb(depth)
-        elif self.i[0] != 0 and self.i[-1] != 0:
-            return sum()
-        elif self.i[0] == 0 and self.i[-1] != 0:
-            pass
-    def __repr__(self):
-        return f"I({','.join('a_{'+str(i)+'},0^{'+str(n)+'-1}' for i, n in zip(self.i[:-1], self.n))},a_{{{self.i[-1]}}})"
+        if expr.is_Add or expr.is_Mul:
+            return all(ISymb.is_ISymb(arg) for arg in expr.args)
+        elif expr.is_Pow:
+            return ISymb.is_ISymb(expr.args[0]) and expr.args[1].is_integer and expr.args[1] >= 0
+
+        elif expr.is_Indexed and expr.base == II and len(expr.args) % 2 == 0:
+            m = len(expr.args) // 2 - 2
+            i = lambda index: expr.args[1 + 2 * index] if index > 0 else 0
+            n = lambda index: expr.args[2 + 2 * index]
+            return m > 0 and all(n(r) >= 1 and i(r) < i(r+1) for r in range(m + 1))
+        
+        return expr.is_rational
+
+
+
+    @staticmethod
+    def degree(expr):
+        '''
+        Get the degree of an ISymb
+        '''
+        if expr.is_Add:
+            return max(ISymb.degree(arg) for arg in expr.args)
+        elif expr.is_Mul:
+            return sum(ISymb.degree(arg) for arg in expr.args)
+        elif expr.is_Pow:
+            return ISymb.degree(expr.args[0]) * expr.args[1]
+        return 1 if expr.is_Indexed else 0
+
+
+
+    def __add__(self, other):
+        if isinstance(other, ISymb):
+            return ISymb(self.expr + other.expr)
+        if isinstance(other, int) or other.is_rational:
+            return ISymb(self.expr + other)
+        return NotImplemented
+    def __radd__(self, other):
+        if isinstance(other, ISymb):
+            return ISymb(self.expr + other.expr)
+        if isinstance(other, int) or other.is_rational:
+            return ISymb(self.expr + other)
+        return NotImplemented
+
+    def __mul__(self, other):
+        if isinstance(other, ISymb):
+            return ISymb(self.expr * other.expr)
+        if isinstance(other, int) or other.is_rational:
+            return ISymb(self.expr * other)
+        return NotImplemented
+    def __rmul__(self, other):
+        if isinstance(other, ISymb):
+            return ISymb(self.expr * other.expr)
+        if isinstance(other, int) or other.is_rational:
+            return ISymb(self.expr * other)
+        return NotImplemented
+
+    def __neg__(self):
+        return ISymb(-self.expr)
+
+    def __pow__(self, other):
+        if isinstance(other, int):
+            if other == 0:
+                return 1
+            elif other == 1:
+                return ISymb(self.expr)
+            elif other > 1:
+                return ISymb(self.expr ** other)
+        return NotImplemented
+
+    def __sub__(self, other):
+        if isinstance(other, ISymb):
+            return ISymb(self.expr - other.expr)
+        if isinstance(other, int) or other.is_rational:
+            return ISymb(self.expr - other)
+        return NotImplemented
+    def __rsub__(self, other):
+        if isinstance(other, ISymb):
+            return ISymb(-self.expr + other.expr)
+        if isinstance(other, int) or other.is_rational:
+            return ISymb(-self.expr + other)
+        return NotImplemented
+
+
+
+    def toHSymb(self, d):
+        '''
+        Phi: ISymb(d) -> HSymb(d), given depth d
+        '''
+        if self.expr.is_number:
+            return self
+        elif self.expr.is_Pow:
+            return self.args[0].toHSymb(d) ** self.expr.args[1]
+        elif self.expr.is_Mul:
+            return prod(arg.toHSymb(d) for arg in self.expr.args)
+        elif self.expr.is_Add:
+            return sum(arg.toHSymb(d) for arg in self.expr.args)
+        elif self.expr.is_Indexed:
+            m = len(self.expr.args) // 2 - 2
+            i = lambda index: self.expr.args[1 + 2 * index] if index > 0 else 0
+            n = lambda index: self.expr.args[2 + 2 * index]
+            if m == 1:
+                return 1
+            elif i(0) == 0 and i(-1) == 0:
+                return 0
+            elif i(0) != 0 and i(-1) == 0:
+                return (-1)^(sum(n) - 1) * ISymb(*self.expr.args[:0:-1]).toHSymb(d)
+            elif i(0) != 0 and i(-1) != 0:
+                return sum()
+            elif i(0) == 0 and i(-1) != 0:
+                pass
+        return False
+
+
+
+    def _repr_latex_(self):
+        return "$\\displaystyle " + ISymb._ISymbToLaTeX(self.expr) + "$"
+
+    @staticmethod
+    def _ISymbToLaTeX(expr):
+        if expr.is_number:
+            return expr._repr_latex_()[1:-1]
+        elif expr.is_Add:
+            return f"{'+'.join(ISymb._ISymbToLaTeX(arg) for arg in expr.args)}"
+        elif expr.is_Mul:
+            return f"{''.join(ISymb._ISymbToLaTeX(arg) for arg in expr.args)}"
+        elif expr.is_Pow:
+            return f"{ISymb._ISymbToLaTeX(expr.args[0])}^{expr.args[1]}"
+
+        elif expr.is_Indexed:
+            m = len(expr.args) // 2 - 2
+            i = lambda index: expr.args[1 + 2 * index] if index > 0 else 0
+            n = lambda index: expr.args[2 + 2 * index]
+
+            arglist = []
+            for r in range(m + 1):
+                arglist.append(f"a_{{{i(r)}}}")
+                if n(r) == 2:
+                    arglist.append(f"0")
+                elif n(r) > 2:
+                    arglist.append(f"0^{{{n(r)-1}}}")
+            arglist.append(f"a_{{{i(m+1)}}}")
+            return f"I({','.join(arglist)})"
 
 
 
