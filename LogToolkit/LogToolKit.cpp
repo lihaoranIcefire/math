@@ -19,7 +19,7 @@ public:
             throw std::invalid_argument("The number of arguments should be odd and at least 3");
         }
 
-        int m = (args.size() / 2) - 1;
+        m = args.size() / 2 - 1;
         for (int r = 0; r <= m; ++r) {
             int i_r = (r > 0) ? args[2 * r] : 0;
             int n_r = args[1 + 2 * r];
