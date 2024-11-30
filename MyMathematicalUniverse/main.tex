@@ -1,0 +1,65 @@
+\documentclass[a4paper,10pt]{book}
+\usepackage{My_math_package}
+
+
+
+\title{My mathematical universe}
+\author{Haoran Li}
+\date{}
+
+
+
+\makeindex[columns=2, title=Index, intoc] % Create the index
+
+
+
+\begin{document}\sloppy % Reduce overlong words
+
+
+
+% Maketitle
+\begin{titlepage}
+\begin{center}
+\vspace*{1cm}
+\Huge
+\textbf{My Mathematical Universe} \\
+\vspace{1cm}
+\Large
+Haoran Li \\
+\vspace{3cm}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{MyMathematicalUniverse/Pictures/Universe.jpg}
+\end{center}
+\vspace{5cm}
+Department of Mathematics\\
+University of Maryland\\
+\end{center}
+\end{titlepage}
+
+
+
+\tableofcontents
+\let\tableofcontents\relax
+\newpage
+
+
+
+\subfile{MyMathematicalUniverse/CategoryTheory.tex}
+\newpage
+
+
+
+% \RequirePackage[
+% backend=biber,
+% style=alphabetic,
+% sorting=ynt
+% ]{biblatex}
+
+% \addbibresource{MyMathematicalUniverse/Bibliography.bib} %Imports bibliography file
+
+
+\printindex
+
+
+
+\end{document}
