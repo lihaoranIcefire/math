@@ -1,9 +1,26 @@
 module LogToolKit
 
-using Latexify
+
+
+export Symb, ISymb, HSymb, monomial, polynomial, tensor, tensors, Phi, Phi_inv, fundamental_column
+
+
+
 using LaTeXStrings
+using Latexify
+using Combinatorics
+
+
 
 abstract type Symb end
+
+
+
+"""
+    ISymb(args::Vararg{Int})
+
+Return an Iterated integral symbol with args
+"""
 
 struct ISymb <: Symb
     args::Tuple{Vararg{Int}}
@@ -13,7 +30,7 @@ struct ISymb <: Symb
     n::Function
     latex_repr::String
 
-    function ISymb(args::Tuple{Vararg{Int}})
+    function ISymb(args::Vararg{Int})
         # Validate the number of arguments
         if length(args) % 2 == 0 || length(args) < 3
             throw(ArgumentError("The number of arguments should be odd and at least 3"))
@@ -25,7 +42,7 @@ struct ISymb <: Symb
         argstrs = String[]
 
         # Check the validity of arguments
-        if m <= 0 || any(n(r) < 1 || i(r) >= i(r + 1) for r in 1:m)
+        if m < 0 || any(n(r) < 1 || i(r) >= i(r + 1) for r in 1:m)
             throw(ArgumentError("The arguments are not valid"))
         end
         
@@ -61,6 +78,53 @@ Base.isless(a::ISymb, b::ISymb) = begin
     return a.i(0) < b.i(0)
 end
 
+Base.:*(a::Symb, b::Symb) = begin
+    if a == b
+        return monomial((a, 2))
+    elseif a < b
+        return monomial((a,1), (b,1))
+    else
+        return monomial((b,1), (a,1))
+    end
+end
+
+function Phi(I::ISymb, d::Int)
+    if d + 1 < I.i(I.m+1)
+        throw(ArgumentError("The depth is invalid"))
+    end
+
+    if I.m == 0 && I.n(1) == 1
+        return 1
+    elseif I.i(0) == 0 && I.i(I.m+1) == 0
+        return 0
+    elseif I.i(0) > 0 && I.i(I.m+1) == 0
+        return (-1)^(I.weight) * Phi(ISymb(reverse(I.args)), d)
+    elseif I.i(0) > 0 && I.i(I.m+1) > 0
+        return sum(
+            sum(
+                Phi(ISymb(I.args[1:2*k+1]..., p, 0), d) * Phi(ISymb(0, I.n(k)-q, I.args[2*k+3:end]...), d)
+                for p in 0:I.n(k)
+            )
+            for k in 0:I.m
+        )
+    elseif I.i(0) == 0 && I.i(I.m+1) == d + 1
+        return sum(
+            (-1)^(I.n(0)+m-1) * product(binomial(I.n(r)+p[r]-1, p[r]) for r in 1:I.m)
+            * HSymb(I.i(1), vcat(([I.n(r)+p[r], I.i(r+1)-I.i(r)] for r in 1:I.m)...)...)
+            for p in nonnegative_partitions(I.n(0)-1, I.m)
+        )
+    elseif I.i(0) == 0 && I.i(I.m+1) > 0
+        return sum(
+            sum(
+                (-1)^(I.n(0)+p0+m-1) * HSymb(I.i(I.m+1),1,d+1)^p0 * product(binomial(I.n(r)+p[r]-1, p[r]) for r in 1:I.m)
+                * HSymb(I.i(1), vcat(([I.n(r)+p[r], I.i(r+1)-I.i(r)] for r in 1:I.m)...)...)
+                for p in nonnegative_partitions(I.n(0)-1-p0, I.m)
+            )
+            for p0 in 0:I.n(0)-1
+        )
+    end
+end
+
 
 
 struct HSymb <: Symb
@@ -72,7 +136,7 @@ struct HSymb <: Symb
     n::Function
     latex_repr::String
 
-    function HSymb(args::Tuple{Vararg{Int}})
+    function HSymb(args::Vararg{Int})
         # Validate the number of arguments
         if length(args) % 2 == 0 || length(args) < 3
             throw(ArgumentError("The number of arguments should be odd and at least 3"))
@@ -120,26 +184,38 @@ Base.isless(a::HSymb, b::HSymb) = begin
     return false
 end
 
+function partial_differential(H::HSymb, r::Int)
+    if r > H.d || r < 1
+        throw(ArgumentError("The partial differential is invalid"))
+    end
+end
+
+function differential(H::HSymb)
+
+end
+
+function Phi_inv(H::HSymb)
+    return ISymb(0, 1, vcat(([H.i[r], H.n(r)] for r in 1:H.d)...)..., H.i[end])
+end
+
 
 
 struct monomial
-    vars::Tuple{Vararg{Tuple{Symb, Int}}}
+    vars::Tuple{Vararg{Tuple{Any, Int}}}
     deg::Int
     coef::Number
     latex_repr::String
 
-    function monomial(coef::Number, vars::Tuple{Vararg{Tuple{Symb, Int}}} = ())
+    function monomial(vars::Vararg{Tuple{Any, Int}}; coef::Number = 1)
         # Validate the arguments
         if any(exponent < 1 for (var, exponent) in vars)
             throw(ArgumentError("The exponents should be at least 1"))
         end
 
-        vars = Tuple(sort(collect(vars), by = x -> x[1]))
-
+        vars = Tuple(sort(collect(vars)))
         deg = length(vars)>0 ? sum(exponent for (_, exponent) in vars) : 0
 
-        latex_repr = "$(coef)"
-
+        latex_repr = (coef == 1 ? "" : "$(coef)")
         for (var, exponent) in vars
             if exponent == 1
                 latex_repr *= "$(var.latex_repr)"
@@ -169,13 +245,12 @@ Base.isless(m1::monomial, m2::monomial) = begin
 end
 
 
-
 struct polynomial
     terms::Tuple{Vararg{monomial}}
     deg::Int
     latex_repr::String
 
-    function polynomial(terms::Tuple{Vararg{monomial}})
+    function polynomial(terms::Vararg{monomial})
         terms = Tuple(sort(collect(terms)))
         return new(terms, maximum([term.deg for term in terms]), join(map(x->x.latex_repr, terms), '+'))
     end
@@ -183,3 +258,53 @@ end
 
 
 
+struct tensor
+    args::Tuple{Vararg{Any}}
+    weight::Int
+    coef::Number
+    latex_repr::String
+
+    function tensor(args::Vararg{Any}; coef::Number = 1)
+        args = Tuple(sort(collect(args)))
+        latex_repr = (coef == 1 ? "" : "$(coef)") * join(map(x->x.latex_repr, args), "\\otimes ")
+
+        return new(args, length(args), coef, latex_repr)
+    end
+end
+
+Base.isless(t1::tensor, t2::tensor) = begin
+    if t1.weight != t2.weight
+        return t1.weight < t2.weight
+    else
+        return t1.terms < t2.terms
+    end
+    return false
+end
+
+
+
+struct tensors
+    terms::Tuple{Vararg{tensor}}
+    weight::Int
+    latex_repr::String
+
+    function tensors(terms::Vararg{tensor})
+        terms = Tuple(sort(collect(terms)))
+        return new(terms, maximum([term.weight for term in terms]), join(map(x->x.latex_repr, terms), '+'))
+    end
+end
+
+
+
+function nonnegative_partitions(n::Int, k::Int)
+    positive_partitions = union((unique(permutations(unordered_partition)) for unordered_partition in partitions(n + k, k))...)
+    return [partition .- 1 for partition in positive_partitions]
+end
+
+
+
+
+
+
+
+end
