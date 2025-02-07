@@ -4,6 +4,7 @@
 - [Mathematics](#mathematics)
 - [Statistics](#statistics)
 - [Finance](#finance)
+- [Numerical Analysis](#numerical-analysis)
 - [Coding](#coding)
 
 ## Brain Teaser
@@ -310,6 +311,31 @@ We need the following straightforward yet useful identity
 $$
 Se^{-y\tau}N'(d_+) = Ke^{-r\tau}N'(d_-)
 $$
+
+## Numeric Analysis
+
+### Optimization
+
+Suppose problem is to minimize $f(x)$, under the condition $g_i(x)\leq 0$ and $h_j(x)=0$.
+
+Consider Lagrange function 
+$$
+L(x,\lambda_i, \mu_j) = f(x) + \sum_i\lambda_ig_i(x) + \sum_i\mu_ih_i(x)
+$$
+
+So a minimizer of $f$ coincide with a minimizer of its Lagrange dual
+$$
+\max_{\lambda_i\leq0,\,\mu_j}L(x,\lambda_i, \mu_j)
+$$
+
+### Linear optimization
+
+Consider the maximizing $\mathbf c^T\mathbf x$ under the condition $\mathbf x\leq\mathbf0, A\mathbf x=\mathbf b$. Since
+$$
+\min_{\mathbf x\leq \mathbf 0}\max_{\mathbf y\leq 0}-\mathbf c^T\mathbf x + \mathbf y^T(A\mathbf x-\mathbf b)
+= \min_{\mathbf y\leq \mathbf 0}\max_{\mathbf x\leq 0}\mathbf x^T(A^T\mathbf y-\mathbf c)-\mathbf b^T\mathbf y
+$$
+The dual problem is maximizing $\mathbf b^T\mathbf y$ under the condition $\mathbf y\leq\mathbf0, \mathbf A^T\mathbf y=\mathbf c$
 
 ## Coding
 
