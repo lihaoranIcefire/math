@@ -218,7 +218,7 @@ Let's denote
 
 **Q:** Explain call-put parity
 
-**A:** $c+Ke^{-r\tau}=p+S-D$, where if we suppose $Se^{(r-y)\tau}+De^{r\tau}=Se^{r\tau}\Rightarrow S-D=Se^{-y\tau}$.
+**A:** $c-p=Se^{-y\tau}-Ke^{-r\tau}-D$, where if we suppose $Se^{(r-y)\tau}+De^{r\tau}=Se^{r\tau}\Rightarrow S-D=Se^{-y\tau}$.
 
 **Q:** Why should you never exercise an american call on a non-dividend paying stock before maturity?
 
