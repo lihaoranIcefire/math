@@ -1,0 +1,780 @@
+\documentclass{beamer}
+\setbeamercovered{}
+
+\usepackage{bookman}
+\usepackage{newtxtext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{systeme}
+\usepackage{subcaption}
+\usepackage{bm} % Bold
+\usepackage{bbm} % Can use \mathbbm{1}
+\usepackage{ifthen} % Use if then else
+\usepackage{shuffle} % Use shuffle product
+\usepackage{minted} % For listing codes
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+% \newcommand*{\relbarfill@}{\arrowfill@\relbar-\relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+% \newcommand*{\xdash}[2][]{\ext@arrow 0055\relbarfill@{#1}{#2}}
+\makeatother
+
+\newlength{\simlength}
+
+\newcommand{\xsim}[1]{
+\settowidth{\simlength}{$#1$}
+\mathrel{\overset{#1}{\resizebox{\simlength}{\height}{\sim}}}
+}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+    \usecolortheme{beaver}
+    \usefonttheme{professionalfonts} 
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{caption}[numbered]
+}
+
+\theoremstyle{definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{recall}{Recall}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginSection[]{
+    \begin{frame}
+    \centering
+    \begin{beamercolorbox}[center, shadow=true, rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \end{frame}
+}
+
+\title{MATH240 - Introduction to Linear Algebra}
+\author{Haoran Li}
+\institute[UMD]{University of Maryland, College Park}
+\date{Summer 2024}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 3 - Matrix algebra}
+
+\begin{frame}[t]
+\begin{definition}
+Let's use $M_{m\times n}(\mathbb R)$ to denote the set of all (real-valued) $m$ by $n$ matrices.
+\end{definition}
+\pause
+\begin{definition}
+Suppose $A,B$ are $m\times n$ matrices, $c$ is a scalar (i.e. a number), then we can define\pause
+\begin{itemize}
+\item Addition
+\begin{align*}
+&\begin{bmatrix}
+a_{11}&a_{12}&\cdots&a_{1n}\\
+a_{21}&a_{22}&\cdots&a_{2n}\\
+\vdots&\vdots&&\vdots\\
+a_{m1}&a_{m2}&\cdots&a_{mn}
+\end{bmatrix}+\begin{bmatrix}
+b_{11}&b_{12}&\cdots&b_{1n}\\
+b_{21}&b_{22}&\cdots&b_{2n}\\
+\vdots&\vdots&&\vdots\\
+b_{m1}&b_{m2}&\cdots&b_{mn}
+\end{bmatrix}\\
+&=\begin{bmatrix}
+a_{11}+b_{11}&a_{12}+b_{12}&\cdots&a_{1n}+b_{1n}\\
+a_{21}+b_{21}&a_{22}+b_{22}&\cdots&a_{2n}+b_{2n}\\
+\vdots&\vdots&&\vdots\\
+a_{m1}+b_{m1}&a_{m2}+b_{m2}&\cdots&a_{mn}+b_{mn}
+\end{bmatrix}
+\end{align*}
+\end{itemize}
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+\begin{itemize}
+\item Scalar multiplication
+\[
+c\begin{bmatrix}
+a_{11}&a_{12}&\cdots&a_{1n}\\
+a_{21}&a_{22}&\cdots&a_{2n}\\
+\vdots&\vdots&&\vdots\\
+a_{m1}&a_{m2}&\cdots&a_{mn}
+\end{bmatrix}=\begin{bmatrix}
+ca_{11}&ca_{12}&\cdots&ca_{1n}\\
+ca_{21}&ca_{22}&\cdots&ca_{2n}\\
+\vdots&\vdots&&\vdots\\
+ca_{m1}&ca_{m2}&\cdots&ca_{mn}
+\end{bmatrix}
+\]
+\end{itemize}
+\end{definition}
+\pause
+\begin{example}\hfill
+\begin{itemize}
+\item $\begin{bmatrix}
+1&2\\
+3&4
+\end{bmatrix}+\begin{bmatrix}
+4&3\\
+2&1
+\end{bmatrix}=\begin{bmatrix}
+5&5\\
+5&5
+\end{bmatrix}$\pause
+\item $2\begin{bmatrix}
+1&2\\
+3&4
+\end{bmatrix}=\begin{bmatrix}
+2&4\\
+6&8
+\end{bmatrix}$
+\end{itemize}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+Suppose $A$ is a $m\times n$ matrix, and $B$ is a $n\times p$ matrix, we can define \textcolor{blue}{matrix multiplication}\index{matrix multiplication} $AB$ to be the $m\times p$ matrix, computed via the \textcolor{blue}{row-column rule}\index{rule-column rule}:\pause
+The $(i,j)$-entry is to multiply the $i$-row and $j$-th column
+\[
+\begin{bmatrix}
+\\
+\\
+\\
+a_{i1}&a_{i2}&\cdots &a_{in}\\
+\\
+\\
+\end{bmatrix}\begin{bmatrix}
+&&b_{1j}&&&\\
+&&b_{2j}&&&\\
+&&\vdots&&&\\
+&&b_{nj}&&&\\
+\end{bmatrix}=\begin{bmatrix}
+&&&&&\\
+&&&&&\\
+&&&&&\\
+&&\blacksquare&&\\
+&&&&&\\
+&&&&&
+\end{bmatrix}
+\]
+Where the $(i,j)$-entry $\blacksquare=a_{i1}b_{1j}+a_{i2}b_{2j}+\cdots+a_{in}b_{nj}$.
+\pause
+If $A$ is a square matrix, then we could define matrix power $A^k$ to be simply $\overbrace{AA\cdots A}^{k\text{ times}}$
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}\hfill
+\begin{itemize}
+\item 
+\scalebox{0.8}{
+$\begin{bmatrix}
+a_{11}&a_{12}&a_{13}\\
+a_{21}&a_{22}&a_{23}
+\end{bmatrix}
+\begin{bmatrix}
+b_{11}&b_{12}\\
+b_{21}&b_{22}\\
+b_{31}&b_{32}
+\end{bmatrix}=\begin{bmatrix}
+a_{11}b_{11}+a_{12}b_{21}+a_{13}b_{31} & a_{11}b_{12}+a_{12}b_{22}+a_{13}b_{32}\\
+a_{21}b_{11}+a_{22}b_{21}+a_{23}b_{31} & a_{21}b_{12}+a_{22}b_{22}+a_{23}b_{32}
+\end{bmatrix}$
+}\pause
+\item 
+\scalebox{0.8}{
+$\begin{bmatrix}
+1&2&2\\
+2&1&1
+\end{bmatrix}\begin{bmatrix}
+3&1\\
+1&2\\
+2&3
+\end{bmatrix}=\begin{bmatrix}
+1\cdot3+2\cdot1+2\cdot2&1\cdot1+2\cdot2+2\cdot3\\
+2\cdot3+1\cdot1+1\cdot2&2\cdot1+1\cdot2+1\cdot3
+\end{bmatrix}=\begin{bmatrix}
+9&11\\
+9&7
+\end{bmatrix}$
+}\pause
+\item
+\scalebox{0.8}{
+$\begin{bmatrix}
+a_{11}&a_{12}&a_{13}\\
+a_{21}&a_{22}&a_{23}
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2\\
+x_3
+\end{bmatrix}=\begin{bmatrix}
+a_{11}x_1+a_{12}x_2+a_{13}x_3 \\
+a_{21}x_1+a_{22}x_2+a_{23}x_3
+\end{bmatrix}=x_1\begin{bmatrix}a_{11}\\a_{21}\end{bmatrix}+x_1\begin{bmatrix}a_{12}\\a_{22}\end{bmatrix}+x_1\begin{bmatrix}a_{13}\\a_{23}\end{bmatrix}$
+}\pause
+\item
+\scalebox{0.8}{
+$\begin{bmatrix}
+0&1\\
+0&0
+\end{bmatrix}\begin{bmatrix}
+1&0\\
+0&0
+\end{bmatrix}=\begin{bmatrix}
+0\cdot1+1\cdot0&0\cdot0+1\cdot0\\
+0\cdot1+0\cdot0&0\cdot0+0\cdot0
+\end{bmatrix}=\begin{bmatrix}
+0&0\\
+0&0
+\end{bmatrix}$
+}\pause
+\item
+\scalebox{0.8}{
+$\begin{bmatrix}
+1&0\\
+0&0
+\end{bmatrix}\begin{bmatrix}
+0&1\\
+0&0
+\end{bmatrix}=\begin{bmatrix}
+1\cdot0+0\cdot0&1\cdot1+0\cdot0\\
+0\cdot0+0\cdot0&0\cdot1+0\cdot0
+\end{bmatrix}=\begin{bmatrix}
+0&1\\
+0&0
+\end{bmatrix}$
+}
+\end{itemize}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+\begin{itemize}
+\item 
+\[
+\begin{bmatrix}
+a_{11}&a_{12}&a_{13}\\
+a_{21}&a_{22}&a_{23}\\
+a_{31}&a_{32}&a_{33}\\
+\end{bmatrix}\begin{bmatrix}
+1&0&0\\
+0&1&0\\
+0&0&1
+\end{bmatrix}=\begin{bmatrix}
+a_{11}&a_{12}&a_{13}\\
+a_{21}&a_{22}&a_{23}\\
+a_{31}&a_{32}&a_{33}\\
+\end{bmatrix}
+\]\pause
+\item 
+\[
+\begin{bmatrix}
+1&0&0\\
+0&1&0\\
+0&0&1
+\end{bmatrix}\begin{bmatrix}
+a_{11}&a_{12}&a_{13}\\
+a_{21}&a_{22}&a_{23}\\
+a_{31}&a_{32}&a_{33}\\
+\end{bmatrix}=\begin{bmatrix}
+a_{11}&a_{12}&a_{13}\\
+a_{21}&a_{22}&a_{23}\\
+a_{31}&a_{32}&a_{33}\\
+\end{bmatrix}
+\]
+\end{itemize}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}\label{ex: elementary matrices}\hfill
+\begin{itemize}
+\item 
+\scalebox{0.6}{
+$\begin{bmatrix}
+1&0&-3\\
+0&1&0\\
+0&0&1
+\end{bmatrix}\begin{bmatrix}
+a_{11}&a_{12}&a_{13}\\
+a_{21}&a_{22}&a_{23}\\
+a_{31}&a_{32}&a_{33}\\
+\end{bmatrix}=\begin{bmatrix}
+a_{11}-3a_{31}&a_{12}-3a_{32}&a_{13}-3a_{33}\\
+a_{21}&a_{22}&a_{23}\\
+a_{31}&a_{32}&a_{33}\\
+\end{bmatrix}$
+}\pause
+\item 
+\scalebox{0.6}{
+$\begin{bmatrix}
+a_{11}&a_{12}&a_{13}\\
+a_{21}&a_{22}&a_{23}\\
+a_{31}&a_{32}&a_{33}
+\end{bmatrix}\begin{bmatrix}
+1&0&0\\
+0&1&0\\
+2&0&1
+\end{bmatrix}=\begin{bmatrix}
+a_{11}+2a_{13}&a_{12}&a_{13}\\
+a_{21}+2a_{23}&a_{22}&a_{23}\\
+a_{31}+2a_{33}&a_{32}&a_{33}\\
+\end{bmatrix}$
+}\pause
+\item 
+\scalebox{0.6}{
+$\begin{bmatrix}
+1&0&0\\
+0&2&0\\
+0&0&1
+\end{bmatrix}\begin{bmatrix}
+a_{11}&a_{12}&a_{13}\\
+a_{21}&a_{22}&a_{23}\\
+a_{31}&a_{32}&a_{33}
+\end{bmatrix}=\begin{bmatrix}
+a_{11}&a_{12}&a_{13}\\
+2a_{21}&2a_{22}&2a_{23}\\
+a_{31}&a_{32}&a_{33}
+\end{bmatrix}$
+}\pause
+\item 
+\scalebox{0.6}{
+$\begin{bmatrix}
+a_{11}&a_{12}&a_{13}\\
+a_{21}&a_{22}&a_{23}\\
+a_{31}&a_{32}&a_{33}
+\end{bmatrix}\begin{bmatrix}
+1&0&0\\
+0&3&0\\
+0&0&1
+\end{bmatrix}=\begin{bmatrix}
+a_{11}&3a_{12}&a_{13}\\
+a_{21}&3a_{22}&a_{23}\\
+a_{31}&3a_{32}&a_{33}
+\end{bmatrix}$
+}\pause
+\item 
+\scalebox{0.6}{
+$\begin{bmatrix}
+0&0&1\\
+0&1&0\\
+1&0&0
+\end{bmatrix}\begin{bmatrix}
+a_{11}&a_{12}&a_{13}\\
+a_{21}&a_{22}&a_{23}\\
+a_{31}&a_{32}&a_{33}
+\end{bmatrix}=\begin{bmatrix}
+a_{31}&a_{32}&a_{33}\\
+a_{21}&a_{22}&a_{23}\\
+a_{11}&a_{12}&a_{13}
+\end{bmatrix}$
+}\pause
+\item 
+\scalebox{0.6}{
+$\begin{bmatrix}
+a_{11}&a_{12}&a_{13}\\
+a_{21}&a_{22}&a_{23}\\
+a_{31}&a_{32}&a_{33}
+\end{bmatrix}\begin{bmatrix}
+0&1&0\\
+1&0&0\\
+0&0&1
+\end{bmatrix}=\begin{bmatrix}
+a_{12}&a_{11}&a_{13}\\
+a_{22}&a_{21}&a_{23}\\
+a_{32}&a_{31}&a_{33}
+\end{bmatrix}$
+}
+\end{itemize}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+Suppose $A=\begin{bmatrix}
+1&1&1\\
+2&2&1\\
+2&1&1
+\end{bmatrix}, B=\begin{bmatrix}
+1&1&1\\
+2&2&1\\
+2&1&1
+\end{bmatrix}$, computes matrix multiplication $AB$
+\end{frame}
+
+\begin{frame}[t]
+Suppose $A,B,C,D$ are matrices, $c$ is a scalar, $0$ is the zero matrix, $I$ is the identity matrix. we have the following facts\pause
+\begin{enumerate}
+\item Matrix multiplication is generally \textit{NOT commutative}, i.e. $AB\neq BA$\pause
+\item Matrix multiplication is \textit{associative}, i.e. the order of multiplication doesn't matter, in other words $(AB)C=A(BC)$, so it makes sense to write successive multiplication $A_1A_2A_3\cdots A_n$\pause
+\item Scalar multiplication and matrix multiplication commutes, $A(cB)=c(AB)=(cA)B$. so it makes sense to write $cA_1A_2A_3\cdots A_n$\pause
+\item Matrix multiplication is \textit{distributive} over addition, i.e. $A(B+C)=AB+AC$, $(A+B)C=AC+BC$\pause
+\item Zero matrix and identity matrix acts as 0 and 1, i.e. $A+0=0+A=A$, $A0=0A=0$, $IA=AI=A$\pause
+\item Even if $A\neq0$, $B\neq0$, $AB$ could still be $0$\pause
+\item $AB=AC$ does NOT imply $B=C$
+\end{enumerate}
+\pause
+\begin{remark}
+Some of the properties of matrices are really similar to that of numbers, so we dub this the name of \textit{matrix algebra}
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+$A$ is a \textcolor{blue}{partitioned} (or \textcolor{blue}{block}) matrix\index{partitioned matrix} if is divided into smaller submatrix by some horizontal and vertical lines. And the submatrices are the blocks
+\begin{center}
+\scalebox{0.8}{
+$\left[\begin{array}{c|c|c}
+A_{11}&A_{12}&A_{13}\\
+\hline
+A_{21}&A_{22}&A_{23}\\
+\hline
+A_{31}&A_{32}&A_{33}\\
+\end{array}\right]=
+\left[\begin{array}{cc|cccc|c}
+a_{11}&a_{12}&a_{13}&a_{14}&a_{15}&a_{16}&a_{17}\\
+a_{21}&a_{22}&a_{23}&a_{24}&a_{25}&a_{26}&a_{27}\\
+\hline
+a_{31}&a_{32}&a_{33}&a_{34}&a_{35}&a_{36}&a_{37}\\
+\hline
+a_{41}&a_{42}&a_{43}&a_{44}&a_{45}&a_{46}&a_{47}\\
+a_{51}&a_{52}&a_{53}&a_{54}&a_{55}&a_{56}&a_{57}\\
+a_{61}&a_{62}&a_{63}&a_{64}&a_{65}&a_{66}&a_{67}\\
+\end{array}
+\right]$
+}
+\end{center}
+Here the blocks are
+\begin{center}
+\scalebox{0.8}{
+$A_{11}=\begin{bmatrix}
+a_{11}&a_{12}\\
+a_{21}&a_{22}
+\end{bmatrix}$,
+$A_{12}=\begin{bmatrix}
+a_{13}&a_{14}&a_{15}&a_{16}\\
+a_{23}&a_{24}&a_{25}&a_{26}
+\end{bmatrix}$,
+$A_{13}=\begin{bmatrix}a_{17}\\ a_{27}\end{bmatrix}$
+}
+\end{center}
+\begin{center}
+\scalebox{0.8}{
+$A_{21}=\begin{bmatrix}a_{31}&a_{32}\end{bmatrix}$,
+$A_{22}=\begin{bmatrix}a_{33}&a_{34}&a_{35}&a_{36}\end{bmatrix}$,
+$A_{23}=\begin{bmatrix}a_{37}\end{bmatrix}$
+}
+\end{center}
+\begin{center}
+\scalebox{0.8}{
+$A_{31}=\begin{bmatrix}
+a_{41}&a_{42}\\
+a_{51}&a_{52}\\
+a_{61}&a_{62}
+\end{bmatrix}$,
+$A_{32}=\begin{bmatrix}
+a_{43}&a_{44}&a_{45}&a_{46}\\
+a_{53}&a_{54}&a_{55}&a_{56}\\
+a_{63}&a_{64}&a_{65}&a_{66}
+\end{bmatrix}$,
+$A_{33}=\begin{bmatrix}a_{47}\\ a_{57}\\ a_{67}\end{bmatrix}$
+}
+\end{center}
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Consider $\left[\begin{array}{c|c}
+A_{11}&A_{12}\\
+\hline
+A_{21}&A_{22}
+\end{array}\right]=
+\left[\begin{array}{cc|c}
+1&1&1\\
+2&2&1\\
+\hline
+2&1&1
+\end{array}\right]$, $\left[\begin{array}{c|c}
+B_{11}&B_{12}\\
+\hline
+B_{21}&B_{22}
+\end{array}\right]=
+\left[\begin{array}{c|cc}
+1&1&1\\
+2&2&1\\
+\hline
+2&1&1
+\end{array}\right]$\pause, then
+\[
+A_{11}B_{11}+A_{12}B_{21}=\begin{bmatrix}
+1&1\\
+2&2
+\end{bmatrix}\begin{bmatrix}
+1\\2
+\end{bmatrix}+\begin{bmatrix}
+1\\1
+\end{bmatrix}\begin{bmatrix}
+2
+\end{bmatrix}=\pause\begin{bmatrix}
+5\\8
+\end{bmatrix}
+\]
+\[
+A_{11}B_{12}+A_{12}B_{22}=\begin{bmatrix}
+1&1\\
+2&2
+\end{bmatrix}\begin{bmatrix}
+1&1\\
+2&1
+\end{bmatrix}+\begin{bmatrix}
+1\\1
+\end{bmatrix}\begin{bmatrix}
+1&1
+\end{bmatrix}=\pause\begin{bmatrix}
+4&3\\7&5
+\end{bmatrix}
+\]
+\[
+A_{21}B_{11}+A_{22}B_{21}=\begin{bmatrix}
+2&1
+\end{bmatrix}\begin{bmatrix}
+1\\2
+\end{bmatrix}+\begin{bmatrix}
+1
+\end{bmatrix}\begin{bmatrix}
+2
+\end{bmatrix}=\pause\begin{bmatrix}
+6
+\end{bmatrix}
+\]
+\[
+A_{21}B_{12}+A_{22}B_{22}=\begin{bmatrix}
+2&1
+\end{bmatrix}\begin{bmatrix}
+1&1\\
+2&1
+\end{bmatrix}+\begin{bmatrix}
+1
+\end{bmatrix}\begin{bmatrix}
+1&1
+\end{bmatrix}=\pause\begin{bmatrix}
+5&4
+\end{bmatrix}
+\]
+\begin{center}
+\vspace{-10mm}
+\scalebox{0.8}{
+$\left[\begin{array}{c|c}
+A_{11}&A_{12}\\
+\hline
+A_{21}&A_{22}
+\end{array}\right]\left[\begin{array}{c|c}
+B_{11}&B_{12}\\
+\hline
+B_{21}&B_{22}
+\end{array}\right]=\left[\begin{array}{c|c}
+A_{11}B_{11}+A_{12}B_{21}&A_{11}B_{12}+A_{12}B_{22}\\
+\hline
+A_{21}B_{11}+A_{22}B_{21}&A_{21}B_{12}+A_{22}B_{22}
+\end{array}\right]=\pause\left[\begin{array}{c|cc}
+5    & 4&     3\\
+8 &    7  &   5\\
+\hline
+6&     5   &  4
+\end{array}\right]$
+}
+\end{center}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{fact}
+Suppose $A=\begin{bmatrix}
+A_{11}&A_{12}&\cdots& A_{1q}\\
+A_{21}&A_{22}&\cdots& A_{2q}\\
+\vdots&\vdots&&\vdots\\
+A_{p1}&A_{p2}&\cdots& A_{pq}\\
+\end{bmatrix}$, $B=\begin{bmatrix}
+B_{11}&B_{12}&\cdots& B_{1r}\\
+B_{21}&B_{22}&\cdots& B_{2r}\\
+\vdots&\vdots&&\vdots\\
+B_{q1}&B_{q2}&\cdots& B_{qr}\\
+\end{bmatrix}$ are partitioned matrices, and the number of columns of $A_{1k}$ is equal to the number of rows of $B_{k1}$ (so that all submatrices multiplications make sense).\pause
+Then the usual row-column rule still WORKS!!! By treating submatrices as if they are numbers.
+\[
+AB=C=\begin{bmatrix}
+C_{11}&C_{12}&\cdots& C_{1r}\\
+C_{21}&C_{22}&\cdots& C_{2r}\\
+\vdots&\vdots&&\vdots\\
+C_{p1}&C_{p2}&\cdots& C_{pr}\\
+\end{bmatrix}
+\]
+\[
+C_{ij}=A_{i1}B_{1j}+A_{i2}B_{2j}+\cdots+A_{iq}B_{qj}
+\]
+\end{fact}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Suppose $3\times3$ matrix $A$ can be partitioned into $\begin{bmatrix}
+R1\\R2\\R3
+\end{bmatrix}$ or $\begin{bmatrix}
+\mathbf a_1&\mathbf a_2&\mathbf a_3
+\end{bmatrix}$, then Example~\ref{ex: elementary matrices} reads\pause
+\begin{enumerate}
+\item $E=\begin{bmatrix}
+1&0&-3\\
+0&1&0\\
+0&0&1
+\end{bmatrix}$, $EA=\begin{bmatrix}
+1&0&-3\\
+0&1&0\\
+0&0&1
+\end{bmatrix}\begin{bmatrix}
+R1\\R2\\R3
+\end{bmatrix}=\pause\begin{bmatrix}
+R1-3R3\\R2\\R3
+\end{bmatrix}$, $EA$ acts as subtracting 3 times row 3 from row 1.\pause
+\item $E=\begin{bmatrix}
+1&0&0\\
+0&1&0\\
+2&0&1
+\end{bmatrix}$,
+\scalebox{0.8}{
+$AE=\begin{bmatrix}
+\mathbf a_1&\mathbf a_2&\mathbf a_3
+\end{bmatrix}\begin{bmatrix}
+1&0&0\\
+0&1&0\\
+2&0&1
+\end{bmatrix}=\begin{bmatrix}
+\mathbf a_1+2\mathbf a_3&\mathbf a_2&\mathbf a_3
+\end{bmatrix}$
+}, $AE$ acts as adding 2 times column 3 to column 1.\pause
+\item $E=\begin{bmatrix}
+1&0&0\\
+0&2&0\\
+0&0&1
+\end{bmatrix}$, $EA=\begin{bmatrix}
+1&0&0\\
+0&2&0\\
+0&0&1
+\end{bmatrix}\begin{bmatrix}
+R1\\R2\\R3
+\end{bmatrix}=\begin{bmatrix}
+R1\\2R2\\R3
+\end{bmatrix}$, $EA$ acts as scaling the third row by 2.
+\seti
+\end{enumerate}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+\begin{enumerate}
+\conti
+\item $E=\begin{bmatrix}
+1&0&0\\
+0&3&0\\
+0&0&1
+\end{bmatrix}$, $AE=\begin{bmatrix}
+\mathbf a_1&\mathbf a_2&\mathbf a_3
+\end{bmatrix}\begin{bmatrix}
+1&0&0\\
+0&3&0\\
+0&0&1
+\end{bmatrix}=\pause\begin{bmatrix}
+\mathbf a_1&3\mathbf a_2&\mathbf a_3
+\end{bmatrix}$, $AE$ acts as scaling the third column by 3.\pause
+\item $E=\begin{bmatrix}
+0&0&1\\
+0&1&0\\
+1&0&0
+\end{bmatrix}$, $EA=\begin{bmatrix}
+0&0&1\\
+0&1&0\\
+1&0&0
+\end{bmatrix}\begin{bmatrix}
+R1\\R2\\R3
+\end{bmatrix}=\pause\begin{bmatrix}
+R3\\R2\\R1
+\end{bmatrix}$, $EA$ acts as interchanging row 1 and row 3.\pause
+\item $E=\begin{bmatrix}
+0&1&0\\
+1&0&0\\
+0&0&1
+\end{bmatrix}$, $AE=\begin{bmatrix}
+\mathbf a_1&\mathbf a_2&\mathbf a_3
+\end{bmatrix}\begin{bmatrix}
+0&1&0\\
+1&0&0\\
+0&0&1
+\end{bmatrix}=\pause\begin{bmatrix}
+\mathbf a_2&\mathbf a_1&\mathbf a_3
+\end{bmatrix}$, $AE$ acts as interchanging column 1 and column 2.
+\end{enumerate}
+\end{example}
+\pause
+\begin{definition}
+Matrices $E$ in the previous example is called \textcolor{blue}{elementary matrices}\index{Elementary matrices}. They describe row and column elementary operations.
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+If $A$ is a 4 by 5 matrix, what is the elementary matrix $E$ that acts as replacing the fourth row by adding twice of the second row.
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+Suppose $B=\begin{bmatrix}
+\mathbf b_1&\mathbf b_2&\cdots&\mathbf b_n
+\end{bmatrix}$, show that $AB=\begin{bmatrix}
+A\mathbf b_1&A\mathbf b_2&\cdots&A\mathbf b_n
+\end{bmatrix}$
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+Verify that $A^2=I_2$ where $A=\begin{bmatrix}
+1&0\\3&-1
+\end{bmatrix}$, and use partitioned matrices to show that $M^2=I_4$, where $M=\begin{bmatrix}
+1&0&0&0\\
+3&-1&0&0\\
+1&0&-1&0\\
+0&1&-3&1
+\end{bmatrix}$
+\end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+\end{document}

@@ -1,0 +1,454 @@
+\documentclass{beamer}
+\setbeamercovered{}
+
+\usepackage{bookman}
+\usepackage{newtxtext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{systeme}
+\usepackage{subcaption}
+\usepackage{bm} % Bold
+\usepackage{bbm} % Can use \mathbbm{1}
+\usepackage{ifthen} % Use if then else
+\usepackage{shuffle} % Use shuffle product
+\usepackage{minted} % For listing codes
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+    \usecolortheme{beaver}
+    \usefonttheme{professionalfonts} 
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{caption}[numbered]
+}
+
+\theoremstyle{definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{recall}{Recall}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginSection[]{
+    \begin{frame}
+    \centering
+    \begin{beamercolorbox}[center, shadow=true, rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \end{frame}
+}
+
+\title{MATH240 - Introduction to Linear Algebra}
+\author{Haoran Li}
+\institute[UMD]{University of Maryland, College Park}
+\date{Summer 2024}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 1 - System of linear equations}
+
+
+\begin{frame}{Some Notations}\pause
+\begin{itemize}
+\item \textcolor{blue}{Natural numbers}: $\mathbb N=\{0,1,2,3,\cdots\}$.
+\pause
+\item \textcolor{blue}{Integers}: $\mathbb Z=\{\cdots,-2,-1,0,1,2,\cdots\}$.
+\pause
+\item \textcolor{blue}{Rational numbers}: $\mathbb Q=\left\{\frac{m}{n}\middle|m,n\in\mathbb Z,n\neq0\right\}$ is the set of fractions. Here $\in$ means \textcolor{blue}{belong to}.
+\pause
+\item \textcolor{blue}{Real numbers:} $\mathbb R$ is the set of numbers on the whole real number line. \pause It includes
+\begin{itemize}
+\item irrational numbers (like $\sqrt{2},\sqrt[3]{3}$) 
+\item transcendental numbers (like $\pi,e$)
+\end{itemize}
+\pause
+\item \textcolor{blue}{Complex numbers}: $\mathbb C=\left\{a+bi\middle|a,b\in\mathbb R\right\}$, $i=\sqrt{-1}$ is the imaginary number such that $i^2=-1$.
+\pause
+\item $\mathbb N\subsetneqq\mathbb Z\subsetneqq\mathbb Q\subsetneqq\mathbb R\subsetneqq\mathbb C$.
+\pause
+\item $\mathbb R^n=\{(r_1,r_2,\cdots,r_n)|r_1,r_2,\cdots,r_n\in\mathbb R\}$ is the set of all $n$-tuples of real numbers. \pause Geometrically, it is the $n$-dimensional Euclidean space. For example
+\begin{itemize}
+\item $\mathbb R^1=\mathbb R$ is a line
+\item $\mathbb R^2$ is a plane
+\item $\mathbb R^3$ is our usual three dimensional space
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+A \textcolor{blue}{linear equation}\index{linear equation} in the variables $x_1,x_2,x_3,\cdots,x_n$ is an equation that can be written in the form 
+\begin{equation}\label{14:02-05/31/2022}
+a_1x_1+a_2x_2+a_3x_3+\cdots+a_nx_n=b
+\end{equation}
+where the coefficients $a_1,a_2,a_3,\cdots,a_n$ and $b$ are real or complex numbers, usually known in advance.
+\end{definition}
+\pause
+\begin{example}[Examples and non-examples of linear equations]\hfill
+\begin{itemize}
+\item $x_1+\frac{1}{2}x_2=2$ \pause\ding{51}
+\item $\pi(x_1+x_2)-9.9x_3=e$ \pause\ding{51}. Because if we expand it, we got $\pi x_1+\pi x_2-9.9x_3=e$ in which case $a_1=\pi,a_2=\pi,a_3=-9.9,b=e$ as in the form of \eqref{14:02-05/31/2022}
+\item $|x_2|-1=0$ \pause\ding{55}. Because this involves absolute values.
+\item $x_1+x_2^2=9$ \pause\ding{55}. Because this is of degree two (quadratic equation).
+\item $\sqrt{x_1}+\sqrt{x_2}=1$ \pause\ding{55}. Because this is of degree one half.
+\end{itemize}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+A \textcolor{blue}{system of linear equations} (or a \textcolor{blue}{linear system})\index{linear system} is a collection of one or more linear equations involving the same variables, say $x_1,x_2,x_3,\cdots,x_n$.
+\begin{equation}\label{eq: general linear system}
+\begin{cases}
+\,\quad a_{11}x_1+a_{12}x_2+a_{13}x_3+\cdots+a_{1n}x_{n}=b_1 \\
+\,\quad a_{21}x_1+a_{22}x_2+a_{23}x_3+\cdots+a_{2n}x_{n}=b_2 \\
+\quad \,a_{31}x_1+a_{32}x_2+a_{33}x_3+\cdots+a_{3n}x_{n}=b_3 \\
+\,\,\,\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad\vdots \\
+a_{m1}x_1+a_{m2}x_2+a_{m3}x_3+\cdots+a_{mn}x_{n}=b_m
+\end{cases}
+\end{equation}
+\end{definition}
+\pause
+\begin{example}
+For $n=m=2$, \eqref{eq: general linear system} is just
+\begin{equation}\label{eq: general 2 by 2 linear system}
+\begin{cases}
+a_{11}x_1+a_{12}x_2=b_1\\
+a_{21}x_1+a_{22}x_2=b_2
+\end{cases}
+\end{equation}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}\label{13:09-05/31/2022}
+In a cage full of chickens and rabbits. The total number of heads is 10 and the total number of legs is 26. Calculate the number of chickens and rabbits.
+\end{example}\pause
+\begin{solution}
+Let's assume the number of chickens and rabbits are $x_1$ and $x_2$, then we can write down a linear system
+\begin{equation}\label{14:34-05/31/2022}
+\systeme{x_1+x_2=10,2x_1+4x_2=26}
+\end{equation}
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{solution}
+Let's solve the linear system \systeme{x_1+x_2=10, 2x_1+4x_2=26}\pause
+\begin{enumerate}[I.]
+\item Replace \texttt{Row 2} by \texttt{Row 2 - 2(Row 1)}, we get \systeme{x_1+x_2=10, 2x_2=6}
+\pause
+\item Divide \texttt{Row 2} by 2, we get \systeme{x_1+x_2=10, x_2=3}
+\pause
+\item Replace \texttt{Row 1} by \texttt{Row 1 - Row 2}, we have the solution \\
+\systeme{x_1=7, x_2=3}
+\end{enumerate}
+\end{solution}\pause
+
+\begin{remark}
+This process is call the \textcolor{blue}{Gaussian elimination}\index{Gaussian elimination}
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+\begin{itemize}
+\item A \textcolor{blue}{solution} of the linear system~\eqref{eq: general linear system} is
+\[
+\begin{cases}
+x_1=s_1\\
+x_2=s_2\\
+x_3=s_3\\
+\quad\,\,\,\,\vdots\\
+x_n=s_n
+\end{cases}\qquad\text{$s_1,s_2,s_3,\cdots,s_n$ are numbers}
+\]
+which makes~\eqref{eq: general linear system} true. \pause
+\item The set of all possible solutions is called the \textcolor{blue}{solution set} of the linear system.
+\pause
+\item \textcolor{blue}{To solve} a linear system is to find all its solutions.
+\end{itemize}
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]{Geometric intepretation}\pause
+\begin{example}
+\systeme{x_1+x_2=10, 2x_1+4x_2=26} describe two lines in $\mathbb R^2$, and the solution set is the intersection.
+\end{example}
+\pause
+\begin{question}
+How many solutions does $\begin{cases}
+a_{11}x_1+a_{12}x_2=b_1\\
+a_{21}x_1+a_{22}x_2=b_2
+\end{cases}$ have?
+\end{question}
+\pause
+\begin{answer} It may have
+\begin{itemize}
+\item a \textit{unique} solution if these two lines \textit{intersect}.
+\item (uncountably) \textit{infinitely many} solutions if these two lines \textit{overlap}.
+\item \textit{no} solutions if these two lines are \textit{parallel} but not overlapping.
+\end{itemize}
+\end{answer}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}\label{ex: number of solutions}
+Compare the following three linear systems
+\newpage
+\begin{subequations}
+\begin{table}
+\begin{subtable}{.32\linewidth}
+\begin{equation}\label{eq: unique solution}
+\systeme{x_1+x_2=10,2x_1+4x_2=26}
+\end{equation}
+\end{subtable}
+\begin{subtable}{.32\linewidth}
+\begin{equation}\label{eq: no solutions}
+\systeme{x_1+2x_2=10, 2x_1+4x_2=26}
+\end{equation}
+\end{subtable}
+\begin{subtable}{.32\linewidth}
+\begin{equation}\label{eq: inf solutions}
+\systeme{x_1+2x_2=13, 2x_1+4x_2=26}
+\end{equation}
+\end{subtable}
+\end{table}
+\end{subequations}
+\pause
+\begin{itemize}
+\item \eqref{eq: unique solution} has a unique solution \systeme*{x_1=7,x_2=3}
+\pause
+\item \eqref{eq: no solutions} has no solutions since the 1st equation contradicts the 2nd.
+\pause
+\item \eqref{eq: inf solutions} has infinitely many solutions since the 2nd equation is twice of the 1st.
+\end{itemize}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{figure}
+\centering
+\begin{subfigure}[b]{0.49\textwidth}
+\centering
+\scalebox{0.5}{
+\begin{tikzpicture}[scale=0.1]
+\pgfmathsetmacro{\A}{-30}
+\pgfmathsetmacro{\B}{30}
+\pgfmathsetmacro{\C}{-10}
+\pgfmathsetmacro{\D}{30}
+\coordinate (P) at (-10,20);
+\coordinate (Q) at (-1,7);
+\clip (\A,\C) rectangle (\B,\D);
+\draw[help lines, color=gray!30, step=10, dashed] (\A,\C) grid (\B,\D);
+\draw[->, color=gray!50] (\A,0)--(\B,0);
+\draw[->, color=gray!50] (0,\C)--(0,\D);
+\draw[thick, domain=\A:\B, samples=100, blue] plot ({\x}, {10-\x});
+\draw[thick, domain=\A:\B, samples=100, red] plot ({\x}, {(13-\x)/2});
+\node at (P)[above right] {\textcolor{blue}{$x_1+x_2=10$}};
+\node at (Q)[below left] {\textcolor{red}{$2x_1+4x_2=26$}};
+\end{tikzpicture}}
+\caption{Two lines intersect}
+\label{fig: two lines intersect}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.49\textwidth}
+\centering
+\scalebox{0.5}{
+\begin{tikzpicture}[scale=0.3]
+\pgfmathsetmacro{\A}{-10}
+\pgfmathsetmacro{\B}{10}
+\pgfmathsetmacro{\C}{-1}
+\pgfmathsetmacro{\D}{15}
+\coordinate (P) at (2,4);
+\coordinate (Q) at (-1,7);
+\clip (\A,\C) rectangle (\B,\D);
+\draw[help lines, color=gray!30, step=3, dashed] (\A,\C) grid (\B,\D);
+\draw[->, color=gray!50] (\A,0)--(\B,0);
+\draw[->, color=gray!50] (0,\C)--(0,\D);
+\draw[thick, domain=\A:\B, samples=100, blue] plot ({\x}, {(10-\x)/2});
+\draw[thick, domain=\A:\B, samples=100, red] plot ({\x}, {(13-\x)/2});
+\node at (P)[below left] {\textcolor{blue}{$x_1+2x_2=10$}};
+\node at (Q)[above right] {\textcolor{red}{$2x_1+4x_2=26$}};
+\end{tikzpicture}}
+\caption{Two line parallel but not overlapping}
+\label{fig: two line parallel but not overlapping}
+\end{subfigure}
+\hfill
+\vspace{1mm}
+\begin{subfigure}[b]{0.5\textwidth}
+\centering
+\scalebox{0.5}{
+\begin{tikzpicture}[scale=0.3]
+\pgfmathsetmacro{\A}{-10}
+\pgfmathsetmacro{\B}{10}
+\pgfmathsetmacro{\C}{-1}
+\pgfmathsetmacro{\D}{15}
+\pgfmathsetmacro{\E}{0.03}
+\coordinate (Q) at (-1,7);
+\clip (\A,\C) rectangle (\B,\D);
+\draw[help lines, color=gray!30, step=3, dashed] (\A,\C) grid (\B,\D);
+\draw[->, color=gray!50] (\A,0)--(\B,0);
+\draw[->, color=gray!50] (0,\C)--(0,\D);
+\draw[thick, domain=\A:\B, samples=100, blue] plot ({\x}, {(13-\x)/2-\E});
+\draw[thick, domain=\A:\B, samples=100, red] plot ({\x}, {(13-\x)/2+\E});
+\node at (Q)[below left] {\textcolor{blue}{$x_1+2x_2=13$}};
+\node at (Q)[above right] {\textcolor{red}{$2x_1+4x_2=26$}};
+\end{tikzpicture}}
+\caption{Two line overlap}
+\label{fig: two line overlap}
+\end{subfigure}
+\caption{Figure for Example~\ref{ex: number of solutions}}
+\label{fig: geometric interpretation of 2 by 2 linear system}
+\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Generalization}
+If we increase the number of equations, we get more lines, it might looks like
+\pause
+\begin{figure}
+\centering
+\begin{subfigure}[b]{0.2\textwidth}
+\centering
+\begin{tikzpicture}
+\draw[help lines, color=gray!30, step=.4, dashed] (-1,-1) grid (1,1);
+\draw(-1,0)--(1,0);
+\draw(0,-1)--(0,1);
+\draw(-1,-1)--(1,1);
+\end{tikzpicture}
+\end{subfigure}
+\begin{subfigure}[b]{0.2\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.5]
+\draw[help lines, color=gray!30, step=.8, dashed] (-1,-1) grid (3,3);
+\draw(-1,0)--(3,0);
+\draw(0,-1)--(0,3);
+\draw(-1,3)--(3,-1);
+\end{tikzpicture}
+\end{subfigure}
+\begin{subfigure}[b]{0.2\textwidth}
+\centering
+\begin{tikzpicture}
+\draw[help lines, color=gray!30, step=.4, dashed] (-1,-1) grid (1,1);
+\draw(-1,0.5)--(1,0.5);
+\draw(-1,-0.5)--(1,-0.5);
+\draw(0,-1)--(0,1);
+\end{tikzpicture}
+\end{subfigure}
+\begin{subfigure}[b]{0.2\textwidth}
+\centering
+\begin{tikzpicture}
+\draw[help lines, color=gray!30, step=.4, dashed] (-1,-1) grid (1,1);
+\draw(-1,0.5)--(1,0.5);
+\draw(-1,-0.5)--(1,-0.5);
+\draw(-1,0)--(1,0);
+\end{tikzpicture}
+\end{subfigure}
+\end{figure}
+\pause
+If we increase the number of variables, we get
+\begin{itemize}
+\item $a_1x_1+a_2x_2+a_3x_3=b$ describes a plane in $\mathbb R^3$.
+\pause
+\item $a_1x_1+a_2x_2+a_3x_3+\cdots+a_nx_n=b$ describes a \textit{hyperplane} in $\mathbb R^n$.
+\pause
+\item Therefore the solution set of~\eqref{eq: general linear system} is the intersection of $m$ hyperplanes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Geometric interpretation of \systeme{x_1-3x_2+2x_3=0, -5x_1+12x_2-x_3=0}
+\begin{center}
+\begin{tikzpicture}
+\definecolor{color1}{rgb}{255,0,0}
+\definecolor{color2}{rgb}{0,0,255}
+\definecolor{color3}{rgb}{255,0,255}
+\def\XMAX{2.5};\def\YMAX{2.5};\def\ZMAX{4.5};
+\begin{scope}[blend mode=multiply]
+\draw [color1, fill=color1!20] plot (-2,-2,-2)--(-2,2,4)--(2,2,2)--(2,-2,-4)--cycle;
+\node at (2,-2,-4) [below right]{$x_1-3x_2+2x_3=0$};
+\draw [color2, fill=color2!20] plot (-2,-7/6,-4)--(-2,-1/2,4)--(2,7/6,4)--(2,1/2,-4)--cycle;
+\node at (2,1/2,-4) [above]{$-5x_1+12x_2-x_3=0$};
+\end{scope}
+\draw [purple, ultra thick](-2,-6/7,-2/7)--(2,6/7,2/7);
+\draw[->] (-\XMAX,0,0)--(\XMAX,0,0) node[right]{$x_1$};
+\draw[->] (0,-\YMAX,0)--(0,\YMAX,0) node[above]{$x_2$};
+\draw[->] (0,0,-\ZMAX)--(0,0,\ZMAX) node[below left]{$x_3$};
+\end{tikzpicture}
+\end{center}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{remark}
+It is geometrically clear that for a system of 2 equations in 3 variables, there are either no solutions or infinitely many, since two planes either intersects at a line, or overlap, or simply parallel.
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+We say a linear system is \textcolor{blue}{consistent}\index{consistent} if it has solution(s), and \textcolor{blue}{inconsistent}\index{inconsistent} if it has none.
+\end{definition}
+\pause
+\begin{example}
+In the previous Example~\ref{ex: number of solutions}, \systeme{x_1+x_2=10,2x_1+4x_2=26} and \systeme{x_1+2x_2=13, 2x_1+4x_2=26} are consistent, while \systeme{x_1+2x_2=10, 2x_1+4x_2=26} is inconsistent
+\end{example}
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+Try Gaussian elimination on the following linear systems
+\begin{enumerate}
+\item \systeme{x_1+5x_2 = 7,-2x_1 - 7x_2 = -5 }
+\seti
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+\begin{enumerate}
+\conti
+\item \systeme{2x_1+4x_2=-4, 5x_1+7x_2=11}
+\seti
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+\begin{enumerate}
+\conti
+\item \systeme{x_1-x_2+x_3=1, 2x_1-x_3=1,x_1+x_2+x_3=3}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+Find the point of intersection of the lines $x_1-5x_2=1$ and $3x_1-7x_2=5$.
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+For what values of $h$ and $k$ is the following system consistent?
+\[
+\systeme{2x_1-x_2=h, -6x_1+3x_2=k}
+\]
+\end{frame}
+
+
+\end{document}

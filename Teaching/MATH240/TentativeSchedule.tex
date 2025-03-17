@@ -1,0 +1,85 @@
+\documentclass[landscape,a4paper]{article}
+\usepackage[landscape,margin=0.5in]{geometry}
+% \usepackage{lscape}
+\usepackage{termcal}
+
+\pagestyle{empty} % Removes the page number from the bottom of the page
+
+\renewcommand{\calprintdate}{%
+\framebox{\arabic{month}/\arabic{date}}%
+}
+
+\begin{document}\sloppy % Reduce overlong words
+
+\begin{center}
+\large
+\textbf{Math240 – Summer 2024 – Tentative Schedule} \\
+\vspace{0.5cm}
+\normalsize
+Haoran Li - Section WB11\\
+\end{center}
+
+\begin{center}
+\begin{calendar}{05/26/24}{8}
+\setlength{\calboxdepth}{0.5in}
+\setlength{\calwidth}{10in}
+% Description of the Week.
+\calday[Sunday]{\noclassday}
+\calday[Monday]{\classday}
+\calday[Tuesday]{\classday}
+\calday[Wednesday]{\classday}
+\calday[Thursday]{\classday}
+\calday[Friday]{\classday}
+\calday[Saturday]{\noclassday}
+% Holidays
+\options{5/27/23}{\noclassday}
+\options{6/19/23}{\noclassday}
+\caltext{6/19/23}{No Class\\Juneteenth Holiday}
+\options{7/4/23}{\noclassday}
+\caltext{7/4/23}{No Class\\Independence Day Holiday}
+% Exams
+\caltext{6/20/23}{Exam 1}
+\caltext{7/7/23}{Exam 2}
+\caltext{7/21/23}{Final}
+% Assignments
+\caltext{6/25/23}{MATLAB 1 due}
+\caltext{7/16/23}{MATLAB 2 due}
+% Teaching Schedule
+\caltexton{1}{Syllabus\\Lecture 1}
+\caltextnext{Lecture 2}
+\caltextnext{Lecture 3}
+\caltextnext{Lecture 3\\Lecture 4}
+\caltextnext{Lecture 5}
+\caltextnext{Lecture 5\\Lecture 6}
+\caltextnext{Lecture 6}
+\caltextnext{Lecture 6\\Lecture 7}
+\caltextnext{Lecture 8}
+\caltextnext{Lecture 9}
+\caltextnext{Lecture 10}
+\caltextnext{Lecture 11}
+\caltextnext{Lecture 12}
+\caltextnext{Exam 1 Review}
+\caltexton{16}{Lecture 13}
+\caltextnext{Lecture 14}
+\caltextnext{Lecture 15}
+\caltextnext{Lecture 16}
+\caltextnext{Lecture 17}
+\caltextnext{Lecture 18}
+\caltextnext{Lecture 19}
+\caltextnext{Lecture 20}
+\caltextnext{Lecture 21}
+\caltextnext{Lecture 22}
+\caltextnext{Exam 2 Review}
+\caltexton{28}{Lecture 23}
+\caltextnext{Lecture 24}
+\caltextnext{Lecture 25}
+\caltextnext{Lecture 26}
+\caltextnext{Lecture 27}
+\caltextnext{Lecture 28}
+\caltextnext{Lecture 29}
+\caltextnext{Exams Review}
+\caltextnext{Final Review}
+\end{calendar}
+\end{center}
+
+\end{document}

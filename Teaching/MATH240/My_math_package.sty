@@ -1,0 +1,290 @@
+% Identification
+% The package identifies itself and the LaTeX version needed
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{Mymathpackage}[2020/05/01 My math package]
+
+% ----------------------------------------------------------------------------------------------------------
+
+\RequirePackage[top=1in, bottom=1.25in, left=1.25in, right=1.25in]{geometry}
+\RequirePackage{verbatim}
+\RequirePackage{graphicx}
+\RequirePackage{systeme}
+\RequirePackage{subcaption}
+\RequirePackage[inline]{enumitem}
+\RequirePackage{bm} % Bold
+\RequirePackage{bbm} % Can use \mathbbm{1}
+\RequirePackage{shuffle} % Use shuffle product
+\RequirePackage{hyperref}
+\hypersetup{
+colorlinks = true, % Allow colored links
+linkcolor = red, % Setup the color for the links
+citecolor = black, % Choose the color for citation
+}
+
+
+% \RequirePackage[inline]{showlabels} % Show labels in PDF files
+% \makeatletter
+% \showlabels{blx@bibitem}
+% \makeatother
+% \renewcommand{\showlabelfont}{\small\color{gray}}
+
+
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{mathrsfs}
+\RequirePackage{mathtools}
+\RequirePackage{tasks}
+\RequirePackage{esint} % various fancy integral symbols
+\RequirePackage{esvect} % using vector
+\RequirePackage{amsthm}
+\RequirePackage{tikz}
+\RequirePackage{pgfplots} % drawing axis, addplots
+\pgfplotsset{compat=newest} % ensure position and scaling compatibility
+\usetikzlibrary{intersections} % intersections in tikz
+\usetikzlibrary{calc} % calculations in tikz, and calculate length of texts
+\usetikzlibrary{hobby} % smoothly connecting points
+\usetikzlibrary{arrows} % fancy arrows
+\usetikzlibrary{decorations.markings} % put arrow in the middle
+\tikzset{->-/.style={decoration={markings,mark=at position #1 with {\arrow{>}}},postaction={decorate}}} % use as [->-=#1], put the arrow at #1, where 0 <= #1 <= 1
+\RequirePackage{tikz-3dplot}
+\RequirePackage{tikz-cd}
+% Scaling the diagrams
+\tikzcdset{scale cd/.style={every label/.append style={scale=#1},
+    cells={nodes={scale=#1}}}}
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+
+% ----------------------------------------------------------------------------------------------------------
+
+% new and renew commands
+\renewcommand{\mod}{\,\mathrm{mod}\,}
+\newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}} % Scaling math expressions
+
+
+% Alternatively we can use \operatorname{...}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Ord}{Ord}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\PSL}{PSL}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\sym}{sym}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Alt}{Alt}
+\DeclareMathOperator{\alt}{alt}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\Isom}{Isom}
+\DeclareMathOperator{\isom}{isom}
+\DeclareMathOperator{\im}{im} % \Im has already been defined
+\DeclareMathOperator{\re}{re} % \Re has already been defined
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Coker}{Coker}
+\DeclareMathOperator{\Span}{Span} % \span has already been defined
+\DeclareMathOperator{\Rep}{Rep}
+\DeclareMathOperator{\Hom}{Hom} % \hom has already been defined
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\aut}{aut}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\ext}{ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Spm}{Spm}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\trdeg}{trdeg}
+\DeclareMathOperator{\Max}{Max}
+\DeclareMathOperator{\Min}{Min}
+\DeclareMathOperator{\lcm}{lcm} % \gcd has already been defined
+\DeclareMathOperator{\Sh}{Sh}
+\DeclareMathOperator{\PreSh}{PreSh}
+\DeclareMathOperator{\Ch}{Ch}
+\DeclareMathOperator{\MCG}{MCG}
+\DeclareMathOperator{\Char}{Char} % \char has already been defined
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\der}{der}
+\DeclareMathOperator{\Adj}{Adj}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Ab}{Ab}
+\DeclareMathOperator{\ab}{ab}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\Rad}{Rad}
+\DeclareMathOperator{\nil}{nil}
+\DeclareMathOperator{\Nil}{Nil}
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\lk}{lk}
+\DeclareMathOperator{\st}{st} % \st has already been defined
+\DeclareMathOperator{\St}{St}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\Li}{Li}
+\DeclareMathOperator{\const}{const}
+\DeclareMathOperator{\Const}{Const}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\Rel}{Rel}
+\DeclareMathOperator{\rel}{rel}
+\DeclareMathOperator{\Et}{\'Et}
+\DeclareMathOperator{\et}{\'et}
+\DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\ob}{ob}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Dist}{Dist} % \dist has already been defined
+\DeclareMathOperator{\LHS}{LHS}
+\DeclareMathOperator{\RHS}{RHS}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Sol}{Sol}
+\DeclareMathOperator{\sol}{sol}
+\DeclareMathOperator{\Deck}{Deck}
+\DeclareMathOperator{\Div}{Div} % \div has already been defined
+\DeclareMathOperator{\Curl}{Curl}
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\ann}{ann}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Rank}{Rank}
+\DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\Vect}{Vect}
+\DeclareMathOperator{\Cart}{Cart}
+\DeclareMathOperator{\Idem}{Idem}
+\DeclareMathOperator{\Coh}{Coh}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Nul}{Nul}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\Range}{Range}
+% \nil, \Nil has already been defined
+% \ht has already been defined
+% \int has already been defined
+
+
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+% \newcommand*{\relbarfill@}{\arrowfill@\relbar-\relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+% \newcommand*{\xdash}[2][]{\ext@arrow 0055\relbarfill@{#1}{#2}}
+\makeatother
+
+\newlength{\simlength}
+
+\newcommand{\xsim}[1]{
+\settowidth{\simlength}{$#1$}
+\mathrel{\overset{#1}{\resizebox{\simlength}{\height}{\sim}}}
+}
+\newcommand{\fatdot}{\mathrel{\raisebox{0.25ex}{\tikz\filldraw[black,x=2pt,y=2pt] (0,0) circle (0.5);}}}
+\newcommand{\fatplus}{\mathrel{\raisebox{-0.1ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0.9,0)--(1.1,0)--(1.1,0.9)--(2,0.9)--(2,1.1)--(1.1,1.1)--(1.1,2)--(0.9,2)--(0.9,1.1)--(0,1.1)--(0,0.9)--(0.9,0.9)--cycle;}}}
+\newcommand{\fatminus}{\raisebox{+0.4ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0,0.9)--(2,0.9)--(2,1.1)--(0,1.1)--cycle;}}
+
+% ----------------------------------------------------------------------------------------------------------
+
+
+
+% Auxiliary functions
+\newcommand{\mygrid}[3]% starting point and end point for the grid, then origin
+{
+\draw[step=1,gray] #1 grid #2;
+\draw[step=0.1,very thin,color=gray!30] #1 grid #2;
+\filldraw #3 circle (0.02);
+}
+
+
+% ----------------------------------------------------------------------------------------------------------
+
+% Global variables
+\def\PROOFCROP{0}
+\def\SOLUTIONCROP{0}
+
+% ----------------------------------------------------------------------------------------------------------
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{fact}[theorem]{Fact}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem*{recall}{Recall}
+\newtheorem*{slogan}{Slogan}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+
+\makeatletter
+% \renewcommand{\proofname}{\textnormal{\textbf{Proof}}}
+\renewenvironment{proof}[1][\proofname]{\par
+\pushQED{\qed}
+\normalfont \topsep6\p@\@plus6\p@\relax
+\trivlist
+\item\relax
+{\itshape
+#1\@addpunct{.}}\hspace\labelsep\ignorespaces
+\if\PROOFCROP1\comment\fi}{\if\PROOFCROP1\endcomment\fi
+\popQED\endtrivlist\@endpefalse
+}
+
+\def\solutionname{Solution}
+\newenvironment{solution}[1][\solutionname]{\par
+\pushQED{\qed}
+\normalfont \topsep6\p@\@plus6\p@\relax
+\trivlist
+\item\relax
+{\itshape
+#1\@addpunct{.}}\hspace\labelsep\ignorespaces
+\if\SOLUTIONCROP1\comment\fi}{\if\SOLUTIONCROP1\endcomment\fi
+\popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+
+%Labelling and referencing with section numbers
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+
+% Default value of number of columns in a matrix
+\setcounter{MaxMatrixCols}{100}
+
+
+
+\bibliographystyle{alpha}
+
+
+\setlength{\parindent}{0pt}
+
+% ----------------------------------------------------------------------------------------------------------
+
+% This part handles the options passed to the package
+\DeclareOption*{\PackageWarning{Mymathpackage}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
+
+% ----------------------------------------------------------------------------------------------------------
+
+\RequirePackage{subfiles} % Best loaded last in the preamble

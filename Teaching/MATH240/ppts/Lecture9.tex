@@ -1,0 +1,425 @@
+\documentclass{beamer}
+\setbeamercovered{}
+
+\usepackage{bookman}
+\usepackage{newtxtext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{systeme}
+\usepackage{subcaption}
+\usepackage{bm} % Bold
+\usepackage{bbm} % Can use \mathbbm{1}
+\usepackage{ifthen} % Use if then else
+\usepackage{shuffle} % Use shuffle product
+\usepackage{minted} % For listing codes
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\tikzcdset{ampersand replacement=\&}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+% \newcommand*{\relbarfill@}{\arrowfill@\relbar-\relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+% \newcommand*{\xdash}[2][]{\ext@arrow 0055\relbarfill@{#1}{#2}}
+\makeatother
+
+\newlength{\simlength}
+
+\newcommand{\xsim}[1]{
+\settowidth{\simlength}{$#1$}
+\mathrel{\overset{#1}{\resizebox{\simlength}{\height}{\sim}}}
+}
+\newcommand{\fatdot}{\mathrel{\raisebox{0.25ex}{\tikz\filldraw[black,x=2pt,y=2pt] (0,0) circle (0.5);}}}
+\newcommand{\fatplus}{\mathrel{\raisebox{-0.1ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0.9,0)--(1.1,0)--(1.1,0.9)--(2,0.9)--(2,1.1)--(1.1,1.1)--(1.1,2)--(0.9,2)--(0.9,1.1)--(0,1.1)--(0,0.9)--(0.9,0.9)--cycle;}}}
+\newcommand{\fatminus}{\raisebox{+0.4ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0,0.9)--(2,0.9)--(2,1.1)--(0,1.1)--cycle;}}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+    \usecolortheme{beaver}
+    \usefonttheme{professionalfonts} 
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{caption}[numbered]
+}
+
+\theoremstyle{definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{recall}{Recall}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\DeclareMathOperator{\Span}{Span}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginSection[]{
+    \begin{frame}
+    \centering
+    \begin{beamercolorbox}[center, shadow=true, rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \end{frame}
+}
+
+\title{MATH240 - Introduction to Linear Algebra}
+\author{Haoran Li}
+\institute[UMD]{University of Maryland, College Park}
+\date{Summer 2024
+}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 9 - Vector spaces and subspaces}
+
+\begin{frame}[t]
+To motivate the definition of a vector space, let's consider the following example
+\pause
+\begin{example}\label{17:45-06/27/2022}
+Let $\mathbb P_n$ denote the set of (real) polynomials of degree less or equal to $n$\pause. For example $\mathbb P_0=\mathbb R$ is just the set of real numbers, and\pause
+\begin{align*}
+\mathbb P_1&=\{a_0+a_1t|a_0,a_1\in\mathbb R\} \\
+\mathbb P_2&=\{a_0+a_1t+a_2t^2|a_0,a_1,a_2\in\mathbb R\}\\
+\mathbb P_3&=\{a_0+a_1t+a_2t^2+a_3t^3|a_0,a_1,a_2,a_3\in\mathbb R\}\\
+&\vdots\\
+\mathbb P_n&=\{a_0+a_1t+a_2t^2+\cdots+a_nt^n|a_0,a_1,a_2,\cdots,a_n\in\mathbb R\}.
+\end{align*}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+You may soon realize that $\mathbb P_n$ can be identified with $\mathbb R^{n+1}$.
+\begin{center}
+\begin{tikzcd}
+\mathbb P_1 \arrow[r,equal,"\sim"]        \& \mathbb R^2   \\
+\{a_0+a_1t\} \arrow[r, leftrightsquigarrow] \arrow[u, equal] \& \left\{\begin{bmatrix}a_0\\a_1\end{bmatrix}\right\} \arrow[u, equal]
+\end{tikzcd}
+\begin{tikzcd}
+\mathbb P_2 \arrow[r,equal,"\sim"]        \& \mathbb R^3\\
+\{a_0+a_1t+a_2t^2\} \arrow[r, leftrightsquigarrow] \arrow[u, equal] \& \left\{\begin{bmatrix}a_0\\a_1\\a_2\end{bmatrix}\right\} \arrow[u, equal]
+\end{tikzcd}
+\begin{tikzcd}
+\mathbb P_n \arrow[r,equal,"\sim"]        \& \mathbb R^{n+1}          \\
+\{a_0+a_1t+a_2t^2+\cdots+a_nt^n\} \arrow[r, leftrightsquigarrow] \arrow[u, equal] \& \left\{\begin{bmatrix}a_0\\a_1\\\vdots\\a_n\end{bmatrix}\right\} \arrow[u, equal]
+\end{tikzcd}
+\end{center}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+More concrete examples could be
+\begin{enumerate}
+\item For $\mathbb P_1\cong\mathbb R^2$, $1+2t\leftrightsquigarrow\pause\begin{bmatrix}
+1\\2
+\end{bmatrix}$\pause
+\item For $\mathbb P_2\cong\mathbb R^3$, $3t^2-1\leftrightsquigarrow\pause\begin{bmatrix}
+-1\\0\\3
+\end{bmatrix}$
+\end{enumerate}\pause
+If we consider addition and scalar multiplication, we have
+\begin{center}
+\begin{tikzpicture}
+\tikzset{<-squig->/.style={to-to, decorate, decoration={zigzag,segment length=5,amplitude=1,pre=lineto,post=lineto,post length=2pt,pre length=2pt}}}
+\node at (0,1) {$\begin{bmatrix}
+1\\0\\2
+\end{bmatrix}+\begin{bmatrix}
+2\\1\\0
+\end{bmatrix}=\begin{bmatrix}
+3\\1\\2
+\end{bmatrix}$};
+\node at (0,-1) {$(1+2t^2)+(2+t)=3+t+2t^2$};
+\draw[<-squig->] (-1.1,0.2)--(-1.8,-0.7);
+\draw[<-squig->] (0,0.2)--(-0.1,-0.7);
+\draw[<-squig->] (1.1,0.2)--(1.5,-0.7);
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\tikzset{<-squig->/.style={to-to, decorate, decoration={zigzag,segment length=5,amplitude=1,pre=lineto,post=lineto,post length=2pt,pre length=2pt}}}
+\node at (0,1) {$2\cdot\begin{bmatrix}
+1\\0\\2
+\end{bmatrix}=\begin{bmatrix}
+2\\0\\4
+\end{bmatrix}$};
+\node at (0,-1) {$2\cdot(1+2t^2)=2+4t^2$};
+\draw[<-squig->] (-0.35,0.2)--(-0.6,-0.7);
+\draw[<-squig->] (0.8,0.2)--(1.1,-0.7);
+\end{tikzpicture}
+\end{center}\pause
+\vspace{-3mm}
+So we may conclude that addition and scalar multiplication in $\mathbb P_n$ can be identically translated to addition and scalar multiplication in $\mathbb R^{n+1}$.
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{remark}
+We call $\{1,t,t^2,\cdots,t^n\}$ the \textit{standard basis} of $\mathbb P_n$, corresponding to the standard basis for $\mathbb R^{n+1}$
+\end{remark}
+\pause
+\begin{example}
+$\left\{1,t,t^2\right\}$ is the standard basis for $\mathbb P_2$, and
+\begin{align*}
+p(t)&=a_0+a_1t+a_2t^2=a_0\cdot 1+a_1\cdot t+a_2\cdot t^2
+\end{align*}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}\label{17:53-06/27/2022}
+$M_{m\times n}(\mathbb R)$ can be identified with $\mathbb R^{mn}$.\pause\\
+\scalebox{0.7}{
+\begin{tikzcd}
+M_{2\times 2}(\mathbb R) \arrow[r,equal,"\sim"]        \& \mathbb R^{4}   \\
+\left\{\begin{bmatrix}
+a_{11}&a_{12}\\
+a_{21}&a_{22}
+\end{bmatrix}\right\} \arrow[r, leftrightsquigarrow] \arrow[u, equal] \& \left\{\begin{bmatrix}a_{11}\\a_{12}\\a_{21}\\a_{22}\end{bmatrix}\right\} \arrow[u, equal]
+\end{tikzcd}\pause
+\begin{tikzcd}
+M_{3\times 2}(\mathbb R) \arrow[r,equal,"\sim"]        \& \mathbb R^{6}   \\
+\left\{\begin{bmatrix}
+a_{11}&a_{12}\\
+a_{21}&a_{22}\\
+a_{31}&a_{32}
+\end{bmatrix}\right\} \arrow[r, leftrightsquigarrow] \arrow[u, equal] \& \left\{\begin{bmatrix}a_{11}\\a_{12}\\a_{21}\\a_{22}\\a_{31}\\a_{32}\end{bmatrix}\right\} \arrow[u, equal]
+\end{tikzcd}
+}\pause\\
+\scalebox{0.7}{
+\begin{tikzcd}
+M_{2\times 3}(\mathbb R) \arrow[r,equal,"\sim"]        \& \mathbb R^{6}   \\
+\left\{\begin{bmatrix}
+a_{11}&a_{12}&a_{13}\\
+a_{21}&a_{22}&a_{23}
+\end{bmatrix}\right\} \arrow[r, leftrightsquigarrow] \arrow[u, equal] \& \left\{\begin{bmatrix}a_{11}\\a_{12}\\a_{13}\\a_{21}\\a_{22}\\a_{23}\end{bmatrix}\right\} \arrow[u, equal]
+\end{tikzcd}\pause
+\begin{tikzcd}
+M_{m\times n}(\mathbb R) \arrow[r,equal,"\sim"]        \& \mathbb R^{mn}   \\
+\left\{\begin{bmatrix}
+a_{11}&a_{12}&\cdots&a_{1n}\\
+a_{21}&a_{22}&\cdots&a_{2n}\\
+\vdots&\vdots&&\vdots\\
+a_{m1}&a_{m2}&\cdots&a_{mn}\\
+\end{bmatrix}\right\} \arrow[r, leftrightsquigarrow] \arrow[u, equal] \& \left\{\begin{bmatrix}a_{11}\\\vdots\\a_{1n}\\\vdots\\a_{m1}\\\vdots\\a_{mn}\end{bmatrix}\right\} \arrow[u, equal]
+\end{tikzcd}
+}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+In more concrete terms, addition and scalar multiplication can be identified as the following
+\begin{center}
+\begin{tikzpicture}
+\tikzset{<-squig->/.style={to-to, decorate, decoration={zigzag,segment length=5,amplitude=1,pre=lineto,post=lineto,post length=2pt,pre length=2pt}}}
+\node at (0,1) {$\begin{bmatrix}
+1&0\\1&1
+\end{bmatrix}+\begin{bmatrix}
+-1&0\\2&3
+\end{bmatrix}=\begin{bmatrix}
+0&0\\4&6
+\end{bmatrix}$};
+\node at (0,-1) {$\begin{bmatrix}
+1\\0\\1\\1
+\end{bmatrix}+\begin{bmatrix}
+-1\\0\\2\\3
+\end{bmatrix}=\begin{bmatrix}
+0\\0\\4\\6
+\end{bmatrix}$};
+\draw[<-squig->] (-1.6,0.5)--(-1.2,-0.1);
+\draw[<-squig->] (0,0.5)--(0,-0.1);
+\draw[<-squig->] (1.6,0.5)--(1.2,-0.1);
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\tikzset{<-squig->/.style={to-to, decorate, decoration={zigzag,segment length=5,amplitude=1,pre=lineto,post=lineto,post length=2pt,pre length=2pt}}}
+\node at (0,1) {$2\cdot\begin{bmatrix}
+-1&0\\2&3
+\end{bmatrix}=\begin{bmatrix}
+-2&0\\4&6
+\end{bmatrix}$};
+\node at (0,-1) {$2\cdot\begin{bmatrix}
+-1\\0\\2\\3
+\end{bmatrix}=\begin{bmatrix}
+-2\\0\\4\\6
+\end{bmatrix}$};
+\draw[<-squig->] (-0.6,0.5)--(-0.5,-0.1);
+\draw[<-squig->] (1.1,0.5)--(0.9,-0.1);
+\end{tikzpicture}
+\end{center}\pause
+So we may conclude that addition and scalar multiplication in $M_{m\times n}(\mathbb R)$ can be identically translated to addition and scalar multiplication in $\mathbb R^{mn}$
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{remark}
+We call $\{E_{ij}\}$ the \textit{standard basis} of $M_{m\times n}(\mathbb R)$, corresponding to the standard basis for $\mathbb R^{mn}$. Here $E_{ij}$ is the $m\times n$ matrix that only has a single 1 in the $(i,j)$-th spot, but 0's elsewhere.
+\end{remark}
+\pause
+\begin{example}
+$\left\{E_{11}=\begin{bmatrix}
+1&0\\0&0
+\end{bmatrix},E_{12}=\begin{bmatrix}
+0&1\\0&0
+\end{bmatrix},E_{21}=\begin{bmatrix}
+0&0\\1&0
+\end{bmatrix},E_{22}=\begin{bmatrix}
+0&0\\0&1
+\end{bmatrix}\right\}$ is the standard basis for $M_{2\times2}(\mathbb R)$, and
+\begin{align*}
+\begin{bmatrix}
+a_{11}&a_{12}\\a_{21}&a_{22}
+\end{bmatrix}&=\begin{bmatrix}
+a_{11}&0\\0&0
+\end{bmatrix}+\begin{bmatrix}
+0&a_{12}\\0&0
+\end{bmatrix}+\begin{bmatrix}
+0&0\\a_{21}&0
+\end{bmatrix}+\begin{bmatrix}
+0&0\\0&a_{22}
+\end{bmatrix}\\
+&=a_{11}\begin{bmatrix}
+1&0\\0&0
+\end{bmatrix}+a_{12}\begin{bmatrix}
+0&1\\0&0
+\end{bmatrix}+a_{21}\begin{bmatrix}
+0&0\\1&0
+\end{bmatrix}+a_{22}\begin{bmatrix}
+0&0\\0&1
+\end{bmatrix}\\
+&=a_{11}E_{11}+a_{12}E_{12}+a_{21}E_{21}+a_{22}E_{22}
+\end{align*}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+A \textcolor{blue}{(real) vector space}\index{vector space} is a set $V$ of objects, called \textit{vectors}, on which are defined two operations, called \textit{addition} $\fatplus$ and \textit{(left) scalar multiplication} $\fatdot$, subject to axioms\pause
+\begin{enumerate}\setcounter{enumi}{-1}
+\item $\bm u\fatplus\bm v$ and $c\fatdot\bm v$ are still in $V$\pause
+\item $\bm u\fatplus\bm v=\bm v\fatplus\bm u$\pause
+\item $(\bm u\fatplus\bm v)\fatplus\bm w=\bm u\fatplus(\bm v\fatplus\bm w)$\pause
+\item There is a \textit{zero vector} $\bm 0$ such that $\bm u\fatplus\bm 0=\bm u$\pause
+\item For each $\bm u$ in $V$, there is a vector $\fatminus\bm u$ in $V$ such that $\bm u\fatplus(\fatminus\bm u)=\bm 0$\pause
+\item $c\fatdot(\bm u\fatplus\bm v)=c\fatdot\bm u\fatplus c\fatdot\bm v$\pause
+\item $(c+d)\fatdot\bm u=c\fatdot\bm u\fatplus d\fatdot\bm u$\pause
+\item $c\fatdot(d\fatdot\bm u)=(cd)\fatdot\bm u$\pause
+\item $1\fatdot\bm u=\bm u$
+\end{enumerate}
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Set $V$ to be $\mathbb R^n$, $\fatplus$ to be addition $+$ for vectors, $\fatdot$ to be scalar multiplication $\cdot$ for vectors, then this is a vector space
+\end{example}
+\pause
+\begin{example}[non-example]
+Suppose $V=\mathbb R$, $a\fatplus b=a+b+1$, $c\fatdot a=c\cdot a=ca$, we can check
+\begin{enumerate}\setcounter{enumi}{-1}
+\item $a\fatplus b=a+b+1\in\mathbb R$, $c\fatdot a=ca\in\mathbb R$
+\item $a\fatplus b=a+b+1=b+a+1=b\fatplus a$
+\item $(a\fatplus b)\fatplus c=(a+b+1)+c+1=a+(b+c+1)+1=a\fatplus(b\fatplus c)$
+\item There is a \textit{zero vector} $\bm 0=-1$ such that $a\fatplus\bm 0=a+(-1)+1=a$
+\item For each $a$, we have $\fatminus a=-a-2$ such that $a\fatplus(\fatminus a)=a+(-a-2)+1=-1=\bm 0$
+\end{enumerate}
+However $2\fatdot(a\fatplus b)=2(a+b+1)\neq 2a+2b+1=2\fatdot a\fatplus 2\fatdot b$. Therefore, this is not a vector space
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+Suppose $V$ is a vector space with addition $\fatplus$ and scalar multiplication $\fatdot$. A \textcolor{blue}{subspace}\index{subspace} $H$ is a non-empty subset which closed under addition and scalar multiplication, i.e. for any $\bm u,\bm v\in H$, $c\in\mathbb R$, $\bm u\fatplus\bm v,c\fatdot\bm u\in H$
+\end{definition}
+\pause
+\begin{remark}
+It is easy to check that a subspace $H$ is again a vector space.
+\end{remark}
+\pause
+\begin{exercise}\label{17:08-06/29/2022}
+Recall that $M_{2\times2}(\mathbb R)$ is the set of 2 by 2 matrices, and that a square matrix $A$ is \textit{symmetric} if $A^T=A$. Consider a subset $V$ consists of 2 by 2 symmetric matrices, i.e. $V=\left\{A\in M_{2\times2}(\mathbb R)\middle|A^T=A\right\}$. Show that $V$ is a vector space.
+\end{exercise}
+\end{frame}
+
+\begin{frame}[t]
+\begin{solution}
+For any $A,B\in V$, $c\in\mathbb R$, by definition we know that $A^T=A$, $B^T=B$, we want to show that $A+B\in V$, $cA\in V$ (condition for subspace), i.e. $(A+B)^T=A^T+B^T$, $(cA)^T=cA$. This is true because
+\[
+(A+B)^T=A^T+B^T=A+B,\qquad (cA)^T=cA^T=cA
+\]
+Therefore $V$ is a subspace of $M_{2\times2}(\mathbb R)$, and thus a vector space
+\end{solution}
+\pause
+\begin{exercise}
+Suppose $H=\{p(t)=a_0+a_1t+a_2t^2\in\mathbb P_2|a_0+a_1+a_2=0\}$ is the set of polynomials of degree $\leq 2$ and sum of coefficients zero. Show that $H$ is a vector space.
+\end{exercise}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}\label{15:10-06/23/2022}
+Consider the vector space $V=\mathbb R^2$, and $H$ is the set of solutions to the linear equation $2x_1-x_2+2=0$, then $H$ is not a subspace. For example, if we choose $\mathbf u=\begin{bmatrix}
+-1\\0
+\end{bmatrix},\mathbf v=\begin{bmatrix}
+0\\2
+\end{bmatrix}$, then $\mathbf u+\mathbf v=\begin{bmatrix}
+-1\\2
+\end{bmatrix}$ is not in $H$, nor is $2\mathbf u=\begin{bmatrix}
+-2\\0
+\end{bmatrix}$
+\vspace{-10mm}
+\begin{center}
+\begin{tikzpicture}
+\def\XMAX{2.5};\def\YMAX{2.5};\def\ZMAX{4.5};
+\begin{scope}
+\clip(-\XMAX,-\YMAX) rectangle (\XMAX,\YMAX);
+\draw (-3,-4)--(3,8);
+\draw[blue] (-3,-6)--(3,6);
+\end{scope}
+\draw[help lines, color=gray!30, dashed] (-\XMAX,-\YMAX) grid (\XMAX,\YMAX);
+\draw[->, color=gray!80] (-\XMAX,0)--(\XMAX,0) node[right]{$x_1$};
+\draw[->, color=gray!80] (0,-\YMAX)--(0,\YMAX) node[above]{$x_2$};
+\coordinate (u) at (-1,0); \node at (u)[below right]{$\mathbf u$}; \draw[->,thick] (0,0)--(u);
+\coordinate (v) at (0,2); \node at (v)[below right]{$\mathbf v$}; \draw[->,thick] (0,0)--(v);
+\draw[->,thick,blue] (0,0)--(1,2);
+\node at ($2*(u)$)[below right]{$2\mathbf u$}; \draw[->] (0,0)--($2*(u)$);
+\node at ($(u)+(v)$)[below left]{$\mathbf u+\mathbf v$}; \draw[->] (0,0)--($(u)+(v)$);
+% \draw[dashed] (u)--($(u)+(v)$); \draw[dashed] (v)--($(u)+(v)$);
+\node at (-2,-2)[left] {$H$};
+\node at (1,2)[below right] {$H_1$};
+\end{tikzpicture}
+\end{center}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+The reason is that $H$ is not homogeneous. If we consider $H_1$ to be solution set of the homogeneous equation $2x_1-x_2=0$, we see that $H_1$ is a subspace as it is the span of a single vector $\begin{bmatrix}
+1\\2
+\end{bmatrix}$.
+\end{example}
+\end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+% \begin{frame}[t]]
+% \end{frame}
+
+\end{document}

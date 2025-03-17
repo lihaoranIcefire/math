@@ -1,0 +1,59 @@
+h1 {
+    font-family: "Times New Roman", Times, sans-serif;
+    color: lightgreen;
+    text-align: center;
+    font-size: 2em
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: "Times New Roman", Times, sans-serif;
+    color: lightgreen;
+}
+
+body {
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    font-weight: 100;
+    background-color: black;
+    color: white;
+}
+
+b, strong {
+    color: orange;
+}
+
+i, em {
+    color: teal;
+}
+
+a {
+    color: #007bff; /* Default blue */
+    text-decoration: none; /* Removes underline */
+}
+
+a:hover {
+    color: #007bff; /* Changes color on hover */
+    text-decoration: underline; /* Underline on hover */
+}
+
+pre {
+    color: #101010;
+    color: orchid;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+pre code {
+    color: #101010;
+    color: orchid;
+    font-size: 14px;
+    font-family: "Courier New", monospace;
+}
+
+code {
+    background-color: black;
+    color: orchid;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: "Courier New", monospace;
+}

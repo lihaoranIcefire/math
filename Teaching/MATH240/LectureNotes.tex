@@ -1,0 +1,51 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{My_math_package}
+\usepackage{pifont}
+\usepackage{cancel}
+
+\title{MATH240 Summer 2023} % password: 
+\author{Haoran Li}
+\date{}
+
+\makeindex[columns=2, title=Index, intoc] % Create the index
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Lecture 1 - System of linear equations}
+
+
+\subsection{Linear systems}
+
+Throughout this course, we adopt the following notations
+\begin{itemize}
+\item \textcolor{blue}{Natural numbers}: $\mathbb N=\{0,1,2,3,\cdots\}$.
+\item \textcolor{blue}{Integers}: $\mathbb Z=\{\cdots,-2,-1,0,1,2,\cdots\}$.
+\item \textcolor{blue}{Rational numbers}: $\mathbb Q=\left\{\frac{m}{n}\middle|m,n\in\mathbb Z,n\neq0\right\}$ is the set of fractions. Here $\in$ means \textcolor{blue}{belong to}.
+\item \textcolor{blue}{Real numbers}: $\mathbb R$ is the set of numbers on the whole real number line. It includes
+\begin{itemize}
+\item irrational numbers (like $\sqrt{2},\sqrt[3]{3}$) 
+\item transcendental numbers (like $\pi,e$)
+\end{itemize}
+\item \textcolor{blue}{Complex numbers}: $\mathbb C=\left\{a+bi\middle|a,b\in\mathbb R\right\}$, $i=\sqrt{-1}$ is the imaginary number such that $i^2=-1$.
+\item $\mathbb N\subsetneqq\mathbb Z\subsetneqq\mathbb Q\subsetneqq\mathbb R\subsetneqq\mathbb C$.
+\item $\mathbb R^n=\{(r_1,r_2,r_3,\cdots,r_n)|r_1,r_2,r_3,\cdots,r_n\in\mathbb R\}$ is the set of all $n$-tuples of real numbers. Geometrically, it is the $n$-dimensional Euclidean space. For example
+\begin{itemize}
+\item $\mathbb R^1=\mathbb R$ is a line.
+\item $\mathbb R^2$ is a plane.
+\item $\mathbb R^3$ is our usual physical space.
+\end{itemize}
+\end{itemize}
+
+\begin{definition}
+A \textcolor{blue}{linear equation}\index{linear equation} in the variables $x_1,x_2,x_3,\cdots,x_n$ is an equation that can be written in the form 
+\begin{equation}\label{14:02-05/31/2022}
+a_1x_1+a_2x_2+a_3x_3+\cdots+a_nx_n=b
+\end{equation}
+where the coefficients $a_1,a_2,a_3,\cdots,a_n$ and $b$ are real or complex numbers, usually known in advance.
+\end{definition}
+
+\end{document}

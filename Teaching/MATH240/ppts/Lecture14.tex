@@ -1,0 +1,224 @@
+\documentclass{beamer}
+\setbeamercovered{}
+
+\usepackage{bookman}
+\usepackage{newtxtext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{systeme}
+\usepackage{subcaption}
+\usepackage{bm} % Bold
+\usepackage{bbm} % Can use \mathbbm{1}
+\usepackage{ifthen} % Use if then else
+\usepackage{shuffle} % Use shuffle product
+\usepackage{minted} % For listing codes
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{cancel}
+\tikzcdset{ampersand replacement=\&}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+% \newcommand*{\relbarfill@}{\arrowfill@\relbar-\relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+% \newcommand*{\xdash}[2][]{\ext@arrow 0055\relbarfill@{#1}{#2}}
+\makeatother
+
+\newlength{\simlength}
+
+\newcommand{\xsim}[1]{
+\settowidth{\simlength}{$#1$}
+\mathrel{\overset{#1}{\resizebox{\simlength}{\height}{\sim}}}
+}
+\newcommand{\fatdot}{\mathrel{\raisebox{0.25ex}{\tikz\filldraw[black,x=2pt,y=2pt] (0,0) circle (0.5);}}}
+\newcommand{\fatplus}{\mathrel{\raisebox{-0.1ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0.9,0)--(1.1,0)--(1.1,0.9)--(2,0.9)--(2,1.1)--(1.1,1.1)--(1.1,2)--(0.9,2)--(0.9,1.1)--(0,1.1)--(0,0.9)--(0.9,0.9)--cycle;}}}
+\newcommand{\fatminus}{\raisebox{+0.4ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0,0.9)--(2,0.9)--(2,1.1)--(0,1.1)--cycle;}}
+
+\DeclareMathOperator{\Nul}{Nul}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\Rank}{Rank}
+\DeclareMathOperator{\Range}{Range}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Proj}{Proj}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+    \usecolortheme{beaver}
+    \usefonttheme{professionalfonts} 
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{caption}[numbered]
+}
+
+\theoremstyle{definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{recall}{Recall}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\DeclareMathOperator{\Span}{Span}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginSection[]{
+    \begin{frame}
+    \centering
+    \begin{beamercolorbox}[center, shadow=true, rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \end{frame}
+}
+
+\title{MATH240 - Introduction to Linear Algebra}
+\author{Haoran Li}
+\institute[UMD]{University of Maryland, College Park}
+\date{Summer 2023}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 14 - Least-square problem}
+
+\begin{frame}[t]
+\begin{question}
+linear system $A\mathbf x=\mathbf b$ may not always be solvable, nonetheless, we still want to find the \textit{best possible} solution $\hat{\mathbf x}$
+\end{question}
+\pause
+\begin{answer}
+According to Gauss, by best possible we mean the \textcolor{blue}{least-square solutions}\index{least-square}. In concrete terms, such $\hat{\mathbf x}$ stisfies that $\|A\hat{\mathbf x}-\mathbf b\|\leq\|A\mathbf x-\mathbf b\|$ for any other choice of $\mathbf x$.
+\end{answer}
+\pause
+By a simple argument we can show that $A\hat{\mathbf x}$ must be the projection of $\mathbf b$ onto $\Col A$\pause, so we know that
+\begin{align*}
+(A\hat{\mathbf x}-\mathbf b)\perp\Col A\iff(A\hat{\mathbf x}-\mathbf b)\in(\Col A)^\perp=\Nul(A^T)\iff A^T(A\hat{\mathbf x}-\mathbf b)=\mathbf 0\iff A^TA\hat{\mathbf x}=A^T\mathbf b
+\end{align*}
+\pause
+We call equation
+\begin{equation}\label{00:08-07/15/2022}
+A^TA\mathbf x=A^T\mathbf b
+\end{equation}
+the normal equation of $A\mathbf x=\mathbf b$\pause. And we have shown that the least square solutions of the linear system $A\mathbf x=\mathbf b$ is the solution set to the normal equation~\eqref{00:08-07/15/2022}\pause. The solution to the least square problem might not be unique.
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}
+$A^TA\mathbf x=A^T\mathbf b$ has a unique solution $\iff$ the columns of $A$ is linearly independent $\iff A^TA$ is invertible. And the unique solution would of course be $(A^TA)^{-1}A^T\mathbf b$
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Suppoes $A=\begin{bmatrix}
+4&0\\
+0&2\\
+1&1
+\end{bmatrix}$, $\mathbf b=\begin{bmatrix}
+2\\0\\11
+\end{bmatrix}$. It is easy to verify that the linear system $A\mathbf x=\mathbf b$ is not linearly consistent. To solve for the least-square solution, we look at its normal equation
+\[
+\begin{bmatrix}
+17&1\\1&5
+\end{bmatrix}\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}=\begin{bmatrix}
+4&0&1\\
+0&2&1
+\end{bmatrix}\begin{bmatrix}
+4&0\\
+0&2\\
+1&1
+\end{bmatrix}\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}=A^TA\mathbf x=A^T\mathbf b=\begin{bmatrix}
+4&0&1\\
+0&2&1
+\end{bmatrix}\begin{bmatrix}
+2\\0\\11
+\end{bmatrix}=\begin{bmatrix}
+19\\11
+\end{bmatrix}
+\]
+And solve for $\mathbf x(A^TA)^{-1}A^T\mathbf b=(A^TA)^{-1}A^T\mathbf b=\begin{bmatrix}
+1\\2
+\end{bmatrix}$
+\end{example}
+\end{frame}
+
+\begin{frame}[t]{exercise}
+Suppose $A=\begin{bmatrix}
+1&2\\
+-1&4\\
+1&2
+\end{bmatrix}$, $\mathbf b=\begin{bmatrix}
+3\\-1\\5
+\end{bmatrix}$, solve for the least square solution of $A\mathbf x=\mathbf b$.
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Find the equation $y=\beta_0+\beta_1x$ of the least-squares line that best fits the data points $(2,1),(5,2),(7,3)$ and $(8,3)$.
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{question}
+Suppose you know a curve has the form
+\[
+y=\beta_1f_1(x_1,\cdots,x_k)+\beta_2f_2(x_1,\cdots,x_k)+\cdots+\beta_nf_n(x_1,\cdots,x_k)
+\]
+And you know what functions $f_1,f_2,\cdots,f_n$ should be (they could be linear functions, quadratic functions, polynomial functions, exponential functions, logarithmic function, trigonometry functions, etc.)\pause. You also have collected a bunch of data points $(x_1^{(1)},\cdots,x_k^{(1)},y^{(1)}),(x_1^{(2)},\cdots,x_k^{(2)},y^{(2)}),\cdots,(x_1^{(m)},\cdots,x_k^{(m)},y^{(m)})$\pause. How do you find best fitting coefficients $\beta_1,\beta_2,\cdots,\beta_n$\pause? First let's define the \textcolor{blue}{residual}\index{residual}
+\[
+\epsilon^{(i)}=y^{(i)}-\beta_1f_1(x_1^{(i)},\cdots,x_k^{(i)})-\beta_2f_2(x_1^{(i)},\cdots,x_k^{(i)})-\cdots-\beta_nf_n(x_1^{(i)},\cdots,x_k^{(i)})
+\]\pause
+Our goal to minimize the residual\pause. One might want to minimize the quantity $\sum_{i=1}^m|\epsilon^{(i)}|$, however, this is cumbersome, difficult to work with, and mathematically unsatisfactory\pause. So Gauss instead considered the square sum $\sum_{i=1}^m|\epsilon^{(i)}|^2$, posed and solved the least square problem!!!
+\end{question}
+\end{frame}
+
+\begin{frame}[t]
+\begin{answer}
+We use normal equations.
+\end{answer}
+\pause
+Let's write
+\[
+\mathbf y=\begin{bmatrix}
+y^{(1)}\\\vdots\\y^{(m)}
+\end{bmatrix},\mathbf \beta=\begin{bmatrix}
+\beta_1\\\vdots\\\beta_n
+\end{bmatrix},\mathbf \epsilon=\begin{bmatrix}
+\epsilon^{(1)}\\\vdots\\\epsilon^{(m)}
+\end{bmatrix}
+\]
+\[
+X=\begin{bmatrix}
+f_1(x_1^{(1)},\cdots,x_k^{(1)})&\cdots&f_n(x_1^{(1)},\cdots,x_k^{(1)})\\
+\vdots&\ddots&\vdots\\
+f_1(x_1^{(m)},\cdots,x_k^{(m)})&\cdots&f_n(x_1^{(m)},\cdots,x_k^{(m)})\\
+\end{bmatrix}
+\]\pause
+Then have $\mathbf y=X\mathbf\beta=\mathbf\epsilon$. To minimize $\|\mathbf\epsilon\|^2$ will be the same as solving the normal equation $X^TX\mathbf\beta=X^T\mathbf y$ of $X\mathbf\beta=\mathbf y$.
+\end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+\end{document}

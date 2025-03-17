@@ -1,0 +1,315 @@
+\documentclass{beamer}
+\setbeamercovered{}
+
+\usepackage{bookman}
+\usepackage{newtxtext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{systeme}
+\usepackage{subcaption}
+\usepackage{bm} % Bold
+\usepackage{bbm} % Can use \mathbbm{1}
+\usepackage{ifthen} % Use if then else
+\usepackage{shuffle} % Use shuffle product
+\usepackage{minted} % For listing codes
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+% \newcommand*{\relbarfill@}{\arrowfill@\relbar-\relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+% \newcommand*{\xdash}[2][]{\ext@arrow 0055\relbarfill@{#1}{#2}}
+\makeatother
+
+\newlength{\simlength}
+
+\newcommand{\xsim}[1]{
+\settowidth{\simlength}{$#1$}
+\mathrel{\overset{#1}{\resizebox{\simlength}{\height}{\sim}}}
+}
+
+\DeclareMathOperator{\Nul}{Nul}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\Rank}{Rank}
+% \DeclareMathOperator{\}{}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+    \usecolortheme{beaver}
+    \usefonttheme{professionalfonts} 
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{caption}[numbered]
+}
+
+\theoremstyle{definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{recall}{Recall}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\DeclareMathOperator{\Span}{Span}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginSection[]{
+    \begin{frame}
+    \centering
+    \begin{beamercolorbox}[center, shadow=true, rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \end{frame}
+}
+
+\title{MATH240 - Introduction to Linear Algebra}
+\author{Haoran Li}
+\institute[UMD]{University of Maryland, College Park}
+\date{Summer 2024}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 11 - Null spaces, Column spaces, Row spaces, Rank and Nullity}
+
+\begin{frame}[t]
+\begin{definition}
+Suppose $V$ is a vector space, $\{\bm v_1,\bm v_2,\cdots,\bm v_n\}\subseteq V$ is a set of linearly independent vectors that span $V$, we define the \textcolor{blue}{dimension}\index{dimension} of $V$ to be $\dim V=n$.
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+Suppose $A$ is a $m\times n$ matrix, we define the \textcolor{blue}{null space}\index{null space} of $A$ to be $\Nul A=\{\mathbf x\in\mathbb R^n|A\mathbf x=\mathbf0\}$. Note that the solution set to linear system $A\mathbf x=\mathbf0$ is the intersection of $m$ hyperplanes (one for each homogeneous equation) that pass through the origin.
+\end{definition}
+\pause
+\begin{example}
+$A=\begin{bmatrix}
+1&-3&2\\
+-5&12&-1
+\end{bmatrix}$, the to find the $\Nul A$ is equivalent to solve $A\mathbf x=\mathbf 0$\\
+\scalebox{0.7}{
+$\begin{bmatrix}
+A&\mathbf 0
+\end{bmatrix}\xsim{R2\rightarrow R2+5R1}\begin{bmatrix}
+1&-3&2&0\\
+0&-3&9&0
+\end{bmatrix}\xsim{R2/(-3)}\begin{bmatrix}
+1&-3&2&0\\
+0&1&-3&0
+\end{bmatrix}\xsim{R1\rightarrow R1+3R2}\begin{bmatrix}
+1&0&-7&0\\
+0&1&-3&0
+\end{bmatrix}$
+}
+Hence the solution set is $\begin{cases}
+x_1=7x_3\\
+x_2=3x_3\\
+x_3\text{ is free}
+\end{cases}$, in parametric form, $\begin{bmatrix}
+x_1\\x_2\\x_3
+\end{bmatrix}=x_3\begin{bmatrix}
+7\\3\\1
+\end{bmatrix}$, which describes a line in $\mathbb R^3$ that passes through the origin, and this line is the intersection of planes $x_1-3x_2+2x_3=0$ and $-5x_1+12x_2-x_3=0$
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{center}
+\begin{tikzpicture}
+\definecolor{color1}{rgb}{255,0,0}
+\definecolor{color2}{rgb}{0,0,255}
+\definecolor{color3}{rgb}{255,0,255}
+\def\XMAX{2.5};\def\YMAX{2.5};\def\ZMAX{4.5};
+\begin{scope}[blend mode=multiply]
+\draw [color1, fill=color1!20] plot (-2,-2,-2)--(-2,2,4)--(2,2,2)--(2,-2,-4)--cycle;
+\node at (2,-2,-4) [below right]{$x_1-3x_2+2x_3=0$};
+\draw [color2, fill=color2!20] plot (-2,-7/6,-4)--(-2,-1/2,4)--(2,7/6,4)--(2,1/2,-4)--cycle;
+\node at (2,1/2,-4) [above]{$-5x_1+12x_2-x_3=0$};
+\end{scope}
+\draw [purple, ultra thick](-2,-6/7,-2/7)--(2,6/7,2/7);
+\draw[->] (-\XMAX,0,0)--(\XMAX,0,0) node[right]{$x_1$};
+\draw[->] (0,-\YMAX,0)--(0,\YMAX,0) node[above]{$x_2$};
+\draw[->] (0,0,-\ZMAX)--(0,0,\ZMAX) node[below left]{$x_3$};
+\end{tikzpicture}
+\end{center}
+
+\begin{remark}
+As discussed in Example~\ref{15:10-06/23/2022}, in general, the solution set of $A\mathbf x=\mathbf b$ is not a subspace of $\mathbb R^n$ unless $\mathbf b=\mathbf0$. And in fact, any subspace of $\mathbb R^n$ is the null space for some $m\times n$ matrix $A$, i.e. the intersection of hyperplanes passing through the origin
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+Suppose $A=\begin{bmatrix}
+\mathbf a_1&\mathbf a_2&\cdots&\mathbf a_n
+\end{bmatrix}$ is an $m\times n$ matrix, then the \textcolor{blue}{column space}\index{column space} (denote as $\Col A$) is the subspace $\Span\{\mathbf a_1,\mathbf a_2,\cdots,\mathbf a_n\}$ in $\mathbb R^m$. Suppose $A=\begin{bmatrix}
+R1\\R2\\\vdots\\Rm
+\end{bmatrix}$, then the \textcolor{blue}{row space}\index{row space} (denote as $\Row A$) is the subspace spaned by row vectors $\Span\{R1,R2,\cdots, Rm\}$ in $\mathbb R^n$ written horizontally.
+\end{definition}
+\pause
+\begin{theorem}
+Row reductions preserve $\Nul A, \Row A$, but not $\Col A$. However, row reductions preserve linear dependences of the column vectors.
+\end{theorem}
+\pause
+\begin{remark}
+Suppose $A\mathbf x=\mathbf0$ is some linear dependence of the column vectors of $A$, after elementary row reduction $A\sim EA$, $(EA)\mathbf x=E(A\mathbf x)=E\mathbf0=\mathbf0$ is again the same linear dependence of columns of $EA$. In other words, the linear dependence of columns of a matrix is preserved by row equivalence.
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}
+Suppose $A$ is a $m\times n$ matrix, $A\sim U$ is of RREF form
+\begin{itemize}
+\item The direction vectors in the solution set of $\begin{bmatrix}
+U&\mathbf0
+\end{bmatrix}$ in parametric vector form gives a basis for $\Nul A$. Note that $\dim\Nul A=$ the number of free variables.
+\item A basis for $\Col A$ could be the set of pivot columns in $A$. Note that $\dim\Col A=$ the number of pivots.
+\item A basis for $\Row A$ could be the set of non-zero row vectors in $U$ (Or any REF of $A$). Note that $\dim\Row A=$ the number of pivots.
+\end{itemize}
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+$\dim\Nul A$ is also name the \textcolor{blue}{nullity}\index{nullity} of $A$. The number of pivots of $A$ (which is equal to both $\dim\Col A$ and $\dim\Row A$) is called the \textcolor{blue}{rank}\index{rank} of $A$
+\end{definition}
+\pause
+\begin{theorem}[Rank-Nullity theorem]\label{16:38-06/24/2022}
+Notice that the number of columns in $A$ (say a $m\times n$ matrix) is equal to the number of free variables and the number of pivot columns, thus we have
+\begin{center}
+$n=$ nullity + rank
+\end{center}
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+$A=\begin{bmatrix}
+1&-1&1\\
+2&0&-1\\
+1&1&-2
+\end{bmatrix}\sim\begin{bmatrix}
+1&-1&1\\
+0&2&-3\\
+0&0&0
+\end{bmatrix}\sim\begin{bmatrix}
+1&0&-\frac{1}{2}\\
+0&1&-\frac{3}{2}\\
+0&0&0
+\end{bmatrix}$, which is an REF and an RREF respectively\pause. There is only one free variable $x_3$, so the nullity is 1\pause, and the 1st, 2nd columns are pivot columns, so the rank is 2\pause. We see that Theorem~\ref{16:38-06/24/2022} holds as $3=1+2$\pause, and
+\[
+\Nul A=\Span\left\{\begin{bmatrix}
+\frac{1}{2}\\\frac{3}{2}\\1
+\end{bmatrix}\right\}
+\]\pause
+\[
+\Col A=\Span\left\{\begin{bmatrix}
+1\\2\\1
+\end{bmatrix},\begin{bmatrix}
+-1\\0\\1
+\end{bmatrix}\right\}
+\]\pause
+$\Row A=\Span\left\{\begin{bmatrix}
+1&0&-\frac{1}{2}
+\end{bmatrix},\begin{bmatrix}
+0&1&-\frac{3}{2}
+\end{bmatrix}\right\}$\pause or $\Span\left\{\begin{bmatrix}
+1&-1&1
+\end{bmatrix},\begin{bmatrix}
+1&2&-3
+\end{bmatrix}\right\}$
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}
+$A=\begin{bmatrix}
+1&2&0&4&5\\
+0&0&5&-7&8\\
+0&0&0&0&-9\\
+0&0&0&0&0
+\end{bmatrix}\sim\begin{bmatrix}
+1&2&0&4&0\\
+0&0&1&-\frac{7}{5}&0\\
+0&0&0&0&1\\
+0&0&0&0&0
+\end{bmatrix}$\pause
+Note that here we have 2 free variables $x_2,x_4$, so the nullity is 2\pause, and the 1st, 3rd, 5th columns are pivot columns, so the rank is 3\pause. We see that Theorem~\ref{16:38-06/24/2022} holds as $5=2+3$\pause, and
+\[
+\Nul A=\Span\left\{\begin{bmatrix}
+-2\\1\\0\\0\\0
+\end{bmatrix},\begin{bmatrix}
+-4\\0\\\frac{7}{5}\\1\\
+\end{bmatrix}\right\},\qquad \Col A=\Span\left\{\begin{bmatrix}
+1\\0\\0\\0
+\end{bmatrix},\begin{bmatrix}
+0\\5\\0\\0
+\end{bmatrix},\begin{bmatrix}
+5\\8\\-9\\0
+\end{bmatrix}\right\}
+\]\pause
+\[
+\Row A=\Span\left\{\begin{bmatrix}
+1&2&0&4&5
+\end{bmatrix},\begin{bmatrix}
+0&0&5&-7&8
+\end{bmatrix},\begin{bmatrix}
+0&0&0&0&-9
+\end{bmatrix}\right\}
+\]
+\end{exercise}
+\end{frame}
+
+\begin{frame}[t]
+\begin{question}
+If you have a set $\mathcal S$ of vectors in $\mathbb R^m$, how do you find a subset of $\mathcal S$ that is a basis for $\Span\{\mathcal S\}$ (i.e. remove linear dependences)?
+\end{question}
+\pause
+\begin{answer}
+Collect these vectors as the column vectors of a matrix, and then find its columns space.
+\end{answer}
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+Suppose $\mathbf v_1=\begin{bmatrix}
+1\\2\\1
+\end{bmatrix}$, $\mathbf v_2=\begin{bmatrix}
+-1\\0\\1
+\end{bmatrix}$, $\mathbf v_3=\begin{bmatrix}
+1\\-1\\-2
+\end{bmatrix}$. Find a basis for $\Span\{\mathbf v_1, \mathbf v_2, \mathbf v_3\}$.
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+Suppose $A=\begin{bmatrix}
+1&-7&0&6&5\\
+0&0&1&-2&-3\\
+-1&7&-4&2&7
+\end{bmatrix}$. Find $\Nul A,\Row A,\Col A$, and the nullity, rank of $A$.
+\end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+\end{document}

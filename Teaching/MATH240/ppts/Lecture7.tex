@@ -1,0 +1,508 @@
+\documentclass{beamer}
+\setbeamercovered{}
+
+\usepackage{bookman}
+\usepackage{newtxtext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{systeme}
+\usepackage{subcaption}
+\usepackage{bm} % Bold
+\usepackage{bbm} % Can use \mathbbm{1}
+\usepackage{ifthen} % Use if then else
+\usepackage{shuffle} % Use shuffle product
+\usepackage{minted} % For listing codes
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+% \newcommand*{\relbarfill@}{\arrowfill@\relbar-\relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+% \newcommand*{\xdash}[2][]{\ext@arrow 0055\relbarfill@{#1}{#2}}
+\makeatother
+
+\newlength{\simlength}
+
+\newcommand{\xsim}[1]{
+\settowidth{\simlength}{$#1$}
+\mathrel{\overset{#1}{\resizebox{\simlength}{\height}{\sim}}}
+}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+    \usecolortheme{beaver}
+    \usefonttheme{professionalfonts} 
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{caption}[numbered]
+}
+
+\theoremstyle{definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{recall}{Recall}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\DeclareMathOperator{\Span}{Span}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginSection[]{
+    \begin{frame}
+    \centering
+    \begin{beamercolorbox}[center, shadow=true, rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \end{frame}
+}
+
+\title{MATH240 - Introduction to Linear Algebra}
+\author{Haoran Li}
+\institute[UMD]{University of Maryland, College Park}
+\date{Summer 2024}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 7 - Matrix transpose and matrix inverse}
+
+\begin{frame}[t]
+\begin{definition}
+Suppose $A=\begin{bmatrix}
+a_{11}&a_{12}&\cdots&a_{1n}\\
+a_{21}&a_{22}&\cdots&a_{2n}\\
+\vdots&\vdots&&\vdots\\
+a_{m1}&a_{m2}&\cdots&a_{mn}
+\end{bmatrix}$ is a $m\times n$ matrix, we define its \textcolor{blue}{transpose}\index{transpose} by flipping it over the diagonal, and this is the $n\times m$ matrix
+\[
+A^T=\begin{bmatrix}
+a_{11}&a_{21}&\cdots&a_{m1}\\
+a_{12}&a_{22}&\cdots&a_{2n}\\
+\vdots&\vdots&&\vdots\\
+a_{1n}&a_{2n}&\cdots&a_{mn}
+\end{bmatrix}
+\]
+\end{definition}
+\pause
+\begin{example}
+Suppose $A=\begin{bmatrix}
+1&2&3\\4&5&6
+\end{bmatrix}$, then $A^T=\begin{bmatrix}
+1&4\\2&5\\3&6
+\end{bmatrix}$
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}
+Here are some properties of matrix transpose
+\begin{itemize}
+\item $(A^T)^T=A$\pause
+\item $(A+B)^T=A^T+B^T$\pause
+\item $(cA)^T=cA^T$\pause
+\item $(AB)^T=B^TA^T$
+\end{itemize}
+\end{theorem}
+\pause
+\begin{definition}
+For any $\mathbf v=\begin{bmatrix}
+v_1\\v_2\\\vdots\\v_n
+\end{bmatrix},\mathbf w=\begin{bmatrix}
+w_1\\w_2\\\vdots\\w_n
+\end{bmatrix}\in\mathbb R^n$, we can define the \textcolor{blue}{dot product}\index{dot product} to be\pause $\mathbf v\cdot\mathbf w=\mathbf v^T\mathbf w=v_1w_1+\cdots+v_nw_n$\pause. $\|\mathbf v\|=\sqrt{\mathbf v^T\mathbf v}=\sqrt{v_1^2+\cdots+v_n^2}$ is the length $\mathbf v$
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{remark}
+There is a nice geometric interpretation of dot product. Suppose the angle between $\mathbf v$ and $\mathbf w$ is $\theta$, then $\mathbf v\cdot\mathbf w=\|\mathbf v\|\|\mathbf w\|\cos\theta$.
+% With a bit of trigonometry, we see it is the product of one vector and the projection of the other onto the first one.
+\begin{center}
+\begin{tikzpicture}[scale=3]
+\coordinate (a) at ($cos(30)*(1,0)+sin(30)*(0,1)$);
+\coordinate (b) at ($(1.2,0)$);
+\draw[->, thick] (0,0)--(a);
+\draw[->, thick] (0,0)--(b);
+% \draw[dotted] (a)--(a|-0,0);
+% \draw[->] (0,0)--(a|-0,0);
+\draw (0.2,0) arc (0:30:0.2);
+\node at (a)[right] {$\mathbf v$};
+\node at (b)[right] {$\mathbf w$};
+\node at (0.2,0)[above right] {$\theta$};
+% \node at (a|-0,0)[below] {$\mathbf u$};
+\end{tikzpicture}
+\end{center}
+% Here $\mathbf u$ is the projection of $\mathbf v$ onto $\mathbf w$
+\end{remark}
+\pause
+\begin{exercise}
+Let $\mathbf v=\begin{bmatrix}
+1\\-2\\1
+\end{bmatrix}$, $\mathbf w=\begin{bmatrix}
+1\\0\\-1
+\end{bmatrix}$.
+\begin{itemize}
+\item What is the length of $\mathbf v$?
+\item What is $\mathbf v\cdot\mathbf w$?
+\item what is the angle between $\mathbf v$ and $\mathbf w$?
+\end{itemize}
+\end{exercise}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+Suppose linear transformation $T:\mathbb R^n\to\mathbb R^m$ is both onto and one-to-one\pause (i.e. for each vector $\mathbf b$ in the codomain $\mathbb R^m$ there is a unique preimage, which we denote as $T^{-1}(\mathbf b)$)\pause. Suppose $A$ is the standard matrix for $T$, then $m$ necessarily equal $n$ as shown in Exercise~\ref{13:16-06/10/2022}, so $A$ must be a square matrix\pause. We know $T(\mathbf x)=\mathbf b$ always has a unique solution which should be $T^{-1}(\mathbf b)$, it can be shown that $T^{-1}:\mathbb R^n\to\mathbb R^n$ as mapping is actually also a linear transformation (Why? See if you can figure this out)\pause. Then the standard matrix of $T^{-1}$ is defined to be $A^{-1}$ (the \textcolor{blue}{inverse matrix}\index{Inverse matrix} of $A$)\pause. Note that
+\begin{align*}
+&(T\circ T^{-1})(\mathbf b)=T(T^{-1}(\mathbf b))=T(\mathbf x)=\mathbf b\\
+&(T^{-1}\circ T)(\mathbf x)=T^{-1}(T(\mathbf x))=T^{-1}(\mathbf b)=\mathbf x
+\end{align*}\pause
+Since $T\circ T^{-1}$, $T^{-1}\circ T$ work like the identity mappings\pause, so $AA^{-1}=A^{-1}A=I$\pause. In this case, we see that $A$ is equivalent to the identity matrix (because of Theorem~\ref{06:35-06/06/2022}, $A$ has a pivot in each row and column).
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{remark}
+Because we can write elementary row operations as left elementary matrix multiplications\pause, so we know there are elementary matrices $E_1,E_2,\cdots,E_k$ such that
+\begin{align*}
+A&\sim E_1A\sim E_2E_1A\sim E_3E_2E_1A\sim\cdots\\
+&\sim E_kE_{k-1}\cdots E_2E_1A=I
+\end{align*}
+If we multiply $A^{-1}$ on the right on both sides, we get $E_kE_{k-1}\cdots E_2E_1=A^{-1}$\pause. Thanks to this observation, we introduce an algorithm for computing matrix inverses. Let's consider the RREF of the following partitioned matrix
+\begin{align*}
+\left[\begin{array}{c|c}
+A&I
+\end{array}\right]&\sim\left[\begin{array}{c|c}
+E_1A&E_1
+\end{array}\right]\sim\left[\begin{array}{c|c}
+E_2E_1A&E_2E_1
+\end{array}\right]\sim\cdots\\
+&\sim\left[\begin{array}{c|c}
+E_kE_{k-1}\cdots E_2E_1A&E_kE_{k-1}\cdots E_2E_1
+\end{array}\right]=\left[\begin{array}{c|c}
+I&A^{-1}
+\end{array}\right]
+\end{align*}
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}\label{19:39-06/13/2022}
+Find the inverse of the following matrices. $A=\begin{bmatrix}
+-1&0\\0&1
+\end{bmatrix}$
+\end{exercise}
+\pause
+\begin{solution}
+\begin{align*}
+&\left[\begin{array}{cc|cc}
+-1&0&1&0\\
+0&1&0&1
+\end{array}\right]\xsim{R1\to(-1)R1}\left[\begin{array}{cc|cc}
+1&0&-1&0\\
+0&1&0&1
+\end{array}\right]
+\end{align*}
+Hence $A^{-1}=\begin{bmatrix}
+-1&0\\0&1
+\end{bmatrix}$
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}\label{19:39-06/13/2022}
+Find the inverse of the following matrices. $A=\begin{bmatrix}
+1&2\\3&5
+\end{bmatrix}$
+\end{exercise}
+\pause
+\begin{solution}
+\begin{align*}
+&\left[\begin{array}{cc|cc}
+1&2&1&0\\
+3&5&0&1
+\end{array}\right]\xsim{R2\rightarrow R2-3R1}\left[\begin{array}{cc|cc}
+1&2&1&0\\
+0&-1&-3&1
+\end{array}\right]\\
+&\xsim{R1\rightarrow R1+2R2}\left[\begin{array}{cc|cc}
+1&0&-5&2\\
+0&-1&-3&1
+\end{array}\right]\xsim{R2\to(-1)R2}\left[\begin{array}{cc|cc}
+1&0&-5&2\\
+0&1&3&-1
+\end{array}\right]
+\end{align*}
+Hence $A^{-1}=\begin{bmatrix}
+-5&2\\3&-1
+\end{bmatrix}$
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}\label{19:39-06/13/2022}
+Find the inverse of the following matrices. $\begin{bmatrix}
+1&-1&1\\
+2&0&-1\\
+1&1&1\\
+\end{bmatrix}$
+\end{exercise}
+\pause
+\begin{solution}
+\scalebox{0.8}{
+$\left[\begin{array}{ccc|ccc}
+1&-1&1&1&0&0\\
+2&0&-1&0&1&0\\
+1&1&1&0&0&1\\
+\end{array}\right]\xsim{\substack{R2\rightarrow R2-2R1\\R3\rightarrow R3-R1}}\left[\begin{array}{ccc|ccc}
+1&-1&1&1&0&0\\
+0&2&-3&-2&1&0\\
+0&2&0&-1&0&1\\
+\end{array}\right]\xsim{R3\rightarrow R3-R2}$
+}
+\scalebox{0.8}{
+$\left[\begin{array}{ccc|ccc}
+1&-1&1&1&0&0\\
+0&2&-3&-2&1&0\\
+0&0&3&1&-1&1\\
+\end{array}\right]\xsim{R2\rightarrow R2+R3}\left[\begin{array}{ccc|ccc}
+1&-1&1&1&0&0\\
+0&2&0&-1&0&1\\
+0&0&3&1&-1&1\\
+\end{array}\right]\xsim{\substack{R2\to R2/2\\R3\to R3/3}}$
+}
+\scalebox{0.8}{
+$\left[\begin{array}{ccc|ccc}
+1&-1&1&1&0&0\\
+0&1&0&-\frac{1}{2}&0&\frac{1}{2}\\
+0&0&1&\frac{1}{3}&-\frac{1}{3}&\frac{1}{3}\\
+\end{array}\right]\xsim{R1\rightarrow R1+R2-R3}\left[\begin{array}{ccc|ccc}
+1&0&0&\frac{1}{6}&\frac{1}{3}&\frac{1}{6}\\
+0&1&0&-\frac{1}{2}&0&\frac{1}{2}\\
+0&0&1&\frac{1}{3}&-\frac{1}{3}&\frac{1}{3}\\
+\end{array}\right]$
+}
+
+Hence $A^{-1}=\begin{bmatrix}
+\frac{1}{6}&\frac{1}{3}&\frac{1}{6}\\
+-\frac{1}{2}&0&\frac{1}{2}\\
+\frac{1}{3}&-\frac{1}{3}&\frac{1}{3}\\
+\end{bmatrix}$
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+A square matrix $A$ is \textcolor{blue}{invertible} (or \textcolor{blue}{non-singular})\index{invertible} if it has an inverse $A^{-1}$ such that $AA^{-1}=A^{-1}A=I$\pause. $A$ is called \textcolor{blue}{singular}\index{singular} if $A$ is not invertible.
+\end{definition}
+
+\begin{theorem}
+Suppose $T$ is a linear transformation with standard matrix $A$, then\pause
+
+$T\text{ is invertible with inverse }T^{-1}\iff A\text{ is invertible with inverse }A^{-1}\iff A\sim I$
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}
+$A=\begin{bmatrix}
+a&b\\c&d
+\end{bmatrix}$, $A^{-1}=\pause\dfrac{1}{ad-bc}\begin{bmatrix}
+d&-b\\-c&a
+\end{bmatrix}$, here $\det A=ad-bc$
+\end{theorem}
+
+\begin{example}
+If $A=\begin{bmatrix}
+\frac{1}{2}&\frac{\sqrt{3}}{2}\\-\frac{\sqrt{3}}{2}&\frac{1}{2}
+\end{bmatrix}$, then
+\[
+A^{-1}=\dfrac{1}{\frac{1}{2}\frac{1}{2}-\frac{\sqrt{3}}{2}\left(-\frac{\sqrt{3}}{2}\right)}\begin{bmatrix}
+\frac{1}{2}&-\frac{\sqrt{3}}{2}\\\frac{\sqrt{3}}{2}&\frac{1}{2}
+\end{bmatrix}=\begin{bmatrix}
+\frac{1}{2}&-\frac{\sqrt{3}}{2}\\\frac{\sqrt{3}}{2}&\frac{1}{2}
+\end{bmatrix}
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}
+If $A$ is invertible, then the linear system $A\mathbf x=\mathbf b$ has a unique solution $\mathbf x=A^{-1}\mathbf b$
+\end{theorem}
+\pause
+\begin{proof}
+Multiply $A^{-1}$ on the left on both sides
+\end{proof}
+\pause
+\begin{example}
+Let's consider~\eqref{14:34-05/31/2022}, in which case $A=\begin{bmatrix}
+1&1\\2&4
+\end{bmatrix}$, $\mathbf b=\begin{bmatrix}
+10\\26
+\end{bmatrix}$, then $A^{-1}=\dfrac{1}{1\cdot4-1\cdot2}\begin{bmatrix}
+4&-1\\-2&1
+\end{bmatrix}=\begin{bmatrix}
+2&-\frac{1}{2}\\-1&\frac{1}{2}
+\end{bmatrix}$, and\pause
+\[
+\mathbf x=A^{-1}\mathbf b=\begin{bmatrix}
+2&-\frac{1}{2}\\-1&\frac{1}{2}
+\end{bmatrix}\begin{bmatrix}
+10\\26
+\end{bmatrix}=\begin{bmatrix}
+2\cdot10-\frac{1}{2}\cdot26\\-10+\frac{1}{2}\cdot26
+\end{bmatrix}=\begin{bmatrix}
+7\\3
+\end{bmatrix}
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}\label{19:42-06/13/2022}
+Here are some properties of matrix inverse
+\begin{itemize}
+\item $(A^{-1})^{-1}=A$\pause
+\item $(AB)^{-1}=B^{-1}A^{-1}$\pause
+\item $(A^T)^{-1}=(A^{-1})^T$
+\end{itemize}
+\end{theorem}
+\pause
+\begin{exercise}
+What is $(A^T)^{-1}$ in Exercise~\ref{19:39-06/13/2022}, c)?
+\end{exercise}
+\pause
+\begin{solution}
+Use Theorem~\ref{19:42-06/13/2022}, we know
+\[
+(A^T)^{-1}=(A^{-1})^T=\begin{bmatrix}
+\frac{1}{6}&\frac{1}{3}&\frac{1}{6}\\
+-\frac{1}{2}&0&\frac{1}{2}\\
+\frac{1}{3}&-\frac{1}{3}&\frac{1}{3}\\
+\end{bmatrix}^T=\begin{bmatrix}
+\frac{1}{6}&-\frac{1}{2}&\frac{1}{3}\\
+\frac{1}{3}&0&-\frac{1}{3}\\
+\frac{1}{6}&\frac{1}{2}&\frac{1}{3}\\
+\end{bmatrix}
+\]
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}
+Let $T:\mathbb R^n\to\mathbb R^n$ be a linear transformation with standard matrix $A$.
+\begin{itemize}
+\item If $A$ is invertible, then $A$ has $n$ pivots\pause. \ding{51}
+\item If $T$ is one-to-one, then $A$ is invertible\pause. \ding{51}
+\item If columns of $A$ span $\mathbb R^n$, then $A$ is invertible\pause. \ding{51}
+\item If $A$ is invertible, $A\mathbf x=\mathbf0$ only has the trivial solution\pause. \ding{51} 
+\item If $T$ is onto, then $T$ is one-to-one\pause. \ding{51}
+\item If $T$ is one-to-one, then $T$ is onto\pause. \ding{51}
+\end{itemize}
+\end{exercise}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}
+Suppose $T:\mathbb R^3\to\mathbb R^3$ is a linear transformation with standard matrix $A=\begin{bmatrix}
+1&2&3\\
+0&-1&-2\\
+0&0&1
+\end{bmatrix}$. Is $A^{-1}$ invertible? Is $T$ one-to-one? Is $A^T$ invertible? If so, what is $(A^T)^{-1}$? If so, what is $(A^{-1})^{-1}$. Is $T$ invertible (i.e. does $T^{-1}$ exist)? What is the standard matrix of $T^{-1}$? Is $T$ onto?
+\end{exercise}
+\pause
+\begin{solution}
+\scalebox{0.8}{
+$\left[\begin{array}{c|c}
+A&I
+\end{array}\right]=\left[\begin{array}{ccc|ccc}
+1&2&3&1&0&0\\
+0&-1&-2&0&1&0\\
+0&0&1&0&0&1
+\end{array}\right]\xsim{\substack{R1\rightarrow R1-3R3\\R2\rightarrow R2+2R3}}\left[\begin{array}{ccc|ccc}
+1&2&0&1&0&-3\\
+0&-1&0&0&1&2\\
+0&0&1&0&0&1
+\end{array}\right]\xsim{R2\to (-1)R2}$
+}
+\scalebox{0.8}{
+$\left[\begin{array}{ccc|ccc}
+1&2&0&1&0&-3\\
+0&1&0&0&-1&-2\\
+0&0&1&0&0&1
+\end{array}\right]\xsim{R1\rightarrow R1-2R2}\left[\begin{array}{ccc|ccc}
+1&0&0&1&2&1\\
+0&1&0&0&-1&-2\\
+0&0&1&0&0&1
+\end{array}\right]=\left[\begin{array}{c|c}
+I&A^{-1}
+\end{array}\right]$
+}
+So $A^{-1}=\begin{bmatrix}
+1&2&1\\
+0&-1&-2\\
+0&0&1
+\end{bmatrix}$. By Theorem~\ref{19:42-06/13/2022}, we know
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{solution}
+\[
+(A^{-1})^{-1}=A=\begin{bmatrix}
+1&2&3\\
+0&-1&-2\\
+0&0&1
+\end{bmatrix}
+\]\pause
+\[
+(A^T)^{-1}=(A^{-1})^T=\begin{bmatrix}
+1&2&1\\
+0&-1&-2\\
+0&0&1
+\end{bmatrix}^T=\begin{bmatrix}
+1&0&0\\
+2&-1&0\\
+1&-2&1
+\end{bmatrix}
+\]\pause
+Therefore we know $A^{-1}$ and $A^T$ are invertible.\pause
+
+In general, if $T$ is invertible, then $A$ is invertible, so $A^{-1}$ will be the standard matrix for $T^{-1}$ as $T^{-1}(\mathbf x)=A^{-1}\mathbf x$, in more explict terms, we have\pause
+\[
+T^{-1}\left(\begin{bmatrix}
+x_1\\x_2\\x_3
+\end{bmatrix}\right)=\begin{bmatrix}
+1&2&1\\
+0&-1&-2\\
+0&0&1
+\end{bmatrix}\begin{bmatrix}
+x_1\\x_2\\x_3
+\end{bmatrix}=\begin{bmatrix}
+x_1+2x_2+x_3\\-x_2-2x_2\\x_3
+\end{bmatrix}
+\]
+\end{solution}
+\end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+\end{document}

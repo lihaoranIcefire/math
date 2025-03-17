@@ -1,0 +1,523 @@
+\documentclass{beamer}
+\setbeamercovered{}
+
+\usepackage{bookman}
+\usepackage{newtxtext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{systeme}
+\usepackage{subcaption}
+\usepackage{bm} % Bold
+\usepackage{bbm} % Can use \mathbbm{1}
+\usepackage{ifthen} % Use if then else
+\usepackage{shuffle} % Use shuffle product
+\usepackage{minted} % For listing codes
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\tikzcdset{ampersand replacement=\&}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+% \newcommand*{\relbarfill@}{\arrowfill@\relbar-\relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+% \newcommand*{\xdash}[2][]{\ext@arrow 0055\relbarfill@{#1}{#2}}
+\makeatother
+
+\newlength{\simlength}
+
+\newcommand{\xsim}[1]{
+\settowidth{\simlength}{$#1$}
+\mathrel{\overset{#1}{\resizebox{\simlength}{\height}{\sim}}}
+}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+    \usecolortheme{beaver}
+    \usefonttheme{professionalfonts} 
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{caption}[numbered]
+}
+
+\theoremstyle{definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{recall}{Recall}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\DeclareMathOperator{\Span}{Span}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginSection[]{
+    \begin{frame}
+    \centering
+    \begin{beamercolorbox}[center, shadow=true, rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \end{frame}
+}
+
+\title{MATH240 - Introduction to Linear Algebra}
+\author{Haoran Li}
+\institute[UMD]{University of Maryland, College Park}
+\date{Summer 2024}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 6 - Linear transformations}
+
+\begin{frame}[t]
+\begin{definition}
+A \textcolor{blue}{Linear transformation} (or \textcolor{blue}{linear mapping})\index{linear transformation} $T$ from $\mathbb R^n$ to $\mathbb R^m$ is a mapping satisfying\pause
+\begin{itemize}
+\item $T(\mathbf u+\mathbf v)=T(\mathbf u)+T(\mathbf v)$ for any $\mathbf u,\mathbf v$ in $\mathbb R^n$
+\item $T(c\mathbf u)=cT(\mathbf u)$ for any scalar $c$ and any $\mathbf u$ in $\mathbb R^n$
+\end{itemize}
+\end{definition}
+\pause
+\begin{example}
+Reflection, rotation and scaling are all linear transformations from $\mathbb R^2$ to $\mathbb R^2$.
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}\label{ex: matrix transformation}
+Suppose $T:\mathbb R^2\to\mathbb R^2$ is defined by $T\left(\begin{bmatrix}
+x\\y
+\end{bmatrix}\right)=\begin{bmatrix}
+x+y\\
+y
+\end{bmatrix}$. Is $T$ is a linear mapping?
+\end{exercise}
+\pause
+\begin{solution}
+Suppose $\mathbf u=\begin{bmatrix}
+u_1\\u_2
+\end{bmatrix}$, $\mathbf v=\begin{bmatrix}
+v_1\\v_2
+\end{bmatrix}$, then\pause
+\begin{itemize}
+\item 
+$T(\mathbf u+\mathbf v)=\pause T\left(\begin{bmatrix}
+u_1+v_1\\u_2+v_2
+\end{bmatrix}\right)=\pause\begin{bmatrix}
+(u_1+v_1)+(u_2+v_2)\\u_2+v_2
+\end{bmatrix}=\pause\begin{bmatrix}
+u_1+u_2\\u_2
+\end{bmatrix}+\begin{bmatrix}
+v_1+v_2\\v_2
+\end{bmatrix}=\pause T(\mathbf u)+T(\mathbf v)$
+\item 
+\[
+T(c\mathbf u)=\pause T\left(\begin{bmatrix}
+cu_1\\cu_2
+\end{bmatrix}\right)=\pause\begin{bmatrix}
+cu_1+cu_2\\cu_2
+\end{bmatrix}=\pause c\begin{bmatrix}
+u_1+u_2\\u_2
+\end{bmatrix}=\pause cT(\mathbf u)
+\]
+\end{itemize}
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+A \textcolor{blue}{matrix transformation}\index{matrix transformation} is the mapping defined via matrix multiplication, i.e. $T(\mathbf x)=A\mathbf x$ for some $m\times n$ matrix $A$\pause. It is a linear transformation thanks to Fact~\ref{19:08-06/07/2022} c),d) since
+\begin{itemize}
+\item $T(\mathbf u+\mathbf v)=A(\mathbf u+\mathbf v)\pause=A\mathbf u+A\mathbf v\pause=T(\mathbf u)+T(\mathbf v)$
+\item $T(c\mathbf u)=A(c\mathbf u)\pause=c(A\mathbf u)\pause=cT(\mathbf u)$
+\end{itemize}
+\end{definition}
+\pause
+\begin{example}
+In fact, $T$ in Exercise~\ref{ex: matrix transformation} is a matrix transformation
+\[
+T\left(\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}\right)=\begin{bmatrix}
+x_1+x_2\\
+x_2
+\end{bmatrix}=\pause\begin{bmatrix}
+1&1\\0&1
+\end{bmatrix}\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}=A\mathbf x
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+In general, if $T:\mathbb R^n\to\mathbb R^m$ is a linear transformation, and $\{\mathbf e_1,\mathbf e_2,\cdots,\mathbf e_n\}$ is the standard basis\pause, then any $\mathbf x=x_1\mathbf e_1+\cdots+x_n\mathbf e_n$, and\pause
+\begin{equation}\label{12:47-06/08/2022}
+T(\mathbf x)=x_1T(\mathbf e_1)+\cdots+x_nT(\mathbf e_n)\pause=\begin{bmatrix}
+T(\mathbf e_1)&\cdots &T(\mathbf e_n)
+\end{bmatrix}\begin{bmatrix}
+x_1\\\vdots\\x_n
+\end{bmatrix}
+\end{equation}
+Denote $A=\begin{bmatrix}
+T(\mathbf e_1)&\cdots &T(\mathbf e_n)
+\end{bmatrix}$ (which is called the \textcolor{blue}{standard matrix for the linear transformation $T$})\index{standard matrix}\pause, then $T(\mathbf x)=A\mathbf x$, so every linear transformation $T$ from $\mathbb R^n\to\mathbb R^m$ is a matrix transformation.
+\end{definition}
+\pause
+\begin{example}
+In Exercise~\ref{ex: matrix transformation}, the standard matrix for $T$ is $\begin{bmatrix}
+1&1\\0&1
+\end{bmatrix}$.\pause
+\vspace{-3mm}
+\[
+T(\mathbf e_1)=T\left(\begin{bmatrix}
+1\\0
+\end{bmatrix}\right)=\begin{bmatrix}
+1+0\\0
+\end{bmatrix}=\begin{bmatrix}
+1\\0
+\end{bmatrix}, T(\mathbf e_2)=T\left(\begin{bmatrix}
+0\\1
+\end{bmatrix}\right)=\begin{bmatrix}
+0+1\\1
+\end{bmatrix}=\begin{bmatrix}
+1\\1
+\end{bmatrix}
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}
+Suppose $T:\mathbb R^2\to\mathbb R^2$ is defined by $T\left(\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}\right)=\begin{bmatrix}
+x_1+x_2+1\\
+x_2
+\end{bmatrix}$. Is $T$ is a linear mapping?
+\end{exercise}
+\pause
+\begin{solution}
+$T$ is not a linear transformation since
+$T(\mathbf x)=\begin{bmatrix}
+1&1\\0&1
+\end{bmatrix}\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}+\begin{bmatrix}
+1\\0
+\end{bmatrix}=A\mathbf x+\mathbf p$ is not a matrix transformation~\eqref{12:47-06/08/2022} ($\mathbf p\neq0$)
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}\label{10:10-06/09/2022}
+Suppose $T:\mathbb R^2\to\mathbb R^2$ is a linear transformation
+\begin{enumerate}
+\item Suppose $T$ is the reflection over $x_2$-axis, then the standard matrix for $T$ is\pause
+\[
+A=\begin{bmatrix}
+T(\mathbf e_1)&T(\mathbf e_2)
+\end{bmatrix}=\begin{bmatrix}
+-1&0\\
+0&1
+\end{bmatrix}
+\]
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\def\XMAX{2.5};\def\YMAX{2.5};
+\draw[help lines, color=gray!30, dashed] (-\XMAX,-\YMAX) grid (\XMAX,\YMAX);
+\draw[->, color=gray!80] (-\XMAX,0)--(\XMAX,0) node[right]{$x_1$};
+\draw[->, color=gray!80] (0,-\YMAX)--(0,\YMAX) node[above]{$x_2$};
+\coordinate (a) at (1,0); \node at (a)[below right]{$\mathbf e_1$}; \draw[->, thick] (0,0)--(a);
+\coordinate (b) at (0,1); \node at (b)[above right]{$\mathbf e_2=T(\mathbf e_2)$}; \draw[->, thick] (0,0)--(b);
+\draw[->, purple, thick] (0,0)--($(0,0)-(a)$) node[below left]{$T(\mathbf e_1)$};
+\end{tikzpicture}
+\end{center}
+\seti
+\end{enumerate}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+\begin{enumerate}
+\conti
+\item Suppose $T$ is the rotation by $60^\circ$ counter-clockwise, then the standard matrix for $T$ is\pause
+\[
+A=\begin{bmatrix}
+T(\mathbf e_1)&T(\mathbf e_2)
+\end{bmatrix}=\begin{bmatrix}
+\frac{1}{2}&-\frac{\sqrt{3}}{2}\\
+\frac{\sqrt{3}}{2}&\frac{1}{2}
+\end{bmatrix}
+\]
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+\def\XMAX{1.5};\def\YMAX{1.5};
+\draw[help lines, color=gray!30, dashed] (-\XMAX,-\YMAX) grid (\XMAX,\YMAX);
+\draw[->, color=gray!80] (-\XMAX,0)--(\XMAX,0) node[right]{$x_1$};
+\draw[->, color=gray!80] (0,-\YMAX)--(0,\YMAX) node[above]{$x_2$};
+\draw[opacity=0.6, red, dashed] (0,0) circle (1);
+\coordinate (a) at (1,0); \node at (a)[below right]{$\mathbf e_1$}; \draw[->, thick] (0,0)--(a);
+\coordinate (b) at (0,1); \node at (b)[above right]{$\mathbf e_2$}; \draw[->, thick] (0,0)--(b);
+\coordinate (c) at ($cos(60)*(1,0)+sin(60)*(0,1)$); \node at (c)[above right]{\textcolor{purple}{$T(\mathbf e_1)=\begin{bmatrix}
+\cos60^\circ\\\sin60^\circ
+\end{bmatrix}$}}; \draw[->, purple, thick] (0,0)--(c);
+\coordinate (d) at ($cos(150)*(1,0)+sin(150)*(0,1)$); \node at (d)[above left]{\textcolor{blue}{$\begin{bmatrix}
+\cos150^\circ\\\sin150^\circ
+\end{bmatrix}=T(\mathbf e_2)$}}; \draw[->, blue, thick] (0,0)--(d);
+\draw[opacity=0.6, purple, dashed] (c)--($cos(60)*(1,0)$);
+\draw[opacity=0.6, purple, dashed] (c)--($sin(60)*(0,1)$);
+\draw[opacity=0.6, blue, dashed] (d)--($cos(150)*(1,0)$);
+\draw[opacity=0.6, blue, dashed] (d)--($sin(150)*(0,1)$);
+\end{tikzpicture}
+\end{center}
+\end{enumerate}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}\label{10:08-06/09/2022}
+$T:\mathbb R^2\to\mathbb R^2$ is the linear transformation that rotate $60^\circ$ counter-clockwise and then reflects over $x_2$-axis, what is its standard matrix?
+\end{exercise}
+\pause
+\begin{solution}
+The standard matrix for $T$ is $A=\begin{bmatrix}
+T(\mathbf e_1)&T(\mathbf e_2)
+\end{bmatrix}=\begin{bmatrix}
+-\frac{1}{2}&\frac{\sqrt{3}}{2}\\
+\frac{\sqrt{3}}{2}&\frac{1}{2}
+\end{bmatrix}$
+\vspace{-5mm}
+\begin{center}
+\scalebox{0.7}{
+\begin{tikzpicture}[scale=2]
+\def\XMAX{1.5};\def\YMAX{1.5};
+\draw[help lines, color=gray!30, dashed] (-\XMAX,-\YMAX) grid (\XMAX,\YMAX);
+\draw[->, color=gray!80] (-\XMAX,0)--(\XMAX,0) node[right]{$x_1$};
+\draw[->, color=gray!80] (0,-\YMAX)--(0,\YMAX) node[above]{$x_2$};
+\draw[opacity=0.6, red, dashed] (0,0) circle (1);
+\coordinate (a) at (1,0); \node at (a)[below right]{$\mathbf e_1$}; \draw[->, thick] (0,0)--(a);
+\coordinate (b) at (0,1); \node at (b)[above right]{$\mathbf e_2$}; \draw[->, thick] (0,0)--(b);
+\coordinate (c) at ($sin(60)*(0,1)-cos(60)*(1,0)$); \node at (c)[above left]{\textcolor{purple}{$T(\mathbf e_1)=\begin{bmatrix}
+-\cos60^\circ\\\sin60^\circ
+\end{bmatrix}=\begin{bmatrix}
+\cos120^\circ\\\sin120^\circ
+\end{bmatrix}$}}; \draw[->, purple, thick] (0,0)--(c);
+\coordinate (d) at ($sin(150)*(0,1)-cos(150)*(1,0)$); \node at (d)[above right]{\textcolor{blue}{$T(\mathbf e_2)=\begin{bmatrix}
+-\cos150^\circ\\\sin150^\circ
+\end{bmatrix}=\begin{bmatrix}
+-\cos30^\circ\\\sin30^\circ
+\end{bmatrix}$}}; \draw[->, blue, thick] (0,0)--(d);
+\draw[opacity=0.6, purple, dashed] (c)--($(0,0)-cos(60)*(1,0)$);
+\draw[opacity=0.6, purple, dashed] (c)--($sin(60)*(0,1)$);
+\draw[opacity=0.6, blue, dashed] (d)--($(0,0)-cos(150)*(1,0)$);
+\draw[opacity=0.6, blue, dashed] (d)--($sin(150)*(0,1)$);
+\end{tikzpicture}
+}
+\end{center}
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+Suppose $T:\mathbb R^n\to\mathbb R^m$ is a mapping. We call
+\begin{itemize}
+\item $\mathbb R^n$ the \textcolor{blue}{domain}\index{domain} of $T$\pause
+\item $\mathbb R^m$ the \textcolor{blue}{codomain}\index{codomain} of $T$\pause
+\item $T(\mathbf x)$ the \textcolor{blue}{image}\index{image} of $\mathbf x$ under $T$\pause
+\item $T^{-1}(\mathbf b)=\{\mathbf x|T(\mathbf x)=\mathbf b\}$ the set of \textcolor{blue}{preimages}\index{preimage} of $\mathbf b$ under $T$\pause
+\item the set of images $\{T\mathbf x|\mathbf x\in\mathbb R^n\}$ the \textcolor{blue}{range}\index{range} of $T$
+\end{itemize}
+\end{definition}
+\pause
+\begin{exercise}
+Suppose the linear transformation $T:\mathbb R^3\to\mathbb R^3$ is defined by $T\left(\begin{bmatrix}
+x_1\\x_2\\x_3
+\end{bmatrix}\right)=\begin{bmatrix}
+x_1-x_2+x_3\\ 2x_1-x_3\\ x_1+x_2+x_3
+\end{bmatrix}$, what is the standard matrix of $T$? What is the image of $\begin{bmatrix}
+2\\0\\1
+\end{bmatrix}$, what is the set of vectors with image $\begin{bmatrix}
+1\\1\\-3
+\end{bmatrix}$, what is the range?
+\end{exercise}
+\end{frame}
+
+\begin{frame}[t]
+\begin{solution}
+The standard matrix is $A=\begin{bmatrix}
+1&-1&1\\
+2&0&-1\\
+1&1&1
+\end{bmatrix}$\pause, the image $\begin{bmatrix}
+2\\0\\1
+\end{bmatrix}$ under $T$ is
+\[
+T\left(\begin{bmatrix}
+2\\0\\1
+\end{bmatrix}\right)=\begin{bmatrix}
+1&-1&1\\
+2&0&-1\\
+1&1&1
+\end{bmatrix}\begin{bmatrix}
+2\\0\\1
+\end{bmatrix}=\pause\begin{bmatrix}
+3\\3\\3
+\end{bmatrix}
+\]
+The set of vectors with image $\mathbf b=\begin{bmatrix}
+1\\1\\3
+\end{bmatrix}$ under $T$ is the solution set to $T(\mathbf x)=A\mathbf x=\mathbf b$\pause, which is $\left\{\begin{bmatrix}
+1\\1\\1
+\end{bmatrix}\right\}$\pause. And since there is a pivot in each row, $A\mathbf x=\mathbf b$ would solutions for any $\mathbf b\in\mathbb R^3$, hence the range of $T$ is $\mathbb R^3$.
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+A mapping $T$ is said to be \textcolor{blue}{onto} $\mathbb R^m$ if each $b\in \mathbb R^m$ is the image of at least one $x\in\mathbb R^n$. 
+\end{definition}
+\pause
+Codomain is larger than the range if $T$ is not onto
+\pause
+\begin{definition}
+A mapping $T$ is said to be \textcolor{blue}{one-to-one} if each $b\in \mathbb R^m$ is the image of at most one $x\in\mathbb R^n$. 
+\end{definition}
+\pause
+\begin{theorem}\label{15:25-06/08/2022}
+Suppose $A$ is the standard matrix for linear transformation $T$ (i.e. $T(\mathbf x)=A\mathbf x$), then\pause
+\begin{itemize}
+\item $T$ is one-to-one $\iff$ $A\mathbf x=\mathbf0$ has a unique solution $\iff$ $A\mathbf x=\mathbf b$ has at most a unique solution $\iff$ RREF of $A$ has a pivot in each column $\iff$ columns of $A$ are linearly independent.
+\item $T$ is onto $\iff$ the columns of $A$ span $\mathbb R^m$ $\iff$ RREF of $A$ has a pivot in each row.
+\end{itemize}
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}
+Suppose the linear transformation $T:\mathbb R^3\to\mathbb R^2$ is defined by $T\left(\begin{bmatrix}
+x_1\\x_2\\x_3
+\end{bmatrix}\right)=\begin{bmatrix}
+x_1-x_2+x_3\\ 2x_1-x_3
+\end{bmatrix}$, Is $T$ onto? Is $T$ one-to-one?
+\end{exercise}
+\pause
+\begin{solution}
+The standard matrix for $T$ is $A=\begin{bmatrix}
+1&-1&1\\
+2&0&-1
+\end{bmatrix}\xsim{R2\rightarrow R2-2R1}\begin{bmatrix}
+1&-1&1\\
+0&2&-3
+\end{bmatrix}$\pause, since there is a pivot in each row but not in each column, it is onto but not one-to-one
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}
+\begin{itemize}
+\item If $T:\mathbb R^3\to\mathbb R^2$ is a linear transformation, could it be one-to-one?
+\item If $T:\mathbb R^2\to\mathbb R^3$ is a linear transformation, could it be onto?
+\end{itemize}
+\end{exercise}
+
+\begin{solution}
+Both no! Due to Theorem~\ref{15:25-06/08/2022}
+\begin{itemize}
+\item Since $A$ is a $2\times3$ matrix, there will be at most 2 pivots (only 2 rows), so there won't be enough pivots to fill all columns.\pause
+\item Since $A$ is a $3\times2$ matrix, there will be at most 2 pivots (only 2 columns), so there won't be enough pivots to fill all rows.
+\end{itemize}
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+Consider composition of linear transformations
+\begin{center}
+\begin{tikzcd}
+{\mathbb R^p} \arrow[r, "T_1"] \arrow[rr, "T_2\circ T_1"', bend right] \& {\mathbb R^n} \arrow[r, "T_2"] \& {\mathbb R^m}
+\end{tikzcd}
+\end{center}
+Here $\circ$ means \textcolor{blue}{composition} which you compose from the left. Then $T_2\circ T_1:\mathbb R^p\to\mathbb R^m$ is also a linear transformation (Why? Verify this)\pause. Suppose the standard matrices for $T_1,T_2$ are $A_1,A_2$ respectively, then sizes of $A_1,A_2$ are\pause $n\times p, m\times n$, and for $\mathbf x\in\mathbb R^p$, $(T_2\circ T_1)(\mathbf x)=\pause T_2(T_1(\mathbf x))=\pause A_2(T_1(\mathbf x))=\pause A_2(A_1\mathbf x)=\pause (A_2A_1)\mathbf x$\pause. So we have concluded that the standard matrix for $T_2\circ T_1$ is the $m\times p$ matrix $A_2A_1$.
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Consider Example~\ref{10:10-06/09/2022}., If we let $T_1:\mathbb R^2\to\mathbb R^2$ to denote the rotation by $60^\circ$ counter-clockwise, $T_2:\mathbb R^2\to\mathbb R^2$ to denote reflection over $x_2$-axis, and their standard matrices are
+\[
+\begin{bmatrix}
+\frac{1}{2}&-\frac{\sqrt{3}}{2}\\\frac{\sqrt{3}}{2}&\frac{1}{2}
+\end{bmatrix},\qquad\begin{bmatrix}
+-1&0\\0&1
+\end{bmatrix}
+\]\pause
+Then look at Exercise~\ref{10:08-06/09/2022}, this is the composition $T_2\circ T_1$, which has the standard matrix
+\[
+A_2A_1=\begin{bmatrix}
+-1&0\\0&1
+\end{bmatrix}\begin{bmatrix}
+\frac{1}{2}&-\frac{\sqrt{3}}{2}\\\frac{\sqrt{3}}{2}&\frac{1}{2}
+\end{bmatrix}=\begin{bmatrix}
+-\frac{1}{2}&\frac{\sqrt{3}}{2}\\
+\frac{\sqrt{3}}{2}&\frac{1}{2}
+\end{bmatrix}
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{question}
+Suppose $A=\begin{bmatrix}
+\frac{1}{2}&-\frac{\sqrt{3}}{2}\\\frac{\sqrt{3}}{2}&\frac{1}{2}
+\end{bmatrix}$ is the standard matrix for the linear transformation of rotating $60^\circ$ counter-clockwise (Example~\ref{10:10-06/09/2022}). What is $A^7$?
+\end{question}
+\pause
+\begin{answer}
+$A^7=AAAAAAA$ is the standard matrix for composition of linear transformations $T\circ T\circ T\circ T\circ T\circ T\circ T$\pause which is rotate $7\times60^\circ=420^\circ$\pause, but that is the same as rotating $420^\circ-360^\circ=60^\circ$ which is the same linear transformation as $T$\pause, so $A^7=A$
+\begin{center}
+\begin{tikzcd}
+{A^7=AAAAAAA} \arrow[rr,equal]                                                                                                       \&  \& {A}                                      \\
+{T^{\circ7}=T\circ T\circ T\circ T\circ T\circ T\circ T} \arrow[rr,equal, "\text{same effect}"'] \arrow[u, rightsquigarrow, "\text{Standard matrix}"] \&  \& {T} \arrow[u, rightsquigarrow, "\text{Standard matrix}"']
+\end{tikzcd}
+\end{center}
+\end{answer}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}
+Let $T$ be the linear transformation that rotate $\mathbb R^2$ counter-clockwise of angle $\theta$, find the standard matrix for $T$. What about the standard matrix for $T^{\circ100}$
+\end{exercise}
+\end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+\end{document}

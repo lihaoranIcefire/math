@@ -137,7 +137,7 @@ public:
 
     bool operator < (const HSymb& other) const {
     }
-}
+};
 
 
 

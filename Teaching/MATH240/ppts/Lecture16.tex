@@ -1,0 +1,354 @@
+\documentclass{beamer}
+\setbeamercovered{}
+
+\usepackage{bookman}
+\usepackage{newtxtext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{systeme}
+\usepackage{subcaption}
+\usepackage{bm} % Bold
+\usepackage{bbm} % Can use \mathbbm{1}
+\usepackage{ifthen} % Use if then else
+\usepackage{shuffle} % Use shuffle product
+\usepackage{minted} % For listing codes
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{cancel}
+\tikzcdset{ampersand replacement=\&}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+% \newcommand*{\relbarfill@}{\arrowfill@\relbar-\relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+% \newcommand*{\xdash}[2][]{\ext@arrow 0055\relbarfill@{#1}{#2}}
+\makeatother
+
+\newlength{\simlength}
+
+\newcommand{\xsim}[1]{
+\settowidth{\simlength}{$#1$}
+\mathrel{\overset{#1}{\resizebox{\simlength}{\height}{\sim}}}
+}
+\newcommand{\fatdot}{\mathrel{\raisebox{0.25ex}{\tikz\filldraw[black,x=2pt,y=2pt] (0,0) circle (0.5);}}}
+\newcommand{\fatplus}{\mathrel{\raisebox{-0.1ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0.9,0)--(1.1,0)--(1.1,0.9)--(2,0.9)--(2,1.1)--(1.1,1.1)--(1.1,2)--(0.9,2)--(0.9,1.1)--(0,1.1)--(0,0.9)--(0.9,0.9)--cycle;}}}
+\newcommand{\fatminus}{\raisebox{+0.4ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0,0.9)--(2,0.9)--(2,1.1)--(0,1.1)--cycle;}}
+
+\DeclareMathOperator{\Nul}{Nul}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\Rank}{Rank}
+\DeclareMathOperator{\Range}{Range}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Proj}{Proj}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+    \usecolortheme{beaver}
+    \usefonttheme{professionalfonts} 
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{caption}[numbered]
+}
+
+\theoremstyle{definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{recall}{Recall}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\DeclareMathOperator{\Span}{Span}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginSection[]{
+    \begin{frame}
+    \centering
+    \begin{beamercolorbox}[center, shadow=true, rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \end{frame}
+}
+
+\title{MATH240 - Introduction to Linear Algebra}
+\author{Haoran Li}
+\institute[UMD]{University of Maryland, College Park}
+\date{Summer 2023}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 16 - Orthogonal diagonalization}
+
+\begin{frame}[t]
+\begin{theorem}\label{23:54-07/19/2022}
+Suppose $A$ is a symmetric ($A^T=A$) real-valued matrix, and $\mathbf v_1$, $\mathbf v_2$ are $\lambda_1$-eigenvector, $\lambda_2$-eigenvectors respectively. Then $\mathbf v_1\cdot\mathbf v_2=0$
+\end{theorem}
+\pause
+\begin{proof}
+Consider $\lambda_1(\mathbf v_1\cdot\mathbf v_2)=(\lambda_1\mathbf v_1)^T\mathbf v_2=(A\mathbf v_1)^T\mathbf v_2=\mathbf v_1^TA^T\mathbf v_2=\mathbf v_1^TA\mathbf v_2=\mathbf v_1\cdot(\lambda_2\mathbf v_2)=\lambda_2(\mathbf v_1\cdot\mathbf v_2)$, We get $(\lambda_1-\lambda_2)(\mathbf v_1\cdot\mathbf v_2)=0$, since $\lambda_1-\lambda_2\neq0$, $\mathbf v_1\cdot\mathbf v_2=0$
+\end{proof}
+\pause
+\begin{theorem}
+Suppose $A$ is a symmetric real-valued matrix, then the eigenvalues are also real.
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\begin{proof}
+Suppose $\lambda$ is an eigenvalue of $A$, then there exists some $\lambda$-eigenvector such that $A\mathbf v=\lambda\mathbf v$, and that the length of the complex vector $\mathbf v$ is $\|\mathbf v\|^2=\overline{\mathbf v}\cdot\mathbf v$ is a positive real number (Note that for a complex number $z=a+bi$, $|z|^2=a^2+b^2=(a+bi)(a-bi)=z\overline z$). Since $A$ is symmetric and real-valued, $\overline A^T=A$. We have
+\[
+\overline\lambda\|\mathbf v\|^2=\overline{(A\mathbf v)}^T\mathbf v=\overline{\mathbf v}^T\overline A^T\mathbf v=\overline{\mathbf v}^TA\mathbf v=\lambda\|\mathbf v\|^2
+\]
+Which implies that $(\lambda-\overline\lambda)\|\mathbf v\|^2=0$, so $\lambda=\overline\lambda$, i.e. $\lambda$ is real-valued.
+\end{proof}
+\pause
+\begin{fact}
+A symmetric real-valued matrix is diagonalizable.
+\end{fact}
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}
+Suppose $A$ is a symmetric real-valued matrix with eigenvalues $\lambda_1,\cdots,\lambda_n$ (maybe repeated)\pause. $A$ can be orthogonal diagonalized as $A=PDP^T$\pause, where $D$ is the diagonal matrix $\begin{bmatrix}
+\lambda_1&&\\
+&\ddots&\\
+&&\lambda_n
+\end{bmatrix}$, and $P$ is an orthogonal matrix.
+\end{theorem}
+
+\begin{proof}
+To get an orthonormal basis for each eigenspace $\Nul(\lambda I-A)$, you just need to find an arbitrary basis, and then apply Gram-Schmidt process to get an orthonormal basis\pause, then by Theorem~\ref{23:54-07/19/2022}, the set of eigenvectors form an orthonormal basis for $\mathbb R^n$\pause, assume they are $\mathbf u_1,\cdots,\mathbf u_n$, in corresponds to eigenvalues $\lambda_1,\cdots,\lambda_n$\pause, then we get orthogonal diagonalization
+\[
+A=PDP^{-1}=PDP^T
+\]
+Here $P=\begin{bmatrix}
+\mathbf u_1&\cdots&\mathbf u_n
+\end{bmatrix}$ is an orthogonal basis and thus $P^{-1}=P^T$.
+\end{proof}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}\label{12:47-07/20/2022}
+Suppose $A=\begin{bmatrix}
+7&2\\
+2&4
+\end{bmatrix}$\pause, the characteristic polynomial is $(t-3)(t-8)$, so we have eigenvalues $\lambda_1=3$ and $\lambda_2=8$\pause, we can then find the eigenvectors $\mathbf v_1=\begin{bmatrix}
+-1\\2
+\end{bmatrix}$ and $\mathbf v_2=\begin{bmatrix}
+2\\1
+\end{bmatrix}$\pause, we may realized that $\mathbf v_1\cdot\mathbf v_2=0$, i.e. $\mathbf v_1$ is orthogonal to $\mathbf v_2$, we can further normalize them into $\mathbf u_1=\frac{\mathbf v_1}{\|\mathbf v_1\|}=\begin{bmatrix}
+-\frac{1}{\sqrt5}\\\frac{2}{\sqrt5}
+\end{bmatrix}$ and $\mathbf u_2=\frac{\mathbf v_2}{\|\mathbf v_2\|}=\begin{bmatrix}
+\frac{2}{\sqrt5}\\\frac{1}{\sqrt5}
+\end{bmatrix}$\pause. So we have orthogonal diagonalization
+\[
+A=\begin{bmatrix}
+7&2\\
+2&4
+\end{bmatrix}=\begin{bmatrix}
+-\frac{1}{\sqrt5}&\frac{2}{\sqrt5}\\
+\frac{2}{\sqrt5}&\frac{1}{\sqrt5}
+\end{bmatrix}\begin{bmatrix}
+3&0\\
+0&8
+\end{bmatrix}\begin{bmatrix}
+-\frac{1}{\sqrt5}&\frac{2}{\sqrt5}\\
+\frac{2}{\sqrt5}&\frac{1}{\sqrt5}
+\end{bmatrix}=PDP^T
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Suppose $A=\begin{bmatrix}
+3&-2&4\\
+-2&6&2\\
+4&2&3\\
+\end{bmatrix}$\pause, then characteristic polynomial is
+\begin{align*}
+\det(tI-A)&=\left|\begin{matrix}
+t-3&2&-4\\
+2&t-6&-2\\
+-4&-2&t-3
+\end{matrix}\right|\xequal{R3\rightarrow R3+2R2}\left|\begin{matrix}
+t-3&2&-4\\
+2&t-6&-2\\
+0&2t-14&t-7
+\end{matrix}\right|\\
+&\xequal{\text{factor $(t-7)$ from 3rd row}}(t-7)\left|\begin{matrix}
+t-3&2&-4\\
+2&t-6&-2\\
+0&2&1
+\end{matrix}\right|\\
+&\xequal{C2\rightarrow C2-C3}(t-7)\left|\begin{matrix}
+t-3&10&-4\\
+2&t-2&-2\\
+0&0&1
+\end{matrix}\right|\\
+&\xequal{\text{cofactor expansion on the 3rd row}}(t-7)\cdot1\cdot(-1)^{3+3}\left|\begin{matrix}
+t-3&10\\
+2&t-2
+\end{matrix}\right|\\
+&=(t-7)(t^2-5t-14)=(t-7)^2(t+2)
+\end{align*}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Hence the eigenvalues are $\lambda_1=\lambda_2=7$, $\lambda_3=-2$\pause
+\[
+\left[\begin{array}{c|c}
+7I-A&\mathbf0
+\end{array}\right]\sim\left[\begin{array}{ccc|c}
+1&\frac{1}{2}&-1&0\\
+0&0&0&0\\
+0&0&0&0
+\end{array}\right]
+\]\pause
+so we may choose
+\[
+\mathbf v_1=2\begin{bmatrix}
+-\frac{1}{2}\\1\\0
+\end{bmatrix}=\begin{bmatrix}
+-1\\2\\0
+\end{bmatrix},\quad\mathbf v_2=\begin{bmatrix}
+1\\0\\1
+\end{bmatrix}
+\]\pause
+as eigenvectors for $\lambda_1=\lambda_2=7$. We can use Gram-Schmidt process to get an orthogonal set: $\mathbf w_1=\mathbf v_1=\begin{bmatrix}
+-1\\2\\0
+\end{bmatrix}$, $\mathbf v_2-\dfrac{\mathbf v_2\cdot\mathbf w_1}{\mathbf w_1\cdot\mathbf w_1}\mathbf w_1=\begin{bmatrix}
+\frac{4}{5}\\\frac{2}{5}\\1
+\end{bmatrix}$
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+We can choose $\mathbf w_2=\begin{bmatrix}
+4\\2\\5
+\end{bmatrix}$\pause. We can normalize them into
+\[
+\mathbf u_1=\frac{1}{\sqrt5}\begin{bmatrix}
+-1\\2\\0
+\end{bmatrix},\quad\mathbf u_2=\frac{1}{3\sqrt5}\begin{bmatrix}
+4\\2\\5
+\end{bmatrix}
+\]
+\[
+\left[\begin{array}{c|c}
+-2I-A&\mathbf0
+\end{array}\right]\sim\left[\begin{array}{ccc|c}
+1&0&1&0\\
+0&1&\frac{1}{2}&0\\
+0&0&0&0
+\end{array}\right]
+\]\pause
+so we may choose
+\[
+\mathbf v_3=2\begin{bmatrix}
+-1\\-\frac{1}{2}\\1
+\end{bmatrix}=\begin{bmatrix}
+-2\\-1\\2
+\end{bmatrix}
+\]
+as the eigenvector for $\lambda_3=-2$.
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+We can normalize it into
+\[
+\mathbf u_3=\frac{\mathbf v_3}{\|\mathbf v_3\|}=\frac{1}{3}\begin{bmatrix}
+-2\\-1\\2
+\end{bmatrix}
+\]\pause
+Now we get the orthogonal decomposition
+\[
+A=\begin{bmatrix}
+3&-2&4\\
+-2&6&2\\
+4&2&3\\
+\end{bmatrix}=\begin{bmatrix}
+-\frac{1}{\sqrt5}&\frac{4}{3\sqrt5}&-\frac{2}{3}\\
+\frac{2}{\sqrt5}&\frac{2}{3\sqrt5}&-\frac{1}{3}\\
+0&\frac{5}{3\sqrt5}&\frac{2}{3}
+\end{bmatrix}\begin{bmatrix}
+7&0&0\\
+0&7&0\\
+0&0&-2
+\end{bmatrix}\begin{bmatrix}
+-\frac{1}{\sqrt5}&\frac{2}{\sqrt5}&0\\
+\frac{4}{3\sqrt5}&\frac{2}{3\sqrt5}&\frac{5}{3\sqrt5}\\
+-\frac{2}{3}&-\frac{1}{3}&\frac{2}{3}
+\end{bmatrix}=PDP^T
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}
+Suppose $A$ is a symmetric real-valued matrix, and $A=PDP^T$ is its orthogonal diagonalization\pause, then we have the so-called spectral decomposition
+\[
+A=\lambda_1\mathbf u_1\mathbf u_1^T+\cdots+\lambda_n\mathbf u_n\mathbf u_n^T
+\]
+\end{theorem}
+\pause
+\begin{proof}
+\begin{align*}
+A&=PDP^T=\begin{bmatrix}
+\mathbf u_1&\cdots&\mathbf u_n
+\end{bmatrix}\begin{bmatrix}
+\lambda_1&&\\
+&\ddots&\\
+&&\lambda_n
+\end{bmatrix}\begin{bmatrix}
+\mathbf u_1^T\\\vdots\\\mathbf u_n^T
+\end{bmatrix}=\\
+&\begin{bmatrix}
+\lambda_1\mathbf u_1&&\\
+&\ddots&\\
+&&\lambda_n\mathbf u_n
+\end{bmatrix}\begin{bmatrix}
+\mathbf u_1^T\\\vdots\\\mathbf u_n^T
+\end{bmatrix}=\lambda_1\mathbf u_1\mathbf u_1^T+\cdots+\lambda_n\mathbf u_n\mathbf u_n^T
+\end{align*}
+\end{proof}
+\end{frame}
+
+\begin{frame}[t]
+\begin{remark}
+Recall that if $\mathbf u$ is of unit length, then $\Proj_{\mathbf u}\mathbf x=\mathbf u\mathbf u^T\mathbf x$\pause, so
+\[
+A\mathbf x=\lambda_1\mathbf u_1\mathbf u_1^T\mathbf x+\cdots+\lambda_n\mathbf u_n\mathbf u_n^T\mathbf x
+\]\pause
+You can think of this as decompose the matrix transformation $\mathbf x\mapsto A\mathbf x$ into the sum of scaled orthogonal projections.
+\end{remark}
+\end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+\end{document}

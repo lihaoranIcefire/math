@@ -1,5 +1,3 @@
-
-
 # Large Language Model and Generative AI
 
 ## Recurrent Neural Network
@@ -115,6 +113,3 @@ J(\theta)=\frac{1}{2}\sum_{i,j}f(X_{ij})(\theta_i\cdot e_j+b_i+b_j'-\log(X_{ij})
 $$
 
 Where $f$ is a weighting function such that $X_{ij}=0\Rightarrow f(X_{ij})=0$. Given the symmetry of $e,\theta$, the final word embedding is $\dfrac{e_w+\theta_w}{2}$.
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg1OTY1MjY1MV19
--->

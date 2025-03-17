@@ -1,0 +1,742 @@
+\documentclass{beamer}
+\setbeamercovered{}
+
+\usepackage{bookman}
+\usepackage{newtxtext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{systeme}
+\usepackage{subcaption}
+\usepackage{bm} % Bold
+\usepackage{bbm} % Can use \mathbbm{1}
+\usepackage{ifthen} % Use if then else
+\usepackage{shuffle} % Use shuffle product
+\usepackage{minted} % For listing codes
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{cancel}
+\tikzcdset{ampersand replacement=\&}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+% \newcommand*{\relbarfill@}{\arrowfill@\relbar-\relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+% \newcommand*{\xdash}[2][]{\ext@arrow 0055\relbarfill@{#1}{#2}}
+\makeatother
+
+\newlength{\simlength}
+
+\newcommand{\xsim}[1]{
+\settowidth{\simlength}{$#1$}
+\mathrel{\overset{#1}{\resizebox{\simlength}{\height}{\sim}}}
+}
+\newcommand{\fatdot}{\mathrel{\raisebox{0.25ex}{\tikz\filldraw[black,x=2pt,y=2pt] (0,0) circle (0.5);}}}
+\newcommand{\fatplus}{\mathrel{\raisebox{-0.1ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0.9,0)--(1.1,0)--(1.1,0.9)--(2,0.9)--(2,1.1)--(1.1,1.1)--(1.1,2)--(0.9,2)--(0.9,1.1)--(0,1.1)--(0,0.9)--(0.9,0.9)--cycle;}}}
+\newcommand{\fatminus}{\raisebox{+0.4ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0,0.9)--(2,0.9)--(2,1.1)--(0,1.1)--cycle;}}
+
+\DeclareMathOperator{\Nul}{Nul}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\Rank}{Rank}
+\DeclareMathOperator{\Range}{Range}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\id}{id}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+    \usecolortheme{beaver}
+    \usefonttheme{professionalfonts} 
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{caption}[numbered]
+}
+
+\theoremstyle{definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{recall}{Recall}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\DeclareMathOperator{\Span}{Span}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginSection[]{
+    \begin{frame}
+    \centering
+    \begin{beamercolorbox}[center, shadow=true, rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \end{frame}
+}
+
+\title{MATH240 - Introduction to Linear Algebra}
+\author{Haoran Li}
+\institute[UMD]{University of Maryland, College Park}
+\date{Summer 2023}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 12 - Eigendecomposition}
+
+\begin{frame}[t]
+\begin{definition}
+Suppose $A$ is a square $n\times n$ matrix. A \textcolor{blue}{$\lambda$-eigenvector}\index{eigenvector} of an $n\times n$ matrix $A$ is a nonzero vector $\mathbf x$ such that $A\mathbf x = \lambda\mathbf x$ for some scalar $\lambda$\pause. A scalar $\lambda$ is called an \textcolor{blue}{eigenvalue}\index{eigenvalue} of $A$ has $\lambda$-eigenvectors.
+\end{definition}
+\pause
+\begin{definition}
+We say that a vector space $V$ is \textcolor{blue}{trivial}\index{trivial vector space} if $V=\{0\}$ is the zero vector space.
+\end{definition}
+\pause
+\begin{question}
+How to decide whether a nonzero vector $\mathbf x$ is an eigenvector?
+\end{question}
+\pause
+\begin{answer}
+We can evaluate $A\mathbf x$ and see if it is a multiple of $\mathbf x$
+\end{answer}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+$A=\begin{bmatrix}
+1&6\\5&2
+\end{bmatrix}$, determine whether $\mathbf u=\begin{bmatrix}
+6\\-5
+\end{bmatrix}$, $\mathbf v=\begin{bmatrix}
+3\\-2
+\end{bmatrix}$ are eigenvectors of $A$.\pause
+\[
+A\mathbf u=\begin{bmatrix}
+1&6\\5&2
+\end{bmatrix}\begin{bmatrix}
+6\\-5
+\end{bmatrix}=\begin{bmatrix}
+-24\\20
+\end{bmatrix}=(-4)\mathbf u
+\]
+Hence $\mathbf u$ is a $(-4)$-eigenvector of $A$.\pause
+\[
+A\mathbf v=\begin{bmatrix}
+1&6\\5&2
+\end{bmatrix}\begin{bmatrix}
+3\\-2
+\end{bmatrix}=\begin{bmatrix}
+-9\\11
+\end{bmatrix}
+\]
+Which is not a multiple of $\mathbf v$, so $\mathbf v$ is not an eigenvector.
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{question}
+How to decide if $\lambda$ is an eigenvalue of $A$?
+\end{question}
+\pause
+\begin{answer}
+By definition, we know that $\lambda$ is an eigenvalue of $A\iff A\mathbf x=\lambda\mathbf x$ has a nontrivial solution $\iff \lambda\mathbf x-A\mathbf x=\lambda I\mathbf x-A\mathbf x=(\lambda I-A)\mathbf x=\mathbf 0$ has a nontrivial solution $\iff\Nul(\lambda I-A)$ is nontrivial $\iff \lambda I-A$ is invertible $\iff\det(\lambda I-A)=0$
+\end{answer}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}\label{12:54-07/01/2022}
+$A=\begin{bmatrix}
+4&-1&6\\
+2&1&6\\
+2&-1&8
+\end{bmatrix}$. Determine whether $\lambda=2$ is an eigenvalue of $A$\pause
+\[
+\det(2I-A)=\det\left(2\begin{bmatrix}
+1&0&0\\
+0&1&0\\
+0&0&1
+\end{bmatrix}-\begin{bmatrix}
+4&-1&6\\
+2&1&6\\
+2&-1&8
+\end{bmatrix}\right)=\left|\begin{matrix}
+2&-1&-6\\
+2&-1&-6\\
+2&-1&-6
+\end{matrix}\right|=0
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+From above criterion, we see that the set of $\lambda$-vectors is $\Nul(\lambda I-A)$ which is a subspace of $\mathbb R^n$, we call this the \textcolor{blue}{$\lambda$-eigenspace}\index{eigenspace}.
+\end{definition}
+\pause
+\begin{example}
+Continue Example~\ref{12:54-07/01/2022}. Let's find a basis for the $2$-eigenspace of $A$\pause, which is equivalent of finding a basis for $\Nul(2I-A)$, since\pause $\left[\begin{array}{c|c}
+2I-A&\mathbf 0
+\end{array}\right]\sim\left[\begin{array}{ccc|c}
+1&-\frac{1}{2}&3&0\\
+0&0&0&0\\
+0&0&0&0
+\end{array}\right]$, a basis could be $\left\{\begin{bmatrix}
+\frac{1}{2}\\1\\0
+\end{bmatrix},\begin{bmatrix}
+-3\\0\\1
+\end{bmatrix}\right\}$
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{question}
+How could we find all the eigenvalues of $A$?
+\end{question}
+\pause
+\begin{definition}
+From above discussion, we see that $\lambda$ is an eigenvalue of $A\iff\det(\lambda I-A)=0$, this motivates the following definition. We call $\det(tI-A)$ the \textcolor{blue}{characteristic polynomial}\index{characteristic polynomial} of $A$, and $\det(tI-A)=0$ the \textcolor{blue}{characteristic equation}\index{characteristic equation}. And the roots of the characteristic polynomial are the eigenvalues of $A$.
+\end{definition}
+\pause
+\begin{definition}
+We call the dimension of the $\lambda$-eigenspace ($\dim\Nul(\lambda I-A)$) the \textcolor{blue}{geometric multiplicity}\index{geometric multiplicity} of $\lambda$, and the multiplicity of $\lambda$ as a root in the charateristic polynomial $\det(tI-A)$ the \textcolor{blue}{algebraic multiplicity}\index{algebraic multiplicity} of $\lambda$.
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Suppose $A=\begin{bmatrix}
+1&-4\\4&2
+\end{bmatrix}$, then the characteristic polynomial of $A$ would be\pause $\det(tI-A)=\det\left(t\begin{bmatrix}
+1&0\\0&1
+\end{bmatrix}-\begin{bmatrix}
+1&-4\\4&2
+\end{bmatrix}\right)=\left|\begin{matrix}
+t-1&4\\-4&t-2
+\end{matrix}\right|=(t-1)(t-2)-4\cdot(-4)=t^2-3t+18$\pause.
+And the characteristic equation is $t^2-3t+18=0$\pause. Since $\Delta=(-3)^2-4\cdot1\cdot18=-63<0$, this equation has no (real) solutions, $A$ doesn't have (real) eigenvalues
+\end{example}
+\pause
+Recall that the quadratic equation $ax^2+bx+c=0$ has no (real) solutions $\iff$ the discriminant $\Delta=b^2-4ac<0$.
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Suppose $A=\begin{bmatrix}
+3&-2\\2&-1
+\end{bmatrix}$, then the characteristic polynomial of $A$ would be\pause $\det(tI-A)=\det\left(t\begin{bmatrix}
+1&0\\0&1
+\end{bmatrix}-\begin{bmatrix}
+3&-2\\2&-1
+\end{bmatrix}\right)=\left|\begin{matrix}
+t-3&2\\-2&t+1
+\end{matrix}\right|=(t-3)(t+1)-2\cdot(-2)=t^2-2t+1$\pause. And the characteristic equation is $t^2-2t+1=(t-1)^2=0$\pause. Hence the eigenvalues of $A$ is $2$ with algebraic multiplicity 2.
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Suppose $A=\begin{bmatrix}
+3&-2\\2&-1
+\end{bmatrix}$, then the characteristic polynomial of $A$ would be\pause $\det(tI-A)=\left|\begin{matrix}
+t-3&2&-3\\
+0&t+1&0\\
+-6&-7&t+4
+\end{matrix}\right|\xequal{\text{cofactor expansion across the 2nd row}}(t+1)(-1)^{2+2}\left|\begin{matrix}
+t-3&-3\\
+-6&t+4
+\end{matrix}\right|=(t+1)((t-3)(t+4)-(-3)\cdot(-6))=(t+1)(t^2+t-30)=(t+1)(t+6)(t-5)$\pause. So we see that the eigenvalues of $A$ are $-1, -6, -5$, all with algebraic multiplicities 1,1,1.
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Suppose $A=\begin{bmatrix}
+0&1&1\\
+1&0&1\\
+1&1&0
+\end{bmatrix}$, then characteristic polynomial is\pause
+\begin{align*}
+&\det(tI-A)=\left|\begin{matrix}
+t&-1&1\\
+-1&t&-1\\
+-1&-1&t
+\end{matrix}\right|\xequal{\substack{R2\rightarrow R1+t\cdot R2\\R2\rightarrow R2-R3}}\left|\begin{matrix}
+0&-1-t&1+t^2\\
+0&t+1&-1-t\\
+-1&-1&t
+\end{matrix}\right|\\
+&\xequal{\text{cofactor expansion across the 1st column}}(-1)(-1)^{3+1}\left|\begin{matrix}
+-1-t&1+t^2\\
+t+1&-1-t\\
+\end{matrix}\right|\\
+&=(-1)((-1-t)^2-(1+t^2)(t+1))=(-1)(t-t^3)=t(t+1)(t-1)
+\end{align*}\pause
+Thus the eigenvalues are $0,1,-1$, with algebraic multiplicities $1,1,1$.
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Suppose
+\[
+A=\begin{bmatrix}
+\lambda_1&*&\cdots&*\\
+0&\lambda_2&\cdots&*\\
+\vdots&\vdots&\ddots&\vdots\\
+0&0&\cdots&\lambda_n
+\end{bmatrix}
+\]
+is an $n\times n$ triangular matrix, then the characteristic polynomial of $A$ is\pause
+\[
+\det(tI-A)=\left|\begin{matrix}
+t-\lambda_1&*&\cdots&*\\
+0&t-\lambda_2&\cdots&*\\
+\vdots&\vdots&\ddots&\vdots\\
+0&0&\cdots&t-\lambda_n
+\end{matrix}\right|=(t-\lambda_1)(t-\lambda_2)\cdots(t-\lambda_n)
+\]\pause
+so the eigenvalues are the diagonal elements $\lambda_1,\lambda_2,\cdots,\lambda_n$. Note that $\lambda_i$'s might not be distinct, so there might be some multiplicities.
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Suppose $A=\begin{bmatrix}
+1&2&0&-1\\
+0&2&1&3\\
+0&0&3&4\\
+0&0&0&1
+\end{bmatrix}$, then the characteristic polynomial is\pause
+\[
+\det(tI-A)=\left|\begin{matrix}
+t-1&-2&0&1\\
+0&t-2&-1&-3\\
+0&0&t-3&-4\\
+0&0&0&t-1
+\end{matrix}\right|=(t-1)^2(t-2)(t-3)
+\]\pause
+And the eigenvalues are $1,2,3$, with multiplicities $2,1,1$ respectively.
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+$A$ and $B$ are said to be \textcolor{blue}{similar}\index{similar} if there exists an invertible matrix $P$ such that $A=PBP^{-1}$\pause. Note that this definition is \textit{symmetric} in the sense that we also have $B=P^{-1}AP=(P^{-1})A(P^{-1})^{-1}$\pause. Similarity is \textit{transitive} in the sense that if $A,B$ are similar, $B,C$ are similar, then so do $A,C$\pause. The reason is that suppose $A=PBP^{-1}$, $B=RCR^{-1}$, we would have $A=PBP^{-1}=PRCR^{-1}P^{-1}=(PR)C(PR)^{-1}$.
+\end{definition}
+\pause
+\begin{definition}
+We can the mapping $A\mapsto PAP^{-1}$ a \textcolor{blue}{similar transformation}\index{similar transformation}
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}\label{10:10-07/07/2022}
+Similar matrices have the same
+\begin{itemize}
+\item determinant
+\item characteristic polynomial
+\end{itemize}
+\end{theorem}
+\pause
+\begin{proof}
+Suppose $A,B$ are similar, $A=PBP^{-1}$, then
+\begin{itemize}
+\item $\det(A)=\det(PBP^{-1})=\det(P)\det(B)\det(P^{-1})=\det(P)\det(B)\det(P)^{-1}=\det(B)$
+\item Note that $tI-A=tPIP^{-1}-PBP^{-1}=P(tI-A)P^{-1}$, so $tI-A$ and $tI-B$ are similar, so they have the same determinant which is the characteristic polynomial.
+\end{itemize}
+\end{proof}
+\end{frame}
+\begin{frame}[t]
+\begin{theorem}\label{17:43-07/06/2022}
+If $\mathbf v_1,\cdots,\mathbf v_r$ are eigenvectors that correspond to distinct eigenvalues $\lambda_1,\cdots,\lambda_r$ of an $n\times n$ matrix $A$, then the set $\{\mathbf v_1,\cdots,\mathbf v_r\}$ is linearly independent. 
+\end{theorem}
+\pause
+\begin{proof}
+Suppose $\{\mathbf v_1,\cdots,\mathbf v_n\}$ is linearly independent, up to reordering the indices, we may assume $\mathbf v_r=c_1\mathbf v_1+\cdots+c_{r-1}\mathbf v_{r-1}$
+\end{proof}
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}[diagonalization theorem]\label{09:52-07/07/2022}
+Suppose $\mathbf v_1,\cdots,\mathbf v_n$ are eigenvectors of $A$ with eigenvalues $\lambda_1,\cdots,\lambda_n$, then we have\pause
+\begin{align*}
+A\begin{bmatrix}
+\mathbf v_1& \cdots& \mathbf v_n
+\end{bmatrix}&=\begin{bmatrix}
+A\mathbf v_1& \cdots&A \mathbf v_n
+\end{bmatrix}=\begin{bmatrix}
+\lambda_1\mathbf v_1& \cdots&\lambda_n\mathbf v_n
+\end{bmatrix}\\
+&=\begin{bmatrix}
+\mathbf v_1& \cdots& \mathbf v_n
+\end{bmatrix}\begin{bmatrix}
+\lambda_1&\cdots&0\\
+\vdots&\ddots&\vdots\\
+0&\cdots&\lambda_n
+\end{bmatrix}
+\end{align*}\pause
+Therefore we get a \textcolor{blue}{diagonalization}\index{diagonalization} of $A$, which reads $A=PDP^{-1}$, where $P=\begin{bmatrix}
+\mathbf v_1& \cdots& \mathbf v_n
+\end{bmatrix}$ and $D=\begin{bmatrix}
+\lambda_1&\cdots&0\\
+\vdots&\ddots&\vdots\\
+0&\cdots&\lambda_n
+\end{bmatrix}$
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}
+Diagonalize $A = \begin{bmatrix}
+1&3&3\\
+-3&-5&-3\\
+3&3&1
+\end{bmatrix}$
+\end{exercise}
+\pause
+\begin{solution}
+First we want to find all eigenvalues of $A$
+\begin{align*}
+\det(tI-A)&=\left|\begin{matrix}
+t-1&-3&-3\\
+3&t+5&3\\
+-3&-3&t-1
+\end{matrix}\right|\xequal{R3\rightarrow R3+R2}\left|\begin{matrix}
+t-1&-3&-3\\
+3&t+5&3\\
+0&t+2&t+2
+\end{matrix}\right|\\
+&\xequal{\text{factor out $(t+2)$ from row 3}}(t+2)\left|\begin{matrix}
+t-1&-3&-3\\
+3&t+5&3\\
+0&1&1
+\end{matrix}\right|\\
+&\xequal{\substack{R1\rightarrow R1+3R3\\R2\rightarrow R2-3R3}}(t+2)\left|\begin{matrix}
+t-1&0&0\\
+3&t+2&0\\
+0&1&1
+\end{matrix}\right|=(t+2)(t-1)(t+2)(1)=(t+2)^2(t-1)
+\end{align*}
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{solution}
+So the eigenvalues of $A$ are $\lambda_1=1$ with algebraic multiplicity 1 and $\lambda_2=\lambda_3=-2$ which is of algebraic multiplicity 2. For a basis of the 1-eigenspace $\Nul(I-A)$, consider
+\begin{align*}
+\left[\begin{array}{c|c}
+I-A&\mathbf0
+\end{array}\right]&=\left[\begin{array}{ccc|c}
+0&-3&-3&0\\
+3&6&3&0\\
+-3&-3&0&0
+\end{array}\right]\sim\left[\begin{array}{ccc|c}
+1&0&-1&0\\
+0&1&1&0\\
+0&0&0&0\\
+\end{array}\right]
+\end{align*}
+So it could be $\left\{\mathbf v_1=\begin{bmatrix}
+1\\-1\\0
+\end{bmatrix}\right\}$\pause
+For a basis of the $(-2)$-eigenspace $\Nul(-2I-A)$, consider
+\begin{align*}
+\left[\begin{array}{c|c}
+-2I-A&\mathbf0
+\end{array}\right]&=\left[\begin{array}{ccc|c}
+-3&-3&-3&0\\
+3&3&3&0\\
+-3&-3&-3&0
+\end{array}\right]\sim\left[\begin{array}{ccc|c}
+1&1&1&0\\
+0&0&0&0\\
+0&0&0&0\\
+\end{array}\right]
+\end{align*}
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{solution}
+So it could be $\left\{\mathbf v_2=\begin{bmatrix}
+-1\\1\\0
+\end{bmatrix},\mathbf v_3=\begin{bmatrix}
+-1\\0\\1
+\end{bmatrix}\right\}$. By Theorem~\ref{17:43-07/06/2022}, we know that $\{\mathbf v_1,\mathbf v_2,\mathbf v_3\}$ are linearly independent, thus forming a basis for $\mathbb R^3$. And we have a diagonalization\pause $A=PDP^{-1},\quad P=\begin{bmatrix}
+\mathbf v_1&\mathbf v_2&\mathbf v_3
+\end{bmatrix}=\begin{bmatrix}
+1&-1&-1\\
+-1&1&0\\
+0&0&1\\
+\end{bmatrix}$, $D=\begin{bmatrix}
+\lambda_1&0&0\\
+0&\lambda_2&0\\
+0&0&\lambda_3
+\end{bmatrix}=\begin{bmatrix}
+1&0&0\\
+0&-2&0\\
+0&0&-2
+\end{bmatrix}$
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}\label{09:29-07/07/2022}
+$A = \begin{bmatrix}
+2&4&3\\
+-4&-6&-3\\
+3&3&1
+\end{bmatrix}$, the characteristic polynomial of $A$ is\pause
+\begin{align*}
+\det(tI-A)&=\left|\begin{matrix}
+t-2&-4&-3\\
+4&t+6&3\\
+-3&-3&t-1
+\end{matrix}\right|\xequal{R1\rightarrow R1+R2}\left|\begin{matrix}
+t+2&t+2&0\\
+4&t+6&3\\
+-3&-3&t-1
+\end{matrix}\right|\\
+&\xequal{\text{factor $(t+2)$ from row 1}}(t+2)\left|\begin{matrix}
+1&1&0\\
+4&t+6&3\\
+-3&-3&t-1
+\end{matrix}\right|\xequal{\substack{R2\rightarrow R2-4R1\\R3\rightarrow R3+3R1}}\\
+&(t+2)\left|\begin{matrix}
+1&1&0\\
+0&t+2&3\\
+0&0&t-1
+\end{matrix}\right|\\
+&=(t-1)(t+2)^2
+\end{align*}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+So the eigenvalues of $A$ are $\lambda_1=1$ with algebraic multiplicity 1 and $\lambda_2=\lambda_3=-2$ which is of algebraic multiplicity 2. To find a basis for the 1-eigenspace, consider
+\begin{align*}
+\left[\begin{array}{c|c}
+I-A&\mathbf0
+\end{array}\right]&=\left[\begin{array}{ccc|c}
+-1&-4&-3&0\\
+4&7&3&0\\
+-3&-3&0&0
+\end{array}\right]\sim\left[\begin{array}{ccc|c}
+-1&-4&-3&0\\
+0&-9&-9&0\\
+0&9&9&0
+\end{array}\right]\\
+&\sim\left[\begin{array}{ccc|c}
+-1&-4&-3&0\\
+0&1&1&0\\
+0&0&0&0
+\end{array}\right]\sim\left[\begin{array}{ccc|c}
+1&0&-1&0\\
+0&1&1&0\\
+0&0&0&0
+\end{array}\right]
+\end{align*}
+It could be $\left\{\mathbf v_1=\begin{bmatrix}
+1\\-1\\1
+\end{bmatrix}\right\}$\pause. To find a basis for the $(-2)$-eigenspace, consider
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+\begin{align*}
+\left[\begin{array}{c|c}
+-2I-A&\mathbf0
+\end{array}\right]&=\left[\begin{array}{ccc|c}
+-4&-4&-3&0\\
+4&4&3&0\\
+-3&-3&-3&0
+\end{array}\right]\sim\left[\begin{array}{ccc|c}
+-4&-4&-3&0\\
+0&0&0&0\\
+1&1&1&0
+\end{array}\right]\\
+&\sim\left[\begin{array}{ccc|c}
+0&0&1&0\\
+0&0&0&0\\
+1&1&1&0
+\end{array}\right]\sim\left[\begin{array}{ccc|c}
+1&1&0&0\\
+0&0&1&0\\
+0&0&0&0\\
+\end{array}\right]
+\end{align*}
+It could be $\left\{\mathbf v_2=\begin{bmatrix}
+-1\\1\\0
+\end{bmatrix}\right\}$\pause. Note that there is not enough eigenvectors ($2<3$!!!) for a basis for $\mathbb R^3$. The real reason that this failed to be a basis was that the geometric multiplicity of $-2$ (which is equal to 1) is less that the algebraic multiplicity of $-2$ (which is equal to 2)
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}
+Supoose $A$ is an $n\times n$ matrix. Then the geometric multiplicity of an eigenvalue $\lambda$ is less or equal to the algebraic multiplicity of $\lambda$. $A$ is diagonalizable $\iff A$ has $n$ linearly independent eigenvectors $\iff$ geometric multiplicities are always the same as algebraic multiplicities.
+\end{theorem}
+\pause
+\begin{theorem}\label{13:41-07/08/2022}
+Combining Theorem~\ref{17:43-07/06/2022}, we know that an $n\times n$ matrix with $n$ distinct eigenvalues is diagonalizable.
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+Suppose $T:V\to V$ is a linear transformation, and $\mathcal B=\{\bm b_1,\cdots,\bm b_n\}$ is a basis for $V$, we can the matrix relative to $\mathcal B$ and $\mathcal B$ the \textcolor{blue}{$\mathcal B$-matrix of $T$}\index{$\mathcal B$-matrix} (denoted $[T]_{\mathcal B}$), i.e. \eqref{16:03-06/29/2022} becomes
+\begin{center}
+\begin{tikzcd}
+V \arrow[r, "T"] \arrow[d, "{[\quad]_{\mathcal B}}"'] \& V \arrow[d, "{[\quad]_{\mathcal B}}"] \\
+\mathbb R^n \arrow[r, "{[T]_{\mathcal B}}"]           \& \mathbb R^n                          
+\end{tikzcd}
+\quad
+\begin{tikzcd}
+\bm v \arrow[r, maps to] \arrow[d, maps to] \& T(\bm v) \arrow[d, maps to]                     \\
+{[\bm v]_{\mathcal B}} \arrow[r, maps to]   \& {[T]_{\mathcal B}[\bm v]_{\mathcal B}=[T(\bm v)]_{\mathcal B}}
+\end{tikzcd}
+\end{center}
+And \eqref{12:55-06/29/2022} gives $[T]_{\mathcal B}=\begin{bmatrix}
+[T(\bm b_1)]_{\mathcal B}&\cdots&[T(\bm b_n)]_{\mathcal B}
+\end{bmatrix}$
+Suppose both $\mathcal B=\{\bm b_1,\cdots,\bm b_n\}$ and $\mathcal C=\{\bm c_1,\cdots,\bm c_n\}$ form bases for $V$, then
+\[
+[T]_{\mathcal B}=\underset{\mathcal B\leftarrow\mathcal C}{P}[T]_{\mathcal C}\underset{\mathcal C\leftarrow\mathcal B}{P}=\underset{\mathcal B\leftarrow\mathcal C}{P}[T]_{\mathcal C}\left(\underset{\mathcal B\leftarrow\mathcal C}{P}\right)^{-1}
+\]
+is similar via
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+\begin{center}
+\begin{tikzcd}
+V \arrow[r, "T"] \arrow[d, "{[\quad]_{\mathcal B}}"'] \arrow[dd, "{[\quad]_{\mathcal C}}"', bend right=74] \& V \arrow[d, "{[\quad]_{\mathcal B}}"] \arrow[dd, "{[\quad]_{\mathcal C}}", bend left=74] \\
+\mathbb R^n \arrow[r, "{[T]_{\mathcal B}}"]                                                                \& \mathbb R^n \arrow[d, "\underset{\mathcal C\leftarrow\mathcal B}{P}"']                   \\
+\mathbb R^n \arrow[r, "{[T]_{\mathcal C}}"] \arrow[u, "\underset{\mathcal B\leftarrow\mathcal C}{P}"']     \& \mathbb R^n                                                                             
+\end{tikzcd}
+\end{center}
+If $T:\mathbb R^n\to\mathbb R^n$, $T(\mathbf x)=A\mathbf x$ is a matrix transformation, $\mathcal E$ is the standard basis, and $\mathcal C=\{\mathbf v_1,\cdots,\mathbf v_n\}$ is basis consists of eigenvectors, then $[T]_{\mathcal C}=D$ is diagonal with eigenvalues, as shown in Theorem~\ref{09:52-07/07/2022}.
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{remark}
+In fact, any two similar matrix can be realized as matrices of the same linear transformation in different basis.
+\end{remark}
+\pause
+\begin{definition}
+By Theorem~\ref{10:10-07/07/2022} we know that similar matrices have the same characteristic polynomials (hence the same eigenvalues) and determinants. So we may define notions like \textit{eigenvalues}, \textit{eigenvectors}, \textit{characteristic polynomials} and \textit{determinants} for a linear transformation $T:V\to V$.
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Suppose $T=\dfrac{d}{dt}:\mathbb P_2\to\mathbb P_2$, $T(a_0+a_1t+a_2t^2)=a_1+2a_2t$ is a linear transformation (verify this!), $\mathcal E=\{1,t,t^2\}$ is the standard basis, we have\pause
+\[
+D=[T]_{\mathcal B}=\begin{bmatrix}
+0&0&0\\
+0&1&0\\
+0&0&2
+\end{bmatrix}
+\]
+so the characteristic polynomial of $T$ is $\det(tI-[T]_{\mathcal E})=t(t-1)(t-2)$, so the eigenvalues for $T$ will be $\lambda_1=0,\lambda_2=1,\lambda_3=2$\pause, and the corresponding eigenvectors for $[T]_{\mathcal E}$ could be $\left\{\mathbf v_1=\begin{bmatrix}
+1\\0\\0
+\end{bmatrix},\mathbf v_1=\begin{bmatrix}
+0\\1\\0
+\end{bmatrix},\mathbf v_1=\begin{bmatrix}
+0\\0\\1
+\end{bmatrix}\right\}$, which in turn corresponds to eigenvectors $\{1,t,t^2\}$ for $T$. However if we choose basis $\mathcal C=\{1+t,t,t^2\}$ is the standard basis, we have
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+\[
+P=\underset{\mathcal E\leftarrow\mathcal C}{P}=\begin{bmatrix}
+1&0&0\\
+1&1&0\\
+0&0&1
+\end{bmatrix},\quad P^{-1}=\underset{\mathcal C\leftarrow\mathcal E}{P}=\begin{bmatrix}
+1&0&0\\
+-1&1&0\\
+0&0&1
+\end{bmatrix}
+\]
+and thus\pause
+\begin{align*}
+A&=[T]_{\mathcal C}=\underset{\mathcal B\leftarrow\mathcal C}{P}[T]_{\mathcal C}\left(\underset{\mathcal B\leftarrow\mathcal C}{P}\right)^{-1}=PDP^{-1}\\
+&=\begin{bmatrix}
+1&0&0\\
+1&1&0\\
+0&0&1
+\end{bmatrix}\begin{bmatrix}
+0&0&0\\
+0&1&0\\
+0&0&2
+\end{bmatrix}\begin{bmatrix}
+1&0&0\\
+-1&1&0\\
+0&0&1
+\end{bmatrix}=\begin{bmatrix}
+0&0&0\\
+-1&1&0\\
+0&0&2
+\end{bmatrix}
+\end{align*}\pause
+The determinant of $T$ is equal to either $\det([T]_{\mathcal B})$ or $\det([T]_{\mathcal C})$, which is zero.
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+$A=\begin{bmatrix}
+2&1\\
+2&3
+\end{bmatrix}$, let's compute $A^{50}$\pause. First we find the eigenvalues $\lambda_1=1$, $\lambda_2=4$. and we get corresponding eigenvectors $\mathbf v_1=\begin{bmatrix}
+-1\\1
+\end{bmatrix},\mathbf v_2=\begin{bmatrix}
+1\\2
+\end{bmatrix}$, so we have $D=\begin{bmatrix}
+1&0\\0&4
+\end{bmatrix}$ and $P=\begin{bmatrix}
+-1&1\\1&2
+\end{bmatrix}$, so $P^{-1}=\frac{1}{3}\begin{bmatrix}
+-2&1\\1&1
+\end{bmatrix}$\pause. So we have
+\begin{align*}
+A^{50} &= \overbrace{(PDP^{-1})(PDP^{-1})(PDP^{-1})\cdots(PDP^{-1})}^{50}\\
+&=\overbrace{(PD\cancel{P^{-1}})(\cancel PD\cancel{P^{-1}})(\cancel PD\cancel{P^{-1}})\cdots(\cancel PDP^{-1})}^{50}\\
+&=PD^{50}P^{-1}=\frac{1}{3}\begin{bmatrix}
+-1&1\\1&2
+\end{bmatrix}\begin{bmatrix}
+1&0\\0&4^{50}
+\end{bmatrix}\begin{bmatrix}
+-2&1\\1&1
+\end{bmatrix}
+\end{align*}
+\end{example}
+\end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+\end{document}

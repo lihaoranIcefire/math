@@ -1,0 +1,452 @@
+\documentclass{beamer}
+\setbeamercovered{}
+
+\usepackage{bookman}
+\usepackage{newtxtext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{systeme}
+\usepackage{subcaption}
+\usepackage{bm} % Bold
+\usepackage{bbm} % Can use \mathbbm{1}
+\usepackage{ifthen} % Use if then else
+\usepackage{shuffle} % Use shuffle product
+\usepackage{minted} % For listing codes
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{cancel}
+\tikzcdset{ampersand replacement=\&}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+% \newcommand*{\relbarfill@}{\arrowfill@\relbar-\relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+% \newcommand*{\xdash}[2][]{\ext@arrow 0055\relbarfill@{#1}{#2}}
+\makeatother
+
+\newlength{\simlength}
+
+\newcommand{\xsim}[1]{
+\settowidth{\simlength}{$#1$}
+\mathrel{\overset{#1}{\resizebox{\simlength}{\height}{\sim}}}
+}
+\newcommand{\fatdot}{\mathrel{\raisebox{0.25ex}{\tikz\filldraw[black,x=2pt,y=2pt] (0,0) circle (0.5);}}}
+\newcommand{\fatplus}{\mathrel{\raisebox{-0.1ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0.9,0)--(1.1,0)--(1.1,0.9)--(2,0.9)--(2,1.1)--(1.1,1.1)--(1.1,2)--(0.9,2)--(0.9,1.1)--(0,1.1)--(0,0.9)--(0.9,0.9)--cycle;}}}
+\newcommand{\fatminus}{\raisebox{+0.4ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0,0.9)--(2,0.9)--(2,1.1)--(0,1.1)--cycle;}}
+
+\DeclareMathOperator{\Nul}{Nul}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\Rank}{Rank}
+\DeclareMathOperator{\Range}{Range}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Proj}{Proj}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+    \usecolortheme{beaver}
+    \usefonttheme{professionalfonts} 
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{caption}[numbered]
+}
+
+\theoremstyle{definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{recall}{Recall}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\DeclareMathOperator{\Span}{Span}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginSection[]{
+    \begin{frame}
+    \centering
+    \begin{beamercolorbox}[center, shadow=true, rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \end{frame}
+}
+
+\title{MATH240 - Introduction to Linear Algebra}
+\author{Haoran Li}
+\institute[UMD]{University of Maryland, College Park}
+\date{Summer 2023}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 16 - Orthogonalization}
+
+\begin{frame}[t]
+Recall for $\mathbf u=\begin{bmatrix}
+u_1\\u_2\\\vdots\\u_n
+\end{bmatrix},\mathbf v=\begin{bmatrix}
+v_1\\v_2\\\vdots\\v_n
+\end{bmatrix}\in\mathbb R^n$, we can define the \textit{dot product} $\mathbf u\cdot\mathbf v$ to be $\mathbf u^T\mathbf v=\begin{bmatrix}
+u_1&u_2&\cdots&u_n
+\end{bmatrix}\begin{bmatrix}
+v_1\\v_2\\\vdots\\v_n
+\end{bmatrix}=u_1v_1+u_2v_2+\cdots u_nv_n$\pause. The \textcolor{blue}{length}(or \textcolor{blue}{norm}) of a vector $\mathbf u$ can be expressed as $\|\mathbf u\|=\sqrt{\mathbf u\cdot\mathbf u}=\sqrt{u_1^2+\cdots+u_n^2}$\pause. Geometrically, the dot product can interpreted as $\mathbf u\cdot\mathbf v=\|\mathbf u\|\|\mathbf v\|\cos\theta$, here $\theta$ is the angle between $\mathbf u$ and $\mathbf v$ (which could be between 0 and $\pi$)\pause
+\begin{itemize}
+\item If $\mathbf u\cdot\mathbf v<0$, then $\cos\theta<0$, $\theta$ is obtuse, if in addition $\mathbf u\cdot\mathbf v=\|\mathbf u\|\|\mathbf v\|$, then $\mathbf u,\mathbf v$ are of the opposite direction.\pause
+\item If $\mathbf u\cdot\mathbf v=0$, then $\cos\theta=0$, $\theta=\frac{\pi}{2}$, or $\mathbf u=\mathbf0$, or $\mathbf v=\mathbf0$. In this case, we say that $\mathbf u,\mathbf v$ are \textcolor{blue}{orthogonal}\index{orthogonal} (denoted $\mathbf u\perp\mathbf v$, $\perp$ stands for perpendicular).\pause
+\item If $\mathbf u\cdot\mathbf v>0$, then $\cos\theta>0$, $\theta$ is acute, if in addition $\mathbf u\cdot\mathbf v=\|\mathbf u\|\|\mathbf v\|$, then $\mathbf u,\mathbf v$ are of the same direction.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+We say a vector $\mathbf u$ is of unit length (or a \textcolor{blue}{unit vector}, or a \textcolor{blue}{normalized vector}) if $\|\mathbf u\|=1$
+\end{definition}
+\pause
+\begin{definition}
+$\mathcal B=\{\mathbf v_1,\cdots,\mathbf v_n\}$ is called an orthogonal set if $\mathbf v_i,\mathbf v_j$ ($i\neq j$) are orthogonal\pause. $\mathcal B$ is called an \textcolor{blue}{orthogonal} basis if $\mathcal B$ is in addition a basis\pause. $\mathcal B$ is called an \textcolor{blue}{orthonormal}\index{orthonormal} basis if the basis vectors are in addition normalized.
+\end{definition}
+\pause
+\begin{remark}
+Suppose $\mathcal B=\{\mathbf v_1,\cdots,\mathbf v_n\}$, to test if $\mathcal B$ is an orthogonal (or orthonormal) set, we just need to write $A=\begin{bmatrix}
+\mathbf v_1&\cdots&\mathbf v_n
+\end{bmatrix}$, and test if
+\scalebox{0.9}{
+$A^TA=\begin{bmatrix}
+\mathbf v_1^T\\\mathbf v_2^T\\\vdots\\\mathbf v_n^T
+\end{bmatrix}\begin{bmatrix}
+\mathbf v_1&\mathbf v_2&\cdots&\mathbf v_n
+\end{bmatrix}=\begin{bmatrix}
+\mathbf v_1^T\mathbf v_1&\mathbf v_1^T\mathbf v_2&\cdots&\mathbf v_1^T\mathbf v_n\\
+\mathbf v_2^T\mathbf v_1&\mathbf v_2^T\mathbf v_2&\cdots&\mathbf v_2^T\mathbf v_n\\
+\vdots&\vdots&\ddots&\vdots\\
+\mathbf v_n^T\mathbf v_1&\mathbf v_n^T\mathbf v_2&\cdots&\mathbf v_n^T\mathbf v_n\\
+\end{bmatrix}$
+}
+is diagonal (or if $A^TA=I$)
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}\label{01:12-07/15/2022}
+Suppose $\mathcal B=\{\mathbf v_1,\cdots,\mathbf v_p\}$ is an orthogonal set of non-zero vectors, then $\mathcal B$ is linearly independent
+\end{theorem}
+\pause
+\begin{proof}
+Suppose not, we may assume $\mathbf 0\neq\mathbf v_p=c_1\mathbf v_1+\cdots+r_{p-1}\mathbf v_{p-1}$, but then
+\[
+0<\|\mathbf v_p\|^2=\mathbf v_p\cdot(c_1\mathbf v_1+\cdots+r_{p-1}\mathbf v_{p-1})=0
+\]
+Which is a contradiction.
+\end{proof}
+\end{frame}
+
+\begin{frame}[t]
+\begin{question}
+Suppose you have two vectors $\mathbf u,\mathbf v$ (here $\mathbf v\neq\mathbf0$), what is the orthogonal projection of $\mathbf u$ onto $\mathbf v$ (Which we denote as $\Proj_{\mathbf v}\mathbf u$)?
+\end{question}
+\pause
+\begin{answer}
+First you realize that $\Proj_{\mathbf v}\mathbf u$ is parallel to $\mathbf v$, so we write it as $\lambda\mathbf v$\pause, and we know $\|\Proj_{\mathbf v}\mathbf u\|=\lambda\|\mathbf v\|=\|\mathbf u\|\cos\theta$, so we may conclude that\pause\pause
+\[
+\lambda=\frac{\|\mathbf u\|\cos\theta}{\|\mathbf v\|}=\frac{\|\mathbf u\|\|\mathbf v\|\cos\theta}{\|\mathbf v\|^2}=\frac{\mathbf u\cdot\mathbf v}{\mathbf v\cdot\mathbf v}
+\]\pause
+Therefore we have derived the equation
+\begin{equation}\label{13:10-07/14/2022}
+\Proj_{\mathbf v}\mathbf u=\frac{\mathbf u\cdot\mathbf v}{\mathbf v\cdot\mathbf v}\mathbf v
+\end{equation}
+\end{answer}
+\end{frame}
+
+\begin{frame}[t]
+\begin{question}
+If $W$ is a subspace of $\mathbb R^n$ with an orthogonal basis $\mathcal B=\{\mathbf u_1,\cdots,\mathbf u_p\}$, how could you express the orthogonal projection of a vector $\mathbf y\in\mathbb R^n$ onto $W$ (denoted by $\Proj_W\mathbf y$).
+\end{question}
+\pause
+Suppose $\Proj_W\mathbf y=\lambda_1\mathbf u_1+\cdots+\lambda_p\mathbf u_p$\pause, then we should have for any $i$, $0=(\mathbf y-\Proj_W\mathbf y)\cdot\mathbf u_i\pause=(\mathbf y-\lambda_1\mathbf u_1+\cdots+\lambda_p\mathbf u_p)\cdot\mathbf u_i\pause=\mathbf y\cdot\mathbf u-\lambda_i\mathbf u_1\cdot\mathbf u_1\pause\Rightarrow\lambda_i=\frac{\mathbf y\cdot\mathbf u_i}{\mathbf u_i\cdot\mathbf u_i}$\pause. There we have the equation
+\begin{equation}\label{22:47-07/14/2022}
+\begin{aligned}
+\Proj_W\mathbf y&=\Proj_{\mathbf u_1}\mathbf y+\cdots+\Proj_{\mathbf u_p}\mathbf y\\
+&=\frac{\mathbf y\cdot\mathbf u_1}{\mathbf u_1\cdot\mathbf u_1}\mathbf u_1+\cdots+\frac{\mathbf y\cdot\mathbf u_p}{\mathbf u_p\cdot\mathbf u_p}\mathbf u_p
+\end{aligned}
+\end{equation}
+\pause
+If we further assume that $\mathcal B$ is an orthonormal basis, then $\mathbf u_1\cdot\mathbf u_1=\|\mathbf u_i\|^2=1$. Let's write $U=\begin{bmatrix}
+\mathbf u_1&\cdots&\mathbf u_p
+\end{bmatrix}$. \eqref{22:47-07/14/2022} becomes\pause
+\begin{equation}\label{22:51-07/14/2022}
+\Proj_W\mathbf y=(\mathbf y\cdot\mathbf u_1)\mathbf u_1+\cdots+(\mathbf y\cdot\mathbf u_p)\mathbf u_p=UU^T\mathbf y
+\end{equation}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Consider $\mathcal B=\left\{\mathbf u_1=\begin{bmatrix}
+2\\1\\0
+\end{bmatrix},\mathbf u_2=\begin{bmatrix}
+-1\\2\\0
+\end{bmatrix}\right\}$, $\mathbf y=\begin{bmatrix}
+1\\1\\1
+\end{bmatrix}$, $W=\Span\{\mathbf u_1,\mathbf u_2\}$\pause. Let $U=\begin{bmatrix}
+\mathbf u_1&\mathbf u_2
+\end{bmatrix}=\begin{bmatrix}
+2&-1\\
+1&2\\
+0&0
+\end{bmatrix}$, then $A^TA=\begin{bmatrix}
+5&0\\
+0&5
+\end{bmatrix}$ is diagonal, hence $\mathcal B$ is an orthogonal set\pause, the orthogonal projection of $\mathbf y$ onto $W$ is
+\begin{align*}
+\Proj_W\mathbf y&=\frac{\mathbf y\cdot\mathbf u_1}{\mathbf u_1\cdot\mathbf u_1}\mathbf u_1+\frac{\mathbf y\cdot\mathbf u_2}{\mathbf u_2\cdot\mathbf u_2}\mathbf u_2\\
+&=\frac{1\cdot2+1\cdot1+1\cdot0}{2^2+1^2+0^2}\mathbf u_1+\frac{1\cdot(-1)+1\cdot2+1\cdot0}{(-1)^2+2^2+0^2}\mathbf u_2\\
+&=\frac{3}{5}\begin{bmatrix}
+2\\1\\0
+\end{bmatrix}+\frac{1}{5}\begin{bmatrix}
+-1\\2\\0
+\end{bmatrix}=\begin{bmatrix}
+1\\1\\0
+\end{bmatrix}
+\end{align*}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{question}
+Suppose we are given arbitrary basis $\mathcal B=\{\mathbf v_1,\cdots,\mathbf v_p\}$ for a subspace $W$ of $\mathbb R^n$, how could we get a orthogonal (or orthonormal) basis $\mathcal U=\{\mathbf u_1,\cdots,\mathbf u_p\}$ from it
+\end{question}
+\end{frame}
+
+\begin{frame}[t]
+\begin{answer}
+We apply the \textcolor{blue}{Gram-Schmidt process}\index{Gram-Schmidt process}\pause
+\begin{itemize}
+\item $\mathbf u_1=\mathbf v_1$\pause
+\item $\mathbf u_2=\mathbf v_2-\Proj_{\mathbf u_1}\mathbf v_2$\\
+$\hphantom{\mathbf u_2}=\mathbf v_2-\dfrac{\mathbf v_2\cdot\mathbf u_1}{\mathbf u_1\cdot\mathbf u_1}\mathbf u_1$\pause
+\item $\mathbf u_3=\mathbf v_3-\Proj_{\mathbf u_1}\mathbf v_3-\Proj_{\mathbf u_2}\mathbf v_3$\\
+$\hphantom{\mathbf u_3}=\mathbf v_3-\dfrac{\mathbf v_3\cdot\mathbf u_1}{\mathbf u_1\cdot\mathbf u_1}\mathbf u_1-\dfrac{\mathbf v_3\cdot\mathbf u_2}{\mathbf u_2\cdot\mathbf u_2}\mathbf u_2$\pause
+\item $\hphantom{\mathbf u_4}\vdots$
+\item $\mathbf u_p=\mathbf v_p-\Proj_{\mathbf u_1}\mathbf v_p-\cdots-\Proj_{\mathbf u_{p-1}}\mathbf v_p$\\
+$\hphantom{\mathbf u_p}=\mathbf v_p-\dfrac{\mathbf v_p\cdot\mathbf u_1}{\mathbf u_1\cdot\mathbf u_1}\mathbf u_1-\cdots-\dfrac{\mathbf v_p\cdot\mathbf u_{p-1}}{\mathbf u_{p-1}\cdot\mathbf u_{p-1}}\mathbf u_{p-1}$\pause
+\end{itemize}
+Then $\{\mathbf u_1,\cdots,\mathbf u_p\}$ would be an orthogonal basis\pause. To get an orthonormal basis, just normalize these vectors.
+\end{answer}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}\label{00:47-07/15/2022}
+Consider $\left\{\mathbf v_1=\begin{bmatrix}
+1\\1\\1
+\end{bmatrix},\mathbf v_2=\begin{bmatrix}
+1\\2\\2
+\end{bmatrix},\mathbf v_3=\begin{bmatrix}
+3\\-1\\1
+\end{bmatrix}\right\}$. Let's use Gram-Schmidt process to find an orthogonal (and an orthonormal) basis from it.\pause
+\begin{itemize}
+\item First we choose $\mathbf u_1=\mathbf v_1=\begin{bmatrix}
+1\\1\\1
+\end{bmatrix}$
+\item $\mathbf v_2-\dfrac{\mathbf v_2\cdot\mathbf u_1}{\mathbf u_1\cdot\mathbf u_1}\mathbf u_1=\begin{bmatrix}
+1\\2\\2
+\end{bmatrix}-\frac{5}{3}\begin{bmatrix}
+1\\1\\1
+\end{bmatrix}=\begin{bmatrix}
+-\frac{2}{3}\\\frac{1}{3}\\\frac{1}{3}
+\end{bmatrix}$. Let's instead take a multiple of this to be our $\mathbf u_2$, namely we set $\mathbf u_2=\begin{bmatrix}
+-2\\1\\1
+\end{bmatrix}$
+\item $\mathbf u_3=\mathbf v_3-\dfrac{\mathbf v_3\cdot\mathbf u_1}{\mathbf u_1\cdot\mathbf u_1}\mathbf u_1-\dfrac{\mathbf v_3\cdot\mathbf u_2}{\mathbf u_2\cdot\mathbf u_2}\mathbf u_2=\begin{bmatrix}
+3\\-1\\1
+\end{bmatrix}-\begin{bmatrix}
+1\\1\\1
+\end{bmatrix}-\begin{bmatrix}
+-2\\1\\1
+\end{bmatrix}=\begin{bmatrix}
+0\\-1\\1
+\end{bmatrix}$
+\end{itemize}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Thus $\left\{\mathbf u_1=\begin{bmatrix}
+1\\1\\1
+\end{bmatrix},\mathbf u_2=\begin{bmatrix}
+-2\\1\\1
+\end{bmatrix},\mathbf u_3=\begin{bmatrix}
+0\\-1\\1
+\end{bmatrix}\right\}$ is an orthogonal basis for $\mathbb R^3$. If we further normalize it, we have
+\[
+\mathbf w_1=\frac{\mathbf u_1}{\|\mathbf u_1\|}=\frac{1}{\sqrt3}\begin{bmatrix}
+1\\1\\1
+\end{bmatrix}=\begin{bmatrix}
+\frac{1}{\sqrt3}\\\frac{1}{\sqrt3}\\\frac{1}{\sqrt3}
+\end{bmatrix},\mathbf w_2=\frac{\mathbf u_2}{\|\mathbf u_2\|}=\frac{1}{\sqrt6}\begin{bmatrix}
+-2\\1\\1
+\end{bmatrix}=\begin{bmatrix}
+-\frac{1}{\sqrt3}\\\frac{1}{\sqrt6}\\\frac{1}{\sqrt6}
+\end{bmatrix}
+\]
+\[
+\mathbf w_3=\frac{\mathbf u_3}{\|\mathbf u_3\|}=\frac{1}{\sqrt2}\begin{bmatrix}
+0\\-1\\1
+\end{bmatrix}=\begin{bmatrix}
+0\\-\frac{1}{\sqrt2}\\\frac{1}{\sqrt2}
+\end{bmatrix}
+\]
+is an orthonormal basis.
+\end{example}
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+Use Gram-Schmidt process to find an orthogonal and orthonormal basis of the following basis
+\begin{enumerate}
+\item $\left\{\begin{bmatrix}1\\2\end{bmatrix},\begin{bmatrix}3\\1\end{bmatrix}\right\}$\pause
+\item $\left\{\begin{bmatrix}1\\1\\-1\end{bmatrix},\begin{bmatrix}2\\1\\0\end{bmatrix},\begin{bmatrix}-2\\-1\\3\end{bmatrix}\right\}$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+A square matrix $U$ is called an \textcolor{blue}{orthogonal matrix}\index{orthogonal matrix} if  the columns of $U$ form an orthonormal basis $\iff U^TU=UU^T=I$. Note that in this particular case, $U^T=U^{-1}$
+\end{definition}
+\pause
+\begin{remark}
+The rows of $U$ also form an orthonormal basis.
+\end{remark}
+\pause
+\begin{note}
+The name \textit{orthogonal matrix} is unfortunate since it is made out of orthonormal basis. It should really be called the orthonormal matrix. But since mathematicians has been using this for a long time. So we will stick to this usage.
+\end{note}
+\end{frame}
+
+\begin{frame}[t]
+The Gram-Schmidt process gives us the so-called $QR$-factorization. First we can rewrite the Gram-Schmidt process as
+\begin{align*}
+\mathbf v_1&=\mathbf u_1\\
+\mathbf v_2&=\textstyle\frac{\mathbf v_2\cdot\mathbf u_1}{\mathbf u_1\cdot\mathbf u_1}\mathbf u_1+\mathbf u_2\\
+\mathbf v_3&=\textstyle\frac{\mathbf v_3\cdot\mathbf u_1}{\mathbf u_1\cdot\mathbf u_1}\mathbf u_1+\frac{\mathbf v_3\cdot\mathbf u_2}{\mathbf u_2\cdot\mathbf u_2}\mathbf u_2+\mathbf u_3\\
+&\vdots\\
+\mathbf v_n&=\textstyle\frac{\mathbf v_n\cdot\mathbf u_1}{\mathbf u_1\cdot\mathbf u_1}\mathbf u_1+\cdots+\frac{\mathbf v_n\cdot\mathbf u_{n-1}}{\mathbf u_{n-1}\cdot\mathbf u_{n-1}}\mathbf u_{n-1}+\mathbf u_n
+\end{align*}
+\pause
+After normalization (let's set $\mathbf u_i:=\frac{\mathbf u_i}{\|\mathbf u_i\|}$ to be unit vectors), we may write the above as the following set of equations with coefficients
+\begin{align*}
+\mathbf v_1&=r_{11}\mathbf u_1\\
+\mathbf v_2&=r_{12}\mathbf u_1+r_{22}\mathbf u_2\\
+\mathbf v_3&=r_{13}\mathbf u_1+r_{23}\mathbf u_2+r_{33}\mathbf u_3\\
+&\vdots\\
+\mathbf v_n&=r_{1n}\mathbf u_1+\cdots+r_{n-1,n}\mathbf u_{n-1}+r_{nn}\mathbf u_n
+\end{align*}
+\end{frame}
+
+\begin{frame}[t]
+If we write $A=\begin{bmatrix}
+\mathbf v_1&\cdots&\mathbf v_n
+\end{bmatrix}$, $Q=\begin{bmatrix}
+\mathbf u_1&\cdots&\mathbf u_n
+\end{bmatrix}$ (this is an orthogonal matrix), then have
+\[
+A=\begin{bmatrix}
+\mathbf v_1&\cdots&\mathbf v_n
+\end{bmatrix}=\begin{bmatrix}
+\mathbf u_1&\cdots&\mathbf u_n
+\end{bmatrix}\begin{bmatrix}
+r_{11}&r_{12}&r_{13}&\cdots& r_{1n}\\
+0&r_{22}&r_{23}&\cdots&r_{2n}\\
+0&0&r_{33}&\cdots&r_{3n}\\
+\vdots&\vdots&\vdots&\ddots&\vdots\\
+0&0&0&\cdots&r_{nn}
+\end{bmatrix}=QR
+\]\pause
+It can be shown that $QR$-factorization always exists, even $A$ is not invertible (columns does not form a basis)
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Continuing Example~\ref{00:47-07/15/2022}, we consider the $QR$-factorization of $A=\begin{bmatrix}
+\mathbf v_1&\mathbf v_2&\mathbf v_3
+\end{bmatrix}=\begin{bmatrix}
+1&1&3\\
+1&2&-1\\
+1&2&1
+\end{bmatrix}$\pause, we know that $Q=\begin{bmatrix}
+\mathbf w_1&\mathbf w_2&\mathbf w_3
+\end{bmatrix}=\begin{bmatrix}
+\frac{1}{\sqrt3}&-\frac{1}{\sqrt3}&0\\
+\frac{1}{\sqrt3}&\frac{1}{\sqrt6}&-\frac{1}{\sqrt2}\\
+\frac{1}{\sqrt3}&\frac{1}{\sqrt6}&\frac{1}{\sqrt2}
+\end{bmatrix}$\pause, so we know that
+\begin{align*}
+R&=Q^{-1}A=Q^TA\\
+&=\begin{bmatrix}
+\frac{1}{\sqrt3}&\frac{1}{\sqrt3}&\frac{1}{\sqrt3}\\
+-\frac{1}{\sqrt3}&\frac{1}{\sqrt6}&\frac{1}{\sqrt6}\\
+0&-\frac{1}{\sqrt2}&\frac{1}{\sqrt2}
+\end{bmatrix}\begin{bmatrix}
+1&1&3\\
+1&2&-1\\
+1&2&1
+\end{bmatrix}=\begin{bmatrix}
+\sqrt3&\frac{5}{\sqrt3}&\sqrt3\\
+0&\frac{2}{\sqrt6}&-\sqrt6\\
+0&0&\sqrt2
+\end{bmatrix}
+\end{align*}\pause
+Note that here we didn't actually use Gram-Schmidt process to evaluate $R$, instead we only used the existence of $QR$-factorization.
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+Suppose $W$ is a subspace of $\mathbb R^n$, the \textcolor{blue}{orthogonal complement}\index{orthogonal complement} $W^\perp=\{\mathbf v|\mathbf v\perp W\}$ is the set of vectors that are orthogonal to $W$
+\end{definition}
+\pause
+\begin{remark}
+It is easy to show that $W$ is a subspace of $\mathbb R^n$ and $(W^\perp)^\perp=W$. This is kind of a \textit{duality}, take $\mathbb R^3$ for an example, the orthogonal complement of a line would be the perpendicular plane, the orthogonal complement of a plane would be the perpendicular line, the orthogonal complement of the origin (a point) would be the whole space ($\mathbb R^3$) and the orthogonal complement of $\mathbb R^3$ would be the origin $\{\mathbf 0\}$. From this we also see that $\dim W+\dim W^\perp=n$.
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+We make the following crucial observation: $\mathbf x$ is in $\Nul A\iff\mathbf x$ is orthogonal all row vectors of $A\iff \mathbf x\perp\Row A$, so we may conclude that $(\Row A)^\perp=\Nul A$, and similarly we know that $(\Col A)^\perp=(\Row(A^T))^\perp=\Nul(A^T)$.
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+Suppose $W=\Span\left\{\begin{bmatrix}
+1\\1\\0\\2\\0\\3
+\end{bmatrix},\begin{bmatrix}
+0\\0\\1\\-2\\0\\2
+\end{bmatrix},\begin{bmatrix}
+0\\0\\0\\0\\1\\1
+\end{bmatrix}\right\}$, find $(\Col A)^\perp$.
+\end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+\end{document}

@@ -1,0 +1,353 @@
+\documentclass{beamer}
+\setbeamercovered{}
+
+\usepackage{bookman}
+\usepackage{newtxtext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{systeme}
+\usepackage{subcaption}
+\usepackage{bm} % Bold
+\usepackage{bbm} % Can use \mathbbm{1}
+\usepackage{ifthen} % Use if then else
+\usepackage{shuffle} % Use shuffle product
+\usepackage{minted} % For listing codes
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+% \newcommand*{\relbarfill@}{\arrowfill@\relbar-\relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+% \newcommand*{\xdash}[2][]{\ext@arrow 0055\relbarfill@{#1}{#2}}
+\makeatother
+
+\newlength{\simlength}
+
+\newcommand{\xsim}[1]{
+\settowidth{\simlength}{$#1$}
+\mathrel{\overset{#1}{\resizebox{\simlength}{\height}{\sim}}}
+}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+    \usecolortheme{beaver}
+    \usefonttheme{professionalfonts} 
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{caption}[numbered]
+}
+
+\theoremstyle{definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{recall}{Recall}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\DeclareMathOperator{\Span}{Span}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginSection[]{
+    \begin{frame}
+    \centering
+    \begin{beamercolorbox}[center, shadow=true, rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \end{frame}
+}
+
+\title{MATH240 - Introduction to Linear Algebra}
+\author{Haoran Li}
+\institute[UMD]{University of Maryland, College Park}
+\date{Summer 2024}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 4 - Matrix equations and linear independence}
+
+\begin{frame}[t]
+Recall a vector is a one column matrix, zero vector is the vector of zeros. For scalar (i.e. a number) $c$, and vectors $\mathbf a=\begin{bmatrix}
+a_1\\a_2\\\vdots\\a_n
+\end{bmatrix}$, $\mathbf b=\begin{bmatrix}
+b_1\\b_2\\\vdots\\b_n
+\end{bmatrix}$, we have\pause
+\begin{itemize}
+\item Addition $\mathbf a+\mathbf b=\begin{bmatrix}
+a_1\\a_2\\\vdots\\a_n
+\end{bmatrix}+\begin{bmatrix}
+b_1\\b_2\\\vdots\\b_n
+\end{bmatrix}=\begin{bmatrix}
+a_1+b_1\\a_2+b_2\\\vdots\\a_n+b_n
+\end{bmatrix}$\pause
+\item Scalar multiplication $c \mathbf  a=c\begin{bmatrix}
+a_1\\a_2\\\vdots\\a_n
+\end{bmatrix}=\begin{bmatrix}
+ca_1\\ca_2\\\vdots\\ca_n
+\end{bmatrix}$
+\end{itemize}
+\pause
+\begin{remark}
+In handwritings, we use $\Vec{v}$ or $\overset{\rightharpoonup}{v}$ to denote a vector, while in printing materials we often use the math bold font $\mathbf v$.
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+A \textcolor{blue}{vector equation}\index{vector equation} is of the form
+\begin{equation}\label{09:29-06/03/2022}
+x_1\mathbf a_1+x_2\mathbf a_2+\cdots+x_n\mathbf a_n=\mathbf b
+\end{equation}\pause
+We can also write the vector equation~\eqref{09:29-06/03/2022} as a \textcolor{blue}{matrix equation}\index{Matrix equation} with partitioned matrix
+\[
+x_1\mathbf a_1+x_2\mathbf a_2+\cdots+x_n\mathbf a_n=\begin{bmatrix}
+\mathbf a_1&\mathbf a_2&\cdots&\mathbf a_n
+\end{bmatrix}\begin{bmatrix}
+x_1\\x_2\\\vdots\\x_n
+\end{bmatrix}=A\mathbf x=\mathbf b
+\]
+Here $A=\begin{bmatrix}
+\mathbf a_1&\mathbf a_2&\cdots&\mathbf a_n
+\end{bmatrix}$ and $\mathbf x=\begin{bmatrix}
+x_1\\x_2\\\vdots\\x_n
+\end{bmatrix}$
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+\systeme{x_1+x_2=10, 2x_1+4x_2=26} can be written as a vector equation
+\begin{center}
+\scalebox{0.9}{
+$\mathbf b=\begin{bmatrix}
+10\\26
+\end{bmatrix}\pause=\begin{bmatrix}
+x_1+x_2\\2x_1+4x_2
+\end{bmatrix}\pause=\begin{bmatrix}
+x_1\\2x_1
+\end{bmatrix}+\begin{bmatrix}
+x_2\\4x_2
+\end{bmatrix}\pause=x_1\begin{bmatrix}
+1\\2
+\end{bmatrix}+x_2\begin{bmatrix}
+1\\4
+\end{bmatrix}\pause=x_1\mathbf a_1+x_2\mathbf a_2$
+}
+\end{center}\pause
+Or a matrix equation
+\[
+\mathbf b=\begin{bmatrix}
+10\\26
+\end{bmatrix}=x_1\mathbf a_1+x_2\mathbf a_2\pause=\begin{bmatrix}
+\mathbf a_1&\mathbf a_2
+\end{bmatrix}\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}\pause=\begin{bmatrix}
+1&1\\2&4
+\end{bmatrix}\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}\pause=A\mathbf x
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}\label{16:17-06/03/2022}
+The vector equation of \systeme*{x_1+x_3=1, 2x_1+x_3=2} is\pause
+\[
+x_1\begin{bmatrix}
+1\\0
+\end{bmatrix}+x_2\begin{bmatrix}
+0\\2
+\end{bmatrix}+x_3\begin{bmatrix}
+1\\1
+\end{bmatrix}=\begin{bmatrix}
+1\\2
+\end{bmatrix}
+\]\pause
+And the corresponding matrix equation is\pause
+\[
+\begin{bmatrix}
+1&0&1\\
+0&2&1
+\end{bmatrix}\begin{bmatrix}
+x_1\\x_2\\x_3
+\end{bmatrix}=\begin{bmatrix}
+1\\2
+\end{bmatrix}
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}\hfill
+\begin{itemize}
+\item A \textcolor{blue}{linear combination}\index{linear combination} of $\mathbf a_1,\mathbf a_2,\cdots,\mathbf a_n$ is a sum $c_1\mathbf a_1+c_2\mathbf a_2+\cdots+c_n\mathbf a_n$ for some scalars $c_1,\cdots,c_n$.\pause
+\item The \textcolor{blue}{span}\index{span} of $\{\mathbf v_1,\mathbf v_2,\cdots,\mathbf v_n\}$ is the set of all its linear combinations, which we denote $\Span\{\mathbf v_1, \mathbf v_2,\cdots,\mathbf v_n\}$.
+\end{itemize}
+\end{definition}
+\pause
+\begin{theorem}
+$x_1\mathbf a_1+x_2\mathbf a_2+\cdots+x_n\mathbf a_n=\mathbf b$ has solution(s) $\iff\mathbf b$ is a linear combination of $\mathbf v_1, \mathbf v_2,\cdots,\mathbf v_n$ $\iff$ $\mathbf b\in\Span\{\mathbf v_1, \mathbf v_2,\cdots,\mathbf v_n\}$
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}
+Let $\mathbf a_1=\begin{bmatrix}
+1\\2\\1
+\end{bmatrix}$, $\mathbf a_2=\begin{bmatrix}
+-1\\0\\1
+\end{bmatrix}$, $\mathbf a_3=\begin{bmatrix}
+1\\-1\\-2
+\end{bmatrix}$, $\mathbf b=\begin{bmatrix}
+1\\1\\1
+\end{bmatrix}$. Is $\mathbf b$ in $\Span\{\mathbf a_1, \mathbf a_2,\mathbf a_3\}$?
+\end{exercise}
+\pause
+\begin{solution}
+This is equivalent of asking if whether the vector equation $x_1\mathbf a_1+x_2\mathbf a_2+x_3\mathbf a_3=\mathbf b$ has solution(s)\pause, we find an REF of its augmented matrix
+\begin{center}
+\scalebox{0.8}{
+$\begin{bmatrix}
+1&-1&1&1\\
+2&0&-1&1\\
+1&1&-2&1\\
+\end{bmatrix}\xsim{\substack{R2\rightarrow R2-2R1\\R3\rightarrow R3-R1}}\begin{bmatrix}
+1&-1&1&1\\
+0&2&-3&-1\\
+0&2&-3&0\\
+\end{bmatrix}\xsim{R3\rightarrow R3-R2}\begin{bmatrix}
+1&-1&1&1\\
+0&2&-3&-1\\
+0&0&0&1\\
+\end{bmatrix}$
+}
+\end{center}\pause
+Since there is a pivot in the last column, the linear system is inconsistent, hence $\mathbf b\notin\Span\{\mathbf a_1, \mathbf a_2,\mathbf a_3\}$
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+$\{\mathbf v_1,\cdots,\mathbf v_n\}$ is \textcolor{blue}{linearly dependent}\index{linearly dependent} if some $\mathbf v_i$ is in the span of the others (so it is somewhat redundant)\pause, or equivalently, if there is a non-trivial solution $c_1,\cdots,c_n$ (i.e. not all $c_i$'s are 0) to the vector equation
+\begin{equation}\label{16:30-06/06/2022}
+c_1\mathbf v_1+\cdots+c_n\mathbf v_n=\mathbf0
+\end{equation}\pause
+\eqref{16:30-06/06/2022} is referred to as a \textcolor{blue}{linear dependence}\index{linear dependence} between $\{\mathbf v_1,\cdots,\mathbf v_n\}$. If \eqref{16:30-06/06/2022} has only the trivial solution (i.e. $c_1,\cdots, c_n$ are all 0, which is of course always a solution), $\{\mathbf v_1,\cdots,\mathbf v_n\}$ is said to be \textcolor{blue}{linearly independent}\index{linearly independent}
+\end{definition}
+\pause
+\begin{remark}
+Equivalence between two different definitions of linear dependence
+\begin{itemize}
+\item If $\mathbf v_i=c_1\mathbf v_1+\cdots+c_n\mathbf v_n$, then $c_1\mathbf v_1+\cdots+(-1)\mathbf v_i+\cdots+c_n\mathbf v_n=\mathbf0$
+\item If $c_1\mathbf v_1+\cdots+c_i\mathbf v_i+\cdots+c_n\mathbf v_n=\mathbf0$ and $c_i\neq0$ (since not all $c_i$'s are zero, we may assume some $c_i$ is nonzero), then $\mathbf v_i=-\frac{c_1}{c_i}\mathbf v_1-\cdots-\frac{c_{i-1}}{c_i}\mathbf v_{i-1}-\frac{c_{i+1}}{c_i}\mathbf v_{i+1}-\cdots-\frac{c_n}{c_i}\mathbf v_n$
+\end{itemize}
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+\begin{question}
+How do we determine and find linear dependence of $\{\mathbf v_1,\cdots,\mathbf v_n\}$?
+\end{question}
+\pause
+\begin{answer}
+Let $A=\begin{bmatrix}
+\mathbf v_1&\cdots&\mathbf v_n
+\end{bmatrix}$, then non-trivial solutions to $A\mathbf x=x_1\mathbf v_1+\cdots+x_n\mathbf v_n=\mathbf0$ would be the linear dependences of $\{\mathbf v_1,\cdots,\mathbf v_n\}$. Therefore it is linearly independent if it has only the trivial(zero) solution.
+\end{answer}
+\pause
+\begin{theorem} 
+$\{\mathbf v_1,\cdots,\mathbf v_n\}$ is linearly independent $\iff A\mathbf x=\mathbf 0$ has only the trivial(zero) solution $\iff$ each column of the RREF of $A$ is a pivot column.
+\end{theorem}
+\pause
+\begin{proof}
+Consider the RREF of the augmented matrix $\begin{bmatrix}
+A&\mathbf 0
+\end{bmatrix}$, it is necessarily $\begin{bmatrix}
+U&\mathbf 0
+\end{bmatrix}$ for $A\mathbf x=\mathbf0$ to have only the trivial solution.
+\end{proof}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}\label{06:35-06/06/2022}
+Suppose $\mathbf v_1=\begin{bmatrix}
+1\\-1
+\end{bmatrix}$, $\mathbf v_2=\begin{bmatrix}
+1\\1
+\end{bmatrix}$, $\mathbf e_1=\begin{bmatrix}
+1\\0
+\end{bmatrix}$, $\{\mathbf v_1,\mathbf v_2,\mathbf e_1\}$ is linearly dependent since
+\[
+\begin{bmatrix}
+\mathbf v_1&\mathbf v_2&\mathbf e_1
+\end{bmatrix}=\begin{bmatrix}
+1&1&1\\
+-1&1&0\\
+\end{bmatrix}\sim\begin{bmatrix}
+1&0&\frac{1}{2}\\
+0&1&\frac{1}{2}\\
+\end{bmatrix}
+\]\pause
+The solution to this augmented matrix would be $\begin{cases}
+x_1=-\frac{1}{2}x_3\\
+x_2=-\frac{1}{2}x_3\\
+x_3\text{ is free}
+\end{cases}$, by choosing any value nonzero value of $x_3$ (say 1) we get a linear dependence $-\frac{1}{2}\mathbf v_1-\frac{1}{2}\mathbf v_2+\mathbf e_1=\mathbf0$\pause. On the other hand, $\mathbf v_1,\mathbf v_2$ are linearly independent since
+\[
+\begin{bmatrix}
+\mathbf v_1&\mathbf v_2
+\end{bmatrix}=\begin{bmatrix}
+1&1\\
+-1&1
+\end{bmatrix}\sim\begin{bmatrix}
+1&0\\
+0&1
+\end{bmatrix}
+\]
+Where each column is a pivot column.
+\end{example}
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+Write the system \systeme{8x_1-x_2=4, 5x_1+4x_2=1,x_1-3x_2=2} first as a vector equation and then as a matrix equation.
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+Let $\mathbf v_1=\begin{bmatrix}
+0\\0\\-2
+\end{bmatrix}$, $\mathbf v_2=\begin{bmatrix}
+0\\-3\\8
+\end{bmatrix}$, $\mathbf v_3=\begin{bmatrix}
+4\\-1\\-5
+\end{bmatrix}$.
+\begin{itemize}
+\item Does $\{\mathbf v_1,\mathbf v_2,\mathbf v_3\}$ span $\mathbb R^3$? Why or why not?\pause
+\item Is $\{\mathbf v_1,\mathbf v_2,\mathbf v_3\}$ linearly independent? Why or why not?
+\end{itemize}
+\end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+\end{document}

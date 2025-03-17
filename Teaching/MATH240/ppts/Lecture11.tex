@@ -1,0 +1,719 @@
+\documentclass{beamer}
+\setbeamercovered{}
+
+\usepackage{bookman}
+\usepackage{newtxtext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{systeme}
+\usepackage{subcaption}
+\usepackage{bm} % Bold
+\usepackage{bbm} % Can use \mathbbm{1}
+\usepackage{ifthen} % Use if then else
+\usepackage{shuffle} % Use shuffle product
+\usepackage{minted} % For listing codes
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\tikzcdset{ampersand replacement=\&}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+% \newcommand*{\relbarfill@}{\arrowfill@\relbar-\relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+% \newcommand*{\xdash}[2][]{\ext@arrow 0055\relbarfill@{#1}{#2}}
+\makeatother
+
+\newlength{\simlength}
+
+\newcommand{\xsim}[1]{
+\settowidth{\simlength}{$#1$}
+\mathrel{\overset{#1}{\resizebox{\simlength}{\height}{\sim}}}
+}
+\newcommand{\fatdot}{\mathrel{\raisebox{0.25ex}{\tikz\filldraw[black,x=2pt,y=2pt] (0,0) circle (0.5);}}}
+\newcommand{\fatplus}{\mathrel{\raisebox{-0.1ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0.9,0)--(1.1,0)--(1.1,0.9)--(2,0.9)--(2,1.1)--(1.1,1.1)--(1.1,2)--(0.9,2)--(0.9,1.1)--(0,1.1)--(0,0.9)--(0.9,0.9)--cycle;}}}
+\newcommand{\fatminus}{\raisebox{+0.4ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0,0.9)--(2,0.9)--(2,1.1)--(0,1.1)--cycle;}}
+
+\DeclareMathOperator{\Nul}{Nul}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\Rank}{Rank}
+\DeclareMathOperator{\Range}{Range}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\id}{id}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+    \usecolortheme{beaver}
+    \usefonttheme{professionalfonts} 
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{caption}[numbered]
+}
+
+\theoremstyle{definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{recall}{Recall}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\DeclareMathOperator{\Span}{Span}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginSection[]{
+    \begin{frame}
+    \centering
+    \begin{beamercolorbox}[center, shadow=true, rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \end{frame}
+}
+
+\title{MATH240 - Introduction to Linear Algebra}
+\author{Haoran Li}
+\institute[UMD]{University of Maryland, College Park}
+\date{Summer 2024}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 11 - Linear transformations in general}
+
+\begin{frame}[t]
+\begin{definition}
+Suppose $V,W$ are vector spaces, a \textit{linear transformation} is a mapping $T:V\to W$ such that
+\begin{itemize}
+\item $T(\bm u\fatplus\bm v)=T(\bm u)\fatplus T(\bm v)$
+\item $T(c\fatdot u)=c\fatdot T(\bm u)$
+\end{itemize}
+Just as before, we call $V$ the \textit{domain} of $T$, $W$ the \textit{codomain} of $T$, the \textit{image} of $\bm x$ under $T$ is $T(\bm x)$, the set of images $\{T(\bm x)|\bm x\in V\}$ the \textit{range} (denoted as $\Range T$), and the set $\{\bm x|T(\bm x)=\bm b\}$ the preimage of $\bm b$ under $T$. We still say that $T$ is \textit{one-to-one} if any $\bm b\in W$, there is at most one $\bm x\in V$ such that $T(\bm x)=\bm b$. $T$ is \textit{onto} the range is the codomain. $T$ is said to be \textit{invertible} if $T$ has a inverse (this happens if and only if $T$ is both one-to-one and onto), in this case we also call $T$ an \textcolor{blue}{isomorphism}\index{isomorphism}.
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{definition}
+We call $\{\bm x|T(\bm x)=\bm0\}$ the \textcolor{blue}{kernel}\index{kernel} (or \textcolor{blue}{null space}) of $T$
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\begin{remark}\label{14:24/06/30/2022}
+Suppose $T:\mathbb R^n\to\mathbb R^m$, $T(\mathbf x)=A\mathbf x$ is a matrix transformation, then $\ker T=\Nul A$, $\Range T=\Col A$
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+The identification
+\[
+T:\mathbb P_2\to\mathbb R^3,\qquad T(a_0+a_1t+a_2t^2)=\begin{bmatrix}
+a_0\\a_1\\a_2
+\end{bmatrix}
+\]
+in Eaxmple~\ref{17:45-06/27/2022} is an invertible linear transformation with inverse linear transformation
+\[
+T^{-1}:\mathbb R^3\to\mathbb P_2,\qquad T^{-1}\left(\begin{bmatrix}
+a_0\\a_1\\a_2
+\end{bmatrix}\right)=a_0+a_1t+a_2t^2
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+The identification
+\[
+T:M_{2\times2}(\mathbb R)\to\mathbb R^4,\qquad
+T\left(\begin{bmatrix}
+a&b\\c&d
+\end{bmatrix}\right)=\begin{bmatrix}
+a\\b\\c\\d
+\end{bmatrix}
+\]
+in Eaxmple~\ref{17:53-06/27/2022} is an invertible linear transformation with inverse linear transformation
+\[
+T^{-1}:\mathbb R^4\to M_{2\times2}(\mathbb R),\qquad
+T^{-1}\left(\begin{bmatrix}
+a\\b\\c\\d
+\end{bmatrix}\right)=\begin{bmatrix}
+a&b\\c&d
+\end{bmatrix}
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}\label{18:15-06/27/2022}
+Suppose $T:V\to W$ is a linear transformation between vector spaces, then
+\begin{itemize}
+\item $\ker T$ is a subspace of $V$.
+\item $\Range T$ is a subspace of $W$.
+\end{itemize}
+\end{theorem}
+\pause
+\begin{proof}
+\hfill
+\begin{itemize}
+\item Suppose $\bm u,\bm v\in\ker T$, then by definition $T(\bm u)=\bm0$, $T(\bm v)=\bm0$, so $T(\bm u\fatplus\bm v)=T(\bm u)\fatplus T(\bm v)=\bm0$. And for any $c\in\mathbb R$, $T(c\fatdot\bm u)=c\fatdot T(\bm u)=\bm0$. In other words, we have shown that $\bm u\fatplus\bm v, c\fatdot\bm u\in \ker T$, so $\ker T$ is a subspace.
+\item For any $T(\bm u),T(\bm v)\in\Range T$, $T(\bm u)\fatplus T(\bm v)=T(\bm u\fatplus\bm v)\in\Range T$, and for any $c\in\mathbb R$, $c\fatdot T(\bm u)=T(c\fatdot\bm u)\in\Range T$, so $\Range T$ is a subspace
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}\label{17:52-06/29/2022}
+Suppose $T:\mathbb P_2\to\mathbb R$ takes the sum of coefficients, i.e. $T(a_0+a_1t+a_2t^2)=a_0+a_1+a_2$. Show that $T$ is a linear transformation, and $H$ in Exercise~\ref{ker T for T take sum of coef of poly} is a vector space.
+\end{exercise}
+\pause
+\begin{solution}
+since for any $p(t)=a_0+a_1+a_2,q(t)=b_0+b_1t+b_2t^2\in\mathbb P_2$, $c\in\mathbb R$, we have
+\begin{align*}
+T(p+q)&=T((a_0+b_0)+(a_1+b_1)t+(a_2+b_2)t^2)=(a_0+b_0)+(a_1+b_1)+(a_2+b_2)\\
+&=(a_0+a_1+a_2)+(b_0+b_1+b_2)=T(p)+T(q)
+\end{align*}
+\[
+T(cp)=T((ca_0)+(ca_1)t+(ca_2)t^2)=(ca_0)+(ca_1)+(ca_2)=c(a_0+a_1+a_2)=cT(p)
+\]
+So $V=\ker T$ is a subspace of $V$ by Theorem~\ref{18:15-06/27/2022}
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{exercise}
+Suppose $T:M_{2\times2}(\mathbb R)\to\mathbb R$ takes the sum of diagonal, i.e. $T\left(\begin{bmatrix}
+a&b\\c&d
+\end{bmatrix}\right)=a+d$. Show that $T$ is a linear transformation, and the set $H=\left\{\begin{bmatrix}
+a&b\\c&d
+\end{bmatrix}\middle|a+d=0\right\}$ of $2\times2$ matrix with \textcolor{blue}{trace}\index{trace}(sum of diagonal element) 0 is a vector space.
+\end{exercise}
+\end{frame}
+
+\begin{frame}[t]
+\begin{question}
+Can we realize a general linear transformation $T$ as a matrix transformation?
+\end{question}
+\pause
+\begin{answer}
+Just need to know its effect on any basis! Suppose $\mathbf v_1,\mathbf v_2,\cdots,\mathbf v_n$ is a basis of $\mathbb R^n$, then any vector $\mathbf v$ can be written as $c_1\mathbf v_1+c_2\mathbf v_2+\cdots+c_n\mathbf v_n$, and by linearality, we have
+\begin{equation}\label{19:13-06/07/2022}
+T(\mathbf v)=T(c_1\mathbf v_1+c_2\mathbf v_2+\cdots+c_n\mathbf v_n)=c_1T(\mathbf v_1)+c_2T(\mathbf v_2)+\cdots+c_nT(\mathbf v_n)
+\end{equation}
+\end{answer}
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}[Unique representation theorem]\label{12:53-06/28/2022}
+Suppose $\mathcal B=\{\bm b_1,\cdots,\bm b_n\}$ is a basis of a vector sapce $V$, then any vector $\bm v\in V$ can be uniquely represented as a linear combination $x_1\fatdot\bm b_1\fatplus\cdots\fatplus x_n\fatdot\bm b_n$
+\end{theorem}
+\pause
+\begin{remark}
+Here $[\bm v]_{\mathcal B}=\begin{bmatrix}
+x_1\\\vdots\\x_n
+\end{bmatrix}$ is called the \textcolor{blue}{$\mathcal B$-coordinate vector}\index{coordinat vector} (or \textcolor{blue}{coordinate vector relative to the basis $\mathcal B$}) of $\bm v$
+\end{remark}
+\pause
+\begin{proof}
+Suppose $\bm v=c_1\fatdot\bm b_1\fatplus\cdots\fatplus c_n\fatdot\bm b_n=d_1\fatdot\bm b_1\fatplus\cdots\fatplus d_n\fatdot\bm b_n$ are two linear combinations that express $\bm v$, then we have $(c_1-d_1)\fatdot\bm b_1\fatplus\cdots\fatplus(c_n-d_n)\fatdot\bm b_n=\bm0$, since $\{\bm b_1,\cdots,\bm b_n\}$ is linearly independent, we have $c_1=d_1,\cdots,c_n=d_n$. Therefore the expression is unique.
+\end{proof}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+The identifications in Example~\ref{17:45-06/27/2022} and Example~\ref{17:53-06/27/2022} are coordinate mappings $[\quad]_{\mathcal E}:\mathbb P_2\to\mathbb R^3$ with standard basis $\mathcal E=\{1,t,t^2\}$ and $[\quad]_{\mathcal E}:M_{2\times2}(\mathbb R)\to\mathbb R^4$ with standard basis $\mathcal E=\left\{\begin{bmatrix}
+1&0\\0&0
+\end{bmatrix},\begin{bmatrix}
+0&1\\0&0
+\end{bmatrix},\begin{bmatrix}
+0&0\\1&0
+\end{bmatrix},\begin{bmatrix}
+0&0\\0&1
+\end{bmatrix}\right\}$, respectively
+\end{example}
+\pause
+\begin{example}
+$\mathcal B=\left\{\mathbf b_1=\begin{bmatrix}
+1\\0
+\end{bmatrix}, \mathbf b_2=\begin{bmatrix}
+1\\2
+\end{bmatrix}\right\}$ is a basis for $\mathbb R^2$, $\mathbf v=\begin{bmatrix}
+1\\6
+\end{bmatrix}$. Solve linear system $\mathbf v=x_1\mathbf b_1+x_2\mathbf b_2=\begin{bmatrix}
+\mathbf b_1&\mathbf b_2
+\end{bmatrix}\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}$ we get $[\mathbf v]_{\mathcal B}=\begin{bmatrix}
+-2\\3
+\end{bmatrix}$.
+\end{example}
+\pause
+\begin{theorem}
+The \textcolor{blue}{coordinate mapping}\index{coordinate mapping} $[\quad]_{\mathcal B}:V\to\mathbb R^n$ is a linear transformation
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\begin{question}
+How should we study linear transformations via matrices in general?
+\end{question}
+\pause
+Assume $T:V\to W$ is a linear transformation between vector spaces, $\{\bm b_1,\cdots,\bm b_n\}$ is a basis for $V$ and $\{\bm c_1,\cdots,\bm c_m\}$ is a basis for $W$\pause, then for any
+\begin{align*}
+\bm v=x_1\fatdot\bm b_1\fatplus\cdots\fatplus x_n\fatdot\bm b_n=\begin{bmatrix}
+\bm b_1&\cdots&\bm b_n
+\end{bmatrix}\begin{bmatrix}
+x_1\\\vdots\\x_n
+\end{bmatrix}=\begin{bmatrix}
+\bm b_1&\cdots&\bm b_n
+\end{bmatrix}[\bm v]_{\mathcal B}
+\end{align*}\pause
+We have
+\begin{align*}
+T(\bm v)&=T(x_1\fatdot\bm b_1\fatplus\cdots\fatplus x_n\fatdot\bm b_n)=x_1\fatdot T(\bm b_1)\fatplus\cdots\fatplus x_n\fatdot T(\bm b_n)\\
+&=\begin{bmatrix}
+T(\bm b_1)&\cdots&T(\bm b_n)
+\end{bmatrix}\begin{bmatrix}
+x_1\\\vdots\\x_n
+\end{bmatrix}=\begin{bmatrix}
+T(\bm b_1)&\cdots&T(\bm b_n)
+\end{bmatrix}[\bm v]_{\mathcal B}
+\end{align*}\pause
+By Theorem~\ref{12:53-06/28/2022}, we can write
+\end{frame}
+
+\begin{frame}[t]
+\begin{align*}
+T(\bm b_1)&=a_{11}\fatdot\bm c_1+a_{21}\fatdot\bm c_2+\cdots+a_{m1}\fatdot\bm c_m\\
+T(\bm b_2)&=a_{12}\fatdot\bm c_1+a_{22}\fatdot\bm c_2+\cdots+a_{m2}\fatdot\bm c_m\\
+&\vdots\\
+T(\bm b_n)&=a_{1n}\fatdot\bm c_1+a_{2n}\fatdot\bm c_2+\cdots+a_{mn}\fatdot\bm c_m
+\end{align*}\pause
+Therefore we have
+\begin{equation}\label{13:44-06/28/2022}
+\begin{bmatrix}
+T(\bm b_1)&\cdots&T(\bm b_n)
+\end{bmatrix}=\begin{bmatrix}
+\bm c_1&\cdots&\bm c_m
+\end{bmatrix}\begin{bmatrix}
+a_{11}&a_{12}&\cdots&a_{1n}\\
+a_{21}&a_{22}&\cdots&a_{2n}\\
+\vdots&\vdots&&\vdots\\
+a_{m1}&a_{m2}&\cdots&a_{mn}
+\end{bmatrix}
+\end{equation}\pause
+Where
+\begin{equation}\label{12:55-06/29/2022}
+A=\begin{bmatrix}
+[T(\bm b_1)]_{\mathcal C}&\cdots&[T(\bm b_n)]_{\mathcal C}
+\end{bmatrix}
+\end{equation}
+is called the \textcolor{blue}{matrix of $T$ relative to bases $\mathcal B$ and $\mathcal C$}\pause, thus
+\[
+T(\bm v)=\begin{bmatrix}
+\bm c_1&\cdots&\bm c_m
+\end{bmatrix}A[\bm v]_{\mathcal B}
+\]
+\end{frame}
+
+\begin{frame}[t]
+On the other hand, we should have
+\[T(\bm v)=\begin{bmatrix}
+\bm c_1&\cdots&\bm c_m
+\end{bmatrix}[T(\bm v)]_{\mathcal C}\]\pause
+So we may also conclude that
+\begin{equation}\label{14:19-06/29/2022}
+[T(\bm v)]_{\mathcal C}=A[\bm v]_{\mathcal B}
+\end{equation}\pause
+The above discussion can be summerized by the following commutative diagram
+\begin{equation}\label{16:03-06/29/2022}
+\begin{tikzcd}
+V \arrow[r, "T"] \arrow[d, "{[\quad]_{\mathcal B}}"'] \& W \arrow[d, "{[\quad]_{\mathcal C}}"] \\
+\mathbb R^n \arrow[r, "A"]                            \& \mathbb R^m                          
+\end{tikzcd}
+\quad
+\begin{tikzcd}
+\bm v \arrow[r, maps to] \arrow[d, maps to] \& T(\bm v) \arrow[d, maps to]                     \\
+{[\bm v]_{\mathcal B}} \arrow[r, maps to]   \& {A[\bm v]_{\mathcal B}=[T(\bm v)]_{\mathcal C}}
+\end{tikzcd}
+\end{equation}
+\pause
+\begin{remark}
+The philosophy here is that any statement about a general linear transformation can be converted to a corresponding statement about matrix transformation.
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Suppose $V=\mathbb R^n$, $W=\mathbb R^m$ with bases $\{\mathbf e_1,\cdots,\mathbf e_n\}$, $\{\mathbf e_1,\cdots,\mathbf e_m\}$, then \eqref{13:44-06/28/2022} reads $A=\begin{bmatrix}
+T(\mathbf e_1)&\cdots&T(\mathbf e_n)
+\end{bmatrix}$ is the standard matrix
+\end{example}
+\pause
+\begin{example}
+Consider linear transformation
+\[
+T:\mathbb P_2\to\mathbb R^3,\qquad T(a_0+a_1t+a_2t^2)=\begin{bmatrix}
+a_0\\a_1\\a_2
+\end{bmatrix}
+\]
+and $\mathcal B=\{1+t,t+t^2,1+t^2\}$ is a basis for $\mathbb P_2$, $\mathcal E$ is the standard basis for $\mathbb R^3$, then matrix of $T$ relative to bases $\mathcal B$ and $\mathcal E$ can be read from \eqref{12:55-06/29/2022} as
+\[
+A=\begin{bmatrix}
+T(1+t)&T(t+t^2)&T(1+t^2)
+\end{bmatrix}=\begin{bmatrix}
+1&0&1\\
+1&1&0\\
+0&1&1
+\end{bmatrix}
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Consider linear transformation $T:\mathbb R^2\to\mathbb R^2$ is defined by $T\left(\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}\right)=\begin{bmatrix}
+x_1+2x_2\\x_2
+\end{bmatrix}$, $\mathcal B=\left\{\begin{bmatrix}
+1\\1
+\end{bmatrix}, \begin{bmatrix}
+1\\-1
+\end{bmatrix}\right\}$, $\mathcal C=\left\{\begin{bmatrix}
+-1\\1
+\end{bmatrix}, \begin{bmatrix}
+-1\\-1
+\end{bmatrix}\right\}$ are bases for $\mathbb R^2$. Then the matrix of $T$ relative to bases $\mathcal B$ and $\mathcal C$ can be read from~\eqref{13:44-06/28/2022}
+\begin{align*}
+\begin{bmatrix}
+-1&-1\\1&-1
+\end{bmatrix}A=\begin{bmatrix}
+3&-1\\1&-1
+\end{bmatrix}&\Rightarrow A=\begin{bmatrix}
+-1&-1\\1&-1
+\end{bmatrix}^{-1}\begin{bmatrix}
+3&-1\\1&-1
+\end{bmatrix}=\begin{bmatrix}
+-1&0\\-2&1
+\end{bmatrix}
+\end{align*}
+\end{example}
+\pause
+\begin{remark}
+Suppose $T:V\to W$ and $S:W\to U$ are linear transformations between vector spaces, $\mathcal B=\{\bm b_1,\cdots,\bm b_n\}$ is a basis for $V$, $\mathcal C=\{\bm c_1,\cdots,\bm c_n\}$ is a basis for $W$ and $\mathcal D=\{\bm d_1,\cdots,\bm d_n\}$ is a basis for $U$, then the matrix of $S\circ T$ relative to bases $\mathcal B$, $\mathcal D$ is $BA$.
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+\begin{remark}
+\begin{center}
+\begin{tikzcd}
+V \arrow[r, "T"] \arrow[d, "{[\quad]_{\mathcal B}}"'] \arrow[rr, "S\circ T", bend left, shift left=2] \& W \arrow[d, "{[\quad]_{\mathcal C}}"] \arrow[r, "S"] \& U \arrow[d, "{[\quad]_{\mathcal D}}"] \\
+\mathbb R^n \arrow[r, "A"] \arrow[rr, "BA", bend right, shift right=2]                                \& \mathbb R^m \arrow[r, "B"]                           \& \mathbb R^p                          
+\end{tikzcd}
+\quad
+\begin{tikzcd}
+\bm v \arrow[r, maps to] \arrow[d, maps to] \& T(\bm v) \arrow[d, maps to] \arrow[r]                              \& S(T(\bm v))=(S\circ T)(\bm v) \arrow[d, maps to]    \\
+{[\bm v]_{\mathcal B}} \arrow[r, maps to]   \& {A[\bm v]_{\mathcal B}=[T(\bm v)]_{\mathcal C}} \arrow[r, maps to] \& {BA[\bm v]_{\mathcal B}=[S(T(\bm v))]_{\mathcal D}}
+\end{tikzcd}
+\end{center}
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+\begin{remark}
+If $T$  is invertible, then the matrix of $T^{-1}$ relative to bases $\mathcal C$, $\mathcal B$ is $A^{-1}$
+\begin{center}
+\begin{tikzcd}
+V \arrow[r, "T"] \arrow[d, "{[\quad]_{\mathcal B}}"'] \& W \arrow[d, "{[\quad]_{\mathcal C}}"] \arrow[l, "T_{-1}", bend left] \\
+\mathbb R^n \arrow[r, "A"]                            \& \mathbb R^m \arrow[l, "A^{-1}", bend left]                          
+\end{tikzcd}
+\end{center}
+\end{remark}
+\end{frame}
+
+\begin{frame}[t]
+Now let's talk about change of basis. Suppose $V$ is a vector space with two basis $\mathcal B=\{\bm b_1,\cdots,\bm b_n\}$ and $\mathcal C=\{\bm c_1,\cdots,\bm c_n\}$, and $\id_V:V\to V$, $\id_V(\bm v)=\bm v$ is the \textcolor{blue}{identity mapping}\index{identity mapping}\pause. Diagram~\eqref{16:03-06/29/2022} becomes
+\begin{equation}\label{19:43-06/29/2022}
+\begin{tikzcd}
+V \arrow[r, "\id_V", equal] \arrow[d, "{[\quad]_{\mathcal B}}"']             \& V \arrow[d, "{[\quad]_{\mathcal C}}"] \\
+\mathbb R^n \arrow[r, "\underset{\mathcal C\leftarrow\mathcal B}{P}"] \& \mathbb R^n                          
+\end{tikzcd}
+\end{equation}\pause
+Where equation~\eqref{12:55-06/29/2022} and equation~\eqref{14:19-06/29/2022} become
+\[
+\underset{\mathcal C\leftarrow\mathcal B}{P}=\begin{bmatrix}
+[\bm b_1]_{\mathcal C}&\cdots&[\bm b_n]_{\mathcal C}
+\end{bmatrix}
+\]
+\[
+[\bm v]_{\mathcal C}=\underset{\mathcal C\leftarrow\mathcal B}{P}[\bm v]_{\mathcal B}
+\]\pause
+which is the matrix of $\id_V$ relative to basis $\mathcal B$ and $\mathcal C$, and we call this the \textcolor{blue}{change of coordinates matrix from $\mathcal B$ to $\mathcal C$}\pause. Also remark~\ref{17:02-06/29/2022} gives us
+\[
+\underset{\mathcal D\leftarrow\mathcal B}{P}=\left(\underset{\mathcal D\leftarrow\mathcal C}{P}\right)\left(\underset{\mathcal C\leftarrow\mathcal B}{P}\right),\quad \left(\underset{\mathcal C\leftarrow\mathcal B}{P}\right)^{-1}=\underset{\mathcal B\leftarrow\mathcal C}{P}
+\]
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Continue Example~\ref{17:08-06/29/2022}, we have shown that $\mathcal B=\left\{\begin{bmatrix}
+1&0\\0&0
+\end{bmatrix},\begin{bmatrix}
+0&1\\1&0
+\end{bmatrix},\begin{bmatrix}
+0&0\\0&1
+\end{bmatrix}\right\}=\left\{B_1,B_2,B_3\right\}$ is a basis for $V$\pause. Let's show that $\mathcal C=\left\{\begin{bmatrix}
+1&1\\1&0
+\end{bmatrix},\begin{bmatrix}
+1&0\\0&1
+\end{bmatrix},\begin{bmatrix}
+0&1\\1&1
+\end{bmatrix}\right\}=\left\{C_1,C_2,C_3\right\}$ is another basis for $V$\pause. First note that
+\[
+C_1=\begin{bmatrix}
+1&1\\1&0
+\end{bmatrix}=\begin{bmatrix}
+1&0\\0&0
+\end{bmatrix}+\begin{bmatrix}
+0&1\\1&0
+\end{bmatrix}=B_1+B_2
+\]
+\[
+C_2=\begin{bmatrix}
+1&0\\0&1
+\end{bmatrix}=\begin{bmatrix}
+1&0\\0&0
+\end{bmatrix}+\begin{bmatrix}
+0&0\\0&1
+\end{bmatrix}=B_1+B_3
+\]
+\[
+C_3=\begin{bmatrix}
+0&1\\1&1
+\end{bmatrix}=\begin{bmatrix}
+0&1\\1&0
+\end{bmatrix}+\begin{bmatrix}
+0&0\\0&1
+\end{bmatrix}=B_2+B_3
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+So $\{[C_1]_{\mathcal B},[C_2]_{\mathcal B},[C_3]_{\mathcal B}\}=\left\{\begin{bmatrix}
+1\\1\\0
+\end{bmatrix},\begin{bmatrix}
+1\\0\\1
+\end{bmatrix},\begin{bmatrix}
+0\\1\\1
+\end{bmatrix}\right\}$\pause, and it is easy to show that this is a basis for $\mathbb R^3$\pause, hence $\mathcal C$ is a basis for $V$. Also we know that\pause
+\[
+\underset{\mathcal B\leftarrow\mathcal C}{P}=\begin{bmatrix}
+1&1&0\\
+1&0&1\\
+0&1&1
+\end{bmatrix},\qquad
+\underset{\mathcal C\leftarrow\mathcal B}{P}=\left(\underset{\mathcal B\leftarrow\mathcal C}{P}\right)^{-1}=\begin{bmatrix}
+\frac{1}{2}&\frac{1}{2}&-\frac{1}{2}\\
+\frac{1}{2}&-\frac{1}{2}&\frac{1}{2}\\
+-\frac{1}{2}&\frac{1}{2}&\frac{1}{2}
+\end{bmatrix}
+\]
+Note that here the diagram~\eqref{19:43-06/29/2022} becomes\pause
+\vspace{-4mm}
+\begin{center}
+\begin{tikzcd}
+V \arrow[r, "\id_V", equal] \arrow[d, "{[\quad]_{\mathcal B}}"']             \& V \arrow[d, "{[\quad]_{\mathcal C}}"] \\
+\mathbb R^3 \arrow[r, "\underset{\mathcal C\leftarrow\mathcal B}{P}"] \& \mathbb R^3                          
+\end{tikzcd}
+\end{center}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}\label{10:24-07/01/2022}
+Continue Example~\ref{17:52-06/29/2022}, let's find a basis for $V=\ker T$ which is supposed to correspond to $\Nul A$, where $A$ is the matrix relative to both standard bases $\mathcal E=\{1,t,t^2\}$ for $\mathbb P_2$\pause and $\mathcal E=\left\{\mathbf e_1=\begin{bmatrix}
+1\\0\\0
+\end{bmatrix},\mathbf e_2=\begin{bmatrix}
+0\\1\\0
+\end{bmatrix},\mathbf e_3=\begin{bmatrix}
+0\\0\\1
+\end{bmatrix}\right\}$ which can be read from~\eqref{14:19-06/29/2022}
+\[
+A=\begin{bmatrix}
+[T(1)]_{\mathcal E}&[T(t)]_{\mathcal E}&[T(t^2)]_{\mathcal E}
+\end{bmatrix}=\begin{bmatrix}
+1&1&1
+\end{bmatrix}
+\]\pause
+So we get
+\[
+\Nul A=\Span\left\{\begin{bmatrix}
+-1\\1\\0
+\end{bmatrix},\begin{bmatrix}
+-1\\0\\1
+\end{bmatrix}\right\}
+\]\pause
+Which gives a basis $\{-1+t,-1+t^2\}$ for $V$. Note that here the diagram~\eqref{16:03-06/29/2022} becomes
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+\begin{center}
+\begin{tikzcd}
+\mathbb P_2 \arrow[r, "T"] \arrow[d, "{[\quad]_{\mathcal E}}"'] \& \mathbb R \arrow[d, equal, "{[\quad]_{\mathcal E}}"] \\
+\mathbb R^3 \arrow[r, "A"]                            \& \mathbb R                                    
+\end{tikzcd}
+\end{center}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+An algorithm for computing $A^{-1}B$\pause
+\[
+\left[\begin{array}{c|c}
+A&B
+\end{array}\right]\sim\left[\begin{array}{c|c}
+I&A^{-1}B
+\end{array}\right]
+\]
+\pause
+\begin{exercise}
+Suppose $\mathcal B=\{2t^2-1,3t+1-t^2,3-t\}$ and $\mathcal C=\{1+t,t^2,-t\}$ are both bases for $\mathbb P_2$. Please find the change of basis matrix form $\mathcal B$ to $\mathcal C$
+\end{exercise}
+\end{frame}
+
+\begin{frame}[t]
+\begin{solution}
+First let's find the change of basis matrices from $\mathcal B$ and $\mathcal C$ to the standard basis $\mathcal E=\{1,t,t^2\}$\pause. We have
+\[
+\underset{\mathcal E\leftarrow\mathcal B}{P}=\begin{bmatrix}
+[-1+2t^2]_{\mathcal E}&[1+3t-t^2]_{\mathcal E}&[3-t]_{\mathcal E}
+\end{bmatrix}=\begin{bmatrix}
+-1&1&3\\
+0&3&-1\\
+2&-1&0
+\end{bmatrix}
+\]\pause
+And
+\[
+\underset{\mathcal E\leftarrow\mathcal C}{P}=\begin{bmatrix}
+[1-t]_{\mathcal E}&[t]_{\mathcal E}&[t^2]_{\mathcal E}
+\end{bmatrix}=\begin{bmatrix}
+1&0&0\\
+1&0&-1\\
+0&1&0
+\end{bmatrix}
+\]\pause
+Hence we have
+\begin{align*}
+\underset{\mathcal C\leftarrow\mathcal B}{P}=\left(\underset{\mathcal C\leftarrow\mathcal E}{P}\right)\left(\underset{\mathcal E\leftarrow\mathcal B}{P}\right)=\left(\underset{\mathcal E\leftarrow\mathcal C}{P}\right)^{-1}\left(\underset{\mathcal E\leftarrow\mathcal B}{P}\right)
+\end{align*}
+Which can computed via the above algorithm
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{solution}
+\begin{align*}
+\left[\begin{array}{ccc|ccc}
+1&0&0&-1&1&3\\
+1&0&-1&0&3&-1\\
+0&1&0&2&-1&0
+\end{array}\right]\sim\left[\begin{array}{ccc|ccc}
+1&0&0&-1&1&3\\
+0&1&0&2&-1&0\\
+0&0&1&-1&-2&4
+\end{array}\right]
+\end{align*}
+\begin{center}
+\begin{tikzcd}
+\mathbb P_2 \arrow[r,equal, "\id_V"] \arrow[d, "{[\quad]_{\mathcal B}}"']                                                                                             \& \mathbb P_2 \arrow[d, "{[\quad]_{\mathcal E}}"'] \arrow[r,equal, "\id_V"]               \& \mathbb P_2 \arrow[d, "{[\quad]_{\mathcal C}}"]                       \\
+\mathbb R^3 \arrow[r, "\underset{\mathcal E\leftarrow\mathcal B}{P}"'] \arrow[rr, "\underset{\mathcal C\leftarrow\mathcal B}{P}", bend right=49, shift right=1] \& \mathbb R^3 \arrow[r, "\underset{\mathcal C\leftarrow\mathcal E}{P}", bend left] \& \mathbb R^3 \arrow[l, "\underset{\mathcal E\leftarrow\mathcal C}{P}"]
+\end{tikzcd}
+\end{center}
+\end{solution}
+\end{frame}
+
+\begin{frame}[t]
+\begin{example}
+Suppose $\mathbb R^2$ has bases $\mathcal B=\left\{\mathbf b_1=\begin{bmatrix}
+7\\5
+\end{bmatrix},\mathbf b_2=\begin{bmatrix}
+-3\\-1
+\end{bmatrix}\right\}$, $\mathcal C=\left\{\mathbf c_1=\begin{bmatrix}
+1\\-5
+\end{bmatrix},\mathbf c_2=\begin{bmatrix}
+-2\\2
+\end{bmatrix}\right\}$. $\underset{\mathcal C\leftarrow\mathcal B}{P}\pause=\left(\underset{\mathcal E\leftarrow\mathcal C}{P}\right)^{-1}\left(\underset{\mathcal E\leftarrow\mathcal B}{P}\right)$, which can be computed via\pause
+\[
+\left[\begin{array}{cc|cc}
+1&-2&7&-3\\
+-5&2&5&-1
+\end{array}\right]\sim\left[\begin{array}{cc|cc}
+1&0&-3&1\\
+0&1&-5&2
+\end{array}\right]
+\]\pause
+So $\underset{\mathcal C\leftarrow\mathcal B}{P}=\begin{bmatrix}
+-3&1\\
+-5&2
+\end{bmatrix}$
+\vspace{-4mm}
+\begin{center}
+\begin{tikzcd}
+\mathbb R^2 \arrow[r,equal] \arrow[d, "{[\quad]_{\mathcal B}}"']                                                                                           \& \mathbb R^2 \arrow[d, "{[\quad]_{\mathcal E}}"'] \arrow[r,equal]               \& \mathbb R^2 \arrow[d, "{[\quad]_{\mathcal C}}"]                       \\
+\mathbb R^2 \arrow[r,"\underset{\mathcal E\leftarrow\mathcal B}{P}"'] \arrow[rr, "\underset{\mathcal C\leftarrow\mathcal B}{P}", bend right=49, shift right] \& \mathbb R^2 \arrow[r, "\underset{\mathcal C\leftarrow\mathcal E}{P}", bend left] \& \mathbb R^2 \arrow[l, "\underset{\mathcal E\leftarrow\mathcal C}{P}"]
+\end{tikzcd}
+\end{center}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]
+\begin{theorem}
+Let's generalize the rank-nullity theorem~\ref{16:38-06/24/2022}, with the remark~\ref{14:24/06/30/2022}, we have
+\[
+\dim V=\dim\Range T+\dim\ker T
+\]
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+\begin{exercise}
+Suppose $T:\mathbb P_2\to\mathbb R_3$ is evaluation at $2$, i.e. $T(p(t))=p(2)$ for $p(t)\in\mathbb P_2$. Show that $T$ is a linear transformation. Is $T$ onto? Is $T$ one-to-one? Is $T$ invertible? Find a basis for $\ker T$. Find a basis for $\Range T$.
+\end{exercise}
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+\begin{exercise}
+Suppose $H$ is the set of 2 by 2 matrices that are symmetric with the sum of diagonal being zero. Show $H$ is a vector space. Find a basis of $H$.
+\end{exercise}
+\end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+% \begin{frame}[t]
+% \end{frame}
+
+
+\end{document}
