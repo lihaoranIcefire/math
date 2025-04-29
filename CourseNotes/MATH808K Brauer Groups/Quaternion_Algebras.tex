@@ -1,0 +1,93 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{My_math_package}
+
+\begin{document}
+
+First let's assume $\Char k\neq 2$
+
+\begin{definition}
+$a,b\in k^\times$, the \textit{generalized quaternion algebra} is denoted as $(a,b)=k[i,j]/(i^2=a,j^2=b,ij=-ji)$, for $q=x+yi+zj+wij$, write $\bar q=x-yi-zj-wij$, and $\|q\|^2=q\bar q=\bar qq=x^2+ay^2+bz^2+abw^2$
+\end{definition}
+
+\begin{definition}
+We say a $k$-algebra $A$ has \textit{division} if $A$ is a division ring. We say $A$ \textit{split} if $A\cong M_n(k)$ for some $n$. We call $f:A\xrightarrow{\cong}M_n(k)$ a splitting of $A$
+\end{definition}
+
+\begin{example}
+$(-1,-1)/\mathbb R$ has divsion: $q^{-1}=\frac{\bar q}{\|q\|^2}=\frac{x-yi-zj-wij}{x^2+y^2+z^2+w^2}$ for $q=x+yi+zj+wij$. $(-1,-1)/\mathbb C$ splits with splitting $f:Q\to M_2(\mathbb C)$, $f(i)=\begin{bmatrix}-i&\\&i\end{bmatrix}$, $f(j)=\begin{bmatrix}&-1\\1&\end{bmatrix}$
+\end{example}
+
+\begin{proposition}
+Suppose $Q=(a,b)/k$, then the following are equivalent
+\begin{enumerate}
+\item $Q$ split
+\item $Q$ doesn't have division
+\item There is a nontrivial solution over $k$ to $x^2-ay^2-bz^2+abw^2=0$
+\item There is a solution over $k$ to either $a=x^2-by^2$ or $b=z^2-aw^2$
+\end{enumerate}
+\end{proposition}
+
+\begin{remark}
+$(-1,-1)/\bar k$ always split
+\end{remark}
+
+\begin{proof}
+\begin{itemize}
+\item (1)$\Rightarrow$(2): $E_{ij}$ has no inverse
+\item (2)$\Rightarrow$(3): Assume not, then $q^{-1}=\frac{\bar q}{\|q\|^2}$ is defined
+\item (3)$\Rightarrow$(4): 
+\item (4)$\Rightarrow$(1): 
+\end{itemize}
+\end{proof}
+
+\begin{lemma}
+\begin{enumerate}
+\item $(a,b)\cong(b,a)$
+\item $(a,b)\cong(au^2,b)$ for all $u\in k^\times$
+\item $(1,b)\cong M_2(k)$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\begin{enumerate}
+\item Switch $i,j$
+\item Consider $i\mapsto ui$
+\item $i\mapsto\begin{bmatrix}1&0\\0&-1\end{bmatrix}$, $j\mapsto\begin{bmatrix}0&b\\1&0\end{bmatrix}$
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}[Classification of finite division $k$-algebra of dimension 1,2,3,4]
+\begin{enumerate}
+\item $\dim_kA=1$: $A=k$
+\item $\dim_kA=2$: $A=k1\oplus ki$, hence $A$ is commutative, therefore $A/k$ is a quadratic field extension
+\item $\dim_kA=3$: Consider $Z(A)$, we have the following cases
+\begin{enumerate}
+\item $\dim_kZ(A)=3$: $A$ is commutative, hence $A/k$ is a cubic field extension
+\item $\dim_kZ(A)=2$: we may assume $A=k1\oplus ki\oplus kj$ and $Z(A)=k1\oplus ki$, but then $ij=ji$ and $\dim_kZ(A)=3$
+\item $\dim_kZ(A)=1$: we may assume $A=k1\oplus ki\oplus kj$, $Z(A)=k$ and $ij\neq ji$. Let's write $i^2=a+bi+cj$, then $ai+bi^2+cij=ii^2=i^2i=ai+bi^2+cji\Rightarrow c(ij-ji)=0\Rightarrow c=0$, hence $i^2=a+bi$. Then multiply by $i$ as a matrix would look like $\begin{bmatrix}0&a&x\\1&b&y\\0&0&z\end{bmatrix}=:M$ for some $x,y,z\in k$, so $\exists v\neq0$ such that $iv=zv$, but then $(i-z)v=0$ which is impossible
+\end{enumerate}
+\item $\dim_kA=4$: $A\cong(a,b)$ for some $a,b\in k^\times$
+\end{enumerate}
+\end{proposition}
+
+\begin{lemma}
+Let $D$ be a 4 dimensional, $k$-central division algebra, and assume there exists a $k$-subalgebra $E\subseteq A$ so that $E\cong k(\sqrt{a})$, $a\notin {k^\times}^2$, then $A\cong(a,b)$ for some $b\in k^\times$
+\end{lemma}
+
+If $\Char k=2$(note that $-1=1$), things are more complicated
+
+\begin{definition}
+$a\in k,b\in k^\times$, define $[a,b)=k[i,j]/(i^2+i=a,j^2=b,ij=ji+j)$, suppose $q=x+yi+zj+wij$, then $\bar q=x+y(1+i)+zj+wij=(x+y)+yi+zj+wij$, since the minimal polynomials of $i,j,ij$ are $x^2+x+a$ , $x^2+b$ and $x^2+ab$ [since $(ij)^2=ijij=i(ij+j)j=i^2j^2+ij^2=(i+a)b+ib=ab$]
+\end{definition}
+
+\begin{exercise}
+Suppose $\Char k=2$, the following are equivalent
+\begin{enumerate}
+\item $[a,b)$ split
+\item $[a,b)$ doesn't have division
+\item $b$ is a norm from $k(\alpha)/k$ where $\alpha$ is a root of $x^2+x+a=0$
+\item The conic $ax^2+by^2=z^2+zw$ has a $k$ point
+\end{enumerate}
+\end{exercise}
+
+\end{document}

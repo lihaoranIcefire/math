@@ -1,0 +1,103 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$K\subseteq\Omega$ is compact, define
+\[\mathcal O(K)=\{f|_K:f\text{ is holomorphic in a neighborhood of }K\}\]
+Then for we have restriction map $\rho:\mathcal O(\Omega)\to \mathcal O(K)$, let $\|f\|_K=\displaystyle\max_{z\in K}|f(z)|$ to be the $L^\infty$ norm
+\end{definition}
+
+\begin{theorem}[Runge's theorem]\label{Runge's theorem}
+The following are equivalent
+\begin{enumerate}
+\item The image of $\rho$ is dense
+\item No connected component of $\Omega\setminus K$ is relatively compact in $\Omega$
+\item If $\xi\in \Omega\setminus K$, then there exists $f\in \mathcal O(\Omega)$ such that $|f(\xi)|>\|f\|_K$
+\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+For $K\subseteq\Omega$ compact, the \textit{holomorphic convex hull}\index{Holomorphic convex hull} of $K$ relative to $\Omega$ is
+\[\hat K=\hat K_\Omega=\{z\in\Omega:|f(z)|\leq \|f\|_K,\forall f\in \mathcal O(\Omega)\}\]
+Clearly $K\subseteq \hat K$
+\end{definition}
+
+\begin{proposition}\hfill
+\begin{enumerate}
+\item $\hat K$ is compact
+\item $\|f\|_{\hat K}=\|f\|_K$ for all $f\in \mathcal O(\Omega)$
+\item $\hat{\hat K}=\hat K$
+\item If $\xi\in\Omega\setminus\hat K$, then there exists $f\in \mathcal O(\Omega)$ such that $|f(\xi)|>\|f\|_K$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}
+\item $\hat K$ is bounded by considering $f=z$. Suppose $z_i\in\hat K$ converges to $\xi$, if $\xi\in\Omega^c$, then $f=\dfrac{1}{z-\xi}$ will be unbounded on $\hat K$, thus $\xi\in\Omega$, but then for any $f\in\mathcal O(\Omega)$, $\displaystyle|f(\xi)|=\lim_{i\to\infty}|f(z_i)|\leq\|f\|_K$, thus $\xi\in\hat K$
+\item By definition, $\|f\|_{\hat K}\leq \|f\|_K$, $\forall f\in \mathcal O(\Omega)$, and $\|f\|_K\leq\|f\|_{\hat K}$, $\forall f\in \mathcal O(\Omega)$ is obvious
+\item $\hat{\hat K}=\{z\in\Omega:|f(z)|\leq \|f\|_{\hat K}=\|f\|_{K},\forall f\in \mathcal O(\Omega)\}=\hat K$
+\item By definition
+\end{enumerate}
+\end{proof}
+
+\begin{example}
+$K$ is the unit circle. If $\Omega$ is the anulus $\left\{\dfrac{1}{2}<|z|<2\right\}$, then $\hat K=K$. If $\Omega$ is the disc $\{|z|<2\}$, then $\hat K=\{|z|<1\}$ is the unit disc. Just consider $f=z$ and $f=\dfrac{1}{z}$
+\end{example}
+
+\begin{corollary}\label{Compact exhaustion of a domain}
+Any domain $\Omega$ has an exhaustion by compact sets $\hat{K_i}=K_i$ such that
+\[K_i\subset\subset \overset{\circ}{K_{i+1}}\subset K_{i+1}\subset\subset\Omega\]
+\end{corollary}
+
+\begin{theorem}\label{Vanishing theorem}
+$\mathcal U=\{U_i\}$ is an open cover of $\Omega$, then $H^1(\mathcal U,\mathcal O)=0$
+\end{theorem}
+
+\begin{proof}
+Let $\{\phi_i\}$ be a partion of unity. For any cocycle $\{g_{ij}\}\in Z^1(\mathcal U,\mathcal O)$, consider $h_i=\displaystyle\sum_j\phi_jg_{ij}$, then
+\begin{align*}
+h_i-h_j&=\sum_k\phi_kg_{ik}-\sum_k\phi_kg_{jk} \\
+&=\sum_k\phi_k(g_{ik}-g_{jk}) \\
+&=\sum_k\phi_kg_{ij} \\
+&=g_{ij}
+\end{align*}
+Hence $\bar\partial h_i-\bar\partial h_j=0$, $\{\bar\partial h_i\}$ define a well-defined smooth $(0,1)$ form. By Theorem \ref{d bar theorem}, there exist a holomorphic fuction $u$ such that $\bar\partial u=\bar\partial h_i$, define $f_i=h_i-u$, then $\bar\partial f_i=0$, i.e. $\{f_i\}$'s are holomorphic, and $g_{ij}=f_i-f_j$. In other words, $\{g_{ij}\}$ is the image of $\{f_i\}\in C^1(\mathcal U,\mathcal O)$ under the coboundary map
+\end{proof}
+
+\begin{theorem}[Mittag-Leffler theorem]
+$\Omega\subseteq\mathbb C$ is an open set, $E\subseteq\Omega$ is a discrete subset, then there exists a meromorphic function $f$ with prescribed principal parts on $E$
+\end{theorem}
+
+\begin{proof}
+There exists and open cover $\mathcal U=\{U_i\}$ and $f_i\in\mathcal M(U_i)$ with the prescribed principal parts round each point of $E$, then $f_i-f_j\in\mathcal O(U_i\cap U_j)$ is a coycle, by Theorem \ref{Vanishing theorem}, there exist holomorphic functions $\{g_i\}$ such that $f_i-f_j=g_i-g_j$ on $U_i\cap U_j$, then $f_i-g_i=f_j-g_j$ defines a global meromorphic function $f$ such that $f-f_i=-g_i$ on $U_i$ which is holomorphic
+\end{proof}
+
+\begin{theorem}[Weierstrass theorem]\label{Weierstrass theorem}
+$E\subseteq\Omega$ is discrete, then
+\begin{enumerate}
+\item There is $f\in\mathcal M(\Omega)$ with arbitrary orders precisely at $E$
+\item Any $f\in\mathcal M(\Omega)$ can be written as $f=g/h$ for $g,h\in \mathcal O(\Omega)$
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}
+\item First take care of poles, and then multiply by $a_k(z-z_k)^{r_k}$ for each zero $z_k$, that converges
+\item 
+\end{enumerate}
+\end{proof}
+
+\begin{definition}
+Open subset $\Omega\subseteq\mathbb C^n$ is called a \textit{domain of holomorphy}\index{Domain of holomorphy} if for any $p\in\overline\Omega\setminus\Omega$, there is no holomorphic function $g$ defined on an open set $U\ni p$ with $g=f$ on $U\cap \Omega$
+\end{definition}
+
+\begin{theorem}
+For any proper open subset $\Omega\subseteq\mathbb C$ is a domain of holomorphic
+\end{theorem}
+
+\begin{proof}
+Suppose $p\in\partial\Omega$, $p\in U$ is a neighborhood, $g\in\mathcal O(U)$ such that $f=g$ on $\Omega\cap U$, then there exists $\{\xi_n\}$ discrete and converging to $p$. By Weierstrass theorem \ref{Weierstrass theorem}, there exists $f\in\mathcal O(\Omega)$ having exactly $\{\xi_i\}$ as zeros, but then $g$ has to be identically zero, so is $f$ which is a contradiction
+\end{proof}
+
+\end{document}

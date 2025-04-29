@@ -1,0 +1,134 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{problem}
+First not that
+\[
+\Lambda \subseteq \Lambda' \quad \Leftrightarrow \quad 
+\begin{pmatrix}
+\omega_{1}\\ 
+\omega_{2}
+\end{pmatrix}
+=A
+\begin{pmatrix}
+\omega_{1}'\\ 
+\omega_{2}'
+\end{pmatrix}
+,A \in \mathrm{M}(2,\mathbb{Z})
+\]
+Hence we have
+\[
+\Lambda = \Lambda' \quad \Leftrightarrow \quad 
+\begin{pmatrix}
+\omega_{1}\\ 
+\omega_{2}
+\end{pmatrix}
+=A
+\begin{pmatrix}
+\omega_{1}'\\ 
+\omega_{2}'
+\end{pmatrix}
+,
+\begin{pmatrix}
+\omega_{1}'\\ 
+\omega_{2}'
+\end{pmatrix}
+=B
+\begin{pmatrix}
+\omega_{1}\\ 
+\omega_{2}
+\end{pmatrix}
+,A,B \in \mathrm{M}(2,\mathbb{Z})
+\]
+Which is equivalent to \(A\in \mathrm{GL}(2,\mathbb{Z})\)
+\end{problem}
+
+\begin{problem}
+Since $\mathbb{C}$ is the universal cover of \(\mathbb{C}/\Lambda'\), $f\circ\pi:\mathbb{C}\rightarrow \mathbb{C}/\Lambda'$ has a lift $F:\mathbb{C}\rightarrow \mathbb{C}$, and locally we have $F=\pi'|_{V}^{-1}\circ f\circ\pi|_{U}$, thus $F$ is holomorphic
+
+\begin{center}
+\begin{tikzcd}
+&\mathbb{C} \arrow[r,"F"] \arrow[d,"\pi"]
+& \mathbb{C} \arrow[d,"\pi'"] \\
+& \mathbb{C}/\Lambda \arrow[r,"f"]
+& \mathbb{C}/\Lambda'
+\end{tikzcd}
+\end{center}
+
+Fix \(\omega\in \Lambda\), since $\pi(z+\omega)=\pi(z)$ for any $z\in \mathbb{C}$, we have $F(z+\omega)-F(z)\in\Lambda'$, hence  \(F(z+\omega)-F(z)\) is a continuous function of $z$ but $\Lambda'$ is discrete, thus $F(z+\omega)-F(z)\equiv C_{\omega}$, where $C_{\omega}\in\Lambda'$ is a constant. Then $F'(z+\omega)=F'(z)$ which shows $F':\mathbb{C}\rightarrow \mathbb{C}$ is doubly periodic function, thus induces $G:\mathbb{C}/\Lambda\rightarrow \mathbb{C}$ with $F=G\circ\pi$
+
+\begin{center}
+\begin{tikzcd}
+&\mathbb{C} \arrow[r,"F'"] \arrow[d,"\pi"]
+& \mathbb{C} \\
+& \mathbb{C}/\Lambda \arrow[ur,"G"]
+\end{tikzcd}
+\end{center}
+
+Thus $G$ must be a constant, so is $F'$, therefore $F$ has the form $F(z)=\alpha z+\beta$. Then for any $\omega\in \Lambda$, we have $F(\omega)-F(0)=\alpha\omega\in\Lambda'$, thus $\alpha\Lambda\subset\Lambda'$
+If $f$ is biholomorphic, then $\pi'\circ F=f\circ\pi\Rightarrow \pi\circ F^{-1}=f^{-1}\circ\pi'$, which implies $\left\{\begin{array}{rl}
+\alpha\Lambda\subset\Lambda' \\
+\alpha^{-1}\Lambda'\subset\Lambda
+\end{array}\right. \Rightarrow \alpha\Lambda=\Lambda'$
+
+\begin{center}
+\begin{tikzcd}
+&\mathbb{C} \arrow[d,"\pi"]
+& \mathbb{C} \arrow[l,"F^{-1}"] \arrow[d,"\pi'"] \\
+& \mathbb{C}/\Lambda
+& \mathbb{C}/\Lambda' \arrow[l,"f^{-1}"]
+\end{tikzcd}
+\end{center}
+
+Conversely, if \(\alpha\Lambda=\Lambda'\), $\pi\circ F^{-1}$ is doubly periodic and induce $f^{-1}$, hence $f$ is biholomorphic
+\end{problem}
+
+\begin{problem}
+Suppose $\Lambda=\mathbb{Z}\omega_{1}+\mathbb{Z}\omega_{2}, \mathrm{Im}\left(\dfrac{\omega_{2}}{\omega_{1}}\right)>0$, define $\Lambda'=\mathbb{Z}+\mathbb{Z}\tau$, where $\tau=\dfrac{\omega_{2}}{\omega_{1}}$, we have $\omega_{1}\Lambda'=\Lambda$, thus $X$ and $X(\tau)$ are biholomorphic. \par
+$X(\tau)$ and $X(\tau')$ are biholomorphic if and only if $\begin{pmatrix}
+\tau'\\ 
+1
+\end{pmatrix}
+=\alpha A
+\begin{pmatrix}
+\tau\\ 
+1
+\end{pmatrix}, \alpha\in \mathbb{C}-\{0\}, A\in \mathrm{SL}(2,\mathbb{Z})$
+If $X(\tau)$ and $X(\tau')$ are biholomorphic, then $\mathbb{Z}+\mathbb{Z}\tau'=\Lambda'=\alpha\Lambda=\mathbb{Z}\alpha+\mathbb{Z}\alpha\tau$ for some $\alpha\in \mathbb{C}-\{0\}$, thus $\begin{pmatrix}
+\tau'\\ 
+1
+\end{pmatrix}
+=
+A
+\begin{pmatrix}
+\alpha\tau\\ 
+\alpha
+\end{pmatrix}
+=\alpha A
+\begin{pmatrix}
+\tau\\ 
+1
+\end{pmatrix}$, for some $A\in \mathrm{SL}(2,\mathbb{Z})$, the other direction is easy
+\end{problem}
+
+\begin{problem}
+Assume it is not the case, then $\exists \delta>0$ and $c\in\mathbb{C}$ such that $B(c,\delta) \cap f(X') = \varnothing$, then consider non-constant holomorphic function $\dfrac{1}{f-c}:X'\rightarrow \mathbb{C}$, then it is bounded since $\left| \dfrac{1}{f-c} \right| \leq \delta^{-1}$, by Riemann's removable singularity theorem, we can extend \(\dfrac{1}{f-c}\) to a non-constant holomorphic function $g:X\rightarrow \mathbb{C}$, but since $X$ is compact, $g$ should be a constant, that is a contradiction
+\end{problem}
+
+\begin{problem}
+$f'(z)=\dfrac{1}{2}\left(1-\dfrac{1}{z^{2}}\right)$ when $z\neq0$, thus $1,-1$ are branch points. \par
+Consider the chart $({P}^{1}-\{0\},\varphi)$ with $\varphi(z)=\dfrac{1}{z}$
+
+\begin{center}
+\begin{tikzcd}
+\mathbb{C} \arrow[r,"f"] \arrow[dr]
+& \mathbb{P}^{1}-\{0\} \arrow[d,"\varphi"] \\
+& \mathbb{C}
+\end{tikzcd}
+\end{center}
+
+Thus $g(z)=\varphi\circ f(z)=\dfrac{z}{2(z^{2}+1)}$, $g'(z)=\dfrac{1-z^{2}}{2(z^{2}+1)}$, hence \(0\) is not a branch point
+\end{problem}
+
+\end{document}

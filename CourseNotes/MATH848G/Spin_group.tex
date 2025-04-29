@@ -1,0 +1,50 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$Spin(n)$ is a subgroup of $Cl_n^{even}$ consisting of elements of norm $1$
+\end{definition}
+
+\begin{example}
+$Spin(2)=\mathbb T$ is the circle group, Since $Cl_3^{even}\cong Cl_2\cong\mathbb H$, $SU(2)\cong Spin(3)$ are the corresponding subgroups
+\end{example}
+
+\begin{definition}
+$Spin(n)$ naturally acts on $\mathbb R^n$ by $g\cdot v=gvg^{-1}$, then it is easy to see that $Spin(n)\to SO(n)$ is a double covering, if $M$ is a Riemannian manifold, it has a principal bundle \begin{tikzcd}
+SO(n) \arrow[r] & P \arrow[d] \\
+& M
+\end{tikzcd} where $P_m$ are the oriented orthonormal frames on $T_mM$
+A spin structure on $M$ is a lifting of $P$ to a principal bundle for $Spin(n)$, note this may or may not exist
+\end{definition}
+
+\begin{example}
+$\mathbb CP^{2n}$ doesn't have a spin structure
+\end{example}
+
+\begin{proposition}
+If spin structures exist, the set of such structures is acted on transitively by $H^1(M,\mathbb Z/2\mathbb Z)$
+\end{proposition}
+
+\begin{proof}
+Consider the long exact sequence \par
+\begin{center}
+\begin{tikzcd}
+H^1(M,\mathbb Z/2\mathbb Z) \arrow[r] & H^1(M,Spin(n))\arrow[r] &H^1(M,SO(n))\arrow[r,"w_2"]&H^2(M,\mathbb Z/2\mathbb Z)
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\begin{proposition}
+If $n$ is even and $M$ has a spin structure, fix it, then since $Spin(n)\subseteq Cl_n^{even}\subseteq Cl_n\subseteq Cl_n\otimes\mathbb C\cong M^{2^{\frac{n}{2}}}(\mathbb C)$, and $Cl_n\otimes\mathbb C$ has a unique irreducible representation of dimension $2^{\frac{n}{2}}$, called the spin representation $\Delta$, so we get a (comple) spin vector bundle $S=P_{Spin(n)}\times_{Spin(n)}\Delta$
+\end{proposition}
+
+\begin{definition}
+There is an elliptic operator acting on $S$ via $\displaystyle\sum_{j=1}^ne_j\cdot\nabla e_j$, where $e_1,\cdots,e_n$ is a local orthonormal frame, the symbol is $\sum e_j\xi_j$, this is called the Dirac operator $\slashed{D}$
+\end{definition}
+
+\begin{theorem}
+Assume $M$ is a closed Riemannian spin manifold of dimension $n=2l$, $ind\slashed{D}=\langle \widehat{A}(M),[M]\rangle$, here $\widehat{A}(M)$ is a polynomial in Pontryagin classes defined as follows: suppose $TM\otimes\mathbb C\cong L_1\oplus\cdots\oplus L_l$ where $L_j$ are complex line bundle with Chern class $x_j$, then $\widehat{A}(M)=\displaystyle\prod_{j}\dfrac{x_j}{2\sinh\dfrac{x_j}{2}}$
+\end{theorem}
+
+\end{document}

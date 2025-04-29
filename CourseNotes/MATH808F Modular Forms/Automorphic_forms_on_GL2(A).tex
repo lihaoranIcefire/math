@@ -1,0 +1,76 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+In this section we adopt the following notation:
+\begin{itemize}
+\item $G=\GL_2$ is the group scheme over $\mathbb Z$. $Z\cong\mathbb G_m$ is the center of $G$, $K=\SO_2$, $G_\infty=G_{\mathbb R}$, $K_\infty=K_{\mathbb R}$
+\item The ring of finite adeles over $\mathbb Q$ is
+\[
+\mathbb A_f=\left\{(x_2,x_3,\cdots)\in\prod_{p\text{ primes}}\mathbb Q_p\middle|x_p\in\mathbb Z_p\text{ for all but finite many primes }p\right\}
+\]
+The multiplicative group of finite ideles over $\mathbb Q$ is
+\[
+\mathbb I_f=\mathbb A^\times_f=\left\{(x_2,x_3,\cdots)\in\prod_{p\text{ primes}}\mathbb Q^\times_p\middle|x_p\in\mathbb Z^\times_p\text{ for all but finite many primes }p\right\}
+\]
+If we write $\mathbb Q_\infty=\mathbb R$. The ring of adeles over $\mathbb Q$ is
+\[
+\mathbb A=\left\{(x_\infty,x_2,x_3,\cdots)\in\times\prod_{v\text{ places}}\mathbb Q_v\middle|x_p\in\mathbb Z_p\text{ for all but finite many primes }p\right\}
+\]
+The multiplicative group of ideles over $\mathbb Q$ is
+\[
+\mathbb I=\mathbb A^\times=\left\{(x_\infty,x_2,x_3,\cdots)\in\prod_{v\text{ places}}\mathbb Q^\times_v\middle|x_p\in\mathbb Z^\times_p\text{ for all but finite many primes }p\right\}
+\]
+$\mathbb A_f$ and $\mathbb A^\times_f$ naturally embed into $\mathbb A,\mathbb A^\times$
+\item $\mathscr C=\{\text{congruence modular groups}\}$
+\[\mathcal A=\varinjlim_{\Gamma\in\mathscr C}\mathcal A(\Gamma\setminus G^+_{\mathbb R})\supseteq\mathcal A_0=\varinjlim_{\Gamma\in\mathscr C}\mathcal A_0(\Gamma\setminus G^+_{\mathbb R})\]
+Both $\mathcal A$ and $\mathcal A_0$ are
+\begin{enumerate}
+\item $(\mathfrak g,K)$-modules: induced by right action of $G^+_{\mathbb R}$
+\item $G_{\mathbb Q}^+$ representations: induced by left action of $G_{\mathbb Q}^+$
+\end{enumerate}
+$\forall\phi\in\mathcal A$, stabilizer of $\phi$ in $G^+_{\mathbb Q}$ contains some $\Gamma\in\mathscr C$. This fact implies that $G_{\mathbb Q}^+$ representation on $\mathcal A$ and $\mathcal A_0$ can be actually extended to $\overline{G^+_{\mathbb Q}}$, the completion of $G^+_{\mathbb Q}$ with respect to the topology in which $\mathscr C$ forms a neighborhood basis of 1. A more concrete description is
+\begin{align*}
+\overline{G^+_{\mathbb Q}}&=\{(g_n)_{n=1}^\infty|\forall N\in\mathbb Z_{\geq1},\exists n_0>0,\text{such that }\forall m\geq n\geq n_0,g_m\in g_n\cdot\Gamma(N)\}/\sim
+\end{align*}
+$(g_n)_{n=1}^\infty\sim(h_n)_{n=1}^\infty$ if $\forall N\in\mathbb Z_{\geq1}$, $\forall n_0>0$ such that $\forall n\geq n_0$, $g_n\in h_n\Gamma(N)$
+\end{itemize}
+
+\begin{lemma}
+$\overline{G_{\mathbb Q}^+}=\{g\in\GL_2(\mathbb A_f)|\det g\in\mathbb Q_{>0}\}$
+\end{lemma}
+
+\begin{proof}
+Let $(g_n)_{\geq1}\in\overline{G^+_{\mathbb Q}}$. Then $\exists m_0>0$ such that $\forall n\geq m_0$, $g_n\in\frac{1}{D}M_2(\mathbb Z)$, $\det g_n=\alpha$, for some $D\in\mathbb Z_{\geq1}$, $\alpha\in\mathbb Q_{>0}$. Then $\forall N\in\mathbb Z_{\geq1}$, $\exists n_0>0$ such that $\forall m\geq n\geq n_0$, $g_m\in g_n\Gamma(N)\subseteq g_n+g_nM_2(N\mathbb Z)$ $\Rightarrow$ $g_m-g_n\in\frac{1}{D}M_2(N\mathbb Z)$ $\Rightarrow$ $(g_n)_{n\geq1}\in\frac{1}{D}M_2(\hat{\mathbb Z})\subseteq M_2(\mathbb A_f)$, $\det(g_n)_{n\geq1}=\alpha\in\mathbb Q_{>0}$. This proves "$\subseteq$". The reverse inclusion follows form strong approximation, i.e. $\SL_2(\mathbb Q)$ is dense in $\SL_2(\mathbb A_f)$
+\end{proof}
+
+$\forall N\in\mathbb Z_{\geq1}$. Let $K_N=\{g\in G_{\hat{\mathbb Z}}|g\equiv 1\mod N\hat{\mathbb Z}\}$. Then $\{K_N\cap\overline{G^+_{\mathbb Q}}\}_{\geq1}$ is a neighborhood basis of $1$ in $\overline{G_{\mathbb Q}^+}$ and $K_N\cap G^+_{\mathbb Q}=\Gamma(N)$. Note $\det(K_N)=\begin{cases}
+1+N\hat{\mathbb Z}&,\text{if }N\geq2 \\
+\hat{\mathbb Z}^\times&,\text{if }N=1
+\end{cases}$. Consider the space $\mathcal A(G^+_{\mathbb Q}\setminus(G_{\mathbb R}^+\times\overline{G_{\mathbb Q}^+}))$ satisfying:
+\begin{enumerate}
+\item $\phi(\gamma g_\infty,\gamma g_f)=\phi(g_\infty,g_f)$, $\forall\gamma\in G^+_{\mathbb Q}$, $g_\infty\in G^+_{\mathbb R}$, $g_f\in\overline{G_{\mathbb Q}^+}$
+\item $\phi$ is $C^\infty$, $Z_{\mathfrak g}$-finite, right $K_{\mathbb R}$-finite, moderate growth on $G_{\mathbb R}^+$
+\item $\phi$ is locally constant on $\overline{G^+_{\mathbb Q}}$ factor (this implies $\phi$ is also left $K_N$, invariant for some $N'\in\mathbb Z_{\geq1}$). Then $\mathcal A(G^+_{\mathbb Q}\setminus(G^+_{\mathbb R}\times\overline{G^+_{\mathbb Q}}))$ is a $(\mathfrak g,K_{\mathbb R})$-module and $\overline{G^+_{\mathbb Q}}$ module, both induced by right multiplication action: $\forall x\in\overline{G^+_{\mathbb Q}}$, $(r_x\phi)(g_\infty,g_f)=\phi(g_\infty,g_fx)$. Let $\mathcal A_0(G^+_{\mathbb Q}\setminus(G^+_{\mathbb R}\times\overline{G^+_{\mathbb Q}}))$ be the subspace of functions that are cuspidal on $G^+_{\mathbb R}$
+\end{enumerate}
+
+\begin{lemma}
+$\mathcal A_0(G^+_{\mathbb Q}\setminus(G^+_{\mathbb R}\times\overline{G^+_{\mathbb Q}}))\cong\mathcal A$ as $(\mathfrak g,K_{\mathbb R})\times\overline{G^+_{\mathbb Q}}$ module (same for $\mathcal A_0$)
+\end{lemma}
+
+\begin{proof}
+Let $\phi\in\mathcal A(\Gamma(N)\setminus G^+_{\mathbb R})$. The action of $g_f\in\overline{G^+_{\mathbb Q}}$ is given as follows: choose $\delta\in G^+_{\mathbb Q}$ such that $g_f\in\delta\cdot K_N$. Then $(g_f\cdot\phi)(g_\infty)=\phi(\delta^{-1}g_\infty)$. In particular, $\phi$ is $K_N$ invariant. $\forall (g_\infty,g_f)\in G^+_{\mathbb R}\times\overline{G^+_{\mathbb Q}}$, let $\tilde\phi(g_\infty,g_f)=(g_f\cdot\phi)(g_\infty)$. Then $\tilde\phi\in\mathcal A(G^+_{\mathbb Q}\setminus(G^+_{\mathbb R}\times\overline{G^+_{\mathbb Q}}))$. Conversely, any such $\tilde\phi$ is right $K_N$ invariant for some $N\in\mathbb Z_{\geq1}$. Define $\phi(g_\infty)=\tilde\phi(g_\infty,1)$. Then $\forall\gamma\in\Gamma(N)=K_N\cap G_{\mathbb Q}^+$
+\[\phi(\gamma g_\infty)=\tilde\phi(\gamma g_\infty,1)=\tilde\phi(g_\infty,\gamma^{-1})=\tilde\phi(g_\infty,1)=\phi(g_\infty)\]
+So $\phi\in\mathcal A(\Gamma(N)\setminus G^+_{\mathbb R})$
+\end{proof}
+
+\begin{remark}
+Let $K\subseteq G_{\hat{\mathbb Z}}$ be compact open subgroup and $\Gamma=K\cap G^+_{\mathbb Q}$. Then $\Gamma\in\mathscr C$ and $\Gamma\setminus G^+_{\mathbb R}\cong G^+_{\mathbb Q}\setminus (G^+_{\mathbb R}\times\overline{G_{\mathbb Q}^+}/ K\cap\overline{G_{\mathbb Q}^+})$. $K\cap\overline{G_{\mathbb Q}^+}=\overline\Gamma=\text{closure of }\Gamma$ in $\overline{G^+_{\mathbb Q}}$. Since $\overline{G_{\mathbb Q}^+}=\varprojlim_{\Gamma\in\mathscr C}\overline{G^+_{\mathbb Q}}/\overline\Gamma$ by completeness, we have
+\[\varprojlim_{\Gamma\in\mathscr C}\Gamma\setminus G^+_{\mathbb R}\cong G^+_{\mathbb Q}\setminus(G^+_{\mathbb R}\times\overline{G^+_{\mathbb Q}})\cong\SL_2(\mathbb Q)\setminus\SL_2(\mathbb A)\cdot Z_{\mathbb R}^+\]
+This is a fiber bundle over $[\SL_2(\hat{\mathbb Z})\times Z^+_{\mathbb R}K_{\mathbb R}]\cong\SL_2(\hat{\mathbb Z})\times\mathbb C^\times$. Since $G^+_{\mathbb R}$ is connected, each $\Gamma\setminus G^+_{\mathbb R}$ is connected. So $G^+_{\mathbb Q}\setminus(G^+_{\mathbb R}\times\overline{G^+_{\mathbb Q}})$ is connected by definition of inverse limit topology
+\end{remark}
+
+Automorphic space $[G]=G_{\mathbb Q}\setminus G_{\mathbb A}$ \\
+Consider the composition $[G]=G_{\mathbb Q}\setminus G_{\mathbb A}\xrightarrow{\det}\mathbb Q^\times\setminus\mathbb A\times\cong\mathbb R_{>0}\times\hat{\mathbb Z}^\times\xrightarrow{\mathrm{projection}}\hat{\mathbb Z}^\times$, fiber over 1 is $G^+_{\mathbb Q}\setminus(G^+_{\mathbb R}\times\overline{G^+_{\mathbb Q}})$. Get topological manifold structure on $[G]$ such that $\pi_0([G])=\pi_0(\mathbb Q^\times\setminus\mathbb A^\times)=\hat{\mathbb Z}^\times$ and each connected component is isomorphic to a fiber bundle over $[\SL_2(\mathbb Z)\setminus\mathcal H]$ with fiber $\SL_2(\hat{\mathbb Z})\times\mathbb C^\times$. Also note: $\SL_2(\mathbb Q)\setminus\SL_2(\mathbb A)=\varprojlim_{\Gamma\in\mathscr C}\Gamma\setminus\SL_2(\mathbb R)$ is connected and a fiber bundle over $[\SL_2(\mathbb Z)\setminus\mathcal H]$ with fiber $\SL_2(\hat{\mathbb Z})\times\SO(2)$
+
+\end{document}

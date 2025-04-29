@@ -1,0 +1,265 @@
+\documentclass{article}
+
+\usepackage[a4paper, total={6in, 9in}]{geometry} %page size and margins
+% \usepackage[math]{anttor}
+\usepackage{ccfonts}
+\usepackage{fontspec}
+\usepackage{imakeidx}
+\usepackage{hyperref}
+\hypersetup{
+colorlinks = true, %Allow color links
+linkcolor = blue, %Setup the color for the links
+citecolor = black, %Choose the color for citation
+}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{pgfplots} % drawing axis, addplots
+\pgfplotsset{compat=newest} % ensure position and scaling compatibility
+\usetikzlibrary{intersections} % handle intersections 
+\usetikzlibrary{calc} % using calculations in tikz
+\usepackage{tikz-cd}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\def\CROP{0}
+
+\title{MATH602 - HW5}
+\author{Haoran Li}
+\date{}
+
+\setlength{\parindent}{0pt}
+
+\makeindex[columns=2, title=Index, intoc] % Create the index
+
+\begin{document}\sloppy % reduce overlong words
+
+\maketitle
+\begin{exercise}{\textbf{1.2.6}}
+Gives examples of \par
+(1) a second quadrant double complex $C$ with exact columns such that $Tot^{\Pi}(C)$ is acyclic but $Tot^{\oplus}(C)$ is not \par
+(2) a second quadrant double complex $C$ with exact rows such that $Tot^\oplus(C)$ is acyclic but $Tot^{\Pi}(C)$ is not \par
+(3) a double complex(in the entire plane) for which every row and every column is exact, yet neither $Tot^{\Pi}(C)$ nor $Tot^{\oplus}(C)$ is acyclic
+\end{exercise}
+
+\begin{proof}
+(1) Consider the second quadrant double complex $C$ with $C_{-p,p}=C_{-p,p+1}=\mathbb Z$ for $p\leq0$ and identity maps for all $\mathbb Z\to\mathbb Z$, then $(\cdots,0,1)\in Tot^\oplus_0(C)$ doesn't have a preimage in $Tot^\oplus_1(C)$, hence $Tot^\oplus(C)$ is not acyclic. On the other hand, $Tot^\Pi_1(C)\to Tot^\Pi_0(C)$ is an isomorphism, hence $Tot^\Pi(C)$ is acyclic
+\begin{center}
+\begin{tikzcd}
+       & \vdots \arrow[d]              & \vdots \arrow[d]              & \vdots \arrow[d]              \\
+\cdots & \mathbb Z \arrow[l] \arrow[d] & \mathbb Z \arrow[d] \arrow[l] & 0 \arrow[d] \arrow[l]         \\
+\cdots & 0 \arrow[l] \arrow[d]         & \mathbb Z \arrow[l] \arrow[d] & \mathbb Z \arrow[l] \arrow[d] \\
+\cdots & 0 \arrow[l]                   & 0 \arrow[l]                   & \mathbb Z \arrow[l]          
+\end{tikzcd}
+\end{center}
+(2) Consider the second quadrant double complex $C$ with $C_{-p,p}=C_{-p-1,p}=\mathbb Z$ for $p\leq0$ and identity maps for all $\mathbb Z\to\mathbb Z$, then $(\cdots,-1,1,-1,1)\in Tot^\Pi_1(C)$ maps to $0\in Tot^\Pi_0(C)$, hence $Tot^\Pi(C)$ is not acyclic. On the other hand, $Tot^\oplus_1(C)\to Tot^\oplus_0(C)$ is an isomorphism, hence $Tot^\oplus(C)$ is acyclic
+\begin{center}
+\begin{tikzcd}
+       & \vdots \arrow[d]              & \vdots \arrow[d]              & \vdots \arrow[d]      \\
+\cdots & \mathbb Z \arrow[l] \arrow[d] & 0 \arrow[d] \arrow[l]         & 0 \arrow[d] \arrow[l] \\
+\cdots & \mathbb Z \arrow[l] \arrow[d] & \mathbb Z \arrow[l] \arrow[d] & 0 \arrow[l] \arrow[d] \\
+\cdots & 0 \arrow[l]                   & \mathbb Z \arrow[l]           & \mathbb Z \arrow[l]  
+\end{tikzcd}
+\end{center}
+(3) Consider the double complex $C$ with $C_{-p,p}=C_{-p,p+1}=\mathbb Z$ and identity maps for all $\mathbb Z\to\mathbb Z$, then $(\cdots,0,1,0,\cdots)\in Tot^\oplus_0(C)$ doesn't have a preimage in $Tot^\oplus_1(C)$, hence $Tot^\oplus(C)$ is not acyclic. On the other hand, $(\cdots,-1,1,-1,1,\cdots)\in Tot^\Pi_1(C) $ maps to $0\in Tot^\Pi_0(C)$ is an isomorphism, hence $Tot^\Pi(C)$ is not acyclic
+\begin{center}
+\begin{tikzcd}
+       & \vdots \arrow[d]              & \vdots \arrow[d]              & \vdots \arrow[d]              &                  \\
+\cdots & \mathbb Z \arrow[l] \arrow[d] & 0 \arrow[d] \arrow[l]         & 0 \arrow[d] \arrow[l]         & \cdots \arrow[l] \\
+\cdots & \mathbb Z \arrow[l] \arrow[d] & \mathbb Z \arrow[l] \arrow[d] & 0 \arrow[l] \arrow[d]         & \cdots \arrow[l] \\
+\cdots & 0 \arrow[l] \arrow[d]         & \mathbb Z \arrow[l] \arrow[d] & \mathbb Z \arrow[l] \arrow[d] & \cdots \arrow[l] \\
+       & \vdots                        & \vdots                        & \vdots                        &                 
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\begin{exercise}{\textbf{2.7.1}}
+Let $C$ be the periodic upper half-plane complex with $C_{p,q}=\mathbb Z/4$ for all $p$ and $q\geq0$, all differentials being multiplication by $2$
+\begin{center}
+\begin{tikzcd}
+       & {} \arrow[d, "2"]                         & {} \arrow[d, "2"]                         & {} \arrow[d, "2"]                         &                       \\
+\cdots & \mathbb Z/4 \arrow[l, "2"] \arrow[d, "2"] & \mathbb Z/4 \arrow[l, "2"] \arrow[d, "2"] & \mathbb Z/4 \arrow[l, "2"] \arrow[d, "2"] & \cdots \arrow[l, "2"] \\
+\cdots & \mathbb Z/4 \arrow[l, "2"]                & \mathbb Z/4 \arrow[l, "2"]                & \mathbb Z/4 \arrow[l, "2"]                & \cdots \arrow[l, "2"]
+\end{tikzcd}
+\end{center}
+1. Show that $H_0(Tot^\Pi(C))\cong\mathbb Z/2$ on the cycle $(\cdots,1,1,1)\in\prod C_{-p,p}$ even though the rows of $C$ are exact. Hint: First show that the $0$-boundaries are $\prod2\mathbb Z/4$ \par
+2. Show that $Tot^\oplus(C)$ is acyclic \par
+3. Now extend $C$ downward to form a doubly periodic plane double complex $D$ with $D_{pq}=\mathbb Z/4$ for all $p,q\in\mathbb Z$. Show that $H_0(Tot^\Pi(D))$ maps onto $H_0(Tot^\Pi(C))\cong\mathbb Z/2$. Hence $Tot^\Pi(D)$ is not acyclic, even though every row and column of $D$ is exact. Finally, show that $Tot^\oplus(D)$ is acyclic
+\end{exercise}
+
+\begin{proof}
+1. It is obvious that $B_0(Tot^\Pi(C))\subseteq\prod2\mathbb Z/4$, for any $(\cdots,x_{-2,2},x_{-1,1},x_{0,0})\in\prod2\mathbb Z/4$, we can find $(\cdots,x_{-2,3},x_{-1,2},x_{0,1},0)$ inductively such that $2x_{0,1}=x_{0,0}$, $2x_{0,1}+2x_{-1,2}=x_{-1,1}$, $2x_{-1,2}+2x_{-2,3}=x_{-2,2}$, $\cdots$, hence $B_0(Tot^\Pi(C))=\prod2\mathbb Z/4$. Similarly, we can show any element in $Tot^\Pi_0(C)$ that maps to $0$ has entries of the same parity, hence $H_0(Tot^\Pi(C))\cong\mathbb Z/2$ on the cycle $(\cdots,1,1,1)\in Tot^\Pi_0(C)$ \par
+2. Apply acyclic assembly lemma. $C$ is an upper half-plane complex with exact rows, thus $Tot^\oplus(C)$ is acyclic \par
+As in 1. $B_0(Tot^\Pi(C))=\bigoplus 2\mathbb Z/4$, any element in $Tot^\oplus_0(C)$ that maps to $0$ has entries of the same parity, thus $Z_0(Tot^\oplus(C))=\bigoplus 2\mathbb Z/4$, hence $Tot^\oplus(C)$ is acyclic \par
+3. We have an obvious map $D\to C$. For any $(\cdots,x_{-2,2},x_{-1,1},x_{0,0})\in Z_0(Tot^\Pi(C))$, it comes from $(\cdots,x_{-2,2},x_{-1,1},x_{0,0},x_{0,0},x_{0,0},\cdots)\in Z_0(Tot^\Pi(D))$, also, $B_0(Tot^\Pi(D))\subseteq\prod2\mathbb Z/4$ maps into $B_0(Tot^\Pi(C))=\prod2\mathbb Z/4$, thus  $H_0(Tot^\Pi(D))$ maps onto $H_0(Tot^\Pi(C))\cong\mathbb Z/2$ \par
+As in 2. $B_0(Tot^\oplus(D))=Z_0(Tot^\oplus(D))=\bigoplus 2\mathbb Z/4$, hence $Tot^\oplus(D)$ is acyclic 
+\end{proof}
+
+\begin{exercise}{\textbf{2.7.3}}
+To see why $Tot^\oplus$ is used for the tensor product $P\otimes_R Q$ of right and left $R$ module complexes, while $Tot^\Pi$ is used for $Hom$, let $I$ be a cochain complex of abelian groups. Show that there is a natural isomorphism of double complexes:
+\[Hom_{Ab}(Tot^\oplus(P\otimes_RQ),I)\cong Hom_R(P,Tot^\Pi(Hom_{Ab}(Q,I)))\]
+\end{exercise}
+
+\begin{proof}
+Since
+\begin{align*}
+Hom\left(\bigoplus_{p+q=r} P_p\otimes Q_q,I^r\right)&\cong \prod_{p+q=r} Hom\left(P_p\otimes Q_q,I^r\right) \\
+&\cong \prod_{p+q=r} Hom\left(P_p,Hom(Q_q,I^r)\right) \\
+&\cong Hom\left(P_p,\prod_{p+q=r}Hom(Q_q,I^r)\right) \\
+\end{align*}
+is natural isomorphic. $Hom_{Ab}(Tot^\oplus(P\otimes_RQ),I)\cong Hom_R(P,Tot^\Pi(Hom_{Ab}(Q,I)))$ is also natural isomorphic
+\end{proof}
+
+\begin{exercise}{\textbf{3.1.2}}
+Suppose that $T$ is a commutative domain with field of fractions $F$. Show that $Tor_1^R(F/R,B)$ is the torsion submodule $\{b\in B:(\exists r\neq0)rb=0\}$ of $B$ for every $R$ module $B$
+\end{exercise}
+
+\begin{proof}
+Since localization is exact, $F$ is a flat $R$ module, tensoring the flat resolution $0\to R\to F\to F/R\to0$ with $B$, we get $0\to B=R\otimes B\to F\otimes B\to F/R\otimes B\to0$, and $Tor^R_1(F/R,B)=\ker(B\to F\otimes B)=T(B)$ is the torsion submodule of $B$
+\end{proof}
+
+\begin{exercise}{\textbf{3.1.3}}
+Show that $Tor_1^R(R/I,R/J)\cong\dfrac{I\cap J}{IJ}$ for every right ideal $I$ and left ideal $J$ of $R$. In particular, $Tor_1(R/I,R/I)\cong I/I^2$ for every $2$ sided ideal $I$. Hint: Apply the snake lemma to
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & IJ \arrow[d] \arrow[r] & I \arrow[d] \arrow[r] & I\otimes R/J \arrow[d] \arrow[r] & 0 \\
+0 \arrow[r] & J \arrow[r]            & R \arrow[r]           & R\otimes R/J \arrow[r]           & 0
+\end{tikzcd}
+\end{center}
+\end{exercise}
+
+\begin{proof}
+Since $0\to I\to R\to R/I\to0$ is exact, we have exact sequence
+\[0=Tor^R_1(R,R/J)\to T^R_1(R/I,R/J)\to I\otimes R/J\to R\otimes R/J\]
+Apply the snake lemma to
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & IJ \arrow[d] \arrow[r] & I \arrow[d] \arrow[r] & I\otimes R/J \arrow[d] \arrow[r] & 0 \\
+0 \arrow[r] & J \arrow[r]            & R \arrow[r]           & R\otimes R/J \arrow[r]           & 0
+\end{tikzcd}
+\end{center}
+We get exact sequence
+\[0=\ker(I\to R)\to\ker(I\otimes R/J\to R\otimes R/J)\to\mathrm{coker}(IJ\to J)=J/IJ\to\mathrm{coker}(I\to R)=R/J\]
+Hence
+\[Tor^R_1(R/I,R/J)\cong\ker(I\otimes R/J\to R\otimes R/J)=\ker(J/IJ\to R/I)=\dfrac{I\cap J}{IJ}\]
+\end{proof}
+
+\begin{exercise}{\textbf{3.2.1}}
+Show that the following are equivalent for every left $R$ module $B$ \par
+1. $B$ is flat \par
+2. $Tor_n^R(A,B)=0$ for all $n\neq0$ and all $A$ \par
+3. $Tor_1^R(A,B)=0$ for all $A$ \par
+\end{exercise}
+
+\begin{proof}
+2 $\Rightarrow$ 3: By definition \par
+3 $\Rightarrow$ 1: For any short exact sequence $0\to K\to F\to A\to0$, we have $0=Tor^R_1(A,B)\to K\otimes B\to F\otimes B\to A\otimes B\to0$, hence $B$ is flat \par
+1 $\Rightarrow$ 2: Since $B$ is flat, $-\otimes B$ is exact, tensor any projective resolution of $A$ with $B$, $Tor^R_n(A,B)$, $n\neq0$ which are the homologies are $0$
+\end{proof}
+
+\begin{exercise}{\textbf{3.2.3}}
+We saw in the last section that if $R=\mathbb Z$(or more generally, if $R$ is a principal ideal domain), a module $B$ is flat iff $B$ is torsion free. Here is an example of a torsion free ideal $I$ that is not a flat $R$ module. Let $k$ be a field and set $R=k[x,y]$, $I=(x,y)R$. Show that $k=R/I$ has the projective resolution
+\[0\to R\xrightarrow{\begin{pmatrix}
+-y\\
+x
+\end{pmatrix}}R^2\xrightarrow{\begin{pmatrix}
+x&y
+\end{pmatrix}}R\to k\to0\]
+Then compute that $Tor_1^R(I,k)\cong Tor_2^R(k,k)\cong k$, showing that $I$ is not flat
+\end{exercise}
+
+\begin{proof}
+If $R=k[x,y]$ is a UFD, $I=(x,y)$ is a maximal ideal, then we have a projective resolution
+\[0\to R\xrightarrow{\begin{pmatrix}
+-y\\
+x
+\end{pmatrix}}R^2\xrightarrow{\begin{pmatrix}
+x&y
+\end{pmatrix}}R\to R/I\cong k\to0\]
+For any $h\in R$, $\begin{pmatrix}
+-yh \\
+xh
+\end{pmatrix}=0\Rightarrow h=0$, hence $R\xrightarrow{\begin{pmatrix}
+-y\\
+x
+\end{pmatrix}}R^2$ is injective. $\begin{pmatrix}
+x&y
+\end{pmatrix}\begin{pmatrix}
+-y\\
+x
+\end{pmatrix}=0$ and if $\begin{pmatrix}
+x&y
+\end{pmatrix}\begin{pmatrix}
+f\\
+g
+\end{pmatrix}=xf+yg=0$, then $xf=-yg\Rightarrow g=xh\Rightarrow f=-yh\Rightarrow\begin{pmatrix}
+f \\
+g
+\end{pmatrix}=h\begin{pmatrix}
+-y \\
+x
+\end{pmatrix}$. any element of $R$ is in $I$ iff it can be written as $xf+yg=\begin{pmatrix}
+x&y
+\end{pmatrix}\begin{pmatrix}
+f\\
+g
+\end{pmatrix}$, hence $R^2\to R\to k$ is exact. $R\to k$ is obviously surjective \par
+Tensoring $0\to I\to R\to k\to0$ with $k$ we get $0=Tor^R_2(R,k)\to Tor^R_2(k,k)\to Tor^R_1(I,k)\to Tor^R_1(R,k)=0$. Tensoring the projective resolution with $k$ we get $0\to k\xrightarrow{0}k^2\to k\to0$, hence $Tor^R_2(k,k)=\ker(k\xrightarrow{0}k^2)\cong k$
+\end{proof}
+
+\begin{exercise}{\textbf{3.2.4}}
+Show that a sequence $A\to B\to C$ is exact iff its dual $C^*\to B^*\to A^*$ is exact
+\end{exercise}
+
+\begin{proof}
+Combine the fact that $Hom(-,R)$ is a left exact contravariant functor and Lemma 3.2.5. we know $A\to B\to C$ is exact iff its dual $C^*\to B^*\to A^*$ is exact
+\end{proof}
+
+\begin{exercise}{\textbf{3.3.1}}
+Show that $Ext^1_\mathbb{Z}\left(\mathbb Z\left[\frac{1}{p}\right],\mathbb Z\right)\cong\widehat{\mathbb Z}_p/\mathbb Z\cong\mathbb Z_{p^\infty}$. This shows that $Ext^1_{\mathbb Z}(-,\mathbb Z)$ does not vanish on flat abelian groups
+\end{exercise}
+
+\begin{proof}
+Consider short exact sequence $0\to\mathbb Z\to\mathbb Z\left[\frac{1}{p}\right]\to\mathbb Z_{p^\infty}\to0$, then we have exact sequence
+\[\mathbb Z\cong Hom(\mathbb Z,\mathbb Z)\to Ext_\mathbb{Z}^1(\mathbb Z_{p^\infty},\mathbb Z)\cong(\mathbb Z_{p^\infty})^*\cong\widehat{\mathbb Z}_p\to Ext_{\mathbb Z}^1\left(\textstyle\mathbb Z\left[\frac{1}{p}\right],\mathbb Z\right)\to Ext_{\mathbb Z}^1(\mathbb Z,\mathbb Z)=0\]
+Hence $Ext^1_\mathbb{Z}\left(\mathbb Z\left[\frac{1}{p}\right],\mathbb Z\right)\cong\widehat{\mathbb Z}_p/\mathbb Z\cong\mathbb Z_{p^\infty}$
+\end{proof}
+
+\begin{exercise}{\textbf{3.3.2}}
+When $R=\mathbb Z/m$ and $B=\mathbb Z/p$ with $p\mid m$, show that
+\[0\to\mathbb Z/p\xhookrightarrow{l}\mathbb Z/m\xrightarrow{p}\mathbb Z/m\xrightarrow{m/p}\mathbb Z/m\xrightarrow{p}\mathbb Z/m\xrightarrow{m/p}\cdots\]
+is an infinite periodic injective resolution of $B$. Then compute the groups $Ext^n_{\mathbb Z/m}(A,\mathbb Z/p)$ in terms of $A^*=Hom(A,\mathbb Z/m)$. In particular, show that if $p^2\mid m$, then $Ext^n_{\mathbb Z/m}(\mathbb Z/p,\mathbb Z/p)\cong\mathbb Z/p$ for all $n$
+\end{exercise}
+
+\begin{proof}
+For any ideal $k\mathbb Z/m$, $k\mid m$, any map $k\mathbb Z/m\to\mathbb Z/m$ must send $k$ to a multiple of $k$, thus can be extended to a map $\mathbb Z/m\to\mathbb Z/m$, hence $\mathbb Z/m$ is an injective $\mathbb Z/m$ module. $\mathbb Z/p\to\mathbb Z/m$ is obviously injective. If $m\mid pk$, then $\frac{m}{p}\mid k$, hence this is an injective resolution of $B$. Then we have $0\to A^*\xrightarrow{p} A^*\xrightarrow{\frac{m}{p}}\cdots$, hence $Ext^n_{\mathbb Z/m}(A,\mathbb Z/p)=\begin{cases}
+Hom(A,\mathbb Z/p) &n=0 \\
+\dfrac{Hom(A,\mathbb Z/\frac{m}{p})}{pA^*} &n\text{ odd} \\
+\dfrac{Hom(A,\mathbb Z/p)}{\frac{m}{p}A^*} &n>0\text{ even}
+\end{cases}$ \par
+If $p^2\mid m$, then we would have $0\to (\mathbb Z/p)^*\xrightarrow{0}(\mathbb Z/p)^*\xrightarrow{0}\cdots$, hence $Ext^n_{\mathbb Z/m}(\mathbb Z/p,\mathbb Z/p)\cong(\mathbb Z/p)^*=Hom(\mathbb Z/p,\mathbb Z/m)\cong\mathbb Z/p$
+\end{proof}
+
+\end{document}

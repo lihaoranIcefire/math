@@ -1,0 +1,394 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{My_math_package}
+
+\begin{document}
+
+\begin{definition}
+A \textit{discrete valuation} on a field $F$ is $v:F\to\mathbb Z\cup\{\infty\}$ satisfying
+\begin{enumerate}
+\item $v(x)=\infty\iff x=0$
+\item $v(x+y)\geq\min(v(x),v(y))$, equality holds iff $v(x)\neq v(y)$
+\item $v(xy)=v(x)+v(y)$
+\end{enumerate}
+A valuation is when replacing $\mathbb Z$ by some totally ordered abelian group(called the value group). $v$ is trivial if $v(F^\times)=0$
+\end{definition}
+
+\begin{definition}
+A \textit{discrete valuation ring} is an integral domain $R$ with a discretely valued fraction field $F=\Frac(R)$ such that $R=\{x\in F|v(x)\geq0\}$. In this case $m=\{x\in F|v(x)>0\}$ is the unique prime ideal in $R$, and $m=(\pi)$, we call $\pi$ the \textit{uniformizer}, and for $x\in F$, $v(x)$ is the maximal power of $\pi$ in $a$.
+\end{definition}
+
+\begin{definition}
+Pick some $0<c<1$, we can define norm $|\cdot|:F\to\mathbb R_{\geq0}$ as $|x|=c^{v(x)}$, this defines a metric topology(\textcolor{blue}{which can be shown to be independent of the choice of $c$})
+\end{definition}
+
+\begin{example}
+$\mathbb Z_{(p)}\subseteq \mathbb Q$ with the $p$-adic valuation, $c=p^{-1}$
+\end{example}
+
+\begin{definition}
+By completing the metric topology, we obtain a complete discretely valued field $\widehat F$ with extended norm $|\cdot|$, and the closure of $R$ in $F$ is denoted by $\widehat R$ which can be proven is $\widehat R=\varprojlim R/m^n$
+\end{definition}
+
+\begin{example}
+$k[t]_{(t)}\subseteq k(t)$ with $t$-adic valuation, $\widehat{k(t)}=k((t))$ is the field of formal Laurent series, $\widehat{k[t]_{(t)}}=k[[t]]$ is the ring of formal power series
+\end{example}
+
+\begin{definition}
+Consider finite separable extension $E/F$, then $x\in E$, $|x|_E=|N_{E/F}(x)|_F^{\frac{1}{|[E:F]|}}$. If $F$ was complete wrt $|\cdot|_F$, then $E$ is complete wrt $|\cdot|_E$ and has a valuation $w:E^\times\to\mathbb Z$ satisfying
+\begin{enumerate}
+\item The valuation ring of $w$ is $S$ the integral closure of $R$ in $E$
+\item $\exists e$, such that $\forall x\in R$, $w(x)=ev(x)$, and $[E:F]=ef$, where $f=[S/m':R/m]$
+\end{enumerate}
+\end{definition}
+
+Our setting: If $F$ is complete, $E/F$ finite and separable is said to be unramified if $f=[E:F]$ and $(S/m')/(R/m)$ is separable
+
+\begin{theorem}
+Let $N_F$ be the category with objects unramified extensions $E/F$ and morphisms are $E\to E'$ over $F$. $R_F$ be the category of finite separable extension $R/m$ with $R/m$-algebra morphism. Consider the restion functor $\res:N_F\to R_F$, $E/F\rightsquigarrow (S/m')/(R/m)$, and $(E_1\to E_2)\rightsquigarrow(S_1/m_1'\xrightarrow{f^r}S_2/m_2')$ where $f^r$ is defined as follows: for $x\in S_1/m_1'$, let $y\in S_1$ be a lift, and let $f^r(x)$ be the image of $f(y)$ in $S_2/m_2'$. This functor is an equivalence of categories. So $\Hom_F(E,E)=\Hom_{R/m}(S/m',S/m')$ have isomorphic Galois groups
+\end{theorem}
+
+\begin{example}
+$F=\mathbb Q_p$, $E/F$ unramified with $[E:F]=n$, then $E=F(\xi_{p^n-1})$, and $\Gal(E/F)$ is cyclic
+\end{example}
+
+Now assume $k$ is infinite, $v:k^\times\to\mathbb Z$ is a valuation, $k$ is complete with respect to associated absolute values. $R$ is the valuation ring.
+
+\begin{lemma}
+$D/k$ is a central division algebra with $\deg D=d$, then $\exists$ valution $w:D^\times\mathbb Z$. And $w$ is uniquely determined by restricting on any field $F\subseteq D$ containing $k$ by $w(x)=v_F(x)=\frac{1}{[F:k]}v(N_{F/k}(x))$. Moreover $w(x)=\frac{1}{d}v(\Nrd(x))$ and this valuation gives $D$ the structure of a normed $k$-vector space
+\end{lemma}
+
+\begin{proof}
+For a fixed $F\subseteq D$, $N_{D/k}(x)=\Nrd(x)^d$, so $D$ viewed as a left $F$-vector space is $D\cong F^{\oplus m}$ where $m=\frac{d^2}{[F:k]}$. since for $x\in F$, $\Nrd(x)^d=N_{D/k}(x)=N_{F/k}(x)^m$, $mv(N_{F/k}(x))=dv(\Nrd(x))\Rightarrow\frac{1}{[F:k]}v(N_{F/k}(x))=\frac{1}{d}v(\Nrd(x))=w(x)$. Now let $x,y\in D^\times$ such that $x+y\in D^\times$, $F=k(x^{-1}y)\subseteq D$, we know $w$ is a group homomorphism(since $\Nrd$ is a group homomorphism), we have
+\[
+w(1+x^{-1}y)=v_F(1+x^-1{y})\geq\min(v_F(1),v_F(x^{-1}y))=\min(v_F(1),v_F(x^{-1}y))\Rightarrow w(x+y)\geq\min(w(x),w(y))
+\]
+So $w$ is a valuation
+\end{proof}
+
+\begin{theorem}\label{15:20-04/20/2022}
+If $R/m$ is a perfect field, then any CSA/k is split by an unramified extension of $k$
+\end{theorem}
+
+\begin{proof}
+We will show that for any $L/k$ unramified, any $A\in\text{CSA}/k$ is split by another unramified $E/L$. We prove this by induction on the index. If $A/L$ has index one, then we can just take $E=L$. Now suppose the statement holds for all $L/k$ unramified, $\ind_L(A)\leq d$, by Lemma~\ref{17:21-4/19/2022}, $A$ contains an unramified $E/L$ with $[E:L]>1$, then $\ind_E(A)$ becomes less
+\end{proof}
+
+\begin{lemma}\label{17:21-4/19/2022}
+If $R/m$ is perfect, $L/k$ is a unramified and $D$ is a division algebra over $L$ with $\ind_L(D)>1$, then $D$ contains an unramified $E/L$ with $[E:L]>1$
+\end{lemma}
+
+\begin{proof}
+Suppose not, then for every field $L\subseteq F\subseteq D$, the residue field extension $(S/m')/(R/m)$ ($S\subseteq F$ valution ring with $m'\subseteq S$ maximal ideal) is trivial. Pick $x\in D^\times$, $\pi\in D^\times$ such that $w(\pi)=1$. By induction we can write $y=a_0+a_1\pi+a_2\pi^2+\cdots+a_{n-1}\pi^{n-1}+b_n\pi^n$ which is a Cauchy sequence, so $y\in R(\pi)$
+\end{proof}
+
+By Theorem~\ref{15:20-04/20/2022}, we know
+\[
+\Br(k)=\varinjlim_{E/k\text{ (finite) unramified}}\Br(E/k)=\varinjlim_{E/k\text{ (finite) unramified}}H^2(\Gal(E/k),E^\times)
+\]
+And we have a split short exact sequence of $G=\Gal(E/k)$-modules
+\begin{center}
+\begin{tikzcd}
+1 \arrow[r] & S^\times \arrow[r] & E^\times \arrow[r, "v"] & \mathbb Z \arrow[r] \arrow[l, "1\mapsto\pi", bend left] & 0
+\end{tikzcd}
+\end{center}
+So there is a split exact sequence for all $i\geq0$
+\[
+0\to H^i(G,S^\times)\to H^i(G,E^\times)\to H^i(G,\mathbb Z)\to0
+\]
+
+\begin{proposition}
+$H^i(G,S^\times)=0$ for all $i\geq1$
+\end{proposition}
+
+\begin{proof}
+Since $G$ is cyclic, for all $j\geq1$, $H^{2j-1}(G,S^\times)=H^1(G,S^\times)=1$ by Hilbert 90. $H^{2j}(G,S^\times)=H^{2}(G,S^\times)=(S^\times)^G/N_G(S^\times)$, here recall the norm map $N_G(x)=\prod_{g\in G}gx$. First consider commutative diagram
+\begin{center}
+\begin{tikzcd}
+S^\times \arrow[r, two heads] \arrow[d, "N_G", two heads] & (S/m')^\times \arrow[d, "N_G", two heads] \\
+R^\times=(S^\times)^G \arrow[r, two heads]                & (R/m)^\times                             
+\end{tikzcd}
+\end{center}
+The right map is surjective since $\Gal((S/m')(R/m))$ induce action of $(S/m')^\times$, we know $H^2(G,(S,m')^\times)=(S/m')^\times/N_G(S/m')^\times$, we want to show that the left map is surjective. For $x\in R^\times$, we can find $z_1\in S^\times$ such that $N_G(z_1)$ has the same image as $x$ in $(R/m)^\times$, so $\frac{x}{N_G(z_1)}=1+u\pi$ for some $u\in R$
+Define
+\[
+U_E^{(j)}=1+m'^j,\quad U_k^{(j)}=1+m^j
+\]
+Consider commutative diagram
+\begin{center}
+\begin{tikzcd}
+U_E^{(j)} \arrow[r] \arrow[d, "N_G", two heads] & S/m' \arrow[d, "N_G", two heads] \\
+U_k^{(j)} \arrow[r]                             & R/m                             
+\end{tikzcd}
+\end{center}
+The right map(called the trace map $x\mapsto \sum_{g\in G}gx$) is surjective by lemma~\ref{15:56-01/20/2022}, so $\frac{1}{N_G(z_j)}\frac{x}{N_G(z_1\cdots z_{j-1})}=\frac{x}{N_G(z_1\cdots z_j)}=1+u_j\pi^j$. Note that $\{\prod_{i=1}^nz_i\}$ is Cauchy in $E^\times$, if we take $z$ to be the limit, then $\frac{x}{N_G(z)}=1$
+\end{proof}
+
+\begin{lemma}\label{15:56-01/20/2022}
+$H^i(G,S/m')=0$ for all $i\geq1$
+\end{lemma}
+
+\begin{proof}
+Suppose $R/m=\mathbb F_q$, $S/m'=\mathbb F_{q^n}$ for some $n$. Consider $\mathbb F_{q^n}$ as an abelian group, since $G$ is cyclic of order $n$, $\mathbb F_{q^n}=\frac{\mathbb F_q[t]}{(t^n-1)}=\mathbb F_qG\cong M^G_{\{e\}}(\mathbb F_q)\cong\Hom_{\text{Ab}}(\mathbb ZG,\mathbb F_q)$, then apply Shapiro's lemma~\ref{Shapiro's lemma}.
+\end{proof}
+
+\begin{lemma}
+The short exact sequence of $\mathbb ZG$ modules(as trivial modules)
+\[
+0\to \mathbb Z\to\mathbb Q\to\mathbb Q/\mathbb Z
+\]
+Induces isomorphisms $H^{i-1}(G,\mathbb Q/\mathbb Z)\xrightarrow{\delta^i}H^i(G,\mathbb Z)$
+\end{lemma}
+
+\begin{proof}
+We have $H^^i(G,\mathbb Q)\xrightarrow{\res}H^i(\{e\},\mathbb Q)=0\xrightarrow{\cor}H^i(G,\mathbb Q)$ for $i\geq1$ is multiplying by $|G|$ which is an isomorphism, hence $H^i(G,\mathbb Q)=0$
+\end{proof}
+
+\begin{corollary}
+There are isomorphisms
+\begin{center}
+\begin{tikzcd}
+{H^2(G,E^\times)} \arrow[r, "\cong", shift left] & {H^2(G,\mathbb Z^\times)} \arrow[l, "\cong", shift left] & {H^1(G,\mathbb Q/\mathbb Z)} \arrow[l, "\cong"]
+\end{tikzcd}
+\end{center}
+\end{corollary}
+
+\begin{theorem}
+If $f$ is a 1-cocycle, then $f(gh)=f(g)+g(f(h))=f(g)+f(h)$ is a group homomorphism, so as $\mathbb ZG$ modules, $H^1(G,\mathbb Q/\mathbb Z)=\Hom_{\text{Ab}}(G,\mathbb Q/\mathbb Z)$. Let $H=\ker f$, $F=E^H$, $\chi=\bar f:G/H\to\frac{1}{[F;k]}\mathbb Z/\mathbb Z$, so it can be identified with
+\[
+\{(F/k,\chi),k\leq F\leq E\text{ cyclic Galois, and }\chi:\frac{\Gal(E/k)}{\Gal(F/k)}\xrightarrow{\cong}\frac{1}{[F:k]}\mathbb Z/\mathbb Z\subseteq\mathbb Q/\mathbb Z\}
+\]
+And in our case, we have
+\begin{center}
+\begin{tikzcd}
+{\frac{1}{[F:k]}\mathbb Z/\mathbb Z} \arrow[r, "\cong"] \arrow[rrrd, "{1\mapsto[(\chi,\pi)]}"'] & {\Hom(G,\mathbb Q/\mathbb Z)} \arrow[r, "\cong"] & {H^1(G,\mathbb Q/\mathbb Z)} \arrow[r, "\cong"] & {H^2(G,\mathbb Z)} \arrow[r, "\cong"] & {H^2(G,E^\times)} \arrow[d, "{[\alpha]\mapsto[(E/k,\alpha)]}"] \arrow[ld, "\delta^2"] \\
+                                                                                                &                                                  &                                                 & \Br(E/k)                              & \Br(E/k) \arrow[l, "{[A]\mapsto[A^{\text{op}}]}"]                                    
+\end{tikzcd}
+\end{center}
+If $L/E/k$ unramified, $G'=\Gal(L/k)$ and $\chi:G'\to\frac{1}{[L:k]}\mathbb Z/\mathbb Z$ such that $\overline{\chi'}:\frac{\Gal(L/k)}{\Gal(E/L)}\xrightarrow{\cong}\frac{1}{[E:k]}\mathbb Z/\mathbb Z$ is canonically $\chi$, then
+\begin{center}
+\begin{tikzcd}
+{\frac{1}{[E:k]}\mathbb Z/\mathbb Z} \arrow[r, "\cong"] \arrow[d, hook] & \Br(E/k) \arrow[d, hook] \\
+{\frac{1}{[L:k]}\mathbb Z/\mathbb Z} \arrow[r, "\cong"]                 & \Br(E/k)                
+\end{tikzcd}
+\end{center}
+Hence $\Br(k)=\cong\varinjlim\Br(E/k)\cong\mathbb Q/\mathbb Z$
+\end{theorem}
+
+\begin{corollary}
+If $A$ is a CSA/$k$, then $\ind(A)=\exp(A)$
+\end{corollary}
+
+\begin{proof}
+Since $\Br(k)=\mathbb Q/\mathbb Z$, the algebra $[A]$ generates a subgroup of size $\exp(A)=d$, so $[A]$ is the image of $\frac{1}{d}\cong H^2(\Gal(E_d/k),E_d^\times)$, where $E_d$ is the unique unramified extension of degree $d$, so $d=\exp(A)|\ind(A)|d\Rightarrow\exp(A)=\ind(A)=d$
+\end{proof}
+
+\begin{corollary}
+Every CSA/$k$ is a cyclic
+\end{corollary}
+
+\begin{proof}
+If $A$ is a CSA/$k$, $\deg(A)=n$, and $\ind(A)=d$, then $d=\ind(A)|\deg(A)=n$, so $A$ is split by $E_d$, Hence $A$ is split by $E_d\subseteq E_n$, so $E_n\subseteq A$ is the maximal subfield of $A$.
+\end{proof}
+
+\begin{example}
+$k=\mathbb F_3((t))$, $E=\mathbb F_3((t))[x]/(x^3-x-1)\not\cong\mathbb F_{27}((t))$ \textcolor{blue}{which is actually a infinite degree extension}. $A=[1,t)_{\mathbb F_3((t))}$ has non zero class in $\Br(k)\Rightarrow\Br(\mathbb F_3((t)))\neq0$, $A'=[1,t)_{\mathbb F_3(t)}$, $A'\otimes_{\mathbb F_3(t)}\mathbb F((t))\cong A$
+\end{example}
+
+\paragraph{Setting:}
+\begin{itemize}
+\item $k$ is a field.
+\item $C/k$ is a smooth geometrically connected, projective curve.
+\item $C_F=C\times_kF$ for any field extension $F/k$, denote $\pi:C_F\to C$.
+\item $E/k$ is a finite Galois extension with $G=\Gal(E/k)$. $\forall\sigma\in G$
+\begin{center}
+\begin{tikzcd}
+C_E \arrow[r, "\id\times\sigma"] \arrow[rd, "\pi"] & C_E \arrow[d, "\pi"] \\
+                                       & C                   
+\end{tikzcd}
+\end{center}
+defines a $G$-action on $C_E$.
+\item $E(C_E)=k(C)\otimes_kE$ is the function field of $C_E$.
+\item $\Div(C_E)=\bigoplus_{x\in C_E^{(1)}}\mathbb Zx$ is the group of divisors of $C_E$.
+\item $\Pic(C_E)$ is the Picard group of $C_E$.
+\end{itemize}
+
+We have the following short exact sequence
+\begin{equation}\label{14:08-04/27/2022}
+1\to E^\times\to E(C_E)^\times\xrightarrow{\operatorname{div}}\Div(C_E)\xrightarrow{D\mapsto\mathcal O(D)}\Pic(C_E)\to0
+\end{equation}
+
+
+\begin{lemma}
+There is an isomorphism of $\mathbb ZG$-modules
+\[
+\Div(C_E)=\bigoplus_{x\in C^{(1)}}\left(\bigoplus_{y\in\pi^{-1}(x)}\mathbb Zy\right)\cong\bigoplus_{x\in C^{(1)}}M^G_{G_y}(\mathbb Z)
+\]
+Here $G_y$ is the stabilizer of $y$
+\end{lemma}
+
+\begin{proof}
+Look at the fiber over $x$, we may identify $\mathbb ZG$-modules
+\[G/G_y=\{\sigma_1,\cdots,\sigma_r\}\rightarrow \pi^{-1}(x)=\{y_1,\cdots,y_r\},\quad \sigma_i\mapsto\sigma_iy\]
+ then we can define isomorphism
+\begin{align}
+M^G_{G_y}(\mathbb Z)=\Hom(\mathbb ZG,\mathbb Z)\to\bigoplus_{i=1}^r\mathbb Zy_i,\quad f\mapsto\sum_{i=1}^rf(\sigma_i)y_i
+\end{align}
+\end{proof}
+
+\begin{example}
+\begin{align*}
+\pi^{-1}(x)&=C_E\times_C\Spec k(x)=E\times_kC\times_C\Spec k(x)=E\times_k\Spec k(x)\\
+&=\Spec(k(x)\otimes_kE)=\Spec\left(k(x)\otimes_k\frac{k[t]}{(f(t))}\right)\cong\Spec\frac{k(x)[t]}{f(t)}\\
+&=\Spec\left(\prod_{i=1}^rk(x)[t]/(h_i(t))\right)=\coprod_{i=1}^r\Spec\frac{k(x)[t]}{(h_i(t))}
+\end{align*}
+\end{example}
+
+\begin{example}
+$k=\mathbb Q$, $E=\mathbb Q(i,\sqrt[4]{2})$, $k(x)\cong\mathbb Q(\sqrt2)$
+\[
+\Gal(E/k)=\langle\sigma,\tau|\tau^2=e,\sigma^4=e,\tau\sigma\tau=\sigma^{-1}\rangle,\begin{cases}
+\sigma(\sqrt[4]{2}=i\sqrt[4]{2})\\
+\sigma(i)=i
+\end{cases},\begin{cases}
+\tau(\sqrt[4]{2}=\sqrt[4]{2})\\
+\tau(i)=-i
+\end{cases}
+\]
+\[
+E=\mathbb Q[x]/(x^8-4x^6+8x^4-4x^2+1)
+\]
+\[
+k(x)\otimes_kE=\mathbb Q(\sqrt2)[x]/(x^8-4x^6+8x^4-4x^2+1)=\frac{\mathbb Q(\sqrt2)[x]}{(h_1(x))}\times\frac{\mathbb Q(\sqrt2)[x]}{(h_2(x))}
+\]
+Here $h_1(x)=x^4+(-\sqrt2-2)x^2-2\sqrt2+3$, $h_2(x)=x^4+(\sqrt2-2)x^2+2\sqrt2+3$. The stabilizer is $H=\langle e,\sigma^2,\tau,\sigma^2\tau\rangle$
+\end{example}
+
+\begin{definition}
+The \textit{residue map} $r^i_x(y)$ is defined to be
+\begin{align*}
+H^i(G,E(C_E)^\times)&\to H^i(G,\Div(C_E))\cong\bigoplus_{x\in C^{(1)}}H^i(G,M^G_{G_y}(\mathbb Z))\cong\bigoplus_{x\in C^{(1)}}H^i(G_y,\mathbb Z)\\
+&\cong\bigoplus_{x\in C^{(1)}}H^{i-1}(G_y,\mathbb Q/\mathbb Z)\to H^{i-1}(G_y,\mathbb Q/\mathbb Z)
+\end{align*}
+\end{definition}
+
+\begin{lemma}
+For any $y,z\in\pi^{-1}(x)$, the residue maps $r_x^i(y),r_x^i(z)$ differ by a canonical isomorphism
+\end{lemma}
+
+\begin{proof}
+There exists $\sigma\in G$ such that $\sigma y=z$, and $G_z=\sigma G_y\sigma^{-1}$
+\end{proof}
+
+\begin{lemma}
+The sequence
+\begin{center}\label{13:06-04/29/2022}
+\begin{tikzcd}
+{H^i(G,E(E_E)^\times)} \arrow[rrr, "\bigoplus_{x\in C^{(1)}}r^i_x(y)"] &  &  & {\bigoplus_{x\in C^{(1)}}H^{i-1}(G_y,\mathbb Q/\mathbb Z)} \arrow[rrr, "\sum_{x\in C^{(1)}}d_y\cor^{G_y}_G"] &  &  & {H^{i-1}(G,\mathbb Q/\mathbb Z)}
+\end{tikzcd}
+\end{center}
+is a complex for $i\geq2$, here $d_y=[E(y):E]$ is the degree of $y$
+\end{lemma}
+
+\begin{proof}
+We can split \eqref{14:08-04/27/2022} into two exact sequences
+\begin{equation}\label{00:30-04/48/2022}
+1\to E^\times\to E(C_E)^\times\to E(C_E)^\times/E^\times\to1
+\end{equation}
+\begin{equation}\label{00:31-04/48/2022}
+1\to E(C_E)^\times/E^\times\to\Div(C_E)\to\Pic(C_E)\to0
+\end{equation}
+Hence we get commutative diagram with the help of Lemma~\ref{08:59-04/28/2022}
+\begin{center}
+\begin{tikzcd}
+{H^{i}(G,E(C_E)^\times/E^\times)} \arrow[r] & {H^i(G,\Div(C_E))} \arrow[r] \arrow[d,"\cong"]                 & {H^i(G,\Pic(C_E))} \arrow[d, "\cong"]                  \\
+{H^i(G,E(C_E))^\times} \arrow[u] \arrow[r]  & {\bigoplus_{x\in C^{(1)}}H^i(G_y,\mathbb Z)} \arrow[r] & {H^{i-1}(G,\mathbb Q/\mathbb Z)\cong H^i(G,\mathbb Z)}
+\end{tikzcd}
+\end{center}
+Looking at a single summand, the map reads
+\[
+H^i(G,\Div(C_E))\to H^i(G,M^G_{G_y}(\mathbb Z))\to H^{i}(G_y,\mathbb Z)\to H^i(G,M^G_{G_y}(\mathbb Z))\xrightarrow{\phi_*}H^i(G,\mathbb Z)
+\]
+Recall $\phi:M^G_{G_y}(\mathbb Z)=\Hom_G(\mathbb Z[G],\mathbb Z)\to \mathbb Z$ is defined via $\phi(f)=\sum_{s\in G/G_y}sf(s^{-1}e)$
+\end{proof}
+
+\begin{lemma}\label{08:59-04/28/2022}
+There is a commutative exact ladder
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & \Div^0(C_E) \arrow[r] \arrow[d] & \Div(C_E) \arrow[r, "\deg"] \arrow[d] & \mathbb Z \arrow[r] \arrow[d,equal] & \mathbb Z/d\mathbb Z \arrow[r] \arrow[d,equal] & 0 \\
+0 \arrow[r] & \Pic^0(C_E) \arrow[r]           & \Pic(C_E) \arrow[r]                   & \mathbb Z \arrow[r]           & \mathbb Z/d\mathbb Z \arrow[r]           & 0
+\end{tikzcd}
+\end{center}
+Here $\deg\left(\sum n_yy\right)=\sum n_y[E(y):E]$
+\end{lemma}
+
+\begin{proof}
+Hartshorne chapter II, corollary 6.10
+\end{proof}
+
+\begin{example}
+$C=\mathbb P_k^1$, $E(C_E)=E(t)^\times$, $G=\Gal(E/k)=\Gal(E(t)/k(t))$, then
+\[H^2(G,E(C_E)^\times)\cong H^2(\Gal(E(t)/k(t)),E(t)^\times)\cong\Br(E(t)/k(t))\]
+And our complex is
+\begin{center}
+\begin{tikzcd}
+\Br(E(t)/k(t)) \arrow[r] & {\bigoplus_{x\in(\mathbb P_k^1)^{(1)}}H^1(G_y,\mathbb Q/\mathbb Z)} \arrow[r] & {H^1(G,\mathbb Q/\mathbb Z)}
+\end{tikzcd}
+\end{center}
+Let $p(t)\in E(t)^\times$, assume $E/k$ is cyclic with $\chi:\Gal(E/k)\to\mathbb Z/n\mathbb Z$. Then $[(\chi,p(t))^{op}]$ is given by the 2 cocycle $\alpha:G\times G\to E(t)^\times$, $\alpha(\sigma^i,\sigma^j)=1$ if $i+j<n$, $p(t)$ otherwise.
+
+The residue map just takes $\operatorname{div}(\alpha)=0$, $[\infty]-[0]$
+\end{example}
+
+\begin{theorem}
+Assume $C=\mathbb P_k^1$ such that $H^2(G,E^\times)=H^3(G,E^\times)=0$ (This happens if $k$ is a finite field), then \eqref{13:06-04/29/2022} is exact
+\end{theorem}
+
+\begin{proof}
+$\Pic(\mathbb P^1_E)\xrightarrow[\cong]{\deg}\mathbb Z$, then we get a splitting in \eqref{00:31-04/48/2022} with $1\mapsto[\infty]$.
+
+so we get
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & {H^2(G,E(C_E)^\times/E^\times)} \arrow[r]  & {H^2(G,\Div(C_E))} \arrow[r]                                         & {H^2(G,\mathbb Z)} \arrow[r]                              & 0 \\
+0 \arrow[r] & {H^2(G,E(C_E)^\times)} \arrow[u] \arrow[r] & {\bigoplus H^1(G_y,\mathbb Q\mathbb Z)} \arrow[u, "\cong"] \arrow[r] & {H^1(G,\mathbb Q/\mathbb Z)} \arrow[r] \arrow[u, "\cong"] & 0
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\begin{lemma}
+For any curve $C/k$ as the in the set up
+\[
+H^2(G,E(C_E)^\times)\cong H^2(\Gal(E(C_E)/k(C)),E(C_E)^\times)\cong\Br(E(C_E)/k(C))
+\]
+Moreover, if $k$ is perfect
+\[
+\Br(k(C))=\varinjlim_{E/k\text{ finite Galois}}\Br(E(C_E)/k(C))=\varinjlim_{E/k\text{ finite Galois}}H^2(\Gal(E(C_E)/k(C)),E(C_E)^\times)
+\]
+\end{lemma}
+
+\begin{proof}
+The restriction
+\[
+\Gal(E(C_E)/k(C))\to\Gal(E/k), \varphi\mapsto\varphi|_E
+\]
+is an isomorphism. This gives the first part. Suppose $k<E<F$ are all finite Galois, then we have inclusion
+\[
+\Br(E(C_E)/k(C))\to\Br(F(C_F)/k(C))
+\]
+And all these map to $\Br(k(C))$, surjective since any CSA/$k$, say $A$ is split over $\bar k(C_{\bar k})$ by Tsen's theorem~\ref{}. This proves the moreover part
+\end{proof}
+
+\begin{example}
+$\Br(\mathbb F_3(t))\neq0$, Take $k=\mathbb F_3$, $E=\mathbb F_{27}$, $C=\mathbb P^1_k$, we get split exact sequence
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & \Br(\mathbb F_{27}(t)/\mathbb F_3(t)) \arrow[r] & {\bigoplus H^1(G_y,\mathbb Q/\mathbb Z)} \arrow[r] & {H^1(G,\mathbb Q/\mathbb Z)} \arrow[r] \arrow[l, bend left] & 0
+\end{tikzcd}
+\end{center}
+So $\Br(\mathbb F_{27}(t)/\mathbb F_3(t))\cong\bigoplus_{x\in\mathbb A^1_k}H^1(G_y,\mathbb Q/\mathbb Z)=\bigoplus_{x\in\mathbb A^1_k,y^3-y-1\text{ doesn't split in }k(x)}\mathbb Z/3\mathbb Z$
+
+For every point $x\in \mathbb A^1_k$ with $k(x)=\mathbb F_3$, the local ring $\mathcal O_{\mathbb A^1,x}$ can be completed to $\widehat{\mathcal O_{\mathbb A^1,x}}$ with fraction field $\mathbb F_3((\lambda))$, where $\lambda$ is a uniformizer of $\mathcal O_{\mathbb A^1,x}$, the map $O_{\mathbb A^1,x}\to\widehat{O_{\mathbb A^1,x}}$ induces $F(t)\to F((\lambda))$, giving $\Br(\mathbb F_{27}(t)/\mathbb F_3(t))\to\Br(\mathbb F_{27}((\lambda))/\mathbb F_3((\lambda)))\cong \mathbb Z/3\mathbb Z$
+\end{example}
+
+\end{document}

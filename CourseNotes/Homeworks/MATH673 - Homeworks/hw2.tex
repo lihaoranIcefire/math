@@ -1,0 +1,99 @@
+\documentclass[12pt]{article}
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+%\usepackage{bbold}
+\usepackage{dsfont}
+\usepackage{bbm}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\title{MATH673 homework2}
+\author{Haoran Li}
+\date{}
+
+\setlength{\parindent}{0cm}
+
+\begin{document}
+
+\maketitle
+\textbf{2.5.13} \par
+\textbf{(a)} \par
+We have $u_{t}=-\dfrac{x}{2t^{\frac{3}{2}}}v'$ and $u_{xx}=\dfrac{1}{t}v''$, thus $u_{t}-u_{xx}=0 \Leftrightarrow -\dfrac{x}{2t^{\frac{3}{2}}}v'-\dfrac{1}{t}v''=0 \Leftrightarrow v''+\dfrac{z}{2}v'=0$ \par
+Multiply $e^{\frac{z^{2}}{4}}$ on both sides, we get $e^{\frac{z^{2}}{4}}v''+\dfrac{ze^{\frac{z^{2}}{4}}}{2}v'=\left(e^{\frac{z^{2}}{4}}v'\right)'=0$, Thus $e^{\frac{z^{2}}{4}}v'=c$ for some constant $c$, $v'=ce^{-\frac{z^{2}}{4}} \Rightarrow \displaystyle v=c\int_{0}^{z}e^{-\frac{s^{2}}{4}}ds+d$ for some other constant $d$ \par
+\textbf{(b)} \par
+According to (a), we have $u(x,t)=\displaystyle c\int_{0}^{\frac{x}{\sqrt{t}}}e^{-\frac{s^{2}}{4}}ds+d$, thus $u_{x}=\dfrac{c}{\sqrt{t}}e^{-\frac{x^{2}}{4t}}$, which again solve the heat equation, in order to obtain a fundamental solution, we also need $\lim_{t\downarrow 0}u_x(x,t)=u_x(x,0)=\delta_0$, thus we should have $1=\displaystyle \int_\mathbb{R}u_x(x,0)dx=\int_\mathbb{R}\lim_{t\downarrow 0}u_x(x,t)dx=\lim_{t\downarrow 0}\int_\mathbb{R}u_x(x,t)dx=\lim_{t\downarrow 0}\int_\mathbb{R}\dfrac{c}{\sqrt{t}}e^{-\frac{x^{2}}{4t}}dx=2c\sqrt{\pi}\Rightarrow \, c=\dfrac{1}{\sqrt{4\pi}}$ \par
+
+\textbf{2.5.14} \par
+Consider $v=ue^{ct}$, we have $v_{t}-\Delta v=e^{ct}\left(u_{t}-\Delta u+cu\right)$, thus the initial value problem becomes \par
+\[
+\left\{\begin{matrix}
+v_{t}-\Delta v=fe^{ct},\,\text{in}\,\mathbb{R}^{n}\times(0,\infty)\\ 
+v=g,\,\text{on}\,\mathbb{R}^{n}\times\{t=0\}
+\end{matrix}\right.
+\]
+Solve it to get
+\[
+v(x,t)=\int_{\mathbb{R}^n}\Phi(x-y,t)g(y)dy + \int_0^t\int_{\mathbb{R}^n}\Phi(x-y,t-s)f(y,s)e^{cs}dyds
+\]
+Thus
+\[
+u(x,t)=\int_{\mathbb{R}^n}\Phi(x-y,t)g(y)e^{-ct}dy + \int_0^t\int_{\mathbb{R}^n}\Phi(x-y,t-s)f(y,s)e^{-c(t-s)}dyds
+\]
+\textbf{January 2013, Problem 4} \par
+\textbf{(a)} \par
+Since $\displaystyle u(x,t)=\int_0^xu_x(y,t)dy+u(0,t)=\int_0^xu_x(y,t)dy$
+$$\displaystyle |u(x,t)|^2=\left|\int_0^xu_x(y,t)dy\right|^2\leq\left(\int_0^1|u_x(y,t)|dy\right)^2\leq \left(\int_0^1|u_x(y,t)|^2dy\right)\left(\int_0^11^2dy\right)=\int_0^1|u_x(y,t)|^2dy$$
+Hence $\displaystyle\sup_x|u(x,t)|^2\leq\int_0^1|u_x(y,t)|^2dy$ \par
+Then we have
+\[
+\begin{aligned}
+\int_0^1u^3dx&\leq\int_0^1|u^3|dx\leq \left(\int_0^1|u_x|^2dx\right)\int_0^1|u|dx \\
+&\leq \left(\int_0^1|u_x|^2dx\right)\left(\int_0^1|u|^2dx\right)^\frac{1}{2}\left(\int_0^11^2dy\right)^\frac{1}{2} \\
+&=\left(\int_0^1|u_x|^2dx\right)\left(\int_0^1|u|^2dx\right)^\frac{1}{2}
+\end{aligned}
+\]
+Since $u$ is smooth, we have
+\[
+\begin{aligned}
+\dfrac{d}{dt}\int_0^1|u|^2dx&=\int_0^1\dfrac{d}{dt}u^2dx=\int_0^12uu_tdx=2\int_0^1u(u_{xx}+cu^2)dx \\
+&=2uu_{xx}|_0^1-2\int_0^1|u_x|^2dx+2c\int_0^1u^3dx \\
+&\leq -2\int_0^1|u_x|^2dx+2c\left(\int_0^1|u_x|^2dx\right)\left(\int_0^1|u|^2dx\right)^\frac{1}{2} \\
+&=-2\left(\int_0^1|u_x|^2dx\right)\left(1-c\left(\int_0^1|u|^2dx\right)^\frac{1}{2}\right)
+\end{aligned}
+\]
+\textbf{(b)} \par
+Since $u$ is smooth, so is $F(t):=\displaystyle\left(\int_0^1|u|^2dx\right)^\frac{1}{2}$, suppose $\exists t_0\in (0,\infty)$ such that $F(t_0)\geq \dfrac{1}{c^2}$, then $\varnothing\neq S:=\left\{t\in[0,t_0]\left|\right.F(t)=\dfrac{1}{c^2}\right\}$ is closed, let $0<t_1=\min_{t\in S}t$, then we have $F(t_1)=\dfrac{1}{c^2}$ and $F(t)<\dfrac{1}{c^2}$ for $t\in[0,t_1)$, using intermediate value theorem, we have $0<F(t_1)-F(0)=F'(\xi)t_1$, where $\xi\in(0,t_1)$, but according to (a), we have $\displaystyle F'(\xi)\leq -2\left(\int_0^1|u_x|^2dx\right)\left(1-cF(\xi)^\frac{1}{2}\right)\leq0$ which leads to a contradiction \par
+\textbf{January 2012, Problem 2} \par
+\textbf{(a)} \par
+This is equivalent to solve ODE $
+\left\{\begin{matrix}
+w'+w^{3}=0,\,t>0\\ 
+w(0)=c
+\end{matrix}\right.
+$, thus $w(t)=\dfrac{1}{\sqrt{2t+\frac{1}{c^{2}}}}$ \par
+\textbf{(b)} \par
+Assume otherwise, then $\exists (t_0,x_0)\in (0,\infty)\times (0,1)$ such that $(w-u)(t_0,x_0)<0$, suppose $w-u$ must attain the minimum of $[0,t_0]\times [0,1]$ at $(t_1,x_1)$, then $(w-u)(t_1,x_1)<0$, thus $0\leq w(t_1.x_1)<u(t_1.x_1)$, hence $w^3(t_1.x_1)<u^3(t_1.x_1)$, then we would have $0<u^3(t_1.x_1)-w^3(t_1.x_1)=(\frac{\partial}{\partial t}-\Delta)(w-u)(t_1,x_1)\geq 0$ which is a contradiction, hence $u(t,x)\leq \dfrac{1}{\sqrt{2t+\frac{1}{c^{2}}}}$ on $[0,\infty)\times[0,1]$ \par
+\textbf{August 2011, Problem 3} \par
+\textbf{(a)} \par
+Assume $\exists (x_0,t_0)\in\Omega\times(0,\infty)$ such that $u(x_0,t_0)<0$, suppose $u(x_1,t_1)=\min_{\bar{\Omega}_{t_0}}u<0$, since $|f'|\leq K$, $\displaystyle f(x)=\int_0^xf'dy\leq\int_0^xKdy=Kx$ if $x\geq0$, or $f(x)\geq Kx$ if $x<0$ \par
+let $K_1>K$, then $
+0\geq\left(\dfrac{\partial}{\partial t}-\Delta\right)\left(ue^{-K_1t}\right)
+=e^{-K_1t}\left[\left(\dfrac{\partial}{\partial t}-\Delta\right)u-K_1u\right] 
+=e^{-K_1t}\left[f(u)-K_1u\right]
+=e^{-K_1t}\displaystyle\int_u^0\left[K_1-f'\right]dx>0$ at $(x_1,t_1)$ which is a contradiction \par
+\textbf{(b)} \par
+Assume $\exists (x_0,t_0)\in\Omega\times(0,\infty)$ such that $u(x_0,t_0)>Me^{Kt_0}\Rightarrow u(x_0,t_0)e^{-K_1t_0}>M$ for some $K_1>K$, suppose $u(x_1,t_1)e^{-K_1t_1}=\max_{\bar{\Omega}_{t_0}}ue^{-K_1t}>0$ \par
+$0\leq\left(\dfrac{\partial}{\partial t}-\Delta\right)\left(ue^{-K_1t}\right)
+=e^{-K_1t}\left[f(u)-K_1u\right]=e^{-K_1t}\displaystyle\int_0^u\left[f'-K_1\right]dx<0 $ at $(x_1,t_1)$ which is a contradiction \par
+\textbf{August 2005, Problem 6} \par
+Suppose $|f'|<K$, $u,w$ are both solutions, then $(u-w)e^{Kt}=0$ on $\Omega\times\{0\}\cup\partial\Omega\times(0,\infty)$, Assume $\exists (x_0,t_0)\in\Omega\times(0,\infty)$ such that $(u-w)(x_0,t_0)e^{Kt_0}<0$, suppose $(u-w)(x_1,t_1)e^{-Kt_1}=\min_{\bar{\Omega}_{t_0}}(u-w)e^{Kt}<0$, the we have
+ $
+0\geq\left(\dfrac{\partial}{\partial t}-\Delta\right)\left((u-w)e^{Kt}\right)
+=e^{-Kt}\left[\left(f(w)-f(u)\right)+K(u-w)\right]
+=e^{-Kt}\displaystyle\int_u^w\left[f'+K\right]dx>0 $ at $(x_1,t_1)$, which is a contradiction
+
+\end{document}

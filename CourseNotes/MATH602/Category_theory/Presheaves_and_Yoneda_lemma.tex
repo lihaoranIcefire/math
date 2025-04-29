@@ -1,0 +1,140 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+Suppose $\mathscr C$, $\mathscr D$ are categories, we can define the \textbf{functor category}\index{Functor category} $\mathrm{Fun}(\mathscr C,\mathscr D)=\mathscr D^{\mathscr C}$ with objects functors from $\mathscr C$ to $\mathscr D$ and morphisms natural transformations
+\end{definition}
+
+\begin{remark}
+If $I$ is a small category, then $Hom_{\mathscr C^I}(F,G)$ is a set
+\end{remark}
+
+\begin{definition}
+we say categories $\mathscr C,\mathscr D$ are \textbf{isomorphic}\index{Isomorphic category} if there are functors $F:\mathscr C\to\mathscr D$ and $G:\mathscr D\to\mathscr C$ such that $G\circ F=1_\mathscr{C}$, $F\circ G=1_\mathscr{D}$ and we say $\mathscr C,\mathscr D$ are \textbf{equivalent}\index{Equivalent category} if $G\circ F$ is naturally isomorphic to $1_\mathscr{C}$ and $F\circ G$ is naturally isomorphic to $1_\mathscr{D}$
+\end{definition}
+
+\begin{example}
+Let $\mathscr C=Vect_K$ be te category of $K$ vector spaces, define functor $F:\mathscr C\to\mathscr C$, $V\mapsto V\otimes_KK$ is an equivalence with inverse $G=1_{\mathscr C}$, but this is not an isomorphism, since not every vector space is in the form of a tensor product
+\end{example}
+
+\begin{definition}
+Suppose $\mathscr C,\mathscr D$ are locally small categories, $F:\mathscr C\to\mathscr D$ is a functor \par
+$F$ is \textbf{faithful}\index{Faithful functor} if $Hom_{\mathscr C}(X,Y)\to Hom_{\mathscr D}(F(X),F(Y))$ is injective for any $X,Y$ \par
+$F$ is \textbf{full}\index{Full functor} if $Hom_{\mathscr C}(X,Y)\to Hom_{\mathscr D}(F(X),F(Y))$ is surjective for any $X,Y$ \par
+$F$ is \textbf{fully faithful} if $Hom_{\mathscr C}(X,Y)\to Hom_{\mathscr D}(F(X),F(Y))$ is bijective for any $X,Y$ \par
+$F$ is \textbf{essentially surjective}\index{Essentially surjective} if $\forall d\in ob\mathscr D$, $\exists c\in ob\mathscr C$ such that $Fc\cong d$
+\end{definition}
+
+\begin{lemma}\label{X1,X2 iso and Y1,Y2 iso implies Hom(X1,Y1),Hom(X2,Y2) iso}
+In category $\mathscr C$, if $\phi_X:X\to X'$, $\phi_Y:Y\to Y'$ are isomorphisms, then $Hom(X,Y)$, $Hom(X',Y')$ are in bijective correspondence
+\end{lemma}
+
+\begin{proof}
+We can define maps $Hom(X,Y)\to Hom(X',Y')$, $f\mapsto\phi_Y f\phi_X^{-1}$ and $Hom(X',Y')\to Hom(X,Y)$, $f'\mapsto\phi_Y^{-1}f'\phi_X$ which are inverses to each other
+\begin{center}
+\begin{tikzcd}
+X \arrow[r, "f"] \arrow[d, "\phi_X"'] & Y \arrow[d, "\phi_Y"] \\
+X' \arrow[r, "f'"]                  & Y'                 
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\begin{theorem}\label{A functor F is an equivalence iff it is fully faithful and essentially surjective}
+A functor $F:\mathscr C\to\mathscr D$ is an equivalence iff it is fully faithful and essentially surjective
+\end{theorem}
+
+\begin{proof}
+If $F$ is an equivalence, there exist functor $G:\mathscr D\to \mathscr C$ and natural isomorphisms $\eta:1_{\mathscr C}\to GF$,  $\xi:1_{\mathscr D}\to FG$, $\forall d\in\mathscr C$, $\xi_d:d=1_{\mathscr D}(d)\to FG(d)=F(Gd)$ is an isomorphism, i.e. $F$ is essentially surjective, similarly, so is $G$ \par
+The composition of 
+\[Hom(c,c')\xrightarrow{F} Hom(Fc,Fc')\xrightarrow{G} Hom(GFc,GFc'),\quad f\mapsto Ff\mapsto GFf\]
+Is the same as
+\[Hom(c,c')\xrightarrow{\eta} Hom(GFc,GFc'),\quad f\mapsto\eta_{c}'f\eta_c^{-1}\]
+By Lemma \ref{X1,X2 iso and Y1,Y2 iso implies Hom(X1,Y1),Hom(X2,Y2) iso}, this is bijective, thus $Hom(c,c')\xrightarrow{F} Hom(Fc,Fc')$ is injective, i.e. $F$ is faithful. Similarly, consider the composition
+\[Hom(Fc,Fc')\xrightarrow{G} Hom(GFc,GFc')\xrightarrow{F} Hom(FGFc,FGFc')\]
+We know $Hom(GFc,GFc')\xrightarrow{F} Hom(FGFc,FGFc')$ is surjective, but we also have the following diagram
+\begin{center}
+\begin{tikzcd}
+{Hom(c,c')} \arrow[r, "F"] \arrow[d, "\eta"'] & {Hom(Fc,Fc')} \arrow[d, "\xi"] \\
+{Hom(GFc,GFc')} \arrow[r, "F"]                & {Hom(FGFc,FGFc')}             
+\end{tikzcd}
+\end{center}
+Since $\eta,\xi$ are bijective, $Hom(c,c')\xrightarrow{F} Hom(Fc,Fc')$ is surjective, i.e. $F$ is full \par
+Conversely, suppose $F$ is fully faithful and essentially surjective, then for any $d\in\mathscr D$, there exists $c$ and an isomorphism $d\xrightarrow{\xi_d} Fc$, denote this $c$ as $Gd$, we can define a functor $G:\mathscr D\to\mathscr C$, $d\mapsto Gd$(Here we have used the axiom of choice), $d\xrightarrow{f}d'\mapsto c\xrightarrow{Gf}c'$ where $FGf=\xi_d^{-1}f\xi_{d'}$ since $F$ is fully faithful
+\begin{center}
+\begin{tikzcd}
+d \arrow[d, "\xi_d"'] \arrow[r, "f"] & d' \arrow[d, "\xi_{d'}"] \\
+FGd \arrow[r, "FGf"]                 & FGd'                     \\
+Gd \arrow[u, "F"] \arrow[r, "Gf"]    & Gd' \arrow[u, "F"']     
+\end{tikzcd}
+\end{center}
+$\xi:1_{\mathscr D}\to FG$ is a natural isomorphism \par
+Since $F$ is fully faithful, there are unique $\eta_c:c\to GFc$, $F(\eta_c)=\xi_{Fc}$ \par
+If $f,g:c\to c'$ such that $\eta_{c'}f=\eta_{c'}g$, then $\xi_{Fc'}Ff=\xi_{Fc'}Fg\Rightarrow Ff=Fg\Rightarrow f=g$ \par
+If $f,g:c\to c'$ such that $f\eta_{c}=g\eta_{c}$, then $Ff\xi_{Fc}=Fg\xi_{Fc}\Rightarrow Ff=Fg\Rightarrow f=g$
+\begin{center}
+\begin{tikzcd}
+c \arrow[d] \arrow[r] \arrow[dd, "\eta_{c}"', bend right=49]        & c' \arrow[d] \arrow[dd, "\eta_{c'}", bend left=49]       \\
+Fc \arrow[d, "G"'] \arrow[r] \arrow[dd, "\xi_{Fc}"', bend right=49] & Fc' \arrow[d, "G"] \arrow[dd, "\xi_{Fc'}", bend left=49] \\
+GFc \arrow[d, "F"'] \arrow[r]                                       & GFc' \arrow[d, "F"]                                      \\
+FGFc \arrow[r]                                                      & FGFc'                                                   
+\end{tikzcd}
+\end{center}
+$\eta:1_{\mathscr C}\to GF$ is a natural isomorphism
+\end{proof}
+
+\begin{definition}
+$\mathscr D^{\mathscr C^{op}}$ is the category of \textbf{presheaves}\index{Presheaf}. Denote $\mathscr C^{\vee}:= Sets^{\mathscr C^{op}}$. In particular, if $X$ is a topological space, open subsets with inclusion form a category $\mathscr C$, $PreSh(X,\mathscr D)$ is the category of presheaves on $X$ with values in $\mathscr D$
+\end{definition}
+
+\begin{lemma}[Yoneda lemma]\label{Yoneda lemma}
+\textbf{Yoneda embedding}\index{Yoneda embedding} $h:\mathscr C\to\mathscr C^\vee$ defined as follows is a fully faithful functor \par
+For $X\in ob\mathscr C$, $h(X)=Hom_{\mathscr C}(-,X)$ is a contravariant functor $\mathscr C\to Sets$: \par
+For $Z\in ob\mathscr C$, $h(X)(Z)=Hom_{\mathscr C}(Z,X)$, for $\phi:Z\to W$, $h(X)(\phi)=\phi^*:h(X)(W)=Hom_{\mathscr C}(W,X)\to Hom_{\mathscr C}(Z,X)=h(X)(Z)$, hence $h(X)$ is an object in $\mathscr C^\vee$ \par
+For $\psi:X\to Y$, $h(\psi)=\psi_*$ is a natural transformation $h(X)\to h(Y)$: \par
+For $\phi:Z\to W$, we have the commutative diagram
+\begin{center}
+\begin{tikzcd}
+{Hom_{\mathscr C}(W,X)} \arrow[r, "\psi_*"] \arrow[d, "\phi_*"'] & {Hom_{\mathscr C}(W,Y)} \arrow[d, "\phi_*"] \\
+{Hom_{\mathscr C}(Z,X)} \arrow[r, "\psi_*"]                      & {Hom_{\mathscr C}(Z,Y)}                    
+\end{tikzcd}
+\begin{tikzcd}
+h(X)(W) \arrow[r, "h(\psi)_W"] \arrow[d, "h(Y)(\phi)"'] & h(Y)(W) \arrow[d, "h(Y)(\phi)"] \\
+h(X)(Z) \arrow[r, "h(\psi)_Z"]                          & h(X)(Z)                        
+\end{tikzcd}
+\end{center}
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+A \textbf{subcategory}\index{Subcategory} $\mathscr D$ of $\mathscr C$ is a category with objects a subclass of $ob\mathscr C$ and morphisms a subclass of $Hom\mathscr C$, with the original composition
+\end{definition}
+
+\begin{example}
+The image of a functor is not necessarily a category \par
+Consider the following categories $\mathscr C$ and $\mathscr D$
+\begin{center}
+\begin{tikzcd}
+A \arrow[r, "f"] \arrow["1_A"', loop, distance=2em, in=125, out=55] & B \arrow["1_B"', loop, distance=2em, in=125, out=55] & C \arrow[r, "g"] \arrow["1_C"', loop, distance=2em, in=125, out=55] & D \arrow["1_D"', loop, distance=2em, in=125, out=55]
+\end{tikzcd}
+\end{center}
+\begin{center}
+\begin{tikzcd}
+E \arrow[r, "h"] \arrow["1_E"', loop, distance=2em, in=125, out=55] \arrow[rr, "ih", bend right] & F \arrow["1_F"', loop, distance=2em, in=125, out=55] \arrow[r, "i"] & G \arrow["1_G"', loop, distance=2em, in=125, out=55]
+\end{tikzcd}
+\end{center}
+Consider functor $F:\mathscr C\to\mathscr D$, $F(A)=E$, $F(B)=F$, $F(C)=F$, $F(D)=G$, $F(f)=h$, $F(g)=i$
+\end{example}
+
+\begin{theorem}
+A functor $F:\mathscr C\to\mathscr D$ is fully faithful iff it induces an equivalence of categories from $\mathscr C$ to a full subcategory of $\mathscr D$
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,283 @@
+\documentclass{article}
+
+\usepackage[a4paper, total={6in, 9in}]{geometry} %page size and margins
+% \usepackage[math]{anttor}
+\usepackage{ccfonts}
+\usepackage{fontspec}
+\usepackage{imakeidx}
+\usepackage{hyperref}
+\hypersetup{
+colorlinks = true, %Allow color links
+linkcolor = blue, %Setup the color for the links
+citecolor = black, %Choose the color for citation
+}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{pgfplots} % drawing axis, addplots
+\pgfplotsset{compat=newest} % ensure position and scaling compatibility
+\usetikzlibrary{intersections} % handle intersections 
+\usetikzlibrary{calc} % using calculations in tikz
+\usepackage{tikz-cd}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\def\CROP{0}
+
+\title{MATH602 - HW4}
+\author{Haoran Li}
+\date{}
+
+\setlength{\parindent}{0pt}
+
+\makeindex[columns=2, title=Index, intoc] % Create the index
+
+\begin{document}\sloppy % reduce overlong words
+
+\maketitle
+\begin{exercise}{\textbf{2.1.2}}
+If $F:\mathscr A\to\mathscr B$ is an exact functor, show that $T_0=F$ and $T_n=0$ for $n\neq0$ defines a universal $\delta$-functor(of both homological and cohomological type)
+\end{exercise}
+
+\begin{proof}
+Since $F$ is exact, for any short exact sequence $0\to A\xrightarrow{f} B\xrightarrow{g} C\to0$, we get another short exact sequence $0\to F(A)\to F(B)\to F(C)\to0$, we can view this as a long exact sequence with $\delta=0$, thus $T$ is both a homological and cohomological $\delta$ functor \par
+Suppose $S_n$ is another homological or cohomological $\delta$ functor, $S_0\xrightarrow{\phi}F$, $S^0\xrightarrow{\psi}F$, then we have
+\begin{center}
+\begin{tikzcd}
+S_1C \arrow[r, "\delta_1"] \arrow[d] & S_0A \arrow[r, "S_0f"] \arrow[d, "\phi"] & S_0B \arrow[r] \arrow[d, "\phi"] & S_0C \arrow[r] \arrow[d] & 0 \\
+0 \arrow[r]                          & FA \arrow[r, "Ff"]                       & FB \arrow[r]                     & FC \arrow[r]             & 0
+\end{tikzcd}
+\begin{tikzcd}
+0 \arrow[r] & FA \arrow[d] \arrow[r] & FB \arrow[d, "\psi"'] \arrow[r, "Fg"] & FC \arrow[d, "\psi"'] \arrow[r] & 0 \arrow[d] \\
+0 \arrow[r] & S^0A \arrow[r]         & S^0B \arrow[r, "S^0g"]                & S^0C \arrow[r, "\delta^0"]      & S^1A       
+\end{tikzcd}
+\end{center}
+$0=\phi S_0f\delta_1=Ff\phi\delta_1$ and $Ff$ is monic $\Rightarrow$ $\phi\delta_1=0$. $0=\delta^0S^0g\psi=\delta^0\psi Fg$ and $Fg$ is epi $\Rightarrow$ $\delta^0\psi=0$. Thus $T$ is both a universal homological and cohomological $\delta$ functor
+\end{proof}
+
+\begin{exercise}{\textbf{2.2.1}}
+Show that a chain complex $P$ is a projective object in $Ch$ if and only if it is a split exact complex of projectives. Hint: To see that $P$ must be split exact, consider the surjection from $cone(\mathrm{id}_P)$ to $P[-1]$. To see that split exact complexes are projective objects, consider the special case $0\to P_1\cong P_0\to0$
+\end{exercise}
+
+\begin{proof}
+Consider chain complex $C$ with $C_n=P_n\oplus P_{n+1}$
+\[\cdots\to P_n\oplus P_{n+1}\xrightarrow{\begin{pmatrix}
+\partial&0 \\
+1&-\partial
+\end{pmatrix}}P_{n-1}\oplus P_n\to\cdots\]
+and first coordinate projection \begin{tikzcd}C \arrow[r, two heads] & P\end{tikzcd} which is a surjection, if $P$ is projective, then there exists $s$ such that
+\begin{center}
+\begin{tikzcd}
+                       & P \arrow[ld, "s"'] \arrow[d, equal] \\
+C \arrow[r, two heads] & P                                                
+\end{tikzcd}
+\end{center}
+In order to make $s$ a chain map and the diagram commute, we must have $s:P_n\to C_n$, $x\to\begin{pmatrix}
+x \\
+s_nx
+\end{pmatrix}$ and
+\[\begin{pmatrix}
+\partial_nx \\
+s_{n-1}\partial_nx
+\end{pmatrix}=\begin{pmatrix}
+\partial_n&0 \\
+1&-\partial_{n+1}
+\end{pmatrix}\begin{pmatrix}
+x \\
+s_nx
+\end{pmatrix}=\begin{pmatrix}
+\partial_n x \\
+x-\partial_{n+1}s_nx
+\end{pmatrix}\]
+Hence $s_{n-1}\partial_n+\partial_{n+1}s_n=1$, i.e. $1$ is null homotopic, by Exercise 1.4.3, $P$ split exact.
+To prove $P_n$ are projectives, given
+\begin{center}
+\begin{tikzcd}
+                            & P_n \arrow[d, "g_n"] \\
+B \arrow[r, "f", two heads] & A                   
+\end{tikzcd}
+\end{center}
+consider the following commutative diagram with $g_{n+1}=g_n\partial_{n+1}$
+\begin{center}
+\begin{tikzcd}
+P_{n+2} \arrow[r, "\partial_{n+2}"] \arrow[d] & P_{n+1} \arrow[r, "\partial_{n+1}"] \arrow[d, "g_{n+1}"] & P_n \arrow[r, "\partial_n"] \arrow[d, "g_n"'] \arrow[dd, "h", dashed, bend left, near start] & P_{n-1} \arrow[d] \\
+0 \arrow[r]                                   & A \arrow[r,equal]                                              & A \arrow[r]                                                                      & 0                 \\
+0 \arrow[r] \arrow[u]                         & B \arrow[u, "f"', two heads] \arrow[r,equal]                   & B \arrow[u, "f", two heads] \arrow[r]                                            & 0 \arrow[u]      
+\end{tikzcd}
+\end{center}
+Since $P_\bullet$ is projective, there exists $h:P_n\to B$ such that $fh=g_n$ \par
+Conversely, suppose $P$ is a split exact sequence of projectives, by Exercise 1.4.2, there exist bijection $s_n:Z_n=B_n\to B_{n+1}'$ and $P_n\cong B_n\oplus B'_n$, thus $P$ is the direct sum of $0\to B'_{n+1}\to B_n\to0$, and we know the coproducts of projectives are projective, it suffices to consider $0\to P_1\xrightarrow{\cong}P_0\to 0$. Since $\psi_1$ is epi and $P_1$ is projective, there exists $P_1\xrightarrow{\phi_1}B_1$ such that $\xi_1=\psi_1\phi_1$, let $\phi_0=b_1\phi_1p_1^{-1}$, then $\xi_0=a_1\xi_1p_1^{-1}=a_1\psi_1\phi_1p_1^{-1}=\psi_0b_1\phi_1p_1^{-1}=\psi_0\phi_0$ and $b_0\phi_0=b_0b_1\phi_1p_1^{-1}=0$
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] \arrow[d]                         & P_1 \arrow[r,"p_1", "\cong"'] \arrow[d, "\phi_1", dashed] \arrow[dd, "\xi_1"',near end, bend right=40] & P_0 \arrow[r] \arrow[d, "\phi_0"', dashed] \arrow[dd, "\xi_0", near end, bend left=40] & 0 \arrow[d]                              \\
+B_2 \arrow[r] \arrow[d, "\psi_2"', two heads] & B_1 \arrow[r, "b_1"] \arrow[d, "\psi_1", two heads]                                     & B_0 \arrow[r, "b_0"] \arrow[d, "\psi_0"', two heads]                                          & B_{-1} \arrow[d, "\psi_{-1}", two heads] \\
+A_2 \arrow[r]                                 & A_1 \arrow[r, "a_1"]                                                                    & A_0 \arrow[r]                                                                          & A_{-1}                                  
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\begin{exercise}{\textbf{2.3.1}}
+Let $R=\mathbb Z/m$. Use Baer's criterion to show that $R$ is an injective $R$-module. Then show that $\mathbb Z/d$ is not an injective $R$-module when $d\mid m$ and some prime $p$ divides both $d$ and $m/d$.(The hypothesis ensures that $\mathbb Z/m\neq\mathbb Z/d\oplus\mathbb Z/e$)
+\end{exercise}
+
+\begin{proof}
+Any ideal of $R$ is of the form $I=\langle d\rangle$, $m=de$, if $f:I\to R$ is a homomorphism, then $m\mid ef(d)\Rightarrow d\mid f(d)$, thus we can extend $f:R\to R$, $1\mapsto\dfrac{f(d)}{d}$, $R$ is an injective $R$-module \par
+If $m=de$ but $\mathbb Z/m\mathbb Z\neq\mathbb Z/d\mathbb Z\oplus\mathbb Z/e\mathbb Z$, suppose $\mathbb Z/d\mathbb Z$ is injective, then we would have
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & \mathbb Z/d\mathbb Z\cong e\mathbb Z/m\mathbb Z \arrow[d,equal] \arrow[r, "i", hook] & \mathbb Z/m\mathbb Z \arrow[ld, "s", dashed] \arrow[r, two heads] & \mathbb Z/m\mathbb Z/\mathbb Z/d\mathbb Z\cong\mathbb Z/e\mathbb Z \arrow[r] & 0 \\
+            & \mathbb Z/d\mathbb Z                                                           &                                                                   &                                                                              &  
+\end{tikzcd}
+\end{center}
+Then the exact sequence split, $\mathbb Z/m\mathbb Z=\mathbb Z/d\mathbb Z\oplus\mathbb Z/e\mathbb Z$ which is a contradiction
+\end{proof}
+
+\begin{exercise}{\textbf{2.4.2}}(Preserving derived functors)
+If $U:\mathscr B\to\mathscr C$ is an exact functor, show that $U(L_iF)\cong L_i(UF)$
+\end{exercise}
+
+\begin{remark}
+Forgetful functors such as $\mathrm{mod}$-$R\to Ab$ are often exact, and it is often easier to compute the derived functor of $UF$ due to the absence of cluttering restrictions
+\end{remark}
+
+\begin{proof}
+For any chain complex $C$ and exact functor $U$, we have
+\begin{center}
+\begin{tikzcd}
+                                        & UB_{n-1} \arrow[r, hook]                  & UZ_{n-1} \arrow[d, hook] \\
+UC_{n+1} \arrow[d, two heads] \arrow[r] & UC_n \arrow[u, two heads] \arrow[r]       & UC_{n-1}                 \\
+UB_n \arrow[r, hook]                    & UZ_n \arrow[u, hook] \arrow[r, two heads] & UH_n                    
+\end{tikzcd}
+\end{center}
+Then $U(H_nC)=\mathrm{coker}(UB_n\to FZ_n)=H_n(UC)$ are naturally isomorphic, hence $U(L_iF(A))=U(H_i(F(P)))=H_i(UF(P))=L_i(UF(P))$ are naturally isomorphic
+\end{proof}
+
+\begin{exercise}{\textbf{2.4.3}}(Dimension shifting)
+If $0\to M\to P\to A\to0$ is exact with $P$ projective(or $F$-acyclic 2.4.3), show that $L_iF(A)\cong L_{i-1}F(M)$ for $i\geq2$ and that $L_1F(A)$ is the kernel of $F(M)\to F(P)$. More generally, show that if
+\[0\to M_m\to P_m\to P_{m-1}\to\cdots\to P_0\to A\to0\]
+is exact with the $P_i$ projective(or $F$-acyclic), then $L_iF(A)\cong L_{i-m-1}F(M_m)$ for $i\geq m+2$ and $L_{m+1}F(A)$ is the kernel of $F(M_m)\to F(P_m)$. Conclude that if $P\to A$ is an $F$-acyclic resolution of $A$, then $L_iF(A)=H_i(F(P))$
+\end{exercise}
+
+\begin{remark}
+The object $M_m$, which obviously depends on the choices made, is called $m^{\mathrm{th}}$ syzygy of $A$. The word "syzygy" comes from astronomy, where it was originally used to describe the alignment of the Sun, Earth, and Moon
+\end{remark}
+
+\begin{proof}
+We have long exact sequence
+\[L_iF(P)\to L_iF(A)\to L_{i-1}F(M)\to L_{i-1}F(P)\to\cdots\to L_1F(P)\to L_1F(A)\to F(M)\to F(P)\]
+Here $L_iF(P)=0$ for $i\neq0$ since $P$ is $F$-acyclic, hence $L_iF(A)\cong L_{i-1}F(M)$ for $i\geq2$ and $L_1F(A)$ is the kernel of $F(M)\to F(P)$ \par
+Suppose $M_m=\mathrm{im}(P_{m+1}\to P_m)=\ker(P_m\to P_{m-1})$, $M_{-1}=A$, we have
+\begin{center}
+% \begin{tikzcd}
+% \cdots \arrow[r] & M_m \arrow[r]     & P_m \arrow[r]     & M_{m-1} \arrow[d,equal] \\
+%                  & M_{m-2} \arrow[d] & P_{m-1} \arrow[l] & M_{m-1}\arrow[l] \\
+%                  & \vdots \arrow[d]     &                      &                      \\
+%                  & M_1 \arrow[r]     & P_1 \arrow[r]     & M_0 \arrow[d,equal]     \\
+% 0                & A \arrow[l]       & P_0 \arrow[l]     & M_0 \arrow[l]    
+% \end{tikzcd}
+\begin{tikzcd}
+                 &                             &                          & 0 \arrow[d]                 & 0                &                         &                          & 0 \arrow[d]              & 0 \\
+                 &                             &                          & M_{m-1} \arrow[d] \arrow[ru]    &                  &                         &                          & M_0 \arrow[d] \arrow[ru] &   \\
+\cdots \arrow[r] & P_{m+1} \arrow[r] \arrow[d] & P_m \arrow[r] \arrow[ru] & P_{m-1} \arrow[r] \arrow[d] & \cdots \arrow[r] & P_2 \arrow[r] \arrow[d] & P_1 \arrow[r] \arrow[ru] & P_0 \arrow[d]            &   \\
+                 & M_{m} \arrow[ru]          &                          & M_{m-2} \arrow[d]           &                  & M_1 \arrow[ru]          &                          & A \arrow[d]              &   \\
+0 \arrow[ru]     &                             &                          & 0                           & 0 \arrow[ru]     &                         &                          & 0                        &  
+\end{tikzcd}
+\end{center}
+Then we can split this up into short exact sequences
+\[0\to M_m\to P_m\to M_{m-1}\to0\]
+Hence $L_iF(M_{m-1})\cong L_{i-1}F(M_m)$ for $i\geq2$ and $L_1F(M_{m-1})$ is the kernel of $F(M_m)\to F(P_m)$. This implies $L_iF(A)\cong L_{i-m-1}F(M_m)$ for $i\geq m+2$ and $L_{m+1}F(A)$ is the kernel of $F(M_m)\to F(P_m)$ \par
+Suppose $P\to A$ is an $F$-acyclic resolution of $A$, $L_0F(A)=F(A)=H_0(F(P))$ is still true because $F$ is right exact. For $m\geq1$, $F(M_{m-1})\cong\mathrm{coker}(F(M_{m})\to F(P_m))=\mathrm{coker}(F(P_{m+1})\to F(P_m))$, hence $L_{m}F(A)\cong\ker(F(M_{m-1})\to F(P_{m-1}))=\ker\mathrm{coker}(F(P_{m+1})\to F(P_m))=H_m(F(P))$
+\begin{center}
+\begin{tikzcd}
+             &                                 &                               & 0 \arrow[d]                   & 0 \\
+             &                                 &                               & F(M_{m-1}) \arrow[d] \arrow[ru] &   \\
+             & F(P_{m+1}) \arrow[r] \arrow[d]  & F(P_{m}) \arrow[r] \arrow[ru] & F(P_{m-1})                    &   \\
+             & F(M_{m}) \arrow[ru] \arrow[d] &                               &                               &   \\
+0 \arrow[ru] & 0                               &                               &                               &  
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\begin{exercise}{\textbf{2.4.4}}
+Show that homology $H_*:Ch_{\geq0}(\mathscr A)\to\mathscr A$ and cohomology $H^*:Ch^{\geq0}(\mathscr A)\to\mathscr A$ are universal $\delta$-functors. Hint: Copy the proof above, replacing $P$ by the mapping cone $cone(A)$ of exercise 1.5.1
+\end{exercise}
+
+\begin{proof}
+Suppose $T$ is a homological $\delta$ functor, $\phi_0:T_0\to H_0$ is given. From a short exact sequence $0\to A[1]\to cone(A[1])\to A\to 0$ we get a long exact sequence
+\[\cdots\to H_{n+1}(A)\to H_n(A[1])\to H_n(cone(A[1]))\to H_n(A)\to H_{n-1}(A[1])\to\cdots\]
+Since $H_n(A)=H_{n-1}(A[1])$, we have $H_n(cone(A[1]))=0$. $T_n$ induce a unique $T_{n+1}$ as follows
+\begin{center}
+\begin{tikzcd}
+            & T_{n+1}(A) \arrow[r] \arrow[d, "\phi_{n+1}", dashed] & {T_n(A[1])} \arrow[r] \arrow[d, "\phi_n"] & {T_n(cone(A[1]))} \arrow[d, "\phi_n"] \\
+0 \arrow[r] & H_{n+1}(A) \arrow[r]                                 & {H_n(A[1])} \arrow[r]                     & 0                            
+\end{tikzcd}
+\end{center}
+Check $\phi_n$'s are natural transformations. For $f:A\to B$, we have
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & {A[1]} \arrow[r] \arrow[d, "{f[1]}"] & {cone(A[1])} \arrow[r] \arrow[d, "{cone(f[1])}"] & A \arrow[r] \arrow[d, "f"] & 0 \\
+0 \arrow[r] & {B[1]} \arrow[r]                     & {cone(B[1])} \arrow[r]                           & B \arrow[r]                & 0
+\end{tikzcd}
+\end{center}
+Suppose $\phi_{n-1}T_{n-1}(f[-1])=H_{n-1}(f[-1])\phi_{n-1}$, $\delta_nT_n(f)=T_{n-1}(f[1])\delta_n$, $\delta_nH_n(f)=H_{n-1}(f[1])\delta_n$, $\delta_n\phi_n=\phi_{n-1}\delta_n$, then $\delta_n\phi_nT_n(f)=\phi_{n-1}\delta_nT_n(f)=\phi_{n-1}T_{n-1}(f[1])\delta_n=H_{n-1}(f[1])\phi_{n-1}\delta_n=H_{n-1}(f[1])\delta_n\phi_n=\delta_nH_n(f)\phi_n$, since $\delta_n$ is an isomorphism, $\phi_nT_n(f)=H_n(f)\phi_n$
+\begin{center}
+\begin{tikzcd}
+{T_{n-1}(A[1])} \arrow[ddd, "\phi_{n-1}"] \arrow[rrr, "{T_{n-1}(f[1])}"] &                                                                           &                                                     & {T_{n-1}(B[1])} \arrow[ddd, "\phi_{n-1}"] \\
+                                                                         & T_{n}(A) \arrow[r, "T_{n}(f)"] \arrow[d, "\phi_n"] \arrow[lu, "\delta_n"] & T_{n}(B) \arrow[d, "\phi_n"] \arrow[ru, "\delta_n"] &                                           \\
+                                                                         & H_{n}(A) \arrow[r, "H_{n}(f)"] \arrow[ld, "\delta_n"]                     & H_{n}(B) \arrow[rd, "\delta_n"]                     &                                           \\
+{H_{n-1}(A[1])} \arrow[rrr, "{H_{n-1}(f[1])}"]                           &                                                                           &                                                     & {H_{n-1}(B[1])}                          
+\end{tikzcd}
+\end{center}
+Check $\phi_n$'s commute with $\delta_n$'s. For any $f:A[1]\to C$, we can construct commutative diagram
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & A_{n+1} \arrow[r] \arrow[d, "f_{n}"] & A_{n}\oplus A_{n+1} \arrow[r] \arrow[d] & A_{n} \arrow[r] \arrow[d, equal] & 0 \\
+0 \arrow[r] & C_{n} \arrow[r]                      & C_{n}\oplus A_{n} \arrow[r]             & A_{n} \arrow[r]           & 0
+\end{tikzcd}
+\end{center}
+Since
+\begin{center}
+\begin{tikzcd}
+{T_n(A[1])} \arrow[r] \arrow[d, "T_n(f)"] & T_n(cone(A)) \arrow[r] \arrow[d] & T_n(A) \arrow[r, "\delta_n"] \arrow[d,equal] & {T_{n-1}(A[1])} \arrow[d, "T_{n-1}(f)"] \\
+T_n(C) \arrow[r]                          & T_n(C\oplus A) \arrow[r]         & T_n(A) \arrow[r, "\delta_n"]           & T_{n-1}(C)                             
+\end{tikzcd}
+\end{center}
+We have $T_{n-1}(f)\delta_n=\delta_n$. Hence
+\begin{center}
+\begin{tikzcd}
+T_n(A) \arrow[r, "\delta_n"] \arrow[d,"\phi_n"] & {T_{n-1}(A[1])} \arrow[d, "\phi_{n-1}"] \arrow[r] & T_{n-1}(C) \arrow[d, "\phi_{n-1}"] \\
+H_n(A) \arrow[r, "\delta_n"]           & {H_{n-1}(A[1])} \arrow[r]                         & H_{n-1}(C)                        
+\end{tikzcd}
+\end{center}
+Gives
+\begin{center}
+\begin{tikzcd}
+T_n(A) \arrow[r, "\delta_n"] \arrow[d, "\phi_{n}"] & T_{n-1}(C) \arrow[d, "\phi_{n-1}"] \\
+H_n(A) \arrow[r, "\delta_n"]                       & H_{n-1}(C)                        
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\end{document}

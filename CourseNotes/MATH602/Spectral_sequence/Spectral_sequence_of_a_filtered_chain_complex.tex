@@ -1,0 +1,52 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$C$ is a chain complex, $\cdots\subseteq F_{p-1}C\subseteq F_pC\subseteq F_{p+1}C\subseteq\cdots$ is a filtration of chain complexes. $FC$ is \textbf{exhaustive} if $\bigcup F_pC=C$. $FC$ is \textbf{Hausdorff} if $\bigcap F_pC=0$. $\widehat C=\varprojlim C/F_pC$ is the \textbf{completion}. $FC$ is \textbf{complete} if $\widehat C\cong C$, since $C\to\widehat C$ has kernel $\bigcap F_pC$, hence completeness implies Hausdorff. $FC$ is \textbf{bounded below} if $\forall n$, $F_pC_n=0$ for $p$ small enough. $FC$ is \textbf{bounded above} if $\forall n$, $F_pC_n=C_n$ for $p$ big enough. $FC$ is \textbf{bounded} if bounded below and above \par
+$F_pH_n(C)=\mathrm{im}(H_n(F_pC)\to H_n(C))$
+\end{definition}
+
+\begin{definition}
+$F_nC$ is a filtered chain complex, $E^0_{pq}=\dfrac{F_pC_{p+q}}{F_{p-1}C_{p+q}}$ defines a spectral sequence \par
+$E^1_{pq}$ \textbf{converges} to $H_*C$ if $E^1_{pq}=H_{p+q}(F_pC/F_{p-1}C)\Rightarrow H_{p+q}C$
+\end{definition}
+
+\begin{theorem}
+$A^r_p=\left\{x\in F_pC\middle|dx\in F_{p-r}C\right\}$, $Z_p^r=A_p^r+F_{p-1}C$, $B^r_p=dA^{r-1}_{p+r-1}+F_{p-1}C$, $A^r_p\cap F_{p-1}C=A^{r-1}_{p-1}$
+\begin{align*}
+E^r_p&=\frac{Z^r_p}{B^r_p}=\frac{A^r_p+F_{p-1}C}{dA^{r-1}_{p+r-1}+F_{p-1}C}=\frac{\dfrac{A^r_p+F_{p-1}C}{F_{p-1}C}}{\dfrac{dA^{r-1}_{p+r-1}+F_{p-1}C}{F_{p-1}C}}=\frac{\dfrac{A^r_p}{A^{r-1}_{p-1}}}{\dfrac{dA^{r-1}_{p+r-1}}{dA^{r-1}_{p+r-1}\cap F_{p-1}C}} \\
+&=\frac{\dfrac{A^r_p}{A^{r-1}_{p-1}}}{\dfrac{dA^{r-1}_{p+r-1}}{dA^{r-1}_{p+r-1}\cap A_{p-1}^{r-1}}}=\frac{\dfrac{A^r_p}{A^{r-1}_{p-1}}}{\dfrac{dA^{r-1}_{p+r-1}+A_{p-1}^{r-1}}{A_{p-1}^{r-1}}}=\frac{A^r_p}{dA^{r-1}_{p+r-1}+A_{p-1}^{r-1}}
+\end{align*}
+\end{theorem}
+
+\begin{lemma}
+$C$ and $\widehat C$ give the same spectral sequence
+\end{lemma}
+
+\begin{theorem}
+If $F_*C$ is bounded, then $E^1_{p,q}$ converges to $H_*C$ \par
+If $F_*C$ is bounded below and exhaustive, then $E^1_{p,q}$ converges to $H_*C$, the convergence is natural
+\end{theorem}
+
+\begin{theorem}
+$C$ is a complete filtration, then
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & \varprojlim\textstyle^1H_{n+1}(C/F_pC) \arrow[d,equals] \arrow[r] & H_n(C) \arrow[r] & H_n(C/F_pC) \arrow[r] \arrow[d,equals]        & 0 \\
+            & \bigcap F_pH_n(C)                                          &                  & \varprojlim H_n(C)/F_pH_n(C) \arrow[d,equals] &   \\
+            &                                                            &                  & H_*(C)/\bigcap F_pH_n(C)               &  
+\end{tikzcd}
+\end{center}
+\end{theorem}
+
+\begin{lemma}
+$F_*C$ is Hausdorff and exhaustive, then
+\begin{enumerate}[label=\arabic*., leftmargin=*]
+\item $A^\infty_{pq}=\ker(F_pC_{p+q}\xrightarrow dF_{p}C_{p+q-1})$
+\item $F_pH_{p+q}(C)\cong A^\infty/\bigcup dA^r_{p+r,q-r+1}$
+\item The subgroup $e^\infty_{pq}=A^\infty_{pq}+B^\infty_{pq}$ is isomorphic to $F_pH_{p+q}(C)/F_{p-1}H_{p+q}(C)$
+\end{enumerate}
+\end{lemma}
+
+\end{document}

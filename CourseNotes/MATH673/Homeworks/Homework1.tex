@@ -1,0 +1,168 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{customproblem}\textbf{2.5.3}
+Define $$\phi(r):=\dfrac{1}{|\partial B(0,r)|}\int_{\partial B(0,r)}u(x)dS+\int_{B(0,r)}\Phi(x)f(x)dx-\Phi(r)\int_{B(0,r)}f(x)dx $$Where $\Phi(x)=\dfrac{1}{n(n-2)|B(0,1)|}\dfrac{1}{|x|^{n-2}}$, then 
+\[
+\begin{aligned}
+\phi'(r)
+&= \dfrac{r}{n}\dfrac{1}{|B(0,r)|}\int_{B(0,r)}\Delta u(x)dx+ \int_{\partial B(0,r)}\Phi(x)f(x)dS \\
+&\quad -\Phi'(r)\int_{B(0,r)}f(x)dx-\Phi(r)\int_{\partial B(0,r)}f(x)dS \\
+&= -\dfrac{r}{n}\dfrac{1}{|B(0,r)|}\int_{B(0,r)}f(x)dx+\dfrac{r}{n}\dfrac{1}{|B(0,r)|}\int_{B(0,r)}f(x)dx \\
+&\quad +\int_{\partial B(0,r)}\left(\Phi(x)-\Phi(r)\right)f(x)dS \\
+&= 0
+\end{aligned}
+\]
+\[
+\begin{aligned}
+\phi(s)
+&=u(0)+\dfrac{1}{|\partial B(0,s)|}\int_{\partial B(0,s)}\left(u(x)-u(0)\right)dS+\int_{B(0,s)}\Phi(x)f(x)dx-\Phi(s)\int_{B(0,s)}f(x)dx \\
+&:=u(0)+I_{1}+I_{2}+I_{3}
+\end{aligned}
+\]
+\[
+|I_{1}|\leq \dfrac{1}{|\partial B(0,s)|}\int_{\partial B(0,s)}\left|u(x)-u(0)\right|dS\rightarrow 0, \,s\rightarrow 0
+\]
+By the continuity of $u$
+\[
+|I_{2}|\leq \left\Vert f\right\Vert_{L^{\infty}}\int_{B(0,s)}\Phi(x)dx=\left\Vert f\right\Vert_{L^{\infty}}\int_{B(0,s)}\Phi(x)dx=\dfrac{s^{2}\left\Vert f\right\Vert_{L^{\infty}}}{2(n-2)}\rightarrow 0, \,s\rightarrow 0
+\]
+\[
+|I_{3}|\leq \Phi(s)\left\Vert f\right\Vert_{L^{\infty}}\int_{B(0,s)}dx=\left\Vert f\right\Vert_{L^{\infty}}\int_{B(0,s)}\Phi(x)dx=\dfrac{s^{2}\left\Vert f\right\Vert_{L^{\infty}}}{n(n-2)}\rightarrow 0, \,s\rightarrow 0
+\]
+Thus
+\[
+\begin{aligned}
+u(0)&=\lim_{s\rightarrow 0}\phi(s)=\lim_{s\rightarrow r}\phi(s) \\
+&=\dfrac{1}{|\partial B(0,r)|}\int_{\partial B(0,r)}g(x)dS+\int_{B(0,r)}\left(\Phi(x)-\Phi(r)\right)f(x)dx
+\end{aligned}
+\]
+\end{customproblem}
+
+\begin{customproblem}\textbf{2.5.4}
+\textbf{a)}\par
+Since 
+\[
+\dfrac{d}{dr}\left\{\dfrac{1}{|\partial B(x,r)|}\int_{\partial B(x,r)}v(y)dS\right\}=\dfrac{r}{n}\dfrac{1}{|B(x,r)|}\int_{B(x,r)}\Delta v(y)dy \geq 0
+\]
+Thus 
+\[
+v(x)\leq\dfrac{1}{|\partial B(x,r)|}\int_{\partial B(x,r)}v(y)dS
+\]
+and
+\[
+\begin{aligned}
+\dfrac{1}{|B(x,r)|}\int_{B(x,r)}v(y)dy
+&= \dfrac{1}{|B(x,r)|}\int_{0}^{r}\left(\int_{\partial B(x,s)}v(y)dS\right)ds \\
+&\geq v(x)\dfrac{1}{|B(x,r)|}\int_{0}^{r}|\partial B(x,s)|ds \\
+&=v(x)
+\end{aligned}
+\]
+\textbf{b)}\par
+Suppose $v$ attains at $x_{0}\in U$ its maximum $\underset{\overline{U}}{\mathrm{max}}\,v > \underset{\partial U}{\mathrm{max}}\,v$, consider the connected component $U_{0}$ which contains $x_{0}$,  then by $a)$ we know that the set $\{x\in U_{0}\:v(x)=\underset{\overline{U}}{\mathrm{max}}\,v\}$ is both open and closed, thus $\underset{\partial U_{0}}{\mathrm{max}}\,v=\underset{\overline{U}}{\mathrm{max}}\,v$ which is a contradiction. \par
+\textbf{c)}\par
+Since $\phi$ is convex, $\phi''(x)\geq 0$, thus
+\[
+\Delta v(x)=\Delta\phi(u(x))=\phi'(u(x))\Delta u+\phi''(u(x))|\nabla u|^{2}=\phi''(u(x))|\nabla u|^{2}\geq 0
+\]
+Hence $v$ is subharmonic. \par
+\textbf{d)}\par
+\[
+\begin{aligned}
+\Delta v &= \Delta |\nabla u|^{2} =2\sum_{i,j}u_{x_{i}x_{j}}^{2}+2\nabla u\cdot\nabla(\Delta u)\geq 0
+\end{aligned}
+\]
+By \textbf{a)} we know $v$ is subharmonic
+\end{customproblem}
+
+\begin{customproblem}\textbf{2.5.5}
+Define $M:=\underset{B(0,1)}{\mathrm{max}}\,|f|$ and $v:=u+\dfrac{M}{2n}|x|^{2}$, then we have $\Delta v=\Delta u+M=M-f\geq 0$ in $B^{0}(0,1)$, thus $v$ is subharmonic, maximum principle still holds, hence \[
+\underset{B(0,1)}{\mathrm{max}}\,u \leq\underset{B(0,1)}{\mathrm{max}}\,v=\underset{\partial B(0,1)}{\mathrm{max}}\,v\leq \underset{\partial B(0,1)}{\mathrm{max}}\,|g|+\dfrac{M}{2n}=\underset{B(0,1)}{\mathrm{max}}\,|v|\leq \underset{\partial B(0,1)}{\mathrm{max}}\,|g|+\dfrac{1}{2n}\underset{B(0,1)}{\mathrm{max}}\,|f|
+\]Similary, we could consider $\left\{\begin{matrix}
+-\Delta(-u)=-f\\ 
+-u=-g
+\end{matrix}\right.$, then we would have $$-\underset{B(0,1)}{\mathrm{min}}\,u=\underset{B(0,1)}{\mathrm{max}}\,(-u)\leq\underset{\partial B(0,1)}{\mathrm{max}}\,|g|+\dfrac{1}{2n}\underset{B(0,1)}{\mathrm{max}}\,|f| $$
+Therefore, we have $$\underset{B(0,1)}{\mathrm{max}}\,|u|\leq\underset{\partial B(0,1)}{\mathrm{max}}\,|g|+\dfrac{1}{2n}\underset{B(0,1)}{\mathrm{max}}\,|f|\leq\underset{\partial B(0,1)}{\mathrm{max}}\,|g|+\underset{B(0,1)}{\mathrm{max}}\,|f|$$ 
+\end{customproblem}
+
+\begin{customproblem}\textbf{2.5.6}
+Using Poisson's formula and the fact that $u$ is harmonic, we have \[
+\begin{aligned}
+u(x)
+&=\dfrac{r^{2}-|x|^{2}}{|\partial B(0,1)| r}\int_{\partial B(0,r)}\dfrac{u(y)}{|x-y|^{n}}dS \\
+&\leq \dfrac{r^{2}-|x|^{2}}{|\partial B(0,1)| r}\int_{\partial B(0,r)}\dfrac{u(y)}{(r-|x|)^{n}}dS \\
+&= \dfrac{r^{2}-|x|^{2}}{|\partial B(0,1)| r}\dfrac{1}{(r-|x|)^{n}}\int_{\partial B(0,r)}u(y)dS \\
+&= \dfrac{r^{n-2}(r+|x|)}{(r-|x|)^{n-1}}u(0)
+\end{aligned}
+\]Similarly, we have\[
+\begin{aligned}
+u(x)
+&=\dfrac{r^{2}-|x|^{2}}{|\partial B(0,1)| r}\int_{\partial B(0,r)}\dfrac{u(y)}{|x-y|^{n}}dS \\
+&\geq \dfrac{r^{2}-|x|^{2}}{|\partial B(0,1)| r}\int_{\partial B(0,r)}\dfrac{u(y)}{(r+|x|)^{n}}dS \\
+&= \dfrac{r^{2}-|x|^{2}}{|\partial B(0,1)| r}\dfrac{1}{(r+|x|)^{n}}\int_{\partial B(0,r)}u(y)dS \\
+&= \dfrac{r^{n-2}(r-|x|)}{(r+|x|)^{n-1}}u(0)
+\end{aligned}
+\]Thus $\dfrac{r^{n-2}(r-|x|)}{(r+|x|)^{n-1}}u(0) \leq u(x) \leq \dfrac{r^{n-2}(r+|x|)}{(r-|x|)^{n-1}}u(0)$
+\end{customproblem}
+
+\begin{customproblem}\textbf{2.5.7}
+Since $K(x,y)\in C^{\infty}(B^{0}(0,1))$, thus $$u(x):=\int_{\partial B(0,r)}K(x,y)g(y)dS(y)\in C^{\infty}(B^{0}(0,1)) $$
+Also, $$\Delta u(x) = \int_{\partial B(0,r)}\Delta_{x}K(x,y)g(y)dS(y) = 0 $$Since $\Delta_{x}K(x,y)=0$, when $y\in \partial B(0,r)$ \par
+By taking $u\equiv 1$ we get $\displaystyle{\int_{\partial B(0,r)}K(x,y)dS(y)=1}$ \par
+Since $g\in C(\partial B(0,r))$, $|g|\leq M$ for some $M>0$, and $\forall \epsilon > 0, \exists \delta > 0$, such that $\left|g(y)-g(x^{0})\right|\leq\epsilon, \forall y\in \partial B(0,r)\cap B(x^{0},\delta)$, hence, when $|x-x^{0}|<\dfrac{\delta}{2}$, we have $|x-y|\geq|x^{0}-y|-|x-x^{0}|>\dfrac{\delta}{2}, \forall y\in\partial B(0,r)- B(x^{0},\delta) $, hence
+\[
+\begin{aligned}
+\left|u(x)-g(x^{0})\right|
+&=\left|\int_{\partial B(0,r)}K(x,y)\left(g(y)-g(x^{0})\right)dS(y)\right| \\
+&\leq \left|\int_{\partial B(0,r)\cap B(x^{0},\delta)}K(x,y)\left(g(y)-g(x^{0})\right)dS(y)\right| \\
+&\quad + \left|\int_{\partial B(0,r)- B(x^{0},\delta)}K(x,y)\left(g(y)-g(x^{0})\right)dS(y)\right| \\
+&\leq \epsilon\int_{\partial B(0,r)\cap B(x^{0},\delta)}K(x,y)dS(y) + 2M\int_{\partial B(0,r)- B(x^{0},\delta)}K(x,y)dS(y) \\
+&\leq \epsilon\int_{\partial B(0,r)}K(x,y)dS(y) + \dfrac{2M\left(r^{2}-|x|^{2}\right)}{|\partial B(0,1)|r}\int_{\partial B(0,r)}\dfrac{2^{n}}{\delta^{n}} dS(y)  \\
+&= \epsilon + \dfrac{2^{n+1}Mr^{n-2}\left(r^{2}-|x|^{2}\right)}{\delta^{n}}
+\end{aligned}
+\]Thus $\displaystyle{\underset{x\in B^{0}(0,r)}{\underset{x\rightarrow x^{0}}{\lim}}\,u(x)=g(x^{0})}$
+\end{customproblem}
+
+\begin{customproblem}\textbf{1}[January 2010]
+\textbf{a)} \par
+Suppose $u,u_{1}$ are two bounded solution, then $\forall \epsilon>0, \exists R>0$, such that $\forall r > R$
+$$u(x)-\epsilon\ln|x| \leq u_{1}(x) \leq u(x)+\epsilon\ln|x|$$
+on $\partial B(0,r)$, using maximum principle for $u(x)-\epsilon\ln|x|-u_{1}(x)$ and $u_{1}(x)-u(x)-\epsilon\ln|x|$ on $B(0,r)-B^{0}(0,1)$ \par
+Thus the inequality above holds for any $\epsilon>0$ and $|x|>1$, let $\epsilon\rightarrow 0$, we have $u=u_{1}$ \par
+\textbf{b)} \par
+$u\equiv 1$ and $u(x)=\dfrac{1}{|x|}$ are both bounded solutions with $f\equiv 1$ \par
+One additional condition that ascertain the uniqueness of the solution could be $\underset{x\rightarrow \infty}{\lim} u(x) = 0$, in this case we would have $$u(x)-\epsilon \leq u_{1}(x) \leq u(x)+\epsilon$$ On $\partial B(0,r)$ for sufficiently large $r$
+\end{customproblem}
+
+\begin{customproblem}\textbf{1}[January 2005]
+\textbf{Lemma:} If $\displaystyle{g=\sum_{k=0}^{\infty}a_{k}z^{k}}$ is a holomorphic fuction on $\mathbb{C}$, then
+\[
+\int\int_{B(0,R)}|f'(z)|^{2}dxdy=\sum_{k=0}^{\infty}|a_{k}|^{2}\dfrac{\pi R^{2k+2}}{k+1}
+\]
+\textbf{Proof:} Using the fact that $$\int\int_{B(0,R)}z^{k}\overline{z}^{l}dxdy=
+\left\{\begin{matrix}
+\dfrac{\pi R^{2k+2}}{k+1}, \,k=l \\ 
+0, \qquad\quad k\neq l
+\end{matrix}\right.
+$$
+\textbf{Method 1:} \par
+Since $u$ is harmonic on $\mathbb{R}^{2}$, there exists a holomorphic function $f$ on $\mathbb{C}$, such that $\mathrm{Re}f=u$, then $|\nabla u|=|f'|$, hence we have $\displaystyle{
+\int\int_{\mathbb{R}^{2}}|\nabla u|^{2}dxdy=\int\int_{\mathbb{C}}|f'(z)|^{2}dxdy < \infty
+}$, according to the lemma above, we have $f'\equiv 0$, hence $f$ is a constant, so is $u$ \par
+\textbf{Method 2:} \par
+According to \textbf{2.5.4 d)}, we know that $|\nabla u|^{2}$ is subharmonic, thus 
+$$|\nabla u(x)|^{2} \leq \dfrac{1}{|B(x,r)|}\int_{B(x,r)}|\nabla u(y)|^{2}dy \leq\dfrac{1}{|B(x,r)|}\int_{\mathbb{R}^{2}}|\nabla u(y)|^{2}dy$$Which tends to $0$ as $r$ tends  to $0$, thus $\nabla u \equiv 0$, $u$ is a constant
+\end{customproblem}
+
+\begin{customproblem}\textbf{1}[August 2004]
+Assume $f\not\equiv  0$, since $f\in C^{1}(\mathbb{R}^{n})$, there is some $B(x,\epsilon)$, such that $f$ is positive(negative) on it, consider $v\equiv 1$, then we have$$
+\begin{aligned}
+0 &=\int_{\partial B(x,\epsilon)}v\dfrac{\partial u}{\partial n} dS = \int_{B(x,\epsilon)}v\Delta udx + \int_{B(x,\epsilon)}\nabla v\cdot\nabla udx \\
+&= \int_{B(x,\epsilon)}\nabla v\cdot\nabla udx - \int_{B(x,\epsilon)}vfdx \\
+&= -\int_{B(x,\epsilon)}fdx <(>) 0
+\end{aligned}
+$$ Which is a contradiction, Thus $f\equiv 0$
+\end{customproblem}
+
+\end{document}

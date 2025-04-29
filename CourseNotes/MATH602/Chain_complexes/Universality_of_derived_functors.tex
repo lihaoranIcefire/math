@@ -1,0 +1,42 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+The \textbf{left derived functor}\index{Derived functor} of $F$ is $L_iF(A)=H_iF(P)$, where $P\to A$ is a projective resolution
+\end{definition}
+
+\begin{definition}
+$Y\in ob\mathscr A$ is $F$-\textbf{acyclic}\index{$F$-cyclic} if $L_iF(Y)=0$ for all $i\geq1$. Projectives are acyclic
+\end{definition}
+
+\begin{theorem}
+$F:\mathscr A\to\mathscr B$ is right exact, $\mathscr A$ has enough projectives, the \textbf{left derived functor} $L_iF$ is a universal homological $\delta$ functor
+\end{theorem}
+
+\begin{proof}
+Suppose $0\to X\to Y\to Z\to0$ is exact, $P_X,P_Z$ are projective resolutions of $X,Z$, then $(P_Y)_i=(P_X)_i\oplus (P_Z)_i$ is a projective resolution of $Y$ by Lemma \ref{Horseshoe lemma}, since $F(P_Y)_i=F(P_Y)_i\oplus F(P_Z)_i$, $0\to F(P_X)_i\to F(P_Y)_i\to F(P_Z)_i\to0$ split, by Lemma \ref{Snake lemma}, we have $\cdots\to L_iF(X)\to L_iF(Y)\to L_iF(Z)\xrightarrow{\delta}L_{i-1}F(X)\to\cdots$, i.e. $L_iF$ is a homological $\delta$ functor. Suppose $T_i$ is another homological $\delta$ functor, $\phi_0:T_0\to L_0F$ is a natural transformation, since $\mathscr A$ has enough projecives, there exists \begin{tikzcd}P \arrow[r, two heads] & X\end{tikzcd} with $P$ projetive, let $K$ be the kernel, we have a short exact sequence $0\to K\to P\to X\to0$
+\begin{center}
+\begin{tikzcd}
+            & T_1X \arrow[r, "\delta"] \arrow[d, "\exists_1\phi_1", dashed] & T_0K \arrow[r] \arrow[d, "\phi_0"] & T_0P \arrow[r] \arrow[d, "\phi_0"] & T_0X \arrow[d, "\phi_0"] &   \\
+0 \arrow[r] & L_1FX \arrow[r, "\delta"]                                     & L_0FK \arrow[r]                    & L_0FP \arrow[r]                    & L_0FX \arrow[r]          & 0
+\end{tikzcd}
+\end{center}
+And then inductively for $i>0$
+\begin{center}
+\begin{tikzcd}
+            & T_{i+1}X \arrow[r, "\delta"] \arrow[d, "\exists_1\phi_{i+1}", dashed] & T_iK \arrow[d, "\phi_i"] &   \\
+0 \arrow[r] & L_{i+1}FX \arrow[r, "\delta"]                                         & L_iFK \arrow[r]          & 0
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\begin{corollary}
+$F:\mathscr A\to\mathscr B$ is left exact, $\mathscr A$ has enough injectives, the \textbf{right derived functor} $R^iF$ is a universal cohomological $\delta$ functor
+\end{corollary}
+
+\begin{example}
+$F_M:R$-$mod\to Ab$, $N\mapsto Hom_R(M,N)$ is left exact, $R^iF_M(N)=Ext^i_R(M,N)$
+\end{example}
+
+\end{document}

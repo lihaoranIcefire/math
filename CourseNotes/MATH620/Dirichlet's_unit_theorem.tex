@@ -1,0 +1,71 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{proposition}
+For $\alpha\in\mathcal O_K$, $\alpha\in\mathcal O_K^\times\Leftrightarrow N_{K/\mathbb Q}(\alpha)=\pm1$
+\end{proposition}
+
+\begin{proof}
+Let $T_\alpha$ be the $\mathbb Q$-linear operator on $K$ by multiplying $\alpha$. $f(x)=x^m+\cdots+a_{m-1}x+a_m$ be the charateristic polynomial of $T_\alpha$, $N\alpha=(-1)^ma_m$. If $N\alpha=\pm1$, then $g(x)=x^m+a_m^{-1}a_{m-1}x^{m-1}+\cdots+a_m^{-1}a_{1}x+a_m^{-1}\in\mathbb Z[x]$ has $\alpha^{-1}$ as a root, thus $\alpha\in\mathcal O_K^\times$. If $\alpha\in\mathcal O_K^\times$, there exists $\beta\in\mathcal O_K^\times$ such that $\alpha\beta=1$, $\id=T_\alpha T_\beta$, thus $1=\det T_\alpha\det T_\beta=N\alpha\cdot N\beta\Rightarrow N\alpha=\pm1$
+\end{proof}
+
+\begin{lemma}
+The torsion subgroup of $\mathcal O_K^\times$ is $\mu(K)$, the set of roots of unity in $K$ . $\mu(K)$ is finite and hence cyclic
+\end{lemma}
+
+\begin{proof}
+ $\zeta_m\in K\Rightarrow\varphi(m)|[K:\mathbb Q]$
+\end{proof}
+
+\begin{example}
+If $K\hookrightarrow\mathbb R$, then $\mu(K)=\{\pm1\}$. If $K=\mathbb Q(\zeta_p)$, then $\mu(K)=\{\pm1\}\times\langle\zeta_p\rangle$. If $K=\mathbb Q(\sqrt d)$, $d<0$, then $\zeta_m\in K\Rightarrow\varphi(m)\leq 2\Rightarrow m=2,3,4,6$
+\end{example}
+
+\begin{example}
+$K=\mathbb Q(\zeta_p)$, $p\nmid rs$, then $\dfrac{\zeta^r-1}{\zeta^s-1}\in\mathbb Z[\zeta]^\times$
+\end{example}
+
+\begin{proposition}\label{alpha in mu(K) <=> |sigma(alpha)|=1}
+$\alpha\in\mathcal O_K$. $|\sigma(\alpha)|=1$ for all embeddings $K\xhookrightarrow\sigma\mathbb C\Leftrightarrow\alpha\in\mu(K)$
+\end{proposition}
+
+\begin{proof}
+Fix $C,D>0$
+\[E_{C,D}=\{\beta\in\overline{\mathbb Z}|\deg(\beta)\leq C,|\sigma(\beta)|\leq D,\forall \mathbb Q(\beta)\xhookrightarrow\sigma\mathbb C\}\]
+$f_\beta(x)\in\mathbb Z[x]$ is the monic irreducible polynomial of $\beta$. $\deg f_\beta\leq C\Rightarrow \deg f_\beta$ has finitely many choice and coefficients of $f_\beta$ is bounded by function of $D$ $\Rightarrow$ finitely many choices for $f_\beta$ $\Rightarrow$ $E_{C,D}$ is finite. $\alpha\in E_{n,1}$, $n=[K:\mathbb Q]$, $\alpha^2,\alpha^3,\cdots\in E_{n,1}\Rightarrow\alpha\in\mu(K)$ since $E_{n,1}$ is finite, $\alpha^n$ repeats. The other direction is obvious
+\end{proof}
+
+\begin{definition}
+Define
+\begin{align*}
+\mathcal L:(\mathbb R^\times)^r\times(\mathbb C^\times)^s&\to\mathbb R^{r+s} \\
+(x_1,\cdots,x_{r+s})&\mapsto(\log|x_1|,\cdots,\log|x_r|,2\log|x_{r+1}|,\cdots,2\log|x_{r+s}|)
+\end{align*}
+Note that
+\[|N_{K/\mathbb Q}(\alpha)|=\left|\prod\sigma_i(\alpha)\right|=|\sigma_1(\alpha)|\cdots|\sigma_r(\alpha)||\sigma_{r+1}(\alpha)|^2\cdots|\sigma_{r+s}(\alpha)|^2\]
+\end{definition}
+
+\begin{theorem} \hfill
+\begin{enumerate}[label=(\roman*)]
+\item $\ker\mathcal L=\mu(K)=\Tor(\mathcal O_K^\times)$
+\item $\mathcal L(\mathcal O_K^\times)$ is a lattice in the hyperplane $H=\{a_1+\cdots+a_{r+s}=0\}$
+\item $\mathcal O_K^\times\cong\mathbb Z^{r+s-1}\times\mu(K)$, $\mathcal O_K^\times$ is finitely generated
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}[label=(\roman*)]
+\item By Proposition \ref{alpha in mu(K) <=> |sigma(alpha)|=1}
+\item $\mathbb C\xrightarrow{|\cdot|}\mathbb R_{>0}$, $\log:\mathbb R_{>0}\to\mathbb R$ are homomorphisms and homeomorphisms, and $\mathbb C^\times\cong U(1)\times\mathbb R^\times$
+\begin{center}
+\begin{tikzcd}
+\mathcal O_K^\times \arrow[r, hook] \arrow[d, hook] & (\mathbb R^\times)^r\times(\mathbb C^\times)^s \arrow[d, hook] \arrow[r, "\mathcal L", hook] & \mathbb R^r\times\mathbb R^s \\
+\mathcal O_K \arrow[r, hook]                        & \mathbb R^r\times\mathbb C^s                                                                 &                             
+\end{tikzcd}
+\end{center}
+Thus additive group $\mathcal L(\mathcal O_K^\times)$ is discrete in $\mathbb R^r\times\mathbb R^s$ $\Rightarrow \rank_{\mathbb Z}\mathcal O_K^\times\leq r+s$. $\mathcal L(\mathcal O_K^\times)\subseteq H$ is clear
+\end{enumerate}
+\end{proof}
+
+\end{document}

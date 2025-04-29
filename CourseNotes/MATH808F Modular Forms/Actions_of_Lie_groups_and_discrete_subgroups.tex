@@ -1,0 +1,133 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\begin{lemma}
+Suppose topological group $G$ continuously acts on a topological space $X$
+\begin{enumerate}
+\item If $X$ is $T_1$, then the stabilizer $G_x$ of $x$ is closed. The set of orbits $G\backslash X$ is equipped with the quotient topology
+\item The quotient map $\pi: X\to G\backslash X$ is open. Moreover, if $X$ is second countable, then so is $G\backslash X$
+\item If $H\subseteq G$ is a closed subgroup, then $G/H$ is Hausdorff
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\begin{enumerate}
+\item Consider the group action and the second projection map $G\times X\to X$, then $G_x$ is the intersection of preimages of the closed subset $\{x\}$
+\item If $U\subseteq X$ is open, then $\pi^{-1}(\pi(U))=\displaystyle\bigcup_{x\in U}Gx$ is a union of open subsets, hence also open. A countable basis will be mapped to a countable basis of $G\backslash X$ by $\pi$
+\item $\{0\}$ is closed, and the topology is translational invariant
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+Suppose $X$ is locally compact Hausdorff, $G$ is second countable, locally compact and acting transitively on $X$. Then for any $x\in X$, the orbit map $G/G_x\to X$, $gG_x\mapsto gx$ is a homeomorphism
+\end{theorem}
+
+\begin{proof}
+Consider the following diagram, we know $\phi$ is bijective and continuous, it suffices to show that $\phi$ is open($\iff\psi$ is open)
+\begin{center}
+\begin{tikzcd}
+G \arrow[d, "\pi"'] \arrow[rd, "\psi"] &   \\
+G/G_x \arrow[r, "\phi"]                & X
+\end{tikzcd}
+\end{center}
+Since $G$ is second countable, there exists a dense subset $\{g_i\}\subseteq G$, 
+Suppose $U\subseteq G$ is open, we need to show $Ux$ is open. Fix $g\in U$, consider map $G\times G\to G$, $(a,b)\mapsto gab$, there exists a compact neighborhood $K$ of 1 such that $K^{-1}=K$, $gK^2\subseteq U$. Denote $W_n=g_nKx$, if $\overset{\circ}{W_n}\neq\varnothing$, then $(Kx)^\circ\neq\varnothing$, for $gx\in Ux$, $gx\in (gK^{-1}Kx)^\circ=(gK^2x)^\circ\subseteq (Ux)^\circ$. Hence it suffice to show that $\overset\circ{W_n}$ is nonempty for some $n$, which is guaranteed by Baire category theorem: Locally compact Hausdorff spaces are Baire spaces, suppose $\overset\circ{W_n}=\varnothing$, then $W_n^c$ will be dense, so $\bigcap W_n^c=(\bigcup W_n)^c=X^c=\varnothing$ is a contradiction
+\end{proof}
+
+\begin{theorem}\hfill
+\begin{enumerate}
+\item Let $G$ be a Lie group and $H\subseteq G$ a closed subgroup. Then there exists a unique smooth manifold structure on $G/H$ such that the quotient map $G\to G/H$ is a $C^\infty$ submersion
+\item Let $G$ be a Lie group acting transitively on a smooth manifold $M$. Then for any $x\in M$, then map $G/G_x\to M$ is a diffeomorphism
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Warner: Foundations of differentiable manifolds and Lie groups, Thm 3.58, 3.62
+\end{proof}
+
+\begin{example}
+Orbit map at $i\in\mathcal H$ induces diffeomorphisms
+\[
+\SL_2(\mathbb R)/\SO_2(\mathbb R)\xrightarrow{\cong} \mathcal H,\quad\PSL_2(\mathbb R)/\operatorname{PSO}_2(\mathbb R)\xrightarrow{\cong}\mathcal H
+\]
+\end{example}
+
+\begin{definition}
+A subgroup $\Gamma\subseteq G$ is a \textit{discrete} if the induced topology is discrete
+\end{definition}
+
+\begin{lemma}
+A discrete subgroup $\Gamma$ of a Hausdorff topological group $G$ is closed
+\end{lemma}
+
+\begin{proof}
+Since $\Gamma$ is discrete, there exists an open neighborhood $U\ni1$ such that $U\cap \Gamma=\{1\}$, there exists an open neighborhood $V\ni 1$ such that $V^{-1}V\subseteq U$, suppose $g$ is in the closure of $\Gamma$, then $V^{-1}g\cap\Gamma$ is not empty, assume $\alpha,\beta\in V^{-1}g\cap\Gamma$, then $\alpha\beta^{-1}\in V^{-1}V\cap\Gamma\subseteq U\cap\Gamma=\{1\}$, thus $\alpha=\beta$, i.e. $V^{-1}g\cap\Gamma=\{\alpha\}$. If $g\neq\alpha$, then there exists an open neighborhood $g\in W\subseteq V^{-1}g$ which doesn't contain $\alpha$ since $G$ is Hausdorff, but this contradicts the fact that $g$ is in the closure of $\Gamma$, thus $g=\alpha\in\Gamma$
+\end{proof}
+
+\begin{lemma}\label{G locally compact group, K compact subgroup, G->G/K is proper}
+If $K\subseteq G$ is a compact subgroup of a locally compact Hausdorff group, then $G\xrightarrow\pi G/K$ is proper
+\end{lemma}
+
+\begin{proof}
+Cover $G$ with open subsets $V_i$ with compact closure. For any $A\subseteq G/K$ compact, thus closed, $A\subseteq\bigcup_i\pi(V_i)$ by finitely may open sets, then closed set $\pi^{-1}(A)\subseteq\bigcup_i\overline{V_i}K$ which is compact, so is $\pi^{-1}(A)$
+\end{proof}
+
+\begin{definition}
+A group $\Gamma$ is acting continuously on a topological space $X$. We say it acts \textit{properly(proper discontinuously)} if for any compact subsets $A,B\subseteq X$
+\[\#\{\gamma\in\Gamma|\gamma A\cap B\neq\varnothing\}<\infty\]
+\end{definition}
+
+\begin{note}
+This implies that the stabilizers are finite
+\end{note}
+
+\begin{proposition}
+$K\subseteq G$ is a compact subgroup of a locally compact Hausdorff group. For any subgroup $\Gamma\subseteq G$, the following are equivalent
+\begin{enumerate}
+\item $\Gamma$ is discrete
+\item $\Gamma$ acts properly on $G/K$ on the left
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+$1\Rightarrow2$: Suppose $A,B\subseteq G/K$ are compact, by Lemma \ref{G locally compact group, K compact subgroup, G->G/K is proper}, $C=\pi^{-1}(A)$, $D=\pi^{-1}(B)$ are also compact, so is $DC^{-1}$, then
+\[\{g\in\Gamma|\gamma A\cap B\neq\varnothing\}\subseteq\{g\in\Gamma|\gamma C\cap D\neq\varnothing\}=\Gamma\cap DC^{-1}\]
+is discrete and compact, hence finite \\
+$2\Rightarrow1$: Let $V$ be a neighborhood of $1$ with $\overline V$ compact, then
+\[\Gamma\cap V\subseteq \Gamma\cap\pi^{-1}(\pi(V))=\{g\in\Gamma|\pi(g)\cap \pi(V)\neq\varnothing\}\subseteq\{g\in\Gamma|g\pi(1)\cap \pi(\overline V)\neq\varnothing\}\]
+should be finite, by shrinking $V$, we get $\Gamma\cap V=\{1\}$, i.e. $\Gamma$ is discrete
+\end{proof}
+
+\begin{example}
+$\SL_2(\mathbb Z)$ and its finite index subgroups are discrete in $\SL_2(\mathbb R)$ since $\SL_2(\mathbb Z)=M_2(\mathbb Z)\cap\SL_2(\mathbb R)$
+\end{example}
+
+\begin{example}
+$\SL_2(\mathbb Q)$ is not discrete in $\SL_2(\mathbb R)$ since the stabilizer of $i\in\mathcal H$ in $\SL_2(\mathbb Q)$ is
+\[\SO_2(\mathbb Q)\xrightarrow{\text{Stereographic projection}}\mathbb QP^1,\quad\begin{bmatrix}
+a&b\\
+-b&a
+\end{bmatrix}\mapsto\frac{a}{1-b}\]
+which are in 1 to 1 correspondence with $\mathbb P^1(\mathbb Q)$ which is infinite, so $\SL_2(\mathbb Q)$ does not act properly on $\mathcal H$
+\end{example}
+
+\begin{remark}
+A discrete group $\Gamma$ acts properly on $X$ $\iff$ the map $\Gamma\times X\to X\times X$, $(g,x)\mapsto(x,gx)$ is proper
+\end{remark}
+
+\begin{proposition}
+$K\subseteq G$ is a compact subgroup of a locally compact Hausdorff group. $\Gamma\subseteq G$ is a discrete subgroup. Then $\forall z\in G/K$, there exists a neighborhood $U$ of $z$ such that
+\[\{g\in\Gamma|g(U)\cap U\neq\varnothing\}=\{g\in\Gamma|gz=z\}\]
+And $\Gamma\backslash G/K$ is Hausdorff
+\end{proposition}
+
+\begin{proof}
+Shimura, proposition 7.1.8
+\end{proof}
+
+\begin{example}
+If $\Gamma\subseteq\SL_2(\mathbb R)$ is a discrete subgroup, then $\Gamma\backslash\mathcal H$ is Hausdorff, second countable
+\end{example}
+
+\end{document}

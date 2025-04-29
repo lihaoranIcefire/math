@@ -1,0 +1,143 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{example}
+$\mathbb R/\mathbb Q$ is not Hausdorff
+\end{example}
+
+\begin{proposition}
+If $Y$ is discrete, then $X$ is connected if every continuous function $f:X\to Y$ is a constant
+\end{proposition}
+
+\begin{proposition}
+$X$ is compact, $Y$ is Hausdorff, any continuous function $f:X\to Y$ is closed. In particular, if $f$ is bijective, then $f$ is a homeomorphism
+\end{proposition}
+
+\begin{fact}
+$X$ is Hausdorff and locally compact iff $X$ is homeomorhphic to an open subset of a compact Hausdorff space $Y$ through one point compactification
+\[\Hom(X\times A,Y)\cong\Hom(X,\Hom(A,Y))\]
+as a set. However as topological spaces $\Hom(X\times A,Y)\to\Hom(X,\Hom(A,Y))$ is not surjective. Consider $X=\Hom(A,Y)$
+\end{fact}
+
+\begin{note}
+Here $\Hom(A,Y)$ is endowed with compact-open topology
+\end{note}
+
+\begin{theorem}
+$A$ is locally compact and Hausdorff, then $f:X\times A\to Y$ is continuous iff $f:X\to\Hom(A,Y)$ is continuous. Furthermore, if $X$ is also locally compact and Hausdorff, then
+\[\Hom(X\times A,Y)\cong\Hom(X,\Hom(A,Y))\]
+as topological spaces
+\end{theorem}
+
+\begin{proposition}
+If $g:A\to Y$ is injective, then $\iota_X:X\to X\cup_AY$ is also injective. If $f:A\to Y$ is surjective, then $\iota_Y:X\to Y\cup_AY$ is also surjective, moreover, if $f$ is a homeomorphism, so is $\iota_Y$
+\end{proposition}
+
+\begin{proof}
+Proof of homeomorphism: Show that $Y$ satisfies the universal property of the pushout
+\begin{center}
+\begin{tikzcd}
+A \arrow[r, "g"] \arrow[d, "f"']                        & Y \arrow[d,equal] \arrow[rdd, "\varphi_2", bend left] &   \\
+X \arrow[r, "gf"] \arrow[rrd, "\varphi_1"', bend right] & Y \arrow[rd, "\Phi", dashed]                    &   \\
+                                                        &                                                 & T
+\end{tikzcd}
+\end{center}
+$\forall \varphi_1,\varphi_2$ such that $\varphi_1f=\varphi_2g$, $\Phi gf^{-1}=\varphi_1$, thus $\Phi=\varphi_2$
+\end{proof}
+
+\begin{definition}[CW complexes]
+For $x,y\in X$, define $\varphi:S^0\to X$ with $\varphi(-1)=x$, $\varphi(1)=y$, Write $X\cup_\varphi D^1$ for pushout
+\begin{center}
+\begin{tikzcd}
+S^0 \arrow[r, "\varphi"] \arrow[d, hook] & X \arrow[d]       \\
+D^1 \arrow[r, "\iota"]                   & X\cup_\varphi D^1
+\end{tikzcd}
+\end{center}
+The image $\iota(\Int(D^1))$ is called a $1$-cell, denoted $e^1$ \par
+In general, we have
+\begin{center}
+\begin{tikzcd}
+S^{n-1} \arrow[r, "\varphi"] \arrow[d, hook] & X \arrow[d]       \\
+D^n \arrow[r, "\iota"]                       & X\cup_\varphi D^n
+\end{tikzcd}
+\end{center}
+The image $\iota(\Int(D^n))$ is called an $n$-cell, denoted $e^n$. Attaching cells does not disturb the interiors of the cells \par
+A CW complex is built up in the following way
+\begin{enumerate}
+\item Starting with a discrete set $X_0$, the set of $0$-cells or the $0$-skeleton
+\item Given $(n-1)$-skeleton $X_{n-1}$, then $n$-skeleton $X_n$ is obtained by attaching $n$-cells to $X_{n-1}$, that is\begin{center}
+\begin{tikzcd}
+\displaystyle\bigsqcup_{\alpha\in A_n}S_\alpha^{n-1} \arrow[d, hook] \arrow[r, "\phi_\alpha"] & X_{n-1} \arrow[d, hook] \\
+\displaystyle\bigsqcup_{\alpha\in A_n}D_\alpha^{n} \arrow[r, "\Phi_\alpha"]                   & X_n                    
+\end{tikzcd}
+\end{center}
+\item The space $X$ is the union of $X_n$'s, topologized by weak topology
+\end{enumerate}
+The third condition ensures $X_n\hookrightarrow X$ is continuous. As a set, $X$ is the disjoint union of $\Phi_\alpha(\Int(D^n))$, $\Phi_\alpha:D^n\to X_n\to X$ are called characteristic maps, CW complexes are determined by characteristic maps
+\end{definition}
+
+\begin{definition}
+$G$ is a discrete group. $Y\times G\to Y$ is a continuous action, then $q:Y\to Y/G$ is continuous, the action is \textit{properly discontinuous}\index{Properly discontinuous group action} if $\forall y\in Y$, $\exists U$ neighborhood such that $U\cap Ug=\varnothing,\forall g\neq1$, this implies that the action is free, then $q$ is a covering map, furthermore, $p:Y/H\to Y/G$ is a covering map for $H\leq G$
+\end{definition}
+
+\begin{fact}
+A finite group which acts freely on a Hausdorff space $Y$ is properly discontinuous
+\end{fact}
+
+\begin{theorem}[Monodromy]
+Let $\tilde\gamma_x$ be the lift of $\gamma$ against $p$ starting at $x$
+\begin{align*}
+\pi_1(B,b_0)\times F&\to F \\
+([\gamma],x)&\mapsto\tilde\gamma_x(1)
+\end{align*}
+specifies a transitive left action of $\pi_1(B,b_0)$ on $F$, called the monodromy action
+\end{theorem}
+
+\begin{proof}
+Let $c_{b_0}$ be the constant loop, which is the identity element, by transitivity, path-connectedness and orbit-stabilizer theorem, $F\cong G/G_{x_0}$
+\end{proof}
+
+\begin{proposition}
+The stabilizer of $x\in F$ under the monodromy action isthe subgroup $p_*(\pi_1(E,x))\leq\pi_1(B,b_0)$
+\end{proposition}
+
+\begin{corollary}
+$\pi_1(B,b_0)/p_*(\pi_1(E,x))\to F$ is an isomorphism
+\end{corollary}
+
+\begin{proposition}
+$\varphi:E_1\to E_2$ induce map on fibers $F_1\to F_2$ is $\pi_1(B,b_0)$ equivariant, i.e. $[\gamma]\cdot\varphi(x)=\tilde\gamma_{\varphi(x)}(1)=\varphi(\tilde\gamma_x)(1)=\varphi(\tilde\gamma_x(1))=\varphi([\gamma]\cdot x)$
+\end{proposition}
+
+\begin{proposition}
+$H,K\leq G$, every $G$ equivariant map $\varphi:G/H\to G/K$ is of the form $gH\mapsto g\gamma K$ for some $\gamma\in G$ such that $\gamma H\gamma^{-1}\leq K$, in short, $H$ is subconjugate to $K$
+\end{proposition}
+
+\begin{proof}
+An equivariant map is determined by the value at one element, suppose $eH\mapsto\gamma K$, for some $\gamma\in G$. then $gH\mapsto g\gamma K$ which is well-defined should have $ghH=gH$, $gh\gamma H=h\gamma H$, so we need $\gamma^{-1}h\gamma\in K\Rightarrow \gamma^{-1}H\gamma\leq K$
+\end{proof}
+
+\begin{corollary}
+An equivariant map $\varphi:G/H\to G/K$ exists iff $H$ is subconjugate ot $K$. The two orbits are isomorphic as $G$-sets iff $H$ is conjugate to $K$
+\end{corollary}
+
+\begin{theorem}
+There is a bijection of sets
+\[\Hom_B(E_1,E_2)\cong\Hom_{\pi_1(B,b_0)}(F_1,F_2)\]
+\end{theorem}
+
+\begin{corollary}
+\[\Aut_B(E)\cong \Hom_G(G/H,G/H)\cong N_G(H)/H=W_G(H)\]
+here $H=p_*(\pi_1(E))$
+\end{corollary}
+
+\begin{proof}
+There exists a surjective homomorhpism $N_G(H)\to\Hom_G(G/H,G/H)$, $\gamma\mapsto gh\mapsto g\gamma H$, thus $eH\mapsto\gamma H\Rightarrow \gamma\in H$, thus $\Hom_G(G/H,G/H)\cong N_G(H)/H$
+\end{proof}
+
+\begin{proposition}
+$X$ is the universal cover of $B$, $\Aut_B(X)\to F$, $\varphi\mapsto\varphi(x)$, $x\in q^{-1}(b)$ is a bijection as sets
+\end{proposition}
+
+\end{document}

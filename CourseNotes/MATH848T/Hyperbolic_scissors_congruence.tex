@@ -1,0 +1,497 @@
+\documentclass[../main.tex]{subfiles}
+
+\def\CROP{1}
+
+\begin{document}
+
+\begin{definition}
+$R$ is a commutative ring, $M$ is right $R[G]$ module, $C_*(G)$ is the tuple complex, equivalently, $B_*(G)$ is the bar complex, $\bar B_*(G)=B_*(G)\otimes_{R[G]}R$, thus
+\[M\otimes_{R[G]}B_*(G)\cong M\otimes_{R}R\otimes_{R[G]}B_*(G)\cong M\otimes_R\bar B_*(G)\]
+Group homology with coefficients in $M$ is
+\begin{align*}
+H_k(G;M)&=H_k(M\otimes_{R[G]}C_*(G)) \\
+&=H_k(M\otimes_{R[G]}B_*(G)) \\
+&=H_k(M\otimes_{R}\bar B_*(G)) \\
+&=Tor_k^{R[G]}(M,R)
+\end{align*}
+The differential of $M\otimes_{\mathbb Z[G]} C_*(G)$ is given by
+\begin{align*}
+\partial(m\otimes[g_1|\cdots|g_n])&=\partial(m\otimes(1,g_1,g_1g_2,\cdots,g_1\cdots g_n)) \\
+&=mg_1\otimes[g_2|\cdots|g_n]+\sum_{i=1}^{n-1}(-1)^im\otimes[g_1|\cdots|g_ig_{i+1}|\cdots|g_n] \\
+&\quad+(-1)^nm\otimes[g_1|\cdots|g_{n-1}]
+\end{align*}
+$H_0(G;M)=M\otimes_{R[G]}R=M_G$. Write $H_k(G)$ for $H_k(G;\mathbb Z)$
+\end{definition}
+
+\begin{remark}
+A right $R[G]$ module $M$ can be viewed as a left $R[G]$ module and vice versa via $g^{-1}m=mg$. Therefore if $M$ is a left $\mathbb ZG$ module, then
+\begin{align*}
+\partial(m\otimes[g_1|\cdots|g_n])=\,\,&g_1^{-1}m\otimes[g_2|\cdots|g_n]+\sum_{i=1}^{n-1}(-1)^im\otimes[g_1|\cdots|g_ig_{i+1}|\cdots|g_n] \\
+&+(-1)^nm\otimes[g_1|\cdots|g_{n-1}]
+\end{align*}
+\end{remark}
+
+\begin{definition}
+$\mathcal A$ is an abelian category with enough projectives, a \textbf{Cartan-Eilenberg resolution}\index{Cartan-Eilenberg resolution} $P_{**}$ of chain complex $A_*$ is an upper half plane double complex consist of projectives and a augmentation $P_{*0}\xrightarrow\varepsilon A_*$ such that
+\begin{enumerate}[label=\arabic*., leftmargin=*]
+\item If $A_p=0$, then $P_{p*}=0$
+\item $B^h_p(P)\xrightarrow{B_p(\varepsilon)} B_p(A_*)$, $H^h_p(P)\xrightarrow{H_p(\varepsilon)} H_p(A_*)$ are projective resolutions
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+Every chain complex $A_*$ has a Cartan-Eilenberg resolution, and $Z^h_p(P)\xrightarrow{Z_p(\varepsilon)} Z_p(A_*)$, $P_{p*}\xrightarrow{\varepsilon_p} A_p$ are projective resolutions
+\end{lemma}
+
+\if\CROP0
+\begin{definition}
+$f,g:D\to E$ are maps between double complexes, a chain homotopy from $f$ to $g$ consists of $s^h:D_{pq}\to E_{p+1,q}$ and $s^v:D_{pq}\to E_{p,q+1}$ satisfying
+\[f-g=(s^hd^h+d^hs^h)=(s^vd^v+d^vs^v)\]
+\[s^vd^h+d^hs^v=s^hd^v+d^vs^h=0\]
+So that $s^h+s^v:Tot(D)_n\to Tot(E)_{n+1}$ is a chain homotopy between $Tot(f),Tot(g):Tot^\oplus(D)\to Tot^\oplus(E)$
+\end{definition}
+\fi
+
+\begin{lemma}\label{Chain homotopy between Cartna-Eilenberg resolutions}
+$f,g:A_*\to B_*$ are chain homotopic, $P\to A_*$, $Q\to B_*$ are Cartan-Eilenberg resolutions, $\tilde f,\tilde g:P\to Q$ are over $f,g$, then $\tilde f,\tilde g$ are chain homotopic \par
+Any two Cartan-Eilenberg resolutions of $P\to A_*$, $Q\to A_*$ are chain homotopic. If $F$ is an additive functor, then $Tot^\oplus(F(P))$, $Tot^\oplus(F(Q))$ are chain homotopic
+\end{lemma}
+
+\begin{definition}
+$\mathcal A,\mathcal B$ are abelian categories, $\mathcal A$ has enough projectives, $F:\mathcal A\to\mathcal B$ is an additive functor, $f:A_*\to B_*$ is a map of chain complexes. The \textbf{left hyper-derived functor} of $F$ is $\mathbb L_iF:\mathbf{Ch}\mathcal A\to \mathcal B$  given by $\mathbb L_iF(A_*)=H_i(Tot^\oplus(F(P)))$ which we just write as $H_i(F(P))$, is independent of the choice of Cartan-Eilenberg resolution $P$ thanks to Lemma \ref{Chain homotopy between Cartna-Eilenberg resolutions}
+\end{definition}
+
+\begin{definition}
+$A_*$ is a chain of $RG$ modules. Since $A_*\otimes_{R[G]}B_*(G)=A_*\otimes_{R} \bar B_*(G)$ is a Cartan-Eilenberg resolution of $F(A_*)$ with $F=-\otimes_{\mathbb Z[G]}\mathbb Z$. Hence we define the \textbf{hyperhomology} of a chain complex of $RG$ modules $A_*$ to be
+\[\mathbb H_i(G,A_*)=\mathbb L_iF(A_*)=H_i(A_*\otimes_{\mathbb ZG}B_*(G))\]
+\end{definition}
+
+\begin{lemma}\label{Hyperhomology of an acyclic chain complex is the same as homology}
+$A_*$ is an acyclic chain complex with $H_0(A_*)=M$, then $\mathbb L_iF(A_*)=L_iF(M)$. In particular, $\mathbb H_i(G;A_*)\cong H_i(G;M)$
+\end{lemma}
+
+\begin{proof}
+By Lemma \ref{Chain homotopy between Cartna-Eilenberg resolutions}, it suffices to consider the case where $A_*$ is the chain complex with only one nonzero term $M$ at degree zero. Suppose $P\to M$ is a projective resolution of $M$, it can be regared as a Cartan-Eilenberg resolution of $A_*$, thus $\mathbb L_iF(A_*)=H_i(F(P))=L_iF(M)$
+\end{proof}
+
+\begin{theorem}[Hyperhomology spectral sequence]\label{Hyperhomology spectral sequence}\index{Hyperhomology spectral sequence}
+$L_pF(H_q(A_*))\Rightarrow\mathbb L_{p+q}F(A_*)$. If $A_*$ is bounded below, then $H_p(L_qF(A_*))\Rightarrow\mathbb L_{p+q}F(A_*)$
+\end{theorem}
+
+\begin{proof}
+Consider the double complex $P$ of a Cartan-Eilenberg resolution $P\to A_*$. Since $H^h_p(P)\to H_pA_*$, $P_{p*}\to A_p$ are projective resolutions, we have
+\[L_pF(H_q(A_*))=H^v_pF(H^h_q(P))=H^v_p(H^h_qF(P))=''E^2_{pq}\Rightarrow H_{p+q}F(P)=\mathbb L_{p+q}F(A_*)\]
+If $A_*$ is bounded below, then $'E^1_{pq}=L_qF(A_p)=H^v_q(F(P_{p*}))$ and
+\[H_p(L_qF(A_*))=H^h_pH^v_q(F(P))='E^2_{pq}\Rightarrow H_{p+q}F(P)=\mathbb L_{p+q}F(A_*)\]
+\end{proof}
+
+\begin{theorem}[Grothendieck spectral sequence]\label{Grothendieck spectral sequence}\index{Grothendieck spectral sequence}
+$\mathcal A,\mathcal B$ have enough projectives, $F:\mathcal B\to\mathcal C$, $G:\mathcal{A}\to \mathcal{B}$ are right exact functors and $G$ sends projectives to $F$-acyclic objects, then
+\[(L_pF)(L_qG)(A)\Rightarrow L_{p+q}(FG)(A)\]
+\end{theorem}
+
+\begin{proof}
+Suppose $P\to A$ is a projective resolution, then by Theorem \ref{Hyperhomology spectral sequence}, we have
+\[(L_pF)(L_qG)(A)\cong L_pF(H_qG(P))\Rightarrow \mathbb L_{p+q}(FG)(A)\]
+\[H_p(L_qF(G(P)))\Rightarrow \mathbb L_{p+q}(FG)(A)\]
+Since $G(A)$ is $F$-acyclic, $'E^{pq}_2=0$ for $q\neq0$ and
+\[E^{p0}_2=H_p(FG(P))=L_p(FG)(A)\cong\mathbb L_p(FG)(A)\]
+\end{proof}
+
+\begin{corollary}[Hochschild-Serre spectral sequence]\label{Hochschild-Serre spectral sequence}\index{Hochschild-Serre spectral sequence}
+$N\trianglelefteq G$ is a normal subgroup, $A$ is a $\mathbb ZG$ module, then
+\[H_p(G/N;H_q(N;A))\Rightarrow H_{p+q}(G;A)\]
+\end{corollary}
+
+\begin{proof}
+Consider right exact functors
+\[F=-\otimes_{\mathbb Z[G/N]}\mathbb Z:\mathbb Z[G/N]\text{-mod}\to\mathbb Z\text{-mod}\]
+\[G=-\otimes_{\mathbb Z[N]}\mathbb Z=-\otimes_{\mathbb Z[G]}\mathbb Z[G/N]:\mathbb Z[G]\text{-mod}\to\mathbb Z[G/N]\text{-mod}\]
+The left derived functors of $FG=-\otimes_{\mathbb Z[G]}\mathbb Z$ is $L_*(FG)(A)=Tor_*^{\mathbb Z[G]}(A,\mathbb Z)=H_*(G;A)$. For any $\mathbb Z[G]$ module $A$ and $\mathbb Z[G/N]$ module $B$, we have natural isomorphism
+\[Hom_{\mathbb Z[G/N]}(A\otimes_{\mathbb Z[G]}\mathbb Z[G/N],B)\cong Hom_{\mathbb Z[G]}(A,B)=Hom_{\mathbb Z[G]}(A,U(B))\]
+Hence $G$ is left adjoint to forgetful functor $U$ which is exact, this implies that $G$ preserves projectives which are exactly $F$-acyclic objects. Apply Theorem \ref{Grothendieck spectral sequence} we have
+\begin{align*}
+H_p(G/N;H_q(N;A))=(L_pF)(L_qG)(A)\Rightarrow L_{p+q}(FG)(A)=H_{p+q}(G;A)
+\end{align*}
+\end{proof}
+
+\begin{lemma}[Center kills lemma]\label{Center kills lemma}\index{Center kills lema}
+$M$ is a right $R[G]$ module, $\gamma\in Z(G)$ such that $x\gamma=rx,\forall x\in M$ for some $r\in R$, then $(r-1)$ annihilates $H_*(G;M)$
+\end{lemma}
+
+\begin{proof}
+Any $\gamma\in G$ induce endomorphism $M\otimes_R\bar B_*(G)$
+\[\gamma_*(x\otimes[g_1|\cdots|g_q])=x\gamma\otimes[\gamma g_1\gamma^{-1}|\cdots|\gamma g_q\gamma^{-1}]\]
+Which is chain homotopic to identity through
+\[s(x\otimes[g_1|\cdots|g_q])=\sum_{i=0}^qx\otimes[g_1|\cdots|g_i|\gamma|\gamma g_{i+1}\gamma^{-1}|\cdots|\gamma g_1\gamma^{-1}]\]
+If $\gamma\in Z(G)$ such that $x\gamma=rx,\forall x\in M$ for some $r\in R$, then $\gamma_*(x\otimes[g_1|\cdots|g_q])=rx\otimes[ g_1|\cdots| g_q]$ which equals $x\otimes[g_1|\cdots|g_q]$ in $H_*(G;M)$
+\end{proof}
+
+\begin{lemma}[Shapiro's lemma]\label{Shapiro's lemma}\index{Shapiro's lemma}
+$H\leq G$, $M$ is a left $R[G]$ module, then there is a natural isomorphism $H_*(H;M)\cong H_*(G;M\otimes_{R[H]}R[G])$
+\end{lemma}
+
+\begin{proof}
+$B_*(H), B_*(G)$ are both free resolutions of $R[H]$ modules of $R$, thus inclusion $M\otimes_{RH}B_*(H)\hookrightarrow M\otimes_{RH}B_*(G)$ induces an isomorphism on homology
+\begin{align*}
+H_k(G;M\otimes_{R[H]}R[G])&=H_k(M\otimes_{R[H]}R[G]\otimes _{R[G]}B_*(G)) \\
+&\cong H_k(M\otimes_{R[H]}B_*(G)) \\
+&\cong Tor^{R[H]}_k(M,R) \\
+&\cong H_k(M\otimes_{R[H]}B_*(H)) \\
+&\cong H_k(H;M)
+\end{align*}
+\end{proof}
+
+\begin{lemma}
+Torsion free divisible abelian groups are exactly $\mathbb Q$ vector spaces
+\end{lemma}
+
+\begin{proposition}\label{Homology of abelian groups}
+$A$ is an abelian group
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+\item $H_0(A)=\mathbb Z$ and $A\xrightarrow\cong H_1(A)$, $a\mapsto [a]$ is a natural isomorphism
+\item If $A$ is torsion free, then $\bigwedge^k_{\mathbb Z}(A)\xrightarrow \cong\bigwedge^k_{\mathbb Z}(H_1(A))\xrightarrow{\wedge^k}H_k(A)$ is a natural isomorphism
+\item If $A$ is a divisible group, then $A\cong A/T\oplus T$, $T$ is the torsion subgroup of $A$, and $H_k(A)\cong\bigwedge^k_{\mathbb Q}(A/T)\bigoplus H_k(T)$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \hfill
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+\item $H_0(A)=\mathbb Z$ is clear
+\item
+\item
+\end{enumerate}
+\end{proof}
+
+\begin{example}
+If $F$ is a field, $H_k(F)=\bigwedge^k_{\mathbb Q}(F)$
+\end{example}
+
+\begin{theorem}
+$H_n\left(\dfrac{C_*(X)}{F_{n-1}C_*(X)}\right)^t\to\mathcal P(X,\{1\})$ is an isomorphism given $H_n\left(\dfrac{C_*(X)}{F_{n-1}C_*(X)}\right)^t$ with group action $g(a_0,\cdots,a_n)=(\det g)(ga_0,\cdots,ga_n)$
+\begin{align*}
+\mathcal P(X,G)&=\mathbb Z\otimes_{\mathbb Z[G]}\mathcal P(X,\{1\})^t \\
+&=\mathbb Z\otimes_{\mathbb Z[G]}H_n\left(\frac{C_*(X)}{F_{n-1}C_*(X)}\right)^t=H_0\left(G;H_n\left(\dfrac{C_*(X)}{F_{n-1}C_*(X)}\right)^t\right) \\
+&= H_n\left(\mathbb Z\otimes_{\mathbb Z[G]}\frac{C_*(X)}{F_{n-1}C_*(X)}\right)= H_n\left(H_0\left(G;\frac{C_*(X)}{F_{n-1}C_*(X)}\right)\right) \\
+&= H_n\left(\dfrac{\mathbb Z\otimes_{\mathbb Z[G]}C_*(X)}{\mathbb Z\otimes_{\mathbb Z[G]}F_{n-1}C_*(X)}\right)= H_n\left(\dfrac{H_0(G;C_*(X))}{H_0(G;F_{n-1}C_*(X))}\right) \\
+\end{align*}
+\end{theorem}
+
+\begin{definition}
+On $FP^1=F\cup\{\infty\}$ the group of \textbf{M\"obius transformations} $f(z)=\dfrac{az+b}{cz+d}$ can be identified with the group of projective transformations $PGL(2,F)=PSL(2,F)$ since denoting $z=\dfrac{z_1}{z_2}$ we have
+\begin{align*}
+\left[z,1\right]=[z_1,z_2]&\mapsto\begin{pmatrix}
+a&b\\
+c&d
+\end{pmatrix}\cdot[z_1,z_2] \\
+&=[az_1+bz_2,cz_1+dz_2] \\
+&=\left[\dfrac{az_1+bz_2}{cz_1+dz_2},1\right] \\
+&=\left[\dfrac{az+b}{cz+d},1\right]
+\end{align*}
+The \textbf{Cross ratio}\index{Cross ratio} of $z_0,z_1,z_2,z_3\in FP^1$ is
+\[(z_0,z_1;z_2,z_3)=\dfrac{(z_2-z_0)(z_3-z_1)}{(z_3-z_0)(z_2-z_1)}\]
+\end{definition}
+
+\begin{lemma} \hfill
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+\item Cross ratio is a projective invariant
+\item There is a unique $g\in PSGL(2,F)=PSL(2,F)$ such that $(z_0,z_1,z_2,z_3)=g(\infty,0,1,(z_0,z_1;z_2,z_3))$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \hfill
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+\item Since
+\[\frac{az+b}{cz+d}-\frac{aw+b}{cw+d}=\frac{(ad-bc)(z-w)}{(cz+d)(cw+d)}\]
+We have
+\begin{align*}
+\left(\dfrac{az_0+b}{cz_0+d},\dfrac{az_1+b}{cz_1+d};\dfrac{az_2+b}{cz_2+d},\dfrac{az_3+b}{cz_3+d}\right)&=
+\frac{\dfrac{(ad-bc)^4(z_2-z_0)(z_3-z_1)}{(cz_0+d)(cz_1+d)(cz_2+d)(cz_3+d)}}{\dfrac{(ad-bc)^4(z_3-z_0)(z_2-z_1)}{(cz_0+d)(cz_1+d)(cz_2+d)(cz_3+d)}} \\
+&=\dfrac{(z_2-z_0)(z_3-z_1)}{(z_3-z_0)(z_2-z_1)} \\
+&=(z_0,z_1;z_2,z_3)
+\end{align*}
+\item $g=\begin{pmatrix}
+a_2-a_0 & a_1(a_0-a_2) \\
+a_2-a_1 & a_0(a_1-a_2)
+\end{pmatrix}$
+\end{enumerate}
+\end{proof}
+
+\begin{definition}
+The \textbf{ideal points} $\partial\mathbb H^n$ of $\mathbb H^n$ in the Klein and Poincar\'e disc models are the boundary circles, in the half space model is $\mathbb R^n\cup\{\infty\}$, $\overline{\mathbb H^n}=\mathbb H^n\cup\partial\mathbb H^n$ \par
+$\mathcal P(\partial\mathbb H^n)$ is the $K_0$-group generated by simplices in $\overline{\mathbb H^n}$ with vertices on $\partial\mathbb H^n$. Explicitly, $\mathcal P(\partial\mathbb H^n)=H_0(G;H_n(C_*(X)/F_{n-1}C_*(X))^t)$ are $(n+1)$-tuples modulo relations $(a_0,\cdots,a_n)=0$ if lies in a subspace, $(ga_0,\cdots,ga_n)=(\det g)(a_0,\cdots,a_n)$, and $\displaystyle\sum_{i=0}^{n+1}(a_0,\cdots,\widehat{a_i},\cdots,a_{n+1})=0$ for $a_i\in\partial\mathbb H^n$
+\end{definition}
+
+\if\CROP0
+\begin{theorem}
+$\mathbb H^n\hookrightarrow\overline{\mathbb H^n}$ induce an isomorphism $\mathcal P(\mathbb H^n)\to\mathcal P(\overline{\mathbb H^n})$ \par
+\[H_1(O(n),St(S^{n-1}))\to\mathcal P(\partial\mathbb H^n)\to\mathcal P(\overline{\mathbb H^n})\to H_0(O(n),St(S^{n-1}))\to0\]
+Where $St(S^{n-1})=H_n(C_*(S^{n-1})/F_{n-1}C_*(S^{n-1}))$ with tuples contained in hemispheres \par
+If $n$ is odd, then $\mathcal P(\partial\mathbb H^n)\to\mathcal P(\overline{\mathbb H^n})$ is surjective with kernel consists of elements of at most order $2$ \par
+If $n>0$ is even, then $\mathcal P(\overline{\mathbb H^n})/\mathrm{im(\mathcal P(\partial\mathbb H^n)\to\mathcal P(\overline{\mathbb H^n}))}\cong\mathcal P(S^{n-1})/\Sigma\mathcal P(S^{n-2})$
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+\fi
+
+\begin{example}
+$\partial\mathbb H^3=\mathbb R^2\cup\{\infty\}=\mathbb C\cup\{\infty\}$ is the Riemann sphere, every isometry on $\mathbb H^3$ restricts to a conformal map on $\partial\mathbb H^3$ since isometry sends hemispheres to hemispheres or orthogonal planes. Isometries on $\partial\mathbb H^3$ are m\"obius transformations, and translations $z\mapsto z+\lambda$ can be extended to $(z,x_3)\mapsto(z+\lambda,x_3)$, dilations $z\mapsto\lambda z$ can be extended to $(z,x_3)\mapsto (\lambda z,|\lambda|x_3)$, inversions $z\mapsto -\dfrac{1}{z}$ can be extended to $(z,x_3)\mapsto\left(\dfrac{-\bar z}{|z|^2+x_3^2},\dfrac{x_3}{|z|^2+x_3^2}\right)$. Thus the isometry group for $\mathbb H^3$ is $PSL(2,\mathbb C)\ltimes\mathbb Z/2\mathbb Z$
+\end{example}
+
+\if\CROP0
+\begin{definition}
+\textbf{Polylogarithm}\index{Polylogarithm} is 
+\[\displaystyle\mathrm{Li}_s(z)=\sum_{k=1}^\infty\dfrac{z^k}{k^s}\]
+In particular, $\mathrm{Li}_1(z)=-\ln(1-z)$, $\mathrm{Li}_2(z)$ is \textbf{dilogarithm}\index{Dilogarithm} with analytic continuation
+\[\displaystyle\mathrm{Li}_2(z)=-\int_{0}^z\frac{\ln(1-u)}{u}du\]
+integrated avoiding the the cut $[1,\infty]$ \par
+The \textbf{Bloch-Wigner function}\index{Bloch-Wigner function} is
+\[D_2(z)=\mathrm{Im}(\mathrm{Li}_2(z))+\arg(1-z)\ln|z|\]
+For $z\in\mathbb C\setminus\{0,1\}$
+\end{definition}
+
+\begin{lemma}
+The signed volume of the ideal simplex $(p_0,p_1,p_2,p_3)$ is $D_2(p_0,p_1;p_2,p_3)$
+\end{lemma}
+\fi
+
+\begin{definition}\label{Definition for P_F}
+$F$ is a field, define $\mathcal P_F$ to be the abelian group generated by $z\in F\setminus\{0,1\}$ modulo relation
+\begin{align}\label{Relation for PF}
+z_1-z_2+\dfrac{z_2}{z_1}-\dfrac{1-z_2}{1-z_1}+\frac{1-z_2^{-1}}{1-z_1^{-1}}=0
+\end{align}
+For $z_1\neq z_2$
+\end{definition}
+
+\begin{lemma}
+If $\overline F=F$, then $z+z^{-1}=0$, $z+\{1-z\}=0$
+\end{lemma}
+
+\begin{remark}
+By adding $0=1=\infty=0$, these relations are true for all $z\in F\cup\{\infty\}$
+\end{remark}
+
+\if\CROP0
+\begin{proof}
+Replace $z_j$ with $z_j^{-1}$ in \eqref{Relation for PF} we have
+\begin{align}\label{Relation for PF - eq1}
+z_1^{-1}-z_2^{-1}+\dfrac{z_1}{z_2}-\dfrac{1-z_2^{-1}}{1-z_1^{-1}}+\frac{1-z_2}{1-z_1}=0
+\end{align}
+Sum \eqref{Relation for PF} and \eqref{Relation for PF - eq1} we get
+\begin{align}\label{Relation for PF - eq2}
+z_1-z_2+z_1^{-1}-z_2^{-1}+\dfrac{z_2}{z_1}+\dfrac{z_1}{z_2}=0
+\end{align}
+Switch $z_1,z_2$ we have
+\begin{align}\label{Relation for PF - eq3}
+z_2-z_1+z_2^{-1}-z_1^{-1}+\dfrac{z_1}{z_2}+\dfrac{z_2}{z_1}=0
+\end{align}
+Denote $z=\dfrac{z_2}{z_1}$ and sum \eqref{Relation for PF - eq2} and \eqref{Relation for PF - eq3} we get
+\[2(z+z^{-1})=0\]
+Replace $z_j$ with $z^j$ in \eqref{Relation for PF - eq2} we have
+\begin{align*}
+z^2+z^{-2}=2(z+z^{-1})=0
+\end{align*}
+Since $\overline F=F$, $z+z^{-1}=0$ in $\mathcal P_F$ \par
+Replace $z_j$ with $1-z_j$ in \eqref{Relation for PF} we have
+\begin{align}\label{Relation for PF - eq4}
+\{1-z_1\}-\{1-z_2\}+\dfrac{1-z_2}{1-z_1}-\dfrac{z_2}{z_1}+\dfrac{1-z_1^{-1}}{1-z_2^{-1}}
+\end{align}
+Sum \eqref{Relation for PF} and \eqref{Relation for PF - eq2} we get
+\begin{align*}
+&z_1+\{1-z_1\}-z_2-\{1-z_2\}+\dfrac{1-z_2^{-1}}{1-z_1^{-1}}+\dfrac{1-z_1^{-1}}{1-z_2^{-1}}=0 \\
+&\Rightarrow z_1+\{1-z_1\}=z_2+\{1-z_2\}
+\end{align*}
+Since $\overline F=F$, $z^2-z+1=0$ has roots, then $1-z=z^{-1}$, thus $z+\{1-z\}=0$ in $\mathcal P_F$
+\end{proof}
+\fi
+
+\begin{theorem}[K-groups of fields]
+$F$ is a field. The $K_0,K_1,K_2$ groups of $F$ are
+\begin{align*}
+K_0(F)&=\mathbb Z,\, K_1(F)=F^\times \\
+K_2(F)&=F^\times\otimes_{\mathbb Z} F^\times/\langle a\otimes(1-a)\rangle,\,a\neq0,1
+\end{align*}
+\end{theorem}
+
+\begin{theorem}[Bloch-Wigner]
+$F$ is algebraically closed field with characteristic $0$, write $G=SL(2,F)$, we have an exact sequence
+\[0\to\mathbb Q/\mathbb Z\to H_3(G;\mathbb Z)\xrightarrow\sigma \mathcal P_F\xrightarrow\lambda\textstyle \bigwedge^2_{\mathbb Z}(F^\times/\mu_F)\xrightarrow{\sym} H_2(G;\mathbb Z)\to 0\]
+$\mathbb Q/\mathbb Z\cong H_3(\mu_F;\mathbb Z)\to H_3(G;\mathbb Z)$ is induced by
+\[\mu_F\to G,\,z\mapsto\begin{pmatrix}
+z&0\\
+0&z^{-1}
+\end{pmatrix}\]
+For any $(g_0,g_1,g_2,g_3)\in B_3(G)$
+\[\sigma(g_0,g_1,g_2,g_3)=(g_0\infty,g_1\infty,g_2\infty,g_3\infty)\]
+Or for any $[g_1|g_2|g_3]\in\bar B_3(G)$
+\[\sigma([g_1|g_2|g_3])=\sigma(1,g_1,g_1g_2,g_1g_2g_3)=(\infty:g_1\infty: g_1g_2\infty: g_1g_2g_3\infty)\]
+This doesn't depend on the choice of $\infty$
+\[\lambda(z)=z\wedge(1-z)\]
+\[\sym(u\wedge v)=u\otimes v\]
+$K_2(F)\cong H_2(G;\mathbb Z)$
+\end{theorem}
+
+\begin{proof}
+Let $C_*$ be the tuple complex of $FP^1$. The stabilizer of $\infty=[1,0]$ is the Borel subgroup
+\[B=\left\{\begin{pmatrix}
+a&b \\
+0&a^{-1}
+\end{pmatrix}\middle| a\in F^\times,b\in F\right\}\]
+Hence $FP^1\cong G/B$. The stabilizer of $\infty$ and $0=[0,1]$ is the split torus
+\[T=\left\{\begin{pmatrix}
+a&0 \\
+0&a^{-1}
+\end{pmatrix}\middle|a\in F^\times\right\}\cong F^\times\]
+Hence $FP^1\times FP^1\cong G/T$. The stabilizer of $\infty,0$ and $1=[1,1]$ is
+\[\left\{\begin{pmatrix}
+\pm1 &0 \\
+0& \pm1
+\end{pmatrix}\right\}\cong\mathbb Z/2\mathbb Z\]
+Hence $FP^1\times FP^1\times FP^1\cong G$. Therefore we have
+\begin{align*}
+C_0&=\mathbb Z[G/B]=\mathbb ZG\otimes_{\mathbb ZB}\mathbb Z \\
+C_1&=\mathbb Z[G/T]=\mathbb ZG\otimes_{\mathbb ZT}\mathbb Z \\
+C_2&=\mathbb Z[G/(\mathbb Z/2\mathbb Z)]=\mathbb ZG\otimes_{\mathbb Z[\mathbb Z/2\mathbb Z]}\mathbb Z
+\end{align*}
+By Shapiro's lemma \ref{Shapiro's lemma}, we get
+\begin{align*}
+H_*(G;C_0)&=H_*(G;\mathbb ZG\otimes_{\mathbb ZB}\mathbb Z)=H_*(B;\mathbb Z) \\
+H_*(G;C_1)&=H_*(G;\mathbb ZG\otimes_{\mathbb ZT}\mathbb Z)=H_*(T;\mathbb Z) \\
+H_*(G;C_2)&=H_*(G;\mathbb ZG\otimes_{\mathbb Z[\mathbb Z/2\mathbb Z]}\mathbb Z)=H_*(\mathbb Z/2\mathbb Z;\mathbb Z)=\begin{cases}
+\mathbb Z &*=0 \\
+\mathbb Z/2\mathbb Z &*\text{ odd} \\
+0 &*>0\text{ even}
+\end{cases}
+\end{align*}
+\[C_0\otimes_{\mathbb ZT}B_1(T)\hookrightarrow C_0\otimes_{\mathbb ZT}B_1(G)\hookrightarrow C_0\otimes_{\mathbb ZG}B_1(G)\]
+induce isomorphisms on homology
+Consider split exact sequence
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & U \arrow[r, hook] & B \arrow[r] & T \arrow[r] \arrow[l, hook, bend right, shift right] & 0
+\end{tikzcd}
+\end{center}
+$U=\left\{\begin{pmatrix}
+1&b \\
+0&1
+\end{pmatrix}\middle|b\in F\right\}\cong F$ is the unipotent subgroup. Use Hochshild-Serre spectral sequence \ref{Hochschild-Serre spectral sequence} we have
+\[H_p(F^\times;\textstyle\bigwedge_{\mathbb Q}^q(F))=H_p(F^\times;H_q(F;\mathbb Z))=H_p(B/U;H_q(U;\mathbb Z))\Rightarrow H_{p+q}(B;\mathbb Z)\]
+For any $r\in F$, consider
+\[\mu_r:\textstyle\bigwedge_{\mathbb Q}^q(F)\to\bigwedge_{\mathbb Q}^q(F),\,x_1\wedge\cdots\wedge x_q\mapsto (rx_1)\wedge\cdots\wedge (rx_q)=r^q(x_1\wedge\cdots\wedge x_q)\]
+Apply Center kills lemma \ref{Center kills lemma}, $(r^q-1)$ annihilates $H_q(F^\times;\bigwedge_{\mathbb Q}^q(F))$, hence $H_q(F^\times;\bigwedge_{\mathbb Q}^q(F))=0$ for $q>0$, therefore inclusion $T\hookrightarrow B$ and projection $B\to T$ induce isomorphisms
+\[H_*(F^\times;\mathbb Z)\cong H_*(B;\mathbb Z)\]
+Note that $\mu_{F}\cong\mathbb Q/\mathbb Z$ is the torsion subgroup of $F^\times$, by Proposition \ref{Homology of abelian groups}, we get
+\begin{align*}
+H_*(G;C_0)=H_*(G;C_1)=H_*(F^\times;\mathbb Z)=\textstyle\bigwedge^*_{\mathbb Q}(F^\times/\mu_{F})\bigoplus H_*(\mu_{F};\mathbb Z)
+\end{align*}
+Since $Tor$ preserves direct sums and filtered colimits, or through some Bockstein, we have
+\begin{align*}
+H_*(\mu_{F};\mathbb Z)&= Tor^{\mathbb Z[\mu_{F}]}_*(\mathbb Z,\mathbb Z) \\
+&=Tor^{\mathbb Z[\mu_{F}]}_*\left(\bigoplus_p\mathbb Z[\textstyle\frac{1}{p}]/\mathbb Z;\mathbb Z\right) \\
+&=Tor^{\mathbb Z[\mu_{F}]}_*\left(\bigoplus_p\varinjlim_n\mathbb Z/p^n\mathbb Z;\mathbb Z\right) \\
+&=\bigoplus_pTor^{\mathbb Z[\mu_{F}]}_*\left(\varinjlim_n\mathbb Z/p^n\mathbb Z;\mathbb Z\right) \\
+&=\bigoplus_p\varinjlim_nTor^{\mathbb Z[\mu_{F}]}_*\left(\mathbb Z/p^n\mathbb Z;\mathbb Z\right) \\
+&=\begin{cases}
+\bigoplus_p\varinjlim_n\mathbb Z=\bigoplus_p\mathbb Z &i=0 \\
+\bigoplus_p\varinjlim_n\mathbb Z/p^n\mathbb Z=\mu_{F} &i\text{ odd} \\
+0 &i>0\text{ even}
+\end{cases}
+\end{align*}
+Here $\mathbb Z[\frac{1}{p}]/\mathbb Z=\displaystyle\varinjlim_n\mathbb Z/p^n\mathbb Z$ is the Pr\"ufer group \par
+By Lemma \ref{Hyperhomology of an acyclic chain complex is the same as homology} and Theorem \ref{Hyperhomology spectral sequence} we know
+\[E^1_{pq}=H_q(G;C_p)=H_q(C_p\otimes_{\mathbb Z[G]}B_*(G))\Rightarrow \mathbb H_{p+q}(G;C_*)=H_{p+q}(G;\mathbb Z)\]
+Hence the $E^1$ page looks like
+\begin{center}
+\begin{tabular}{c|ccccc}
+3&$\bigwedge^3_{\mathbb Q}(F^\times/\mu_{F})\bigoplus \mathbb Q/\mathbb Z$&$\bigwedge^3_{\mathbb Q}(F^\times/\mu_{F})\bigoplus \mathbb Q/\mathbb Z$&$\mathbb Z/2\mathbb Z$&& \\
+2&$\bigwedge^2_{\mathbb Q}(F^\times/\mu_{F})$&$\bigwedge^2_{\mathbb Q}(F^\times/\mu_{F})$&$0$&& \\
+1&$F^\times$&$F^\times$&$\mathbb Z/2\mathbb Z$&& \\
+0&$\mathbb Z$&$\mathbb Z$&$\mathbb Z$&$H_0(G;C_3)$&$H_0(G;C_4)$ \\
+\hline
+&0&1&2&3&4
+\end{tabular}
+\end{center}
+By Definition \ref{Definition for P_F} of $\mathcal P_F$ we know
+\begin{align*}
+E^2_{30}&=\dfrac{\ker(H_0(G;C_3)\to H_0(G;C_2))}{\mathrm{im}(H_0(G;C_4)\to H_0(G;C_3))} \\
+&=\dfrac{\ker(C_3\otimes_{\mathbb ZG}\mathbb Z\to C_2\otimes_{\mathbb ZG}\mathbb Z)}{\mathrm{im}(C_4\otimes_{\mathbb ZG}\mathbb Z\to C_3\otimes_{\mathbb ZG}\mathbb Z)} \\
+&=\dfrac{C_3\otimes_{\mathbb ZG}\mathbb Z}{\mathrm{im}(C_4\otimes_{\mathbb ZG}\mathbb Z\to C_3\otimes_{\mathbb ZG}\mathbb Z)} \\
+&=\mathcal P_F
+\end{align*}
+Since
+\begin{align*}
+\cdots\to C_4\to C_3\to C_2\to C_1\to Z_0\to0 \\
+\cdots\to C_4\to C_3\to C_2\to Z_1\to0 \\
+\cdots\to C_4\to C_3\to Z_2\to0 \\
+\end{align*}
+are free $\mathbb ZG$ resolutions of $Z_0,Z_1,Z_2$, we have
+\[H_2(G;Z_0)\cong H_1(G;Z_1)\cong H_0(G;Z_2)\cong\mathcal P_F\]
+\begin{align*}
+H_0(G;C_2)\cong C_2\otimes_{\mathbb ZG}\mathbb Z\cong\mathbb Z\to&\mathbb Z\cong C_1\otimes_{\mathbb ZG}\mathbb Z\cong H_0(G;C_1) \\
+(\infty,0,1)\otimes1\mapsto& ((0,1)-(\infty,1)+(\infty,0))\otimes1 \\
+&=(\infty,0)\otimes1
+\end{align*}
+is an isomorphism. Similarly, $H_0(G;C_1)\to H_0(G;C_0)$ is zero map, thus
+\[E^2_{00}=\mathbb Z,\,E^2_{10}=E^2_{20}=0\]
+$w=\begin{pmatrix}
+&-1 \\
+1&
+\end{pmatrix}$ is a generator of the Weyl group $W(T)=N_G(T)/T$ of $T$, $w$ switches $0,\infty$ and $w^2=-I$
+\begin{align*}
+C_1\otimes_{\mathbb ZG}B_1(G)\to\,&C_0\otimes_{\mathbb ZG}B_1(G) \\
+(\infty,0)\otimes(g_0,g_1)\mapsto\,& ((\infty)-(0))\otimes(g_0,g_1) \\
+&=(\infty)\otimes(g_0,g_1)+(0w)\otimes(wg_0,wg_1) \\
+&=2(\infty)\otimes 
+\end{align*}
+is an isomorphism. Similarly
+
+We get the $E^2$ page
+\begin{center}
+\begin{tabular}{c|cccc}
+3&$\mathbb Q/\mathbb Z$&$\mathbb Q/\mathbb Z$&& \\
+2&$\bigwedge^2_{\mathbb Q}(F^\times/\mu_{F})$&$\bigwedge^2_{\mathbb Q}(F^\times/\mu_{F})$&$0$& \\
+1&$0$&$0$&$0$& \\
+0&$\mathbb Z$&$0$&$0$&$\mathcal P_F$ \\
+\hline
+&0&1&2&3
+\end{tabular}
+\end{center}
+\end{proof}
+
+
+
+
+
+
+
+
+\newpage
+\begin{proof} \hfill
+\begin{center}
+\begin{tabular}{c|cccc}
+4&$H_0(G;C_4)$&&& \\
+3&$H_0(G;C_3)$&$H_1(G;C_3)$&$H_2(G;C_3)$&$H_3(G;C_3)$ \\
+2&$\mathbb Z$&$\mathbb Z_2$&$0$&$\mathbb Z_2$ \\
+1&$\mathbb Z$&$F^\times$&$\bigwedge^2_{\mathbb Q}(F^\times/\mu_{F})$&$\bigwedge^3_{\mathbb Q}(F^\times/\mu_{F})\bigoplus \mathbb Q/\mathbb Z$ \\
+0&$\mathbb Z$&$F^\times$&$\bigwedge^2_{\mathbb Q}(F^\times/\mu_{F})$&$\bigwedge^3_{\mathbb Q}(F^\times/\mu_{F})\bigoplus \mathbb Q/\mathbb Z$ \\
+\hline
+&0&1&2&3
+\end{tabular}
+\end{center}
+$H_1(G;C_3)$ are of $2$ torsion
+We get the $E^2$ page
+\begin{center}
+\begin{tabular}{c|cccc}
+3&$\mathcal P_{F}$&&& \\
+2&$0$&$0$&$0$& \\
+1&$0$&$0$&$\bigwedge^2_{\mathbb Q}(F^\times/\mu_{F})$&$\mathbb Q/\mathbb Z$ \\
+0&$\mathbb Z$&$0$&$\bigwedge^2_{\mathbb Q}(F^\times/\mu_{F})$&$\mathbb Q/\mathbb Z$ \\
+\hline
+&0&1&2&3
+\end{tabular}
+\end{center}
+\end{proof}
+
+\end{document}

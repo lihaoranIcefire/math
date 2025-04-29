@@ -1,0 +1,100 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\textbf{Reference: }Section 1.6 of I+L
+
+\begin{lemma}
+If $G$ is a matrix group, $g=(g^i_j):U\to G$ is a local parametrization, then $\omega^G=g^{-1}dg=(g^i_j)^{-1}dg^k_j$(matrix multiplication)
+\end{lemma}
+
+\begin{example}
+Suppose $G=\mathrm{Isom^+}(\mathbb R^2)\cong\mathbb R^2\rtimes SO(2)$, $g=\begin{pmatrix}
+1&0&0 \\
+t_1 & \cos\theta &-\sin\theta \\
+t_2 & \sin\theta &\cos\theta \\
+\end{pmatrix}$, $g^{-1}=\begin{pmatrix}
+1&0&0 \\
+* & \cos\theta &\sin\theta \\
+* & -\sin\theta &\cos\theta \\
+\end{pmatrix}$, $dg=\begin{pmatrix}
+0&0&0 \\
+dt_1 &-\sin\theta d\theta &-\cos\theta d\theta \\
+dt_2 & \cos\theta d\theta&-\sin\theta d\theta \\
+\end{pmatrix}$, $g^{-1}dg=\begin{pmatrix}
+0&0&0 \\
+* & 0&-d\theta \\
+* & d\theta &0 \\
+\end{pmatrix}\in\mathbb R^2\rtimes \mathfrak{so}(2)=\mathfrak g$
+\end{example}
+
+\begin{theorem}
+Let $M$ be a smooth manifold of dimension $m$, $G$ be a Lie group, $\omega\in\Omega^1(M,\mathfrak g)$, then \par
+\textbf{(1) }For any $p\in M$, there exists a neighborhood $U$ of $p$ such that $\omega=f^*\omega^G$ $\Leftrightarrow$ $d\omega+\dfrac{1}{2}[\omega,\omega]=0$ \par
+\textbf{(2) }Suppose $f,h:U\to G$ satisfying $f^*\omega^G=h^*\omega^G$, then there exists $g\in G$, such that $h=L_g\circ f$ \par
+\textbf{(3) }If $M$ is simply connected, then $f$ extends to $M$
+\end{theorem}
+
+\begin{proof}
+Given $\omega\in\Omega^1(M,\mathfrak g)$, $d\omega+\dfrac{1}{2}[\omega,\omega]=0$ \par
+\textbf{(1) }Define $\theta\in\Omega^1(M\times G,\mathfrak g)$ by $\theta=\pi^*_M\omega-\pi^*_G\omega^G$, $\theta=\theta^iX_i$, $\{X_i\}$ being a basis of $\mathfrak g$, $\ker\theta\leq T(M\times G)$, given $u\in T_pM$, $p\in M$, given $g\in G$, $\exists_1v\in T_gG$ such that $\omega_p(u)=\omega^G_g(v)$ $\Rightarrow$ $\forall (p,g)\in M\times G$, $T_pM\to(\ker\theta)_{(p,g)}$ is an isomorphism with inverse $(d\pi_M)_{(p,g)}$
+\begin{align*}
+d\theta&=d(\pi^*_M\omega)-d(\pi^*_G\omega^G) \\
+&=\pi^*_Md\omega-\pi^*_Gd\omega^G \\
+&=\dfrac{1}{2}(\pi^*_M[\omega,\omega]-\pi^*_G[\omega^G,\omega^G]) \\
+&=\dfrac{1}{2}([\pi^*_M\omega,\pi^*_M\omega]-[\pi^*_G\omega^G,\pi^*_G\omega^G]) \\
+&=\dfrac{1}{2}([\pi^*_M\omega,\pi^*_M\omega]-[\pi^*_G\omega^G,\pi^*_G\omega^G]-[\pi^*_G\omega^G,\pi^*_M\omega]+[\pi^*_G\omega^G,\pi^*_M\omega]) \\
+&=\dfrac{1}{2}([\theta,\pi^*_M\omega]+[\pi^*_G\omega^G,\theta]) \\
+&=\dfrac{1}{2}[\theta,\pi^*_M\omega-\pi^*_G\omega^G] \\
+&=\dfrac{1}{2}[\theta,\theta]
+\end{align*}
+$\dfrac{1}{2}[\theta^iX_i,\theta^jX_j](\xi,\eta)=\dfrac{1}{2}(\theta^i(\xi)\theta^j(\eta)[X_i,X_j]-\theta^i(\eta)\theta^j(\xi)[X_i,X_j])=\dfrac{1}{2}[\theta^i,\theta^j]c^k_{ij}X_k$ where $c^k_{ij}$ are structure constants of the Lie algebra $\mathfrak g$, i.e. $[X_i,X_j]=c^k_{ij} X_k$ \par
+Apply Frobenius Theorem\ref{Frobenius theorem}, $\forall (p,q)$, there exists a submanifol of dimension $\dim M$ everywhere tangent to $\ker\theta$, $(d\pi_M)_{(p,g)}):T_{(p,g)}=(\ker\theta)_{(p,g)}\to T_pM$ is surjective, by inverse function theorem, there exists a neighborhood $U$ of $p$ and $f:U\to M\times G$, $f(U)\subseteq\Gamma$, $f|_{U}=\pi^{-1}_M$ $\Rightarrow$ $\Gamma$ is the graph of $f$ and $f^*(\omega^G)=\omega$ \par
+\textbf{(2) }Let $f(p)=g$, $h(p)=g'$, $\exists_1k\in G$ such that $g'=kg$, thus $(L_k\circ f)(p)=kg=g'$, thus $(L_k\circ f)^*\omega^G=f^*L_k^*\omega^G=f^*\omega^G=\omega$, thus the graph of $L_k\circ f$ coincides the graph of $h$ on a neighborhood of $p$, because both are integral submanifolds of $\theta$ at $(p,g)$ \par
+\textbf{(3) }$\pi_M|_{\Gamma}:\Gamma\to M$ for $\Gamma$ a maximal integral submanifold for $\ker\theta$ is a covering map
+\end{proof}
+
+\begin{example}
+$M=I\subset\mathbb R$, $G=\mathrm{Isom^+}(\mathbb R^2)$, $\omega^G=\begin{pmatrix}
+0&0&0 \\
+* &0&-d\theta \\
+* &d\theta&0 \\
+\end{pmatrix}$, consider $\alpha,\beta:I\to\mathbb R^2$ are paths parametrized by arc length, $\widetilde\alpha:I\to G$, $\widetilde\alpha(t)=\begin{pmatrix}
+1&0&0 \\
+\alpha^1(t)&{\alpha^1}'(t) &-{\alpha^2}'(t) \\
+\alpha^2(t)&{\alpha^2}'(t) &{\alpha^1}'(t) \\
+\end{pmatrix}$, 
+$\widetilde\alpha'(t)=\begin{pmatrix}
+0&0&0 \\
+{\alpha^1}'(t)&{\alpha^1}''(t) &-{\alpha^2}'(t) \\
+{\alpha^2}'(t)&{\alpha^2}''(t) &{\alpha^1}''(t) \\
+\end{pmatrix}$, $\widetilde\alpha^*d\tau=\begin{pmatrix}
+{\alpha^1}'dt \\
+{\alpha^2}'dt
+\end{pmatrix}$, $r_0^{-1}\circ\widetilde\alpha=\begin{pmatrix}
+{\alpha^1}' & {\alpha^2}' \\
+-{\alpha^2}' & {\alpha^1}'
+\end{pmatrix}$ \par
+Thus $(r_0^{-1}\circ\widetilde\alpha)(\widetilde\alpha^*d\tau)=\begin{pmatrix}
+({\alpha^1}')^2+({\alpha^2}')^2 \\
+0
+\end{pmatrix}dt=\begin{pmatrix}
+dt \\
+0
+\end{pmatrix}$ \par
+$\theta=\arctan\left(\dfrac{{\alpha^2}'}{{\alpha^1}'}\right)\Rightarrow d\theta=\dfrac{1}{1+\left(\dfrac{{\alpha^2}'}{{\alpha^1}'}\right)^2}\dfrac{{\alpha^2}''{\alpha^1}'-{\alpha^1}''{\alpha^2}'}{({\alpha^1}')^2}dt=({\alpha^2}''{\alpha^1}'-{\alpha^1}''{\alpha^2}')dt$
+Note that $\kappa(t)=-{\alpha^1}^{''}(t){\alpha^2}^{'}(t)+{\alpha^2}^{''}(t){\alpha^1}^{'}(t)=\begin{pmatrix}
+{\alpha^1}'' \\
+{\alpha^2}''
+\end{pmatrix}\cdot\begin{pmatrix}
+-{\alpha^2}' \\
+{\alpha^1}'
+\end{pmatrix}$ is the curvature, $\widetilde\alpha^*\omega^G(t)=\begin{pmatrix}
+0&0&0 \\
+dt&0 &-\kappa(t)dt \\
+0&\kappa(t)dt & 0 \\
+\end{pmatrix}$ \par
+Therefore, $\widetilde\alpha^*\omega^G=\widetilde\beta^*\omega^G\Leftrightarrow \widetilde\alpha=L_g\circ\widetilde\beta\Leftrightarrow\alpha=g\beta\Leftrightarrow\kappa_\alpha=\kappa_\beta$
+\end{example}
+
+\end{document}

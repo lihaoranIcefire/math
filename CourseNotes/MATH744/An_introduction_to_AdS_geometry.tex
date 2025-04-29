@@ -1,0 +1,45 @@
+\documentclass[main]{subfiles}
+
+\newcommand{\AdS}{\text{AdS}}
+
+\begin{document}
+
+\begin{definition}
+Anti de Sitter space is Lorentzian space form of constant curvature -1
+\end{definition}
+
+\begin{motivation} \hfill
+\begin{enumerate}[leftmargin=*]
+\item Gravity: study of Lorentzian metrics which solve Einstein equation $(\Lambda=-1)\Rightarrow$ AdS metrics are solutions. In dimension 3, AdS metrics are the only solutions. Hence 3D gravity = study of AdS metrics(Witten, Moncrief, Andersson, Mess, Benedetti)
+\item Proper isometric actions: Margulis: free groups acting properly on Minkowski space
+\item On a homogeneous space $G/H$ often you can define a matural pseudo-Riemannian structure. $G=\SO(n,2)$, $\SO(n,2)/S(O(n)\times O(2))$, $\SO(n,2)/SO(n-1,2)$
+\item 3D gravity is Teichmuller(Mess)
+\end{enumerate}
+\end{motivation}
+
+\begin{definition}
+$(\mathbb R^{n+2},\langle,\rangle)$, $\langle x,y\rangle=x_1y_1+\cdots+x_ny_n-x_{n+1}y_{n+1}-x_{n+2}y_{n+2}$. $\mathbb H^{n,1}=\{x\in\mathbb R^{n,2}|\langle x,x\rangle=-1\}$, $T_x(\mathbb H^{n,1})=x+x^\perp$ by taking derivative, $\Isom_0(\mathbb H^{n,1})=\SO(n,2)$. If $x\in\mathbb H^{n,1}$, then $x_{n+1}^2+x_{n+2}^2=1+x_1^2+\cdots+x_n^2\geq1$, can write $(x_{n+1},x_{n+2})=\rho(\cos\theta,\sin\theta)$, we have $\mathbb H^n\times S^1\cong\mathbb H^{n,1}$, $\left(\begin{bmatrix}
+x_1\\
+\vdots\\
+x_n\\
+\rho
+\end{bmatrix},e^{i\theta}\right)\leftrightarrow\begin{bmatrix}
+x_1\\
+\vdots\\
+x_n\\
+\rho\cos\theta\\
+\rho\sin\theta
+\end{bmatrix}$
+\end{definition}
+
+\begin{fact}
+Any isometry between two connected open sets of $\mathbb H^{n,1}$ extends to a global isometry. Any AdS manifold is modelled on $(\Isom(\mathbb H^{n,1}),\mathbb H^{n,1})$
+\end{fact}
+
+Klein model of AdS space: $\AdS^{n,1}=\mathbb H^{n,1}/\{x\sim-x\}\subseteq\mathbb{RP}^{n+1}$, $\Isom_0=\PSO(n,2)$. $\partial \AdS^{n,1}=\{\langle x,x\rangle=0\}$. Geodesics are projective lines: time like geodesics: $\langle\dot\gamma,\dot\gamma\rangle<0$, light like, space like
+
+Poincare model: $\mathbb H^n\times S^1\to\mathbb H^{n,1}$, $g_{\AdS}=g_{\mathbb H^n}-\rho^2d\theta^2$
+
+Dimension 2+1: $V=M_2(\mathbb R)$, $q=-\det$ is a quadratic form, $\mathbb H^{2,1}=\SL_2(\mathbb R)$, $\SL_2(\mathbb R)\times\SL_2(\mathbb R)$ acts on $V$ by $(A,B)\cdot X=AXB^{-1}$, given a group homomorphism $\SL_2(\mathbb R)\times\SL_2(\mathbb R)\to\SO(2,2)$, $\Isom(\mathbb H^{2,1})=\SL_2(\mathbb R)\times\SL_2(\mathbb R)/\pm I$, $\AdS^{2,1}\cong\PSL_2(\mathbb R)$,
+
+\end{document}

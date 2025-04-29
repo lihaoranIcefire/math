@@ -1,0 +1,75 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\textbf{Webpage:} www.math.umd.edu/~kmelnick/eds20.html \par
+\textbf{Book recommendation:} \par
+\textbf{1. }T.A. Ivey and J.M. Landsberg: Cartan for Beginners: Differential Geometry via Moving Frames and Exterior Differential Systems (2nd ed.), AMS Graduate Studies in Mathematics 175, Providence, RI (2016) \par
+\textbf{2. }R. Bryant, P. Griffiths, D. Grossman: Exterior Differential Systems and Euler-Lagrange Partial Differential Equations, Chicago Lectures in Mathematics, Chicago (2003) \par
+\textbf{3. }R. Bryant, S.-S. Chern, R.B. Gardiner, H. Goldschmidt, P. Griffiths: Exterior Differential Systems, Springer (1990) \par
+\textbf{Note:} Einstein summation convention is regularly used
+
+\begin{definition}
+We say a PDE is \textbf{overdetermined}\index{Overdetermined} if there are more equations than unknowns
+\end{definition}
+
+\begin{example}
+Suppose $\alpha$ is a $1$ form on $U\subseteq\mathbb R^n$ \par
+Can we find $f$ on $U$ such that $df=\alpha$ \par
+In corrdinaties, $\alpha=a_idx^i$, $\dfrac{\partial f}{\partial x^i}=a^i$ \par
+In general, there is no solution, a necessary condition is $d\alpha=d^2f=0$, i.e. $\dfrac{\partial a_i}{\partial x^j}=\dfrac{\partial a_j}{\partial x^i}$
+\end{example}
+
+\begin{lemma}[Poincar\'e lemma]
+If $U\subseteq\mathbb R^n$ is contractible, $d\alpha=0$ is also a sufficient condition, $f$ is determined up to constants $c_0=f(x_0),x_0\in U$
+\end{lemma}
+
+\begin{example}
+Suppose $D\subseteq\mathbb R^2$ is the disk, $g,A:D\to 2\times 2$ symmetric matrices with $g(x,y)$ positive definite \par
+Can we find $\sigma:D\to\mathbb R^3$ such that $g$ is the induced metric on $D$, and $A$ is the second fundamental form, i.e. $g=d\sigma\cdot d\sigma$, $A=-dn\cdot d\sigma$ \par
+In coordinates, $\sigma=(\sigma^1,\sigma^2,\sigma^3)$, $g(x,y)=\begin{pmatrix}
+g_{11}(x,y) & g_{12}(x,y) \\
+g_{21}(x,y) & g_{22}(x,y)
+\end{pmatrix}$, $A(x,y)=\begin{pmatrix}
+A_{11}(x,y) & A_{12}(x,y) \\
+A_{21}(x,y) & A_{22}(x,y)
+\end{pmatrix}$ \par
+Write $\dfrac{\partial\sigma^i}{\partial x}=\sigma^i_1$, $\dfrac{\partial\sigma^i}{\partial y}=\sigma^i_2$, $n=\dfrac{\sigma_1\times\sigma_2}{\|\sigma_1\times\sigma_2\|}$, $g_{11}=(\sigma^i_1)^2$, $g_{12}=\sigma^i_1\sigma^i_2=g_{21}$, $g_{22}=(\sigma^i_2)^2$, $A_{11}=n^i\sigma^i_{11}$, $A_{12}=n^i\sigma^i_{12}=A_{21}$, $A_{22}=n^i\sigma^i_{22}$, there are $6$ equations in total \par
+There exists a solution iff satisfying Gauss-Codazzi equations:
+\[\dfrac{\partial A_{11}}{\partial y}-\dfrac{\partial A_{12}}{\partial x}=A_{11}\Gamma^1_{12}+A_{12}(\Gamma^2_{12}-\Gamma^1_{11})-A_{22}\Gamma^2_{11}\]
+\[\dfrac{\partial A_{12}}{\partial y}-\dfrac{\partial A_{22}}{\partial x}=A_{11}\Gamma^1_{22}+A_{12}(\Gamma^2_{22}-\Gamma^1_{12})-A_{22}\Gamma^2_{12}\]
+\end{example}
+
+\begin{example}
+Given $\alpha=(\alpha^1(x,y,u),\alpha^2(x,y,u))$, $(x,y)\in U\subseteq\mathbb R^2$ \par
+Can we find $u:U\to\mathbb R$ such that
+\begin{equation}\label{eq:1}
+\dfrac{\partial u}{\partial x}=\alpha^1(x,y,u) \\
+\dfrac{\partial u}{\partial y}=\alpha^2(x,y,u)
+\end{equation}
+Introduce variables $p,q$ and $J^1(\mathbb R^2,\mathbb R)=\mathbb R^2\times\mathbb R\times\mathbb R^2$(1-Jet), define $\theta=du-pdx-qdy$, $\Omega=dx\wedge dy$ \par
+Suppose $\Sigma\subseteq J^1(\mathbb R^2,\mathbb R)$ is a surface such that $\Omega|_{T\Sigma}$ never vanishes and $\theta|_{T\Sigma}$ vanishes identically, then locally $\Sigma$ is a graph($\Omega|_{T\Sigma}\neq0$ is for nondegeneracy) $u=u(x,y)$, $p=p(x,y)$, $q=q(x,y)$ with $du=pdx+qdy$ on $T\Sigma$, but $du=u_xdx+u_ydy$ on $T\Sigma$, thus $p=u_x,q=u_y$ on $\Sigma$ \par
+Now consider $M\subseteq J^1(\mathbb R^2,\mathbb R)$ be the solution to $p=\alpha^1(x,y,u),q=\alpha^2(x,y,u)$ which is a $3$ manifold. Solution of \eqref{eq:1} correspondes to surfaces $\Sigma\subseteq M$ on which $\Omega\neq0, \theta=0$ \par
+A necessary condition for existence of such a surface $\Sigma$ is $d\theta=-dp\wedge dx-dq\wedge dy$ in $J^1(\mathbb R^2,\mathbb R)$, suppose $j:M\hookrightarrow J^1(\mathbb R^2,\mathbb R)$ is the inclusion, then
+\begin{align*}
+j^*d\theta&=-(\alpha^1_xdx+\alpha^1_ydy+\alpha^1_udu)\wedge dx-(\alpha^2_xdx+\alpha^2_ydy+\alpha^2_udu)\wedge dy \\
+&=(\alpha^1_y-\alpha^2_x)dx\wedge dy-\alpha^1_udu\wedge dx-\alpha^2_udu\wedge dy
+\end{align*}
+On $\Sigma$ \par
+Suppose $i:\Sigma\hookrightarrow J^1(\mathbb R^2,\mathbb R)$ is the inclusion, then
+\begin{align*}
+i^*d\theta&=(\alpha^1_y-\alpha^2_x)i^*d\Omega-\alpha^1_u(\alpha^1dx+\alpha^2dy)\wedge dx-\alpha^2_u(\alpha^1dx+\alpha^2dy)\wedge dy \\
+&=(\alpha^1_y-\alpha^2_x+\alpha^1_u\alpha^2-\alpha^2_u\alpha^1)i^*d\Omega
+\end{align*}
+Since $\Omega\neq0$, $\alpha^1_y-\alpha^2_x+\alpha^1_u\alpha^2-\alpha^2_u\alpha^1=0$ on $\Sigma$ \par
+Consider the following possible cases: \par
+\textbf{Case I: }$\alpha^1_y-\alpha^2_x+\alpha^1_u\alpha^2-\alpha^2_u\alpha^1=0$ on $M$ \par
+\textbf{Case II: }$\alpha^1_y-\alpha^2_x+\alpha^1_u\alpha^2-\alpha^2_u\alpha^1=0$ on $M$ \par
+For case I, Apply Theorem \ref{Frobenius theorem}, we know it is a sufficient condition since
+\begin{align*}
+d\theta &=(\alpha^1_y-\alpha^2_x+\alpha^1_u\alpha^2-\alpha^2_u\alpha^1)dx\wedge dy+\alpha^1_u\theta\wedge dx-\alpha^2_u\theta\wedge dy \\
+&=(\alpha^2_udy-\alpha^1_udx)\wedge\theta
+\end{align*}
+\end{example}
+
+\end{document}

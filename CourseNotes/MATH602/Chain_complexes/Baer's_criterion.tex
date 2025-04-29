@@ -1,0 +1,70 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{theorem}[Baer's criterion]\label{Baer's criterion}\index{Baer's criterion}
+A left $R$ module $E$ is injective in the category of left $R$ modules iff every left ideal homomorphism $\phi:I\to E$ can be extended to a homomorphism $R\to E$
+\end{theorem}
+
+\begin{proof}
+If $E$ is injective, we can certainly extend $\phi:I\to E$
+\begin{center}
+\begin{tikzcd}
+I \arrow[r, hook] \arrow[d, "\phi"'] & R \arrow[ld, dashed] \\
+E                                    &                     
+\end{tikzcd}
+\end{center}
+Now suppose extension is always possible, $A\hookrightarrow B$ is a submodule, $\alpha:A\to E$ is a homomorphism, consider poset $\Gamma:=\{A\leq C\leq B,\alpha_C:C\to E\}$, $(C,\alpha_C)\leq(D,\alpha_D)$ meaning $C\leq D$ and $\alpha_D|_C=\alpha_C$, by Zorn's lemma, we can pick a maximal element $(C,\alpha)$, suppose $C\lneq B$, there exists $b\in B\setminus C$, consider $J=\{r\in R|rb\in C\}$, we have
+\begin{center}
+\begin{tikzcd}
+J \arrow[rd, hook] \arrow[r, "\times b"] & C \arrow[r, "\alpha"]    & E \\
+                                         & R \arrow[ru, "f"', dashed] &  
+\end{tikzcd}
+\end{center}
+define $\beta:C+\langle b\rangle\to E$, $c+rb\mapsto\alpha(c)+f(r)$, contradicting the maximality
+\end{proof}
+
+\begin{definition}
+A left $R$ module $M$ is $r$ \textbf{divisible}\index{Divisible} if $M\xrightarrow{\times r}M$ is surjetive, $M$ is divisible if $M$ is $r$ divisible for any $0\neq r\in R$
+\end{definition}
+
+\begin{corollary}\label{Injective <=> Divisible}
+Suppose $R$ is a PID, a left $R$ module $M$ is injective iff $M$ is divisible
+\end{corollary}
+
+\begin{proof}
+Suppose $M$ is injective, for any $0\neq r\in R$, $R\xrightarrow{\times r}rR$ is an isomorphism since $R$ is a PID, by Theorem \ref{Baer's criterion}, we have
+\begin{center}
+\begin{tikzcd}
+R \arrow[r, "\times r"] \arrow[rd, "m"'] & rR \arrow[r, hook] & R \arrow[ld, "m'", dashed] \\
+                                         & M                  &                           
+\end{tikzcd}
+\end{center}
+Here $R\xrightarrow{m} M$, $1\mapsto m$, thus $m=rm'$ \par
+Suppose $M$ is divisible, since $R$ is a PID, for any homomorphism $rR\to M$, $r\mapsto m$, we have $m=rm'$ for some $m'$, giving the extension $R\to M$, $1\mapsto m'$
+\end{proof}
+
+\begin{corollary}
+The category of abelian groups $\mathscr Ab$ has enough injectives
+\end{corollary}
+
+\begin{proof}
+By corollary \ref{Injective <=> Divisible}, $\mathbb Q/\mathbb Z$ is injective since $\mathbb Q/\mathbb Z$ is divisible \par
+Suppose $M$ is an abelian group, define $I=\prod_{f}\mathbb Q/\mathbb Z$ which is also injective due to Lemma \ref{Coproduct of projetives is projective, product of injectives is injective}, here $f$ runs over $Hom(M,\mathbb Q/\mathbb Z)$, thus we get $h:M\to I$. Suppose $0\neq m\in\ker h$, then $f(m)=0$ for any $f\in Hom(M,\mathbb Q/\mathbb Z)$. Define $H=\mathbb Z m$ which is isomorphism to $\mathbb Z$ or $\mathbb Z/n\mathbb Z$, then we can define $\beta:H\to\mathbb Q/\mathbb Z$, $m\mapsto\dfrac{1}{n}$, since $\mathbb Q/\mathbb Z$ is a injective, we can extend to $\alpha:M\to\mathbb Q/\mathbb Z$, but then $\alpha(m)=\beta(m)\neq0$ which is a contradiction
+\end{proof}
+
+\begin{theorem}
+Suppose $\mathscr A,\mathscr B$ are abelian categories, $L:\mathscr A\to\mathscr B$, $R:\mathscr B\to\mathscr A$ are adjoint functors, $L$ is exact, $I\in ob\mathscr B$ is injective, then $R(I)$ is also injective
+\end{theorem}
+
+\begin{proof}
+For any monomorphism $A\hookrightarrow A'$, $L(A)\hookrightarrow L(A')$ is also monic, we have
+\begin{center}
+\begin{tikzcd}
+{Hom(L(A'),I)} \arrow[r] \arrow[d, leftrightarrow] & {Hom(L(A),I)} \arrow[d, leftrightarrow] \\
+{Hom(A',R(I))} \arrow[r]           & {Hom(A,R(I))}          
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\end{document}

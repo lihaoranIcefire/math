@@ -1,0 +1,820 @@
+\documentclass[8pt]{beamer}
+\setbeamercovered{}
+
+\usepackage{bookman}
+\usepackage{newtxtext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{subcaption}
+\usepackage{bm} % Bold
+\usepackage{bbm} % Can use \mathbbm{1}
+\usepackage{ifthen} % Use if then else
+\usepackage{shuffle} % Use shuffle product
+\usepackage{minted} % For listing codes
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\tikzcdset{ampersand replacement=\&}
+\usepackage{pgfplots} % drawing axis, addplots
+\pgfplotsset{compat=newest} % ensure position and scaling compatibility
+\usetikzlibrary{intersections} % intersections in tikz
+\usetikzlibrary{calc} % calculations in tikz, and calculate length of texts
+\usetikzlibrary{hobby} % smoothly connecting points
+\usetikzlibrary{decorations.markings} % put arrow in the middle
+\tikzset{
+    ->-/.style={decoration={markings,mark=at position #1 with {\arrow{>}}},postaction={decorate}}
+} % use as [->-=#1], put the arrow at #1, where 0 <= #1 <= 1
+\usetikzlibrary{arrows}
+\tikzset{leftrightsquig/.style={to-to, decorate, decoration={
+    zigzag,
+    segment length=5,
+    amplitude=1,
+    pre=lineto,
+    post=lineto,
+    post length=2pt,
+    pre length=2pt}}}
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+% \newcommand*{\relbarfill@}{\arrowfill@\relbar-\relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+% \newcommand*{\xdash}[2][]{\ext@arrow 0055\relbarfill@{#1}{#2}}
+\makeatother
+
+\newlength{\simlength}
+
+\newcommand{\xsim}[1]{
+\settowidth{\simlength}{$#1$}
+\mathrel{\overset{#1}{\resizebox{\simlength}{\height}{\sim}}}
+}
+\newcommand{\fatdot}{\mathrel{\raisebox{0.25ex}{\tikz\filldraw[black,x=2pt,y=2pt] (0,0) circle (0.5);}}}
+\newcommand{\fatplus}{\mathrel{\raisebox{-0.1ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0.9,0)--(1.1,0)--(1.1,0.9)--(2,0.9)--(2,1.1)--(1.1,1.1)--(1.1,2)--(0.9,2)--(0.9,1.1)--(0,1.1)--(0,0.9)--(0.9,0.9)--cycle;}}}
+\newcommand{\fatminus}{\raisebox{+0.4ex}{\tikz\filldraw[black,x=2pt,y=2pt,scale=1.4] (0,0.9)--(2,0.9)--(2,1.1)--(0,1.1)--cycle;}}
+
+\DeclareMathOperator{\Symb}{Symb}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Li}{Li}
+\DeclareMathOperator{\INV}{INV}
+\DeclareMathOperator{\Nul}{Nul}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\Rank}{Rank}
+\DeclareMathOperator{\Range}{Range}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\id}{id}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+    \usecolortheme{beaver}
+    \usefonttheme{professionalfonts} 
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{caption}[numbered]
+}
+
+\theoremstyle{definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{recall}{Recall}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\DeclareMathOperator{\Span}{Span}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginSection[]{
+    \begin{frame}
+    \centering
+    \begin{beamercolorbox}[center, shadow=true, rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \end{frame}
+}
+
+\title{Dissertation Defense}
+\subtitle{Hopf Algebra of Multiple polylogarithms and\\ Associated Mixed Hodge Structures}
+\author{Haoran Li}
+\institute[UMD]{University of Maryland, College Park}
+\date{}
+
+
+\begin{document}
+
+% \maketitle
+\frame{\titlepage}
+
+% \section{Introduction}
+
+\begin{frame}[t]{Multiple polylogarithms \& Iterated integrals}
+\begin{center}
+\scalebox{0.7}{
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{function} & \textbf{domain} & \textbf{functional relation} \\
+\hline
+$\log(x):=\ln(x)$ & $\mathbb C^\times$ & $\log(xy)=\log(x)+\log(y)$ \\
+\hline
+$\Li_n(x)=\sum_{k>0}\frac{x^k}{k^n}$ & $\mathbb C^\times-\{0\}$ & five-term relation \\
+\hline
+$\mathcal L_n(x)=\operatorname{ReIm}_n\left(\sum\limits_{r=0}^{n-1}\frac{2^rB_r}{r!}\Li_{n-r}(z)\log^r|z|\right)$ &$\mathbb P^1$& $\mathcal L_2(x)-\mathcal L_2(y)+\mathcal L_2\left(\frac{y}{x}\right)-\mathcal L_2\left(\frac{1-x^{-1}}{1-y^{-1}}\right)+\mathcal L_2\left(\frac{1-x}{1-y}\right)=0$ \\
+\hline
+$\Li_{\mathbf n}(\mathbf x)=\sum\limits_{0<k_1<\cdots<k_d}\frac{x_1^{k_1}\cdots x_d^{k_d}}{k_1^{n_1}\cdots k_d^{n_d}}$ & $S_d(\mathbb C)$ & $\Li_{n_1}(x_1)\Li_{n_2}(x_2)=\Li_{n_1,n_2}(x_1,x_2)+\Li_{n_2,n_1}(x_2,x_1)+\Li_{n_1+n_2}(x_1x_2)$ \\
+\hline
+$\mathcal L_{\mathbf n}(\mathbf x)$ & $S_d(\mathbb C)$ & Goncharov's inversion relation \\
+\hline
+\end{tabular}
+}
+\end{center}
+\begin{itemize}
+\item Here $\mathbf n$, $\mathbf x$ stand for $(n_1,\cdots,n_d)$, $(x_1,\cdots,x_d)$, respectively.
+\item $d$ and $|\mathbf n|=n_1+\cdots+n_d$ are referred to as the \textit{depth} and \textit{weight}.
+\item $\operatorname{ReIm}$ is $\operatorname{Re}$ when $n$ is odd and $\operatorname{Im}$ when $n$ is even, $B_r$ are Bernoulli numbers.
+\item \scalebox{0.85}{
+$S_d(\mathbb C)=\mathbb C^d-\bigcup_i\{x_i=0\}-\bigcup_{j\leq k}\{x_jx_{j+1}\cdots x_k=1\}$
+} is the natural domain of the multi-valued $\Li_{\mathbf n}(\mathbf x)$.
+\item $S_d$ can be thought of as a scheme that is well-defined regardless of the choice of the fields.
+\end{itemize}
+%% \pause
+
+Multiple polylogarithms can be expressed as iterated integrals. Let's briefly talk about iterated integrals.
+\begin{definition}
+$f_i$ are continuous functions on $[a,b]$. The \textit{iterated integral} of $f_1,\cdots,f_n$ is
+\begin{equation}
+\int_a^bf_1(t)dt\cdots f_n(t)dt=\int\limits_{a\leq t_1<\cdots<t_n\leq b}f_1(t_1)dt_1\wedge\cdots\wedge f_n(t_n)dt_n
+\end{equation}
+\end{definition}
+
+\end{frame}
+
+\begin{frame}[t]{Multiple polylogarithms \& Iterated integrals}
+\begin{definition}
+Suppose $X$ is a complex manifold, $\omega_i$ are holomorphic one-forms, $\gamma$ is a piecewise smooth path on $X$. Then $\gamma^*\omega_i(t)=f_i(t)dt$. The \textit{iterated integral} of $\omega_1,\cdots,\omega_n$ along $\gamma$ is defined as
+\begin{equation}
+\int_\gamma\omega_1\cdots\omega_n=\int\limits_{0\leq t_1\leq\cdots\leq t_n\leq 1}\gamma^*\omega_1(t_1)\wedge\cdots\wedge\gamma^*\omega_n(t_n)
+\end{equation}
+If $n=0$, the integral is defined to be $1$.
+\end{definition}
+
+If $\omega_i=d\log(z-a_i)=\frac{dz}{z-a_i}$, then they are known as hyperlogarithms.
+\begin{definition}
+Suppose $\gamma$ is a path from $a_0$ to $a_{n+1}$ and $a_0\neq a_1$, $a_n\neq a_{n+1}$, the \textit{hyperlogarithm} $\int_\gamma d\log(z-a_1)\cdots d\log(z-a_n)$ is denoted as $I_\gamma(a_0;a_1,\cdots,a_n;a_{n+1})$
+\end{definition}
+
+We can show that
+\begin{equation}
+\Li_{n_1,\cdots,n_d}(x_1,\cdots,x_d)=(-1)^dI_\gamma(0;(x_1\cdots x_d)^{-1},0^{n_1-1},\cdots,x_d^{-1},0^{n_d-1};1)
+\end{equation}
+Here $0^k:=\overbrace{0,\cdots,0}^k$
+\end{frame}
+
+\begin{frame}[t]{Bloch complex $\Gamma(F,n)$}
+$$
+\mathcal B_n(F)\xrightarrow{\delta_n}\mathcal B_{n-1}(F)\otimes F^\times\xrightarrow{\delta_{n-1}}\mathcal B_{n-2}(F)\otimes \textstyle\bigwedge^2F^\times\to\cdots\xrightarrow{\delta_2}\textstyle\bigwedge^nF^\times
+$$
+Where $\begin{cases}\delta_n([a]_n)=[a]_{n-1}\otimes a \\ \delta_k([a]_k\otimes b)=[a]_{k-1}\otimes a\wedge b \\ \delta_2([a]_2\otimes b)=a\wedge(1-a)\wedge b\end{cases}$
+
+Here $\mathcal B_n(F)=\mathbb Z[\mathbb P_F^1]/R_n(F)$ is generated by symbols $[a]_n$ which should be thought of as $\mathcal L_n(a)$, $R_n(F)$ is inductively defined, and it is the subgroup generated by relations among $\mathcal L_n$. For example $R_2(F)$ contains
+$$
+[x]_2-[y]_2+\left[\frac{y}{x}\right]_2-\left[\frac{1-x^{-1}}{1-y^{-1}}\right]_2+\left[\frac{1-x}{1-y}\right]_2
+$$
+The $i$-th cohomology group of $\Gamma(F,n)$ is conjecturally rationally isomorphic to the motivic cohomology group $H^i_{\mathcal M}(F,\mathbb Q(n))$.
+%% \pause
+
+\begin{question}
+Is there a complex quasi-isomorphic to $\Gamma(F,n)$, but with generators representing multiple polylogarithms?
+\end{question}
+%% \pause
+
+Goncharov conjectured the existence of a motivic graded Hopf algebra $\mathcal H(F)$, and modulo its products renders the motivic graded Lie coalgebra $\mathcal L(F)$. He argued that the motivic complex $(\bigwedge^*\mathcal L(F))_n$ is what we should look for. He and Rudenko used motivic correlators to construct $\mathcal L_{\leq 4}(F)$.
+\vspace{10pt}
+
+We constructed a complex for arbitrary weight. But first, let's review Hopf algberas and Lie coalgebras.
+\end{frame}
+
+\begin{frame}[t]{Hopf algebras \& Lie coalgebras}
+\begin{definition}
+A \textit{(connected) graded Hopf algebra} $H$ is a graded $k$-algebra with $H_0=k$, and a $k$-algebra morphism $\Delta:H\to H\otimes H$ called the \textit{coproduct}, which is coassociative $(1\otimes\Delta)\Delta=(\Delta\otimes1)\Delta$, and such that  $\Delta=\sum_n\Delta_n$, $\Delta_n=\Delta|_{H_n}:H_n\to\bigoplus\limits_{p+q=n}H_p\otimes H_q$, $\Delta_n=\sum\limits_{p+q=n}\Delta_{p,q}$, $\Delta_{p,q}:H_n\to H_p\otimes H_q$.
+
+There exists a unique \textit{antipode} map $S:H\to H$ determined by the structure.
+\end{definition}
+
+If $A$ is an abelian group, the tensor algebra $T(A)=\bigoplus_{n=0}^\infty A^{\otimes n}$ is a graded Hopf algebra with the shuffle product as its product and deconcatenation as it coproduct.
+\vspace{10pt}
+
+The repeated coproduct $\Delta_{1,\cdots,1}:H\to T(H_1)$ is a morphism between grade Hopf algebras.
+
+\begin{definition}
+A Lie coalgebra $L$ is a module over $k$ with a linear map $\delta:L\to L\wedge L$ called the \textit{cobraket}, such that $(\delta a)\wedge b=a\wedge(\delta b)$ and $\delta^2=0$. $\delta$ can be extend to $\delta:\bigwedge^nL\to\bigwedge^{n+1}L$
+\begin{equation}
+\delta(a_1\wedge\cdots\wedge a_n)=\sum_{i=1}^n(-1)^{i+1}a_1\wedge\cdots\wedge(\delta a_i)\wedge\cdots\wedge a_n
+\end{equation}
+This forms the \textit{Chevalley-Eilenberg complex}: $L\xrightarrow{\delta}L\wedge L\xrightarrow{\delta}L\wedge L\wedge L\xrightarrow{\delta}\cdots$
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]{Hopf algebras \& Lie coalgebras}
+\begin{definition}
+$L$ is \textit{graded} if $\delta(L_n)\subseteq\bigoplus_{p+q=n}L_p\wedge L_q$. The degree $n$ part of $\bigwedge^* L$ is denoted as $\left(\bigwedge^* L\right)_n$
+$$
+L_n\to \bigoplus_{p+q=n}L_p\wedge L_q\to \bigoplus_{p+q+r=n}L_p\wedge L_q\wedge L_r\to\cdots\to L_1^{\wedge n}
+$$
+\end{definition}
+
+\begin{example}
+$\left(\bigwedge^* L\right)_2$ reads
+\[
+L_2\to\textstyle\bigwedge^2L_1
+\]
+$\left(\bigwedge^* L\right)_3$ reads
+\[
+L_3\to L_2\otimes L_1\to\textstyle\bigwedge^3L_1
+\]
+$\left(\bigwedge^* L\right)_4$ reads
+\[
+L_4\to L_3\otimes L_1\oplus\textstyle\bigwedge^2L_2\to L_2\oplus\bigwedge^2L_1\to\bigwedge^4L_1
+\]
+\end{example}
+
+Suppose $H$ is a graded Hopf algebra, modulo its products $H/(H_{>0}\cdot H_{>0})$ is a grade Lie coalgebra, and coproduct $\Delta$ becomes cobracket $\delta$.
+\end{frame}
+
+\begin{frame}[t]{$\overline{\mathbb H}^{\Symb}$ \& $\mathbb H^{\Symb}$}
+\begin{definition}
+We construct a graded Hopf algebra $\overline{\mathbb H}^{\Symb}$, which is a free $\mathbb Q$-algebra generated by two types of symbols:
+\begin{align*}
+\text{regular symbols such as}&\quad [x_i]_0, [x_2x_3, x_4x_5x_6, x_7]_{3,2,5}, \cdots\\
+\text{inverted symbols such as}&\quad [x_7^{-1}, x_6^{-1}x_5^{-1}x_4^{-1}, x_3^{-1}x_2^{-1}]_{5,2,3}, \cdots
+\end{align*}
+\end{definition}
+Use short hand $x_{i\to j}:=\prod_{i\leq k<j}x_k,\quad x^{-1}_{i\to j}:=\prod_{i\leq k<j}x_k^{-1}$.
+
+$[x_{i}]_0,\quad [x_{2\to 4},x_{4\to7},x_{7\to8}]_{3,2,5},\quad [x_{7\to8}^{-1},x_{4\to8}^{-1},x_{2\to 4}^{-1}]_{5,2,3}$  should thought of as
+
+$\log(x_i),\quad\Li_{3,2,5}\left(x_{2\to 4},x_{4\to7},x_{7\to8}\right),\quad\Li_{5,2,3}\left(x_{7\to8}^{-1},x_{4\to8}^{-1},x_{2\to 4}^{-1}\right)$ respectively.
+\vspace{10pt}
+%% \pause
+
+The coproduct $\Delta_{\overline{\mathbb H}}$ is inspired by Goncharov's coproduct on multiple polylogarithms
+
+\begin{equation}
+\scalebox{.8}{$
+\begin{aligned}
+&\Delta([\mathbf y|\mathbf t])=\sum[y_{i_1\to i_2},\dots,y_{i_k\to i_{k+1}}|t_{j_1},\dots ,t_{j_k}]\bigotimes\prod_{\alpha=0}^k(-1)^{j_\alpha-i_\alpha}\exp([y_{i_\alpha\to i_{\alpha+1}}]_0t_{j_\alpha})\\
+&[y_{j_\alpha-1}^{-1},y_{j_\alpha-2}^{-1},\dots,y_{i_\alpha}^{-1}|t_{j_\alpha}-t_{j_\alpha-1},\dots, t_{j_\alpha}-t_{i_\alpha}][y_{j_\alpha+1},y_{j_\alpha+2},\dots,y_{i_{\alpha+1}-1}|t_{j_\alpha+1}-t_{j_\alpha},\dots,t_{i_{\alpha+1}-1}-t_{j_\alpha}]\\
+&\\
+&\Delta([x_{i}]_0)=[x_{i}]_0\otimes 1+1\otimes [x_{i}]_0
+\end{aligned}
+$}
+\end{equation}
+
+Here \scalebox{1}{$[\mathbf y|\mathbf t]=[y_1,\dots,y_d|t_1,\dots,t_d]=\sum_{n_i\geq 1}[y_1,\dots,y_d]_{n_1,\dots,n_d}t_1^{n_1-1}\dots t_d^{n_d-1}$}. 
+
+The sum is over all instances of $1=i_0\leq j_0<i_1\leq j_1<\dots <i_k\leq j_k<i_{k+1}=d+1$.
+\end{frame}
+
+\begin{frame}[t]{$\overline{\mathbb H}^{\Symb}$ \& $\mathbb H^{\Symb}$}
+Example: $\Delta([x_1,x_2]_{1,1})$, $\Delta([x_1,x_2]_{2,1})$.
+\vspace{10pt}
+%% \pause
+
+Inspired by Goncharov's inversion formula on multiple polylogarithms, we can turn inverted symbols into regular symbols
+\begin{definition}
+$\overline{\INV}:\overline{\mathbb H}^{\Symb}\to\overline{\mathbb H}^{\Symb}[\pi i]$ fixes regular symbols and acts on inverted symbols inductively by
+\begin{equation}
+\scalebox{.7}{$
+\begin{aligned}
+&\overline{\INV}([x_d^{-1},\cdots,x_1^{-1}]_{n_d,\cdots,n_1})=-\sum_{r=0}^{d-1}\overline{\INV}[x_r^{-1},\cdots,x_1^{-1}]_{n_r,\cdots,n_1}[x_{r+1},\cdots,x_d]_{n_{r+1},\cdots,n_d}-\\
+&\sum_{r=1}^d\sum_{m_1+\cdots+m_d=n_r}(-1)^{1+n_r+\cdots+n_d+m_{r+1}+\cdots+m_d}\prod_{\substack{1\leq i\leq d\\i\neq r}}\binom{n_i+m_i-1}{n_i-1}B_{m_r}\left(\frac{[x_1\cdots x_d]_0}{2\pi i}\right)\\
+&\frac{(2\pi i)^{m_r}}{m_r!}\overline{\INV}[x_{r-1}^{-1},\cdots,x_1^{-1}]_{n_{r-1}+m_{r-1},\cdots,n_1+m_1}[x_{r+1},\cdots,x_d]_{n_{r+1}+m_{r+1},\cdots,n_d+m_d}
+\end{aligned}
+$}
+\end{equation}
+Here \scalebox{.8}{$B_n(x)=\sum_{k=0}^n\binom{n}{k}\mathsf B_{n-k}x^k$} is the Bernoulli polynomial. If we modulo $\pi i$, we get a map $\INV$
+\end{definition}
+\vspace{10pt}
+
+Example: $\overline{\INV}([x]_9)$, $\INV([x]_9)$, $\overline{\INV}([x_2^{-1},x_1^{-1}]_{1,2})$, $\INV([x_2^{-1},x_1^{-1}]_{1,2})$
+\vspace{10pt}
+%% \pause
+
+$\mathbb H^{\Symb}$ is the subalgebra of $\overline{\mathbb H}^{\Symb}$ generated solely by regular symbols. It is also a Hopf algebra with $\Delta_{\mathbb H}=(1\otimes\INV)\circ\Delta_{\overline{\mathbb H}}$
+\end{frame}
+
+\begin{frame}[t]{Motivic complex $\bigwedge^*\mathbb L(F)$}
+$\mathbb L^{\Symb}:=\mathbb H^{\Symb} / (\mathbb H^{\Symb}_{>0}\cdot \mathbb H^{\Symb}_{>0})$ is a graded Lie coalgebra. If we let $\mathbf x=(x_1,\cdots,x_d)$ take values in in $S_d(F)$, we will define $\mathbb H^{\Symb}(F)$, $\mathbb L^{\Symb}(F)$.
+\vspace{10pt}
+%% \pause
+
+To construct the motivic complex, we first define the motivic Lie coalgebra $\mathbb L_n(F)=\mathbb L_n^{\Symb}(F)/R_n(F)$, here $R_n(F)$ is the subgroup inductively defined similar to the $R_n(F)$ in Goncharov's $\mathcal B_n(F)$ group, and it is supposed to consist of all functional relations between $\mathcal L_{n_1,\cdots,n_d}$.
+\vspace{10pt}
+
+We conjecture that the degree $n$ part of its Chevalley-Eilenberg complex $(\bigwedge^*\mathbb L(F))_n$ is quasi-isomorphic to $\Gamma(F,n)$ and computes the rational motivic cohomology.
+\vspace{10pt}
+
+The construction of $\mathbb L_n(F)$ can be found in our paper: \textit{The Lie coalgebra of multiple polylogarithms} (published in Journal of Algebra).
+
+The proof of $\overline{\mathbb H}^{\Symb}, \mathbb H^{\Symb}$ are Hopf algebras can be found in our paper: \textit{Hopf algebras of multiple polylogarithms, and holomorphic 1-forms}, (arXiv:2211.08337)
+\end{frame}
+
+\begin{frame}[t]{Lifted polylogarithms}
+Zickert considered lifted polylogarithms $\widehat{\mathcal L}_n$ which are functions from $\widehat{\mathbb C}$ to $\mathbb C/(2\pi i)^n\mathbb Z$. Here $\widehat{\mathbb C}=\left\{(u,v)\in\mathbb C^2\middle|e^u+e^v=1\right\}$ is the universal abelian cover of $S_1(\mathbb C)$. $u,v$ should be thought of as $\log(x)$ and $\log(1-x)$, respectively. ``lifted'' means constructions over $\widehat{\mathbb C}$. 
+\vspace{10pt}
+
+He argued that $\mathcal L_n$ should make the following diagram commutes
+\begin{center}
+\begin{tikzcd}\label{cd: cycle map and L}
+{H^1_{\mathcal M}(\mathbb C,\mathbb Z(n))} \arrow[d, "\cong_{\mathbb Q}"] \arrow[r, "b_n"]                             \& \mathbb C/(2\pi i)^n\mathbb Z \arrow[d, "\operatorname{ReIm}"] \\
+\ker(\mathcal B_n(\mathbb C)\xrightarrow{\delta_n}\mathcal B_{n-1}\otimes\mathbb C^\times) \arrow[r, "\mathcal L_n"] \& \mathbb R
+\end{tikzcd}
+\end{center}
+here $b_n$ is the cycle map from motivic cohomology to Deligne cohomology $H^1_{\mathcal D}(\Spec\mathbb C,\mathbb Z(n))$, the left is the conjectural rational isomorphism, and $\operatorname{ReIm}$ is $\operatorname{Re}$ when $n$ is odd and $\operatorname{Im}$ when $n$ is even.
+\vspace{10pt}
+
+Zickert then constructed the lifted Bloch complex $\widehat\Gamma(\mathbb C,n)$
+
+\begin{equation}\label{eq: lifted Bloch complex for C}
+\widehat{\mathcal B}_n(\mathbb C)\xrightarrow{\widehat\delta_n}\widehat{\mathcal B}_{n-1}(\mathbb C)\otimes\widehat{\mathbb C}\xrightarrow{\widehat\delta_{n-1}}\widehat{\mathcal B}_{n-2}(\mathbb C)\otimes\textstyle\bigwedge^2\widehat{\mathbb C}\to\cdots\xrightarrow{\widehat\delta_2}\textstyle\bigwedge^n\widehat{\mathbb C}
+\end{equation}
+Here $\widehat{\mathcal B}_n(\mathbb C)=\mathbb Z[\widehat{\mathbb C}]/\widehat R_n(\mathbb C)$ with generators $[u,v]_n$ representing $\widehat{\mathcal L}_n(u,v)$. He conjectured its $i$-th cohomology group is isomorphic to $H^i_{\mathcal M}(\mathbb C,\mathbb Z(n))$. And $\widehat{\mathcal L}_n$ would correspond to the cycle map $b_n$.
+\end{frame}
+
+\begin{frame}[t]{Lifted polylogarithms}
+\begin{question}
+Can we define lifted multiple polylogarithms $\widehat{\mathcal L}_{n_1,\cdots,n_d}$ on $\widehat S_d(\mathbb C)$, the universal abelian cover of the domain $S_d(\mathbb C)$? Can we build a motivic complex with generators representing $\widehat{\mathcal L}_{n_1,\cdots,n_d}$ that computes the integral motivic cohomology.
+\end{question}
+
+\begin{equation}
+\scalebox{.8}{$\widehat S_d(\mathbb C)=\left\{(u_i,v_{j,k})\in \mathbb C^{d+\binom{d+1}{2}}\middle|\exp\left(\sum_{r=j}^k u_i\right)+\exp(v_{j,k})=1,\forall 1\leq j\leq k\leq d\right\}$}
+\end{equation}
+Here $u_i$, $v_{j,k}$ should be thought of as $\log x_i$, $\log(1-x_{j\to k})$. $v_j:=v_{j,j}$, $u_{i,j}:=u_i+\cdots +u_j$.
+%% \pause
+
+Zickert noticed $\widehat{\mathcal L}_n$ have well-defined differential one-forms in $\Omega^1_{\mathbb C[u,v]}$:
+\begin{equation}
+\scalebox{.8}{$w_n(u,v)=d\widehat{\mathcal L}_n=(-1)^n\frac{n-1}{n!}u^{n-2}(udv-vdu)$}
+\end{equation}
+He was able to find $\widehat{\mathcal L}_{1,1}$, $\widehat{\mathcal L}_{2,1}$, $\widehat{\mathcal L}_{1,2}$, $\widehat{\mathcal L}_{1,1,1}$ with differentials $w_{1,1}$, $w_{2,1}$, $w_{1,2}$, $w_{1,1,1}$ in $\Omega^1_{\mathbb C[\{u_i,v_{j,k}\}]}$. However, the best one can do for $\widehat{\mathcal L}_{3,1}$ is
+\begin{equation}
+d\widehat{\mathcal L}_{3,1}=w_{3,1}-w_2(u_2,v_2)\widehat{\mathcal L}_2(u_{1,2},v_{1,2}),\quad dw_{3,1}=w_2(u_2,v_2)\wedge w_2(u_{1,2},v_{1,2})
+\end{equation}
+Note that $w_{3,1}\in\Omega^1_{\mathbb C[\{u_i,v_{j,k}\}]}$ is neither exact nor closed. To understand why, we need to discuss the variation of mixed Hodge structures introduced by multiple polylogarithms.
+\end{frame}
+
+\begin{frame}[t]{Review of variation of mixed Hodge structures}
+Suppose $H$ is an abelian group, and denote $H_R=H\otimes R$.
+
+\begin{definition}
+$H$ is a \textit{pure Hodge structure of weight $n$} if there is a (decreasing) Hodge filtration of subspaces $\{F^pH_{\mathbb C}\}_{p\in\mathbb Z}$ such that $H_{\mathbb C}=F^pH_{\mathbb C}\oplus\overline{F^{n+1-p}H_{\mathbb C}}$.
+
+$H$ is a \textit{mixed Hodge structure} if there is in addition an (increasing) weight filtration of subspaces $\{W_kH_{\mathbb Q}\}_{k\in\mathbb Z}$ such that the graded piece $gr^W_kH_{\mathbb Q}$ is a pure Hodge structure of weight $k$.
+\end{definition}
+
+Suppose $B$ be a complex manifold and $\mathbb V$ a locally constant sheaf of abelian groups over $B$, $\mathcal V=\mathbb V\otimes\mathcal O_B$ is a locally free sheaf.
+
+\begin{definition}
+A \textit{variation of pure Hodge structures} of weight $n$ is a decreasing filtration of subsheaves $\{F^p\mathcal V\}$ such that each fiber $\mathbb V_{b}$ is a pure Hodge structure of weight $n$ with Hodge filtration $\{F^p\mathbb V_{\mathbb C,b}\}$ which satisfies Griffith transversality: $\nabla F^p\mathcal V\subseteq F^{p-1}\mathcal V\otimes\Omega^1_B$.
+
+A \textit{variation of mixed Hodge structures} consists of a decreasing filtration $F^\bullet$ of $\mathbb V$ by holomorphic subsheaves $\{F^p\mathcal V\}$, and a weight filtration $W_\bullet$ of $\mathbb V_{\mathbb Q}$ by subsheaves $\{W_k\mathbb V_{\mathbb Q}\}$ such that each fiber $\mathbb V_b$ is a mixed Hodge structure with Hodge filtration $F^p\mathbb V_{\mathbb C,b}$ and weight filtration $W_k\mathbb V_{\mathbb Q,b}$, again satisfying the Griffith transversality $\nabla F^p\mathcal V\subseteq F^{p-1}\mathcal V\otimes\Omega^1_B$.
+\end{definition}
+
+A variation of mixed Hodge structures always comes with a flat connection.
+\vspace{10pt}
+
+\end{frame}
+
+\begin{frame}[t]{Variation of mixed Hodge structures introduced by $\Li_n(z)$}
+$\operatorname{Li}_n$ defines a variation of mixed Hodge structures over $S_1(\mathbb C)$, which are best encaptured by a variation matrix
+\begin{center}
+\scalebox{.9}{
+$V(z)=\begin{bmatrix}
+1\\
+\operatorname{Li}_1(z)&1\\
+\operatorname{Li}_2(z)&\log(z)&1\\
+\operatorname{Li}_3(z)&\frac{\log^2(z)}{2}&\log(z)&1\\
+\vdots&\vdots&\vdots&\ddots&\ddots\\
+\operatorname{Li}_n(z)&\frac{\log^{n-1}(z)}{(n-1)!}&\frac{\log^{n-2}(z)}{(n-2)!}&\cdots&\log(z)&1\\
+\end{bmatrix}$
+}
+\end{center}
+$V(z)$ is the fundamental solution to the differential equation
+\begin{center}
+\scalebox{.9}{
+$dV(z)=\begin{bmatrix}
+0\\
+\frac{dz}{1-z}&0\\
+&\frac{dz}{z}&0\\
+&&\frac{dz}{z}&0\\
+&&&\ddots&\ddots\\
+&&&&\frac{dz}{z}&0\\
+\end{bmatrix}V(z)=\omega V(z)$
+}
+\end{center}
+We can interpret $\omega$ as the connection form of a flat connection $\nabla:=d-\omega$ on trivial vector bundle $\mathbb C^{n+1}\times S_1(\mathbb C)\to S_1(\mathbb C)$. One can think of the columns of $V(z)$ as flat sections, and define Hodge and weight filtrations on the columns. This will give rise to a variation of mixed Hodge structures.
+\end{frame}
+
+\begin{frame}[t]{Variation matrix of multiple polylogarithms}
+Zhao showed that multiple polylogarithms can be put into a variation matrix $V^{\overline{\mathbb H}}$ such that $\Delta_{\over{\mathbb H}}(V^{\overline{\mathbb H}})^T=(V^{\overline{\mathbb H}})^T\otimes(V^{\overline{\mathbb H}})^T$. For example, the variation matrix of $[x_1,x_2]_{2,1}$ is
+\begin{equation}
+\scalebox{.7}{$
+\begin{bmatrix}
+1&0&0&0&0&0\\
+[x_2]_1&1&0&0&0&0\\
+[x_1x_2]_1&0&1&0&0&0\\
+[x_1,x_2]_{1,1}&[x_1]_1&[x_2]_1-[x_1^{-1}]_1&1&0&0\\
+[x_1x_2]_2&0&[x_1x_2]_0&0&1&0\\
+[x_2,x_2]_{2,1}&[x_1]_2&[x_1^{-1}]_2-[x_2]_2+[x_2]_1[x_1x_2]_0&[x_1]_0&[x_2]_1&1
+\end{bmatrix}
+$}
+%% \pause
+\end{equation}
+Similar to Zhao, we can construct a variation matrix $V^{\mathbb H}$ of symbols in $\mathbb H$ according to $\Delta_{\mathbb H}$. For example, the variation matrix of $[x_1,x_2]_{2,1}$ is
+\begin{equation}
+\scalebox{.7}{$
+\begin{bmatrix}
+1&0&0&0&0&0\\
+[x_2]_1&1&0&0&0&0\\
+[x_1x_2]_1&0&1&0&0&0\\
+[x_1,x_2]_{1,1}&[x_1]_1&[x_2]_1-[x_1]_1-[x_1]_0&1&0&0\\
+[x_1x_2]_2&0&[x_1x_2]_0&0&1&0\\
+[x_2,x_2]_{2,1}&[x_1]_2&-[x_1]_2-[x_2]_2-\frac{1}{2}[x_1]_0^2+[x_2]_1[x_1x_2]_0&[x_1]_0&[x_2]_1&1
+\end{bmatrix}
+$}
+%% \pause
+\end{equation}
+There is a similar coproduct $\Delta_{\mathbb I}$ on iterated integrals, so there is a variation matrix $V^{\mathbb I}$ made out of iterated integrals. For example, the variation matrix of $I(0;a_1,0,a_2;a_3)$ is
+\begin{equation}
+\scalebox{.7}{$
+\begin{bmatrix}
+1&0&0&0&0&0\\
+I(0;a_2;a_3)&1&0&0&0&0\\
+I(0;a_1;a_3)&0&1&0&0&0\\
+I(0;a_1,a_2;a_3)&I(0;a_1;a_2)&I(a_1;a_2;a_3)&1&0&0\\
+I(0;a_1,0;a_3)&0&I(a_1;0;a_3)&0&1&0\\
+I(0;a_1,0,a_2;a_3)&I(0;a_1,0;a_2)&I(a_1;0,a_2;a_3)&I(a_1;0;a_2)&I(0;a_2;a_3)&1
+\end{bmatrix}
+$}
+\end{equation}
+These three matrices are exactly the same if we regard their entries as functions and take $a_1=(x_1x_2)^{-1}$, $a_2=x_2^{-1}$, $a_3=1$.
+\end{frame}
+
+\begin{frame}[t]{Variation of mixed Hodge structures of multiple polylogarithms}
+Just like $V(z)$, $\omega=dV^{\mathbb H}$ is connection form of the flat connection $\nabla:=d-\omega$. For example, $\omega_{2,1}$ is
+\begin{center}
+\scalebox{.7}{
+$\begin{bmatrix}
+0 & 0 & 0 & 0 & 0 & 0 \\
+-dv_2 & 0 & 0 & 0 & 0 & 0 \\
+-dv_{1,2} & 0 & 0 & 0 & 0 & 0 \\
+0 & -dv_1 & -du_1+dv_1-dv_2 & 0 & 0 & 0 \\
+0 & 0 & du_{1,2} & 0 & 0 & 0 \\
+0 & 0 & 0 & du_1 & -dv_2 & 0 \\
+\end{bmatrix}$
+}
+\end{center}
+Columns of $V^{\overline{\mathbb H}}$, $V^{\mathbb H}$ are flat sections of trivial bundle $\mathbb C^N\times S_d(\mathbb C)\to S_d(\mathbb C)$, where $N\times N$ is the size of the variation matrix. Filtrations on columns give rise to a variation of mixed Hodge structures.
+\vspace{10pt}
+
+If we omit the differential operator $d$ in $\omega$, we get a new matrix $\Omega$ with entries in $\mathbb C[\{u_i,v_{j,k}\}]$. For example, $\Omega_{2,1}$ reads
+\begin{center}
+\scalebox{.7}{
+$\begin{bmatrix}
+0 & 0 & 0 & 0 & 0 & 0 \\
+-v_2 & 0 & 0 & 0 & 0 & 0 \\
+-v_{1,2} & 0 & 0 & 0 & 0 & 0 \\
+0 & -v_1 & -u_1+v_1-v_2 & 0 & 0 & 0 \\
+0 & 0 & u_{1,2} & 0 & 0 & 0 \\
+0 & 0 & 0 & u_1 & -v_2 & 0 \\
+\end{bmatrix}$
+}
+\end{center}
+This is useful for the construction of lifted variation matrix.
+\end{frame}
+
+\begin{frame}[t]{Lifted variation matrix}
+As it turns out, one can find all the lifted multiple polylogarithms $\widehat{\mathcal L}_{n_1,\cdots,n_d}$, and they also fit into a lifted variation matrix $\widehat V$. For example
+\begin{center}
+\scalebox{.7}{
+$\begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+\widehat{\mathcal L}_{1,1}\left(u_1,u_2\right) & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+\widehat{\mathcal L}_2\left(u_1 u_2\right) & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+\widehat{\mathcal L}_{2,1}\left(u_1,u_2\right) & \widehat{\mathcal L}_2\left(u_1\right) & -\widehat{\mathcal L}_2\left(u_1\right)-\widehat{\mathcal L}_2\left(u_2\right) & 0 & 0 & 1 & 0 & 0 \\
+\widehat{\mathcal L}_3\left(u_1 u_2\right) & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+\widehat{\mathcal L}_{3,1}\left(u_1,u_2\right) & \widehat{\mathcal L}_3\left(u_1\right) & \widehat{\mathcal L}_3\left(u_2\right)-\widehat{\mathcal L}_3\left(u_1\right) & 0 & -\widehat{\mathcal L}_2\left(u_2\right) & 0 & 0 &
+1 \\
+\end{bmatrix}$
+}
+\end{center}
+We discovered that the lifted variation matrix should be $\widehat V=e^{-\Omega}V^{\mathbb H}$, whose columns are the flat sections over trivial vector bundle $\mathbb C^N\times \widehat S_d(\mathbb C)\to \widehat S_d(\mathbb C)$ with connection $\widehat\nabla$. $\widehat\nabla$ is simply conjugating $\nabla$ by $e^\Omega$, so its connection form $\widehat{\omega}$ is the also the conjugated connection form $d e^{-\Omega}e^\Omega+e^{-\Omega}\omega e^\Omega$. For example, $\widehat{\omega}_{3,1}$ is
+\begin{center}
+\scalebox{.7}{
+$\begin{bmatrix}
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+w_{1,1}\left(u_1,u_2\right) & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+w_2\left(u_{1,2}\right) & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+w_{2,1}\left(u_1,u_2\right) & w_2\left(u_1\right) & -w_2\left(u_1\right)-w_2\left(u_2\right) & 0 & 0 & 0 & 0 & 0 \\
+w_3\left(u_{1,2}\right) & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+w_{3,1}\left(u_1,u_2\right) & w_3\left(u_1\right) & w_3\left(u_2\right)-w_3\left(u_1\right) & 0 & -w_2\left(u_2\right) & 0 & 0 &
+0 \\
+\end{bmatrix}$
+}
+\end{center}
+Being flat section and flat connection, $d\widehat{V}=\widehat{\omega}\widehat{V}$ and $d\widehat{\omega}=\widehat{\omega}\wedge\widehat{\omega}$ give
+\begin{equation}
+d\widehat{\mathcal L}_{3,1}=w_{3,1}-w_2(u_2,v_2)\widehat{\mathcal L}_2(u_{1,2},v_{1,2}),\quad dw_{3,1}=w_2(u_2,v_2)\wedge w_2(u_{1,2},v_{1,2})
+\end{equation}
+These can be found in our paper: \textit{Hopf algebras of multiple polylogarithms, and holomorphic 1-forms}
+\end{frame}
+
+\begin{frame}[t]{Lifted variation matrix}
+We can prove that there is a nice structural theorem of the lifted variation matrix and lifted connection form.
+\begin{theorem}
+The entries of $\widehat V$ are obtained by replacing $\Li_{n_1,\cdots,n_d}$ with $\widehat{\mathcal L}_{\mathbf n}$ in $V^{\mathbb H}$ for $|\mathbf n|\geq2$, and $\log$, $\Li_1$ with zeros. The entries of $\widehat{\omega}$ are obtained by replacing $\Li_{\mathbf n}$ with $w_{\mathbf n}$ for $|\mathbf n|\geq2$ in $V^{\mathbb H}$, and then  modulo products.
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]{Symbols and associated one-forms of multiple polylogarithms}
+Now one might ask what are the differential one-forms $w_{\mathbf n}\in\Omega^1_{\mathbb C[\{u_i,v_{j,k}\}]}$ in $\widehat{\omega}$. As it turns out, we can directly produce all one-forms using symbols of multiple polylogarithms.
+\begin{definition}
+The symbol of a multiple polylogarithmic symbol $[x_{i_1\to i_2}, x_{i_2\to i_3},\cdots,x_{i_d\to i_{d+1}}]_{n_1,n_2,\cdots,n_d}$ is its image under repeated coproduct $\Delta_{1,\cdots,1}:\mathbb H^{\Symb}\to T(\mathbb H^{\Symb}_1)$
+\end{definition}
+Example: Symbol of $[x_1,x_2]_{3,1}$
+%% \pause
+\begin{definition}
+$w_f:T(\mathbb H^{\Symb}_1)\to\Omega^1_{\mathbb C[\{u_i,v_{j,k}\}]/\mathbb C}$ turns symbols into one-forms
+\begin{equation}\label{eq: w_f}
+w_f(a_1\otimes\cdots\otimes a_n)=\frac{(-1)^{n+1}}{n!}\sum_{1\leq i\leq n}(-1)^{i-1}\binom{n-1}{i-1}a_1\cdots da_i\cdots a_n
+\end{equation}
+\end{definition}
+The composition of symbol map and $w_f$ renders the one-form map $w:\mathbb H^{\Symb}\to\Omega^1_{\mathbb C[\{u_i,v_{j,k}\}]}$
+\vspace{10pt}
+
+Example: $w([x_1,x_2]_{3,1})$, $w([x_1,x_2]_{2,2})$.
+\vspace{10pt}
+
+It is worth noting that the one-form $w_{\mathbf n}$ in $\widehat{\omega}$ is equal to $(|\mathbf n|-1)w([\mathbf x]_{\mathbf n})$.
+\end{frame}
+
+\begin{frame}[t]{chain map from motivic complex to de Rham complex}
+$w$ induces a map $\mathbb L^{\Symb}\to\Omega^1_{\mathbb C[\{u_i,v_{j,k}\}]}$ which can be extended to $\bigwedge^*\mathbb L^{\Symb}\to\Omega^*_{\mathbb C[\{u_i,v_{j,k}\}]}$.
+\begin{theorem}
+Suppose $\Omega^\bullet_{\mathbb Q[\{u_i,v_{j,k}\}]/\mathbb Q}$ is the de Rham complex, and $w$ is the map that takes an element to its one-form, then the following diagram commutes:
+\begin{center}
+\begin{tikzcd}
+\mathbb L^{\Symb} \arrow[d, "w"] \arrow[r, ""] \& \textstyle\bigwedge^2\mathbb L^{\Symb} \arrow[d, "w\wedge w"] \arrow[r, ""] \& \textstyle\bigwedge^3\mathbb L^{\Symb} \arrow[d, "w\wedge w\wedge w"] \arrow[r] \& \cdots \\
+\Omega^1 \arrow[r, "d"]                       \& \Omega^2 \arrow[r, "d"]                                                                             \& \Omega^3 \arrow[r, "d"]                                                  \& \cdots
+\end{tikzcd}
+\end{center}
+\end{theorem}
+
+This theorem can be found in our paper: \textit{Hopf algebras of multiple polylogarithms, and holomorphic 1-forms}
+\vspace{10pt}
+
+By sheafifying morphisms from open subsets of $M$ over a complex manifold $M$ to $\widehat S_d(\mathbb C)$, we can get a sheaf of Hopf algebras is denoted $\widehat{\mathbb H}^{\Symb}_M$. if we further take the quotient of $\widehat{\mathbb H}^{\Symb}_M$ by the products and functional relations on its stalks over $M$. We also get a sheaf of graded Lie coalgebra $\widehat{\mathbb L}_M$. $\bigwedge^*\widehat{\mathbb L}_M$ is conjectured to be the motivic complex for $M$, and it computes integral motivic cohomology.
+\end{frame}
+
+\begin{frame}[t]{Relating motivic cohomology to singular cohomology}
+We speculate that there exist a induced chain map $\bigwedge^\bullet\widehat{\mathbb L}_M\to\Omega^\bullet$ induced from the theorem above that relates motivic cohomology with singular cohomology.
+
+\begin{center}
+\begin{tikzcd}
+{H^i(M,(\bigwedge^*\widehat{\mathbb L}_M)_n)} \arrow[d, "\cong?"] \arrow[r] \& {H^i(M,\Omega^*)} \arrow[d, "\cong"] \\
+{H^i_{\mathcal M}(M,\mathbb Z(n))} \arrow[r]              \& {H^i(M,\mathbb C)}
+\end{tikzcd}
+\end{center}
+
+Here the top arrow is induced by the chain map $\bigwedge^\bullet\widehat{\mathbb L}_M\to\Omega^\bullet$, the bottom arrow should be the realization functor from integral motivic cohomology to singular cohomology, the left arrow is the conjectured isomorphism to integral motivic cohomology, and right arrow is isomorphism between de Rham cohomology and singular cohomology
+\end{frame}
+
+\begin{frame}[t]{Monodromies of multiple polylogarithms}
+Since the variation matrix consists of multi-valued function, to ensure the well-definedness of Hodge structures by columns of the variation matrix, a monodromy on the variation matrix should only be rational. This has been proven theoretically. An explicit formula for multiple logarithms $\Li_{1,\cdots,1}$ is given by Zhao, by converting the iterated integral $I_\gamma(0;a_1,0^{n_1-1},\cdots,a_d^{-1},0^{n_d-1};1)$ into an iterated integral on $S_d(\mathbb C)$. Here $a_i=(x_i\cdots x_d)^{-1}$. Denoting the monodromy operator as $\mathcal M_{\nu_i}$ and $\mathcal M_{\nu_{j,k}}$. Zhao has the following theorem
+
+\begin{theorem}
+\begin{equation}
+\scalebox{.8}{$
+\begin{aligned}
+(\mathcal M_{\nu_i}-\id)&\Li_{1,\cdots,1}(x_1,\cdots,x_d)=0,\quad 1\leq i\leq d \\
+(\mathcal M_{\nu_{j,k}}-\id)&\Li_{1,\cdots,1}(x_1,\cdots,x_d)=0,\quad\forall 1\leq j<k<d \\
+(\mathcal M_{\nu_{j,j}}-\id)&\Li_{1,\cdots,1}(x_1,\cdots,x_d)=0,\quad\forall 1\leq j<d \\
+(\mathcal M_{\nu_{d,d}}-\id)&\Li_{1,\cdots,1}(x_1,\cdots,x_d)=2\pi i\Li_{1,\cdots,1}(x_1,\cdots,x_{d-1}) \\
+(\mathcal M_{\nu_{j,d}}-\id)&\Li_{1,\cdots,1}(x_1,\cdots,x_d)=2\pi i\Li_{1,\cdots,1}(x_1,\cdots,x_{j-1})\\
+&\Li_{1,\cdots,1}\left(\frac{1-x_jx_{j+1}}{1-x_j},\cdots,\frac{1-x_j\cdots x_d}{1-x_j\cdots x_{d-1}}\right),\quad \forall 1\leq j<d
+\end{aligned}
+$}
+\end{equation}
+\end{theorem}
+%% \pause
+
+We would take a different approach. By converting monodromies of $I_\gamma(0;a_1,0^{n_1-1},\cdots,a_d^{-1},0^{n_d-1};1)$ into deformations of $\gamma$.
+\vspace{10pt}
+
+Without loss of generality, we fix some choice of $a_i=(x_i\cdots x_d)^{-1}$ with $0<x_i<1$, and the image of $\gamma$ is below the real axis $\{\operatorname{Im} z=0\}$.
+\end{frame}
+
+\begin{frame}[t]{Deformation of the integration path under monodromy}
+If $1\leq i\leq i_0<j\leq d+1$, then
+\begin{equation}\label{eq: M_{i0}I(a_i;...;a_j)}
+\mathcal M_{\nu_{i_0}}I(a_i;\cdots;a_j)=I_{\sigma_{i_0+1}\cdots\sigma_{j-1}\sigma_0}(a_i;\cdots;a_j)
+\end{equation}
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.48\textwidth}
+\ContinuedFloat
+\centering
+\begin{tikzpicture}[scale=0.4]
+\foreach \x/\y/\p/\labelpos/\labeltext in {0/0/o/above/{$0$}, 1/0/aj/above/{$a_j$}, 3/0/aip1/below/{$a_{i_0+1}$}, 4/0/a0i0/above/{$a_{i_0}$}, 6/0/ai0/above/{$a_i$}, 7/0/a10/above/{$a_1$}, 0/-4/a0i/below/{}, 0/-6/ai/below/{}, 0/-7/a1/below/{}}{
+    \coordinate (\p) at (\x,\y);
+    \draw[fill] (\p) circle (0.08);
+    \node at (\p)[\labelpos] {\labeltext};
+}
+\node at (2,0) {$\cdots$};
+\node at (5,0) {$\cdots$};
+\node at (0,-5) {$\vdots$};
+\draw[->-=0.5, blue, dashed] (a0i0) arc (0:-90:4);
+\draw[->-=0.5, blue, dashed] (ai0) arc (0:-90:6);
+\draw[->-=0.5, blue, dashed] (a10) arc (0:-90:7);
+\draw[->-=0.5, opacity=0.3] (ai0) to [curve through={(2,-5.3)..(0,-5.7)..(-.5,-3)}] (aj);
+\node at (2,-5.3)[above, opacity=0.3] {$\gamma_0$};
+\draw[->-=0.5] (ai) to [curve through={(-5.5,0)..(-4,4)..(-3,4.8)..(0,5.5)..(0,3)..(-1,0)}] (aj);
+\node at (-5.5,0)[right] {$\gamma_{1/3}$};
+\end{tikzpicture}
+\caption{$I_{\gamma_0}(a_0;\cdots;a_j)$ to $I_{\gamma_{1/3}}(a_0;\cdots;a_j)$}
+\label{fig: M_{v_i0}I(a_i;...;a_j), gamma_0 -> gamma_{1/3}}
+\end{subfigure}
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.4]
+\foreach \x/\y/\p/\labelpos/\labeltext in {0/0/o/above/{$0$}, 1/0/aj/above/{$a_j$}, 3/0/aip1/below/{$a_{i_0+1}$}, 0/-4/a0i0/right/{$a_{i_0}$}, 0/-6/ai0/right/{$a_i$}, 0/-7/a10/right/{$a_1$}, 0/4/a0i/above/{}, 0/6/ai/above/{}, 0/7/a1/above/{}}{
+    \coordinate (\p) at (\x,\y);
+    \draw[fill] (\p) circle (0.08);
+    \node at (\p)[\labelpos] {\labeltext};
+}
+\node at (2,0) {$\cdots$};
+\node at (0,-5) {$\vdots$};
+\node at (0,5) {$\vdots$};
+\draw[->-=0.5, blue, dashed] (a0i0) arc (270:90:4);
+\draw[->-=0.5, blue, dashed] (ai0) arc (270:90:6);
+\draw[->-=0.5, blue, dashed] (a10) arc (270:90:7);
+\draw[->-=0.5, opacity=0.3] (ai0) to [curve through={(-5.5,0)..(-4,4)..(-3,4.8)..(0,5.5)..(0,3)..(-1,0)}] (aj);
+\node at (-5.5,0)[right, opacity=0.3] {$\gamma_{\frac{1}{3}}$};
+\draw[->-=0.5] (ai) to [curve through={(4,4.2)..(5.5,0)..(4,-1)..(3.7,0)..(2,1)..(-.8,0)..(0,-.4)}] (aj);
+\node at (2,1)[above] {$\gamma_{2/3}$};
+\end{tikzpicture}
+\caption{$I_{\gamma_{1/3}}(a_0;\cdots;a_j)$ to $I_{\gamma_{2/3}}(a_0;\cdots;a_j)$}
+\label{fig: M_{v_i0}I(a_i;...;a_j), gamma_{1/3} -> gamma_{2/3}}
+\end{subfigure}
+\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Deformation of the integration path under monodromy}
+\begin{figure}
+\centering
+\begin{subfigure}[b]{0.48\textwidth}
+\ContinuedFloat
+\centering
+\begin{tikzpicture}[scale=0.5]
+\foreach \x/\y/\p/\labelpos/\labeltext in {0/0/o/above/{$0$}, 1/0/aj/above/{$a_j$}, 3/0/aip1/below/{$a_{i_0+1}$}, 0/4/a0i0/below/{$a_{i_0}$}, 0/6/ai0/below/{$a_i$}, 0/7/a10/below/{$a_1$}, 4/0/a0i/below/{}, 6/0/ai/below right/{}, 7/0/a1/below/{}}{
+    \coordinate (\p) at (\x,\y);
+    \draw[fill] (\p) circle (0.08);
+    \node at (\p)[\labelpos] {\labeltext};
+}
+\node at (2,0) {$\cdots$};
+\node at (0,5) {$\vdots$};
+\node at (5,0) {$\cdots$};
+\draw[->-=0.5, blue, dashed] (a0i0) arc (90:0:4);
+\draw[->-=0.5, blue, dashed] (ai0) arc (90:0:6);
+\draw[->-=0.5, blue, dashed] (a10) arc (90:0:7);
+\draw[->-=0.5, opacity=0.3] (ai0) to [curve through={(4,4.2)..(5.5,0)..(4,-1)..(3.7,0)..(2,1)..(-.8,0)..(0,-.4)}] (aj);
+\node at (2,1)[above, opacity=0.3] {$\gamma_{3/4}$};
+\draw[->-=0.5] (ai) to [curve through={(5,-1.5)..(4,-1.5)..(3.3,0)..(2,.5)..(-.5,0)..(0,-.3)}] (aj);
+\node at (4,-1.5)[below] {$\gamma_1$};
+\end{tikzpicture}
+\label{fig: M_{v_i0}I(a_i;...;a_j), gamma_{2/3} -> gamma_1}
+\end{subfigure}
+\caption{$I_{\gamma_{2/3}}(a_0;\cdots;a_j)$ to $I_{\gamma_{1}}(a_0;\cdots;a_j)$}
+\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Monodromy of iterated integrals}
+Suppose $\gamma=\gamma_1'\gamma_2'$ is a path from $a_0$ to $a_{n+1}$ and $\gamma'=\gamma_1'\sigma\gamma_2'$, $a_i\neq a$ for $1\leq i\leq n$, then
+\begin{equation}\label{Equation for monodromy}
+I_{\gamma'}(a_0;\cdots,\overbrace{a,\cdots,a}^k,\cdots;a_{n+1})-I_{\gamma}(a_0;\cdots,\overbrace{a,\cdots,a}^k,\cdots;a_{n+1})
+\end{equation}
+is equal to
+\begin{equation}\label{eq: equation for monodromy}
+\sum_{\substack{p+q+r=k\\r\geq1}}\frac{(2\pi i)^{r}}{(r)!}I_{\gamma_1}(a_0;\cdots,\overbrace{a,\cdots,a}^p;a)I_{\gamma_2}(a;\overbrace{a,\cdots,a}^q,\cdots;a_{n+1})
+\end{equation}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=1.7]
+\coordinate (s) at (-2,0); \coordinate (t) at (2,0); \coordinate (a) at (0,1); \coordinate (b) at (0,0.9);
+\draw[fill] (s) circle (0.02); \draw[fill] (t) circle (0.02); \draw[fill] (a) circle (0.02); \draw[fill] (b) circle (0.02);
+\draw[->-=0.2,->-=0.8] (s) to [curve through={(-1,0.6)..(b)..(1,0.6)}] (t);
+\draw[->-=0.2,->-=0.8,red] (s) to [curve through={(-1,0.7)}] (a);
+\draw[->-=0.2,->-=0.8,blue] (a) to [curve through={(1,0.7)}] (t);
+\draw[->-=0.5] (b) to [curve through={(0,1.2)}] (b);
+\node at (s)[left] {$a_0$};
+\node at (t)[right] {$a_{n+1}$};
+\node at (a)[above] {$a$};
+\node at (0,1.2)[above] {$\sigma$};
+\node at (b)[below] {$a'$};
+\node[red] at (-1.4,0.5)[above] {$\gamma_1$};
+\node[blue] at (1.4,0.5)[above] {$\gamma_2$};
+\node at (-1.4,0.4)[below] {$\gamma_1'$};
+\node at (1.4,0.4)[below] {$\gamma_2'$};
+\end{tikzpicture}
+\caption{Monodromy of $I(a_0;\cdots,a,\cdots,a,\cdots;a_{n+1})$ at $a$}
+\label{fig: monodromies of iterated integrals}
+\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Calculation of monodromy matrices}
+When viewing entries as actual functions, the variation matrix of iterated integrals $V^{\mathbb I}$ and $V^{\overline{\mathbb H}}$ are the same. So it suffices to consider the monodromy of $V^{\mathbb I}$, assuming $a_i=(x_i\cdots x_d)^{-1}$.
+\vspace{10pt}
+%% \pause
+
+The rows and columns of $V^{\mathbb I}$ can be indexed by words $\sigma_{j_1}\sigma_0^{p_{j_1}-1}\cdots\sigma_{j_l}\sigma_0^{p_{j_l}-1}$ and $\sigma_{i_1}\sigma_0^{m_{i_1}-1}\cdots\sigma_{i_k}\sigma_0^{m_{i_k}-1}$, respectively. The entry with this index would be denoted by
+\[
+(-1)^{l-k}I^{\sigma_{i_1}\sigma_0^{m_{i_1}-1}\cdots\sigma_{i_k}\sigma_0^{m_{i_k}-1}}(0;a_{j_1},0^{p_{j_1}-1},\cdots,a_{j_l},0^{p_{j_l}-1};1)
+\]
+The super index $\sigma_{i_1}\sigma_0^{m_{i_1}-1}\cdots\sigma_{i_k}\sigma_0^{m_{i_k}-1}$ means to divide the iterated integral $I$ at $a_{i_\alpha}$, $0$ and turn them into products. For example
+\begin{align*}
+I^{\sigma_1\sigma_0^2}(0;a_1,0,0,a_2,0;1)&=I(0;a_1)I(a_1;0)I(0;0)I(0;a_2,0;1)\\
+&+I(0;a_1)I(a_1;0)I(0;0,a_2;0)I(0;1)\\
+&+I(0;a_1)I(a_1;0;0)I(0;a_2;0)I(0;1)
+\end{align*}
+\vspace{10pt}
+%% \pause
+
+Combining the deformation of integration paths, formula for monodromies of iterated integrals, and the knowledge of structures of $V^{\mathbb I}$, we are able to obtain explicit formulas for monodromies matrices.
+\vspace{10pt}
+
+Example: Monodromies matrices for $\Li_{5,1}$, $\Li_{3,3}$, $\Li_{2,2,2}$.
+\end{frame}
+
+\begin{frame}[plain]
+\centering
+\Huge{\textbf{Thank You!}}
+\end{frame}
+
+% \begin{frame}[t]{Make up of $V^{\mathbb I}$}
+% When viewing entries as actual functions, the variation matrix of iterated integrals $V^{\mathbb I}$ and $V^{\overline{\mathbb H}}$ are the same. So we look at the structure of $V^{\mathbb I}$. Still assuming $a_i=(x_i\cdots x_d)^{-1}$.
+% \vspace{10pt}
+
+% The first column of the variation matrix of 
+% \[
+% (-1)^dI(0;a_1,0^{n_1-1},\cdots,a_d,0^{n_d-1};1)
+% \]
+% consist of entries of the form
+% \[
+% (-1)^kI(0;a_{i_1},0^{m_{i_1}-1},\cdots,a_{i_k},0^{m_{i_k}-1};1)
+% \]
+% the complementary entry of $(-1)^kI(0;a_{i_1},0^{m_{i_1}-1},\cdots,a_{i_k},0^{m_{i_k}-1};1)$ with respect to $(-1)^lI(0;a_{j_1},0^{p_{j_1}-1},\cdots,a_{j_l},0^{p_{j_l}-1};1)$ is
+% \[
+% (-1)^{l-k}I^{\sigma_{i_1}\sigma_0^{m_{i_1}-1}\cdots\sigma_{i_k}\sigma_0^{m_{i_k}-1}}(0;a_{j_1},0^{p_{j_1}-1},\cdots,a_{j_l},0^{p_{j_l}-1};1)
+% \]
+% The words $\sigma_{i_1}\sigma_0^{m_{i_1}-1}\cdots\sigma_{i_k}\sigma_0^{m_{i_k}-1}$ and $\sigma_{j_1}\sigma_0^{p_{j_1}-1}\cdots\sigma_{j_l}\sigma_0^{p_{j_l}-1}$ indicate the column and row index of
+% \[
+% (-1)^{l-k}I^{\sigma_{i_1}\sigma_0^{m_{i_1}-1}\cdots\sigma_{i_k}\sigma_0^{m_{i_k}-1}}(0;a_{j_1},0^{p_{j_1}-1},\cdots,a_{j_l},0^{p_{j_l}-1};1)
+% \]
+% Since $m_\alpha<p_\alpha,\forall\alpha$, the variation matrix is evidently a lower-triangular unipotent matrix.
+% \end{frame}
+
+% \begin{frame}[t]{Make up of $V^{\mathbb I}$}
+% The variation matrix of $(-1)^2I(0;a_1,0,a_2;1)$ is
+% \begin{equation}
+% \begin{bmatrix}
+% 1&0&0&0&0&0\\
+% -I(0;a_2;1)&1&0&0&0&0\\
+% -I(0;a_1;1)&0&1&0&0&0\\
+% I(0;a_1,a_2;1)&-I(0;a_1;a_2)&-I(a_1;a_2;1)&1&0&0\\
+% -I(0;a_1,0;1)&0&I(a_1;0;1)&0&1&0\\
+% I(0;a_1,0,a_2;1)&-I(0;a_1,0;a_2)&-I(a_1;0,a_2;1)&I(a_1;0;a_2)&-I(0;a_2;1)&1
+% \end{bmatrix}
+% \end{equation}
+% where
+% \begin{align*}
+% &-I(0;a_1;a_2)=(-1)I^{\sigma_2}(0;a_1,a_2;1),\quad-I(a_1;a_2;1)=(-1)I^{\sigma_1}(0;a_1,a_2;1),\\
+% &I(a_1;0;1)=I^{\sigma_1}(0;a_1,0;1),\quad-I(0;a_1,0;a_2)=(-1)I^{\sigma_2}(0;a_1,0,a_2;1),\\
+% &-I(a_1;0,a_2;1)=(-1)I^{\sigma_1}(0;a_1,0,a_2;1),\quad I(a_1;0;a_2)=I^{\sigma_1\sigma_2}(0;a_1,0,a_2;1),\\
+% &-I(0;a_2;1)=(-1)I^{\sigma_1\sigma_0}(0;a_1,0,a_2;1).
+% \end{align*}
+% \end{frame}
+
+\end{document}

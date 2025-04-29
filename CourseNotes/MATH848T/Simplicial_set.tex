@@ -1,0 +1,127 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$G$ is group, define \textbf{group homology}\index{Group homology} $H_i(G)=Tor_i^{\mathbb Z[G]}(\mathbb Z,\mathbb Z)$
+\end{definition}
+
+\begin{example}
+Suppose $G=T$, then $C_*(X)$ is a free $\mathbb Z[T]$ module, then
+\[C_n(X)\to\cdots\to C_0(X)\to\mathbb Z\]
+is a free $\mathbb Z[T]$ resolution of $\mathbb Z$, hence $H_i(C_*(X)\otimes_{\mathbb Z[T]}\mathbb Z)=Tor^{\mathbb Z[T]}_i(\mathbb Z,\mathbb Z)=H_i(T)$
+\end{example}
+
+\begin{definition}
+Since
+\[C_{n+1}(X)/F_{n-1}C_{n+1}(X)\to C_n(X)/F_{n-1}C_n(X)\to C_{n-1}(X)/F_{n-1}C_{n-1}(X)=0\]
+is exact and $-\otimes_{\mathbb Z[G]}\mathbb Z$ is a right exact functor
+\begin{align*}
+\mathcal P(X,G)&=\mathcal P(X,\{1\})\otimes_{\mathbb Z[G]}\mathbb Z \\
+&=H_n(C_*(X)/F_{n-1}C_*(X))\otimes_{\mathbb Z[G]}\mathbb Z \\
+&\cong H_n\left(C_*(X)/F_{n-1}C_*(X)\otimes_{\mathbb Z[G]}\mathbb Z\right) \\
+&\cong H_n\left(\dfrac{C_*(X)\otimes_{\mathbb Z[G]}\mathbb Z}{F_{n-1}C_*(X)\otimes_{\mathbb Z[G]}\mathbb Z}\right)
+\end{align*}
+\end{definition}
+
+\begin{definition}
+The \textbf{simplex category}\index{Simplex category} $Simp$ has $[n]:=\{0,1,\cdots,n\}$ as objects, and order preserving functions as morphisms, there are two special types of morphisms: \textbf{Face maps}\index{Face map} $\varepsilon_{n,i}:[n-1]\to [n]$, $\varepsilon_{n,i}(j)=\begin{cases}
+j&,j<i \\
+j+1&,j\geq i
+\end{cases}$ and the \textbf{degeneracy maps}\index{Degeneracy map} $\eta_{n,i}:[n+1]\to[n]$, $\eta_{n,i}(j)=\begin{cases}
+j&,j\leq i \\
+j-1&,j> i
+\end{cases}$, and they subject to the \textbf{simplicial identities}\index{Simplicial identities}:
+\[\varepsilon_j\circ \varepsilon_i=\varepsilon_{i}\circ \varepsilon_{j-1},i<j\Leftrightarrow i\leq j-1\]
+\[\eta_j\circ \eta_i=\eta_i\circ \eta_{j+1},i\leq j\Leftrightarrow i<j+1\]
+\[\eta_j\circ \varepsilon_i=\begin{cases}
+\varepsilon_{i-1}\circ \eta_j&,j\leq i-2\Leftrightarrow j<i-1 \\
+1&, j=i,i-1 \\
+\varepsilon_{i}\circ \eta_{j-1}&, j>i\Leftrightarrow j-1\geq i
+\end{cases}\]
+\end{definition}
+
+\begin{definition}
+A \textbf{simplicial set}\index{Simplicial set} is a functor $X:Simp^{op}\to Set$
+\end{definition}
+
+\begin{definition}
+An element in $S_p$ is called \textbf{degenerate} if it is the image of some element in $S_{p-1}$ under some $\eta_j$
+\end{definition}
+
+\begin{definition}
+Given a simplicial set $S$, we can form a chain complex
+\[\cdots\to C_p(S)\xrightarrow{\partial_p}C_{p-1}(S)\to\cdots\to C_0(S)\to0\]
+Where $C_p(S)=\mathbb Z[S_p]$, $\displaystyle\partial_p=\sum_{i=0}^p(-1)^i\varepsilon_i$ \par
+Define homology $H_*(S)=H_*(C_*(S))$
+\end{definition}
+
+\begin{example}
+\textbf{(a) }$S_p$ is the set of $(p+1)$ tuples, $\varepsilon_i:S_p\to S_{p-1}$, $(x_0,\cdots,x_p)\mapsto (x_0,\cdots,\widehat{x_i},\cdots,x_p)$, $\eta_i:S_p\to S_{p+1}$, $(x_0,\cdots,x_p)\mapsto(x_0,\cdots,x_i,x_i,\cdots,x_p)$, $C_*(S)$ is the tuple complex \par
+\textbf{(b) }$X$ is a topological space, $S_p=[\Delta^p,X]$, $C_*(S)$ is the singular chain complex \par
+\textbf{(c) }$X$ is topological space with an open cover $\mathcal U=\{U_j\}$, $S_p=\{(p+1)\text{ folded intersections}\}$, $C_*(S)$ is \v{C}ech chain complex
+\end{example}
+
+\begin{definition}
+\textbf{Realization}\index{Realization}
+\end{definition}
+
+\begin{lemma}
+$C_*(S)$ the simplicial chain complex of the realization of $S$
+\end{lemma}
+
+\begin{lemma}
+Degenerate simplices generate a subcomplex $DC_*(S)$ 
+\end{lemma}
+
+\begin{example}
+$\partial(x_0,x_1,x_1,x_2)=(x_1,x_1,x_2)-(x_0,x_1,x_2)+(x_0,x_1,x_2)-(x_0,x_1,x_1)=(x_1,x_1,x_2)-(x_0,x_1,x_1)$
+\end{example}
+
+\begin{theorem}
+$C_*(S)$ and $C_*(S)/DC_*(S)$ are chain homotopy equivalent
+\end{theorem}
+
+\begin{definition}
+A $p$ \textbf{flag} in $X$ is $U_0\supseteq U_1\supseteq\cdots\supseteq U_p$, $\varnothing\subsetneqq U_i\subsetneqq X$, let $S_p$ be the set of $p$ flags, then $S$ form a simplicial set, $\varepsilon_i:S_p\to S_{p-1}$, $U_0\supseteq\cdots\supseteq U_p\mapsto U_0\supseteq\cdots\supseteq \widehat{U_i}\supseteq\cdots\supseteq U_p$, $\eta_i:S_p\to S_{p+1}$, $U_0\supseteq\cdots\supseteq U_p\mapsto U_0\supseteq\cdots\supseteq U_i\supseteq U_i\supseteq\cdots\supseteq U_p$. Clearly, a flag is degenrate iff it has to consecutive $U_i$'s, thus $H_k(S)=0$ for $k>n$
+\end{definition}
+
+\begin{lemma}
+Let $S$ be the simplicial set of flags, $H_k(S)\cong H_k(F_{n-1}C_*(X))\overset{\text{LES}}{\cong} H_{k-1}(C_*(X)/F_{n-1}C_*(X))$
+\end{lemma}
+
+\begin{proof}
+Define double chain complex $\displaystyle A_{p,q}=\bigoplus_{U_0\supseteq\cdots\supseteq U_p}C_q(U_p)$, $\partial'=\sum(-1)^i\varepsilon_i$, $\partial''=(-1)^p\partial$, then we have
+\['E^1_{p,q}=H_q(A_{p,*})=\bigoplus_{U_0\supseteq\cdots\supseteq U_p}H_q(C_*(U_p))=\begin{cases}
+\displaystyle\bigoplus_{U_0\supseteq\cdots\supseteq U_p}\mathbb Z=C_p(S)&,q=0 \\
+0&,\text{otherwise}
+\end{cases}\]
+\['E^\infty_{p,q}='E^2_{p,q}=\begin{cases}
+H_p(S)&,q=0 \\
+0&,\text{otherwise}
+\end{cases}\]
+We can construct $P:A_{p,q}\to A_{p+1,q}$ as follows, for each $\sigma\in C_*(X)$, let $U_\sigma$ be the intersection of all subspaces containing $\sigma$ which is again a subspace, for $\sigma\in C_q(U_p)$ with $U_0\supseteq\cdots\supseteq U_p$, define $P(\sigma)=\sigma\in C_q(U_\sigma)$ with $U_0\supseteq\cdots\supseteq U_p\supseteq U_\sigma$, then $\partial P+P\partial=1$
+\begin{center}
+\begin{tikzcd}
+{A_{p+1,q}} \arrow[r] \arrow[d] & {A_{p,q}} \arrow[r] \arrow[d] \arrow[ld, "P"'] & {A_{p-1,q}} \arrow[d] \arrow[ld, "P"] \\
+{A_{p+1,q}} \arrow[r]           & {A_{p,q}} \arrow[r]                            & {A_{p-1,q}}                          
+\end{tikzcd}
+\end{center}
+Also, $\displaystyle\bigoplus_{U_0\supseteq U_1}C_q(U_1)\to\bigoplus_{U_0}C_q(U_0)\to F_{n-1}(X)\to0$ is exact, hence
+\[''E^1_{p,q}=H_p(A_{*,q})=\begin{cases}
+F_{n-1}C_*(X)&,q=0 \\
+0&,\text{otherwise}
+\end{cases}\]
+\[''E^\infty_{p,q}=''E^2_{p,q}=\begin{cases}
+H_q(F_{n-1}C_*(X))&,p=0 \\
+0&,\text{otherwise}
+\end{cases}\]
+Since $'E,''E$ both converge to the homology of total complex, $H_k(S)=H_k(F_{n-1}C_*(X))$
+\end{proof}
+
+\begin{remark}
+The map $H_k(S)\to H_k(F_{n-1}C_*(X))$ is actually given by
+\[(x_0,\cdots,x_n)\mapsto\sum_{\sigma}\left\{\left(x_{\sigma(0)},\cdots,x_{\sigma(1)}\right)\supseteq\cdots\supseteq\left(x_{\sigma(0)}\right)\right\}\]
+\end{remark}
+
+\end{document}

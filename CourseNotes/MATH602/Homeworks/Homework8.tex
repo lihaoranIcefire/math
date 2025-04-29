@@ -1,0 +1,87 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{customexercise}{5.5.1}
+Give an example of a complete Hausdorff filtered complex $C$ such that the filtration on $H_0(C)$ is Hausdorff, that is, such that $\bigcap F_pH_0(C)\neq0$
+\end{customexercise}
+
+\begin{proof}
+Consider $\displaystyle\mathbb Z_3=\varprojlim_k\mathbb Z/3^k\mathbb Z$ , $F_pC_n=\begin{cases}
+3^{-p}\mathbb Z_3 &p\leq0 \\
+\mathbb Z_3 &p\geq0
+\end{cases}$ for $n=0,1$
+\[0\to\mathbb Z_3\xrightarrow{\times2}\mathbb Z_3\to0\]
+is a complete Hausdorff filtered chain complex. However
+\begin{align*}
+F_p(H_0C)&=\mathrm{im}(H_0(F_pC)\to H_pC) \\
+&=\mathrm{im}\left(\frac{F_pC_0}{B_p(F_pC_0)}\to \frac{C_0}{B_0C}\right) \\
+&=F_pC_0+B_0C \\
+&=3^{-p}\mathbb Z_3+2\mathbb Z_3 \\
+&=\mathbb Z_3+2\mathbb Z_3
+\end{align*}
+The last equality holds since $3^{-p}$ and $2$ are coprime, hence $\bigcap F_pH_0(C)\neq0$
+\end{proof}
+
+\begin{customexercise}{5.5.3}
+Suppose that the filtration on $C$ is Hausdorff and exhaustive. If for any $p+q=n$ we have $E^r_{pq}=0$, show that $F_pH_n(C)=F_{p-1}H_n(C)$. Conclude that $H_n(C)=\bigcap F_pH_n(C)$, provided that every $E^r_{pq}$ with $p+q$ equalling $n$ vanishes
+ \end{customexercise}
+
+\begin{proof}
+Since $E^r_{pq}=0$, $0=E^\infty_{pq}\supseteq e^\infty_{pq}\cong F_pH_n(C)/F_{p-1}H_n(C)\Rightarrow F_pH_n(C)=F_{p-1}H_n(C)$, then 
+\[\cdots\subseteq F_{p-1}H_n(C)\subseteq F_pH_n(C)\subseteq\cdots\subseteq H_n(C)=\bigcup F_pH_n(C)\]
+implies $H_n(C)=F_pH_n(C), \forall p$, hence $H_n(C)=\bigcap F_pH_n(C)$
+\end{proof}
+
+\begin{customexercise}{5.6.3}(Base-change for $Ext$)
+Let $f:R\to S$ be a ring map. Show that there is a first quadrant cohomology spectral sequence
+\[E^{p,q}_2=Ext_S^p(A,Ext^q_R(S,B))\Rightarrow Ext_R^{p+q}(A,B)\]
+For every $S$-module $A$ and every $R$-module $B$
+\end{customexercise}
+
+\begin{proof}
+Let $P_*\to A$ be an $S$-module projective resolution, $B\to I^*$ be an $R$-module injective resolution, consider the first quadrant double complex $Hom_R(P,I)$ and write $H_*(Hom_R(P,I))=H_*(Tot^{\Pi}(Hom_R(P,I)))$. Since $Hom_R(P_p,-)$ is an exact functor, the $p^\text{th}$ column of $Hom_R(P,I)$ is a resolution of $Hom(P_p,B)$. Therefore the first spectral sequence collapse at $'E^1=H^v_q(Hom(P,I))$ to yield $H_*(Hom_R(P,I))\cong H_*(Hom_R(P,B))\cong Ext_R^*(A,B)$. Therefore the second spectral sequence converges to $Ext_R^*(A,B)$ and
+\begin{align*}
+''E^1_{pq}&=H_q(Hom_R(P,I^p)) \\
+&=H_q(Hom_S(P,Hom_R(S,I^p)) \\
+&=Hom_S(P,H_q(Hom_R(S,I^p))) \\
+&=Hom_S(P,Ext_R^q(S,B))
+\end{align*}
+Hence $H_p(''E^1_{pq})=Ext_S^p(A,Ext_R^q(S,B))$
+\end{proof}
+
+\begin{customexercise}{5.7.4} \hfill
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+\item If $A$ is an object of $\mathcal A$, considered as a chain complex concentrated in degree zero, show that $\mathbb L_iF(A)$ is the ordinary derived functor $L_iF(A)$
+\item Let $\mathbf{Ch}_{\geq0}(\mathcal A)$ be a subcategory of complexes $A$ with $A_p=0$ for $p<0$. Show that the functors $\mathbb L_iF$ restricted to $\mathbf{Ch}_{\geq0}(\mathcal A)$ are the left derived functors of the right exact functor $H_0F$
+\item (Dimension shifting)
+Show that $\mathbb L_iF(A[n])=\mathbb L_{n+i}F(A)$ for all $n$. Here $A[n]$ is the translate of $A$ with $A[n]_i=A_{n+i}$
+\end{enumerate}
+\end{customexercise}
+
+\begin{proof} \hfill
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+\item Suppose $P\to A$ is a projective resolution of $A$, then it can also be regared as a Cartan-Eilenberg resolution of $A$, then $\mathbb L_iF(A)=H_i(Tot^\oplus(F(P)))=H_i(F(P))=L_iF(A)$
+\item Use Grothendieck spectral sequence theorem 5.8.4, we have
+\[(L_pH_0)(L_qF)(A)\Rightarrow L_{p+q}(H_0F)(A)\]
+On the other hand, by proposition 5.7.6, we have
+\[(L_pH_0)(L_qF)(A)=H_p(L_qF)(A)\Rightarrow\mathbb L_{p+q}F(A)\]
+Therefore, $\mathbb L_iF(A)\cong L_i(H_0F)(A)$
+\item Suppose $P\to A$ is a Cartan-Eilenberg resolution of $A$, then $\tilde P\to A[n]$ with $\tilde P_{ij}=P_{i+n,j}$ is also a Cartan-Eilenberg resolution, and
+\[\mathbb L_iF(A[n])=H_i(Tot^\oplus(F(\tilde P)))=H_{n+i}(Tot^\oplus(F(P)))=\mathbb L_{n+i}F(A)\]
+\end{enumerate}
+\end{proof}
+
+\begin{customexercise}{5.7.6}
+Let $A$ be the mapping cone complex $0\to A_1\xrightarrow fA_0\to0$ with only two nonzero rows. Show that there is a long exact sequence
+\[\cdots\to \mathbb L_{i+1}F(A)\to L_{i}F(A_1)\xrightarrow fL_iF(A_0)\to\mathbb L_iF(A)\to L_{i-1}F(A_1)\to\cdots\]
+\end{customexercise}
+
+\begin{proof}
+We have exact sequence
+\[0\to A_1\to A\to A_0[-1]\to0\]
+Thus we have long exact sequence
+\[\cdots\to\mathbb L_{i+1}F(A)\to\mathbb L_{i+1}F(A_0[-1])=L_iF(A_0)\xrightarrow f\mathbb L_iF(A_1)=L_iF(A_1)\to\mathbb L_iF(A)\to\cdots\]
+\end{proof}
+
+\end{document}

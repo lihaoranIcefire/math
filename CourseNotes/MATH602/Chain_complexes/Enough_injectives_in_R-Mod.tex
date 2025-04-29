@@ -1,0 +1,40 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{lemma}
+If $M$ is a left $R$ module, $A$ is an abelian group, then $Hom(M,A)$ is a right $R$ module. Similarly, if $M$ is a ring $R$ module, then $Hom(A,M)$ is a left $R$ module
+\end{lemma}
+
+\begin{proof}
+$(fr)(m)=f(rm)$, $(frs)(m)=f(rsm)=(fr)(sm)=((fr)s)(m)$ \par
+$(rf)(m)=f(mr)$, $(rsf)(m)=f(mrs)=(sf)(rm)=(r(sf))(m)$
+\end{proof}
+
+\begin{proposition}
+If $M$ is a left $R$ module, $A$ is an abelian group, viewing $R$ as a right $R$ module, then the natural map $Hom_{\mathscr Ab}(M,A)\to Hom_{R\text{-}Mod}(M,Hom(R,A))$ is an isomorphism. In other words, $Hom(R,-)$ is the right adjoint to the forgetful functor $R$-$Mod\to \mathscr Ab$, sending a right $R$ module to its underlying abelian group, the forgetfull is clearly an exact functor, thus $Hom(R,-)$ maps injectives to injectives
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{corollary}
+ $R$-$Mod$ has enough injectives
+\end{corollary}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+Suppose $\mathscr A,\mathscr B$ are abelian category, $F:\mathscr A\to \mathscr B$ is an \textbf{additive funtor}\index{Additive funtor} if $F(A\oplus B)$ is naturally isomorphic to $F(A)\oplus F(B)$, and $F$ is \textbf{additive}, i.e. $F(f+g)=F(f)+F(g)$, $f,g\in Hom(A,B)$, here $f+g$ is given by the composition $A\xrightarrow{\begin{pmatrix}
+f \\ g
+\end{pmatrix}} B\oplus B\xrightarrow{\nabla}Y$, here $\nabla$ is the \textbf{codiagonal}
+\end{definition}
+
+\begin{example}
+$\bigwedge^2:\mathrm{Vect}_F\to\mathrm{Vect}_F$ is exact but not additive
+\end{example}
+
+\end{document}

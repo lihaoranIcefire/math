@@ -1,0 +1,233 @@
+% Identification
+% The package identifies itself and the LaTeX version needed
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{Mymathpackage}[2020/05/01 My math package]
+
+% ----------------------------------------------------------------------------------------------------------
+
+\RequirePackage[top=1in, bottom=1.25in, left=1.25in, right=1.25in]{geometry}
+% \RequirePackage{ccfonts}
+% \RequirePackage[math]{anttor}  % Font choice
+\RequirePackage[no-math]{fontspec}
+\RequirePackage{verbatim}
+\RequirePackage[yyyymmdd]{datetime}
+\RequirePackage{graphicx}
+\RequirePackage{pdfpages} % Include PDF pages
+\RequirePackage{enumitem}
+\RequirePackage{bm} % Bold
+\RequirePackage{ifthen} % Use if then else
+\RequirePackage{minted} % For listing codes
+\RequirePackage[framemethod=tikz]{mdframed} % Highlight entire paragraph, hidealllines=true hide the circumference
+\RequirePackage{imakeidx} % Making index
+\RequirePackage{hyperref}
+\hypersetup{
+colorlinks = true, % Allow colored links
+linkcolor = black, % Setup the color for the links
+citecolor = black, % Choose the color for citation
+}
+
+
+% \RequirePackage[inline]{showlabels} % Show labels in PDF files
+% \makeatletter
+% \showlabels{blx@bibitem}
+% \makeatother
+% \renewcommand{\showlabelfont}{\small\color{gray}}
+
+
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{mathrsfs}
+\RequirePackage{mathtools}
+\RequirePackage{amsthm}
+\RequirePackage{tikz}
+\RequirePackage{pgfplots} % drawing axis, addplots
+\pgfplotsset{compat=newest} % ensure position and scaling compatibility
+\usetikzlibrary{intersections} % intersections in tikz
+\usetikzlibrary{calc} % calculations in tikz
+\usetikzlibrary{hobby} % smoothly connecting points
+\RequirePackage{tikz-cd}
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+
+% ----------------------------------------------------------------------------------------------------------
+
+% new and renew commands
+\renewcommand{\mod}{\,\mathrm{mod}\,}
+
+
+
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Ord}{Ord}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\sym}{sym}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Alt}{Alt}
+\DeclareMathOperator{\alt}{alt}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\Isom}{Isom}
+\DeclareMathOperator{\isom}{isom}
+\DeclareMathOperator{\im}{im} % \Im has already been defined
+\DeclareMathOperator{\re}{re} % \Re has already been defined
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Coker}{Coker}
+\DeclareMathOperator{\Span}{Span} % \span has already been defined
+\DeclareMathOperator{\Rep}{Rep}
+\DeclareMathOperator{\Hom}{Hom} % \hom has already been defined
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\aut}{aut}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\interior}{int} % \int has already been defined
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\ext}{ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Spm}{Spm}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\trdeg}{trdeg}
+\DeclareMathOperator{\Max}{Max}
+\DeclareMathOperator{\Min}{Min}
+\DeclareMathOperator{\lcm}{lcm} % \gcd has already been defined
+\DeclareMathOperator{\Sh}{Sh}
+\DeclareMathOperator{\PreSh}{PreSh}
+\DeclareMathOperator{\Ch}{Ch}
+\DeclareMathOperator{\MCG}{MCG}
+\DeclareMathOperator{\Char}{Char}
+\DeclareMathOperator{\characteristic}{char} % \char has already been defined
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\der}{der}
+\DeclareMathOperator{\Adj}{Adj}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\Rad}{Rad}
+\DeclareMathOperator{\nil}{nil}
+\DeclareMathOperator{\Nil}{Nil}
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\lk}{lk}
+\DeclareMathOperator{\st}{st} % \st has already been defined
+\DeclareMathOperator{\St}{St}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\Li}{Li}
+\DeclareMathOperator{\const}{const}
+\DeclareMathOperator{\Const}{Const}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\cor}{cor}
+\DeclareMathOperator{\Rel}{Rel}
+\DeclareMathOperator{\rel}{rel}
+\DeclareMathOperator{\Et}{\'Et}
+\DeclareMathOperator{\et}{\'et}
+\DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\ob}{ob}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\Br}{Br}
+\DeclareMathOperator{\op}{op}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Nrd}{Nrd}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\Pic}{Pic}
+% Alternatively we can use \mathrm{operatorname}\mkern3mu
+
+
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+% \newcommand*{\relbarfill@}{\arrowfill@\relbar-\relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+% \newcommand*{\xdash}[2][]{\ext@arrow 0055\relbarfill@{#1}{#2}}
+\makeatother
+
+% ----------------------------------------------------------------------------------------------------------
+
+% Global variables
+\def\PROOFCROP{0}
+\def\SOLUTIONCROP{0}
+
+% ----------------------------------------------------------------------------------------------------------
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{deduction}[theorem]{Deduction}
+\newtheorem{Remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{problem}[theorem]{Problem}
+
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{fact}[theorem]{Fact}
+
+\theoremstyle{remark}
+\newtheorem*{note}{note}
+\newtheorem*{remark}{remark}
+
+\makeatletter
+% \renewcommand{\proofname}{\textnormal{\textbf{Proof}}}
+\renewenvironment{proof}[1][\proofname]{\par
+\pushQED{\qed}
+\normalfont \topsep6\p@\@plus6\p@\relax
+\trivlist
+\item\relax
+{\itshape
+#1\@addpunct{.}}\hspace\labelsep\ignorespaces
+\if\PROOFCROP1\comment\fi}{\if\PROOFCROP1\endcomment\fi
+\popQED\endtrivlist\@endpefalse
+}
+
+\def\solutionname{Solution}
+\newenvironment{solution}[1][\solutionname]{\par
+\pushQED{\qed}
+\normalfont \topsep6\p@\@plus6\p@\relax
+\trivlist
+\item\relax
+{\itshape
+#1\@addpunct{.}}\hspace\labelsep\ignorespaces
+\if\SOLUTIONCROP1\comment\fi}{\if\SOLUTIONCROP1\endcomment\fi
+\popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+
+%Labelling and referencing with section numbers
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+
+\setlength{\parindent}{0pt}
+
+% ----------------------------------------------------------------------------------------------------------
+
+% This part handles the options passed to the package
+\DeclareOption*{\PackageWarning{Mymathpackage}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
+
+% ----------------------------------------------------------------------------------------------------------
+
+\RequirePackage{subfiles} % Best loaded last in the preamble

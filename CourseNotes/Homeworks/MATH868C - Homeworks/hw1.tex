@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\title{MATH868C hw1}
+\author{Haoran Li}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\setlength{\parindent}{0cm}
+
+\textbf{1.} \par
+\textbf{a)} \par
+The infimum of a family of upper semicontinuous functions is again upper semicontinuous. \par
+\textbf{b)} \par
+Consider $ f_{n}(x) = \sup_{y\in X}\left( f(y) - nd(y,x) \right) $ which surely is monotone decreasing, for any fixed $x$, it is obvious \(f(x)\leq f_{n}(x)\), suppose $\lim_{n\rightarrow \infty}f_{n}(x)>f(x)$, then \(\exists y_{n}, f(y_{n})-nd(y_{n},x)-f(x)>\eta \) for some \(\eta>0\), hence \(d(y_{n},x)<\dfrac{f(y_{n})-f(x)-\eta}{n}\leq\dfrac{M-f(x)-\eta}{n}\), thus \(\lim_{n\rightarrow \infty}y_{n}=x\), since \(f\) is semicontinuous, \(\exists\delta>0\), such that\(f(y)<f(x)+\eta, \forall y\in B(x,\delta)\), thus \(\exists N\), such that \(f(y_{n})<f(x)+\eta, \forall n>N\), but then \(\eta>f(y_{n})-f(x)\geq f(y_{n})-nd(y_{n},x)-f(x)>\eta\) which is a contradiction. Therefore, $\lim_{n\rightarrow \infty}f_{n}(x)=f(x)$ \par
+Next we will prove that \(f_{n}\) is indeed continuous, since $ f_{n}(x) $ could be seen as the supremum of a family of continuous functions in $x$ over the family \(\{f(y) - nd(y,x)\}_{y\in X}\), it is lower semicontinuous. To show that \(f_{n}\) is also upper semicontinuous, we only need to show that, \(\forall x\in\{f_{n}<a\}, \exists\delta>0\), such that \(B(x,\delta)\in\{f_{n}<a\}\). 
+we have \(f(z)-nd(z,y)\leq f(z)-nd(x,z)+nd(y,x)\leq f_{n}(x)+nd(y,x)<a\Rightarrow f_{n}(y)<a\), as long as $\delta$ is small enough. \par
+\textbf{2.} \par
+\[
+\begin{aligned}
+\int_{\mathbb{S}^{n-1}}f(x+r\xi)\mathrm{d}\xi-\mu(\mathbb{S}^{n-1})f(x)
+&=\int_{\mathbb{S}^{n-1}}\left(f(x+r\xi)-f(x)\right) \\
+&=\int_{\mathbb{S}^{n-1}}\left(r\xi^{T}Df(x)+\dfrac{r^{2}}{2}\xi^{T}D^{2}f(\eta)\xi\right) \\
+&=\int_{\mathbb{S}^{n-1}}\dfrac{r^{2}}{2}\xi^{T}D^{2}f(\eta)\xi
+\end{aligned}
+\]
+Where \(\eta=x+\theta r\xi, 0<\theta<1\) depends on \(r\xi\).  Then we have\par
+\[
+\begin{aligned}
+\lim_{r\rightarrow 0}\dfrac{\int_{\mathbb{S}^{n-1}}f(x+r\xi)\mathrm{d}\xi-\mu(\mathbb{S}^{n-1})f(x)}{r^{2}\mu(\mathbb{S}^{n-1})} 
+&=\dfrac{1}{2\mu(\mathbb{S}^{n-1})}\lim_{r\rightarrow 0}\int_{\mathbb{S}^{n-1}}\xi^{T}D^{2}f(\eta)\xi \\
+&=\dfrac{1}{2\mu(\mathbb{S}^{n-1})}\int_{\mathbb{S}^{n-1}}\xi^{T}D^{2}f(x)\xi \\
+&=\dfrac{1}{2\mu(\mathbb{S}^{n-1})}\int_{\mathbb{S}^{n-1}}\xi^{T}P^{T}
+\begin{pmatrix}
+\dfrac{\partial^{2}f}{\partial x_{1}^{2}}(x) &  & \\ 
+ & \ddots  & \\ 
+ &  & \dfrac{\partial^{2}f}{\partial x_{n}^{2}}(x)
+\end{pmatrix}
+P\xi \\
+&=\dfrac{1}{2\mu(\mathbb{S}^{n-1})}\int_{\mathbb{S}^{n-1}}\zeta^{T}
+\begin{pmatrix}
+\dfrac{\partial^{2}f}{\partial x_{1}^{2}}(x) &  & \\ 
+ & \ddots  & \\ 
+ &  & \dfrac{\partial^{2}f}{\partial x_{n}^{2}}(x)
+\end{pmatrix}
+\zeta \\
+&=\dfrac{1}{2\mu(\mathbb{S}^{n-1})}\int_{\mathbb{S}^{n-1}}\dfrac{\partial^{2}f}{\partial x_{1}^{2}}(x)\zeta_{1}^{2}+\cdots+\dfrac{\partial^{2}f}{\partial x_{n}^{2}}(x)\zeta_{n}^{2} \\
+&= \dfrac{1}{2\mu(\mathbb{S}^{n-1})}\int_{\mathbb{S}^{n-1}}V \cdot \zeta \\
+&= \dfrac{1}{2\mu(\mathbb{S}^{n-1})}\int_{\mathbb{B}^{n}}\mathrm{div}V \\
+&= \dfrac{1}{2\mu(\mathbb{S}^{n-1})}\int_{\mathbb{B}^{n}}\Delta f(x) \\
+&= \dfrac{1}{2n}\Delta f(x)
+\end{aligned}
+\]
+Where \(P\in O(n)\), \(\zeta:=P\xi\), \(V=\left(\dfrac{\partial^{2}f}{\partial x_{1}^{2}}(x)\zeta_{1}, \cdots, \dfrac{\partial^{2}f}{\partial x_{n}^{2}}(x)\zeta_{n}\right)^{T}\) 
+
+\end{document}

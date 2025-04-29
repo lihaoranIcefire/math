@@ -1,0 +1,100 @@
+\section{Appendix: The proof that coproduct commutes with inversion}\label{sec:DeltaCommutesWithINV}
+We now prove that $\INV\colon\overline{\mathbb H}^{\symb}\to\mathbb H^{\symb}$ respects the coproduct. We first claim that (c.f.~the definition of $\INV$)
+\begin{equation}\label{eq:Claim}
+\begin{aligned}
+0&=\INV\circ\Delta\left(\sum_{j=0}^d(-1)^j[y_j^{-1},\cdots,y_1^{-1}|-t_j,\cdots,-t_1][y_{j+1},\cdots,y_d|t_{j+1},\cdots,t_d]\right.\\
+&+\sum_{j=1}^d\frac{(-1)^j}{t_j}[y_{j-1}^{-1},\cdots,y_1^{-1}|-t_{j-1},\cdots,-t_1][y_{j+1},\cdots,y_d|t_{j+1},\cdots,t_d]\\
+&-\left.\sum_{j=1}^d\frac{(-1)^{j}}{t_j}[y_{j-1}^{-1},\cdots,y_1^{-1}|t_j-t_{j-1},\cdots,t_j-t_1]\exp([y_{1\to d+1}]_0t_j)[y_{j+1},\cdots,y_d|t_{j+1}-t_{j},\cdots,t_d-t_j]\right).
+\end{aligned}
+\end{equation}
+Given this, it follows by induction on lower depth and weight that we have
+\begin{align*}
+&\INV\circ\Delta[y_n^{-1}\cdots,y_1^{-1}|-t_n,\cdots,-t_1]\\
+&=\INV\circ\Delta\left(\sum_{j=0}^{d-1}(-1)^{d-1-j}[y_j^{-1},\cdots,y_1^{-1}|-t_j,\cdots,-t_1][y_{j+1},\cdots,y_d|t_{j+1},\cdots,t_d]\right.\\
+&+\sum_{j=1}^d\frac{(-1)^{d-1-j}}{t_j}[y_{j-1}^{-1},\cdots,y_1^{-1}|-t_{j-1},\cdots,-t_1][y_{j+1},\cdots,y_d|t_{j+1},\cdots,t_d]\\
+&+\left.\sum_{j=1}^d\frac{(-1)^{d-j}}{t_j}[y_{j-1}^{-1},\cdots,y_1^{-1}|t_j-t_{j-1},\cdots,t_j-t_1]\exp([y_{1\to d+1}]_0t_j)[y_{j+1},\cdots,y_d|t_{j+1}-t_{j},\cdots,t_d-t_j]\right)\\
+&=\Delta\circ\INV\left(\sum_{j=0}^{d-1}(-1)^{d-1-j}[y_j^{-1},\cdots,y_1^{-1}|-t_j,\cdots,-t_1][y_{j+1},\cdots,y_d|t_{j+1},\cdots,t_d]\right.\\
+&+\sum_{j=1}^d\frac{(-1)^{d-1-j}}{t_j}[y_{j-1}^{-1},\cdots,y_1^{-1}|-t_{j-1},\cdots,-t_1][y_{j+1},\cdots,y_d|t_{j+1},\cdots,t_d]\\
+&+\left.\sum_{j=1}^d\frac{(-1)^{d-j}}{t_j}[y_{j-1}^{-1},\cdots,y_1^{-1}|t_j-t_{j-1},\cdots,t_j-t_1]\exp([y_{1\to d+1}]_0t_j)[y_{j+1},\cdots,y_d|t_{j+1}-t_{j},\cdots,t_d-t_j]\right)\\
+&=\Delta\circ\INV[y_n^{-1}\cdots,y_1^{-1}|-t_n,\cdots,-t_1].
+\end{align*}
+It remains to prove the claim. We use the convention that $\exp([X]_0t)=X^t$. To simplify, we write the righthand side of~\eqref{eq:Claim} as $\Delta(A+B-C)$. We rewrite $\Delta(B)$ as
+\begin{align*}
+&\sum_{r=1}^d\frac{(-1)^r}{t_r}\Delta[y_{r-1,\dots,1}^{-1}|-t_{r-1,\dots,1}]\Delta[y_{r+1,\dots,d}|t_{r+1,\dots,d}]\\
+&=\sum_{r=1}^d\frac{(-1)^r}{t_r}\sum_{1=i_0\leq j_0<\dots<i_q\leq r<i_{q+1}<\dots<i_{k+1}=d+1}[y_{i_{q-1}\to i_q,\dots,i_0\to i_1}^{-1}|-t_{j_{q-1},\dots,j_0}]\\
+&[y_{i_{q+1}\to i_{q+2},\dots,i_k\to i_{k+1}}|t_{j_{q+1},\dots,k}]\otimes[y_{r-1,\dots,i_q}^{-1}|-t_{r-1,\dots,i_q}][y_{r+1,\dots,i_{q+1}-1}|t_{r+1,\dots,i_{q+1}-1}]\\
+&\prod_{p=0}^{q-1}(-1)^{j_p-i_{p+1}+1}y_{i_p\to i_{p+1}}^{t_{j_p}}[y_{j_p+1,\dots,i_{p+1}-1}|t_{j_p+1,\dots,i_{p+1}-1}-t_{j_p}][y_{j_p-1,\dots,i_p}|t_{j_p}-t_{j_p-1,\dots,i_p}]\\
+&\prod_{p=q+1}^k(-1)^{j_p-i_p}y_{i_p\to i_{p+1}}^{t_{j_p}}[y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p}][y_{j_p+1,\dots,i_{p+1}-1}|t_{j_p+1,\dots,i_{p+1}-1}-t_{j_p}],
+\end{align*}
+which simplifies to
+\begin{align*}
+&\sum_{1=i_0\leq j_0<\dots<i_q\leq j_q<i_{q+1}<\dots<i_{k+1}=d+1}\frac{(-1)^{j_q}}{t_{j_q}}[y_{i_{q-1}\to i_q,\dots,i_0\to i_1}^{-1}|-t_{j_{q-1},\dots,j_0}]\\
+&[y_{i_{q+1}\to i_{q+2},\dots,i_k\to i_{k+1}}|t_{j_{q+1},\dots,j_k}]\otimes[y_{j_q-1,\dots,i_q}^{-1}|-t_{j_q-1,\dots,i_q}][y_{j_q+1,\dots,i_{q+1}-1}|t_{j_q+1,\dots,i_{q+1}-1}](-1)^{i_q+q+1}\\
+&\prod_{0\leq p\leq k,p\neq q}(-1)^{j_p-i_p}y_{i_p\to i_{p+1}}^{t_{j_p}}[y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p}][y_{j_p+1,\dots,i_{p+1}-1}|t_{j_p+1,\dots,i_{p+1}-1}-t_{j_p}].
+\end{align*}
+Let's denote this by $T_1$. Similarly, $\Delta(C)$ equals
+\begin{align*}
+&\sum_{r=1}^d\frac{(-1)^r}{t_r}\Delta[y_{r-1,\dots,1}^{-1}|t_r-t_{r-1,\dots,1}]\left(y_{1\to d+1}^{t_r}\otimes y_{1\to d+1}^{t_r}\right)\Delta[y_{r+1,\dots,d}|t_{r+1,\dots,d}-t_r]\\
+&=\sum_{r=1}^d\frac{(-1)^r}{t_r}\sum_{1\leq i_0\leq j_0<\dots<i_q\leq r<i_{q+1}<\dots<i_{k+1}=d+1}[y_{i_{q-1}\to i_q,\dots,i_0\to i_1}|t_r-t_{j_{q-1},\dots,j_0}]y_{1\to d+1}^{t_r}\\
+&[y_{i_{q+1}\to i_{q+2},\dots,i_k\to i_{k+1}}|t_{j_{q+1},\dots,j_k}-t_r]\otimes[y_{r-1,\dots,i_q}^{-1},t_r-t_{r-1,\dots,i_q}][y_{r+1,\dots,i_{q+1}-1}|t_{r+1,\dots,i_{q+1}-1}-t_r]\\
+&\prod_{p=0}^{q-1}(-1)^{j_p-i_{p+1}+1}y_{i_p\to i_{p+1}}^{t_{j_p}-t_r}[y_{j_p+1,\dots.i_{p+1}-1}|t_{j_p+1,\dots.i_{p+1}-1}-t_{j_p}][y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p}]\\
+&\prod_{p=q+1}(-1)^{j_p-i_p}y_{i_p\to i_{p+1}}^{t_{j_p}-t_r}[y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p}][y_{j_p+1,\dots.i_{p+1}-1}|t_{j_p+1,\dots.i_{p+1}-1}-t_{j_p}],
+\end{align*}
+which we simplify to
+\begin{align*}
+&\sum_{1\leq i_0\leq j_0<\dots<i_q\leq j_q<i_{q+1}<\dots<i_{k+1}=d+1}\frac{(-1)^{j_q}}{t_{j_q}}[y_{i_{q-1}\to i_q,\dots,i_0\to i_1}|t_{j_q}-t_{j_{q-1},\dots,j_0}]y_{1\to d+1}^{t_{j_q}}\\
+&[y_{i_{q+1}\to i_{q+2},\dots,i_k\to i_{k+1}}|t_{j_{q+1},\dots,j_k}-t_{j_q}]\otimes[y_{j_q-1,\dots,i_q}^{-1},t_{j_q}-t_{j_q-1,\dots,i_q}]y_{1\to d+1}^{t_{j_q}}\\
+&[y_{j_q+1,\dots,i_{q+1}-1}|t_{j_q+1,\dots,i_{q+1}-1}-t_{j_q}](-1)^{i_q+q+1}\\
+&\prod_{0\leq p\leq k,p\neq q}(-1)^{j_p-i_p}y_{i_p\to i_{p+1}}^{t_{j_p}-t_{j_q}}[y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p}][y_{j_p+1,\dots.i_{p+1}-1}|t_{j_p+1,\dots.i_{p+1}-1}-t_{j_p}]
+\end{align*}
+and denote it $T_2$. Finally, $\Delta(A)$ is given by
+\begin{align*}
+&\sum_{r=0}^d(-1)^r\Delta[y_{r,\dots,1}^{-1}|-t_{r,\dots,1}]\Delta[y_{r+1,\dots,d}|t_{r+1,\dots,d}]\\
+&=\sum_{r=0}^d(-1)^r\sum_{1=i_0\leq j_0<\cdots<i_q\leq r+1\leq i_{q+1}<\cdots<i_{k+1}=d+1}[y_{i_{q-1}\to i_q,\dots,i_0\to i_1}^{-1}|-t_{j_{q-1},\dots,j_0}]\\
+&[y_{i_{q+1}\to i_{q+2},\dots,i_k\to i_{k+1}}|t_{j_{q+1},\dots,j_k})\otimes[y_{r,\dots,i_q}^{-1}|-t_{r,\dots,i_q}][y_{r+1,\dots,i_{q+1}-1}|t_{r+1,\dots,i_{q+1}-1}]\\
+&\prod_{p=0}^{q-1}(-1)^{j_p-i_{p+1}+1}y_{i_p\to i_{p+1}}^{t_{j_p}}[y_{j_p+1,\dots,i_{p+1}-1}|t_{j_p+1,\dots,i_{p+1}-1}-t_{j_p}][y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p}]\\
+&\prod_{p=q+1}^k(-1)^{j_p-i_p}y_{i_p\to i_{p+1}}^{t_{j_p}}[y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p})[y_{j_p+1,\dots,i_{p+1}-1}|t_{j_p+1,\dots,i_{p+1}-1}-t_{j_p}],
+\end{align*}
+which simplifies to
+\begin{align*}
+&\sum_{1=i_0\leq j_0<\cdots<i_q\leq i_{q+1}<\cdots<i_{k+1}=d+1}[y_{i_{q-1}\to i_q,\dots,i_0\to i_1}^{-1}|-t_{j_{q-1},\dots,j_0}]\\
+&[y_{i_{q+1}\to i_{q+2},\dots,i_k\to i_{k+1}}|t_{j_{q+1},\dots,j_k}]\otimes(-1)^q\\
+&\left(\sum_{i_q\leq r+1\leq i_{q+1}}(-1)^{r-i_q+1}[y_{r,\dots,i_q}^{-1}|-t_{r,\dots,i_q}][y_{r+1,\dots,i_{q+1}-1}|t_{r+1,\dots,i_{q+1}-1}]\right)\\
+&\prod_{0\leq p\leq k,p\neq q}(-1)^{j_p-i_p}y_{i_p\to i_{p+1}}^{t_{j_p}}[y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p}][y_{j_p+1,\dots,i_{p+1}-1}|t_{j_p+1,\dots,i_{p+1}-1}-t_{j_p}].
+\end{align*}
+We split this into two sums
+\[
+\sum_{1=i_0\leq j_0<\cdots<i_q<i_{q+1}<\cdots<i_{k+1}=d+1},\quad\sum_{1=i_0\leq j_0<\cdots<i_q=i_{q+1}<\cdots<i_{k+1}=d+1}
+\]
+For the first we have (by induction)
+\begin{align*}
+&\sum_{1=i_0\leq j_0<\cdots<i_q< i_{q+1}<\cdots<i_{k+1}=d+1}[y_{i_{q-1}\to i_q,\dots,i_0\to i_1}^{-1}|-t_{j_{q-1},\dots,j_0}]\\
+&[y_{i_{q+1}\to i_{q+2},\dots,i_k\to i_{k+1}}|t_{j_{q+1},\dots,j_k}]\otimes(-1)^q\\
+&\left(-\sum_{i_q\leq r\leq i_{q+1}-1}\frac{(-1)^{r-i_q+1}}{t_r}[y_{r-1,\dots,i_q}^{-1}|-t_{r-1,\dots,i_q}][y_{r+1,\dots,i_{q+1}-1}|t_{r+1,\dots,i_{q+1}-1}]\right.\\
+&+\left.\sum_{i_q\leq r\leq i_{q+1}-1}\frac{(-1)^{r-i_q+1}}{t_r}[y_{r-1,\dots,i_q}^{-1}|t_r-t_{r-1,\dots,i_q}]y_{i_q\to i_{q+1}}^{t_r}[y_{r+1,\dots,i_{q+1}-1}|t_{r+1,\dots,i_{q+1}-1}-t_r]
+\right)\\
+&\prod_{0\leq p\leq k,p\neq q}(-1)^{j_p-i_p}y_{i_p\to i_{p+1}}^{t_{j_p}}[y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p}][y_{j_p+1,\dots,i_{p+1}-1}|t_{j_p+1,\dots,i_{p+1}-1}-t_{j_p}]\\
+&=-\sum_{1=i_0\leq j_0<\cdots<i_q\leq j_q<i_{q+1}<\cdots<i_{k+1}=d+1}[y_{i_{q-1}\to i_q,\dots,i_0\to i_1}^{-1}|-t_{j_{q-1},\dots,j_0}][y_{i_{q+1}\to i_{q+2},\dots,i_k\to i_{k+1}}|t_{j_{q+1},\dots,j_k}]\\
+&\otimes\frac{(-1)^{j_q-i_q+q+1}}{t_{j_q}}[y_{j_q-1,\dots,i_q}^{-1}|-t_{j_q-1,\dots,i_q}][y_{j_q+1,\dots,i_{q+1}-1}|t_{j_q+1,\dots,i_{q+1}-1}]\\
+&\prod_{0\leq p\leq k,p\neq q}(-1)^{j_p-i_p}y_{i_p\to i_{p+1}}^{t_{j_p}}[y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p}][y_{j_p+1,\dots,i_{p+1}-1}|t_{j_p+1,\dots,i_{p+1}-1}-t_{j_p}]\\
++&\sum_{1=i_0\leq j_0<\cdots<i_q\leq j_q<i_{q+1}<\cdots<i_{k+1}=d+1}[y_{i_{q-1}\to i_q,\dots,i_0\to i_1}^{-1}|-t_{j_{q-1},\dots,j_0}][y_{i_{q+1}\to i_{q+2},\dots,i_k\to i_{k+1}}|t_{j_{q+1},\dots,j_k}]\\
+&\otimes\frac{(-1)^{j_q-i_q+q+1}}{t_{j_q}}[y_{j_q-1,\dots,i_q}^{-1}|t_{j_q}-t_{j_q-1,\dots,i_q}]y_{i_q\to i_{q+1}}^{t_{j_q}}[y_{j_q+1,\dots,i_{q+1}-1}|t_{j_q+1,\dots,i_{q+1}-1}-t_{j_q}]\\
+&\prod_{0\leq p\leq k,p\neq q}(-1)^{j_p-i_p}y_{i_p\to i_{p+1}}^{t_{j_p}}[y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p}][y_{j_p+1,\dots,i_{p+1}-1}|t_{j_p+1,\dots,i_{p+1}-1}-t_{j_p}],
+\end{align*}
+which we write as $-T_3+T_4$. The second sum can be rewritten as
+\begin{align*}
+&\sum_{1=i_1\leq j_1<\dots<i_{k+1}=d+1}\left(\sum_{0\leq q\leq k}(-1)^q[y_{i_q\to i_{q+1},\dots,i_1\to i_2}^{-1}|-t_{j_q,\dots,j_1}][y_{i_{q+1}\to i_{q+2},\dots,i_k\to i_{k+1}}|t_{j_{q+1},\dots,j_k}]\right)\\
+&\otimes\prod_{1\leq p\leq k}(-1)^{j_p-i_p}y_{i_p\to i_{p+1}}^{t_{j_p}}[y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p}][y_{j_p+1,\dots,i_{p+1}-1}|t_{j_p+1,\dots,i_{p+1}-1}-t_{j_p}]
+\end{align*}
+and inductively replaced by
+\begin{align*}
+&\sum_{1=i_1\leq j_1<\dots<i_{k+1}=d+1}\left(-\sum_{1\leq q\leq k}\frac{(-1)^q}{t_{j_q}}[y_{i_{q-1}\to i_q,\dots,i_1\to i_2}^{-1}|-t_{j_{q-1},\dots,j_1}][y_{i_{q+1}\to i_{q+2},\dots,i_k\to i_{k+1}}|t_{j_{q+1},\dots,j_k}]\right.\\
+&+\left.\sum_{1\leq q\leq k}\frac{(-1)^q}{t_{j_q}}[y_{i_{q-1}\to i_q,\dots,i_1\to i_2}^{-1}|t_{j_q}-t_{j_{q-1},\dots,j_1}]y_{1\to d+1}^{t_{j_q}}[y_{i_{q+1}\to i_{q+2},\dots,i_k\to i_{k+1}}|t_{j_{q+1},\dots,j_k}-t_{j_q}]\right)\\
+&\otimes\prod_{1\leq p\leq k}(-1)^{j_p-i_p}y_{i_p\to i_{p+1}}^{t_{j_p}}[y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p}][y_{j_p+1,\dots,i_{p+1}-1}|t_{j_p+1,\dots,i_{p+1}-1}-t_{j_p}]\\
+&=-\sum_{1=i_0\leq j_0<\dots<i_{k+1}=d+1}\frac{(-1)^q}{t_{j_q}}[y_{i_{q-1}\to i_q,\dots,i_0\to i_1}^{-1}|-t_{j_{q-1},\dots,j_0}][y_{i_{q+1}\to i_{q+2},\dots,i_k\to i_{k+1}}|t_{j_{q+1},\dots,j_k}]\\
+&\otimes\prod_{0\leq p\leq k}(-1)^{j_p-i_p}y_{i_p\to i_{p+1}}^{t_{j_p}}[y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p}][y_{j_p+1,\dots,i_{p+1}-1}|t_{j_p+1,\dots,i_{p+1}-1}-t_{j_p}]\\
+&+\sum_{1=i_0\leq j_0<\dots<i_{k+1}=d+1}\frac{(-1)^q}{t_{j_q}}[y_{i_{q-1}\to i_q,\dots,i_0\to i_1}^{-1}|t_{j_q}-t_{j_{q-1},\dots,j_0}]y_{1\to d+1}^{t_{j_q}}\\
+&[y_{i_{q+1}\to i_{q+2},\dots,i_k\to i_{k+1}}|t_{j_{q+1},\dots,j_k}-t_{j_q}]\\
+&\otimes\prod_{0\leq p\leq k}(-1)^{j_p-i_p}y_{i_p\to i_{p+1}}^{t_{j_p}}[y_{j_p-1,\dots,i_p}^{-1}|t_{j_p}-t_{j_p-1,\dots,i_p}][y_{j_p+1,\dots,i_{p+1}-1}|t_{j_p+1,\dots,i_{p+1}-1}-t_{j_p}]
+\end{align*}
+which we denote by $-T_5+T_6$. We note that $T_1=T_3,T_2=T_6,T_4=T_5$. It follows that $\Delta(A+B-C)=-T_3+T_4-T_5+T_6+T_1-T_2=0$ proving the claim.

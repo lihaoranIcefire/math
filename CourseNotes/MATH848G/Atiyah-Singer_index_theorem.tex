@@ -1,0 +1,87 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{theorem}(\textbf{Atiyah-Singer index theorem}\index{Atiyah-Singer index theorem})\label{Atiyah-Singer index theorem}
+$M$ is a compact manifold, $p: T^*M\to M$ is the cotangent bundle, $E,F$ are vector bundles over $M$, $P: \Gamma(E)\to \Gamma(F)$ is an elliptic $\psi$DO of order $m$ with principal symbol $\sigma(P): p^*E\to p^*F$, $P$ defines a Fredholm operator $H^s(E)\to H^{s-m}(F)$, from this we get its index(analytic index) $\mathrm{ind}_a(P)$, then \par
+\textbf{(1): }$\mathrm{ind}_a(P)$ is independent of the choice of $s$ \par
+\textbf{(2): }$\sigma(P)$ defines an element of $K(T^*M)$ \par
+\textbf{(3): }$\mathrm{ind}_a(P)$ only depends on $[\sigma(P)]\in K(T^*M)$ \par
+\textbf{(4): }$\exists$ homomorphism $\mathrm{ind}_t$(topological index)$:K(T^*M)\to \mathbb Z$ independent of $P,E,F$ such that $\mathrm{ind}_a(P)=\mathrm{ind}_t\left([\sigma(P)]\right)$
+\end{theorem}
+
+\begin{proof}
+\textbf{(1): }Follows from what we did about $\psi$DOs \par
+\textbf{(2): }Since $\sigma(P)$ is an elliptic operator, at $(x,\xi)\in T^*M$, $\sigma(P)(x,\xi)$ is a linear map $(p^*E)_{(x,\xi)}\to (p^*F)_{(x,\xi)}$ which is invertible except for $\xi$ small, thus $0\to p^*E\overset{\sigma(P)}{\longrightarrow}p^*F\to0$ is exact off a compact set, thus $\left[0\to p^*E\overset{\sigma(P)}{\longrightarrow}p^*F\to0\right]$ defines an element in $K(T^*M)$ \par
+\textbf{(3): }The $K$-theory class of $\sigma(P)$ only depends on $\sigma(P)$ over $S^*M$, which is compact, then you can extend it to $T^*M$ just by homogeneity, $\sigma(P)(x,r\xi)=r^m\sigma(P)(x,\xi)$, varying this symbol over $S^*M$ continuously, keeping it invertible, gives a homotopy of Fredholm operators,the index doesn't change since the index is locally constant, and such a homotopy preserves the $K$-theory class \par
+\textbf{(4): }
+\end{proof}
+
+\begin{theorem}(\textbf{Dolbeault theorem})\index{Dolbeault theorem}\label{Dolbeault theorem}
+Consider complex \par
+\[
+\begin{tikzcd}
+{\Omega^{0,0}(E)} \arrow[r, "\bar\partial"] & {\Omega^{0,1}(E)} \arrow[r, "\bar\partial"] & {\Omega^{0,2}(E)} \arrow[r, "\bar\partial"] & {\cdots}
+\end{tikzcd}
+\]
+The $j$-th cohomology will be $H^j(M,\mathcal{O}_E)$
+\end{theorem}
+
+\begin{proof}
+\[
+\begin{tikzcd}
+{0} \arrow[r] &{\mathcal{O}(E)}\arrow[r, hook] &{\Omega^{0,0}(E)} \arrow[r, "\bar\partial"] & {\Omega^{0,1}(E)} \arrow[r, "\bar\partial"] & {\Omega^{0,2}(E)} \arrow[r, "\bar\partial"] & {\cdots}
+\end{tikzcd}
+\]
+is a resolution of ${\mathcal{O}(E)}$ by fine sheaves as defined in Definition \ref{Fine sheaves}
+\end{proof}
+
+\begin{definition}\label{Fine sheaves}
+A fine sheaf\index{Fine sheaf} $\mathcal{F}$ over $X$ is one with "partitions of unity"; more precisely for any open cover of the space $X$ we can find a family of homomorphisms from the sheaf to itself with sum $1$ such that each homomorphism is $0$ outside some element of the open cover
+\end{definition}
+
+\begin{example}
+$M$ is compact Riemann surface, $E\to M$ is a holomorphic vector bundle, $E$ is equipped with $\bar\partial$ operator, $\bar\partial: \Gamma(E)\to \Gamma\left(E\otimes\Omega^{0,1}\right)$, $\bar\partial f:=\dfrac{\partial f}{\partial\bar z}d\bar z$(Notice when $E$ is trivial this is the normal $\bar\partial$ operator), $\bar\partial$ is an elliptic operator since its principal symbol is given by $\sigma(\bar\partial)(x,\xi)=\bar\xi$, thus $\mathrm{ind}_a(\bar\partial)=\dim H^0(M,E)-\dim H^1(M,E)$, $H^0(M,E)$ is space of all holomorphic sections of $E$
+\end{example}
+
+\begin{lemma}
+$E\overset{p}{\to} X$ is a vector bundle, then the pullback bundle $p^*(E):=E\underset{X}{\times}X$ is a trivial bundle
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+Let $X$ be a compact $G$ space(meaning $G$ acts on $X$), where $G$ is a compact Lie group, a $G$-vector bundle\index{$G$-vector bundle} $E$ is a vector bundle over $X$ which is also a $G$ space, with $g: E_x\to E_{gx}$ a linear map on fibers. In particular, if $X$ is a point, then a $G$-bundle is just a finite dimensional representation of $G$, and $K_G(X)$ is the $K$-theory of such vector bundles, thus $R(G):=K_G(*)$ is the representation ring of $G$, if $X$ is a trivial $G$ space, then a $G$-vector bundle is just a continuous family of $G$ representations
+\end{definition}
+
+\begin{example}(Examples of representation rings $R(G)$)
+$R(G)=\mathbb Z$
+\end{example}
+
+\begin{theorem}
+If $X$ is a trivial $G$ space, $K_G(X)\cong K(X)\otimes_{\mathbb Z}R(G)$ \par
+If $X$ is a free $G$ space, $K_G(X)\cong K(X/G)$
+\end{theorem}
+
+\begin{theorem}(\textbf{Equivariant Bott periodicity theorem})\label{Equivariant Bott periodicity theorem}
+Let $X$ be a locally compact $G$ space, where $G$ is a compact Lie group, $V$ is a finite dimensional representation of $G$, then there is an isomorphism $K_G\to K_G(V\times X)$ defined as follows \par
+Consider the complex
+\[
+\begin{tikzcd}
+0 \arrow[r] & \mathbb C=\bigwedge^0V \arrow[r, "\lambda_v"] & V=\bigwedge^1V \arrow[r, "\lambda_v"] & \bigwedge^2V \arrow[r, "\lambda_v"] & \cdots \arrow[r, "\lambda_v"] & \bigwedge^nV \arrow[r] &0
+\end{tikzcd}
+\]
+Where $\lambda_v:=v\wedge-$
+\end{theorem}
+
+\begin{theorem}(Thom isomorphism theorem in $K$-theory)
+Let $X$ be a compact Hausdorff space, $E\to X$ is a complex vector bundle, then multiplication by $\lambda_{E^*}$ give an isomorphism $K(X)\to K(E)$
+\end{theorem}
+\begin{proof}
+Give an inner product on each fiber varying smoothly, $n=\dim E$, let $G=U(n)$, $Y$ be the fiber bundle over $X$ with fiber over $x$ the stiefel manifold of $E_x$, then $G$ acts on $Y$ and $\mathbb C^n\times Y$ freely, thus $K(X)=K(Y/G)\cong K_G(Y)\xrightarrow{\cong}K_G\left(\mathbb C^n\times Y\right)\cong K\left((\mathbb C^n\times Y)/G\right)=K(E)$ \par
+Here $\lambda_E$ is the complex $\bigwedge\left(p^*E\right)$
+\end{proof}
+
+\end{document}

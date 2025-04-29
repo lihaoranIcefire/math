@@ -1,0 +1,189 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{theorem}
+If $\Omega\subseteq\mathbb C^n$ is pseudoconnvex, then there is a complete K\"ahler metric on $\Omega$
+\end{theorem}
+
+\begin{proof}
+From Richberg's lemma, there is a smooth strictly plurisubharmonic exhaustion function $\psi$ on $\Omega$. By adding a constant, we can assume $\psi>0$. Let $\omega_0$ denote the euclidean K\"ahler form on $\Omega$, and consider: $\omega=\omega_0+i\partial\bar\partial\psi^2$, $i\partial\bar\partial\psi^2$ is semi-positive definite
+\[\omega=\omega_0+i\partial\psi\wedge\bar\partial\psi+i\psi\partial\bar\partial\psi\geq\omega_0+i\partial\psi\wedge\bar\partial\psi\]
+\[\omega^n\geq\omega_0\wedge\omega^{n-1}+i\partial\psi\wedge\bar\partial\psi\wedge\omega^{n-1}\geq i\partial\psi\wedge\bar\partial\psi\wedge\omega^{n-1}\]
+\[\frac{\omega^n}{n!}\geq\frac{2}{n}i\partial\psi\wedge\bar\partial\psi\wedge\frac{\omega^{n-1}}{(n-1)!}=\frac{2}{n}|\partial\psi|^2_\omega\frac{\omega^n}{n!}\]
+So $|d\psi|_\omega=\sqrt{2}|\partial\psi|_\omega\leq C$. Completeness follows from Lemma \ref{Equivalent conditions of completeness and compact exhaustion}
+\end{proof}
+
+\begin{definition}
+Let $d\mu=\omega^n/n!$ be a K\"ahler metric on $\Omega$, $\phi\in C^0(\Omega)$ be an exhaustion function. Define $L_{(p,q)}^2(\Omega,\phi)$ to be the completion of smooth $(p,q)$-forms with respect to the norm
+\[\|\alpha\|^2_\phi=\int_\Omega|\alpha|_\omega^2e^{-\phi}d\mu\]
+\end{definition}
+
+The same density theorems apply as for unweighted spaces
+
+For compactly supported $\alpha$
+\[\int_\Omega\langle\bar\partial u,\alpha\rangle e^{-\phi}d\mu=\int_\Omega\langle u,e^\phi\bar\partial^*(e^{-\phi}\alpha)\rangle e^{-\phi}d\mu\]
+The new adjoint is $-i[\Lambda,\partial_\phi]$, $\partial_\phi=e^\phi\partial e^{-\phi}=\partial-\partial\phi$. Moreover
+\[\int_\Omega\langle\partial_\phi u,\alpha\rangle e^{-\phi}d\mu=\int_\Omega\langle\partial(e^{-\phi} u),\alpha\rangle d\mu=\int_\Omega\langle u,\bar\partial^*\alpha\rangle e^{-\phi}d\mu\]
+So $\partial^*_\phi=i[\Lambda,\bar\partial]$
+
+\begin{definition}
+The Laplacian is $\Delta=d^*d+dd^*$. The Dolbeault laplacians are
+\[\Box_{\bar\partial}=\bar\partial^*\bar\partial+\bar\partial\bar\partial^*,\Box_{\partial}=\partial_\phi^*\partial_\phi+\partial_\phi\partial_\phi^*\]
+The curvature is the pure imaginary $(1,1)$ form
+\[F_\phi=\bar\partial\partial_\phi+\partial_\phi\bar\partial=\partial\bar\partial\phi\]
+\end{definition}
+
+\begin{lemma}
+$\Box_{\bar\partial}-\Box_\partial=[iF_\phi,\Lambda]$
+\end{lemma}
+
+\begin{proof}
+\[\bar\partial^*\bar\partial=-i[\Lambda,\partial_\phi]\bar\partial=-i\Lambda\partial_\phi\bar\partial+i\partial_\phi\Lambda\bar\partial\]
+\[\bar\partial\bar\partial^*=\bar\partial(-i[\Lambda,\partial_\phi])=-i\bar\partial\Lambda\partial_\phi+i\bar\partial\partial_\phi\Lambda\]
+\[-\partial^*_\phi\partial_\phi=-i[\Lambda,\bar\partial]\partial_\phi=-i\Lambda\bar\partial\partial_\phi+i\bar\partial\Lambda\partial_\phi\]
+\[-\partial_\phi\partial^*_\phi=-\partial_\phi(i[\Lambda,\bar\partial])=-i\partial_\phi\Lambda\bar\partial+i\partial_\phi\bar\partial\Lambda\]
+\end{proof}
+
+\begin{corollary}
+For $\alpha\in D(\bar\partial)\cap D(\bar\partial^*)$
+\[\|\bar\partial\alpha\|^2+\|\bar\partial^*\alpha\|^2\geq\langle[iF_\phi,\Lambda]\alpha,\alpha\rangle\]
+\end{corollary}
+
+\begin{proof}
+$\langle\partial_\phi\alpha,\alpha\rangle\geq0$ can be throw away, and $\langle\Box_{\bar\partial}\alpha,\alpha\rangle$ give the left hand side by integration by parts
+\end{proof}
+
+\begin{lemma}
+Write $iF_\phi=f_{i\bar j}dz_i\wedge d\bar z_j$. If there is $C_0>0$ such that $\sum f_{i\bar j}(z)\xi_i\bar\xi_j\geq C_0|\xi|^2$ for all $\xi\in\mathbb C^n$ and all $z\in\Omega$, then there is $C_1>0$ such that
+\[\langle[iF_\phi,\Lambda]\alpha,\alpha\rangle\geq C_1\|\alpha\|^2\]
+for all $\alpha\in L^2_{(n,q)}(\Omega,\omega),q\geq1$
+\end{lemma}
+
+Note that $[iF_\phi,\Lambda]=0$ on $(n,0)$ forms. In particular, the condition that $q\geq1$ is necessary. The applications of theis result extends to $(p,q)$ froms, $q\geq1$. We will only prove a couple of special cases. For the general result see Demailly
+
+\begin{example}
+Consider an $(n,1)$ form $\alpha$. Let $\theta_i$ denote an orthonormal frame for $T^{1,0}\Omega$. Write $\omega=i\sum_j\theta_j\wedge\bar\theta_j$, and
+\[\alpha=i\sum_{i=1}^n\alpha_i(z)\theta_1\wedge\cdots\wedge\theta_n\wedge\bar\theta_i\]
+Write $iF_\phi=\sum f_{i\bar j}\theta_i\wedge\bar\theta_j$
+\end{example}
+
+Write $\sum_{i,j}\dfrac{\partial^2\phi_0}{\partial z_i\partial\bar z_j}(z)\xi_i\bar\xi_j\geq m(z)|\xi|^2$, where $m$ is a continuous function, $m(z)>0$ for all $z\in\Omega$. We will replace a given $\phi_0$ with $\phi=\chi\circ\phi_0$, for an appropriate increasing convex function $\chi$
+
+Set $M(t)=(\min_{\phi_0(z)\geq t}m(z))^{-1}$. Then $M(t)$ is a positive, continuous, increasing function of $t$. Note that $M(\phi_0(z))m(z)\geq1$
+
+\begin{claim}
+We can find a smooth $\tilde M\geq M$ that is increasing
+\end{claim}
+
+Assuming the claim, set $\chi(t)=\int^t\tilde M(\tau)d\tau$. Then $\chi$ is convex, and $\chi'(t)\geq M(t)$. Set $\phi=\chi\circ\phi_0$. Then $\phi$ is psh exhaustion function, and
+\[\sum_{i,j}\frac{\partial^2\phi}{\partial z_i\partial\bar z_j}(z)\xi_i\bar\xi_j\geq\sum_{i,j}\chi'\circ\phi_0\frac{\partial^2\phi_0}{\partial z_i\partial\bar z_j}(z)\xi_i\bar\xi_j\geq M(\phi_0(z))m(z)|\xi|^2\geq|\xi|^2\]
+
+\begin{proof}[Proof of claim]
+This is probably obvious, by here is one idea: Let $\psi:\mathbb R\to\mathbb R$ be smooth with compact support in $(-1,1)$, $0\leq\psi\leq 1$ and $\int_{\mathbb R}\psi=1$. Set
+\[\tilde M(t)=\int_{\mathbb R}M(s)\psi(s-t-1)ds=\int_{\mathbb R}M(\tau+t+1)\psi(\tau)d\tau\]
+The first equality proves that $\tilde M$ is smooth. By the second equality
+\[\tilde M(t)\geq\int_{\mathbb R}M(t)\psi(\tau)d\tau=M(t)\]
+Also by the second equality, for $\delta>0$
+\[\tilde M(t+\delta)-M(t)=\int_{\mathbb R}(M(\tau+t+1)-M(\tau+t+1))\psi(\tau)d\tau\geq0\]
+So $\tilde M$ is increasing
+\end{proof}
+
+Summary: $\Omega\subseteq\mathbb C^n$ pseudoconvex, $\omega$ complete. For an $(n,q)$ form $\alpha$, $q\geq1$, and $\alpha\in D(\bar\partial)\cap D(\bar\partial^*)$, we have proved the basic estimate
+\[\|\bar\partial\alpha\|_\phi+\|\bar\partial^*\alpha\|_\phi\geq C\|\alpha\|_\phi\]
+This implies that $\bar\partial$ has closed range and that the harmonics $\mathcal H^{n,q}=\{0\}$, i.e. $\ker\bar\partial=\im\bar\partial$
+
+\begin{theorem}
+If $\alpha\in L^2_{(n,q)}(\Omega,\phi)$, $q\geq1$, and $\bar\partial\alpha=0$, then there is $u\in L^2_{(n,q-1)}(\Omega,\phi)$ such that $\bar\partial u=\alpha$. Moreover, $\|u\|\leq C\|\alpha\|$
+\end{theorem}
+
+\begin{note}
+In applications, having the estimate on the norms is crucial. Notice that $\|\|$ depends on the K\"ahler metric $\omega$ and the weight $\phi$. We can get rid of the dependence on $\omega$, i.e. prove the same result for the euclidean metric, by taking a limit of solutions for metrics $\omega_\epsilon=\omega_0+\epsilon\omega$ as $\epsilon\to0$ (see Demailly). On the other hand, $\phi$ is necessary. Optimizing the choice of $\phi$ is an important issue we will skip for now. Finally, the result holds more generally for $(p,q)$ forms: $\bigwedge^pT^*\Omega\cong\bigwedge^{n-p}T\Omega\otimes\bigwedge T^*\Omega$, so trivializing $\bigwedge^{n-p}T\Omega$ reduces the problem to this case. More importantly. This is not exactly what we want, since we are trying to solve $\bar\partial$ for all smooth $\alpha$, not just those that are integrable. Let $L^2_{(p,q)}(\Omega,\loc)$ denote the $(p,q)$ forms that are locally $L^2$. Notice that here the metric $\omega$ and weight $\phi$ are irrelevant
+\end{note}
+
+\begin{theorem}
+If $\alpha\in L^2_{(p,q)}(\Omega,\loc)$, $q\geq1$, and $\bar\partial\alpha=0$, then there is $u\in L^2_{(p,q-1)}(\Omega,\loc)$ such that $\bar\partial u=\alpha$
+\end{theorem}
+
+\begin{proof}
+The idea is to find some weight $\tilde\phi$ such that $\alpha\in L^2_{(p,q)}(\Omega,\tilde\phi)$, and then apply the previous result. We again choose the form $\tilde\phi=\chi\circ\phi$, where $\chi$ is increasing and convex. To do this, let $K_i=\{z\in\Omega|\phi(z)\leq i\}$, and let $\ell_i=\|\alpha\|^2_{L^2(K_i)}$. Now choose $\chi$ so that $e^{-\chi(i)}(\ell_{i+1}-\ell_i)\leq 2^{-i}$, then
+\begin{align*}
+\int_{K_{i+1}\setminus K_i}|\alpha|^2e^{-\tilde\phi}d\mu\leq e^{-\chi(i)}\int_{K_{i+1}\setminus K_i}|\alpha|^2d\mu\leq e^{-\chi(i)}(\ell_{i+1}-\ell_i)\leq 2^{-i}
+\end{align*}
+Hence
+\[\int_\Omega|\alpha|^2e^{-\tilde\phi}d\mu=\sum_i\int_{K_{i+1}\setminus K_i}|\alpha|^2e^{-\tilde\phi}d\mu\leq\sum_i2^{-i}<\infty\]
+\end{proof}
+
+Elliptic regularity: The result applies, in particular, to the case where $\alpha$ is smooth. However, the theorem just concludes that the solution $\bar\partial u=\alpha$ is locally in $L^2$. We want to improve this
+
+\begin{theorem}
+If $\alpha$ is a smooth $(p,q)$-form on $\Omega$, $q\geq1$, with $\bar\partial\alpha=0$, then there is a smooth $(p,q-1)$-form on $\Omega$ such that $\bar\partial u=\alpha$
+\end{theorem}
+
+\begin{proof}
+First consider the case $q=1$, i.e. $u$ is a function. We know that $\partial^*\partial=\bar\partial^*\bar\partial$, so $\|\partial u\|\leq \|\bar\partial u\|$. In particular, if $\alpha\in L^2(\Omega,\loc)$, then $u$ is in $L_1^2(\Omega,\loc)$ (one distributional derivative in $L^2$). Now differentiate the equation $\bar\partial u=\alpha$ $k$ times to conclude that $u\in L_k^2(\Omega,\loc)$ for arbitrary $k$. On the other hand, the Sobolev embedding theorem implies $L_k^2\hookrightarrow C^j$ for $k\geq n+j$. Hence, if $\alpha$ is smooth, so is $u$ \\
+If $q\geq2$, then we have
+\[L_{(p,q-1)}^2(\Omega,\phi)=R(\bar\partial)\oplus R(\bar\partial^*)\]
+Moreover, $N(\bar\partial)^\perp=R(\bar\partial^*)$. Hence, $u$ may be taken to be in the range of $\bar\partial^*$. Since $(\bar\partial^*)^2=0$, we have $\Box_{\bar\partial}u=\bar\partial^*\bar\partial u=\bar\partial^*\alpha$. Let $\Delta=dd^*+d^*d$ be the ordinary or de Rham Laplacian. Then in standard basis and euclidean metric, $\Delta$ acts on the coefficients of $(p,q)$-forms
+\end{proof}
+
+\begin{claim}
+$\Delta=2\Box_{\bar\partial}$
+\end{claim}
+
+\begin{proof}
+Write $d=\partial+\bar\partial$, $d^*=\partial^*+\bar\partial^*$, then
+\[\Delta=\Box_{\bar\partial}+\Box_{\partial}+\bar\partial\partial^*+\partial^*\bar\partial+\partial\bar\partial^*+\bar\partial^*\partial\]
+But the cross terms vanish: e.g. since $\bar\partial^2=0$
+\[\bar\partial\partial^*=i\bar\partial[\Lambda,\bar\partial]=i\bar\partial\Lambda\bar\partial\]
+\[\partial^*\bar\partial=i[\Lambda,\bar\partial]\bar\partial=-i\bar\partial\Lambda\bar\partial\]
+The result now follows, since $\Box_\partial=\Box_{\bar\partial}$
+\end{proof}
+
+It follows that if $\alpha\in L^2_1(\Omega,\loc)$, then $\Delta u=2\bar\partial^*\alpha$ is in $L^2(\Omega,\loc)$. We now appeal to the following interior estimate: if $U\subset\subset U'\subset\subset\Omega$, then there is a constant $C>0$ such that
+\[\|u\|_{L^2_{k+1}(U)}\leq C\left(\|\|_{L^2_{k}(U')}+\|\Delta u\|_{L^2_{k}(U')}\right)\]
+for all smooth $(p,q)$-forms. By ``bootstrapping'' the equation, we conclude that if $\bar\partial u=\alpha$, $\bar\partial^* u=0$, for $\alpha$ smooth, then $u$ is in $L^2_k(\Omega,\loc)$ for any $k$, and hence is smooth by Sobolev embedding
+
+\begin{theorem}
+If $\Omega\subseteq\mathbb C^{n}$ is pseudoconvex, then $H^k_{\mathrm{dR}}(\Omega)=0$ for $k>n$
+\end{theorem}
+
+\begin{remark}
+This is sharp, i.e. it is possible that $H^n_{\mathrm{dR}}(\Omega)=0$. For example $A_i=\{\frac{1}{2}<|z_i|<2\}$, $\Omega=A_1\times\cdots\times A_n$, let $Y=S^1\times\cdots\times S^1\subset\Omega$, and
+\[\beta=\frac{dz_1\wedge\cdots\wedge dz_n}{z_1\cdots z_n}\]
+Then $d\beta=\bar\partial\beta=0$, and
+\[\int_Y\beta=\int_{|z_1|=1}\frac{dz_1}{z_1}\cdots\int_{|z_n|=1}\frac{dz_n}{z_n}=(2\pi i)^n\]
+Hence $0\neq[\beta]\in H^n_{\mathrm{dR}}(\Omega)$
+\end{remark}
+
+\begin{claim}
+Suppose $\beta$ is a $k$-form such that $d\beta$ is of type $(k+1,0)$. Then $\beta$ is cohomologous to a $(k,0)$-form
+\end{claim}
+
+\begin{proof}
+Write $\beta=\sum_{q=0}^l\beta_{(k-q,q)}$. Proof by induction on $l$. The case $l=0$ is trivial. Assume $l\geq1$ and that the result holds for $l-1$. We have
+\[d\beta=\partial\beta+\bar\partial\beta=\sum_{q=0}^l\partial\beta_{(k-q,q)}+\bar\partial\beta_{(k-q,q)}\]
+Thus $\bar\partial\beta_{(k-l,l)}=0$, $\beta_{(k-l,l)}=\bar\partial u$, for a smooth $(k-l,l-1)$ form $u$. Let $\tilde\beta=\beta-du$. Then $\tilde\beta=\sum_{q=0}^{l-1}\tilde\beta_{(k-q,q)}$, $d\beta=d\tilde\beta$,
+\end{proof}
+
+\begin{remark}
+Another proof use Morse theory: $\phi$ is a $C^\infty$ psh exhaustion function, Morse function on $\Omega$. The complex Hessian $\dfrac{\partial^2}{\partial z_j\partial\bar z_j}\phi>0$ bound the number of negative eigenvalues of the real Hessian \\
+Lefschetz hyperplane theorem: 
+\end{remark}
+
+Solution to the Levi problem
+
+\begin{theorem}
+$\Omega\subseteq\mathbb C^n$ is a domain of holomorphy iff it is pseudoconvex. We have already proved $\Rightarrow$, by showing that $-\log d(z)$ is a psh exhaustion function. We also showed that being a domain of holomorphy is equivalent to being holomorphically convex
+\end{theorem}
+
+\begin{theorem}
+If we can solve $\bar\partial$ on $\Omega\subseteq\mathbb C^n$, then it is a domain of holomorphy
+\end{theorem}
+
+\begin{proof}
+Let $\tilde\alpha\in C^\infty_{(p,q)}(\tilde\Omega)$, $q\geq1$, and $\bar\partial\tilde\alpha=0$. Set $\beta=z_n^{-1}\bar\partial\phi\wedge\pi^*\tilde\alpha$. Then $\beta\in C^\infty_{(p,q+1)}(\Omega)$. Moreover, $\bar\partial\beta=0$. By the hypothesis of the theorem, there is $u\in C^\infty_{(p,q)}(\Omega)$ such that $\bar\partial u=\beta$. Consider $\alpha=\phi\pi^*\tilde\alpha-z_nu$. Then $\bar\partial\alpha=0$. Hence, there is $v\in C^\infty_{(p,q-1)}(\Omega)$ such that $\bar\partial v=\alpha$. Finally, since $z_n$ vanishes and $\phi\equiv1$ on $j(\tilde\Omega)$
+This proves the claim. By the induction hypothesis, $\tilde\Omega$ is a domain of holomorphy. Hence, there is $\tilde f\in A(\tilde\Omega)$ that blows up at $\xi$. As in the first part of the argument above, there is $u\in C^\infty(\Omega)$ such that $f=\phi\pi^*\tilde f-z_nu\in A(\Omega)$, and $j^*f=\tilde f$. Hence, $f$ blows up at $\xi$
+\end{proof}
+
+\end{document}

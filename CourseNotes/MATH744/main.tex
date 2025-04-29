@@ -1,0 +1,59 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{My_math_package}
+
+
+
+\title{MATH744 - Lie Groups I}
+\author{Haoran Li}
+\date{2019 Fall}
+
+\makeindex[columns=2, title=Index, intoc] % Create the index
+
+\begin{document}\sloppy % reduce overlong words
+
+% Maketitle
+\begin{titlepage}
+\begin{center}
+\vspace*{1cm}
+\LARGE
+\textbf{MATH744 - Lie Groups I} \\
+\vspace{2cm}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{Pictures/Sophus_Lie.jpg}
+\end{center}
+\vspace{2cm}
+\normalsize
+Taught by \texttt{Jeffrey Adams} \\
+Notes taken by \texttt{Haoran Li} \\
+2019 Fall \\
+\vspace{2cm}
+Department of Mathematics\\
+University of Maryland\\
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Matrix groups}
+\subfile{Matrix_groups.tex}
+\newpage
+
+\section{Homeworks}
+\subfile{Homeworks/Homeworks-main.tex}
+\newpage
+
+\begin{thebibliography}{}
+
+\bibitem{Lie Groups, Lie Algebras, and Representations: An Elementary Introduction - Hall} 
+\textit{Lie Groups, Lie Algebras, and Representations: An Elementary Introduction} - Brian C. Hall
+
+\bibitem{Introduction to Lie Algebras and Representation Theory - Humphreys} 
+\textit{Introduction to Lie Algebras and Representation Theory} - James E. Humphreys
+
+\end{thebibliography}
+
+\printindex
+\newpage
+
+\end{document}

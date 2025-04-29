@@ -1,0 +1,38 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+The exact sequence
+\begin{center}
+\begin{tikzcd}
+1 \arrow[r] & A \arrow[r] & B \arrow[r, "\phi"'] & C \arrow[r] \arrow[l, "s"', bend right, dashed] & 1
+\end{tikzcd}
+\end{center}
+split if there exists $s:C\to B$ such that $\phi s=1_C$ which is equivalent of saying that $B=C\ltimes A$
+\end{definition}
+
+\begin{lemma}
+\begin{itemize}
+\item $e^0=I$
+\item $(e^X)^T=e^{X^T}$
+\item $\overline{e^X}-e^{\overline X}$
+\item $(e^X)^{-1}=e^{-X}$
+\item $ge^Xg^{-1}=e^{gXg^{-1}}$
+\item $\frac{d}{dt}e^{tX}=Xe^{tX}$
+\end{itemize}
+\end{lemma}
+
+\begin{theorem}
+$\phi_X:\mathbb R\to\GL(n,\mathbb C)$, $t\mapsto e^{tX}$ is a group homomorphism. Conversely, any group homomorphism $\phi:\mathbb R\to\GL(n,\mathbb C)$ is of the form $\phi_X$ for some $X\in M_n(\mathbb C)$
+\end{theorem}
+
+\begin{definition}
+$G$ is a Lie group, the Lie algebra is
+\begin{align*}
+\Lie(G)&=\{X\in M_n(\mathbb C)|e^{tX}\in G,\forall t\in\mathbb R\} \\
+&=\{X\in M_n(\mathbb C)|\im\phi_X\subseteq G\}
+\end{align*}
+\end{definition}
+
+\end{document}

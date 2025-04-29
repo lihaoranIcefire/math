@@ -1,0 +1,51 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+Suppose $\mathscr A$ is an abelian category, define $K(\mathscr A)$ to be the \textbf{homotopy category}\index{Homotopy category} with $obK(\mathscr A)=obCh(\mathscr A)$, $Hom_{K(\mathscr A)}(X_\bullet,Y_\bullet)=H_0(Hom_\bullet(X_\bullet,Y_\bullet))$
+\end{definition}
+
+\begin{definition}
+Suppose $f:X_*\to Y_*$ is chain map, then the \textbf{mapping cone}\index{Mapping cone} of $f$ is defined to be the object $C(f)$ in $Ch(\mathscr A)$ with $C(f)_{n}=X_{n-1}\oplus Y_n$, $d_{C(f)}=\begin{pmatrix}
+-d_X &0\\
+-f&d_Y
+\end{pmatrix}$, note that $d^2_{C(f)}=\begin{pmatrix}
+-d_X &0\\
+-f&d_Y
+\end{pmatrix}\begin{pmatrix}
+-d_X &0\\
+-f&d_Y
+\end{pmatrix}=\begin{pmatrix}
+d^2_X &0\\
+fd_X-d_Yf&d^2_Y
+\end{pmatrix}=\begin{pmatrix}
+0 &0\\
+0&0
+\end{pmatrix}$
+\end{definition}
+
+\begin{lemma}
+We have a short exact sequence
+\begin{center}
+\begin{tikzcd}
+            &                      & {(x,y)} \arrow[r, maps to] & x                &   \\
+0 \arrow[r] & Y \arrow[r]          & C(f) \arrow[r]             & {X[-1]} \arrow[r] & 0 \\
+            & y \arrow[r, maps to] & {(0,y)}                    &                   &  
+\end{tikzcd}
+\end{center}
+\end{lemma}
+
+\begin{remark}
+If $f:X_*\to0$ is the zero morphism, then $C(f)=X[-1]$
+\end{remark}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{corollary}
+$f:X_*\to Y_*$ is a quasi-isomorphism $\Leftrightarrow$ $C(f)$ is exact
+\end{corollary}
+
+\end{document}

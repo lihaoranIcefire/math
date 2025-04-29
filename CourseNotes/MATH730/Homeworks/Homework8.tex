@@ -1,0 +1,44 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\textbf{Hatcher 1.2.3.} \par
+Assume this finite set of points are $S=\{p_1,\cdots,p_n\}$, let $U_i=\mathbb{R}^n\setminus\{p_i\}$, then $U_i\cong S^n$ is simply connected, $U_i\cap U_j$ is path connected and $\{U_i\}$ forms an open cover for $\mathbb{R}^n\setminus S$, by Van-Kampen's theorem, $*\pi_1(U_i)\rightarrow \pi_1(\mathbb{R}^n\setminus S)$ is surjective, hence $\pi_1(\mathbb{R}^n\setminus S)=0$ \par
+\textbf{Hatcher 1.2.8.} \par
+Could imagine put a torus $T_1$ exactly on top of the other $T_2$, then they overlap on a circle $C$, $C$ has a neighborhood $W$ which is open and can be deformation retract to $C$, let $U_1=T_1\cup W, U_2=T_2\cup W$, then $U_1$ is homotopic to $T_1$, $U_2$ is homotopic to $T_2$, $U_1\cap U_2=W$ is homotopic to $C$, by Van-Kampen's theorem, the resulting space $X$ has fundamental group
+\[
+\begin{aligned}
+\pi_1(X)
+&=\dfrac{F(a,b)/\langle aba^{-1}b^{-1}\rangle *F(c,d)/\langle cdc^{-1}d^{-1}\rangle}{\langle ac^{-1}\rangle} \\
+&=F(a,b,c,d)/\langle aba^{-1}b^{-1},cdc^{-1}d^{-1},ac^{-1}\rangle \\
+&=F(a,b,d)/\langle aba^{-1}b^{-1},ada^{-1}d^{-1}\rangle \\
+&=F(b,d)\times \langle a\rangle \\
+&\cong F_2\times \mathbb{Z}
+\end{aligned}
+\]
+Which isn't surprising since $X=(S^1\vee S^1)\times S^1$, $\pi_1(X)=F_2\times \mathbb{Z}$ \par
+\textbf{Hatcher 1.2.21.} \par
+Let $q:X\times Y\times I\rightarrow X*Y$ be the quotient map \par
+First, assume $Y$ is path connected, consider $U=q\left(X\times Y\times [0,\frac{2}{3})\right), V=q\left(X\times Y\times (\frac{1}{3},1]\right)$which form an open cover for $X*Y$, $X\times Y\times [0,\frac{2}{3})$ deformation retracts to $q(X\times Y\times \{0\})\cong X$, $X\times Y\times (\frac{1}{3},1]$ deformation retracts to $q(X\times Y\times \{1\})\cong Y$, $U\cap V=X\times Y\times (\frac{1}{3},\frac{2}{3})$ is path connected and deformation retracts to $q(X\times Y\times \{\frac{1}{2}\})\cong X\times Y$, thus we have $\pi_1(U)=\pi_1(X),\pi_1(V)=\pi_1(Y)$ and ${i_U}_*(\pi_1(U\cap V))=\pi_1(X), {i_V}_*(\pi_1(U\cap V))=\pi_1(Y)$, where $i_U:U\cap V\rightarrow U, i_V:U\cap V\rightarrow V$ are inclusion maps, by Van-Kampen's theorem, we get $\pi_1(X*Y)=0$ \par
+In general, consider $\{Y_i\}$ to be the path connected components of $Y$, let $Z=q\left(X\times Y\times [0,\frac{1}{2})\right), U_i=(X\times Y_i\times I)\cup Z$, $\{U_i\}$ forms an open cover of $X*Y$, and $U_i\cap U_j=Z$ deformation retracts to $q(X\times Y\times \{0\})\cong X$, which is path connected, by Van-Kampen's theorem, $*\pi_1(x\times Y_i\times I)\cong *\pi_1(U_i)\rightarrow \pi_1(X*Y)$ is surjective, hence $\pi_1(X*Y)=0$ \par
+\textbf{1.} \par
+$X$ could be given the following CW structure: 2 0-cells, 3 1-cells and 2 2-cells \par
+\vspace{1.5cm}
+Let $X^1$ be the 1-skeleton of $X$, then by attaching these two cells on $X^1$, we have $\pi_1(X)=\pi_1(X^1)/\langle ca^{-1}\rangle\cong \mathbb{Z}$ \par
+
+\textbf{2.} \par
+Suppose $M$ has $\alpha_n$ $n$-cells, and $N$ has $\beta_n$ $n$-cells, then $M\times N$ also has a CW structure with $\displaystyle\gamma_n=\sum_{k+l=n}\alpha_k\beta_l$ $n$-cells, thus
+\[
+\begin{aligned}
+\chi(M\times N)
+&=\sum_{n\geq 0}(-1)^n\gamma_n \\
+&=\sum_{n\geq 0}\sum_{k+l=n}(-1)^{k+l}\alpha_k\beta_l \\
+&=\left(\sum_{k\geq 0}(-1)^k\alpha_k\right)\left(\sum_{l\geq 0}(-1)^l\beta_l\right) \\
+&=\chi(M)\chi(N)
+\end{aligned}
+\]
+\textbf{3.} \par
+For a connected graph $X$, assuming it has $v$ 0-cells and $e$ 1-cells, find a maximal tree $T$ of $X$, then we have $\chi(X)+n=v-(e-n)=\chi(T)=1\Rightarrow n=1-\chi(X)$ where $n$ is the number of generators of free group $\pi_1(X)$ \par
+Let $X$ be $n$ copies of $S^1$ wedge at a point, then $G=\pi_1(X)$ is a free group on $n$ generators, for a subgroup $H\leq G$ of index $k$, we could find a covering $p:E\rightarrow X$ with $p_*(\pi_1(E))=H$, then $E$ is also a connected graph with $kv$ 0-cells and $ke$ 1-cells, thus we have the number of generators of free group $H$ is $1-\chi(E)=1-(kv-ke)=1-k\chi(X)=1-k(1-n)=1-k+nk$ \par
+
+\end{document}

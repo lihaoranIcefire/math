@@ -1,0 +1,177 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+$\chi:\Gamma\to\mathbb C^\times$, $\omega:Z_G\to\mathbb C^\times$ are unitary charaterss that agree on $Z_\Gamma=\Gamma\cap Z_G$
+
+\begin{proposition}
+$L_0^2(\Gamma\backslash G,\chi,\omega)$ is closed in $L^2(\Gamma\backslash G,\chi,\omega)$ [Borel, 8.2]
+\end{proposition}
+
+\begin{proof}
+Suppose $\infty\in P_\Gamma$, $\forall \phi\in C_c^\infty(N\backslash G)$, let
+\[\lambda_{B,\phi}(f)=\int_{\Gamma_N\backslash G}f(x)\phi(x)dx\]
+Then
+\[\lambda_{B,\phi}(f)=\int_{N\backslash G}\phi(x)\left(\int_{\Gamma_N\backslash} f(nx)dx\right)dx=\int_{N\backslash G}\phi(x)f_B(x)dx\]
+$f_B=0\iff\lambda_{B,\phi}(f)=0$, $\forall\phi$ $\Rightarrow$ $L_0^2=\bigcap_{P,\phi}\ker\lambda_{P,\phi}$, it suffices to show $\lambda_{P,\phi}$ is continuous. $\exists$ compact set $E\subseteq G$ such that $\Supp(\phi)\subseteq\Gamma_NE\Rightarrow |\lambda_{P,\phi}|\leq\|\phi\|_\infty\int_E|f|<<\|f\|_2$
+\end{proof}
+
+So $L_0^2(\Gamma\backslash G,\chi,\omega)$ is a Hilbert space. Corollary \ref{A_0 subseteq L^2} $\Rightarrow$ $\mathcal A_0(\Gamma\backslash G,\chi,\omega)\subseteq L_0^2(\Gamma\backslash G,\chi,\omega)$
+
+\begin{definition}[convolution operator]
+$\phi\in C^\infty_c(G)$, $f\in L^2(\Gamma\backslash G,\chi,\omega)$, $(r_\phi f)(g)=\int_Gf(gh)\phi(h)dh=f*\phi^\vee$, $\phi^\vee(x)=\phi(x^{-1})$. $r_\phi f\in C^\infty\cap L^2$. If $f\in L^2_0$, then $r_\phi f\in C^\infty\cap L_0^2$ since
+\[\int_{\Gamma\cap U\backslash U}(r_\phi f)(ug)du=\int_G\int_{\Gamma\cap U\backslash\cap U}f(ugh)\phi(h)dudh=\int_Gf_B(gh)\phi(h)dh=0\]
+So $r_\phi$ preserves the subspace $L^2_0$, moreover, Corollary \ref{f in L_0^2, |f*g(g)|<=c|f|_2} $\Rightarrow$ $r_\phi f$ has rapid decay at all cusps if $f\in L_0^2$
+\end{definition}
+
+Recall: $L$ is a bounded linear operator on Hilbert space $H$
+\begin{enumerate}
+\item $L$ is \textit{compact} if maps bounded sets to precompact sets. $L$ is compact $\iff$ $L$ is the limit of finite rank operators
+\item $L$ is \textit{Hilbert-Schmidt} if $H$ is separable and for any orthonormal basis $\{e_i\}$, $\sum(Le_i.Le_i)$ is finite. Hilbert-Schmidt operators are compact
+\item $L$ is self-adjoint if $(Lv,w)=(v,Lw),\forall v,w\in H$
+\end{enumerate}
+
+\begin{proposition}\label{r_phi:L_0^2->L_0^2 is Hilbert-Schmidt}
+For any $\phi\in C^\infty_c(G)$, $r_\phi:L_0^2\to L_0^2$ is a Hilbert-Schmidt operator, hence a compact operator
+\end{proposition}
+
+\begin{proof}
+[Borel 9.5], Corollary \ref{f in L_0^2, |f*g(g)|<=c|f|_2}, $|(r_\phi f)(x)|\leq c\|f\|_2,\forall x\in G$, $f\mapsto r_\phi f$ is a continuous linear functional on $L^2_0$
+\[r_\phi f(x)=(f,K_x)=\int_{\Gamma\backslash G/Z_G}f(y)\overline{K_x(y)}dy\]
+for some $K_x\in L_0^2$, $(K_x,K_x)=r_\phi K_x(x)\leq c\|K_x\|_2$, thus $\|K_x\|_2\leq c$. Let $K(x,y)=\overline{K_x(y)}$, then $|K(x,y)|\in L^2(\Gamma\backslash G/Z_G\times \Gamma\backslash G/Z_G)$ and 
+$\Rightarrow$ $r_\phi$ is Hilbert-Schmidt [Bump Theorem 2.3.2]
+\end{proof}
+
+\begin{remark}
+Combined with Dixmier-Malliavin theorem (any $\phi\in C_c^\infty(G)$ is a finite linear combination of convolutions $\alpha*\beta$, $\alpha,\beta\in C_c^\infty(G)$), one deduce that $r_\phi$ is of trace class on $L_0^2$, so $\Tr(r_\phi)=\int K(x,x)dx<\infty$. However, its kernel $K(x,y)$ is not explicit in general. When $\Gamma\backslash\mathcal H$ is compact, $L_0^2=L^2$ and $K(x,y)$ coincides with the explicit naive kernel (see [Bump prop 2.3.1])
+\[K^{\text{naive}}(x,y)=\int_{Z_G}\sum_{\gamma\in\Gamma}\chi(\gamma)\phi(x^{-1}\gamma yu)\omega(u)du\]
+Then $\Tr(r_\phi)=\int_{\Gamma\backslash G/Z_G}K^{\text{naive}}(x,x)dx=$ explicit expression involving conjugacy classes of $\Gamma$. In general, when there are cusps, the naive kernel is not $L^2$, so $r_\phi$ is not compact on $L^2$, $r_\phi|_{L^2_0}$ suffices for the purpose of spectral decomposition of $L_0^2$. To get formula for $\Tr(r_\phi|L_0^2)$, need to truncate the explicit naive kernel. As comparison, nonzero convolution operators on $L^2(\mathbb R)$ are never compact. $L^2(\mathbb R)$ does not have irreducible subrepresentations of $\mathbb R$, but decompose into direct integrals of $\mathbb R$-irreducible representations
+\end{remark}
+
+\begin{theorem}\label{Theorem on compact operators on Hilbert spaces}
+Let $T$ be a compact self-adjoint operator on a separable Hilbert space $H$, then $H$ has an orthonomral basis $\{\phi_i\}$ consisting of eigenvectors of $T$, $T\phi_i=\lambda_i\phi_i$. If $\dim H=\infty$, then $\lambda_i\to0$. In particular, if $\lambda\neq0$ is an eigenvalue of $T$, then the $\lambda$-eigentsapce is finite dimensional. See [Bump Theorem 2.3.1]
+\end{theorem}
+
+\begin{lemma}
+$\phi\in C^\infty_c(G)$
+\begin{enumerate}
+\item If $\phi(g)=\overline{r(g^{-1})}$, $\forall g\in G$, then $r_\phi$ is self-adjoint
+\item If $\phi(k_\theta g)=e^{im\theta}\phi(g)$, then $r_\phi(L^2)\subseteq C^\infty(,m)=\{f\in C^\infty|f(gk_\theta)=e^{im\theta}f(g)\}$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+A representation of $G$ on a Hilbert space $H$ is a homomorphism $\rho:G\to\End(H)$ such that $G\times H\to H$ is continuous
+$\rho$ is irreducible if there is no nonzero proper \underline{closed} $G$-invariant subspace of $H$
+\[H(m)=\{v\in H|\rho(k)v=\chi_m(k)v,\forall k\in K\}\]
+Stone-Weierstrass $\Rightarrow H=\displaystyle\widehat{\bigoplus_{m\in\mathbb Z}}H(m)$, see [Bump Exercise 2.1.5]
+$\rho$ is admissible if $\dim H(m)<\infty,\forall m\in\mathbb Z$. $\phi\in C_c(G)$, $\rho(\phi)v=\displaystyle\int_G\phi(g)\rho(g)vdg$, $\forall v\in H$, this is the unique element in $H$ such that
+\[(\rho(\phi)v,w)=\int_G\phi(g)(\rho(g),w)dg\]
+If $\phi(g)=\overline{\phi(g^{-1})}$, then $\rho(\phi)$ is self-adjoint
+\end{definition}
+
+\begin{lemma}\label{rho(phi)v=v}
+$\rho$ is a unitary representation of $G$ on a Hilbert space $H$, let $0\neq v\in H$, $\epsilon>0$, then $\exists\phi\in C^\infty_c(G)$ such that $\rho(\phi)$ is self-adjoint and $|\rho(\phi)v-v|<\epsilon$. In particular, if $|v|>\epsilon$, this implies $\rho(\phi)v\neq0$. Moreover, if $v\in H(m)$, we may choose $\phi\in C_c^\infty(K\backslash G/K,m)$, i.e. $\phi(k_\theta g)=\phi(g k_\theta)=e^{-im\theta}\phi(g)$, $\forall g\in G,\theta\in\mathbb R$. If $\dim H(m)<\infty$, then $\exists\phi\in C_c^\infty(K\backslash G/K,m)$ such that $\rho(\phi)v=v$
+\end{lemma}
+
+\begin{proof}
+[Bump Lemma 2.3.2]. Use continuity of the map $G\to H$, $g\mapsto\rho(g)v$ to find $\phi$, replace $\phi$ by $\phi(g)+\overline{\phi(g^{-1})}$ to make it self-adjoint. Suppose $v\in H(m)$. May assume $\phi$ is $K$-conjugation invariant by averaging over $K$. Let
+\[\tilde\phi(g)=\int_0^{2\pi}e^{im\theta}\phi(k_\theta g)\frac{d\theta}{2\pi}\]
+$\phi$ is self-adjoint, $K$-conjugation invariant $\Rightarrow$ $\tilde\phi\in C^\infty_c(K\backslash G/K,m)$ is self-adjoint and $\rho(\tilde\phi)v=\rho(\phi)v$. Have shown $v\in\overline{\rho(C^\infty_c(K\backslash G/K,m))\cdot v}$. If $\dim H(m)<\infty$, then deduce $v\in \rho(C^\infty_c(K\backslash G/K,m))\cdot v$
+\end{proof}
+
+\begin{theorem}
+The right regular representation of $g$ on $L_0^2$ decompose into Hilbert space direact sum of irreducible representations of $G$
+\end{theorem}
+
+\begin{proof}
+By Zorn's lemma, suffice to show that for any closed $G$ invariant subspace $0\neq H\leq L_0^2$, $H$ contains an irreducible subrepresentation of $G$. Let $0\neq f\in H$, $\exists\phi\in C_c^\infty(G)$ such that $r_\phi$ is self-adjoint and $r_\phi f\neq0$, by Proposition \ref{r_phi:L_0^2->L_0^2 is Hilbert-Schmidt}, $r_\phi$ is compact, by Theorem \ref{Theorem on compact operators on Hilbert spaces}, $r_\phi$ has a nonzero eigenvaule $\alpha$ with finite dim eigenspace $L\leq H$. Let $L_0$ be a minimal element of the set
+\[\{0\neq L\cap W|W\leq H\text{ closed $G$ invaraint}\}\]
+$\displaystyle V=\bigcap_{W\leq H,W\cap L=L_0} W$, show $V$ is irreducible. Supoose $V=V_1\oplus V_2$, $0\neq f_0\in L_0\subseteq V$, write $f_0=f_1+f_2$, supose $f_1\neq0$
+\[(r_\phi f_1-\lambda f_1)+(r_\phi f_2-\lambda f_2)=(r_\phi f_0-\lambda f_0)=0\]
+Thus $r_\phi f_1=\lambda f_i$, $0\neq f_1\in L\cap V_1\leq L_0$, by the minimality of $L_0$, $L\cap V_1=V_0$, $V_1=V$ by the definition of $V$
+\end{proof}
+
+Next analyze structure of irreducible representations in $L_0^2$. $\forall m\in\mathbb Z$, let $E_m=\chi_m(k)^{-1}dk$, $\chi\left(\begin{bmatrix}
+\cos\theta&\sin\theta \\
+-\sin\theta&\cos\theta
+\end{bmatrix}\right)=e^{im\theta}$, $dk=\dfrac{d\theta}{2\pi}$ is the Haar measure on $K$ \\
+For any representation of $G$ on Hilbert space $H$, $E_mv=\displaystyle\int_K\chi_m(k)^{-1}k\cdot vdk$. $E_m(H)=H(m)$ is the idempotent projection to $H(m)$. $\forall \phi\in C_c^\infty(G)$, \[\phi* E_m(g)=\int_K\phi(gk)\chi_m(k)dk\]
+\[E_m*\phi(g)=\int_K\chi_m(k)\phi(kg)dk\]
+Hence $E_m*C^\infty_c(G)*E_m=C_c^\infty(K\backslash G/K,m)=\{\phi\in C_c^\infty(G),\phi(kg)=\phi(gk)=\chi_m(k)^{-1}\phi(g)\}$
+
+\begin{lemma}\label{C_c^infty(K G /K,m) is commutative}
+The convolution algebra $C_c^\infty(K\backslash G/K,m)$ is commutative
+\end{lemma}
+
+\begin{proof}
+(Gelfond trick): Consider involution $\iota:\begin{bmatrix}
+a&b\\
+c&d
+\end{bmatrix}\mapsto\begin{bmatrix}
+a&-c\\
+-b&d
+\end{bmatrix}$, then $\iota$ acts as identity on $K,A$. Gauss decomposition: $G=KAK\Rightarrow$ $\iota$ acts by identity on $C_c^\infty(K\backslash G/K,m)\Rightarrow\phi_1*\phi_2=\iota(\phi_1*\phi_2)=\iota(\phi_2)*\iota(\phi_1)=\phi_2*\phi_1$
+\end{proof}
+
+\begin{proposition}\label{H<=L_0^2 irreducible, then dim H(m)<=1}
+Let $H\subseteq L_0^2(\Gamma\backslash G,\chi,\omega)$ be an irreducible $G$-subrepresentation, then $\dim H(m)\leq1$, $\forall m\in\mathbb Z$. In particular, $H$ is admissible
+\end{proposition}
+
+\begin{proof}
+Suppose $0\neq v\in H(m)$. By Lemma \ref{rho(phi)v=v}, $\exists\phi\in C_c^\infty(K\backslash G/K,m)$ self-adjoint, $r_\phi(v)\neq0$. Moreover, $r_\phi$ is compact by Proposition \ref{r_phi:L_0^2->L_0^2 is Hilbert-Schmidt}. So by Theorem \ref{Theorem on compact operators on Hilbert spaces}, $r_\phi$ has an eigenspace $V\subseteq H(m)$ with eigenvalue $\lambda>0$, $V\neq0$ and $\dim V<\infty$. Since $C_c^\infty(K\backslash G/K,m)$ is commutative by Lemma \ref{C_c^infty(K G /K,m) is commutative}, $\exists$ one dimension subspace $L\leq V$ preserved by $C_c^\infty(K\backslash G/K,m)$. If $L\neq H(m)$, let $w\in H(m)$ be orthogonal to $L$, $W=\overline{C_c^\infty(G)w}$, $W$ is $G$-invariant closed subspace of $H$ (easy to see). $\forall\phi\in C_c^\infty(G)$, $v\in L$, we have
+\[\langle r_\phi w,v\rangle=\langle r_\phi w,E_mv\rangle=\langle w,r_{\tilde\phi*E_m}v\rangle=\langle w,r_{E_m*\tilde\phi*E_m}v\rangle\]
+where $\tilde\phi(g)=\overline{\phi(g^{-1})}$ and we used that
+\begin{enumerate}
+\item $v,w\in H(m)$
+\item $E_m$ is self-adjoint
+\item $r_{\tilde\phi}$ is the adjoint of $r_\phi$
+\end{enumerate}
+Since $E_m\tilde\phi*E_m\in C_c^\infty(K\backslash G/K,m)$, $r_{E_m*\tilde\phi*E_m}(v)\in L$ $\Rightarrow\langle r_\phi w,v\rangle=0$ $\Rightarrow W\perp L$ $\Rightarrow 0\neq W\leq H$ is a proper subrepresentation, contradiction. Hene $L=H(m)$ and $\dim H(m)=1$
+\end{proof}
+
+Denote $H_{\mathrm{fin}}=\bigoplus_{m\in\mathbb Z}H(m)$, the space of $K$-finite vectors. $H_{\mathrm{fin}}$ is dense in $H$ by Stone-Weierstrass
+
+\begin{theorem}
+Let $0\neq H\subseteq L_0^2(\Gamma\backslash G,\chi,\omega)$ be an irreducible $G$-representation. Then $H_{\mathrm{fin}}$ is an irreducible admissible $(\mathfrak g,K)$-submodule of $\mathcal A_0(\Gamma\backslash G,\chi,\omega)$. Moreover, the multiplicity space $\Hom_G(H,L_0^2)$ is finite dimensional
+\end{theorem}
+
+\begin{proof}
+Let $0\neq f\in H(m)$, then $\dim H(m)=1$ by Proposition \ref{H<=L_0^2 irreducible, then dim H(m)<=1}. By Lemma \ref{rho(phi)v=v}, $\exists \phi\in C_c^\infty(K\backslash G/K,m)$ such that $r_\phi f=f$ $\Rightarrow f\in C^\infty(\Gamma\backslash G,\chi,\omega)\cap H(m)$ has moderate growth by Proposition \ref{phi moderate growth at all cusps <=> phi moderate growth on G} and Corollary \ref{f in L_0^2, |f*g(g)|<=c|f|_2}. So
+\[H_{\mathrm{fin}}=\bigoplus_{m\in\mathbb Z}H(m)\subseteq C^\infty(\Gamma\backslash,\chi,\omega)\]
+In particular, $H_{\mathrm{fin}}$ is a $(\mathfrak g,K)$-module. It is irreducible since $H$ is irreducible $G$-representation. By Lemma \ref{Schur's lemma}, $Z_{\mathfrak g}$ acts as scalar on $H_{\mathrm{fin}}\Rightarrow H_{\mathrm{fin}}\subseteq\mathcal A_0(\Gamma\backslash G,\chi,\omega)$. $\forall T\in\Hom_G(H,L_0^2)$, $r_\phi Tf=Tr_\phi f=Tf\Rightarrow Tf$ lies in 1-eigenspace of the compact operator $r_\phi$, by Theorem \ref{Theorem on compact operators on Hilbert spaces}, this eigenspace is finite dimensional. Since $H$ is irreducible, $T$ is determined by $Tf$, we get $\dim\Hom_G(H,L_0^2)<\infty$
+\end{proof}
+
+\begin{lemma}
+For all irreducible $G$ subrepresentation $0\neq H\subseteq L_0^2(\Gamma\backslash G,\chi,\omega)$, we have $\Hom_G(H,L_0^2)=\Hom_{(\mathfrak g,K)}(H_{\mathrm{fin}},\mathcal A_0)$
+\end{lemma}
+
+\begin{proof}
+Let $0\neq T\in\Hom_{(\mathfrak g,K)}(H_{\mathrm{fin}},\mathcal A_0)$, Lemma \ref{Schur's lemma} $\Rightarrow (Tv,Tw)=c(v,w)$ for some $c>0$ $\Rightarrow$ $T$ can be extended to a bounded linear operator $\tilde T:H\to L_0^2(\Gamma\backslash,\chi,\omega)$. Remains to show $\tilde T$ is $G$ equivariant. Suffices to show $\forall v\in H_{\mathrm{fin}}$, $f\in L_0^2$, $(\tilde Tgv,f)=(r_g\tilde Tv,f)$. Both sides are $Z_{\mathfrak g}$-finite, $K$-finite functions on $G$. By Lemma \ref{f is Z_g finite and K finite, then f is real analytic}, they are analytic. Their derivatives agree since $T$ is $U\mathfrak g_{\mathbb C}$ equivariant. They agree at $g=1$ $\Rightarrow$ they agree on $G$ since $G$ is connected
+\end{proof}
+
+In particular, if $H_1,H_2$ are irreducible summands of $L_0^2$ and $H_{1,\mathrm{fin}}\cong H_{2,\mathrm{fin}}$ as $(\mathfrak g,K)$-module, then $H_1\cong H_2$ (This is true for any irreducible unitary representation of $G$)
+
+\begin{corollary}\label{A_0 decomposes into direct sum of irreducible admissible (g,K) modules with finite multiplicities}
+$\mathcal A_0(\Gamma\backslash G,\chi,\omega)$ decomposes into direct sum of irreducible admissible (unitary) $(\mathfrak g,K)$-modules with finite multiplicities. Each irreducible summand has the form $H_{\mathrm{fin}}$ for some irreducible $G$ subrepresentation $H\subseteq L_0^2(\Gamma\backslash G,\chi,\omega)$ and $\dim\Hom_{\mathfrak g,K}(H_{\mathrm{fin}},\mathcal A_0)=\dim _G(H,L_0^2)<\infty$
+\end{corollary}
+
+\begin{fact}
+There are finitely many non-isomorphic irreducible $(\mathfrak g,K)$-module with given infinitesimal and central character
+\end{fact}
+
+Granting this, we get
+
+\begin{corollary}
+Let $I\subseteq Z_{\mathfrak g}$ be an ideal of finite codimension. Then $\mathcal A_0(\Gamma\backslash G,\chi,\omega)[I]$ is admissible. (This proves the special case of Theorem \ref{Another theorem of Harish-Chandra})
+\end{corollary}
+
+Summary:
+\[\bigoplus_{H}\bigoplus_{m\in\mathbb Z}H(m)=\mathcal A_0(\Gamma\backslash G,\chi,\omega)\underset{\text{dense}}{\subseteq}L_0^2(\Gamma\backslash G,\chi,\omega)=\widehat{\bigoplus}_{0\neq H\leq L_0^2\text{ irreducible $G$ rep}}\widehat{\bigoplus}H(m)\]
+Thus first sum in $\mathcal A_0$ is algebraic by $Z_{\mathfrak g}$-finiteness, the finiteness of multiplicities and the fact stated above
+
+\end{document}

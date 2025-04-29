@@ -1,0 +1,59 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{My_math_package}
+
+
+
+\title{MATH606 - Algebraic Geometry I}
+\author{Haoran Li}
+\date{2018 Fall}
+
+\makeindex[columns=2, title=Index, intoc] % Create the index
+
+\begin{document}\sloppy % reduce overlong words
+
+% Maketitle
+\begin{titlepage}
+\begin{center}
+\vspace*{1cm}
+\LARGE
+\textbf{MATH606 - Algebraic Geometry I} \\
+\vspace{2cm}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{Pictures/Weil.jpg}
+\end{center}
+\vspace{2cm}
+\normalsize
+Taught by \texttt{Amin Gholampour} \\
+Notes taken by \texttt{Haoran Li} \\
+2019 Fall \\
+\vspace{2cm}
+Department of Mathematics\\
+University of Maryland\\
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Affine varieties}
+\subfile{Affine_varieties.tex}
+
+\section{Tangent space}
+\subfile{Tangent_space.tex}
+
+\section{New}
+\subfile{new.tex}
+
+\newpage
+
+\begin{thebibliography}{}
+
+\bibitem{Algebraic Geometry - J.S. Milne} 
+\textit{Algebraic Geometry} - J.S. Milne
+
+\end{thebibliography}
+
+\printindex
+\newpage
+
+\end{document}

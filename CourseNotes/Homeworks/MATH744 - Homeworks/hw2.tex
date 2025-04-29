@@ -1,0 +1,318 @@
+\documentclass[10pt]{article}
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\<}[1]{\langle #1 \rangle}
+%\newcommand{cmd}[args]{def}
+
+\title{MATH744 homework 2}
+\author{Haoran Li}
+\date{}
+
+\setlength{\parindent}{0cm}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} \par
+$\ker\phi$ is evidently a vector space, and $\forall X\in\ker\phi, Y\in\mathfrak{g}$, we have $\phi([X,Y])=[\phi(X),\phi(Y)]=0\Rightarrow [X,Y]\in\ker\phi$, thus $\ker\phi$ is an ideal. The converse is not true, since we can easily find an injection $\phi$ such that it is a vector space homomorphism but not a Lie algebra homomorphism \par
+On the other hand, if the converse is true, if $\mathfrak{h}$ is an ideal in $\mathfrak{g}$, we can define Lie algebra homomorphism the quotient map $\pi:\mathfrak{g}\rightarrow\mathfrak{g}/\mathfrak{h}$ which have kernel $\mathfrak{h}$ \par
+\textbf{2.} \par
+Suppose $G$ is a connected matrix group, $H\leq G$ is a connected subgroup, $\mathfrak{h},\mathfrak{g}$ are their corresponding Lie algebras, then by Lie subgroup-Lie subalgebra correspondence, we know that $G$ and $H$ consists of elements of the form $\left\{e^{X_1}e^{X_2}\cdots e^{X_n}|X_i\in\mathfrak{g}\right\}$ and $\left\{e^{Y_1}e^{Y_2}\cdots e^{Y_m}|Y_i\in\mathfrak{h}\right\}$, to show $H\trianglelefteq G$, we only need to show $e^Xe^Ye^{-X}\in H, X\in\mathfrak{g},Y\in\mathfrak{h}$, since then $e^{X_1}\cdots e^{X_n}e^{Y}e^{-X_n}\cdots e^{-X_1}\in H, Y\in\mathfrak{h}$ and $e^{X_1}\cdots e^{X_n}e^{Y_1}\cdots e^{Y_m}e^{-X_n}\cdots e^{-X_1},Y_i\in\mathfrak{h}$, notice $\displaystyle e^Xe^Ye^{-X}=e^{e^XYe^{-X}}=e^{Ad_{e^Y}(X)}=e^{e^{ad_{Y}}(X)}$, where $e^{ad_Y}(X)=X+ad_Y(X)+\dfrac{ad_Y^2}{2}(X)+\cdots\in\mathfrak{h}$ since $\mathfrak{h}$ is an ideal in $\mathfrak{g}$ which is certainly a closed subspace because they are finite dimensional, thus $e^{e^{ad_Y}(X)}\in H$ \par
+Conversely, if $H\trianglelefteq G$, then $e^{X}e^{tY}e^{-X}=e^{te^{X}Ye^{-X}}\in H, \forall t\in\mathbb R, X\in\mathfrak{g}, Y\in\mathfrak{h}$, thus $e^{X}Ye^{-X}\in\mathfrak{h}$, then $e^{tX}Ye^{-tX}\in\mathfrak{h}, \forall t\in\mathbb R$, so we have $\left.\dfrac{d}{dt}\right|_{t=0}e^{tX}Ye^{-tX}=[X,Y]\in\mathfrak{h}$, therefore $\mathfrak{h}\leq\mathfrak{g}$ is an ideal \par
+\textbf{3.} \par
+Let $\mathfrak{g}_0=\mathbb{R}$ be a real Lie algebra of dimension 1 with $[a,b]=0$ for any $a,b\in\mathbb{R}$, suppose $\mathfrak{g}=\<{v}$ is a real Lie algebra of dimension 1, then $[v,v]=0$ because of anti-symmetry, hence $\varphi:\mathfrak{g}\rightarrow\mathfrak{g}_0,v\mapsto 1$ is a Lie algebra isomorphism, hence Lie algebra of dimension 1 is $\mathfrak{g}_0$ up to isomorphism \par
+Let $\mathfrak{g}_{ab}=\mathbb{R}^2$ be a real Lie algebra of dimension 2 with $[e_1,e_2]=ae_1+be_2$, suppose $\mathfrak{g}=\<{v}\oplus\<{w}$ is a real Lie algebra of dimension 2, with $[v,w]=av+bw$, hence $\varphi:\mathfrak{g}\rightarrow\mathfrak{g}_{ab},v\mapsto e_1,w\mapsto e_2$ is a Lie algebra isomorphism, suppose $\phi:\mathfrak{g}_{ab}\rightarrow\mathfrak{g}_{cd}$ is an isomorphism, $\phi(e_1)=xe_1+ye_2, \phi(e_2)=ze_1+we_2$, then we necessarily have $A\left( {\begin{array}{c}
+a \\
+b \\
+\end{array} } \right)=\det A \left( {\begin{array}{c}
+c \\
+d \\
+\end{array} } \right)$, where $\det A\neq0$, if $c=d=0$, then $a=b=0$, you can just take $A=I$, if $c,d$ are not both zero, then $a,b$ are not both zero and without loss of generality we may assume $d\neq0$, in that case, if $b\neq0$, we can take $A=\left( {\begin{array}{cc}
+\frac{b}{d} & \frac{cd-ab}{bd} \\
+0 & \frac{d}{b} \\
+\end{array} } \right)$, if $b=0$, then $a\neq0$, we can take $A=\left( {\begin{array}{cc}
+\frac{c}{a} & -\frac{a}{d} \\
+\frac{d}{a} & 0 \\
+\end{array} } \right)$, Therefore, there are two classes of real Lie algebras of dimension 2, namely $\mathfrak{g}_{00}$ and $\mathfrak{g}_{01}$ \par
+\textbf{4.} \par
+$$
+\left( {\begin{array}{cc}
+   & I \\
+-I &  \\
+\end{array} } \right)
+\left( {\begin{array}{cc}
+A & B \\
+C & D \\
+\end{array} } \right)=
+\left( {\begin{array}{cc}
+C & D \\
+-A & -B \\
+\end{array} } \right)=
+\left( {\begin{array}{cc}
+A & B \\
+C & D \\
+\end{array} } \right)
+\left( {\begin{array}{cc}
+   & I \\
+-I &  \\
+\end{array} } \right)=
+\left( {\begin{array}{cc}
+-B & A \\
+-D & C \\
+\end{array} } \right)\Rightarrow
+\begin{cases}
+D=A \\
+C=-B
+\end{cases}
+$$
+Let $J=
+\left( {\begin{array}{cc}
+   & I \\
+-I &  \\
+\end{array} } \right)$, then these are the matrices deonoted as $\mathfrak{g}\leq\mathfrak{gl}(2n,\mathbb R)$ commuting with $J$, consider $\varphi:\mathfrak{gl}(n,\mathbb C)\rightarrow \mathfrak{g}, A+iB\mapsto
+\left( {\begin{array}{cc}
+A & B \\
+-B & A \\
+\end{array} } \right)$ is evidently a linear map, and $[\varphi(A_1+iB_1),\varphi(A_2+iB_2)]=$\par
+$
+\left( {\begin{array}{cc}
+A_1 & B_1 \\
+C_1 & D_1 \\
+\end{array} } \right)\left( {\begin{array}{cc}
+A_2 & B_2 \\
+C_2 & D_2 \\
+\end{array} } \right)-\left( {\begin{array}{cc}
+A_2 & B_2 \\
+C_2 & D_2 \\
+\end{array} } \right)\left( {\begin{array}{cc}
+A_1 & B_1 \\
+C_1 & D_1 \\
+\end{array} } \right)
+=\left( {\begin{array}{cc}
+[A_1,A_2]-[B_1,B_2] & [A_1,B_2]+[B_1,A_2] \\
+-[A_1,B_2]-[B_1,A_2] & [A_1,A_2]-[B_1,B_2] \\
+\end{array} } \right)=$\par
+$\varphi\left([A_1,A_2]-[B_1,B_2]+i([A_1,B_2]+[B_1,A_2])\right)=\varphi\left([A_1+iB_1,A_2+iB_2]\right)$, thus $\varphi$ is an isomorphism \par
+\textbf{5.} \par
+\textbf{(a)} \par
+Define group homomorphism $\varphi:\mathbb H\rightarrow GL(2,\mathbb C)$, $1\mapsto \left( {\begin{array}{cc}
+1 &  \\
+ & 1 \\
+\end{array} } \right)$, $i\mapsto \left( {\begin{array}{cc}
+i &  \\
+ & -i \\
+\end{array} } \right)$, $j\mapsto \left( {\begin{array}{cc}
+ & 1 \\
+-1 &  \\
+\end{array} } \right)$, $k\mapsto \left( {\begin{array}{cc}
+ & i \\
+i &  \\
+\end{array} } \right)$, $a+bi+cj+dk\mapsto \left( {\begin{array}{cc}
+a+bi & c+di \\
+-c+di & a-bi \\
+\end{array} } \right)$, i.e. $\lambda+j\mu\mapsto \left( {\begin{array}{cc}
+\lambda & \bar{\mu} \\
+-\mu & \bar{\lambda}
+\end{array} } \right)$ with determinant $|\lambda|^2+|\mu|^2=|\lambda+j\mu|^2$ which is the norm, and $\left( {\begin{array}{cc}
+\frac{\overline\lambda}{|\lambda|^2+|\mu|^2} & \frac{-\overline\mu}{|\lambda|^2+|\mu|^2} \\
+\frac{\mu}{|\lambda|^2+|\mu|^2} & \frac{\lambda}{|\lambda|^2+|\mu|^2}
+\end{array} } \right)$ is the left and right inverse, similarly, we can define $\Phi:GL(n,\mathbb H)\rightarrow GL(2n,\mathbb C)$, \par
+$\left( {\begin{array}{ccc}
+\lambda_{11}+j\mu_{11} &\cdots & \lambda_{1n}+j\mu_{1n}  \\
+\vdots & \ddots & \vdots \\
+ \lambda_{n1}+j\mu_{n1} &\cdots & \lambda_{nn}+j\mu_{nn}
+\end{array} } \right)\mapsto\left( {\begin{array}{ccc}
+\begin{array}{cc}\lambda_{11} & \overline{\mu_{11}} \\-\mu_{11} & \overline{\lambda_{11}}\end{array} &\cdots & \begin{array}{cc}\lambda_{1n} & \overline{\mu_{1n}} \\-\mu_{1n} & \overline{\lambda_{1n}}\end{array}   \\
+\vdots & \ddots & \vdots \\
+\begin{array}{cc}\lambda_{n1} & \overline{\mu_{n1}} \\-\mu_{n1} & \overline{\lambda_{n1}}\end{array}&\cdots &\begin{array}{cc}\lambda_{nn} & \overline{\mu_{nn}} \\-\mu_{nn} & \overline{\lambda_{nn}}\end{array}
+\end{array} } \right)$ which shows that $GL(n,\mathbb H)$ is a matrix group of complex dimension $2n^2$, it is not compact since the entries are not bounded \par
+\textbf{(b)} \par
+$$\<{\lambda\vec{v},\vec{w}}=\sum_{i=1}^n\overline{\lambda v_i}w_i=\sum_{i=1}^n \overline\lambda\overline{v_i} w_i=\overline\lambda\<{\vec{v},\vec{w}}$$
+$$\<{\vec{v},\vec{w}}=\sum_{i=1}^n\overline{v_i}w_i\lambda=\<{\vec{v},\vec{w}}\lambda$$
+$$\<{\vec{v},\vec{w}}=\sum_{i=1}^n\overline{v_i}w_i=\sum_{i=1}^n \overline{\overline{w_i} v_i}=\overline{\sum_{i=1}^n\overline{w_i} v_i}=\overline{\<{\vec{w},\vec{v}}}$$
+\textbf{(c)} \par
+$\left( {\begin{array}{cc}
+\lambda & \bar{\mu} \\
+-\mu & \bar{\lambda}
+\end{array} } \right)\left( {\begin{array}{cc}
+\alpha & \bar{\beta} \\
+-\beta & \bar{\alpha}
+\end{array} } \right)=\left( {\begin{array}{cc}
+\lambda\alpha-\bar\mu\beta & \lambda\bar\beta+\bar\mu\bar\alpha \\
+-\mu\alpha-\bar\lambda\beta & -\mu\bar\beta+\bar\lambda\bar\alpha
+\end{array} } \right)$, we can define $\left( {\begin{array}{cc}
+\lambda & \bar{\mu} \\
+-\mu & \bar{\lambda}
+\end{array} } \right)\cdot\left( {\begin{array}{c}
+\alpha\\
+\beta
+\end{array} } \right)=\left( {\begin{array}{c}
+\lambda\alpha-\bar\mu\beta \\
+\mu\alpha+\bar\lambda\beta
+\end{array} } \right)$, then the corresponding matrix would be $\left( {\begin{array}{cc}
+\lambda & -\bar{\mu} \\
+\mu & \bar{\lambda}
+\end{array} } \right)$, here we are identifying $\alpha+j\beta$ with $\left( {\begin{array}{c}
+\alpha\\
+\beta
+\end{array} } \right)$ and $\left( {\begin{array}{c}
+\alpha_1+j\beta_1\\
+\vdots \\
+\alpha_n+j\beta_n
+\end{array} } \right)$ with $\left( {\begin{array}{c}
+\alpha_1\\
+\beta_1 \\
+\vdots \\
+\alpha_n\\
+\beta_n
+\end{array} } \right)$, the we have $\<{\vec{v},\vec{w}}=\<{\vec{v},\vec{w}}_1+j\<{\vec{v},\vec{w}}_2$ where $\vec{v}=\left( {\begin{array}{c}
+\alpha_1\\
+\beta_1 \\
+\vdots \\
+\alpha_n\\
+\beta_n
+\end{array} } \right),\vec{w}=\left( {\begin{array}{c}
+\gamma_1\\
+\eta_1 \\
+\vdots \\
+\gamma_n\\
+\eta_n
+\end{array} } \right)$, and $\<{\vec{v},\vec{w}}_1=\sum_{i=1}^n(\overline{\alpha_i}\gamma_i+\overline{\beta_i}\eta_i)$, $\<{\vec{v},\vec{w}}_2=\sum_{i=1}^n(-\overline{\beta_i}\gamma_i+\overline{\alpha_i}\eta_i)$, hence $\<{\vec{gv},\vec{gw}}_1+j\<{\vec{gv},\vec{gw}}_2=\<{\vec{gv},\vec{gw}}=\<{\vec{v},\vec{w}}=\<{\vec{v},\vec{w}}_1+j\<{\vec{v},\vec{w}}_2$, $\<{,}_2$ is a symplectic form with respect to vectors of the form $\vec{v}=\left( {\begin{array}{c}
+\alpha_1\\
+\vdots \\
+\alpha_n \\
+\beta_1 \\
+\vdots\\
+\beta_n
+\end{array} } \right),\vec{w}=\left( {\begin{array}{c}
+\gamma_1\\
+\vdots \\
+\gamma_n\\
+\eta_1 \\
+\vdots \\
+\eta_n
+\end{array} } \right)$ compare to $\<{,}_1$, thus $g\in U(2n)\cap Sp(2n,\mathbb C)$ \par
+\textbf{6.} \par
+\textbf{(a)} \par
+Suppose $(\vec{v},t)\in Z$, then $(\vec{v},t)*(\vec{w},u)=(\vec{v}+\vec{w},t+u+\frac{1}{2}\<{\vec{v},\vec{w}})=(\vec{v}+\vec{w},t+u+\frac{1}{2}\<{\vec{w},\vec{v}})=(\vec{v},t)*(\vec{w},u), \forall (\vec{w},u)\in H(V)$, then $-\<{\vec{w},\vec{v}}=\<{\vec{v},\vec{w}}=\<{\vec{w},\vec{v}}\Rightarrow \<{\vec{v},\vec{w}}=0, \forall \vec{w}\in V$, since $\<{,}$ is non-degenerate, $\vec{v}=0$, $Z\cong\mathbb R$\par
+\textbf{(b)} \par
+Define $\varphi: H(V)\rightarrow V, (\vec{v},t)\mapsto\vec{v}$ which is surjective, then $\ker\varphi=Z$, hence $H(V)/Z\cong V$ \par
+\textbf{(c)} \par
+From (b), we can easily see there is an exact sequence $1\rightarrow Z\rightarrow H(V)\rightarrow V\rightarrow 1$, consider $\psi:V\rightarrow H(V), \vec{v}\mapsto(\vec{v},0)$, we have $\varphi\circ\psi=id_V$, thus the exact sequence splits \par
+\textbf{(d)} \par
+Define $\phi:H(V)\rightarrow H, (\vec{v},\vec{w},t)\mapsto\left( {\begin{array}{ccc}
+1 & \vec{v}^T & t+\frac{1}{2}\vec{v}^T\vec{w} \\
+0 & I_{n}& \vec{w} \\
+0 & 0 & 1
+\end{array} } \right)$is an isomorphism where $H$ is Heisenberg group and the non-degenerate symplectic form $\<{,}$ is first isomorphic to $\<{(\vec{v_1},\vec{w_1}),(\vec{v_2},\vec{w_2})}=\frac{1}{2}(\vec{v_1}^T\vec{w_2}-\vec{w_1}^T\vec{v_2})$, then \par
+$\phi(\vec{v_1},\vec{w_1},t_1)\phi(\vec{v_1},\vec{w_1},t_1)=\left( {\begin{array}{ccc}
+1 & \vec{v_1}^T & t_1+\frac{1}{2}\vec{v_1}^T\vec{w_1} \\
+0 & I_{n}& \vec{w_1} \\
+0 & 0 & 1
+\end{array} } \right)\left( {\begin{array}{ccc}
+1 & \vec{v_2}^T & t_2+\frac{1}{2}\vec{v_2}^T\vec{w_2} \\
+0 & I_{n}& \vec{w_2} \\
+0 & 0 & 1
+\end{array} } \right)=$\par
+$\left( {\begin{array}{ccc}
+1 & \vec{v_1}^T+\vec{v_2}^T & t_1+\frac{1}{2}\vec{v_1}^T\vec{w_1}+ t_2+\frac{1}{2}\vec{v_2}^T\vec{w_2}+\vec{v_1}^T\vec{w_2} \\
+0 & I_{n}& \vec{w_1}+\vec{w_2} \\
+0 & 0 & 1
+\end{array} } \right)=$\par
+$\left( {\begin{array}{ccc}
+1 & \vec{v_1}^T+\vec{v_2}^T & t_1+t_2+\frac{1}{2}\<{(\vec{v_1},\vec{w_1}),(\vec{v_2},\vec{w_2})}+\frac{1}{2}(\vec{v_1}+\vec{v_2})^T(\vec{w_1}+\vec{w_2}) \\
+0 & I_{n}& \vec{w_1}+\vec{w_2} \\
+0 & 0 & 1
+\end{array} } \right)=$\par
+$\phi(\vec{v_1}+\vec{v_2},\vec{w_1}+\vec{w_2},t_1+t_2+\frac{1}{2}\<{(\vec{v_1},\vec{w_1}),(\vec{v_2},\vec{w_2})})$ \par
+
+\textbf{7.} \par
+\textbf{(a)} \par
+Let $E_{ij}$ denote the matrix with only the $(i,j)$-th entry 1, and 0 else where, then $E_{ij}E_{kl}=\delta_{jk}E_{il}$, $[E_{ij},E_{kl}]=E_{ij}E_{kl}-E_{kl}E_{ij}=\delta_{jk}E_{il}-\delta_{li}E_{kj}$, and $\mathfrak{n}$ is spaned by $\{E_{ij}\}_{j>i}$, it is easy to see that $[\mathfrak{n},\mathfrak{n}]$ is spaned by $\{E_{ij}\}_{j>i+1}$ \par
+\textbf{(b)} \par
+Consider $\{I+aE_{ij}\}_{j>i}$ Notice $(I+aE_{ij})^{-1}=I-aE_{ij}$, and it is easy to calculate that given $j>i,l>k$, we have $(I+aE_{ij})(I+bE_{kl})(I+aE_{ij})^{-1}(I+bE_{kl})^{-1}=I+ab\delta_{jk}E_{il}-ab\delta_{il}E_{kj}$, as the same analysis in $(a)$, we know the commutator subgroup contains all the elements in $I+[\mathfrak{n},\mathfrak{n}]$, on the other hand, for any $I-P\in N$ with $P$ nilpotent, we have $(I-P)^{-1}=I+P+P^2+\cdots$, thus $(I-P)(I-Q)(I-P)^{-1}(I-Q)^{-1}=(I-P)(I-Q)(I+P+P^2+\cdots)(I+Q+Q^2+\cdots)=(I-P-Q+PQ)(I+P+Q+P^2+Q^2+PQ+\cdots)=I+[P,Q]+\cdots$, with the result in $(a)$, we know that $[P,Q]+\cdots\in [\mathfrak{n},\mathfrak{n}]$, and for $X,Y\in[\mathfrak{n},\mathfrak{n}]$, $(I+X)(I+Y)=I+(X+Y+XY)\in I+[\mathfrak{n},\mathfrak{n}]$, thus the commutator subgroup $\{N,N\}$ of $N$ is $I+[\mathfrak{n},\mathfrak{n}]$, $\log(e^Xe^Y)=X+Y+S$, where $S\in [\mathfrak{n},\mathfrak{n}]$, thus $f(e^Xe^Y)=e^{\phi(X+Y+S)}=e^{\phi(X)+\phi(Y)}=f(e^{X})f(e^Y)$ meaning $f$ is a homomorphism \par
+\textbf{(c)} \par
+The sufficient and necessary condition needed is $\{N,N\}\leq\ker f$, first notice this map is well defined, that $N$ is the image of $\mathfrak{n}$ under exponential map because you can take $\log$ where the power series has only finitely many terms, and $\mathfrak{n}$ is the Lie algebra of $N$, if $e^X=e^Y$ where $X,Y\in\mathfrak{n}$, then $X-Y\in [\mathfrak{n},\mathfrak{n}]\leq \ker \phi$, thus $f(e^X)=e^{\phi(X)}=e^{\phi(Y)}=f(e^Y)$, the condition is obvious necessary, on the other hand, if $\{N,N\}\leq\ker f$, $e^Xe^Y=I+X+Y+R$ where $R\in [\mathfrak{n},\mathfrak{n}]$ \par
+\textbf{8.} \par
+For any $g=
+\left( {\begin{array}{cc}
+a & b \\
+c & d \\
+\end{array} } \right)\in SL(2,\mathbb R)$, suppose $g=kan$ with $k\in SO(2,\mathbb R), a=\left( {\begin{array}{cc}
+e^{x} &  \\
+ & e^{-x} \\
+\end{array} } \right), n=\left( {\begin{array}{cc}
+1 & y \\
+ & 1 \\
+\end{array} } \right)$, then we would have $\left( {\begin{array}{cc}
+a^2+c^2 & ab+cd \\
+ab+cd & b^2+d^2 \\
+\end{array} } \right)=g^Tg=n^Ta^Tk^Tkan=n^Ta^Tan=\left( {\begin{array}{cc}
+e^{2x} & ye^{2x} \\
+ye^{2x} & y^2e^{2x}+e^{-2x} \\
+\end{array} } \right)$ thus we would necessarily have $x=\dfrac{\ln(a^2+c^2)}{2}, y=\dfrac{ab+cd}{a^2+c^2}$, and $k=g^{-T}n^Ta^T$ this shows the uniqueness, only need to check that $k$ is indeed in $SO(2,\mathbb R)$ and calculation shows that $k^Tk=ang^{-1}g^{-T}n^Ta^T=\left( {\begin{array}{cc}
+(ad-bc)^2 & 0 \\
+0 & 1 \\
+\end{array} } \right)=I$ \par
+\textbf{9.} \par
+\textbf{(a)} \par
+Since $\mathrm{Cent}_G(hgh^{-1})=h\mathrm{Cent}_G(g)h^{-1}$, up to conjugacy, if $g=rI_3$, then $\mathrm{Cent}_G(g)=SL(3,\mathbb C)$, if $g=\mathrm{diag}(rI_2,a)$ where $a\neq r$, then $\mathrm{Cent}_G(g)=\left\{\mathrm{diag}(A,b)\right\}$, and if $g=\mathrm{diag}(a,b,c)$, where $a,b,c$ are distinct, then $\mathrm{Cent}_G(g)=\mathrm{diag}(\alpha, \beta, \gamma)$, only need to prove $SL(n,\mathbb C)$ is connected. Notice any element of $SL(n,\mathbb C)$ can be written as $g=C\left( {\begin{array}{ccc}
+\lambda_1 &  & * \\
+& \ddots &  \\
+ & & \lambda_n\\
+\end{array} } \right)C^{-1}$, where $\lambda_1\cdots\lambda_n=1$, let $\left( {\begin{array}{ccc}
+\lambda_1 &  & * \\
+& \ddots &  \\
+ & & \lambda_n\\
+\end{array} } \right)=\mathrm{diag}(\lambda_1,\cdots,\lambda_n)+N$, $N$ is nilpotent, consider path $g(t)=C\left(\mathrm{diag}(\lambda_1(t),\cdots,\lambda_{n-1}(t),\lambda_n(t))+tN\right)C^{-1}$, where $\lambda_j(t)=r_j^te^{it\theta_j}$, with $\lambda_j=r_je^{i\theta_j}, 1\leq j\leq n-1$, and $\lambda_n(t)=\dfrac{1}{\lambda_1(t)\cdots\lambda_{n-1}(t)}$, then $g(0)=I, g(1)=g$ \par
+\textbf{(b)} \par
+$Z$ only consists of three elements $I_3, \omega I_3, \omega^2 I_3$, where $\omega=e^{\frac{2\pi i}{3}}$, up to conjugacy, if $g=rI_3$, then $\mathrm{Cent}_G(g)=PSL(3,\mathbb C)$ which has trivial component group, if $g=\mathrm{diag}(rI_2,a)$ where $a\neq r$, then $\mathrm{Cent}_G(g)=\left\{\mathrm{diag}(A,b)\right\}$ which has trivial component group, if $g=\mathrm{diag}(a,b,c)$, where $a,b,c$ are distinct, suppose $a=b\omega=c\omega^2$(or $a=c\omega=b\omega^2$), then $\mathrm{Cent}_G(g)$ consists of diagonal matrices $\left( {\begin{array}{ccc}
+x& &  \\
+&y &  \\
+& &z \\
+\end{array} } \right)$ and matrices of the form $\left( {\begin{array}{ccc}
+& x &  \\
+& & y \\
+z & & \\
+\end{array} } \right)$ and $\left( {\begin{array}{ccc}
+&  & x \\
+y & & \\
+ & z & \\
+\end{array} } \right)$, and they form two different connected components other than the diagonal matrices easily seen from the fact that they are the preimages of $\{1\}$ under the maps $\left( {\begin{array}{ccc}
+a_{11}& a_{12} &a_{13}  \\
+a_{21}& a_{22} &a_{23} \\
+a_{31}& a_{32} &a_{33} \\
+\end{array} } \right) \mapsto a_{11}a_{22}a_{33}$, $\left( {\begin{array}{ccc}
+a_{11}& a_{12} &a_{13}  \\
+a_{21}& a_{22} &a_{23} \\
+a_{31}& a_{32} &a_{33} \\
+\end{array} } \right) \mapsto a_{12}a_{23}a_{31}$ and $\left( {\begin{array}{ccc}
+a_{11}& a_{12} &a_{13}  \\
+a_{21}& a_{22} &a_{23} \\
+a_{31}& a_{32} &a_{33} \\
+\end{array} } \right) \mapsto a_{13}a_{21}a_{32}$, these are all connected since you can find a path connected with $\left( {\begin{array}{ccc}
+1& &  \\
+&1 &  \\
+& &1 \\
+\end{array} } \right),\left( {\begin{array}{ccc}
+&1 &  \\
+& &1  \\
+1& & \\
+\end{array} } \right)$ and $\left( {\begin{array}{ccc}
+& & 1 \\
+1& &  \\
+&1 & \\
+\end{array} } \right)$ correspondingly as above, so the component group is $\mathbb Z/3\mathbb Z$, for other possibilities of $a,b,c$, $\mathrm{Cent}_G(g)=\mathrm{diag}(\alpha, \beta, \gamma)$ which is connected \par
+
+
+\end{document}

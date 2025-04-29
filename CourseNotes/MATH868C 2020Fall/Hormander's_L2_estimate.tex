@@ -1,0 +1,162 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$H_1,H_2$ are complex Hilbert space, $T:H_1\to H_2$ is an \textit{unbounded operator}, if it is a linear map defined on some linear subspace $D(T)\leq H_1$ called the domain of $T$. $T$ is \textit{densely defined} if $D(T)$ is dense in $H_1$. $T$ is \textit{closed} if the graph $\Gr(T)=\{(x,Tx)\in H_2\times H_2|x\in D(T)\}$ is closed. $T$ has \textit{closed range} if $R(T)=\{Tx\in H_2|x\in D(T)\}$ is closed in $H_2$. Write $N(T)=\ker T$
+\end{definition}
+
+\begin{definition}
+$T:H_1\to H_2$ is a densely defined unbounded operator, its adjoint $T^*:H_2\to H_1$ is defined as an unbounded operator as follows
+\begin{itemize}
+\item $D(T^*)$ consists of $y\in H_2$ such that the funcitonal $\langle T(-),y\rangle:D(T)\to\mathbb C$ is continuous
+\item By the Hahn-Banach theorem, $\langle T(-),y\rangle$ extends to a linear functional on $H_1$
+\item By the Riesz representation theorem and denseness, there is a vector $T^*y\in H_1$ such that $\langle Tx,y\rangle=\langle x,T^*y\rangle$
+\end{itemize}
+\end{definition}
+
+\begin{proposition}
+If $T$ is densely defined, then $T^*$ is closed
+\end{proposition}
+
+\begin{proof}
+Let $y_j\in D(T^*)$, $y_j\to y$, and $x_j=T^*y_j\to x$. We need to show $y\in D(T^*)$ and $x=T^*y$. Fix $u\in D(T)$. Then
+\[|u||x|\geq\langle u,x\rangle=\lim_j\langle u,x_j\rangle=\lim_j\langle u,T^*y_j\rangle=\lim_j\langle Tu,y_j\rangle=\langle Tu,y\rangle\]
+So the map $u\mapsto\langle Tu,y\rangle$ is bounded on $D(T)$ by $|x|$. This implies $y\in D(T^*)$ and $x=T^*y$
+\end{proof}
+
+\begin{fact}
+If $T,T^*$ are densely defined then $T$ is closed, and $(T^*)^*=T$
+\end{fact}
+
+\begin{lemma}\label{Gr(T*)=Gr(-T)^perp}
+If $T$ is closed and densely defined, then $\Gr(T^*)=\Gr(-T)^\perp$ in $H_1\times H_2$
+\end{lemma}
+
+\begin{proof}
+We have inclusion $\subseteq$ since
+\[\langle(T^*y,y),(x,-Tx)\rangle=\langle T^*y,x\rangle-\langle y,Tx\rangle=0\]
+Now if $\langle(x,y),(u,-Tu)\rangle=\langle x,u\rangle-\langle y,Tu\rangle=0$ for all $u\in D(T)$, then $u\mapsto\langle Tu,y\rangle=\langle u,x\rangle$ is bounded on $D(T)$, so $y\in D(T^*)$, and $x=T^*y$
+\end{proof}
+
+\begin{theorem}
+If $T$ is closed and densely defined, then so is $T^*$. Moreover, $N(T^*)=R(T)^\perp$ and $N(T)=\overline{R(T^*)^\perp}$
+\end{theorem}
+
+\begin{note}
+$(V^\perp)^\perp=\overline V$
+\end{note}
+
+\begin{proof}
+By Lemma \ref{Gr(T*)=Gr(-T)^perp}, any $(u,v)\in H_1\times H_2$ can be written as
+\[(u,v)=(x,-Tx)+(T^*y,y),x\in D(T),y\in D(T^*)\]
+Taking $u=0$, then $v=y+TT^*y$. This implies $\langle v,y\rangle=|y|^2+|T^*y|^2$. If $v\in D(T^*)^\perp$, then $y=0$, and so $v=0$. Hence $D(T^*)$ must be dense. $N(T^*)=R(T)^\perp$ follows form $\langle Tx,y\rangle=\langle x,T^*y\rangle$
+\end{proof}
+
+\begin{proposition}\label{T closed, densely defined, equivalent conditions for R(T) closed}
+Let $T:H_1\to H_2$ be closed and densely defined. The following are equivalent
+\begin{enumerate}
+\item $R(T)$ is closed
+\item $\exists C$ such that $|x|\leq C|Tx|$ for all $x\in D(T)\cap R(T^*)$
+\item $R(T^*)$ is closed
+\item $\exists C$ such that $|y|\leq C|T^*y|$ for all $y\in D(T^*)\cap R(T)$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+2.$\Rightarrow$1.: Suppose $Tx_j\to y$, then $x_j$ converges, say to $x$, $(x_j,Tx_j)\to (x,y)$ \\
+To show 1.$\Rightarrow$2., recall $N(T)=R(T^*)^\perp$. Hence $T$ is continuous and 1-1 from $D(T)\cap R(T^*)$ onto the closed subspace $R(T)$. Hence the inverse is continuous by the closed graph theorem. This proves 2. \\
+3.$\iff$4. \\
+2.$\Rightarrow$4.:
+\[|\langle Tx,y\rangle|=|\langle x,T^*y\rangle|\leq|x||T^*y|\leq C|Tx||T^*y|\]
+So $|\langle z,y\rangle|\leq C|T^*y||z|$ for $z\in R(T)$, $y\in D(T^*)$
+\end{proof}
+
+\begin{definition}
+Now consider densely defined closed unbounded operators $H_1\xrightarrow T H_2\xrightarrow S H_3$ satisfying $S\circ T=0$. The \textit{harmonic elements} are 
+\[\mathcal H_2=N(S)\cap N(T^*)\]
+there is an orthogonal decomposition $H_2=\mathcal H_2\oplus(N(S)\cap N(T^*))^\perp=\mathcal H_2\oplus\overline{R(T)}\oplus\overline{R(S^*)}$, so $N(S)=\mathcal H_2\oplus\overline{R(T)}$
+\end{definition}
+
+\begin{theorem}
+There is $C>0$ such that for all $y\in D(S)\cap D(T^*)$
+\begin{equation}\label{basic estimate}
+|y|\leq C(|Sy|+|T^*y|)
+\end{equation}
+i.e. the \textit{basic estimate} holds$\iff\mathcal H_2=0$ and $R(T),R(S^*)$ are closed
+\end{theorem}
+
+\begin{proof}
+$\Rightarrow$: If $y\in\mathcal H_2$, then $|y|\leq C(|Sy|+|T^*y|)=0$, hence $\mathcal H_2=0$. If $y\in R(T)\cap D(T^*)$, then $y\in N(S)$ and $|y|\leq C|T^*y|$, by Proposition \ref{T closed, densely defined, equivalent conditions for R(T) closed}, $R(T)$ is closed, similarly, $R(S^*)$ is closed
+$\Leftarrow$: $H_2=R(T)\oplus R(S^*)$ and $y\in D(S)\cap D(T^*)$, write $y=y_1+y_2$, $y_1\in R(T)\cap D(T^*)$, $y_2\in R(S^*)\cap D(S)$. Apply the previous estimates and the triangle inequality
+\[|y|\leq|y_1|+|y_2|\leq C_1|T^*y|+C_2|Sy|\leq C(|Sy|+|T^*y|)\]
+\end{proof}
+
+ $\mathcal D_{(p,q)}(\Omega)\subseteq L^2_{(p,q)}(\Omega)$ be the smooth $(p,q)$-forms with compact support in $\Omega$. Consider the unbounded operator $\bar\partial:L^2_{(p,q)}(\Omega)\to L^2_{(p,q+1)}(\Omega)$ with domain $D(\bar\partial)=\{u\in L^2_{(p,q)}(\Omega)|\bar\partial u\in L^2_{(p,q+1)}(\Omega)\}$, the derivative is in the sense of distributions $\langle \bar\partial u,\alpha\rangle_{L^2}=\langle u,\bar\partial^*\alpha\rangle_{L^2}$ for $\alpha\in\mathcal D_{(p,q+1)}(\Omega)$. $\bar\partial^*$ is called the \textit{formal adjoint} of $\bar\partial$. Then $\bar\partial u\in L^2$ if there is a constant $C>0$ such that $|\langle u,\bar\partial^*\alpha\rangle|\leq C\|\alpha\|_{L^2}$. In this case, the Hahn-Banach and Riesz representation theorem, $\langle u,\bar\partial^*\alpha\rangle=\langle v,\alpha\rangle$
+ 
+\begin{proposition}
+$\bar\partial:L^2_{(p,q)}(\Omega)\to L^2_{(p,q+1)}(\Omega)$ is a closed operator
+\end{proposition}
+ 
+\begin{proof}
+$u_i\to u$ in $L^2$, $u_i\in D(\bar\partial)$, $\bar\partial u_i\to\alpha$. Let $\beta\in\mathcal D_{(p,q+1)}(\Omega)$, then
+ \[\langle u,\bar\partial^*\beta\rangle=\lim_{i\to\infty}\langle u_i,\bar\partial^*\beta\rangle=\lim_{i\to \infty}\langle \bar\partial u_i,\beta\rangle=\langle \alpha,\beta\rangle\]
+So the map $\beta\mapsto \langle u,\bar\partial^*\beta\rangle$ is bounded and $\bar\partial u=\alpha$, thus $\bar\partial$ is closed
+\end{proof}
+ 
+\begin{example}
+Consider $T=i\frac{d}{dx}$ on $L^2([0,1])$, with $D(T)$ consisting of $f,f'\in L^2$. One can show $f\in D(T)$ is (absolutely) continuous on $[0,1]$. By  integration by parts
+ \[f\mapsto\langle Tf,g\rangle=\langle f,Tg\rangle+i(f(1)\bar g(1)-f(0)\bar g(0))\]
+ This is not continuous with respect to the $L^2$ topology on $f$, unless $g(0)=g(1)=0$. Thus $T^*$ is the same operator $T$, but with a different domain of definition
+\end{example}
+ 
+The problem is that while compactly supported functions are dense in $L^2$ topology, they are not dense in the $L^2_1$ topology, i.e. the graph norm $\|u\|+\|\bar\partial u\|$
+ 
+ 
+Methods to fix this
+\begin{enumerate}
+\item H\"omander uses a clever choice of (three) weights to prove the basic estimate
+\item If $\Omega$ has sufficiently nice boundary, define boundary conditions (the $\bar\partial$-Neumann problem)
+\item Change the geometry of $\Omega$ to carry a complete K\"ahler metric
+\end{enumerate}
+We will follow the last option (Demially, Gaffney)
+
+\begin{lemma}\label{Equivalent conditions of completeness and compact exhaustion}
+$(M,g)$ is a Riemannian manifold, the following are equivalent
+\begin{enumerate}
+\item $(M,g)$ is complete (Hopf-Rinow theorem)
+\item $\exists$ compact exhaustion function $\psi$ with $|d\psi|_g\leq1$
+\item $\exists$ compact exhaustion $K_i\subseteq K_{i+1}^\circ$, and $0\leq \psi_i$ supported in $K_{i+1}$, $\equiv1$ on $K_i$, such that $|d\psi_i|_g\leq 2^{-i}$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+1.$\Rightarrow$2.: Fix $x_0\in M$, Let $\psi_0(x)=\frac{1}{2}d(x_0,x)$. Smooth $\phi_0$ to $\psi$ with $|\phi-\phi_0|<1$, by convolution with some $g\in C^\infty$, compactly supported near $0$ and $\int g=1$
+2.$\Rightarrow$3.: Choose a smooth function $\rho:\mathbb R\to[0,1]$ with $\rho(t)=\begin{cases}
+1&t\leq1 \\
+0&t\geq2
+\end{cases}$ and $|\rho'(t)|\leq2$. Then let $K_i=\{\psi(x)\leq2^{i+1}\}$, $\psi_i(x)=\rho(2^{-i-1}\psi(x))$
+3.$\Rightarrow$2.: Set $\psi=\sum 2^i(1-\psi_i)$
+2.$\Rightarrow$1.: $|\psi(x)-\psi(y)|\leq d(x,y)$, $\{x_i\}$ is a Cauchy sequence, then $\{x_i\}$ lies in the set $\{\psi\leq C\}$ for some $C$. Since this is compact, the sequence converges, so $(M,g)$ is complete
+\end{proof}
+
+\begin{corollary}
+Let $\Omega$ have a complete Riemannian metric $\omega$. Then $\mathcal D_{(p,q)}(\Omega)$ is dense in graph norm of $\bar\partial$
+\end{corollary}
+
+\begin{proof}
+Set $u_i=u\phi_i$ as in Lemma \ref{Equivalent conditions of completeness and compact exhaustion}, 3. Then $u_i\to u$ in $L^2$, and $\bar\partial u_i=\bar\partial u\psi_i+u\bar\partial\psi_i\to\bar\partial u$ in $L^2$. Now choose $v_i\in\mathcal D_{(p,q)}(\Omega)$ so that $\|v_i-u_i\|_{L^2_1}=\|v_i-u_i\|_{L^2}+\|\bar\partial v_i-\bar\partial u_i\|_{L^2}\leq 1/i$, the result follows
+\end{proof}
+
+\begin{corollary}
+$(\Omega,\omega)$ is complete, $\bar\partial^*$ with domain
+\[D(\bar\partial^*)=\left\{\alpha\in L^2_{(p,q+1)}(\Omega)\middle|\bar\partial^*\alpha\in L^2_{(p,q)}(\Omega)\right\}\]
+is the adjoint of $T^*$ of $T=\bar\partial$
+\end{corollary}
+
+\begin{proof}
+$D(T^*)\subseteq D(\bar\partial^*)$. Let $u\in\mathcal D_{(p,q)}(\Omega)\subseteq D(T)$. If $\alpha\in D(T^*)$, then there is a constant $C>0$ such that $|\langle\bar\partial u,\alpha\rangle|\leq C|u|$. But then by definition, $|\langle u,\bar\partial^*\alpha\rangle|\leq C|u|$. Since $\mathcal D_{(p,q)}(\Omega)$ is dense in $L^2$, this implies $\bar\partial^*\alpha\in L^2$ \\
+$D(\bar\partial^*)\subseteq D(T^*)$. If $\bar\partial^*\alpha\in L^2$, there is a constant $C>0$ such that $|\langle u,\bar\partial^*\alpha\rangle|\leq C|u|$. Fix $u\in D(T)$. Let $u_i\in\mathcal D_{(p,q)}(\Omega)$ so that $u_i\to u$ and $\bar\partial u_i\to\bar\partial u$ in $L^2$. Then since $\langle u_i,\bar\partial^*\alpha\rangle=\langle\bar\partial u_i,\alpha\rangle$, we have $|\langle\bar\partial u,\alpha\rangle|\leq C|u|$, and so $\alpha\in D(T^*)$
+\end{proof}
+
+\end{document}

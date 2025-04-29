@@ -1,0 +1,159 @@
+% Identification
+% The package identifies itself and the LaTeX version needed
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{Mymathpackage}[2020/05/01 My math package]
+
+% ----------------------------------------------------------------------------------------------------------
+
+\RequirePackage[top=1in, bottom=1.25in, left=1.25in, right=1.25in]{geometry}
+% \RequirePackage{ccfonts}
+% \RequirePackage[math]{anttor}  % Font choice
+\RequirePackage[no-math]{fontspec}
+\RequirePackage{verbatim}
+\RequirePackage[yyyymmdd]{datetime}
+\RequirePackage{graphicx}
+\RequirePackage{enumitem}
+\RequirePackage{minted} % For listing codes
+\RequirePackage[framemethod=tikz]{mdframed} % Highlight entire paragraph, hidealllines=true hide the circumference
+\RequirePackage{imakeidx} % Making index
+\RequirePackage{hyperref}
+\hypersetup{
+colorlinks = true, % Allow colored links
+linkcolor = purple, % Setup the color for the links
+citecolor = black, % Choose the color for citation
+}
+\RequirePackage[inline]{showlabels} % Show labels in PDF files
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{mathrsfs}
+\RequirePackage{mathtools}
+\RequirePackage{amsthm}
+\RequirePackage{polynom} % Using long division of polynomials
+\RequirePackage{esvect} % using vector
+\RequirePackage{tikz}
+\RequirePackage{pgfplots} % drawing axis, addplots
+\pgfplotsset{compat=newest} % ensure position and scaling compatibility
+\usetikzlibrary{intersections} % intersections in tikz
+\usetikzlibrary{calc} % calculations in tikz
+\usetikzlibrary{arrows.meta} % can use Stealth
+\usetikzlibrary{hobby} % smoothly connecting points
+\RequirePackage{tikz-cd}
+
+% ----------------------------------------------------------------------------------------------------------
+
+% new and renew commands
+\renewcommand{\mod}{\,\mathrm{mod}\,}
+
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\sym}{sym}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Alt}{Alt}
+\DeclareMathOperator{\alt}{alt}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\Isom}{Isom}
+\DeclareMathOperator{\im}{im}
+% \Im is already defined
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Ord}{Ord}
+\DeclareMathOperator{\Span}{Span}
+% \span is already defined
+\DeclareMathOperator{\Rep}{Rep}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Spm}{Spm}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\Poly}{Poly}
+\DeclareMathOperator{\Coe}{Coe}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\Res}{Res}
+
+
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+\newcommand*{\xequal}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+\makeatother
+
+% ----------------------------------------------------------------------------------------------------------
+
+% Global variables
+\def\PROOFCROP{0}
+\def\SOLUTIONCROP{0}
+
+% ----------------------------------------------------------------------------------------------------------
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{fact}[theorem]{Fact}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+\pushQED{\qed}
+\normalfont \topsep6\p@\@plus6\p@\relax
+\trivlist
+\item\relax
+{\itshape
+#1\@addpunct{.}}\hspace\labelsep\ignorespaces
+\if\PROOFCROP1\comment\fi}{\if\PROOFCROP1\endcomment\fi
+\popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+\def\solutionname{Solution}
+\makeatletter
+\newenvironment{solution}[1][\solutionname]{\par
+\pushQED{\qed}
+\normalfont \topsep6\p@\@plus6\p@\relax
+\trivlist
+\item\relax
+{\itshape
+#1\@addpunct{.}}\hspace\labelsep\ignorespaces
+\if\SOLUTIONCROP1\comment\fi}{\if\SOLUTIONCROP1\endcomment\fi
+\popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+\numberwithin{equation}{section}
+
+\setlength{\parindent}{0pt}
+
+\renewcommand*\contentsname{目录}
+\renewcommand\indexname{索引}
+
+% ----------------------------------------------------------------------------------------------------------
+
+% This part handles the options passed to the package
+\DeclareOption*{\PackageWarning{Mymathpackage}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
+
+% ----------------------------------------------------------------------------------------------------------
+
+\RequirePackage{subfiles} % Best loaded last in the preamble
+\RequirePackage{xeCJK} % Use Chinese
+\xeCJKsetup{
+CJKecglue  = \hskip 0pt,
+xCJKecglue = true}

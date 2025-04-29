@@ -1,0 +1,140 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$C^1$ function $f:\Omega\to\mathbb C$ is \textit{holomorphic} if $\bar\partial f=0$. Denote the set of all holomorphic functions on $\Omega$ as $A(\Omega)$
+\end{definition}
+
+\begin{lemma}
+If $f$ is holomorphic, then $\displaystyle\int_{\partial \Omega}fdz=0$
+\end{lemma}
+
+\begin{proof}
+\[\int_{\partial \Omega}fdz=\int_\Omega d(fdz)=\int_\Omega\bar\partial f\wedge dz=0\]
+\end{proof}
+
+\begin{theorem}[Poincar\'e-Lelong formula]\label{Poincare-Lelong formula}
+Since $\Delta=\partial_x^2+\partial_y^2=4\partial_z\partial_{\bar z}=4\partial_{\bar z}\partial_z$, $dz\wedge d\bar z=-2idx\wedge dy=-2id\mu$. In the distributional sense, $-\dfrac{\log r}{2\pi}=-\dfrac{1}{4\pi}\log(x^2+y^2)$ is the fundamental solution of Laplacian equation in dimension $2$, i.e. $\Delta\log(x^2+y^2)=4\pi\delta$, we have
+\[\Delta\log|z|^2dz\wedge d\bar z=4\pi\delta dz\wedge d\bar z\Leftrightarrow\bar\partial\partial\log|z|^2=2\pi i\delta dx\wedge dy\]
+\end{theorem}
+
+\begin{note}
+$\partial\log|z|^2=\partial\log(z)+\partial\log(\bar z)=\dfrac{dz}{z}$ is integrable around $0$
+\end{note}
+
+\begin{proof}
+We prove a slightly general result. For any $\phi\in C^\infty_c(\Omega)$, by definition we have
+\begin{align*}
+\iint_{\Omega}\phi\bar\partial\partial\log|z-w|^2&=-\iint_{\Omega}\bar\partial\phi\wedge\partial\log|z-w|^2 \\
+&=-\lim_{\epsilon\to0}\iint_{|z-w|\geq\epsilon}\bar\partial\phi\wedge\partial\log|z-w|^2 \\
+&=-\lim_{\epsilon\to0}\iint_{|z-w|\geq\epsilon} d\left(\phi\partial\log|z-w|^2\right) \\
+&=\lim_{\epsilon\to0}\oint_{|z-w|=\epsilon} \phi\partial\log|z-w|^2 \\
+&=\lim_{\epsilon\to0}\oint_{|z-w|=\epsilon} \frac{\phi}{z-w}dz \\
+&=2\pi i\phi(w)
+\end{align*}
+\end{proof}
+
+\begin{theorem}[Cauchy's formula]\label{Cauchy's formula}
+If $f\in C^1(\overline\Omega)$, then
+\[f(w)=\frac{1}{2\pi i}\iint_{\Omega}\frac{\partial_{\bar z}f dz\wedge d\bar z}{z-w}+\frac{1}{2\pi i}\int_{\partial \Omega}\frac{f}{z-w}dz\]
+\end{theorem}
+
+\begin{proof}
+By Poincar\'e-Lelong formula \ref{Poincare-Lelong formula}, we have
+\begin{align*}
+f(w)&=\frac{1}{2\pi i}\iint_\Omega f\bar\partial\partial\log|z-w|^2 \\
+&=-\frac{1}{2\pi i}\iint_\Omega \bar\partial f\wedge\partial\log|z-w|^2 + \frac{1}{2\pi i}\int_{\partial \Omega}f\partial\log|z-w|^2 \\
+&=\frac{1}{2\pi i}\iint_{\Omega}\frac{\partial_{\bar z}f dz\wedge d\bar z}{z-w}+\frac{1}{2\pi i}\int_{\partial \Omega}\frac{f}{z-w}dz
+\end{align*}
+\end{proof}
+
+\begin{corollary}
+If $f\in C^1(\overline\Omega)\cap A(\Omega)$, then by Cauchy's formula \ref{Cauchy's formula}, we know
+\[f(w)=\frac{1}{2\pi i}\int_{\partial \Omega}\frac{f(z)}{z-w}dz\]
+Which is $C^\infty$ in $w$
+\[f^{(n)}(w)=\frac{n!}{2\pi i}\int_{\partial \Omega}\frac{f(z)}{(z-w)^{n+1}}dz\]
+\end{corollary}
+
+\begin{corollary}[Cauchy's estimate]\label{Cauchy's estimate}
+For $K\subseteq\Omega$ compact, there are constants $C_n$ such that for any $f\in A(\Omega)$
+\[\sup_{z\in K}|f^{(n)}(z)|\leq C_n\|f\|_{L^1(\Omega)}\]
+\end{corollary}
+
+\begin{proof}
+Consider a bump function $\chi$ with $\supp\chi\subseteq\Omega$ and $\chi\equiv1$ on $K$, then for any $w\in K$
+\begin{align*}
+f(w)&=\frac{1}{2\pi i}\iint_{\Omega}\frac{\partial_{\bar z}(\chi f) dz\wedge d\bar z}{z-w}+\frac{1}{2\pi i}\int_{\partial \Omega}\frac{\chi f}{z-w}dz \\
+&=\frac{1}{2\pi i}\iint_{\Omega}\frac{(\partial_{\bar z}\chi) f dz\wedge d\bar z}{z-w} \\
+&=\frac{1}{2\pi i}\iint_{\Omega\setminus K}\frac{(\partial_{\bar z}\chi) f dz\wedge d\bar z}{z-w}
+\end{align*}
+$\dfrac{\partial_{\bar z}\chi}{z-w}$ can be bounded on $\Omega\setminus K$
+\end{proof}
+
+\begin{corollary}
+$A(\Omega)\subseteq C(\Omega)$ is closed, thus a Fr\'echet space
+\end{corollary}
+
+\begin{proof}
+Suppose $\{f_j\}\subseteq A(\Omega)$ converges to $f$ in $C(\Omega)$, but since
+\[f_j(w)=\frac{1}{2\pi i}\int_{\partial \Omega}\frac{f_j(z)}{z-w}dz\]
+$f(w)=\displaystyle\dfrac{1}{2\pi i}\int_{\partial \Omega}\frac{f(z)}{z-w}dz$ which implies $\bar\partial f=0$
+\end{proof}
+
+\begin{theorem}[Montel's theorem]\label{Montel's theorem}
+Suppose $\{f_i\}\subseteq A(\Omega)$ are uniformly bounded on each compact subset, then there is a subsequence $f_{i_k}$ uniformly converges on compact subsets
+\end{theorem}
+
+\begin{proof}
+For $K\subseteq\Omega$ compact, by Cauchy's estimate \ref{Cauchy's estimate}, $f_j$ are Lipschitz with the same $C_k$, by Ascoli-Arzela theorem, $f_j$ are equicontinuous, thus have convergent subsequence, and then use diagonal argument by exhaust $\Omega$ with compact subsets $K$
+\end{proof}
+
+\begin{theorem}[Riemann extension theorem]\label{Riemann extension theorem}
+$E\subseteq\Omega$ is a discrete subset, $f\in A(\Omega\setminus E)$, and $f$ is bounded around each point in $E$, then $f$ can be extended to a unique $\tilde f\in A(\Omega)$
+\end{theorem}
+
+\begin{proof}
+For $z_0\in E$, suppose such $\tilde f$ exists, then by Cauchy's formula \ref{Cauchy's formula}, for any $w\in D(z_0,r)$
+\[\tilde f(w)=\frac{1}{2\pi i}\int_{\partial D(z_0,r)}\frac{f(z)}{z-w}dz\]
+Thus we just take this as a definition, then
+\begin{align*}
+\tilde f(w)-f(w)&=\frac{1}{2\pi i}\int_{\partial D(z_0,r)}\frac{f(z)}{z-w}dz-\frac{1}{2\pi i}\int_{\partial D(w,\epsilon)}\frac{f(z)}{z-w}dz \\
+&=\frac{1}{2\pi i}\int_{\partial D(z_0,\epsilon)}\frac{f(z)}{z-w}dz
+\end{align*}
+Which can be show to arbitrarily small as $\epsilon\to0$
+\begin{center}
+\begin{tikzpicture}
+\draw (0,0) circle (5);
+\draw (2,2) circle (0.5);
+\draw (0,0) circle (0.5);
+\filldraw (0,0) circle (0.02);
+\filldraw (2,2) circle (0.02);
+\node at (0,0) [below] {$z_0$};
+\node at (2,2)[below] {$w$};
+\end{tikzpicture}
+\end{center}
+\end{proof}
+
+\begin{theorem}\label{d bar theorem}
+If $\alpha=g(z)d\bar z$ is a smooth $(0,1)$-form on $\Omega$, then there exists $u\in C^\infty(\Omega)$ such that $\bar\partial u=\alpha$
+\end{theorem}
+
+\begin{proof}
+suppose such a $u$ exists, then by Cauchy's formula \ref{Cauchy's formula}
+\[u(w)=\frac{1}{2\pi i}\iint_{\Omega}\frac{g(z) dz\wedge d\bar z}{z-w}+\frac{1}{2\pi i}\int_{\partial \Omega}\frac{u(z)}{z-w}dz\]
+Since $\bar\partial\displaystyle\int_{\partial \Omega}\frac{u(z)}{z-w}dz=0$. This motivates us to first assume $\alpha$ has compact support, and define
+\[u(w)=\frac{1}{2\pi i}\iint_{\Omega}\frac{ g(z)dz\wedge d\bar z}{z-w}\]
+Then
+\[u(w+\zeta)=\frac{1}{2\pi i}\iint_{\Omega}\frac{g(z)dz\wedge d\bar z}{(z-\zeta)-w}=\frac{1}{2\pi i}\iint_{\Omega}\frac{g(z+\zeta)dz\wedge d\bar z}{z-w}\]
+Hence
+\begin{align*}
+\partial_{\bar w} u(w)&=\frac{1}{2\pi i}\iint_{\Omega}\frac{\partial_{\bar z} g(z)dz\wedge d\bar z}{z-w} \\
+&=\frac{1}{2\pi i}\iint_{\Omega}\partial \log|z-w|^2\wedge\bar\partial g \\
+&=g(w)
+\end{align*}
+Therefore $\bar\partial u=\alpha$. In general, consider a compact exhaustion $\Omega=\displaystyle\bigcup_{i}K_i$, where $\hat K_i= K_i$, $K_i\subset\subset\overset{\circ}{K_{i+1}}$, ensured by Corollary \ref{Compact exhaustion of a domain}, let $\chi_i$ be a cutoff function such that $\chi_i\equiv1$ on $K_i$ and $\supp\chi_i\subseteq\overset{\circ}{K_{i+1}}$, then there exists $f_i$ such that $\bar\partial f_i=\chi_i\alpha$, by Runge's theorem \ref{Runge's theorem}, there exists $h_i\in\mathcal O(K_i)$ such that $\|f_{i+1}-f_i-h_i\|_{K_i}<\dfrac{1}{2^i}$. Now define
+\[ u_N=f_1+\sum_{k=1}^{N}(f_{k+1}-f_k-h_k)=f_{N+1}-\sum_{k=1}^{N}h_N\]
+Converges uniformly on compact subsets to $u$, and $\partial u_N=\alpha$ on $K_i$ for any $i\leq N$
+\end{proof}
+
+\end{document}

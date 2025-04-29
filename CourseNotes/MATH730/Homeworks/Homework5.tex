@@ -1,0 +1,32 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\textbf{Hatcher 1.3.2.} \par
+$\forall (x_{1},x_{2})\in X_{1}\times X_{2}$, $\exists U_{1},U_{2}$ are open neighborhoods of $x_{1},x_{2}$, such that $p_{1}^{-1}(U_{1})=\displaystyle\bigsqcup_\alpha U_{1\alpha}$, $p_{1}|_{U_{1\alpha}}$ is a homeomorphism and $p_{2}^{-1}(U_{2})=\displaystyle\bigsqcup_\beta U_{2\beta}$, $p_{1}|_{U_{2\beta}}$ is a homeomorphism, then $U_{1}\times U_{2}$ is an open neighborhood of $(x_{1},x_{2})$, such that $(p_{1}\times p_{2})^{-1}(U_{1}\times U_{2})=p_{1}^{-1}(U_{1})\times p_{2}^{-1}(U_{2})=\displaystyle\bigsqcup_{\alpha,\beta}U_{1\alpha}\times U_{2\beta}$ and $(p_{1}\times p_{2})|_{U_{1\alpha}\times U_{2\beta}}=p_{1}|_{U_{1\alpha}}\times p_{2}|_{U_{2\beta}}$ is a homeomorphism \par
+\textbf{Hatcher 0.11.} \par
+$$\mathbbm{1}\simeq hf\simeq hfgf\simeq gf$$
+\textbf{Hatcher 1.3.8.} \par
+Assume $p: X\rightarrow Y$ and $q: Y\rightarrow X$ are the covering maps, and $\varphi: X\rightarrow Y$ and $\psi: Y\rightarrow X$ satisfying $\psi\varphi\simeq\mathrm{id}_X, \varphi\psi\simeq\mathrm{id}_Y$, Since $\widetilde{X}$ and $\widetilde{Y}$ is simply connected, thus $\exists \widetilde{\varphi}: \widetilde{X}\rightarrow \widetilde{Y}$ and $\exists \widetilde{\psi}: \widetilde{Y}\rightarrow \widetilde{X}$ are lifts of $\varphi p$ and $\psi q$, then $p\widetilde{\psi}\widetilde{\varphi}=\psi q\widetilde{\varphi}=\psi\varphi p$, thus $\widetilde{\psi}\widetilde{\varphi}$ is a lift of $\psi\varphi p$, suppose $\psi\varphi\overset{H}{\simeq}\mathrm{id}_X$, then by homotopy lifting property, we have $\widetilde{H}$, where $\widetilde{H}(x,0)=\widetilde{\psi}\widetilde{\varphi}$, $\widetilde{H}(x,1)$ is the lift of $\mathrm{id}_X p=p$, pick $x_0\in\widetilde{X}$, $\widetilde{H}(x_0,1)\in p^{-1}(x_0)$ might not be $x_0$, but $\exists \Phi: \widetilde{X}\rightarrow\widetilde{X}$ sending $\widetilde{H}(x_0,1)$ to $x_0$ which is a lift of $p$, then $\Phi\widetilde{H}(x,1)$ is a lift of $p$ sending $x_0$ to $x_0$, by uniqueness, we have $\Phi\widetilde{H}(x,1)=\mathrm{id}_{\widetilde{X}}$, also, $\widetilde{H}(x,1)\Phi=\mathrm{id}_{\widetilde{X}}$, thus $\widetilde{\psi}\widetilde{\varphi}\simeq\widetilde{H}(x,1)$ is a homotopy equivalence, $\mathrm{id}_{\widetilde{X}}=\Phi\widetilde{H}(x,1)\simeq\left(\Phi\widetilde{\psi}\right)\widetilde{\varphi}$, similarly, $\exists \Psi: \widetilde{Y}\rightarrow \widetilde{Y}$, such that $\mathrm{id}_{\widetilde{Y}}\simeq\widetilde{\varphi}\left(\widetilde{\psi}\Psi\right)$, by Hatcher 0.11, we have $\widetilde{X}\overset{\widetilde{\varphi}}{\simeq}\widetilde{Y}$ \par
+\textbf{1.} \par
+There exists an open neighborhood $U$ of $x$ such that $p_{1}^{-1}(U)=\displaystyle\bigsqcup_{\alpha}U_{\alpha}$, $p_{1}|_{U_{\alpha}}$ is a homeomorphism, and $p_{2}^{-1}(U)=\displaystyle\bigsqcup_{\beta}V_{\beta}$, $p_{2}|_{U_{\beta}}$ is a homeomorphism, assume there is a lift $\widetilde{p}_{1}$, fix $U_{\alpha}$ then $\widetilde{p}_{1}(U_{\alpha})\subset p_{2}^{-1}(U)$ is connected, thus $\widetilde{p}_{1}(U_{\alpha})\subset V_{\beta}$ for some $\beta$, but since $p_{2}\left(\widetilde{p}_{1}(U_{\alpha})\right)=U$, $\widetilde{p}_{1}(U_{\alpha})=V_{\beta}$, since $p_{1}|_{U_{\alpha}},p_{2}|_{V_{\beta}}$ are homeomorphisms, so is $\widetilde{p}_{1}|_{U_{\alpha}}=\left(p_{2}|_{V_{\beta}}\right)^{-1}\circ p_{1}|_{U_{\alpha}}$, thus $\widetilde{p}_{1}$ is a covering map \par
+\textbf{2.} \par
+\textbf{Case I: $n=1$} \par
+Since $\mathbb{RP}\cong S^{1}$, $\pi_{1}(\mathbb{RP},[x_{0}])\cong\mathbb{Z}$ \par
+\textbf{Case II: $n\geq 2$} \par
+For any $\gamma\in\pi_{1}(\mathbb{RP}^{n},[x_{0}])$, it can be lifts up to $\widetilde{\gamma}$ which starts at $x_{0}$ and ends at $x_{0}$ or $-x_{0}$, since $\pi_{1}(S^{n},x_{0})=0$, thus $\widetilde{\gamma}$ has only two different choice up to homotopy, ending at $x_{0}$ or $-x_{0}$, thus $\gamma$ also has only to different choice, thus $|\pi_{1}(\mathbb{RP}^{n},[x_{0}])|=1 \Rightarrow\pi_{1}(\mathbb{RP}^{n},[x_{0}])=\mathbb{Z}/2\mathbb{Z}$ \par
+\textbf{3.} \par
+\textbf{Case I: $n=1$} \par
+The statement is false. Consider $\mathbb{RP}\cong S^{1}\xrightarrow{\mathrm{id}}S^{1}$ \par
+\textbf{Case II: $n\geq 2$} \par
+The statement is true. since $\mathbb{RP}\xrightarrow{f}S^{1}$ would induce a injective group homomorphism $\mathbb{Z}/2\mathbb{Z}\cong\pi_{1}(\mathbb{RP}^{n})\xrightarrow{f_{*}}\pi_1(S^1)\cong\mathbb{Z}$, hence $f_*(\pi_1(\mathbb{RP}))=\{0\}$, thus there exists a lift $\mathbb{RP}\xrightarrow{\widetilde{f}}\mathbb{R}$, then $\widetilde{f}\simeq c$ by a linear homotopy, so $f\simeq c$ \par
+\textbf{4.} \par
+Assume $\pi: X\rightarrow T$ is the covering map, $T=I^{2}/\sim$ is the torus, where $(x,0)\sim(x,1),(0,y)\sim(1,y)$ \par
+\textbf{Case I: $X\simeq \{*\}$} \par
+$X=\mathbb{R}^{2}$, $\pi(x,y)=\left[(x,y)-(\lfloor x\rfloor,\lfloor y\rfloor)\right]$ \par
+\textbf{Case II: $X\simeq S^{1}$} \par
+$X=I\times\mathbb{R}/\sim$, where $(0,y)\sim(1,y)$, $\pi[(x,y)]=\left[(x,y)-(\lfloor x\rfloor,\lfloor y\rfloor)\right]$ \par
+\textbf{Case III: $X\simeq S^{1}\times S^{1}$} \par
+$X=2I\times 2I/\sim$, where $(x,0)\sim(x,2), (0,y)\sim(2,y)$, $\pi[(x,y)]=\left[(x,y)-(\lfloor x\rfloor,\lfloor y\rfloor)\right]$ \par
+
+\end{document}

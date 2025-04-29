@@ -1,0 +1,133 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{customproblem}\textbf{2.5.24}
+Since the solution is given by d'Alembert's formula
+\[
+u(x,t)=\dfrac{1}{2}[g(x+t)-g(x-t)]+\dfrac{1}{2}\int_{x-t}^{x+t}h(y)dy
+\]
+and $g,h$ are compactly supported, $u(x,t)$ is also compactly supported for any fixed $t$, hence $k(t),p(t)$ make sense \par
+\textbf{(a)} \par
+\[
+\dfrac{d}{dt}(p(t)+k(t))=\int_{-\infty}^{+\infty}u_tu_{tt}+u_xu_{xt}dx=\int_{-\infty}^{+\infty}u_tu_{xx}+u_xu_{xt}dx
+=\int_{-\infty}^{+\infty}\dfrac{\partial}{\partial x}\left(u_tu_x\right) dx=u_tu_x\left|_{-\infty}^{+\infty}\right.=0
+\]
+Thus $k(t)+p(t)$ is a constant in $t$ \par
+\textbf{(b)} \par
+\[
+\begin{aligned}
+&u_t(x,t)=\dfrac{1}{2}[g'(x+t)-g'(x-t)]+\dfrac{1}{2}[h(x+t)+h(x-t)] \\
+&u_x(x,t)=\dfrac{1}{2}[g'(x+t)+g'(x-t)]+\dfrac{1}{2}[h(x+t)-h(x-t)]
+\end{aligned}
+\]
+Suppose $\mathrm{supp}\,g\cup\mathrm{supp}\,h\subset D(0,T)$, then consider $t>T$, one of $g'(x+t),g'(x-t)$ must be zero and one of $h(x+t),h(x-t)$ must be zero, thus $u_t^2=u_x^2$, $p(t)=k(t)$ \par
+\textbf{Additional Problem} \par
+\[
+\begin{aligned}
+|u(x,t)|
+&=\left|\dfrac{1}{4\pi t}\int_{\partial B(x,t)}f(y)dS_y\right| \\
+&=\left|\dfrac{t}{4\pi}\int_{S^2}f(x+t\omega)dS_\omega\right| \\
+&=\left|-\dfrac{t}{4\pi}\int_{S^2}\int_t^{-\infty}\dfrac{d}{d\lambda}f(x+\lambda\omega)d\lambda dS_\omega\right| \\
+&=\left|-\dfrac{t}{4\pi}\int_{S^2}\int_t^{-\infty}(\nabla f\cdot\omega)(x+\lambda\omega)d\lambda dS_\omega\right| \\
+&\leq\dfrac{t}{4\pi}\int_{S^2}\int_t^{-\infty}\left|\nabla f\right||\omega|(x+\lambda\omega)d\lambda dS_\omega \\
+&=\dfrac{t}{4\pi}\int_{S^2}\int_t^{-\infty}\left|\nabla f\right|(x+\lambda\omega)d\lambda dS_\omega \\
+&=\dfrac{t}{4\pi}\int_{\partial B(x,\lambda)}\int_t^{-\infty}\left|\nabla f\right|(y)d\lambda dS_y \\
+&\leq\dfrac{1}{4\pi t}\int_{\mathbb{R}^3}\left|\nabla f\right|dy \\
+\end{aligned}
+\]
+\end{customproblem}
+
+\begin{customproblem}\textbf{January 2007, Problem 2}
+\textbf{(a)} \par
+Define 
+\[
+E(t)=\dfrac{1}{2}\int_{\partial\Omega}u^2dS+\dfrac{1}{2}\int_{\Omega}\left\{u_t^2+|\nabla u|^2+V(x)u^2\right\}dx
+\]
+Then we have
+\[
+\begin{aligned}
+E'(t)
+&=\int_{\partial\Omega}uu_tdS+\int_{\Omega}\left\{u_tu_{tt}+\nabla u\cdot\nabla u_t+V(x)uu_t\right\}dx \\
+&=\int_{\partial\Omega}uu_tdS+\int_{\Omega}\left\{u_t\left(\Delta u-V(x)u\right)+\nabla u\cdot\nabla u_t+V(x)uu_t\right\}dx \\
+&=\int_{\partial\Omega}uu_tdS+\int_{\Omega}\left\{u_t\Delta u+\nabla u\cdot\nabla u_t\right\}dx \\
+&=\int_{\partial\Omega}uu_tdS+\int_{\partial\Omega}u_t\dfrac{\partial u}{\partial n}dS \\
+&=\int_{\partial\Omega}u_t\left(u+\dfrac{\partial u}{\partial n}\right)dS \\
+&=0
+\end{aligned}
+\]
+\textbf{(b)} \par
+Uniqueness theorem: Suppose $u,v$ are two solutions to the equation, then $u=v$ \par
+Consider $w=u-v$ which satisfies equation $w_{tt}-\Delta w+V(x)w=0,\,x\in\Omega,t>0$, with initial conditions $w(x,0)=0, w_t(x,0)=0$ and boundary conditions $w+\dfrac{\partial w}{\partial n}=0$ \par
+Since $\displaystyle E(0)=\dfrac{1}{2}\int_{\partial\Omega}w^2(x,0)dS+\dfrac{1}{2}\int_{\Omega}\left\{w_t^2(x,0)+|\nabla w|^2(x,0)+V(x)w^2(x,0)\right\}dx=0$ and $E'(t)=0$, hence $E(t)=0$, since $V(x)\geq 0$, $u=0$ \par
+\textbf{(c)} \par
+As for $h\neq 0$, the result is the same as (b)
+\end{customproblem}
+
+\begin{customproblem}\textbf{August 2003, Problem 4}
+Suppose there are two solutions $u,v$, define $w=u-v$, which would satisfies equation \par
+\[w_{tt}-w_{xx}-w_{yyt}=0,\,(x,y)\in\Omega,\,t>0\]\[w(x,y,0)=0,\,w_{t}(x,y,0)=0\]\[w(0,y,t)=w(1,y,t)=0,\,w_y(x,0,t)=w_y(x,1,t)=0\]
+Consider $\displaystyle E(t)=\dfrac{1}{2}\int_{\Omega}(w_t^2+w_x^2)dxdy$, since
+\[w(0,y,t)=w(1,y,t)=0 \Rightarrow w_t(0,y,t)=w_t(1,y,t)=0\]\[w_y(x,0,t)=w_y(x,1,t)=0 \Rightarrow w_{yt}(x,0,t)=w_{yt}(x,1,t)=0\]
+Thus we have
+\[
+\begin{aligned}
+E'(t)
+&=\int_{\Omega}(w_tw_{tt}+w_xw_{xt})dxdy \\
+&=\int_{\Omega}(w_tw_{xx}+w_tw_{yyt}+w_xw_{xt})dxdy \\
+&=\int_0^1\int_0^1(w_tw_x)_xdxdy+\int_0^1\int_0^1(w_tw_{yt})_ydydx-\int_{\Omega}w_{yt}^2dxdy \\
+&\leq \int_0^1[w_tw_x(1,y,t)-w_tw_x(0,y,t)]dy+\int_0^1[w_tw_{yt}(x,1,t)-w_tw_{yt}(x,0,t)]dx \\
+&=0
+\end{aligned}
+\]
+Thus $u_x=0$, but $u(0,y,t)=0$, hence $u=0$
+\end{customproblem}
+
+\begin{customproblem}\textbf{August 2003, Problem 5}
+Since
+\[
+\begin{aligned}
+u(0,t)^2
+&=\left( \dfrac{1}{4\pi t}\int_{\partial B(0,t)}g(y)dS_y \right)^2 \\
+&\leq \dfrac{1}{8\pi^2t^2}\left(\int_{\partial B(0,t)}g(y)^2dS_y\right)\left(\int_{\partial B(0,t)}1^2dS_y\right) \\
+&=\dfrac{1}{4\pi}\int_{S^2}g(y)^2dS_y \\
+\end{aligned}
+\]
+Thus
+\[
+\int_0^\infty u(0,t)^2dt\leq \int_0^\infty\dfrac{1}{4\pi}\int_{\partial B(0,t)}g(y)^2dS_ydt=\dfrac{1}{4\pi}\int_{\mathbb{R}^3}g(x)^2dx
+\]
+\end{customproblem}
+
+\begin{customproblem}\textbf{August 2006, Problem 3}
+\textbf{(a)} \par
+Direct check to find $u_{tt}-\Delta u=0$ when $r\neq 0$, if $t<1$, then $\psi(t+r)=0$ on a neighborhood of $r=0$, thus $u(x,t)=0$ on this neighborhood, hence $u_{tt}-\Delta u=0$, if $t<1$ \par
+\textbf{(b)} \par
+The extended formula should be given by $\displaystyle u(x,t)=\dfrac{\psi(t+r)-\psi(t-r)}{r}=\int_{-1}^1\psi'(t+\lambda r)d\lambda $ \par
+\textbf{(c)} \par
+Since $\psi\in C^k$ by the formula of $\psi$ we showed that $u\in C^{k-1}$ \par
+\textbf{(d)} \par
+Since $\psi$ is compactly supported, so is $u$ \par
+Define Energy to be $\displaystyle E(t)=\dfrac{1}{2}\int_{\mathbb{R}^3}\left(u_t^2+|\nabla u|^2\right)dx$, then 
+\[
+\begin{aligned}
+E'(t)
+&=\int_{\mathbb{R}^3}\left(u_tu_{tt}+\nabla u\cdot\nabla u_t\right)dx \\
+&=\int_{\mathbb{R}^3}\left(u_t\Delta u+\nabla u\cdot\nabla u_t\right)dx \\
+&=\int_{B(0,R)}\left(u_t\Delta u+\nabla u\cdot\nabla u_t\right)dx \\
+&=\int_{\partial B(0,R)}u_t\dfrac{\partial u}{\partial n}dS \\
+&=0
+\end{aligned}
+\]
+Hence the energy is conserved
+\end{customproblem}
+
+\begin{customproblem}\textbf{August 2001, Problem 1}
+\textbf{(a)} \par
+$$ u(x,t)=\dfrac{1}{4\pi t}\int_{\partial B(x,t)}g(y)dS_y=\dfrac{t}{4\pi}\int_{S^2}g(x+t\omega)dS_\omega $$
+but $|x+t\omega|\geq t|\omega|-|x|=t-|x|\geq a$, $g(x+t\omega)=0$, hence $u(x,t)=0$ \par
+\textbf{(b)} \par
+First we prove $g=0$, assume $g(x_1)>0$, then $\displaystyle u(x_0,|x_1-x_0|)=\dfrac{|x_1-x_0|}{4\pi}\int_{S^2}g(x_0+|x_1-x_0|\omega)dS_\omega >0$, since $g\in C(\mathbb{R}^3), g\geq 0$, that is a contradiction, thus $g=0$, $u(x,t)=0$
+\end{customproblem}
+
+\end{document}

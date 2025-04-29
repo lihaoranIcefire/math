@@ -1,0 +1,134 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+An upper semicontinuous function $\phi:\Omega\subseteq \mathbb C^n\to[-\infty,\infty)$ is \textit{plurisubharmonic}\index{Plurisubharmonic} if the restriction of $\phi$ to every complex line $L\cap\Omega$, $L\cong\mathbb C$, is subharmonic. Let $P(\Omega)$ be the set of plurisubharmonic (psh) functions on $\Omega$
+\end{definition}
+
+\begin{proposition}
+$\phi\in C^2(\Omega)$ is psh $\iff$ for all $\xi\in\mathbb C^n$ and all $z\in\Omega$, the complex Hessian is positive semidefinite
+\[\sum_{i,j=1}^n\frac{\partial^2\phi}{\partial z_i\partial\bar z_j}(z)\xi_i\bar\xi_j\geq0\]
+$\phi$ is strictly psh if $>$ holds for every $\xi\neq0$
+\end{proposition}
+
+\begin{remark}
+A real $(1,1)$ form on $\Omega$ can be written as
+\[\omega(z)=i\sum_{i,j=1}^ng_{i\bar j}(z)dz_i\wedge d\bar z_j\]
+where $g_{i\bar j}$ is a Hermitian matrix. We say that $\omega\geq0$(resp. $\omega>0$) if $(g_{i\bar j}(z))$ is positive semidefinite(resp. positive definite) for every $z\in\Omega$. This means that for each $\xi\in\mathbb C^n$, $\xi\neq0$
+\[\sum_{i,j=1}^ng_{i\bar j}(z)\xi_i\bar\xi_j\geq0(\text{resp. }\omega>0)\]
+In the case $\omega>0$, $g_{i\bar j}$ defines a Hermitian metric on $\Omega$, and $\omega$ is its associate K\"ahler form
+\end{remark}
+
+\begin{proof}
+A line $\jmath:L\hookrightarrow\mathbb C^n$ is given by a choice $\xi\neq0$ in $\mathbb C^n$, so that $\jmath(\tau)=z_0+\tau\xi$, then
+\[\jmath^*(dz_i)=\xi_id\tau,\jmath^*(d\bar z_i)=\bar\xi_id\bar\tau\]
+\begin{align*}
+\jmath^*(i\partial\bar\partial\phi)&=\left(\sum_{i,j=1}^n\frac{\partial^2\phi}{\partial z_i\partial\bar z_j}(z)\xi_i\bar\xi_j\right)id\tau\wedge d\bar\tau \\
+&=\left(\sum_{i,j=1}^n\frac{\partial^2\phi}{\partial z_i\partial\bar z_j}(z)\xi_i\bar\xi_j\right)2d\mu
+\end{align*}
+On the other hand
+\[\jmath^*(i\partial\bar\partial\phi)=i\partial_z\bar\partial_z(\phi\circ\jmath)=\Delta(\phi\circ\jmath)2d\mu\]
+\end{proof}
+
+\begin{definition}
+A domain $\Omega\subseteq\mathbb C^n$ is \textit{pseudoconvex}\index{Pseudoconvex} if there exists a continuous psh exhaustion function $\phi$, i.e.
+\[\Omega_c=\{z\in\Omega|\phi(z)<c\}\subset\subset\Omega\]
+For every $c\in\mathbb R$
+\end{definition}
+
+\begin{fact}[Richberg]
+If $\Omega$ is pseudoconvex, there is a $C^\infty$ strictly psh exhaustion function on $\Omega$ (see Demailly's book)
+\end{fact}
+
+\begin{theorem}
+$\Omega\subseteq\Omega$ is a domain of holomorphy iff it is pseudoconvex
+\end{theorem}
+
+\begin{proof}
+Recall $d(z)=\sup_{\Delta(z,r)\subseteq\Omega}r$. $\Rightarrow$: We have shown that $-\log d(z)$ is psh. It is also continuous. We claim that $u(z)=|z|^2-\log d(z)$ does the job
+Closedness: If $z_i\to w\in\overline\Omega\setminus\Omega$, then $d(z_i)\to0$, so $u$ diverges
+Boundedness: Fix any $w\in\overline\Omega\setminus\Omega$, then
+\[d(z)\leq|z-w|\leq|z|+|w|\]
+so for $|z|$ large
+\[\log d(z)\leq 2\log|z|\leq\frac{1}{2}|z|\]
+This means a bound on $u$ implies a bound on $|z|$
+\end{proof}
+
+\begin{example}
+\begin{enumerate}
+\item Geometrically convex sets are pseudoconvex(e.g. balls and polydisks)
+\item If $\{\Omega_\alpha\}$ are pseudoconvex, then the interior $\Omega$ of $\bigcap\Omega_\alpha$ is pseudoconvex
+\item Annuli or punctured domains are not pseudoconvex
+\item Let $\Omega\subseteq\mathbb C^n$ be pseudoconvex, $f_1,\cdots,f_k\in A(\Omega)$, then $\tilde\Omega=\Omega\setminus V(f_1)\cup\cdots\cup V(f_k)$ is pseudoconvex. Indeed, if $\phi$ is the psh exhaustion function on $\Omega$, take $\tilde\phi=\phi-\log|f_1|-\cdots-\log|f_k|$ on $\tilde\Omega$
+\end{enumerate}
+\end{example}
+
+\begin{proposition}
+Suppose $\Omega\subseteq\mathbb C^n$ is pseudoconvex. Then $-\log d(z)$ is psh
+\end{proposition}
+
+\begin{proof}
+$D\subset\subset\Omega$ is a disc, $f$ on $D$, $F\in A(\Omega)$ restricts to $f$, suppose $-\log d(z)\leq\Re f(z)$, $z\in\partial D$, or equivalently $d(z)\geq|e^{-f(z)}|$, $z\in\partial D$. We want to show this holds in $D$. Fix $w\in\Delta(0,1)$. Let
+\[K=\{z+\lambda we^{-f(z)}|z\in\partial D,0\leq\lambda\leq1\}\]
+Then $K\subseteq\Omega$
+\[\Lambda=\{\lambda\in[0,1]|z+\lambda'we^{-f(z)}\in\Omega,\forall z\in D,0\leq\lambda'\leq\lambda\}\]
+Notice that $\Lambda\neq\varnothing$, since $0\in\Lambda$. We want show that $\Lambda=[0,1]$. $\Lambda$ is clearly open. Suppose $\lambda_i\nearrow c$, $\lambda_i\in\Lambda$, let $\phi$ be a continuous psh exhasution function on $\Omega$, then for each $j$, $z\in D$, $\phi(z+\lambda_jwe^{-f(z)})\leq\sup_K\phi$, but since this is a compact set, $c\in\Lambda$
+\end{proof}
+
+Pseudoconvexity is a property of the boundary of $\Omega$
+
+\begin{proposition}
+$\Omega\subseteq\mathbb C^n$. Suppose that for every $\xi\in\overline\Omega$ there is an open set $\xi\in U$ such that $U\cap\Omega$ is pseudoconvex. Then $\Omega$ is a pseudoconex
+\end{proposition}
+
+\begin{proof}
+Let $\xi\in\partial\Omega$, set $\tilde\Omega=U\cap\Omega$. For $z$ sufficiently close to $\xi$, $d(z)=d_{\Omega}(z)=d_{\tilde\Omega}(z)$, so $-\log d(z)$ is psh in a neighborhood of $\partial\Omega$(say, $\Omega\setminus F$ for smote closed $F$).Find a smooth proper psh function $\psi$ on $\mathbb C^n$ such that $\phi(z)>-\log d(z)$ for $z\in F$. Now let $\phi(z)=\max\{\psi(z),-\log d(z)\}$. Then $\phi$ is a continuous psh exhaustion function
+\end{proof}
+
+\begin{definition}
+$\Omega\subseteq\mathbb C^n$ have a $C^2$ boundary. In a neighborhood $U$ of $z_0\in\partial\Omega$ we can find a $C^2$ defining function $\rho:U\to\mathbb R$, i.e.
+\[\Omega\cap U=\{z\in U|\rho(z)<0\},\nabla\rho\neq0\text{ on }\partial\Omega\cap U\]
+The \textit{Levi form}\index{Levi form} $L_{z_0}$ at the point $z_0$ is the quadratic form $\Hess(\rho)$ restricted to $V_{z_0}=T_{z_0}\partial\Omega\cap J(T_{z_0}\partial\Omega)$. Alternatively, let $\xi\in\mathbb C^n$ satisfy $\sum_{i=1}^n\frac{\partial\rho}{\partial z_i}\xi_i=0$. Then we define
+\[L(\xi)=\sum_{i,j=1}^n\frac{\partial^2\rho}{\partial z_j\partial \bar z_j}(z_0)\xi_i\bar\xi_j\]
+Here, if $\xi$ is the vector corresponding to $v$ then $L(v)=L(\xi)$
+\end{definition}
+
+\begin{lemma}\label{d(z)>=d(w)-r}
+Let $z,w\in \Omega$, $\xi\in\Delta(0,r)$ such that $z=w+\xi$. Then $d(z)\geq d(w)-r$
+\end{lemma}
+
+\begin{proof}
+Let $\eta$ be in some polydisk about $0$, such that $z+\eta\in\partial\Omega$, and $d(z)=\max|\eta_i|$. Then $w+\xi+\eta\in\partial\Omega$. This implies
+\begin{align*}
+d(w)\leq\max_j|(\xi+\eta)_j|\leq\max_j|\xi_j|+\max_j|\eta_j|\leq r+d(z)
+\end{align*}
+\end{proof}
+
+\begin{proposition}
+$\Omega$ is pseudoconvex $\iff$ the Levi form is everywhere positive semidefinite on $\partial\Omega$
+\end{proposition}
+
+\begin{proof}
+$\Rightarrow$: $\rho(z)=\begin{cases}
+-d_\Omega(z)&z\in\Omega \\
+0&z\in\partial\Omega \\
+-d_{\overline\Omega^c}(z)&z\in\overline\Omega^c
+\end{cases}$, then $\rho$ is $C^2$. The function $\phi=-\log d$ is $C^2$ and psh
+\[\frac{\partial^2\phi}{\partial z_i\partial\bar z_j}=-\frac{1}{d(z)}\frac{\partial^2 d}{\partial z_i\partial\bar z_j}+\frac{1}{d(z)^2}\frac{\partial d(z)}{\partial z_i}\frac{\partial d(z)}{\partial\bar z_i}\]
+So for $z\in\Omega$
+\[0\leq\sum_{i,j=1}^n\frac{\partial^2\phi}{\partial z_i\partial\bar z_j}(z)\xi_i\bar\xi_j=\sum_{i,j=1}^n\frac{1}{d(z)}\frac{\partial^2 d}{\partial z_i\partial\bar z_j}\]
+Now let $z\to\partial \Omega$ \\
+$\Leftarrow$: Suppose $c=\frac{\partial^2}{\partial\tau\partial\bar\tau}\log d(z_0+\tau w_0)>0$. $\log d(z_0+\tau w_0)=\log d(z_0)+\Re(A\tau+B\tau^2)+c|\tau|^2+o(|\tau|^2)$. Choose $\xi_0\in\partial\Delta(0,d(z_0))$ such that $z_0+\xi_0\in\partial\Omega$, $\max_i|\xi_{0,i}|=d(z_0)$. Let $z(\tau)=z_0+\tau w_0+\xi_0\exp(A\tau+B\tau^2)$. By Lemma \ref{d(z)>=d(w)-r}
+\begin{align*}
+d(z(\tau))&\geq d(z_0+\tau w_0)-d(z_0)|\exp(A\tau+B\tau^2)| \\
+&\geq|\exp(A\tau+B\tau^2)|(e^{c|\tau|^2/2}-1)
+\end{align*}
+Now $d(z(0))=0$. The inequalitity implies
+\[\left.\frac{\partial}{\partial\tau}d(z(\tau))\right|_{\tau=0}=0,\left.\frac{\partial^2}{\partial\tau\partial\bar\tau}d(z(\tau))\right|_{\tau=0}>0\]
+In other words
+\[\sum_{i=1}^n\frac{\partial\rho}{\partial z_i}z_i'(0)=0,\sum_{i,j=1}^n\frac{\partial^2\rho}{\partial z_i\partial\bar z_j}z_i'(0)\bar z_j'(0)<0\]
+This contradicts $L_{z(0)}\geq0$
+\end{proof}
+
+\end{document}

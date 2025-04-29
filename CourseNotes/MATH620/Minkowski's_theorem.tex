@@ -1,0 +1,55 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$L=\mathbb Zv_1+\cdots+\mathbb Zv_n\leq\mathbb R^n$ is a lattice, $D=\{c_1v_1+\cdots+c_nv_n|0\leq c_i\leq1\}$ , the \textit{covolume} $\covol(L)=\vol(\mathbb R^n/L)=\vol(D)$, $\pi:D\to\mathbb R^n/L$ is the quotient map, $\covol(L)^2=\det(\langle v_i,v_j\rangle)$, $\covol(L)=\det(v_1,\cdots,v_n)$
+\end{definition}
+
+\begin{theorem}
+If $B\subseteq\mathbb R^n$ is convex, symmetric (i.e. $B=-B$) subset such that either
+\begin{enumerate}
+\item $\vol(B)>2^n\covol(L)$ or
+\item $\vol(B)\geq2^n\covol(L)$ and $B$ is compact
+\end{enumerate}
+Then $(B\cap L)\setminus\{0\}\neq\varnothing$
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}
+\item $B\to\mathbb R^{2n}\to\mathbb R^n/2L$ is not injective by comparing volume, there exist $x\neq y\in B$ such that $x-y\in 2L$, hence $0\neq\dfrac{1}{2}(x-y)\in B\cap L$ since $B$ is convex and symmetric
+\item By 1, $C_k=L\cap(1+\frac{1}{k})B\setminus\{0\}\neq\varnothing$, $C_k$ is discrete and closed, $\displaystyle\bigcap_{k=1}^\infty C_k\neq\varnothing$, containing a limit point of $B$, but $B$ is closed
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+$D_K=\disc(\mathcal O_K/\mathbb Z)\in\mathbb Z$
+\begin{enumerate}
+\item $\mathcal O_K\hookrightarrow K_{\mathbb R}$ is a lattice
+\item $\covol(\mathcal O_K)=2^{-s}\sqrt{|D_K|}$
+\item If $I$ is an ideal of $\mathcal O_K$, $\covol(I)=[\mathcal O_K:I]\sqrt{|D_K|}$ (union of all members in the coset)
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}
+\item $\mathcal O_K$ is an additive group, only need to show $\mathcal O_K\cap B_r$ is finite. Let $f(t)=\prod(t-\sigma(x))$ be the minimal polynomial of $x\in\mathcal O_K\cap B_r$, which has $\mathbb Z$ coefficients and of degree no more than $[K:\mathbb Q]$, $\sigma$ are all the possible complex embeddings of $\mathbb Q[x]$ which is a subset of $\{\sigma_1,\cdots,\sigma_n\}$, thus \[\sum|\sigma_i(x)|^2\leq r\Rightarrow\sum|\sigma_i\sigma(x)|^2=\sum|\sigma_i(x)|^2\leq r\] Hence the coefficients of $f$ are bounded, there are only finitely many choices of $f$
+\item $\beta_1,\cdots,\beta_n$ is a $\mathbb Z$-basis for $\mathcal O_K$, the coordinate of $\beta_i$ in $K_{\mathbb R}$ would be \[(\sigma_1(\beta_i),\cdots,\sigma_r(\beta_i),\operatorname{Re}\sigma_{r+1}(\beta_i),\operatorname{Im}\sigma_{r+1}(\beta_i),\cdots,\operatorname{Re}\sigma_{r+1}(\beta_i),\operatorname{Im}\sigma_{r+1}(\beta_i))^T\] With easy elementary row operations we have \[\det(\beta_1,\cdots,\beta_n)=\left(\frac{i}{2}\right)^s\det(w_1,\cdots,w_n)\]where $w_i\in K_{\mathbb R}$ has coordinate \[(\sigma_1(\beta_i),\cdots,\sigma_r(\beta_i),\sigma_{r+1}(\beta_i),\overline{\sigma_{r+1}(\beta_i)},\cdots,\sigma_{r+1}(\beta_i),\overline{\sigma_{r+1}(\beta_i)})^T\]which is exactly $(\sigma_1(\beta_i),\cdots,\sigma_n(\beta_i))$. Therefore $\covol(\mathcal O_K)^2=\left(\dfrac{i}{2}\right)^{2s}\det(M^TM)$, $M=(\sigma_i(\beta_j))$, thus $\covol(\mathcal O_K)^2=2^{-2s}|D_K|\Rightarrow\covol(\mathcal O_K)=2^{-s}\sqrt{|D_K|}$
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+For $m\geq1$, the number of ideals of $\mathcal O_K$ of index less than $m$ is finite, if $[\mathcal O_K:I]\leq m$, then $\mathcal O_K/I$ is killed by $m!$, thus $m!\mathcal O_K\subseteq I\subseteq\mathcal O_K$, but $\mathcal O_K/m!\mathcal O_K\cong\mathbb Z^n/m!\mathbb Z^n\cong(\mathbb Z/m!)^n$ is finite
+\end{lemma}
+
+\begin{theorem}
+For any $g\in \Cl(\mathcal O_K)$, $\exists I\subseteq \mathcal O_K$ such that $NI=[\mathcal O_K:I]\leq(\frac{2}{\pi})^s\sqrt{D_K}\Rightarrow \Cl(\mathcal O_K)$ is finite
+\end{theorem}
+
+\begin{proof}
+$J$ be an ideal representation for $g^{-1}$, if $0\neq\alpha\in J$, then $0\neq(\alpha)\subseteq J\Rightarrow\exists I$ ideal of $\mathcal O_K$ such that $(\alpha)=IJ$, so $I$ represents $g$, $N\alpha=NI\cdot NJ$, for $c=(c_1,\cdots,c_r,c_{r+1},\cdots,c_{r+s})$, $c_i>0$
+\[B(c)=\{(x_1,\cdots,x_r,x_{r+1},\cdots,x_{r+s})\in\mathbb R^r\times\mathbb C^s||x_i|\leq c_i\}\]
+$\vol(B(c))=(2c_1)\cdots(2c_r)(2\pi c_{r+1}^2)\cdots(2\pi c_{r+s}^2)=2^n(\frac{\pi}{2})^sc_1\cdots c_rc_{r+1}^2\cdots c_{r+s}^2=2^n(\frac{\pi}{2})^s\xi$. Pick $c$ such that $\vol(B(c))=2^n\covol(J)$, by Minkowski's theorem, $B(c)\cap J\setminus\{0\}\neq\varnothing$, pick $\alpha\in B(c)\cap J\setminus\{0\}$, $|N(\alpha)|=|\sigma_1(\alpha)|\cdots|\sigma_n(\alpha)|\leq\xi$, thus $N\alpha=NI\cdot NJ\leq \xi=(\frac{2}{\pi})^s\covol J=(\frac{2}{\pi})^s[\mathcal O_K:J]\sqrt{|D_K|}$, hence $NI\leq(\frac{2}{\pi})^s\sqrt{|D_K|}$
+\end{proof}
+
+\end{document}

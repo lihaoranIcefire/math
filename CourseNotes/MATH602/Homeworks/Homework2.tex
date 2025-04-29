@@ -1,0 +1,219 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{customexercise}{A4.2}
+Show that $\mathcal A^{op}$ is an abelian category if $\mathcal A$ is an abelian category
+\end{customexercise}
+
+\begin{proof}
+$Hom_{\mathcal A^{op}}(X,Y)$ has an obvious abelian group structure with addition $f^{op}+g^{op}=(f+g)^{op}$, $0^{op}$ being the zero morphism, the inverse of $f^{op}$ being $(-f)^{op}$, $f^{op}(g^{op}+h^{op})=f^{op}g^{op}+f^{op}h^{op}$ and $
+(g^{op}+h^{op})f^{op}=g^{op}g^{op}+h^{op}f^{op}$. Thus $\mathcal A^{op}$ has an $Ab$ structure \par
+Since $\mathcal A$ is an abelian category, $0$ is the zero object in $\mathcal A^{op}$, for any $A_1,\cdots,A_n\in ob\mathcal A^{op}$, suppose $(\bigoplus A_i,\pi_i,\iota_i)$ is the biproduct in $\mathcal A$, then $(\bigoplus A_i,\iota_i^{op},\pi_i^{op})$ is the biproduct in $\mathcal A^{op}$. Hence $\mathcal A^{op}$ is additive \par
+Since $\mathcal A$ is an abelian category, for any morphism $f^{op}:A\to B$ in $Hom_{\mathcal A^{op}}(A,B)$, suppose $(\ker f,i)$ is the kernel and $(\mathrm{coker}f,\pi)$ is the cokernel of $f:B\to A$, then $(\ker f,i^{op})$ is the cokernel and $(\mathrm{coker}f,\pi^{op})$ is the kernel of $f^{op}$. For any monomorphism $e^{op}:A\to B$ and any epimorphism $m^{op}:A\to B$, suppose $e$ is the cokernel of its kernel $i:C\to B$, $m$ is the kernel of its cokernel $\pi:A\to D$, then $e^{op}$ is the kernel of its cokernel $i^{op}:B\to C$, $m^{op}$ is the cokernel of its kernel $\pi^{op}:D\to A$. Hence $\mathcal A^{op}$ is an abelian category
+\end{proof}
+
+\begin{customexercise}{A4.3}
+Given a category $I$ and an abelian category $\mathcal A$, show that the functor category $\mathcal A^I$ is also an abelian category and that the kernel of $\eta:B\to C$ is the functor $A$, $A(i)=\ker(\eta_i)$
+\end{customexercise}
+
+\begin{proof}
+Suppose $\eta,\xi\in Hom_{\mathcal A^I}(B,C)$ are natural transformations, define addition $(\eta+\xi)_i=\eta_i+\xi_i$, then $0=\{0_i\}$ is the zero morphism, $-\eta=\{-\eta_i\}$ is the inverse of $\eta$, $(\eta+\xi)\mu=\eta\mu+\xi\mu$ and $\eta(\xi+\mu)=\eta\xi+\eta\mu$. Thus $\mathcal A^I$ has an $Ab$ structure \par
+Constant functor $K_0\in ob\mathcal A^I, $ $K_0(B)=0$, $K(f)=0$ is the zero object in $\mathcal A^I$. For any functors $B,C\in ob\mathcal A^I$, $(B\times C,\pi_B,\pi_C)$ is the product, where $(B\times C)(i)=B(i)\times C(i)$, $(\pi_B)_i=\pi_{B(i)}$, $(\pi_C)_i=\pi_{C(i)}$. Hence $\mathcal A^I$ is additive \par
+Now let's show $A$ is the kernel of $\eta:B\to C$, note that morphism $A(f)$ is defined by the following  commutative diagram because $\eta_jB(f)\iota_i=C(f)\eta_i\iota_i$ \par
+\begin{center}
+\begin{tikzcd}
+\ker\eta_i \arrow[r, "\iota_i", hook] \arrow[d, "\exists_1A(f)", dashed] & B_i \arrow[r, "\eta_i"] \arrow[d, "B(f)"] & C_i \arrow[d, "C(f)"] \\
+\ker\eta_j \arrow[r, "\iota_j", hook]                                    & B_j \arrow[r, "\eta_j"]                   & C_j                  
+\end{tikzcd}
+\end{center}
+Suppose $A'\in ob\mathcal A^I$ is another functor making the following diagram commute
+\begin{center}
+\begin{tikzcd}
+A' \arrow[d, "\xi"] \arrow[rd, "\eta\xi"] &   \\
+B \arrow[r, "\eta"]                       & C
+\end{tikzcd}
+\end{center}
+There are unique morphisms $\mu_i$'s making the following diagram commute
+\begin{center}
+\begin{tikzcd}
+                     & A'_i \arrow[d, "\xi_i"] \arrow[rd, "\eta_i\xi_i"] \arrow[ld, "\exists_1\mu_i"', dashed] &     \\
+\ker\eta_i \arrow[r] & B_i \arrow[r, "\eta_i"]                                                                 & C_i
+\end{tikzcd}
+\end{center}
+Which gives the unique natural transformation $\mu:A'\to A$ making the diagram commute
+\begin{center}
+\begin{tikzcd}
+            & A' \arrow[d, "\xi"] \arrow[rd, "\eta\xi"] \arrow[ld, "\exists_1\mu"', dashed] &   \\
+A \arrow[r] & B \arrow[r, "\eta"]                                                           & C
+\end{tikzcd}
+\end{center}
+Hence $A$ is indeed the kernel of $\eta:B\to C$ \par
+Similarly, the cokernel of $\eta:B\to C$ would be functor $D$, $D(i)=\mathrm{coker}(\eta_i)$, $D(f)$ is defined by the following  commutative diagram
+\begin{center}
+\begin{tikzcd}
+B_i \arrow[r, "\eta_i"] \arrow[d, "B(f)"] & C_i \arrow[d, "C(f)"] \arrow[r, "\pi_i", two heads] & \mathrm{coker}\eta_i \arrow[d, "\exists_1D(f)", dashed] \\
+B_j \arrow[r, "\eta_j"]                   & C_j \arrow[r, "\pi_j", two heads]                   & \mathrm{coker}\eta_j            
+\end{tikzcd}
+\end{center}
+Similarly, it is easy to verify that every monomorphism is the kernel of its cokernel and every epimorphism is the cokernel of its kernel. Hence $\mathcal A^I$ is an abelian category
+\end{proof}
+
+\begin{customexercise}{A5.1}
+Show that an abelian category is complete iff it has all products
+\end{customexercise}
+
+\begin{proof}
+Let $\mathcal A$ be an abelian category, $I$ be a small category and $F:I\to\mathcal A$ be a functor and $\mathcal A$ contains all products \par
+For $j\xrightarrow{f}k\in Hom(j,k)$, let $\phi_f$ be the composition $\displaystyle\prod_{i\in obI}F(i)\xrightarrow{\pi_j} F(j)\xrightarrow{F(f)} F(k)$, $\psi_f$ be the composition $\displaystyle\prod_{i\in obI}F(i)\xrightarrow{\pi_k} F(k)\xrightarrow{1_{F(k)}} F(k)$, they induce two maps
+\[\displaystyle \phi,\psi:\prod_{i\in obI}F(i)\to\prod_{f}F(k)\]
+Write $(E,\iota)$ as the equalizer of $\phi,\psi$, $\iota_j$ as the composition $\displaystyle E\xrightarrow{\iota}\prod_{i\in obI}F(i)\xrightarrow{\pi_j} F(j)$, then
+\[F(f)\iota_j=F(f)\pi_j\iota=\phi_f\iota=\pi_f\phi\iota=\pi_f\psi\iota=\psi_f\iota=1_{F(k)}\pi_k\iota=\pi_k\iota=\iota_k\]
+\begin{center}
+\begin{tikzcd}
+                        & E \arrow[d, "\iota"] \arrow[ldd, "\iota_j"', bend right] \arrow[rdd, "\iota_k", bend left] &      \\
+                        & \prod_{i}F(i) \arrow[ld, "\pi_j"'] \arrow[rd, "\pi_k"]                              &      \\
+F(j) \arrow[rr, "F(f)"] &                                                                                            & F(k)
+\end{tikzcd}
+\end{center}
+Let's show $(E,\iota_j)$ is the limit $\varprojlim F$ \par
+Given a commutative digram
+\begin{center}
+\begin{tikzcd}
+                        & A \arrow[ld, "\alpha_j"'] \arrow[rd, "\alpha_k"] &      \\
+F(j) \arrow[rr, "F(f)"] &                                                  & F(k)
+\end{tikzcd}
+\end{center}
+Which induce unique $\eta:A\to\prod_iF(i)$, $\xi:A\to\prod_fF(k)$ such that $\pi_j\eta=\alpha_j$, $\pi_f\xi=\alpha_k$, then we have a commutative diagram
+\begin{center}
+\begin{tikzcd}
+A \arrow[d, "\eta"'] \arrow[rd, "\xi"]                                    &             \\
+\prod_iF(i) \arrow[r, "\phi", shift left] \arrow[r, "\psi"', shift right] & \prod_fF(k)
+\end{tikzcd}
+\end{center}
+Since
+\[\pi_f\phi\eta=\phi_f\eta=F(f)\pi_j\eta=F(f)\alpha_j=\alpha_k=\pi_f\xi\Rightarrow\phi\eta=\xi\]
+And
+\[\pi_f\psi\eta=\psi_f\eta=1_{F(k)}\pi_k\eta=\pi_k\eta=\alpha_k=\pi_f\xi\Rightarrow\psi\eta=\xi\]
+Which induces unique $\zeta:A\to E$ such that $\iota\zeta=\eta$, $\iota_j\zeta=\pi_j\iota\zeta=\pi_j\eta=\alpha_j$, suppose $\zeta':A\to E$ is another map such that $\iota_j\zeta'=\alpha_j$, then $\iota_i\zeta'=\pi_i\iota\zeta'=\alpha_j=\pi_j\eta\Rightarrow\zeta'=\eta\Rightarrow\zeta'=\zeta$
+\end{proof}
+
+\begin{customexercise}{A6.1}
+Fix categories $I$ and $\mathcal A$. When every functor $F:I\to\mathcal A$ has a limit, show that $\lim:\mathcal A^I\to\mathcal A$ is a functor. Show that the universal property of $\lim F_i$ is nothing more than the assertion that $\lim$ is right adjoint to $\Delta$. Dually, show that the universal property of $\mathrm{colim}F_i$ is nothing more than the assertion that $\mathrm{colim}:\mathcal A^I\to\mathcal A$ is the left adjoint to $\Delta$
+\end{customexercise}
+
+\begin{proof}
+Suppose $\eta:F\to G$ is a natural transformation, then we have morphisms $\displaystyle\varprojlim F\to F(i)\xrightarrow{\eta_i}G(i)$ which induces uniquely a morphism $\displaystyle\varprojlim\eta:\varprojlim F\to\varprojlim G$, it is obvious that $\varprojlim(1_F)=1_{\varprojlim F}$, $\varprojlim(\eta\xi)=\varprojlim(\eta)\varprojlim(\xi)$. Hence $\varprojlim:\mathcal A^I\to\mathcal A$ is a functor \par
+Suppose $\eta\in Hom_{\mathcal A^I}(\Delta A,F)$ is a natural transformation, we have morphisms $\eta_i:A\to F(i)$, which induces uniquely a morphism $\displaystyle\varprojlim\eta:A\to\varprojlim F$, conversely, if we have a morphism $\phi:A\to\varprojlim F$, then we have morphisms $\eta_i:A\to\varprojlim F\to F(i)$, this gives a natural transformation $\eta:\Delta A\to F$. Therefore $\eta\to\varprojlim\eta$ is a bijective correspondence, this correspondence is natural since for any $B\xrightarrow{f} A$ and $F\xrightarrow{\xi} G$ the following diagram commutes
+\begin{center}
+\begin{tikzcd}
+{Hom_{\mathcal A^I}(\Delta A,F)} \arrow[ddd] \arrow[rrr] &                                            &                                    & {Hom_{\mathcal A}(A,\varprojlim F)} \arrow[ddd] \\
+                                                         & \eta \arrow[r, maps to] \arrow[d, maps to] & \varprojlim\eta \arrow[d, maps to] &                                                 \\
+                                                         & \xi\eta f \arrow[r, maps to]               & \varprojlim\xi\varprojlim\eta f    &                                                 \\
+{Hom_{\mathcal A^I}(\Delta B,G)} \arrow[rrr]             &                                            &                                    & {Hom_{\mathcal A}(B,\varprojlim G)}            
+\end{tikzcd}
+\end{center}
+Hence $\varprojlim$ is the right adjoint of $\Delta$, dually, it is easy to show $\varinjlim$ is the left adjoint of $\Delta$
+\end{proof}
+
+\begin{customexercise}{A6.2}
+Suppose given functor $L:\mathcal{A}\to\mathcal{B}$, $R:\mathcal{B}\to\mathcal{A}$ and natural transformations $\eta:\mathrm{id}_{\mathcal A}\Rightarrow RL$, $\varepsilon:LR\Rightarrow\mathrm{id}_{\mathcal B}$ such that the composites $LX\xrightarrow{L(\eta_X)}LRLX\xrightarrow{\varepsilon_{LX}}LX$, $RY\xrightarrow{\eta_{RY}}RLRY\xrightarrow{R(\varepsilon_Y)}RY$ are the identities. Show that $(L,R)$ is an adjoint pair of functions
+\end{customexercise}
+
+\begin{proof}
+We have a bijective correspondence between $Hom_{\mathscr B}(LX,Y)$ and $Hom_{\mathscr A}(X,RY)$ giving by commutative diagram
+\begin{center}
+\begin{tikzcd}
+                                         & {Hom_{\mathscr A}(RLX,RY)} \arrow[rd, "\eta^*_X"]         &                                          \\
+{Hom_{\mathscr B}(LX,Y)} \arrow[ru, "R"] &                                                           & {Hom_{\mathscr A}(X,RY)} \arrow[ld, "L"] \\
+                                         & {Hom_{\mathscr B}(LX,LRY)} \arrow[lu, "\varepsilon_{Y*}"] &                                         
+\end{tikzcd}
+\end{center}
+Since
+\[\varepsilon_Y\circ L(R(f)\circ\eta_X)=\varepsilon_Y\circ LR(f)\circ L(\eta_X)=f\circ\varepsilon_{LX}\circ L(\eta_X)=f\circ1_{LX}=f\]
+\[R(\varepsilon_Y\circ L(g))\circ\eta_X=R(\varepsilon_Y)\circ RL(g)\circ\eta_X=R(\varepsilon_Y)\circ\eta_{RY}\circ g=1_{RY}\circ g=g\]
+The bijective correspondence is natural by the following commutative diagram for any given $\alpha:X'\to X$, $\beta:Y\to Y'$
+\begin{center}
+\begin{tikzcd}
+{Hom_{\mathscr B}(LX,Y)} \arrow[d, "\beta_*(L\alpha)^*"'] \arrow[r, "{\Phi_{X,Y}}"] & {Hom_{\mathscr A}(X,RY)} \arrow[d, "(R\beta)_*\alpha^*"] \\
+{Hom_{\mathscr B}(LX',Y')} \arrow[r, "{\Phi_{X',Y'}}"]                              & {Hom_{\mathscr A}(X',RY')}               
+\end{tikzcd}
+\end{center}
+Since
+\[R(\beta\circ f\circ L(\alpha)\circ\eta_{X'})=R(\beta)\circ R(f)\circ RL(\alpha\eta_{X'})=R(\beta)\circ R(f)\circ\eta_X\circ\alpha\]
+Therefore $(L,R)$ is an adjoint pair of functors
+\end{proof}
+
+\begin{customexercise}{1.2.5}
+Given an elementary proof that $Tot(C)$ is acyclic whenever $C$ is a bounded double complex with exact rows(or exact columns). We will see later that this result follows from the Acyclic Assembly Lemma 2.7.3. It also follows from a spectral sequence argument(see Definition 5.6.2 and exercise 5.6.4)
+\end{customexercise}
+
+\begin{proof}
+Without loss of generality, we may assume $C$ is bounded in the first quadrant and has exact rows, use $d',d'',d$ to denote row, column and total differentials \par
+$Tot(C)$ is exact for all $n<0$ since $Tot(C)_n=0$ for all $n<0$. now suppose $n\geq 0$, $\displaystyle d\left(\sum_{k=0}^n x_{k,n-k}\right)=0$, i.e. $d'x_{k+1,n-k-1}+d''x_{k,n-k}=0$ for $0\leq k<n$. Let $x_{0,n+1}=0$, we can construct $x_{k,n+1-k}$ for $k>0$ inductively such that $d''x_{k,n-k+1}+d'x_{k+1,n-k}=x_{k,n-k}$ for $0\leq k\leq n$ as follow: \par
+For $k\geq -1$
+\begin{align*}
+d'(x_{k+1,n-k-1}-d''x_{k+1,n-k})&=d'x_{k+1,n-k-1}-d'd''x_{k+1,n-k} \\
+&=d'x_{k+1,n-k-1}+d''d'x_{k+1,n-k} \\
+&=d'x_{k+1,n-k-1}+d''(d''x_{k,n-k+1}+d'x_{k+1,n-k}) \\
+&=d'x_{k+1,n-k-1}+d''x_{k,n-k} \\
+&=0
+\end{align*}
+By exactness of rows, there exists $x_{k+2,n-k-1}$ such that
+\[d'x_{k+2,n-k-1}=x_{k+1,n-k-1}-d''x_{k+1,n-k}\Leftrightarrow d''x_{k+1,n-k}+d'x_{k+2,n-k-1}=x_{k+1,n-k-1}\]
+Therefore
+\begin{align*}
+d\left(\sum_{k=0}^{n+1} x_{k,n+1-k}\right)&=\sum_{k=1}^{n+1} (d'x_{k,n+1-k}+d''x_{k,n+1-k}) \\
+&=\sum_{k=1}^{n+1} (x_{k-1,n-k+1}-d''x_{k-1,n-k+2}+d''x_{k,n+1-k}) \\
+&=\sum_{k=0}^{n} (x_{k,n-k}-d''x_{k,n-k+1})+\sum_{k=1}^{n+1}d''x_{k,n+1-k} \\
+&=\sum_{k=0}^{n} x_{k,n-k}
+\end{align*}
+\end{proof}
+
+\begin{customexercise}{1.2.7}
+If $C$ is a complex, show that there are exact sequences of complexes:
+\[0\to Z(C)\to C\xrightarrow{d}B(C)[-1]\to0\]
+\[0\to H(C)\to C/B(C)\xrightarrow{d}Z(C)[-1]\to H(C)[-1]\to0\]
+\end{customexercise}
+
+\begin{proof}
+Let $Z_i\hookrightarrow C_i$ be the kernel of $C_i\xrightarrow{\partial}C_{i-1}$ and $C_{i}\to B_{i-1}=B[-1]_i$ be the image of $C_{i}\xrightarrow{\partial}C_{i-1}$, then $0\to Z_i\to C_i\to B_{i-1} \to0$ are exact sequences, and we get a commutative diagram
+\begin{center}
+\begin{tikzcd}
+                 & 0 \arrow[d]                                                & 0 \arrow[d]                                                & 0 \arrow[d]                                    &        \\
+\cdots \arrow[r] & Z_2 \arrow[r, "\partial"] \arrow[d, hook]                  & Z_1 \arrow[r, "\partial"] \arrow[d, hook]                  & Z_0 \arrow[r] \arrow[d, hook]                  & \cdots \\
+\cdots \arrow[r] & C_2 \arrow[r, "\partial"] \arrow[d, "\partial", two heads] & C_1 \arrow[r, "\partial"] \arrow[d, "\partial", two heads] & C_0 \arrow[r] \arrow[d, "\partial", two heads] & \cdots \\
+\cdots \arrow[r] & B_1 \arrow[r, "-\partial"] \arrow[d]                       & B_0 \arrow[r, "-\partial"] \arrow[d]                       & B_{-1} \arrow[r] \arrow[d]                     & \cdots \\
+                 & 0                                                          & 0                                                          & 0                                              &       
+\end{tikzcd}
+\end{center}
+Hence we have an exact sequence of complexes
+\[0\to Z(C)\to C\xrightarrow{d}B(C)[-1]\to0\]
+Consider the following commutative diagram
+\begin{center}
+\begin{tikzcd}
+            & B_i \arrow[d, hook] \arrow[r, equal]      & B_i \arrow[d, hook] \arrow[r, hook]      & Z_i \arrow[d, hook] \arrow[r, "\partial"]       & B_{i-1} \arrow[d, hook]      &   \\
+            & Z_i \arrow[d, two heads] \arrow[r, hook] & C_i \arrow[d, two heads] \arrow[r, equal] & C_i \arrow[d, two heads] \arrow[ru, "\partial"] & Z_{i-1} \arrow[d, two heads] &   \\
+0 \arrow[r] & Z_i/B_i \arrow[r, dashed]          & C_i/B_i \arrow[r, dashed]          & C_i/Z_i \arrow[ruu, dashed]                     & Z_{i-1}/B_{i-1} \arrow[r]    & 0
+\end{tikzcd}
+\begin{tikzcd}
+            & B_i \arrow[d, hook] \arrow[r, equal]            & B_i \arrow[d, hook] \arrow[r, hook]                                & Z_i \arrow[d, hook] \arrow[r, "\partial"]       & B_{i-1} \arrow[d, hook]      &   \\
+            & Z_i \arrow[d, two heads] \arrow[r, hook] & C_i \arrow[d, two heads] \arrow[r, equal]                                 & C_i \arrow[d, two heads] \arrow[ru, "\partial"] & Z_{i-1} \arrow[d, two heads] &   \\
+0 \arrow[r] & Z_i/B_i \arrow[r, dashed]                & C_i/B_i \arrow[r, dashed] \arrow[red, rru, "d"', dashed, bend right=40] & C_i/Z_i \arrow[ruu, dashed]                     & Z_{i-1}/B_{i-1} \arrow[r]    & 0
+\end{tikzcd}
+\end{center}
+We get an exact sequence $0\to H_i\to C_i/B_i\xrightarrow{d} Z_{i-1}\to H_{i-1}\to0$, and thus an exact sequence of complexes
+\[0\to H(C)\to C/B(C)\xrightarrow{d}Z(C)[-1]\to H(C)[-1]\to0\]
+\end{proof}
+
+\begin{customexercise}{1.3.1}
+Let $0\to A\to B\to C\to 0$ be a short exact sequence of complexes. Show that if two of the three complexes $A,B,C$ are exact, then so is the third
+\end{customexercise}
+
+\begin{proof}
+Since we have a long exact sequence
+\[\cdots\to H_nA\to H_nB\to H_nC\xrightarrow{\partial}H_{n-1}A\to H_{n-1}B\to H_{n-1}C\to\cdots\]
+If either two of complexes of $A,B,C$ are exact, then their homologies vanish, thus the homologies of the third one also vanishes, i.e. the third complex is exact
+\end{proof}
+
+\end{document}

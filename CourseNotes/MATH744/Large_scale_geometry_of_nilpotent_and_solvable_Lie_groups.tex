@@ -1,0 +1,365 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+Large scale is often captured by the notion of a quasi-isometry
+
+\begin{definition}
+A $(K,C)$ quasi isometry(QI) is $f:(X,d_X)\to(Y,d_Y)$ such that
+\begin{enumerate}
+\item $-C+\frac{1}{K}d_X(x_1,x_2)\leq d_Y(f(x_1),f(x_2))\leq Kd_X(x_1,x_2)+C$
+\item $\forall y\in Y,\exists x\in X$ such that $d_Y(y,f(x))\leq C$
+\end{enumerate}
+\end{definition}
+
+\begin{exercise}\hfill\\
+\begin{enumerate}
+\item Any map that is bounded distance (the difference with sup norm being finite) from a quasi-isometry is a quasi-isometry
+\item The composition of quasi-isometries is a quasi-isometry
+\item Every quasi-isometry has a coarse inverse (i.e if $f ∶ X \to Y$ is a quasi-isometry then there is $\bar f ∶ Y \to X$ such that $f\circ\bar f$ and $\bar f\circ f$ are bounded distance from the identity map)
+\item Being quasi-isometric is an equivalence relation
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+For any $y$, pick some $x\in X$ to be $\bar f(y)$ such that $d_Y(y,f\bar f(y))=d_Y(y,f(x))\leq C$
+\begin{enumerate}
+\item $d_X(\bar f(y_1),\bar f(y_2))\leq Kd_Y(f\bar f(y_1),f\bar f(y_2))+KC\leq Kd_Y(y_1,y_2)+3KC$. $d_Y(y_1,y_2)\leq d_Y(f\bar f(y_1),f\bar f(y_2))+d_Y(y_1,f\bar f(y_1))+d_Y(f\bar f(y_2),y_2)\leq d_Y(f\bar f(y_1),f\bar f(y_2))+2C\leq Kd_X(\bar f(y_1),\bar f(y_2))+3C$
+\item $\forall x\in X$, $d_X(x,\bar ff(x))\leq Kd_Y(f(x),f\bar ff(x))+KC\leq 2KC$
+\end{enumerate}
+\end{solution}
+
+\begin{note} \hfill \\
+\begin{enumerate}
+\item If $C=0$, then $f$ is biLipschitz
+\item If $C=0,K=1$, then $f$ is just an isometry
+\end{enumerate}
+\end{note}
+
+\begin{example}
+$G$ is a finitely generated group, $S,S'$ are finite generating sets, then $(G,d_S)\overset{\text{QI}}{\simeq}(G,d_{S'})$, here $d_S$ is the word metric
+\end{example}
+
+\begin{exercise}
+Any word metric on a finitely generated group is biLipschitz (hence quasi-isometric) to any other word metric on that group
+\end{exercise}
+
+\begin{exercise}
+Any finite index subgroup of a finitely generated group is quasi-isometric to its supergroup
+\end{exercise}
+
+\begin{solution}
+Say $[G:H]<\infty$, consider the left cosets $\{gH\}$, pick representatives $g_1H,\cdots,g_nH$
+\end{solution}
+
+\begin{example}[Fundamental lemma of geometric group theory]
+If discrete group $G$ acts proper discontinuously and cocompactly on $(X,d_X)$ which is a proper geodesic metric space. Then $G$ with any word metric is QI to $X$, $X$ is called a model space for $G$
+\end{example}
+
+\begin{question}
+\begin{itemize}
+\item Which spaces/finitely generated groupos are QI to each other
+\item Examples of (self) QI's
+\item What properties are preserved by QI's
+\end{itemize}
+\end{question}
+
+\begin{example}
+$\mathbb R$ with euclidean metric is QI to $\mathbb R$ with $\max$ metric
+\end{example}
+
+\begin{example}
+$f:\mathbb R\to\mathbb R$ is QI, then it preserves two "ends"
+\end{example}
+
+\begin{exercise}
+Verify that $f ∶\mathbb R^2 \to\mathbb R^2$ defined by $f(r, \theta) = (r, \ln(1 + \theta))$ is a quasi-isometry
+\end{exercise}
+
+Focus on finitely generated nilpotent and solvable groups that have (connected and simply connected) Lie groups as model spaces
+
+\begin{exercise}
+Any Riemannian metric on $G$ give QI metric space
+\end{exercise}
+
+\begin{definition}
+$\Gamma\leq G$ discrete is a uniform lattice if $G/\Gamma$ is compact
+\end{definition}
+
+\begin{exercise}
+If $\Gamma$ is a uniform lattice in $G$, then $G$ is a model space for $\Gamma$
+\end{exercise}
+
+\begin{warning}
+Not all Lie groups have uniform lattices!
+\end{warning}
+
+\begin{exercise}[Hard]
+$\mathbb R\rtimes\mathbb R$ where $\mathbb R$ acts on $\mathbb R$ by $x\mapsto e^tx$
+\begin{itemize}
+\item Verify $\mathbb R \rtimes\mathbb R$ is solvable
+\item Show that $\mathbb R \rtimes\mathbb R$ does not admit any uniform lattices
+\item Find a metric on $\mathbb R \rtimes\mathbb R$ that makes it isometric to $\mathbb H^2$
+\end{itemize}
+\end{exercise}
+
+\begin{fact}
+\begin{itemize}
+\item Any finitely generated nilpotent group is (virtually, i.e. has finite index subgroup) a lattice in a nilpotent Lie group
+\item Any finitely generated polycyclic group is (virtually) a lattice in a solvable Lie group. For example, $BS(1,n)=\langle a,b|bab^{-1}=a^n\rangle$ is solvable but not polycyclic
+\end{itemize}
+\end{fact}
+
+\begin{exercise}[Heisenberg group]
+$H(\mathbb R)\begin{bmatrix}
+1&x&z\\
+&1&y\\
+&&1
+\end{bmatrix}$ with $x,y,z\in\mathbb R$, $H(\mathbb Z)$ is a uniform lattice and both are nilpotent 
+\end{exercise}
+
+\begin{example}[Sol]
+$\mathbb R^2\rtimes\mathbb R$, $\mathbb R$ acts on $\mathbb R^2$ by $(x,y)\mapsto(e^tx,e^{-t}x)$ is a solvable group with lattice $\mathbb Z^2\rtimes\mathbb Z$, $\begin{bmatrix}
+x\\
+y
+\end{bmatrix}\mapsto\begin{bmatrix}
+2&1\\
+1&1
+\end{bmatrix}^n\begin{bmatrix}
+x\\
+y
+\end{bmatrix}$
+\end{example}
+
+QI basics:
+
+\begin{theorem}[Gromov]
+Any finitely generated group $G$ that is QI to a nilpotent group is (virtually) nilpotent
+\end{theorem}
+
+\begin{note}[Ershler]
+Exists finitely generated group $G$ that are QI to solvable groups that not virtually solvable
+\end{note}
+
+Open question: What about polycyclic groups?
+
+\begin{theorem}[Eskin-Fisher-Whyte]
+If $G$ is a finitely generated group QI to Sol then it is (virtually) a uniform lattice in Sol
+\end{theorem}
+
+\begin{fact}
+$\exp:\mathscr N\to N$ is a diffeomorphism, assuming $N$ is connected and simply connected
+\end{fact}
+
+\begin{example}[Heisenberg group]
+The Lie algebra has basis $\{e_1,e_2,e_3\}$, and $[e_1,e_2]=e_3$ is the only non-trivial bracket
+\end{example}
+
+\begin{exercise}
+Show this is the Heisenberg group
+\end{exercise}
+
+Write $\mathscr N_i=[\mathscr N,\mathscr N_{i-1}]$, $\mathscr N=V_1\oplus V_2\oplus\cdots\oplus V_r$, where $V_i$ is a complement of $\mathscr N_i$ in $\mathscr N_{i-1}$, i.e. $V_i\cong\mathscr N_{i-1}/\mathscr N_{i}$, let $\pi_i:\mathscr N\to V_i$ be projection
+
+\begin{theorem}[Ball-Box]
+There exists $V_i$ and a left invariant Riemannian metric on $\mathscr N$ such that $V_i\perp V_j$ for all $i\neq j$ and the induced distance satisfies: There exists $a>1$ such that $\forall R\geq1$, $Box(\frac{R}{a})\subseteq B_1(R)\subseteq Box(aR)$, where $Box(R)=\{n\in N||\pi_i(n)|\leq R_i\}$
+\end{theorem}
+
+\begin{note}
+$|n|_h=\sum_{i}|\pi_i(n)|^{\frac{1}{i}}$, $\frac{1}{d}d(0,n)\leq|n|_h\leq ard(0,n)$
+\end{note}
+
+Warning: $d_h(m,n)=|m^{-1}n|_h$ doesn't give a distance
+
+QI of $N$
+
+Affine maps $\mathbb R^n\rtimes\GL(n,\mathbb R)$ are QI's, generalize this, affine maps $N\rtimes\Aut(N)$ are QI's
+
+\begin{theorem}[Xie]
+Let $S_g:N\to N$, $S_g(n)=n+g(\pi_1(n))$ for some $g:V_1\to V_r$, then $S_g$ is QI iff $|g(x)-g(y)|\leq K|x-y|+C$. $S_g$ is bounded distance from an affine map iff $g$ is bounded distance from a linear map
+\end{theorem}
+
+\begin{proof}
+If $|g(x)-g(y)|\leq K|x-y|+C$, then $S_g$ is a QI \\
+
+Pretend $d_h$ is a distance
+\begin{align*}
+d_h(S_g(n_1),S_g(n_2))&=|(-n_2-g(\pi_1(n_2)))\star(n_1+g(\pi_1(n_2)))|_h \\
+&\leq|(-n_2)| \\
+&\leq d_h(n_1,n_2)+d_h(g(\pi_1(n_1))+g(\pi_1(n_2))) \\
+&\leq d_h(n_1,n_2)+|Kd(n_1,n_2)+C|^{\frac{1}{r}}
+\end{align*}
+\end{proof}
+
+See Xie for other examples of "exotic" QI's of Heisenberg group
+
+QI between nilpotent Lie groups
+
+\begin{definition}
+The associated graded Lie group $\gr(N)$ as vector space is just $N$, but with bracket $[x,y]_\infty=\pi_{i+j}([x,y])$, for $x\in V_i,y\in V_j$, so that $[V_i,V_j]_\infty\subseteq V_{i+j}$
+\end{definition}
+
+\begin{theorem}[Pansu]
+If $N_1,N_2$ are QI nilpotent Lie groups, then $\gr(N_1)\cong\gr(N_2)$
+\end{theorem}
+
+\begin{proof}
+Asymptotic cone of $(N,d)$ is $(\gr(N),d_{cc})$, $(N,\frac{1}{t}d)\xrightarrow{t\to\infty}(\gr(N),d_{cc})$. And a QI indeces a biLipschitz map of asymptotic cones. Note that even if $N=\gr(N)$, $d_{cc}$ is not $d$, but rather Carnot-Cartheodory metric(a sub-Riemannian metric)
+\[d_{cc}(p,q)=\inf_{\text{join }p\text{ to }q\text{, the tangent lines in translates of }V_1}\text{Length}(\gamma)\]
+\end{proof}
+
+Shalom,Sauer: cohomological invariants can be used to distinguish certain nilpotent Lie groups up to QI with the same associated gradded Lie groups
+
+Isenrihc-Pallier-Tessera: Dehn functions of certain lattices can distinguish some nilpotent Lie groups up to QI
+
+Open question: Which nilpotent Lie groups are QI. Smallest open case is actually 5
+
+QI and geometry of solvable Lie gorups
+\[1\to N\to S\to N'\to1\]
+Let $N'=\mathbb R$, i.e. $S\cong N\rtimes\mathbb R$
+
+\begin{example}
+$\mathbb R\rtimes\mathbb R$, $ds^2=e^{-2t}dx^2+dt^2$ by letting $y=e^t$, this is the log model of $\mathbb H^2$. This is negatively curved
+
+Sol$=\mathbb R^2\rtimes\mathbb R$, $d^2=e^{-2t}dx^2+e^{2t}dy^2+dt^2$, note that $(x,y_0,t)\overset{\Isom}{\cong}\mathbb H^2$, $(x_0,y,t)\overset{\Isom}{\cong}\mathbb H^2$. This is foliated by negatively curved Lie groups
+\end{example}
+
+\begin{question}
+Which $N\times\mathbb R$ can be made negatively curved? Which $N\rtimes\mathbb R$ are foliated by negatively curved? Are there others? What do QI's look like? Which are QI's
+\end{question}
+
+Let $A:\mathscr N\to\mathscr N$ be a derivation, then $e^{tA}:N\to N$ is a one parameter family of automorphisms. $G_A=N\rtimes \mathbb R$ where action is $e^{tA}$
+
+\begin{definition}
+If the real part of eigenvalues of $A$ is positive, then $e^{tA}$ is a one parameter family of dilations(this is not a standard definition, a little more broad)
+\end{definition}
+
+We say $G_A$ is Heintze group if $e^{tA}$ is one parameter family of dilations. We say $G_A$ is a purely real if eigenvalues are real
+
+\begin{theorem}[Heintze]
+All negatively curved homogeneous spaces are Heintze groups, and all Heintze groups are negative curved homogeneous spaces
+\end{theorem}
+
+\begin{exercise}
+Every Heintze group is QI to a purely real one. If $rA,sB$ have same real Jordan form, then $G_A\overset{QI}{\simeq}G_B$
+\end{exercise}
+
+Special Heintze groups:
+
+$G_{I_n}=\mathbb R^n\rtimes\mathbb R\overset{\Isom}{\cong}\mathbb H^{n+1}$
+
+$G_A=H_n\rtimes\mathbb R\overset{\Isom}{\cong}\mathbb{CH}^n$, $A=\begin{bmatrix}
+1\\
+&\ddots \\
+&&1\\
+&&&2
+\end{bmatrix}$, $H_2=H$ is the Heisenberg group
+
+There are $N$ such that $N\rtimes\mathbb R\overset{\Isom}{\cong}$ for any rank one symmetric space
+
+Negative curvature give $\delta$ hyperbolic
+
+Morse lemma: QI map geodesics to within a bounded distance of geodesics(use $\delta$ hyperbolicity)
+
+Boundaries of $G_A$
+
+For any $n\in N$, let $\gamma_n(s)=(n,s)$, this is a "vertical" geodesic choosing suitable metric
+
+\[d_{G_A}(\gamma_n(s),\gamma_{n'}(s))=\begin{cases}
+0&\text{as }s\to\infty \\
+\infty&\text{as }s\to-\infty
+\end{cases}\]
+$\partial G_A=N\cup\{\infty\}\cong S^n$
+
+\begin{fact}
+QI's of $G_A$ induce homeomorphisms of the boundary(use Morse lemma)
+\end{fact}
+
+\begin{conjecture}[Pointed sphere - de Cornulier]
+Unless $G_A\overset{\Isom}{\cong}$ rank 1 symmetric space, then any QI of $G_A$ preserves $\infty$
+\end{conjecture}
+
+\begin{remark}
+True in many cases(Carraso, Xie)
+\end{remark}
+
+We will assume all QI's fix $\infty$
+
+Parabolic visual boundary metric: $\partial_\infty G_A=N$. $d_A(n,n')=e^{t_0}$ is not always a metric, but it is a quasi-metric, i.e. $d_A(n_1,n_2)\leq M(d_A(n_1,n_3)+d_A(n_3,n_2))$
+
+$(\mathbb R,d_{I_1})\simeq(\mathbb R,d_{Euc})$
+
+$(\mathbb R^2,d_{\begin{bmatrix}
+1\\
+&2
+\end{bmatrix}})\overset{biLipschitz}{\simeq}(\mathbb R),\max\{|\Delta x|,|\Delta y|^{\frac{1}{2}}\}$
+
+\begin{exercise}
+If two QI's (that fix $\infty$) are bounded distance apart, then they induce the same map on $(N,d_A)$
+\end{exercise}
+
+\begin{definition}
+A QI of $G_A\cong N\rtimes\mathbb R$ is coarsely height respecting if it preserves level sets of $\mathbb R$ up to bounded distance, i.e. $f(N\times\{t_0\})$ is contained in a bounded neighborhood of $N\times\{t_0\}$
+\end{definition}
+
+\begin{conjecture}
+All QI's of non-special Heintze groups are height respecting
+\end{conjecture}
+
+\begin{exercise}
+Height respecting QI of $G_A$ induce biLipschitz maps of $(N,d_A)$
+\end{exercise}
+
+Conclusion: $QI(G_A)\simeq biLip(N,d_A)$
+
+Sol-like group:
+\[G_{A_1,A_2}=(N_1\times N_2)\rtimes\mathbb R\]
+$\mathbb R$ acts on $N_1,N_2$ by $(n_1,n_2)\mapsto(e^{tA_1}n_1,e^{-tA_2}n_2)$, i.e. $G_{A_1},G_{A_2}$ are both Heintze groups
+
+(EFW) Any QI of $G_{A_1,A_2}$ is up to isometry bounded distance from $(n_1,n_2,t)\to(f_1(n_1),f_2(n_2),t)$, $f_i\in biLip(N_i,d_{A_i})$
+
+Other example: $H\rtimes\mathbb R=G_A$, $A=\begin{bmatrix}
+1\\
+&-1\\
+&&&
+\end{bmatrix}$, $[e^tx,e^{-t}y]=z$. Not much is known(open)
+
+\begin{conjecture}[Eskin-Fisher-Whyte]
+Let $E(S)$ be the group generated by exponentially distorted elements(exponential radical), then any QI coarsely preserves cosets of $E(S)$
+\end{conjecture}
+
+\begin{note}
+In our examples $E(G_A)=N$
+\end{note}
+
+Other work:
+
+Peng $\mathbb R^n\rtimes\mathbb R^m$
+
+Healy-Pengitore $N\rtimes\mathbb R^n$ CAT0
+
+Tullia Dymarz understand subgroups of $QI(G_A)$, used to show $G$ f.g., QI to $G_A$, then $G$ is virtually a lattice of some $G_{A'}$(QI rigidity)
+
+
+
+\begin{exercise}[Hard]
+ Any group that acts cocompactly and properly discontinously on a proper geodesic metric space X is finitely generated and quasi-isometric to that space
+\end{exercise}
+
+\begin{exercise}
+Show that any two left invariant Riemannian metrics on a Lie group give metric spaces that are quasi-isometric
+\end{exercise}
+
+\begin{exercise}
+A discrete subgroup of a Lie group that is cocompact (i.e $G/H$ compact ) is quasiisometric the Lie group itself (and is called a uniform lattice)
+\end{exercise}
+
+\begin{exercise}
+There are coarsely dense subsets of $\mathbb Z^2$ that are not biLipschitz equivalent to $\mathbb Z^2$ (Burago-Kleiner)
+\end{exercise}
+
+\begin{exercise}
+Are there uniform lattices in a nilpotent Lie group that are not biLipschitz equivalent?
+\end{exercise}
+
+\end{document}

@@ -1,0 +1,174 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+Recall: want to construct $K_{\pi,n}$ as $K(\Lambda_n)$, $\Lambda_n=\{x\in\Lambda|[\pi^n]x=0\}$, $\Lambda=\bigcup_L m_L$, $L/K$ finite extension
+
+$x+'y=x+y+$ higher power terms with coefficients in $\mathcal O_K$, $(\Lambda,+')$ also has $\mathcal O_K$-module structure, $a\in \mathcal O_K,x\in \Lambda$, $[a]x$
+
+Formal group laws
+
+$A$ is a fixed commutative ring. A formal group low over $A$ is a just $F\in A[[X,Y]]$, $F(X,Y)=X+Y+$ higher degree terms, satisfying axioms that mimic usual group axioms. (The difference is that we don't have a set)
+
+Composition of power series
+
+$f\in A[[x_1,\cdots,x_n]]$, $g_1,\cdots,g_n\in A[[y_1,\cdots,y_k]]$
+want $f(g1(y1,...yk),...,gn(y1,...yk))$. This doesn't work in general!
+
+Counterexample: $n=k=1$, $f(x)=1+x+x^2+\cdots, g(x)=1$, then $f(g(x))$ doesn't make sense. Need each $g_i$ have no constant terms
+
+$A[[y_1,\cdots,y_k]]_+$ is the set of g's without constant terms
+
+$\forall f\in A[[x_1,\cdots,x_n]],g_1,\cdots,g_n\in A[[y_1,\cdots,y_k]]_+$, then $f(g_1,\cdots,g_n)\in A[[y_1,\cdots,y_k]]$, if $f\in A[[x_1,\cdots,x_n]]_+$, then $f(g_1,\cdots,g_n)\in A[[y_1,\cdots,y_k]]_+$
+
+\begin{example}
+$f(x)=g(x)=\sum_{n\geq1}x^n$
+\end{example}
+
+\begin{lemma}
+Let $f,g,h\in A[[x]]_+$,
+\begin{enumerate}
+\item this is associative
+\item $f$ has a right composition inverse $g\in A[[x]]_+$ iff the linear term of $f$ is $ax$ with $a\in A^\times$. When this is the case, it is also the left inverse
+\end{enumerate}
+\end{lemma}
+
+\begin{remark}
+2. is a power series analogue of the "inverse function theorem"
+\end{remark}
+
+\begin{proof}
+\begin{enumerate}
+\item Obvious
+\item $f=\sum a_ix^i$, $g=\sum b_ix^i$, if $x=f\circ g(x)=\sum a_ig^i$ with linear term $a_1b_1x$, hence $a_1\in A^\times$. Conversely, if $a_1\in A^\times$
+\end{enumerate}
+\end{proof}
+
+\begin{exercise}
+Formulate and prove a multi-variable version of 2.
+\end{exercise}
+
+\begin{definition}
+A formal group low over $A$ is $F\in A[[X,Y]]_+$(write $F(x,y)=x+_Fy$) satisfying
+\begin{enumerate}
+\item Associative, i.e. $F(F(x,y),z)=F(x,F(y,z))$
+\item Commutative(want it to be an abelian group), i.e. $F(x,y)=F(y,x)$
+\item 0 is the identity, i.e. $F(x,0)=x$
+\item Inverse, i.e. $\exists i(x)=-x+\text{higher terms}\in A[[X]]_+$ such that $F(X,i(x))=0$
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+Have higher dimensional and non-commutative versions, we only care about the one dimensional commutative formal group laws
+\end{remark}
+
+Observation: From 3. $F(x,y)=x+y+xyg$
+
+\begin{lemma}
+Suppose $F\in A[[x,y]]_+$ satisfies 1. and suppose $F(x,y)=x+y+$ higher terms, then it automatically satisfying the 3.
+\end{lemma}
+
+\begin{proof}
+Set $f(x)=F(x,0)\in A[[x]]_+$ is of the form $x+$ higher terms, note that $F(0,0)=0$, by associativity, $f\circ f(x)=F(F(x,0),0)=F(x,0)=f(x)$. Let $g$ be the composition inverse of $f$, then $g\circ f\circ f(x)=g\circ f(x)=x$
+\end{proof}
+
+\begin{example}[Formal addtive group $\widehat{\mathbb G}_a$]
+$F(x,y)=x+y$, $i(x)=-x$ works universal over arbitrary ring $A$
+\end{example}
+
+\begin{example}[Formal multiplicative group $\widehat{\mathbb G}_m$]
+$F(x,y)=x+y+xy=(x+1)(y+1)-1$, $i(x)=\sum_{n\geq1}(-x)^n$
+\end{example}
+
+\begin{definition}
+Let $F,G\in A[[x,y]]_+$ be formal gropus laws, a homomorphism $f:F\to G$ is by definition an element of $A[[x]]_+$ such that $f(x+_Fy)=f(x)+_Gf(y)$, i.e. $f(F(x,y))=G(f(x),f(y))$
+\end{definition}
+
+\begin{definition}
+$\End(F)$ is a ring under $+_F$ and composition
+\end{definition}
+
+\begin{example}
+$A=\mathbb Q$, $F(x,y)=x+y+xy$, $G(x,y)=x+y$, $f(x)=\log(1+x)$ is a homomorphims $F\to G$, $f(x+_Fy)=f((1+x)(1+y)-1)=\log(1+x)+\log(1+y)=f(x)+_Gf(y)$
+\end{example}
+
+Let $K$ be a local field, $\pi\in K$ a uniformizer, construct certain formal group laws over $A=\mathcal O_K$. These group laws are equipped with the structure of a formal $A$-module, i.e. $A\to\End(F)$
+
+\begin{definition}
+$\mathscr F_\pi$ is the set of $f\in A[[x]]_+$ such that
+\begin{enumerate}
+\item $f(x)=\pi x+O(x^2)$
+\item $f(x)=\equiv x^q\mod\pi$, $\mathbb F_1=\mathcal O_K/\pi$
+i.e. $f(x)=\sum a_nx^n, a_n\in m_K,a_q\in1+m_K$
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+$f(x)=\pi x+x^q$
+$K=O_p,\pi=p,f(x)=(1+x)^p-1$
+\end{example}
+
+\begin{lemma}[Key lemma]
+$\forall f,g\in \mathscr F_\pi$, $\forall n\geq1$, $\exists\phi\in A[[x_1,\cdots,x_n]]_+$ such that $f(\phi(x_1,\cdots,x_n))=\phi(g(x_1),\cdots,g(x_n))$. Moreover, $\phi$ is uniquely determined by its linear part $a_1x_1+\cdots+a_nx_n$, also the linear part can be arbitrary
+\end{lemma}
+
+\begin{proof}
+Start with $\phi_1=a_1x_1+\cdots+a_nx_n$, construct uniquely by induction $\phi_r$ which is a degree $r$ polynomial in $x_1,\cdots,x_n$ such that
+$f(\phi_r(x_1,\cdots,x_n))=\phi_r(g(x_1),\cdots,g(x_n))+ O(x^{r+1})$
+$\phi_r=\phi_{r-1}+Q_r$, where $Q_r$ is homogeneous of deg $r$ in $x_1,\cdots,x_n$
+$f(\phi_1)=\pi\phi_1+O(x^2)$, and $\phi_1(g)=\phi_1(\pi x_1,\cdots,\pi x_n)+O(x^2)$
+Suppose $\phi_r$ has been constructed, $\phi_{r+1}=\phi_r+Q$ for some $\deg Q=r+1$
+$f(\phi_{r+1})=f(\phi_r+Q)=f(\phi_r)+f'(\phi_r)Q+O(x^{2r+2})=f(\phi_r)+\pi Q+O(x^{r+2})$
+$\phi_{r+1}(g(x_1),\cdots,g(x_n))=\phi_r(g(x_1),\cdots,g(x_n))+Q(g(x_1),\cdots,g(x_n))=\phi_r(g(x_1),\cdots,g(x_n))+Q(\pi x_1,\cdots,\pi x_n)+O(x^{r+2})$
+Set $Q$ to be $\frac{[f(\phi_r)-\phi_r(g)]mod x^{r+1}}{\pi^{r+1}-\pi}$. Mod $\pi$, $f(\phi_r)\equiv\phi_r^q$, $\phi_r(g)\equiv\phi_r(x_1^q,\cdots,x_n^q)\equiv\phi_r^q)$, so the numerator is divisible by $\pi$. Hence $Q$ has coefficients in $A=\mathcal O_K$
+\end{proof}
+
+\begin{proposition}[Lubin-Tate formal group law]
+$\forall f\in\mathcal F_\pi$, $\exists_1$ formal group law $F_f=F(x,y)\in A[[x,y]]_+$ such that $f\in\End(F)$ which defines a Lubin-Tate group
+\end{proposition}
+
+\begin{proof}
+By the Key lemma, there is a unique $F\in A[[x,y]]_+$ with linear part is $x+y$ such that $f(F(x,y))=F(f(x),f(y))$, only need to check that $F$ is a formal group law. Denote $G_1(x,y,z)=F(x,F(y,z)),G_2(x,y,z)=F(F(x,y),z)$, then $f(G_1(x,y,z))=f(F(x,F(y,z)))=F(f(x),f(F(y,z)))=F(f(x),F(f(y),f(z)))=G_1(f(x),f(y),f(z))$, same for $G_2$, and they have the same linear parts $x+y+z$, so they are indeed equal
+\end{proof}
+
+\begin{remark}
+over $\mathbb F_q$, there is an endomorphism $x^q$
+\end{remark}
+
+Fix $f\in\mathscr F_\pi$, ther is $\mathcal O_K\to\End(\mathscr F_f)$
+
+\begin{lemma}
+$\forall a\in \mathcal O_K, \forall f,g\in \mathscr F_\pi$, $exists_1$ homomorphism $[a]_{g,f}:F_f\to F_g$ which intertwines the endomorphisms $f,g$, i.e.
+$[a]_{g,f}\in\mathcal O_K[[x]]_+$, $[a]_{g,f}(F_f(x,y))=F_g([a]_{g,f}(x),[a]_{g,f}(y))$, $[a]_{g,f}(f(x))=g([a]_{g,f}(x))$, the linear part of $[a]_{g,f}$ is $ax$
+\end{lemma}
+
+\begin{proof}
+By the key lemma, there exists a unique $h(x)\in\mathcal O_K[[x]]_+$ that intertwines $f,g$ with linear part $ax$, only need to check $h$ is a homomorphism, i.e. $F_g(h(x),h(y))=h(F_f(x,y))$, note that bothe sides have linear part $ax+ay$
+\end{proof}
+
+\begin{lemma}
+$\forall a,b\in \mathcal O_K, \forall f,g,h\in \mathscr F_\pi$
+\begin{enumerate}
+\item $[a]_{g,f}+_{F_g}[b]_{g,f}$ is the of course the unique homomorphism $F_f\to F_g$ with linear part $(a+b)x$, i.e. $[a+b]_{g,f}$
+\item $[b]_{h,g}[a]_{g,f}=[ab]_{h,f}$
+\end{enumerate}
+Special case: $[1]_{g,f},[1]_{f,g},[1]_{f,f},[1]_{g,g}$ are canonical isomorphisms
+$[]_{f,f}:\mathcal O_K\to\End(F_f)$ is a ring homomorhpism, and uniquely characterized by $[a]_{f,f}$ has linear part $ax$, $[\pi]_{f,f}=f$
+We have a formal $\mathcal O_K$-module structure on $F_f$, $\mathcal O_K\to\End(F_f)$, $[1]_{f,g}$ is a formal $\mathcal O_K$ module isomorphism $F_f\to F_g$
+\end{lemma}
+
+\begin{example}
+$K=\mathbb Q_p$, $\pi=p$, $f=(1+x)^p-1\in\mathscr F_p$, and $F_f(x,y)=(1+x)(1+y)-1$. In this case, $[a]_{f,f}=(1+x)^a-1$ for $a\in\mathbb Z_p$, why is $\binom{a}{i}\in\mathbb Z_p$, since $\mathbb Z$ is dense in $\mathbb Z_p$, let $a_k\to a$, $a_k\in\mathbb Z$, $\mathbb Z\ni\binom{a_k}{i}\to\binom{a}{i}$ in $\mathbb Q_p$, but $\mathbb Z_p$ is closed in $\mathbb Q_p$, to finish, see $(1+x)^a(1+y)^a-1=((1+x)(1+y))^a-1$, and $[a]_{f,f}$ commutes with $f$
+\end{example}
+
+Extending valuation $v:K\to \mathbb Z\cup\{\infty\}$ to $\bar K$
+
+recall $L/K$ finite ext, $\exists_1$ discrete valuation $w:L\to\mathbb Z\cup\{\infty\}$, recall $w$ must be surjective, $w(x)=e(L/K)v(x)$, so we can extend and define $v:L\to\mathbb Q\cup\{\infty\}$, $v(y)=w(y)/e(L/K)$, in the end have $v:\bar K\to\mathbb Q\cup\{\infty\}$
+
+Define $\Lambda=\{x\in\bar K|v(x)>0\}$, $\Lambda=\cup_Lm_L$, $L$ runs over finite ext
+
+Obeservation: $\forall f(x_1,\cdots,x_n)\in\mathcal O_K[[x_1,\cdots,x_n]]$ with constant term in $\Lambda$(resp $m_L$), $\forall x_1,\cdots,x_n\in\Lambda$(resp $m_L$), $f(x_1,\cdots,x_n)$ converges in $\Lambda$(resp $m_L$). For example $f(x)=a_0+a_1x+\cdots,x\in\Lambda$, so $x\in m_L$ for some $L$, just need $a_ix^i=0$, but $v(a_ix^i)=v(a_i)+iv(x)$
+
+For $f\in\mathscr F_\pi$, we can make $\Lambda$ into a group $\Lambda_f$ with addition $+_{F_f}$, and an $\mathcal O_K$ module $[a]_{f,f}$
+
+\end{document}

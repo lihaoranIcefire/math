@@ -1,0 +1,291 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+Recall:
+\[L_0^2(\Gamma\backslash G,\chi,\omega)=\widehat{\bigoplus} H\otimes\Hom_G(H,L_0^2)\]
+Here $H$ are irreducible representations of $G$.
+Want to decompose further. Need operators on $L_0^2$ commuting with right regular $G$ representations. Natural source: left regular $G$ action
+\[\forall g\in G,{^g\Gamma}\backslash G\xrightarrow{g^{-1}}\Gamma\backslash G,{^g\Gamma} x\mapsto\Gamma g^{-1}x\]
+Here ${^g\Gamma}=g\Gamma g^{-1}$
+\begin{align*}
+l_g:\mathbb C(\Gamma\backslash G)&\xrightarrow{\cong}\mathbb C({^g\Gamma}\backslash G) \\
+\phi&\mapsto (l_g\phi)(x)=\phi(g^{-1}x)
+\end{align*}
+Also for $L_0^2,L^2,\mathcal A_0,\mathcal A,C^\infty$. In particular, get an action of $N_G(\Gamma)$ commuting with right regular reperesentation
+Observation: if $\Gamma'\leq \Gamma$ of finite index, we have map
+\begin{align*}
+\Tr:\mathbb C(\Gamma'\backslash G)&\to\mathbb C(\Gamma\backslash G) \\
+\phi&\mapsto (\Tr\phi)(x)=\sum_{\gamma\in\Gamma'\setminus\Gamma}\phi(\gamma x)
+\end{align*}
+Recall: commensurator $\tilde \Gamma=\{g\in G|\Gamma\approx{^g\Gamma}\}$, recall that $\Gamma_1\approx\Gamma_2\iff\Gamma_1\cap\Gamma_2$ has finite index in both $\Gamma_1$ and $\Gamma_2$
+
+\[
+\Gamma(n)=\left\{\gamma\in\SL_2(\mathbb Z)\middle|\gamma\equiv\begin{bmatrix}
+1&0\\
+0&1
+\end{bmatrix}\mod n\right\}\]
+is of finite index to $\SL_2(\mathbb Z)$
+
+\begin{example}
+$\Gamma\leq\SL_2(\mathbb R)$ is a discrete subgroup such that $\Gamma\approx\SL_2(\mathbb Z)$, then the commensurator $\tilde \Gamma$ is $\begin{cases}
+\SL_2(\mathbb Q)\text{ in }\SL_2(\mathbb R)\\
+\mathbb R^\times\GL_2(\mathbb Q)^+\text{ in }\GL_2(\mathbb R)^+\\
+\mathbb R^\times\GL_2(\mathbb Q)\text{ in }\GL_2(\mathbb R)
+\end{cases}$
+\end{example}
+
+\begin{proof}
+It suffices to consider $\GL_2(\mathbb R)$ case. If $\Gamma_1\approx\Gamma_2$, then $\tilde\Gamma_1=\tilde\Gamma_2$, so we assume $\Gamma=\SL_2(\mathbb Z)$. Let $g\in\mathbb R^\times\GL_2(\mathbb Q)$, up to scaling in $\mathbb R^\times$, we may assume $g\in M_2(\mathbb Z)\cap GL_2(\mathbb R)$, let $m=\det g\in\mathbb Z-\{0\}$, so $mg^{-1}\in M_2(\mathbb Z)$. Note that for any $\gamma\in\Gamma(m)$, $g^{-1}\gamma g=m^{-1}(mg^{-1})\gamma g\in\Gamma$ since $(mg^{-1})\gamma g\equiv mg^{-1}g\equiv0\mod m\Rightarrow {^{g^{-1}}\Gamma}\cap\Gamma\supseteq\Gamma(m)\Rightarrow\mathbb R^\times\GL_2(\mathbb Q)\subseteq\tilde\Gamma$. Conversely, take $\beta=\begin{bmatrix}
+a&b\\
+c&d
+\end{bmatrix}\in\tilde\Gamma$, then $\beta^T\in\tilde\Gamma$ as well. Recall $P_\Gamma=\mathbb Q\cup\{\infty\}$, $\beta P_\Gamma=P_{\beta\Gamma\beta^{-1}}=P_\Gamma$ since $\Gamma\approx\beta\Gamma\beta^{-1}$. Similarly, $\beta^TP_\Gamma=P_\Gamma$. Then one easily deduce $\beta\in\mathbb R^\times\GL_2(\mathbb Q)$
+\end{proof}
+
+\begin{definition}
+$\forall g\in\tilde\Gamma$, define $T_g$ as the composition
+\[\mathbb C(\Gamma\backslash G)\xrightarrow{l_g}\mathbb C({^g\Gamma}\backslash G)\xrightarrow{\res}\mathbb C(\Gamma\cap{^g\Gamma}\backslash G)\xrightarrow{\Tr}\mathbb C(\Gamma\backslash G)\]
+Hecke correspondence:
+\begin{center}
+\begin{tikzcd}
+                   & \Gamma\cap{^g\Gamma}\backslash G \arrow[rd, "\vec p"] \arrow[ld, "\cev p=g^{-1}"'] &                                                             \\
+\Gamma\backslash G &                                                                            & \Gamma\backslash G \arrow[ll, "\text{multivalued}", dashed]
+\end{tikzcd}
+\end{center}
+induces Hecke operator $T_g=\vec p_!\cev p^*$. Here $\vec p$ is the natural projection, $\vec p_!$ is the trace map along $\vec p$
+Concretely, $\forall \phi\in\mathbb C(\Gamma\backslash G)$
+\[(T_g\phi)(x)=\sum_{\gamma\in\Gamma\cap{^g\Gamma}\setminus\Gamma}\phi(g^{-1}\gamma x)=\sum_{\delta\in\Gamma g\Gamma/\Gamma}\phi(\delta^{-1}x)\]
+\begin{align*}
+\Gamma\cap{^g\Gamma}\backslash\Gamma&\xrightarrow{\cong}\Gamma\backslash\Gamma g^{-1}\Gamma\xrightarrow[\cong]{\text{inverse}}\Gamma g\Gamma/\Gamma \\
+\Gamma\cap{^g\Gamma}\gamma&\mapsto\Gamma g^{-1}\gamma=\Gamma\delta^{-1}\mapsto\gamma^{-1}g\Gamma=\delta\Gamma
+\end{align*}
+In particular, $T_g$ only depends on $\Gamma g\Gamma$, also denote $[\Gamma g\Gamma]\phi=T_g\phi$
+\end{definition}
+
+\begin{remark}
+If $\Gamma$ is non-arithmetic, then $\tilde\Gamma/\mathbb R^\times\Gamma$ is finite
+\end{remark}
+
+\subsection{Abstract Hecke algebras}
+
+Let $G$ be the ambient group(e.g. $\GL_2(\mathbb R)$, $\GL_2(\mathbb R)^+$, $\SL_2(\mathbb R)$), $\Omega\subseteq G$ be a submonoid, $\mathscr X\neq\varnothing$ be a family of mutually commensurable subgroups of $G$ such that $\forall\Gamma\in\mathscr X$, $\Gamma\subseteq\Omega\subseteq\tilde\Gamma$. $M$ is a $\mathbb C$ vector space with a representation of $\Omega$
+
+\begin{example}
+$G=\GL_2(\mathbb R)$, $\mathscr X=\{\text{congruence subgroups of }\GL_2(\mathbb Z)\}$, $\Omega=M_2(\mathbb Z)\cap G$, $M=\varinjlim_{\Gamma\in\mathscr X}C^\infty(\Gamma\backslash G)$ has a representation of $\Omega$ via left regular action $l_\delta:C^\infty(\Gamma\backslash G)\to C^\infty(^\delta\Gamma\backslash G)$. Since $^\delta\Gamma=\delta\Gamma\delta^{-1}\in\mathscr X$, $\forall\delta\in\Omega$, get an action $l_\delta:M\to M$. Moreover, $\forall \Gamma\in\mathscr X$, $M^\Gamma=C^\infty(\Gamma\backslash G)$ has action of Hecke operators
+\end{example}
+
+\begin{definition}
+For any $\Gamma_1,\Gamma_2\in\mathscr X$, define
+\[\mathscr H(\Gamma_1\backslash\Omega/\Gamma_2)=\left\{f:\Omega\to\mathbb C\middle|\text{ left $\Gamma_1$-invariant, right $\Gamma_2$-invariant and $\Gamma_1\backslash\Supp f/\Gamma_2$ is finite}\right\}\]
+$\mathscr H(\Omega//\Gamma)=\mathscr H(\Gamma\backslash\Omega/\Gamma)$ is the \textit{Hecke algebra}. Any $f\in\mathscr H(\Gamma_1\backslash\Omega/\Gamma_2)$ defines a linear map $M^{\Gamma_2}\xrightarrow fM^{\Gamma_1}$
+\[\forall m\in M^{\Gamma_2},f\cdot m=\sum_{\delta\in\Omega/\Gamma_2}f(\delta)\delta m\in M^{\Gamma_1}\]
+Convolution: $\forall \Gamma_1,\Gamma_2,\Gamma_3\in\mathscr X$, $\phi\in\mathscr H(\Gamma_1\backslash\Omega/\Gamma_2)$, $\psi\in \mathscr H(\Gamma_2\backslash\Omega/\Gamma_3)$
+\[\phi*\psi(x)\sum_{h\in\Omega\backslash\Gamma_2}\phi(h)\psi(h^{-1}x)=\sum_{\delta\in\Gamma_2\backslash\Omega}\phi(x\delta^{-1})\psi(\delta)\in\mathscr H(\Gamma_1\backslash\Omega/\Gamma_3),\forall x\in\Omega\]
+Both sums are finite and equal
+
+Check
+\begin{itemize}
+\item Associativity
+\item $\forall \Gamma\in\mathscr X$, $\mathscr H(\Omega//\Gamma)$ is a $\mathbb C$ algebra with unit $1_\Gamma$
+\item $\forall m\in M^{\Gamma_3}$, $\phi(\psi m)=(\phi*\psi)m\in M^{\Gamma_1}$
+\end{itemize}
+In particular, $M^\Gamma$ is a left $\mathscr H(\Omega//\Gamma)$ module
+
+Structure constants: $\mathscr H(\Gamma_1\backslash\Omega/\Gamma_2)$ has a $\mathbb C$ basis consisting of  $[\Gamma_1\alpha\Gamma_2]=1_{\Gamma_1\alpha\Gamma_2}$
+\begin{align*}
+*:\mathscr H(\Gamma_1\backslash\Omega/\Gamma_2)\times \mathscr H(\Gamma_2\backslash\Omega/\Gamma_3)&\to \mathscr H(\Gamma_1\backslash\Omega/\Gamma_3) \\
+([\Gamma_1\alpha\Gamma_2],[\Gamma_2\beta\Gamma_3])&\mapsto\sum_{\gamma\in\Gamma_1\backslash\Omega/\Gamma_3}C^\gamma_{\alpha\beta}[\Gamma_1\gamma\Gamma_3]
+\end{align*}
+Then the structure constant is
+\begin{align*}
+C^\gamma_{\alpha\beta}&=([\Gamma_1\alpha\Gamma_2]*[\Gamma_2\beta\Gamma_3])(\gamma) \\
+&=\sum_{h\in\Gamma_2\backslash\Omega}1_{\Gamma_1\alpha\Gamma_2}(\gamma h^{-1})1_{\Gamma_2\beta\Gamma_3}(h) \\
+&=\sum_{b\in B}1_{\Gamma_1\alpha\Gamma_2}(\gamma b^{-1}) \\
+&=\sum_{(a,b)\in A\times B}1_{\Gamma_1a}(\gamma b^{-1})=\#\{(a,b)\in A\times B|\Gamma_1\gamma=\Gamma_1ab\}
+\end{align*}
+\end{definition}
+
+Special case: suppose $\alpha\Gamma\alpha^{-1}=\Gamma$, then $\Gamma\alpha\gamma=\Gamma\alpha=\alpha\Gamma$
+\[C^\gamma_{\alpha\beta}=\{b\in B|\Gamma\gamma=\Gamma\alpha b\}=\begin{cases}
+1&\text{ if }\gamma\in\Gamma\alpha\beta\Gamma \\
+0&\text{ else}
+\end{cases}\]
+So $[\Gamma\alpha\Gamma]*[\Gamma\beta\Gamma]=[\Gamma\alpha\beta\Gamma]$. In particular, $\mathbb C[N_G(\Gamma)/\Gamma]$ is a subalgebra of $\mathscr H(\tilde \Gamma//\Gamma)$
+
+\begin{lemma}\label{Hecke operators, Lemma 1}
+Suppose there exists an anti-involution $\tau:\Omega\to\Omega$ such that $\tau(\Gamma\alpha\Gamma)=\Gamma\alpha\Gamma$, $\forall \alpha\in\Omega$. Then $\mathscr H(\Omega//\Gamma)$ is commutative
+\end{lemma}
+
+\begin{proof}
+Use $\tau(\phi*\psi)=\tau(\psi)*\tau(\phi)$
+\end{proof}
+
+Now let $G=\GL_2(\mathbb R)^+$ and suppose $\Gamma\in\mathscr X$, $\Gamma$ is discrete in $G$ and $\Vol(\Gamma\backslash\mathcal H)<\infty$, fix $\omega:Z_G\to\mathbb C^\times$ be a unitary character. Normalize inner product on $L^2(\Gamma\backslash G,\omega)$ by
+\[(\phi_1,\phi_2)=\frac{1}{\Vol(\Gamma\backslash G/Z_G^+)}\int_{\Gamma\backslash G/Z_G^+}\phi_1(g)\overline{\phi_2(g)}dg\]
+This induces inner product on $M=\bigcup_{\Gamma\in\mathscr X}L^2(\Gamma\backslash G,\omega)$
+
+\begin{lemma}\label{Heck operators Lemma 2}
+\[([\Gamma g\Gamma]\phi_1,\phi_2)=(\phi_1,[\Gamma g^{-1}\Gamma]\phi_2)\]
+\end{lemma}
+
+\begin{example}
+Let $\Gamma=\SL_2(\mathbb Z)$, $\Omega=M_2(\mathbb Z)\cap\GL_2(\mathbb R)^+$. By elementary divisor theorem
+\[\Omega=\bigsqcup_{(\lambda_1,\lambda_2)\in\Lambda_+}\Gamma\begin{bmatrix}
+\lambda_1&\\
+&\lambda_2
+\end{bmatrix}\Gamma\]
+Where
+\[\Lambda_+=\{\lambda=(\lambda_1,\lambda_2)\in\mathbb Z_{\geq1}^2,\lambda_2|\lambda_1\}\xleftrightarrow{1-1}\Gamma\backslash\Omega/\Gamma\]
+$\forall\lambda=(\lambda_1,\lambda_2)\in\Lambda_+$, let $Q_\lambda=\mathbb Z/\lambda_1\mathbb Z\otimes\mathbb Z/\lambda_2\mathbb Z$. Denote
+\[\Gamma_\lambda=\Gamma\begin{bmatrix}
+\lambda_1&\\
+&\lambda_2
+\end{bmatrix}\Gamma,T_\lambda=1_{\Gamma_\lambda}\]
+Recall the bijection
+\begin{align*}
+\GL_2(\mathbb Q)^+/\Gamma&\xrightarrow{\cong}\{L\leq\mathbb Q^2\text{ lattice}\} \\
+g&\mapsto gL_0,L_0=\mathbb Z^2\leq\mathbb Q^2
+\end{align*}
+This induces $\Gamma_\lambda/\Gamma\xrightarrow{\cong}\{L\leq L_0\text{ sublattice}|L_0/L\cong Q_\lambda\}$. Recall the structure constant $C^\nu_{\lambda\mu}$, $\forall \lambda,\mu,\nu\in\Lambda_+=\Gamma\backslash\Omega\Gamma$
+\[T_\lambda*T_\mu=\sum_{\nu\in\Lambda_+}C^\nu_{\lambda\mu}T_\nu\]
+in $\mathscr H(\Omega//\Gamma)$
+\end{example}
+
+\begin{lemma}
+\[C^\nu_{\lambda\mu}=\#\{A\leq A_\nu\text{ subgroup}|A\cong Q_\mu,Q_\nu/A\cong Q_\lambda\}\]
+\end{lemma}
+
+\begin{proof}
+\begin{align*}
+\left\{(g_1,g_2)\in\Gamma_\lambda/\Gamma\times\Gamma_\lambda/\Gamma\middle|g_1g_2\Gamma=\begin{bmatrix}
+\nu_1&\\
+&\nu_2
+\end{bmatrix}\Gamma\right\}&\to\{A\leq A_\nu\text{ subgroup}|A\cong Q_\mu,Q_\nu/A\cong Q_\lambda\} \\
+(g_1,g_2)&\mapsto\frac{g_1L_0}{\nu_1\mathbb Z\oplus\nu_2\mathbb Z}
+\end{align*}
+Check this is a bijection
+\end{proof}
+
+So $C^\nu_{\lambda\mu}$ is related to $\Ext^1(Q_\lambda,Q_\mu)$. In particular, if $(\lambda_1,\mu_1)=1$, there is no nontrivial extension, $T_\lambda*T_\mu=T_{\lambda\mu}$
+\[\forall n\in\mathbb Z_{\geq1},T_{(n,n)}*T_\lambda=T_\lambda*T_{{n,n}}=T_{n\lambda},\forall\lambda\in\Lambda_+\]
+Since only one possible extension with (at most) 2 generators. By Lemma \ref{Hecke operators, Lemma 1}, $\mathscr H(\Omega//\Gamma)$ is commutative (use transpose). Denote $T_p=T_{(p,1)}$, $R_p=T_{(p,p)}$
+
+\begin{lemma}\label{Hecke operators Lemma 4}
+\[T_{p}*T_{(p^n,1)}=T_{(p^n,1)}*T_p=\begin{cases}
+T_{(p^{n+1},1)}+pT_{(p^n,p)}&n>1 \\
+T_{(p^{n+1},1)}+(p+1)T_{(p^n,p)}&n=1
+\end{cases}\]
+\end{lemma}
+
+\begin{proof}
+Note that $T_{(p^n,1)}*T_p=aT_{(p^{n+1},1)}+bT_{(p^n,p)}$. Possible extensions of $\mathbb Z/p^n\mathbb Z$ by $\mathbb Z/p\mathbb Z$ are
+\begin{enumerate}[leftmargin=*]
+\item Split extension $\mathbb Z/p^n\mathbb Z\oplus\mathbb Z/p\mathbb Z$
+\[\left\{A\leq\mathbb Z/p^{n+1}\mathbb Z\middle| A\cong\mathbb Z/p\mathbb Z,\frac{\mathbb Z/p^{n+1}\mathbb Z}{A}\cong\mathbb Z/p^{n}\mathbb Z\right\}=p^n\mathbb Z/p^{n+1}\mathbb Z\Rightarrow a=1\]
+\item Non split extension $\mathbb Z/p^{n+1}\mathbb Z$. If $A\leq\mathbb Z/p^n\mathbb Z\oplus\mathbb Z/p\mathbb Z$, $A\cong\mathbb Zp\mathbb Z$, with quotient $\cong\mathbb Z/p^n\mathbb Z$, when $n=1$, $p+1$ such subgroups (lies in $\mathbb F_p^2$), when $n>1$, $A$ is generated by a nonzero $p$-torsion element $(x,y)\in\mathbb Z/p\mathbb Z\oplus p^{n-1}\mathbb Z/p^n\mathbb Z$, need $y\neq 0$, so $p$ choices
+\end{enumerate}
+\end{proof}
+
+Consequently, $\mathscr H(\Omega//\Gamma)=\otimes_p\mathscr H_p$, $\mathscr H_p\cong\mathbb C[T_p,R_p]$. To see there are no algebraic relation between $T_p,R_p$, show inductively that $T^n_p-T_{(p^n,1)}\in R_p\cdot\mathscr H_p$
+
+\begin{remark}
+Let $\Omega_p=M_2(\mathbb Z_p)\cap\GL_2(\mathbb Q_p)$, then
+\[\mathbb C[T_p,R_p]=\mathscr H_p\cong\mathscr H(\Omega_p//\GL_2(\mathbb Z_p))\subseteq\mathscr H(\GL_2(\mathbb Q_p)//\GL_2(\mathbb Z_p))\cong\mathbb C[T_p,R_p^{\pm1}]\]
+\[\mathscr H(\GL_2(\mathbb Q)^+//\SL_2(\mathbb Z))=\mathscr H(\GL_2(\mathbb Q)//\GL_2(\mathbb Z))\cong\otimes_p\mathscr H(\GL_2(\mathbb Q_p)//\GL_2(\mathbb Z_p))\cong\otimes_p\mathbb C[T_p,R_p^{\pm1}]\]
+\end{remark}
+
+Formal Dirichlet series: $\forall m\in\mathbb Z_{\geq1}$, define
+\[T_m=\sum_{\lambda\in\Lambda_+,\lambda_1\lambda_2=m} T_{(\lambda_1,\lambda_2)}\in\mathscr H(\Omega//\Gamma)\]
+$D(s)=\sum_{m=1}^\infty T_mm^{-s}\Rightarrow D(s)=\prod_p(\sum_{n=0}^\infty T_{p^n}p^{-ns})$. Let $f_p(x)=\sum T_{p^n}X^n\in\mathscr H_p[[X]]$
+
+\begin{proposition}
+$f_p(x)=(1-T_pX+PR_pX^2)^{-1}$
+\end{proposition}
+
+\begin{proof}
+\[f_p(X)=\sum_{n_1\geq n_2\geq0}T_{(p^{n_1},p^{n_2})}X^{n_1+n_2}=\sum_{n=0}^\infty\sum_{m=0}^\infty R^m_pT_{(p^n,1)}X^{n+2m}\]
+Use Lemma \ref{Hecke operators Lemma 4}, we have
+\begin{align*}
+T_pXf_p(X)&=\sum_{m=0}^\infty R_p^mT_pX^{2m+1}+\sum_{m=0}^\infty R_p^m(T_{(p^2,1)}+(p+1)R_p)X^{2m+2}+\sum_{n=2}^\infty\sum_{m=0}^\infty R_p^m\left(T_{(p^{n+1},1)+pR_pT_{(p^{n-1},1)}}\right)X^{n+2m+1} \\
+&=f_p(X)-1+p\sum_{m=1}^\infty R_p^mX^{2m}+pR_pX^2\left(f_p(X)-\sum_{m=0}^\infty R_p^mX^{2m}\right) \\
+&=f_p(X)(1+pR_pX^2)-1
+\end{align*}
+Hence
+\[D(s)=\prod_p f_p(p^{-s})=\prod_p\frac{1}{1-T_pp^{-s}+R_pp^{1-2s}}\]
+
+\end{proof}
+
+Action on modular forms: $k\geq2$ is an even integer, $\Gamma=\SL_2(\mathbb Z)$
+\begin{center}
+\begin{tikzcd}
+M_k(\Gamma) \arrow[r, hook]           & \mathcal A(\Gamma\backslash G/Z_G^+)              \\
+S_k(\Gamma) \arrow[r, hook] \arrow[u,hook] & \mathcal A_0(\Gamma\backslash G/Z_G^+) \arrow[u,hook]  \\
+f \arrow[r,mapsto]                           & {\phi_f(g)=f(gi)j(g,i)^{-i}\det(g)^{\frac{k}{2}}}
+\end{tikzcd}
+\end{center}
+$\mathcal H(\Omega//\Gamma)$ action on RHS induces action on $M_k(\Gamma)$, $S_k(\Gamma)$
+
+\begin{proposition}
+Let $S_n=\{g\in M_2(\mathbb Z)|\det g=n\}$, $\forall n\in\mathbb Z_{\geq1}$, then
+\[S_n/\Gamma=\bigsqcup_{ad=n,d\geq1,0\leq b<a}\begin{bmatrix}
+a&b\\
+0&d
+\end{bmatrix}\Gamma\]
+\[(S_n/\Gamma)^{-1}=\bigsqcup_{ad=n,a\geq1,0\leq b<d}\Gamma\begin{bmatrix}
+a&b\\
+0&d
+\end{bmatrix}n^{-1}\]
+\end{proposition}
+
+\begin{proof}
+Let $e_1,e_2$ be the standard basis of $L_0=\mathbb Z^2$
+\begin{align*}
+S_n/\Gamma&\xrightarrow{\cong}\{L\leq L_0\text{ sublattice of index }n\} \\
+g&\mapsto gL_0
+\end{align*}
+Fix such a lattice $L$. Let $a=|A_1|$, $d=|A_2|$, then $ad=n$. Let $v_1=ae_1\in L$, $\exists v_2\in L$ such that $v_2\equiv de_2\mod \mathbb Z e_1$. Write $v_2=be_1+de_2$, $b\in\mathbb Z$ is unique mod $a$. Then $v_1,v_2$ form a $\mathbb Z$-basis of $L$ and $L=\begin{bmatrix}
+a&b\\
+0&d
+\end{bmatrix}L_0$
+\end{proof}
+
+\begin{corollary}
+$\forall f\in M_k(\Gamma)$, $T_n(f)=n^{\frac{k}{2}}\sum_{a\geq1,ad=n,0\leq b<d}d^{-k}f(\frac{az+b}{d})$
+\end{corollary}
+
+\begin{proof}
+\[T_n=\sum_{\lambda\in\Lambda_+,\lambda_1\lambda_2=n}T_{(\lambda_1,\lambda_2)}=1_{\Gamma\backslash/S_n\Gamma}\]
+\[\Rightarrow(T_n\phi_f)(g)=\sum_{\delta\in S_n/\Gamma}\phi_f(\delta^{-1}g)=\sum_{a\geq1,ad=n,0\leq b<d}\phi_f\left(\begin{bmatrix}
+a&b\\
+0&d
+\end{bmatrix}g\right)\]
+$\phi_f$ is invariant under scalar matrix $n^{-1}$. Translate the formula to $f$
+\end{proof}
+
+\begin{definition}[a common normalization of $T_n$]
+$T_n^{(k)}=n^{\frac{k}{2}-1}T_n$. Then $\forall f\in M_k(\Gamma)$
+\[T^{(k)}_nf=n^{k-1}\sum_{a\geq1,ad=n,0\leq b<d}d^{-k}f(\frac{az+b}{d})\]
+For a prime $p$
+\[T^{(k)}_pf=\frac{1}{p}\sum_{b=0}^{p-1}f(\frac{z+b}{p})+p^{k-1}f(pz)=p^{\frac{k}{2}-1}T_pf\]
+\end{definition}
+
+Fourier coefficients: Let $f(z)=\sum_{n=0}^\infty a_n(f)e^{2\pi inz}$, $z\in\mathcal H$
+
+\begin{corollary}
+\[a_n(T^{(k)}_nf)=\sum_{d|(m,n),d\geq1}d^{k-1}a_{mn/d^2}(f),\forall m\in\mathbb Z_{\geq0}, n\in\mathbb Z_{\geq1}\]
+In particular, $a_1(T^{(k)}_nf)=a_n(f)$, $a_0(T^{(k)}_nf)=\sigma_{k-1}(n)$
+\end{corollary}
+
+Recall: $M_k(\Gamma)=S_k(\Gamma)\oplus\mathbb CE_k$. From Lemma \ref{Heck operators Lemma 2} one deduce that $T_n$ is self-adjoint for Peterson inner product. In particular, it preserves $\mathbb CE_k$. $S_k(\Gamma)$ has a basis consisting of Hecke eigen-forms. i.e. simultaneous eigen-functions of $T_n$, $\forall n\in\mathbb Z_{\geq1}$
+
+\begin{corollary}
+Suppose $T_n^{(k)}=\lambda_nf$, $\forall\lambda_n\in\mathbb C,\forall n\in\mathbb Z_{\geq1}$, then $a_n(f)=\lambda_na_1(f)$. In particular if $a_1(f)=0$, then $f=0$. A normalized eigen-form is a Hecke eigen-form $f$ such that $a_1(f)=1$
+\end{corollary}
+
+\begin{corollary}
+If $f$ is normalized eigen-form, then $T^{(k)}_nf=a_n(f)f$. If $f_1,f_2$ are normalized eigen-form with same eigenvalues for all $T_n$, then $f_1=f_2$
+\end{corollary}
+
+Thus $S_k(\Gamma)=\Hom_{(\mathfrak g,K)}(D^+_k,\mathcal A_0(\Gamma\backslash G/Z_G^+))$ is decomposed into eigenspaces of $\mathscr H(\Omega//\Gamma)$, each with multiplicity 1
+
+\end{document}

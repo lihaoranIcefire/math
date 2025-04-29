@@ -1,0 +1,152 @@
+\documentclass[12pt]{article}
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{dsfont}
+\usepackage{bbm}
+\usepackage{faktor}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{pgfplots,tikz}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{cd}
+
+\newcommand{\bigslant}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
+
+\title{MATH730 hw11}
+\author{Haoran Li}
+\date{}
+
+\setlength{\parindent}{0cm}
+
+\begin{document}
+
+\maketitle
+\textbf{Hatcher 2.1.20.} \par
+Let $q:X\times I\rightarrow SX\cong X\times I/X\times\{0\}\cup X\times\{1\}$ is the quotient map, define $U=q\left(X\times[0,\frac{2}{3})\right)$, $V=q\left(X\times(\frac{1}{3},0]\right)$ are both contractible, and $U\cap V=q\left(X\times(\frac{1}{3},\frac{2}{3})\right)\cong X$ \par
+Apply Mayer-Vietoris theorem we have
+\[
+H_{n+1}(U)\oplus H_{n+1}(V)\rightarrow H_{n+1}(SX)\rightarrow H_n(U\cap V)\rightarrow H_n(U)\oplus H_n(V) \quad (n\geq 1)
+\]
+is exact, thus
+\[
+0\rightarrow H_{n+1}(SX)\rightarrow H_n(X)\rightarrow 0 \quad (n\geq 1)
+\]
+is exact, hence $\overset{\sim}{H}_{n+1}(SX)\cong\overset{\sim}{H}_n(X) \quad (n\geq 1)$ \par
+Also
+\[
+H_1(U)\oplus H_1(V)\rightarrow H_1(SX)\rightarrow H_0(U\cap V)\rightarrow H_0(U)\oplus H_0(V)\rightarrow H_0(SX)\rightarrow 0
+\]
+is exact and $SX$ is path connected, thus \par
+\[
+0\rightarrow H_1(SX)\rightarrow H_0(X)\rightarrow \mathbb{Z}\oplus \mathbb{Z}\rightarrow \mathbb{Z}\rightarrow 0
+\]
+is exact \par
+Since $\mathbb{Z}\oplus \mathbb{Z}\rightarrow \mathbb{Z}$ is surjective and $\mathbb{Z}\oplus \mathbb{Z}$ is free, $\mathrm{Im}\left(H_0(X)\rightarrow \mathbb{Z}\oplus \mathbb{Z}\right)=\mathrm{Ker}\left(\mathbb{Z}\oplus \mathbb{Z}\rightarrow \mathbb{Z}\right)\cong\mathbb{Z}$, thus
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & H_1(SX) \arrow[r, "\alpha"] & H_0(X) \arrow[r,shift left,"\beta"] & \mathbb{Z} \arrow[r] \arrow[l,shift left,"\gamma"] & 0
+\end{tikzcd}
+\end{center}
+is exact, since $\mathbb{Z}$ is free, $\exists\gamma:\mathbb{Z}\rightarrow H_0(X)$ such that $\beta\circ\gamma=\mathrm{id}_\mathbb{Z}$, hence by splitting lemma, $H_0(X)\cong\overset{\sim}{H}_0(X)\oplus\mathbb{Z}$, on the other hand, $H_0(X)\cong\overset{\sim}{H}_0\oplus\mathbb{Z}$ , thus $\overset{\sim}{H}_1(SX)\cong\overset{\sim}{H}_0(X)$, $\overset{\sim}{H}_0(SX)=0=\overset{\sim}{H}_{-1}(X)$ and $\overset{\sim}{H}_{n+1}(SX)\cong\overset{\sim}{H}_n(X) \quad (n<-1)$ is trivial \par
+More generally, let $q:X\times I\rightarrow CX\cong X\times I/X\times\{1\}$ be the quotient map, $\displaystyle Y=\bigsqcup_{i=1}^mCX \Big/\sim$ with their bases identified, define $\displaystyle U=\bigsqcup_{i=1}^{m-1}q\left(X\times[0,1)\right) \Big/\sim\simeq\{*\}$, $\displaystyle V=CX\bigsqcup\bigsqcup_{i=1}^{m-1}q\left(X\times(\frac{1}{2},1]\right) \Big/\sim\simeq\bigsqcup_{i=1}^{m-1}\{*\}$ \par
+Apply Mayer-Vietoris theorem we have
+\[
+H_{n+1}(U)\oplus H_{n+1}(V)\rightarrow H_{n+1}(Y)\rightarrow H_n(U\cap V)\rightarrow H_n(U)\oplus H_n(V) \quad (n\geq 1)
+\]
+is exact, thus
+\[
+0\rightarrow H_{n+1}(Y)\rightarrow \bigoplus_{i=1}^{m-1}H_n(X)\rightarrow 0 \quad (n\geq 1)
+\]
+is exact, hence $H_{n+1}(Y)\cong\bigoplus_{i=1}^{m-1}H_n(X)\quad (n\geq 1)$ \par
+Also
+\[
+H_1(U)\oplus H_1(V)\rightarrow H_1(Y)\rightarrow H_0(U\cap V)\rightarrow H_0(U)\oplus H_0(V)\rightarrow H_0(Y)\rightarrow 0
+\]
+is exact and $Y$ is path connected, thus
+\[
+0\rightarrow H_1(Y)\rightarrow \bigoplus_{i=1}^{m-1}H_0(X)\rightarrow \mathbb{Z}^{m-1}\oplus\mathbb{Z}=\mathbb{Z}^m\rightarrow \mathbb{Z}\rightarrow 0
+\]
+is exact, since $\mathbb{Z}^m$ is free
+\[
+0\rightarrow H_1(Y)\rightarrow \bigoplus_{i=1}^{m-1}H_0(X)\rightarrow \mathbb{Z}^{m-1}\rightarrow 0
+\]
+is exact \par
+Since $\mathbb{Z}^{m-1}$ is free, by splitting lemma, $\displaystyle\bigoplus_{i=1}^{m-1}H_0(X)\cong H_0(Y)\oplus\mathbb{Z}^{m-1}$, on the other hand, $\displaystyle\bigoplus_{i=1}^{m-1}H_0(X)\cong\bigoplus_{i=1}^{m-1}\left(\overset{\sim}{H}_0(X)\oplus\mathbb{Z}\right)\cong\left(\bigoplus_{i=1}^{m-1}\overset{\sim}{H}_0(X)\right)\bigoplus\mathbb{Z}^{m-1}$, thus $\displaystyle\overset{\sim}{H}_1(Y)\cong\bigoplus_{i=1}^{m-1}\overset{\sim}{H}_0(X)$ \par
+$\displaystyle\overset{\sim}{H}_0(Y)=0=\bigoplus_{i=1}^{m-1}\overset{\sim}{H}_{-1}(X)$, and $\displaystyle\overset{\sim}{H}_{n+1}(Y)\cong\bigoplus_{i=1}^{m-1}\overset{\sim}{H}_n(X)\quad (n<-1)$ is trivial \par
+\textbf{Hatcher 2.1.21.} \par
+Let $q:X\times I\rightarrow SX$ still be the quotient map, define $U=q\left(X\times[0,\frac{2}{3})\right)$, $V=q\left(X\times(\frac{1}{3},0]\right)$, $v=q\left(X\times\{0\}\right)$, $v=q\left(X\times\{1\}\right)$, then define
+$$s(\sigma)=[v_0,\cdots,v_n,v]-[v_0,\cdots,v_n,w]$$
+Where $\sigma=[v_0,\cdots,v_n]$, and $[v_i,v]$ be the segment from $v_i$ to $v$ along $v_i\times\left[0,\frac{1}{2}\right]$, $[v_i,w]$ be the segment from $v_i$ to $w$ along $v_i\times\left[\frac{1}{2},1\right]$ \par
+\[
+\begin{aligned}
+\partial s[v_0,\cdots,v_{n+1}]
+&=\partial\left([v_0,\cdots,v]-[v_0,\cdots,w]\right) \\
+&=\sum_{k=0}^{n+1}(-1)^k\left([v_0,\cdots,\hat{v}_k,\cdots,v]-[v_0,\cdots,\hat{v}_k,\cdots,w]\right)
+\end{aligned}
+\]
+\[
+\begin{aligned}
+s\partial[v_0,\cdots,v_{n+1}]
+&=s\left(\sum_{k=0}^{n+1}(-1)^k[v_0,\cdots,\hat{v}_k\cdots,v_{n+1}]\right) \\
+&=\sum_{k=0}^{n+1}(-1)^k\left([v_0,\cdots,\hat{v}_k,\cdots,v]-[v_0,\cdots,\hat{v}_k,\cdots,w]\right)
+\end{aligned}
+\]
+Thus $\partial s=s\partial$, hence $s$ is a chain map which could induce a homomorphism from $\tilde{H}_n(X)$ to $\tilde{H}_{n+1}(SX)$ \par
+Suppose $\sum n_i\sigma_i\in Z_{n}(X)$, namely \par
+\[
+0=\partial\left(\sum n_i\sigma_i\right)=\partial\left(\sum n_i[v^i_0,\cdots,v^i_n]\right)=\sum n_i\sum_{k=0}^n(-1)^k[v^i_0,\cdots,\hat{v}^i_k,\cdots,v^i_n]
+\]
+Then \par
+$$s\left(\sum n_i\sigma_i\right)=\sum n_i\left([v^i_0,\cdots,v]-[v^i_0,\cdots,w]\right)=\left(\sum n_i[v^i_0,\cdots,v]-\sum n_i[v^i_0,\cdots,w]\right)$$
+But $(j_U-j_V)\left(\sum n_i[v^i_0,\cdots,v]\right)\bigoplus\left(\sum n_i[v^i_0,\cdots,v]\right)=s\left(\sum n_i\sigma_i\right)$, also \par
+\[
+\begin{aligned}
+(i_U\oplus i_V)\left((-1)^{n+1}\sum n_i\sigma_i\right)
+&=\left((-1)^{n+1}\sum n_i\sigma_i\right)\bigoplus\left((-1)^{n+1}\sum n_i\sigma_i\right) \\
+&=\partial\left(\sum n_i\sum_{k=0}^n(-1)^k[v^i_0,\cdots,\hat{v}^i_k,\cdots,v]+\sum n_i[v^i_0,\cdots,v]\right)\bigoplus \\
+&\,\quad\partial\left(\sum n_i\sum_{k=0}^n(-1)^k[v^i_0,\cdots,\hat{v}^i_k,\cdots,w]+\sum n_i[v^i_0,\cdots,w]\right) \\
+&=\partial\left(\sum n_i[v^i_0,\cdots,v]\right)\bigoplus\partial\left(\sum n_i[v^i_0,\cdots,w]\right)
+\end{aligned}
+\]
+Therefore $\delta s=(-1)^{n+1}\mathrm{id}$, since $\delta$ is an isomorphism, $s$ also induce an isomorphism \par 
+\textbf{1.} \par
+Let $U$ be a small neighborhood of the left $S^1$, $V$ be a small neighborhood of the right $S^1$, $U,V\simeq S^1$, $U\cap V\simeq\{*\}$ \par
+Apply Mayer-Vietoris theorem, we have \par
+\[
+H_{n+1}(U)\oplus H_{n+1}(V)\rightarrow H_{n+1}(S^1\vee S^1)\rightarrow H_n(U\cap V) \quad (n\geq 1)
+\]
+is exact, thus $0\rightarrow H_{n+1}(S^1\vee S^1)\rightarrow 0 \quad (n\geq 1)$ is exact, hence $H_k(S^1\vee S^1)=0 \quad (k\geq 2)$
+Since $S^1\vee S^1$ is path connected, $H_0(S^1\vee S^1)=\mathbb{Z}$ and
+\[
+H_1(U\cap V)\rightarrow H_1(U)\oplus H_1(V)\rightarrow H_1(S^1\vee S^1)\rightarrow H_0(U\cap V)\rightarrow H_0(U)\oplus H_0(V)\rightarrow H_0(S^1\vee S^1)\rightarrow 0
+\]
+is exact, thus
+\[
+0\rightarrow \mathbb{Z}\oplus \mathbb{Z}\rightarrow H_1(S^1\vee S^1)\rightarrow \mathbb{Z}\rightarrow \mathbb{Z}\oplus \mathbb{Z}\rightarrow \mathbb{Z}\rightarrow 0
+\]
+hence $0\rightarrow \mathbb{Z}\oplus \mathbb{Z}\rightarrow H_1(S^1\vee S^1)\rightarrow 0$ is exact, $H_1(S^1\vee S^1)\cong \mathbb{Z}\oplus \mathbb{Z}$ \par
+\textbf{2.} \par
+Let $U$ be a small neighborhood of $A$, $V$ be the interior of the $n$-cell $\Delta^n$, then $V$ is contractible, $U\simeq A$, $U\cap V\simeq S^{n-1}$ \par
+Apply Mayer-Vietoris theorem, we have \par\
+\[
+H_n(U\cap V)\rightarrow H_n(U)\oplus H_n(V)\rightarrow H_n(X)\rightarrow H_{n-1}(U\cap V)\rightarrow H_{n-1}(U)\oplus H_{n-1}(V)\rightarrow H_{n-1}(X)\rightarrow H_{n-2}(U\cap V)
+\]
+ is exact, thus
+ \[
+H_n(S^{n-1})\rightarrow H_n(A)\oplus H_n(*)\rightarrow H_n(X)\rightarrow H_{n-1}(S^{n-1})\rightarrow H_{n-1}(A)\oplus H_{n-1}(*)\rightarrow H_{n-1}(X)\rightarrow H_{n-2}(S^{n-1}) 
+ \]
+is exact \par
+\textbf{(a)} \par
+If $n>2$
+\[
+0\rightarrow H_n(A)\rightarrow H_n(X)\rightarrow \mathbb{Z}\rightarrow H_{n-1}(A)\rightarrow H_{n-1}(X)\rightarrow 0
+\]
+is exact \par
+\textbf{(b)} \par
+If $k\geq 1, k\neq n,n-1$, then $0\rightarrow H_k(A)\rightarrow H_k(X)\rightarrow 0$ is exact, thus $H_k(A)\cong H_k(X)$ \par
+\textbf{3.} \par
+If $f$ is not surjective, without loss of generality, assume $\mathrm{Im}f\subset S^n\setminus\{N\}$, where $N$ is the north pole, then $f\simeq c$, $H_nf=H_nc=0$ which is a contradiction, hence $f$ is surjective \par
+
+\end{document}

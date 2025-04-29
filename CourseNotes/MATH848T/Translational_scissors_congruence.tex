@@ -1,0 +1,55 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}[Homology with local coefficients]
+$S$ is a simplicial set, $G_s$ is a family of abelian groups for all $s\in S$ with homomorphisms $\varepsilon_i:G_s\to G_{\varepsilon_is}$ satisfying simplicial identities, we can form a complex $C_p(S, G)=\displaystyle\bigoplus_{s\in S_p}G_s$, write $H_p(S,G)$ as the homology
+\end{definition}
+
+\begin{example}
+$F$ is the simplicial set of flags, $\bigwedge^q_{U_0\supseteq\cdots\supseteq U_p}=\bigwedge^q_{\mathbb Z}U_p$
+\end{example}
+
+\begin{definition}
+Denote $M_G=M\otimes_{\mathbb Z[G]}\mathbb Z$, then $\mathcal{P}(X,T)=H_n(C_*(X)_T/F_{n-1}C_*(X)_T)$
+\end{definition}
+
+\begin{theorem}
+$\mathcal{P}(\mathbb R^n,T)$ is a $\mathbb Q$ vector space
+\end{theorem}
+
+\begin{remark}
+$\mathcal{P}(\mathbb R^n,T)$ is in fact an $\mathbb R$ vector space
+\end{remark}
+
+\begin{proof}
+Define double complex
+\[A_{p,q}=\bigoplus_{\mathbb R^n\supsetneqq U_0\supseteq\cdots\supseteq U_p}\widetilde{C}_q(U_p)_{T(U_p)}=\begin{cases}
+\mathbb Z &,p=q=-1 \\
+C_q(\mathbb R^n)_T &,p=-1, q\geq0 \\
+\displaystyle\bigoplus_{U_0\supseteq\cdots\supseteq U_p}\mathbb Z &,p\geq0,q=-1 \\
+\displaystyle\bigoplus_{U_0\supseteq\cdots\supseteq U_p}C_q(U_p)_{T(U_p)} &,p, q\geq0 \\
+\end{cases}\]
+$\partial'=\sum(-1)^i\varepsilon_i$, $\partial''=(-1)^p\partial$. As additive groups $U_p\cong T(U_p)$, hence
+\['E^1_{p,q}=\begin{cases}
+\displaystyle\bigoplus_{U_0\supseteq\cdots\supseteq U_p}H_q(\widetilde{C}_*(U_p)_{U_p})=\bigoplus_{U_0\supseteq\cdots\supseteq U_p}H_q(U_p)=\bigoplus_{U_0\supseteq\cdots\supseteq U_p}\textstyle\bigwedge^*_{\mathbb Z}U_p &,p\geq0 \\
+H_q(\widetilde{C}_*(\mathbb R^n)_{T})=H_q(\mathbb R^n)=\bigwedge^*_{\mathbb Z}\mathbb R^n &,p=-1
+\end{cases}\]
+This is complex $C_*(F,\bigwedge^q)$ \par
+Claim: higher differentials of $'E$ is zero \par
+For any $a\in\mathbb Z$, consider $\mu_a:\mathbb R^n\to\mathbb R^n$, $x\mapsto ax$ which induces multiplication by $a^q$ on $\bigwedge^q_{\mathbb Z}U\to \bigwedge^q_{\mathbb Z}U$, $A_{p,q}\to A_{p,q}$, since $\mu_a$ commutes with differentials $\partial^r:E^r_{p,q}\to E^r_{p-r,q+r-1}$, we have
+\[a^q\partial^rx=\partial^r\mu_ax=\mu_a\partial^rx=a^{q+r-1}\partial^rx\Rightarrow r=1\text{ or }\partial^rx=0\]
+Hence $'E^2_{p,q}='E^\infty_{p,q}=H_p(F,\bigwedge^q)$. Since $U\leq\mathbb R^n$ is a $\mathbb Q$ vector space, $\bigwedge^*_{\mathbb Z}U=\bigwedge^*_{\mathbb Q}U$ is also a $\mathbb Q$ vector space, $H_k(Tot(A))$ has a $\mathbb Q$ vector space filtration $0\subseteq F_{-1}\subseteq\cdots\subseteq F_{k-1}=H_k(Tot(A))$, $H_k(Tot(A))=E^\infty_{-1,k}\oplus\cdots\oplus E^\infty_{k-1,2}$ is the eigenspace decomposition \par
+\[''E^1_{p,q}=\begin{cases}
+0&,q\geq0 \\
+C_*(\mathbb R^n)/F_{n-1}C_*(\mathbb R^n)&,p=-1
+\end{cases}\]
+\[''E^\infty_{-1,q}=''E^2_{-1,q}=H_q(C_*(\mathbb R^n)/F_{n-1}C_*(\mathbb R^n))\]
+Hence $\mathcal{P}(\mathbb R^n,T)=''E^2_{-1,n}=H_{n-1}(Tot(A))$ is a $\mathbb Q$ vector space
+\end{proof}
+
+\begin{definition}
+Define $\Gamma: B_n(\mathbb R^n)\to\mathcal{P}(\mathbb R^n,T)$, $[v_1|\cdots|v_n]\mapsto(0,v_1,v_1+v_2,\cdots,v_1+\cdots+v_n)$
+\end{definition}
+
+\end{document}

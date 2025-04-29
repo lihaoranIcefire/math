@@ -1,0 +1,108 @@
+\documentclass[12pt]{article}
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{dsfont}
+\usepackage{bbm}
+\usepackage{faktor}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{pgfplots,tikz}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{cd}
+
+\title{MATH730 hw12}
+\author{Haoran Li}
+\date{}
+
+\setlength{\parindent}{0cm}
+
+\begin{document}
+
+\maketitle
+\textbf{Hatcher 2.1.17.} \par
+\textbf{(a)} \par
+Assume $A=\{a_1,\cdots,a_n\}$, $\forall [\xi_0]\in C_0(S^2,A)$, $\xi_0=\sum n_kv_0^k$ is a sum of points on $S^2\setminus A$, then we can find paths from $a_1$ to $v_0^k$ contained in $S^2\setminus A$, then define $\xi_1=\sum n_k[a_1,v_0^k]\in C_1(S^2)$, $\partial[\xi_1]=[\xi_0]$, hence $\partial C_1(S^2,A)=C_0(S^2,A)$, $H_0(S^2,A)=0$, similarly we have $H_0(S^1\vee S^1,A)=0$ \par
+\[H_1(S^2)\rightarrow H_1(S^2,A)\rightarrow H_0(A)\rightarrow H_0(S^2)\rightarrow H_0(S^2,A)\]
+\[H_1(A)\rightarrow H_1(S^1\vee S^1)\rightarrow H_1(S^1\vee S^1,A)\rightarrow H_0(A)\rightarrow H_0(S^1\vee S^1)\rightarrow H_0(S^1\vee S^1,A)\]
+are exact, thus
+\[0\rightarrow H_1(S^2,A)\rightarrow \mathbb{Z}^n\rightarrow \mathbb{Z}\rightarrow 0\]
+\[0\rightarrow \mathbb{Z}^2\rightarrow H_1(S^1\vee S^1,A)\rightarrow \mathbb{Z}^n\rightarrow \mathbb{Z}\rightarrow 0\]
+are exact, hence $H_1(S^2,A)\cong\mathbb{Z}^{n-1}$, $H_1(S^1\vee S^1,A)\cong\mathbb{Z}^{n+1}$
+\[0=H_2(A)\rightarrow H_2(S^2)\rightarrow H_2(S^2,A)\rightarrow H_1(A)=0\]
+\[0=H_2(A)\rightarrow H_2(S^1\vee S^1)\rightarrow H_2(S^1\vee S^1,A)\rightarrow H_1(A)=0\]
+are exact, hence $H_2(S^2,A)\cong H_2(S^2)\cong\mathbb{Z}$, $H_2(S^1\vee S^1,A)\cong H_2(S^1\vee S^1)\cong\mathbb{Z}$ 
+\[0=H_k(S^2)\rightarrow H_k(S^2,A)\rightarrow H_{k-1}(A)=0\]
+\[0=H_k(S^1\vee S^1)\rightarrow H_k(S^1\vee S^1,A)\rightarrow H_{k-1}(A)=0\]
+are exact, hence $H_k(S^2,A)=0$, $H_k(S^1\vee S^1,A)=0$, where $k\geq 3$ \par
+\textbf{(b)} \par
+Both $(X,A)$ and $(X,B)$ are good pairs,  it is easy to give $X/A$ and $X/B$ CW complex structures, $X/A$ consists of one $0$-cell, four $1$-cells and two $2$-cells, $X/B$ consists of two $0$-cells, five $1$-cells and two $2$-cells, then we can use cellular homology to get singular homology, the exact sequence for cellular homology are the following \par
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & \mathbb{Z}^2 \arrow[r, "0"] & \mathbb{Z}^4 \arrow[r, "0"] & \mathbb{Z} \arrow[r] & 0
+\end{tikzcd}
+\end{center}
+\par
+\begin{center}
+\begin{tikzcd}[ampersand replacement=\&]
+0 \arrow[r] \& \mathbb{Z}^2 \arrow{r}{ \begin{pmatrix} 0 & 0 \\ 0 & 0 \\ 0 & 0 \\ 0 & 0 \\ 1 & 1 \end{pmatrix} } \& \mathbb{Z}^5 \arrow{rrr}{ \begin{pmatrix} 0 & 0 & 1 & -1 & 0 \\ 0 & 0 & -1 & 1 & 0 \end{pmatrix} } \& \& \& \mathbb{Z}^2 \arrow[r] \& 0
+\end{tikzcd}
+\end{center}
+\par
+Which give us $H_n(X,A)\cong \tilde{H}_n(X/A)=
+\begin{cases}
+\mathbb{Z}^4,\,n=1\\
+\mathbb{Z},\,\,\,n=2\\
+0,\,\,\,\,\text{else}
+\end{cases}$ and $H_n(X,B)\cong \tilde{H}_n(X/B)=
+\begin{cases}
+\mathbb{Z}^3,\,n=1\\
+\mathbb{Z},\,\,\,n=2\\
+0,\,\,\,\,\text{else}
+\end{cases}$ \par
+\textbf{Hatcher 2.1.22.} \par
+\textbf{(a)} \par
+$H_i(X)=H_i(X^n)=0,\forall i>n$ \par
+$0=H_n(X^{n-1})\rightarrow H_n(X^n)\rightarrow H_n(X^n,X^{n-1})$ is exact and $H_n(X^n,X^{n-1})$ is free, so is $H_n(X^n)$ \par
+\textbf{(b)} \par
+$X^{n-1}=X^{n-2}$, thus $0=H_n(X^{n-1})\rightarrow H_n(X^n)\rightarrow H_n(X^n,X^{n-1})\rightarrow H_{n-1}(X^{n-1})=H_{n-1}(X^{n-2})=0$ is exact implies $H_n(X^n)\cong H_n(X^n,X^{n-1})\cong \bigoplus\mathbb{Z}\{e^n\}$ \par
+\textbf{(c)} \par
+Similarly as in (a), $H_{n-1}(X^{n-1})$ is also free, Then exact sequence $H_n(X^{n-1})\rightarrow H_n(X^n)\rightarrow H_n(X^n,X^{n-1})\rightarrow H_{n-1}(X^{n-1})$ implies $0\rightarrow H_n(X^n)\rightarrow \mathbb{Z}^k\rightarrow \mathbb{Z}^m\rightarrow 0$ is exact for some $m\leq k$, hence $H_n(X^n)\cong \mathbb{Z}^{k-m}$ \par
+\textbf{Hatcher 2.1.27.} \par
+\textbf{(a)} \par
+$\exists g:Y\rightarrow X$, $h:B\rightarrow A$ such that $fg\simeq\mathbbm{1}\simeq gf$, $fh\simeq\mathbbm{1}\simeq hf$, then we have $f_*:H_n(X)\rightarrow H_n(Y)$, $f_*:H_n(A)\rightarrow H_n(B)$ are isomorphisms, hence $f_*$ is an isomorphism  by five lemma\par
+\begin{center}
+\begin{tikzcd}
+H_n(A) \arrow[r] \arrow[d, "f_*"] & H_n(X) \arrow[r] \arrow[d, "f_*"] & {H_n(X,A)} \arrow[r] \arrow[d, "f_*"] & H_{n-1}(A) \arrow[r] \arrow[d, "f_*"] & H_{n-1}(X) \arrow[d, "f_*"] \\
+H_n(B) \arrow[r] & H_n(Y) \arrow[r] & {H_n(Y,B)} \arrow[r] & H_{n-1}(B) \arrow[r] & H_{n-1}(Y)
+\end{tikzcd}
+\end{center}
+\textbf{(b)} \par
+Suppose $g:(Y,B)\rightarrow (X,A)$ such that $fg\overset{\varphi}{\simeq}\mathbbm{1}_Y$, $gf\overset{\psi}{\simeq}\mathbbm{1}_X$, $f|_Ag|_B\overset{\varphi|_{B\times I}}{\simeq}\mathbbm{1}_B$, $g|_Af|_B\overset{\psi|_{A\times I}}{\simeq}\mathbbm{1}_A$ \par
+Thus we have $f|_{\bar{A}}:\bar{A}\rightarrow\bar{B}$, $g|_{\bar{B}}:\bar{B}\rightarrow\bar{A}$, $\varphi|_{\bar{B}\times I}:\bar{B}\times I\rightarrow\bar{B}$, $\psi|_{\bar{A}\times I}:\bar{A}\times I\rightarrow\bar{A}$ such that $f|_{\bar{A}}g|_{\bar{B}}\overset{\varphi|_{\bar{B}\times I}}{\simeq}\mathbbm{1}_{\bar{B}}$, $g|_{\bar{A}}f|_{\bar{B}}\overset{\psi|_{\bar{A}\times I}}{\simeq}\mathbbm{1}_{\bar{A}}$  \par
+Hence $f_*:H_n(X,\bar{A})\rightarrow H_n(Y,\bar{B})$ is also an isomorphism, in this case it is impossible since $H_n(X,\bar{A})=H_n(D^n,S^[n-1])\cong\tilde{H}_n(D^n/S^{n-1})\cong\tilde{H}_n(S^n)=\mathbb{Z}^n$, but $H_n(X,\bar{B})=H_n(D^n,D^n)=\tilde{H}_n(D^n/D^n)=0$ which is a contradiction \par
+\textbf{Hatcher 2.1.29.} \par
+$S^1\vee S^1\vee S^2$ has a CW complex structure, one $0$-cell, two $1$-cells, 1 $2$-cell, then we get an exact sequence
+\[H_3(X^3,X^2)\rightarrow H_2(X^2,X^1)\rightarrow H_1(X^1,X^0)\rightarrow H_0(X^0)\rightarrow 0\]
+Which gives \begin{tikzcd}
+0 \arrow[r] & \mathbb{Z} \arrow[r, "0"] & \mathbb{Z}^2 \arrow[r, "0"] & \mathbb{Z} \arrow[r] & 0
+\end{tikzcd} \par
+On the other hand, $\mathbb{R}^2$ is a universal cover of $S^1\times S^1$, and attach to each vertex of the caylay graph which is a universal cover of $S^1\vee S^1$ a $S^2$, call this $\Gamma$, then $\Gamma$ is a universal cover of  $S^1\vee S^1\vee S^2$, but $H_2(\mathbb{R}^2)=0\neq H_2(\Gamma)$ \par
+\textbf{2.} \par
+\textbf{(a)} \par
+Simply use Hatcher 2.1.27, we know that $j$ induces an isomorphism \par
+\textbf{(b)} \par
+Let $r:V\rightarrow A$ be the retraction and $i:A\rightarrow V$ be inclusion, then $\exists h:V\times I\rightarrow V$ such that $ri=\mathbbm{1}_A$, $ir\overset{h}{\simeq}\mathbbm{1}_V$, then $\tilde{r}:V/A\rightarrow A/A$ is also a retraction, $\tilde{i}:A/A\rightarrow V/A$ is also an inclusion, $h$ also induces $\tilde{h}:V/A\times I\rightarrow V/A$, $\tilde{r}\tilde{i}=\mathbbm{1}_{A/A}$, $\tilde{i}\tilde{r}\overset{\tilde{h}}{\simeq}\mathbbm{1}_{V/A}$, thus $\tilde{r}$ is also a deformation retraction \par
+\textbf{(c)} \par
+Directly check that the following diagram is commutative \par
+\begin{center}
+\begin{tikzcd}
+{(X,A)} \arrow[r, "j"] \arrow[d, "p"] & {(X,V)} \arrow[d, "q"] \\
+{(X/A,A/A)} \arrow[r, "g"] & {(X/A,V/A)}
+\end{tikzcd}
+\end{center}
+\par
+Similarly as in (a), $g_*$ and $j_*$ are isomorphisms, so is $q_*$ by 1(c), hence $p_*$ is also an isomorphism \par
+
+\end{document}

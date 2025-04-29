@@ -1,0 +1,1648 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\section{Introduction}
+
+K-theory is the study of categories of \textbf{vector bundles} or similar objects. A vector bundle is a parametrized family of vector spaces: $p:E\to X$ is a vector bundle, $X$ is a topological space. For each $x\in X$, $E_x=p^{-1}(x)$ is a vector space depending "continuously" on $x\in X$. K-theory deals with parametrized linear algebra. Often we don't deal directly with geometry, but with rings
+
+\begin{theorem}[Swan-Serre]\label{Swan-Serre Theorem}
+There is an equivalence of cateogories between vector bundles over $X$ and finitely generated projective modules over an associated ring of functions on $X$. Here are 3 categories in which this works
+\begin{enumerate}
+\item $X$ compact Hausdorff, $R=C(X)$ the continuous $\mathbb F$-valued function on $X$. Here $\mathbb F$ could be $\mathbb R,\mathbb C$ or $\mathbb H$
+\item $X$ affine variety over a field $k$, $R=\mathcal O(X)$ is the ring of regular functions. If $X$ is projective, it is more complicated
+\item $X$ stein manifold(holomorphic submanifold of $\mathbb C^n$), $R=\mathcal O(X)$ holomorphic functions on $X$, category of vector bundles is holomorphic category
+\end{enumerate}
+\end{theorem}
+
+\section{Projective modules}
+In this course, a ring almost always have units but not necessarily commutative
+
+\begin{definition}
+$R$ is a ring with unit. A free $R$-module is one isomorphic to $R^I$, $I$ is some index set. A finitely generated free $R$-module is one isomorphic to $R^n$. $R$ is said to have the \textit{invariant basis property} if $R^n\cong R^m\Rightarrow n=m$. Note that this is always true if $R$ is commutative(reason: true for fields, and if $R$ is commutative, $k=R/m$ is field, $R\otimes k$ is a vector space over $k$)
+\end{definition}
+
+\begin{exercise}[Counter-example]
+$k$ is a field, $R=\End_k(k^\infty)$ doesn't have the invariant basis property, as $R\cong R^2$. Idea: $k^\infty\oplus k^\infty\cong k^\infty$
+\end{exercise}
+
+\begin{solution}
+$R$ corresponds to a matrix with rows and columns ranging in $\mathbb N$, and each column has all but finitely many non-zero elements, and we can decompose any matrix to the direct sum of two matrices with even columns or odd columns
+\[
+\begin{bmatrix}
+\circ&\times&\circ&\times&\circ&\times&\cdots\\
+\circ&\times&\circ&\times&\circ&\times&\cdots\\
+\circ&\times&\circ&\times&\circ&\times&\cdots\\
+\circ&\times&\circ&\times&\circ&\times&\cdots\\
+\circ&\times&\circ&\times&\circ&\times&\cdots\\
+\circ&\times&\circ&\times&\circ&\times&\cdots\\
+\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\ddots\\
+\end{bmatrix}
+\]
+\end{solution}
+
+\begin{theorem}
+$R$ is ring, $P$ is an $R$-module. The following are equivalent
+\begin{enumerate}[leftmargin=*]
+\item $P$ is a direct summand in a free $R$-module, i.e. $F\cong P\oplus Q$ for some free $R$-module $F$
+\item $\Hom_R(P,-)$ is an exact functor
+\item $P$ has the property that if $\phi:M\to N$ is a surjective $R$-module map and we are given $\alpha:P\to N$, there exists $\beta:P\to M$ such that $\alpha=\phi\circ\beta$
+\end{enumerate}
+An $R$-module with these 3 equivalent conditions is called \textit{projective}\index{Projective module}
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+The first invariant of K-theory is $K_0(R)$, then \textbf{Grothendieck group} of finitely generated projective modules over $R$. If $P$ and $Q$ are finitely generated projecive $R$ modules, we can "add" by taking direct sum, but not subtract. $K_0(R)$ is the group with generators $[P]$, $P$ finitely generated $R$-module with relations $[P]=[Q]$ if $P\cong Q$. We build in the relation $[P]+[Q]=[P\oplus Q]$. Note that every element of $K_0(R)$ is of the form $[P]-[Q]$ for some $P,Q$, $[P]-[Q]=[P']-[Q']\iff P\oplus Q'\oplus S\cong R'\oplus Q\oplus S$ for some $S$. In general, "addition" of projective modules does not have the cancellation property, just as addition of vector bundles does not
+
+\begin{example}
+$TS^2$ is not free since $\chi(S^2)=2\neq0$
+\end{example}
+
+\begin{fact}[reference: Hatcher's K-theory book]\hfill
+\begin{enumerate}
+\item Any vector bundle (by definition) is locally trivial, then rank $X\to\mathbb N$ is continuous, hence locally constant
+\item Any vector bundle can be equipped with a metric, i.e. a family of inner products varying continuously with $x\in X$. (Construction: use local triviality and patch with partition of unity)
+\item Any vector bundle can be embedded into a trivial vector bundle $X\times\mathbb F^n$ for $n$ large enough. (Use local triviality and partition of unity)
+\item 2+3 $\Rightarrow$ Any vector bundle is a direct summand in a trivial bundle
+\end{enumerate}
+\end{fact}
+
+\begin{proof}[Proof of Theorem~\ref{Swan-Serre Theorem}]
+Send $p:E\to X$ to the set of sections $\Gamma(E)$, then $\Gamma(E)$ is a $\mathcal O(X)$-module, from above, $\Gamma(E)$ is finitely generated and projective. The rest is formal
+\end{proof}
+
+\begin{example}
+Observation: Any vector bundle over $S^n,n\geq1$ is obtained by gluing("clutching"): two trivial vector bundles over the upper and lower hemispheres via a map $S^{n-1}\to \GL(k,\mathbb F)$. This is because any vector bundle over a contractible space is trivial, so
+\[
+\Vect_{\mathbb F}^k(S^n)\cong[S^{n-1},\GL(k,\mathbb F)]\cong
+\begin{cases}
+\pi_{n-1}(O(k))&\mathbb F=\mathbb R\\
+\pi_{n-1}(U(k))&\mathbb F=\mathbb C\\
+\pi_{n-1}(\operatorname{Sp}(k))&\mathbb F=\mathbb H
+\end{cases}
+\]
+$X=S^2$, $\mathbb F=\mathbb R$, what is the classification of rank $n$ vector bundles over $X$? We see that rank $k$ vector bundles over $S^2$ are classified by $\pi_1(O(k))$, since $S^1$ is connected, any map $S^1\to O(k)$ lies in a single component, both isomorphic to $\SO(k)$, for $k\geq3$, $\SO(k)$ is a simple Lie group and $\pi_1(\SO(k))\cong\mathbb Z/2$ for $k\geq3$(except $\SO(4)$ is only semi-simple with two cover?)
+\end{example}
+
+\begin{note}
+$SU(2)$ as quaternions acts on $S^3$, gives a double cover of $\SO(3)$
+\end{note}
+
+Implication for K-theory: The stable isomorphic classes of vector bundles $E$ over $S^2$ is characterized by
+\[
+\begin{cases}
+\rank\in\mathbb N \\
+\text{Stiefel-Whitney number} = \langle w_2(E),[S^2]\rangle\in\mathbb Z/2
+\end{cases}
+\]
+Similar analysis holds for $S^n$
+\[
+\begin{cases}
+\rank\in\mathbb N \\
+\text{something in } \pi_{n-1}(\SO)
+\end{cases}
+\]
+Here $\pi_{n-1}(\SO)=\pi_{n-1}(\SO(\infty))=\varinjlim_k\pi_{n-1}(\SO(k))$, $\pi_{n-1}(\SO(k))$ stablizes as $k\to\infty$
+
+\begin{theorem}[Bott periodicity theorem]
+\[
+\pi_{n-1}(\SO)=\begin{cases}
+\mathbb Z,&n\text{ is a multiple of }4 \\
+\mathbb Z/2,&n\equiv1,2\mod8 \\
+0,&\text{otherwise}
+\end{cases}
+\]
+\end{theorem}
+
+Lessons form this example: stable classification is much easier than the unstable classification. A stably trivial bundle need not to be trivial. These lessons carry over to the purely algebraic setting of projective modules over a ring. To get a corresponding example with projective modules over a Noetherian commutative ring, take $R=\mathbb R[x,y,z]/(x^2+y^2+z^2-1)$, $\Spec R$ is an "algebraic model" for $S^2$. Our non-trivial but stably trivial vector bundle can be constructed as $\{(x,y,z,u,v,w)|x^2+y^2+z^2=1,xu+yv+zw=0\}$. This is an algebraic model for the tangent bundle of $S^2$
+
+\section{Homotopy Invariance}
+
+\begin{theorem}\label{theorem1 - 1/29/2021}
+The classification of the topological vector bundles over a compact Hausdorff space X is homotopy invariant. In other words, if $f,g:X\to Y$ are maps of compact spaces and $E$ is an $\mathbb F$ bundle over $Y$, then $f\simeq g\Rightarrow f^*(E)\cong g^*(E)$
+\end{theorem}
+
+\begin{corollary}
+Every vector bundle over a contractible space is trivial
+\end{corollary}
+
+\begin{theorem}\label{theorem2 - 1/29/2021}
+$A$ is a unital Banach algebra(For application, $A=C(X,M_n(\mathbb F))$). Let $\Idem A$ be the set of idempotents in $A$($x^2=x$). If $e,f\in \Idem A$ lies in the same component, then they are conjugate under $\GL_1(A)$
+\end{theorem}
+
+\begin{proof}
+It's enough to show that if $e,f\in \Idem A$ are sufficiently close in norm, then $e,f$ are conjugate. Suppose $e,f$ are close and let $a=e+f-1\in A$, then $a^2$ is close to $(2e-1)^2=1$, so $a^2$ is invertible, thus $a$ is invertible. $ae=fa$ since $ae=(e+f-1)e=fe$, $fa=f(e+f-1)=fe$, thus $aea^{-1}=f$
+\end{proof}
+
+\begin{proof}[Proof Theorem~\ref{theorem1 - 1/29/2021}]
+Embed $E$ as a direct summand in a trivial bundle of rank $n$, then $f^*(E),g^*(E)$ are obtained by projecting down from $X\times\mathbb F^n$ via homotopic idempotents in $C(X,M_n(\mathbb F))$
+\end{proof}
+
+\section{Projective modules over a local ring}
+
+\begin{definition}
+$R$ is a ring with unit, $R$ is called \textbf{local} if the non-invertible elements in $R$ constitute a 2-sided ideal $m$. Obviously $m$ is the unique maximal 2-sided ideal
+\end{definition}
+
+Caution: In the non-commutative case, having a unique maximal 2-sided ideal is not good enough! Since $M_n(\mathbb F)$ has this property for $\mathbb F$ a field, and this ring is not local
+
+Note: If $R$ is local and $x\in R$ has a left inverse, then it also has a right inverse. Suppose $ax=1$, then $ax\notin m$, so $x\notin m$, so $x$ is invertible
+
+\begin{fact}
+\begin{enumerate}
+\item If $R$ is local with maximal ideal $m$ and $x\in m$, then $1+x$ is invertible. If not, then $1+x\in m\Rightarrow1\in m$ which is a contradiction
+\item (Nakayama's lemma) $R$ is a local ring with maximal ideal $m$, and let $m$ be a finitely generated $R$-module, if $mM=M$, then $M=0$. Let $M=Rx_1+\cdots +Rx_n$ such that $n$ is minimal, then since $mM=M$, $x_n=r_1x_1+\cdots +r_nx_n$ with $r_j\in m$, now $(1-r_n)x_n=r_1x_1+\cdots+r_{n-1}x_{n-1}$, but $1-r_n$ is invertible, we can divide to get $x_n$, contradicting the minimality unless $n=0$, i.e. $M=0$
+\end{enumerate}
+\end{fact}
+
+\begin{corollary}[Corollary of Nakayama's lemma]
+$M$ is a finitely generated $R$-module, $x_1,\cdots,x_k\in M$
+\begin{enumerate}
+\item If $\dot x_1,\cdots,\dot x_k$ generate $M/mM$, then it generate $M$
+\item If $\dot x_1,\cdots,\dot x_k$ is a free basis for $M/mM$, then it is a free basis for $M$
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Consider $N=M/(Rx_1+\cdots+Rx_k)$, this shows that $x_1,\cdots,x_k\in M$ generates $M$. To show this is a basis, consider 
+\end{proof}
+
+\begin{theorem}
+Let $R$ be a local ring, $M$ a finitely generated projective $R$-module, then $M$ is free
+\end{theorem}
+
+\begin{proof}
+$M\oplus N\cong R^n$. $m(M\oplus N)=m^n$, so $(R/m)M$ is a direct summand  in $(R/m)^n$, but $R/m$ is a division ring, so $(R/m)M\cong (R/m)^k$ for some $0\leq k\leq n$, and $(R/m)N=(R/m)^{n-k}$. Let $\dot x_1,\cdots,\dot x_k$ be a free basis for $(R/m)M\cong M/mM$ and extend it to a free basis by adding $\dot x_{k+1},\cdots,\dot x_n$ for $(R/m)N$, pull these back to $x_1,\cdots,x_k\in M$ and $x_{k+1},\cdots,x_n\in N$. $M=Rx_1+\cdots +Rx_k$ by Nakayama's lemma. Since $x_1,\cdots,x_n$ is another generating set for $R^n$ with $n$ elements, writing the the matrix of $x_i$'s and $e_i$'s gives the linear independence
+\end{proof}
+
+\begin{corollary}
+For $R$ is a local ring, $K_0(R)=\mathbb Z$, with the class of a projective module given by its rank(this is only stable case, note that the theorem actually prove the non-stable case, which is more general)
+\end{corollary}
+
+\section{Projective modules versus vector bundles}
+
+We discussed the Swan-Serre theorem, that if $E$ is a vector bundle over a compact Hausdorff space $X$, then $\Gamma(X,E)$ is a finitely generated projective $C(X)$-module. This suggests a deeper connection between properties of vector bundles and finitely generated projective moduels. A key aspect of vector bundles is that they are \textbf{locally trivial}. The algebraic analogue of this is \textbf{local freeness}
+
+\begin{theorem}[Lemma 2.4, \cite{Weibel}]\label{theorem 1,2021-2-1}
+$R$ is a commutative ring, $M$ is a finitely generated $R$-module. The following are equivalent
+\begin{enumerate}
+\item $M$ is projective
+\item $M$ is locally free, i.e. for each prime ideal $p$, $\exists s\in R\setminus p$ such that $M[1/s]$ is free of finite rangk over $R[1/s]$
+\item For each prime ideal $p$ of $M$, $M_p$ is a free $R_p$-module, and $M$ is finitely presented, i.e. there is an exact sequence $R^m\to R^n\to M\to0$(If $R$ is Noetherian, then finitely generated implies finitely presented)
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+1$\Rightarrow$2,3: Assume $M$ is projective, $R^n\cong M\oplus P$, then $M$ is finitely presented, i.e. $R^n\to R^n\to M\to0$. Also $R_p^n\cong M_p\oplus P_p$ over teh local ring $R_p$, by Theorem~\ref{theorem 1,2021-2-1}, $M_p$ is finitely generated and free over $R_p$. So after inverting things in $R\setminus p$, we get a free module. But we really only have to invert finitely many elements since $M$ is finitely presented, which is the same as inverting their product, which is a single $s\in M\setminus p$, so $M[1/s]$ is free of finite rangk over $R[1/s]$ \\
+3$\Rightarrow$1: Since $M$ is finitely presented, we have an exact sequence $R^m\to R^n\xrightarrow\epsilon M\to0$. To show $M$ is projective, it suffices to show that $\epsilon^*:\Hom(M,R^n)\to\Hom(M,M)$ is surjective, since $\id_M$ then has a preimage. Given a prime ideal $p$, $M_p$ is free over $R_p$, so $\epsilon_p^*$ is split surjective, so is $\epsilon^*$, since $\Hom(M,M)/\Hom(M,R^n)$ is 0 after localizing at any prime ideal, hence 0
+\end{proof}
+
+So at least over a Noetherian commutative ring, $M$ finitely generated projective  $\iff$ $M_p$ finitely generated free for each $p\in\Spec R$. This suggests(and we used this to study vector bundles over spheres) that to construct interesting projective modules, we get them by patching(clutching) finitely generated free modules over different open sets
+
+\begin{example}[Milnor square, his book on algebraic K-theory]
+Suppose $f:R\to S$ is a map of rings, $I\cong f(I)$, then $R$ is the puback of the diagram
+\begin{center}
+\begin{tikzcd}
+R \arrow[r, "f"] \arrow[d] & S \arrow[d] \\
+R/I \arrow[r, "f"]         & S/I        
+\end{tikzcd}
+\end{center}
+Think of $S$ as $R/J$, so we are patching over $I$ and $J$
+\end{example}
+
+\begin{example}[Topological example]
+$R=C(S^2)$, $I$ is the ideal of functions which vanish on the open upper hemisphere and tend to zero along the equator. Then $R/I\cong C(D^2_-)$, continuous functions on the closed lower hemisphere. Let $S$ be the continuous functions on the closed upper hemisphere $C(D^2_+)$, $R\to S$ is just restriction
+$S$ and $R/I$ are both of the form $C(D^2)$, and since $D^2$ is contractible, every vector bundle on $D^2$ is trivial, and so every finitely generated projective $S$-module or $R/I$-module is free. But $S^2$ is contractible, we want to describe fintiely generated projective $R$-modules in terms of patching of trivial bundles along the equator
+\end{example}
+
+\begin{theorem}[Milnor patching theorem]
+In a Milnor square
+\begin{enumerate}
+\item An $R$-moudle $P$ obtained by patching a finitely generated projective $S$-module $P_1$ and a finitely generated projective $R/I$-module $P_2$ is finitely genereated and projective
+\item In the situation of 1, $S\otimes_R P\cong P_1$ and $P/IP\cong P\otimes_RR/I\cong P_2$
+\item (important)Every finitely generated projective $R$-mod arises this way
+\item Suppose $P$ is obtained by patching $S^n$ and $(R/I)^n$ via $g\in\GL_n(S/I)$, and $Q$ is obtained similarly via $g^{-1}\in \GL_n(S/I)$, Then $P\oplus Q\cong R^{2n}$
+\item More generally, if $P$ is obtained by patching $S^n$ and $(R/I)^n$ via $g\in\GL_n(S/I)$, and $Q$ is obtained by patching $S^n$ and $(R/I)^n$ via $h$, then $P\oplus Q\cong$ patching of $S^n$ and $(R/I)^n$ via $gh\oplus R^{n}$
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Translate to algebra the idea of gluing vector bundles when $X=X_1\cup_Y X_2$, here $X_1,X_2$ are closed subsets of a compact Hausdorff sopace $X_1$ and $Y=X_1\cap X_2$. Alternatively, the Milnor patching theorem is a kind of "algebraic Mayer-Vietoris" 
+
+proof of 3: Recall $R$ is embedded in $S\oplus R/I$. Let $P$ be a finitely generated projective $R$-module Let $P_1=S\otimes_RP$ which is finitely generated projective $S$-module, let $P_2=P/IP$ is a finitely generated projective $R/I$-module. We want to show that $P$ is obtained by patching $P_1$ and $P_2$. We have an exact sequence of $R$-modules
+\[0\to R\to S\oplus R/I\to S/I\to0\]
+$\Hom_R(P,-)$ and $-\otimes_RP$ is exact since $P$ is projective, so we have exact sequence
+\[0\to P\to P_1\oplus P_2\to S/I\otimes_RP\]
+which says that $P$ is patched from $P_1$ and $P_2$
+$\begin{bmatrix}
+1&0\\
+0&1
+\end{bmatrix}\simeq\begin{bmatrix}
+0&-1\\
+1&0
+\end{bmatrix}$ through homotopy $\begin{bmatrix}
+1-t&-t\\
+t&1-t
+\end{bmatrix}$ which has determinant $(1-t)^2+t^2>0$, hence
+$\begin{bmatrix}
+g&0\\
+0&g^{-1}
+\end{bmatrix}=\begin{bmatrix}
+1&g\\
+0&1
+\end{bmatrix}\begin{bmatrix}
+1&0\\
+-g^{-1}&1
+\end{bmatrix}\begin{bmatrix}
+1&g\\
+0&1
+\end{bmatrix}\begin{bmatrix}
+0&-1\\
+1&0
+\end{bmatrix}$ and $\begin{bmatrix}
+g&0\\
+0&h
+\end{bmatrix}=\begin{bmatrix}
+g&0\\
+0&g^{-1}
+\end{bmatrix}\begin{bmatrix}
+1&0\\
+0&gh
+\end{bmatrix}$, here $\begin{bmatrix}
+1&g\\
+0&1
+\end{bmatrix}\simeq\begin{bmatrix}
+1&0\\
+0&1
+\end{bmatrix}$ through homotopy $\begin{bmatrix}
+1&tg\\
+0&1
+\end{bmatrix}$
+\end{proof}
+
+\section{Line bundles and Picard Groups}
+
+We assume in this section $R$ is commutative. We showed that a finitely generated $R$-module $P$ is projective exactly when it's locally free. We call it(by analogy with topology) a \textbf{line bundle} if $P$ is \textbf{locally free of rank 1}. Commutativity of $R$ enables you to tensor two $R$-modules together to get a new one. This preserves the property of being a line bundle. So we can define the \textbf{Picard group} $\Pic(R)$ of $R$, to be the abelian group of line bundles over $R$ up to isomorphism with tensor product as the group operation and $[R]$ as the identity element. The dual line bundle $P^\vee=\Hom_R(P,R)$, and $P\otimes_RP^\vee\to R$ is an isomorphism, so $[P^\vee]=[P]^{-1}$. For topological line dunles over $\mathbb C$, the dual line bundle can also be identified with the complex conjuate bundle. The dual of vector bundle $E\to X$ is the bundle whose fibers are the dual vector spaces. Over $\mathbb C$, $\mathbb C^*\cong \overline{\mathbb C}$ via the usual inner product
+
+\begin{example}\hfill
+\begin{enumerate}
+\item $R=C^{\mathbb R}(X)$, $X$ compact Hausdorff. $\Pic(R)\cong H^1(X,\mathbb Z/2)$
+\item $R=C^{\mathbb C}(X)$, $X$ compact Hausdorff. $\Pic(R)\cong H^1(X,\mathbb Z)$
+\end{enumerate}
+\end{example}
+
+\begin{theorem}
+$R$ is a commutative ring, if two line bundle are stably isomorphic, then they are actually isomorphic
+\end{theorem}
+
+\subsection{Rank and Dimension}
+
+Here are some more properties of rank of finitely generated projective modules over a commutative ring $R$. They are algebraic analogues of some theorems in topology
+
+\begin{theorem}
+If $M$ is a manifold of dimension $n$ and $E$ is a vector bundle of rank $k$ which is stably trivial, then $E$ is trivial provided
+$\begin{cases}
+k>n &\mathbb F=\mathbb R\\
+k>(n+1)/2 &\mathbb F=\mathbb C
+\end{cases}$
+\end{theorem}
+
+\begin{example}
+The tangent bundle of $S^2$ is stably trivial but not trivial, in this case, $n=2,k=2,\mathbb F=\mathbb R$. But every stably trivial 3 plane bundle over $S^2$ is trivial
+\end{example}
+
+\begin{proof}
+There is a fibration $O(n-1)\to O(n)\to S^{n-1}$, we have $\pi_{j+1}(S^{n-1})\to\pi_j(O(n))\to\pi_j(O(n-1))\to\pi_j(S^{n-1})$. The map $\pi_j(O(n-1))\to\pi_j(O(n))$ is sujective if $j<n-1$. an iso if $j<n-2$. and we can decompose $M$ as ($n$-1)-skeleton$\cup D^n$ via gluing along the ($n$-1)-skeleton
+
+Similarly with $U(n-1)\to U(n)\to S^{2n-1}$, which gives $\pi_j(U(n-1))\to\pi_j(U(n))$ surjective if $j<2n-1$, an iso if $j<2n-2$
+\end{proof}
+
+\subsection{The rank function}
+$R$ is a commutative ring, we get a notion of local rank function of a finitely generated projective $R$-mod $P$, $\Spec(R)\to \mathbb N,p\mapsto\rank(P_p)$. 
+
+\begin{lemma}
+The rank funciton is continuous in Zariski topology
+\end{lemma}
+
+\begin{proof}
+$p$ is contained in a maximal ideal $m$, $\rank\Spec R[1/s]=\rank(P_p)=\rank(P_m)$. We get a partition of $\Spec R$ into disjoint open sets
+\end{proof}
+
+\begin{theorem}[Stable rank theorem, Bass-Serre, Bass's book on algebraic K theory, not easy]
+$R$ commutative and Noetherian of dimension $d$. If $R$ has a finitely projective module $P$ of constant rank $k$. then if $k>d$
+\begin{enumerate}
+\item $P=P_0\oplus R^{k-d}$ for some projective module $P_0$ of rank $d$
+\item $P$ is stably isomorphic to $P'$ of same rank $\Rightarrow P\cong P'$
+\item $P$ stably free $\Rightarrow$ $P$ is free
+\end{enumerate}
+\end{theorem}
+
+\begin{corollary}
+If $R$ is a commutative ring with no idempotents other than 0 and 1, then every finitely generated projective $R$-module has constant rank
+\end{corollary}
+
+\begin{proof}
+$\Spec R$ is connected iff $R$ has no non-trivial idempotent. And an integral domain is connected(if $x$ is an idempotent, so is $1-x$, and $x(1-x)=0$)
+\end{proof}
+
+\subsection{Back to line bundles}
+
+Let $R$ be a commutative ring, $P$ finitely generated projective $R$-module. We can form new modules $\bigwedge^jP$. If $P$ has constant rank $k$, then $\bigwedge^jP$ is projective of rank $\binom{k}{j}$. So we can define the determinant of $P$, $\det(P)=\bigwedge^kP$,$k=\rank P$. If $R$ has no non-trivial idempotents, the determinant module is defined for all finitely generated projective modules
+
+\begin{enumerate}
+\item $\det P$ is a line bundle
+\item $\det(P\oplus Q)=\det P\otimes\det Q$
+\end{enumerate}
+
+From these facts we deduce
+
+\begin{theorem}
+$R$ is a commutative ring, if two line bundles are stably isomorphic iff isomorphic, i.e. define the same class in $\Pic(R)$
+\end{theorem}
+
+\begin{proof}
+Assume $P\oplus R^n\cong P'\oplus R^n$, then $P\cong\det P\otimes R=\det(P\oplus R^n)\cong \det(P'\oplus R^n)=\det P'\otimes R\cong P'$
+\end{proof}
+
+\begin{theorem}
+$R$ commutative Noetherian of dimension 1(in particular, Dedekind domain: Noetherian integral domain which is integrally closed in the field of fractions). Then every finitely generated projective $R$-module of constant rank is of the form $P\oplus R^{k-1}$ for some $k$ and for some line bundle $P$, namely the determinant bundle of the module. Thus finitely generated projective $R$-module are completely classified by rank and determinant
+\end{theorem}
+
+\begin{proof}
+Just use stable rank theorem
+\end{proof}
+
+\begin{corollary}
+If $R$ is a commutative Noetherian integral domain of dimension 1, then $K_0(R)\cong\mathbb Z\oplus\Pic(R)$, $[P]\mapsto(\rank P,\det P)$
+\end{corollary}
+
+Note $\det(P\oplus Q)=\det P\otimes\det Q$ says it is a homomorphism in $\Pic$, rank adding says it is a homomorphism in $\mathbb Z$
+
+\section{Ideal classes and Picard groups}
+
+$R$ commutative integral domain, $F$ its field of fractions. A fractional ideal of $R$ is a non-zero $R$-submodule $I$ of $F$, is such that $xI\subseteq R$ for some $x\in F^\times$ (i.e. we can clear denominators). $I$ is invertible if $IJ=R$ for some other fraction ideal $J$. Principal fractional ideals are $Rx$ for $x\in F^\times$. Principal fractional ideals are invertible. The invertible fractional ideals form the Cartier group $\Cart(R)$ of Cartier divisors under multiplication
+
+\begin{proposition}
+The line bundles over $R$ are the same as invertible ideals up to isomorphism. If $I,J$ are fractional ideals and $I$ is invertible, then $I\otimes_R J\cong IJ$. There is an exact sequence
+\[1\to R^\times\to F^\times\xrightarrow{\operatorname{div}} \Cart(R)\to\Pic(R)\to0\]
+\end{proposition}
+
+\begin{proof}
+Suppose $I$ is an invertible fractional ideal, $IJ=R$, then there exist $x_i\in I,y_i\in J$, $\sum_{i=1}^nx_iy_i=1$, $\{x_i\}$ define homomorphisms $R^n\to I$, $\{y_i\}$'s define homomorphisms $I\to R^n$. $I\to R^n\to I$ is the identity, so $I$ is projective, and has rank one because $I\otimes_RF=F$, so $I$ is a line bundle. Conversely, suppose $L$ is a line bundle, we get an embedding $L=R\otimes_R L\subseteq F\otimes_R L=F$, $L$ is isomorphic to a nonzero $R$ submodule of $F$, i.e. a fractional ideal. Since $I$ is finitely generated and projective, we have $R\cong L\otimes_R L^\vee$, hence $L$ is invertible
+\end{proof}
+
+Equivalent definition for Dedekind domain: Integral domain for which every fractional ideal is invertible
+
+\begin{theorem}
+$R$ Dedekind domain, every finitely generated torsion-free $R$-module $M$ is projective and isomorphic to $I\otimes R^{n-1}$ for some fractional ideal $I$
+\end{theorem}
+
+\begin{proof}
+Induction on $\rank M=\dim_F(F\otimes_RM)$. $M$ torsion-free means $M$ embeds into $F\otimes_RM$, so if $\rank M=0$, $M=0$. Suppose $\rank M=n$, $M$ embeds into $F^n$ and then projects to the last factor $F$, image can't be zero, so we have $0\to M_0\to M\to I\to0$ with $I$ fractional ideal projective, so $M=M_0\oplus I$, by induction, $M=I\oplus J\oplus R^{n-2}$. $I\oplus J=IJ\oplus R$ since they have the same determinant
+\end{proof}
+
+\subsection{Applications}
+\begin{enumerate}
+\item If $R$ is a PID, then $\Pic(R)=0$,  $1\to R^\times\to F^\times\to \Cart(R)\to1$ is exact
+\begin{enumerate}
+\item $R=\mathbb Z,F=\mathbb Q$, get
+\[1\to\mathbb Z^\times\to\mathbb Q^\times\to\mathbb Q^\times/\{\pm1\}=\mathbb Q^\times_{>0}\to1\]
+\item $R=\mathbb Z[i],F=\mathbb Q[i]$, $R^\times=\{\pm1,\pm i\}$
+\item $R=k[t], F=k(t)$, $R^\times=k^\times$
+\end{enumerate}
+\item $F$ be a number field, $R=\mathcal O_F$. Then $R$ is a Dedekind domain, the $\Pic(R)$ is finite, and $R^\times$ is finitely generated, in fact, $\rank(R^\times)=r_1+r_2-1$. Most of the time, $R$ is not a PID
+\item $k$ is a field, $C$ is a smooth affine curve over $k$, $R$ is the ring of regular functions on $C$, then $R$ is a Dedekind domain. In the case $k=\mathbb C$, $\Pic(R)$ is the group of algebraic line bundles. $\Cart(R)$ indeed corresponds to the group of divisors(finite linear combinations of points)
+\end{enumerate}
+
+\section{Mayer-Vietoris for Picard groups}
+
+Recall that if $R$ is a commutative ring, $\Pic(R)$ is the group of isomorphism classes of line bundles over $R$. Thiss can sometimes be computed by "patching" or "Mayer-Vietoris"
+
+\begin{theorem}[In Weibel I.3]
+In a Milnor square
+\begin{center}
+\begin{tikzcd}
+R \arrow[r, "f"] \arrow[d, two heads] & S \arrow[d, two heads] \\
+R/I \arrow[r, "\dot f"]               & S/I                   
+\end{tikzcd}
+\end{center}
+we get an eaxt sequence
+\[1\to R^\times\xrightarrow{\Delta}S^\times\times(R/I)^\times\to(S/I)^\times\xrightarrow{\partial}\Pic(R)\to\Pic(S)\times\Pic(R/I)\xrightarrow{\text{ratio}}\Pic(S/I)\]
+Here $\Delta$ is the diagonal map and the maps $S^\times\times(R/I)^\times\to(S/I)^\times$, $\Pic(S)\times\Pic(R/I)\to\Pic(S/I)$ are the "ratio maps" $(x,y)\mapsto\frac{\dot x}{\dot f(y)}$ (with multiplicative notation). Note that this is highly analogous to Mayer-Vietoris in topology. The connecting homomorphism $\partial$ is given by the gluing map.
+\end{theorem}
+
+\section{Classification of topological vector bundles and characteristic classes}
+
+Let $X$ be a compact Hausdorff space, $\mathbb F=\mathbb R$ or $\mathbb C$. Let $E\to X$ be a rank $k$ vector bundle. Recall that $E$ embeds in a trivial rank $n$ bundle for some $n$ sufficiently large, then at each point $x\in X$, we have an associated fiber $E_x\subseteq\mathbb F^n$. thus we get a continuous map $X\to\Gr_{\mathbb F}(k,n)$
+\[\Gr_{\mathbb F}(k,n)=
+\begin{cases}
+O(n)/O(k)\times O(n-k)&\mathbb F=\mathbb R \\
+U(n)/U(k)\times U(n-k)&\mathbb F=\mathbb C
+\end{cases}\]
+Over $\Gr_{\mathbb F}(k,n)$, we have a canonical or universal bundle of rank $k$. Now we get classifying space $BO(k)=\displaystyle\varinjlim_{n\to\infty}\Gr_{\mathbb R}(k,n)$ and $BU(k)=\displaystyle\varinjlim_{n\to\infty}\Gr_{\mathbb C}(k,n)$, $BO(1)=\mathbb{RP}^\infty$, $BU(1)=\mathbb{CP}^\infty$
+
+\begin{theorem}[Classification theorem]
+$X$ is a compact Hausdorff space, there is a natural bijection
+\[\{\text{isomorphism class of rank $k$ real vector bundle over $X$}\}\leftrightarrow[X,BO(k)]\]
+\[\{\text{isomorphism class of rank $k$ complex vector bundle over $X$}\}\leftrightarrow[X,BU(k)]\]
+Given a map $X\to BO(k)$, the associated vector bundle is just the pullback. Note that since $X$ is compact, the image lands in $\Gr(k,n)$ for some $n$
+\end{theorem}
+
+\begin{proof}
+We saw the every vector bundle arises this way, we also showed that homotopic maps give isomorphic vector bundles. It remains to show that isomorphic vector bundles come from homotopic maps. Suppose $E\cong F$ are rank $k$ vector bundles, both embedded in a trivial $n$-dimensional vector bundle. Taking $n$ large enough we can construct $\phi$ as a map $X\to\GL_n(\mathbb F)$, $\phi(x):E_x\to F_x$, sending $E_x$ and $E_x^\perp$ to $F_x$ and $F_x^\perp$ isomorphically. We want to show that maps classifying $E$ and $F$ are homotopic. Trick: double $n$, and replace $\phi$ by
+$\begin{bmatrix}
+\phi\\
+&\phi^{-1}
+\end{bmatrix}$
+This map can be homotoped to the identity. This shows the classifying maps to $\Gr_{\mathbb F}(k,2n)$ are homotopic
+\end{proof}
+
+\subsection{Characteristic classes}
+
+It turns out that $H^*(BO(k),\mathbb Z/2)$ and $H^*(BU(k),\mathbb Z)$ are polynomial rings on $k$ variables(prove this by induction on $k$ using the fibrations $O(k-1)\to O(k)\to S^{k-1}$, $U(k-1)\to U(k)\to S^{2k-1}$). From this, one gets the following result
+
+\begin{theorem}[Existence and uniqueness theorem for characteristic classes, ref: see Hatcher on vector bundles and K theory]
+There are unique classes $w_j\in H^j(BO(k),\mathbb Z/2)$ with the following properties
+\begin{enumerate}
+\item $H^*(BO(k),\mathbb Z/2)\cong \mathbb Z/2[w_1,\cdots,w_k]$
+\item If $L$ is a real line bundle over $X$, $w_1$ pulls back to the element of $H^1(X,\mathbb Z/2)=\Hom(\pi_1(X),\mathbb Z/2)$ which classifies the line bundles, as $\Hom(\pi_1(X),\mathbb Z/2)$ corresponds to the two to one coverings $\tilde X$, and $L=\tilde X\times_{\pi_1(X)}\mathbb R$
+\item For arbitrary real vector bundles $E$ of rank $k$ over $X$, we define $w(E)$, called the total Stiefel-Whitney class of $E$, to be $1+f^*(w_1)+f^*(w_2)+\dots$ which has the property that $w(E)=w(F)$ if $E\cong F$, $w(E)w(F)=w(E\oplus F)$, $w(\text{trivial bundle})=1$. These imply that $w$ is a stable invariant
+\end{enumerate}
+There are unique classes $c_j\in H^j(BU(k),\mathbb Z)$ with the following properties
+\begin{enumerate}
+\item $H^*(BU(k),\mathbb Z)\cong \mathbb Z[c_1,\cdots,c_k]$
+\item If $L$ is a complex line bundle over $X$, $c_1(L)$ under usual isomorphism $\Pic(X)\cong H^2(X,\mathbb Z)$
+\item For arbitrary complex vector bundles $E$ of rank $k$ over $X$, we define $c(E)$, called the total Chern class of $E$, to be $1+f^*(c_1)+f^*(c_2)+\dots$ which has the property that $c(E)=c(F)$ if $E\cong F$, $c(E)c(F)=c(E\oplus F)$, $c(\text{trivial bundle})=1$
+\end{enumerate}
+\end{theorem}
+
+\begin{note}
+These facts follow from above:
+\begin{enumerate}
+\item  If $E$ is a rank $k$ complex vector bundle over $X$, we can think of $E$ as a real vector bundle(realification) of rank $2k$, then $w_{2j}(E)=c_j(E)\mod2$, $w_{2j+1}(E)=0$
+\item $w_1(L_1\otimes L_2)=w_1(L_1)+w_1(L_2)$, $c_1(L_1\otimes L_2)=c_1(L_1)+c_1(L_2)$
+\end{enumerate}
+\end{note}
+
+\begin{theorem}[Lerary-Hirsch theorem]
+$F\xrightarrow{\iota}E\xrightarrow{p}B$ is a fiber bundle, $H^*(F,R)$ is finitely generated free $R$-module, and $\exists c_j\in H^{k_j}(E,R)$ such that $\iota^*(c_j)$ form a basis for $H^*(F,R)$. Then $H^*(B,R)\otimes_RH^*(F,R)\to H^*(E,R)$, $\sum b_i\otimes\iota^*(c_j)\mapsto p^*(b_i)\smile c_j$ is an isomorphism
+\end{theorem}
+
+\begin{theorem}[Splitting principle]
+Informal statement: For formulas involving characteristic classes, you can pretend that all vector bundles are direct sum of line bundles
+
+Formal statement: Let $X$ be a compact Hausdorff space, $E\to X$ a rank $k$ vector bundle(over $\mathbb R$ or $\mathbb C$), then there is another space $Y_E$ with a surjective projection $p:Y_E\to X$ such that $p^*:H^*(X)\to H^*(Y_E)$ is injective, and $p^*(E)$ splits as a direct sum of line bundles
+\end{theorem}
+
+\begin{proof}
+Idea: Let $Y_E$ be the fiber bundle over $X$ whose fiber over $x\in X$ is the flag manifold of $E_x$ which can be identified with $U(k)/U(1)^k$ or $O(k)/O(1)^k$. By Leray-Hirsch theorem, $p^*$ is injective on cohomology(with $\mathbb Z$ coefficients in the complex case and $\mathbb Z/2$ in the real case)
+
+We get the formula for behavior under tensor products: if $E=L_1\oplus\cdots\oplus L_k$, $F=M_1\oplus\cdots\oplus M_l$, then $E\otimes F\cong\oplus_{j,m}L_j\otimes M_m$, so $C(E\otimes F)=\prod_{j,m}(1+c_1(L_j)+c_1(M_m))$, $c(E)=\prod_j(1+c_1(L_j))$, we can express $c_k$ using elementary symmetric functions
+\end{proof}
+
+What is this good for? K theory is about stable classification of vector bundles. Sometimes this is hard to compute, but  we have a calculational tool: $E$ is stably isomorphic to $F$ implies that $E$ and $F$ has the same characteristic classes
+
+\begin{example}
+Given line bundles $L,L'$, $c_1(L)=x,c_1(L')=y$, $c(L\otimes L')=1+(x+y)+xy$, so if a rank 2 bundle $E$ is to be stably isomorphic to $L\oplus L'$, we need to have $c_1(E)=x+y$ and $c_2(E)=xy$, this is necessary but not sufficient
+\end{example}
+
+\begin{example}
+Over $S^2$, we have complex vector bundles of rank 1, $L_n,n\in\mathbb Z$ with $c_1(L_n)=nx$, $x$ is the usual generator of $H^2(S^2)$. If we realify $L_n$, there are only two stable isomorphism classes, since $L_n$ is stably isomorphic to $L_{n+2}$
+\end{example}
+
+\section{Other categories of vector bundles}
+
+The subject of K-theory is useful in studying many different categories of vector bundles. A useful framework is that of a \textbf{ringed sapce} $(X,\mathcal O_X)$. Here $X$ is a topological space (not necessarily Hausdorff) and $\mathcal O_X$ is a \textbf{sheaf of rings} on $X$. That means that for each open set $U\subseteq X$, we have a ring $\mathcal O_X(U)$ (to be thought of as the allowable functions on $U$) and that we have compatible \textbf{restriction maps}, in general neither injective nor surjective $\mathcal O_X(U)\to\mathcal O_X(V)$ when $V\subseteq U$. The key axioms enable one to \textbf{recover a function from its restrictions}:
+\begin{enumerate}
+\item If $\{U_i\}$ is a covering of $U$, then $\mathcal O_X(U)\to\prod_i\mathcal O_X(U_i)$ is injective
+\item If $\{U_i\}$ is a covering of $U$ and one is given $f_i\in\mathcal O_X(U_i)$ such that $f_i|_{U_i\cap U_j}=f_j|_{U_i\cap U_j}$ for all $i$ and $j$, then there exists $f\in\mathcal O_X(U)$ restricting to $f_i$ on $U_i$ (gluing condition)
+\end{enumerate}
+In all cases we will be interested in, $(X,\mathcal O_X)$ will be what Weibel calls \textbf{locally ringed}, where we add two more axioms:
+\begin{enumerate}
+\item $\mathcal O_X$ is a sheaf of \textbf{commutative rings}
+\item for $x\in X$, $\mathcal O_{X,x}=\varinjlim_{x\in U}\mathcal O_X(U)$ is a local ring
+\item the topology on $X$ is $T_0$, i.e. distinct points have distinct families of open neighborhoods. (Otherwise we can pass to a quotient space)
+\end{enumerate}
+
+\begin{example}
+\begin{itemize}
+\item $X$ a topological (say compact Hausdorff) space and $\mathcal O_X(U)=\{\text{continuous functions }U\to\mathbb F\}$, where $\mathbb F=\mathbb R$ or $\mathbb C$. In this case, $\mathcal O_{x,x}$ is the local ring of \textbf{germs of continuous functions} at $x$.
+\item $R$ a commutative ring. $X=\Spec R$, $\mathcal O_X(X)=R$, $\mathcal O_X(D(f))=R[\frac{1}{f}]$, $\mathcal O_{X,\mathfrak p}=R_{\mathfrak p}$. This is a key example called an \textbf{affine scheme}.
+\item a locally ringed space $(X,\mathcal O_X)$ such that $X$ has an open covering $\{U_i\}$ with $(U_i,\mathcal O_X|_{U_i})$ an affine scheme for each $i$. Such a ringed space is called a \textbf{scheme}. Aside from affine schemes themselves, the key examples are \textbf{projective schemes} over a field $k$. These are subschemes of \textbf{projective space} $\mathbb P^n_k$, which is constructed from the ring of homogeneous polynomials in $n+1$ \textbf{homogeneous coordinates} $x_0,\cdots,x_n$. Note that $\mathbb P_k^n$ has a covering $\{U_i\}_{i=0}^n$, where $U_i=\{x_i\neq 0\}$. Each $U_i$ is isomorphic to \textbf{affine $n$-space} $\mathbb A^n_k=\Spec k[x_1,\cdots,x_n]$.
+\item A \textbf{stein manifold} $X$, i.e. a complex analytic submanifold of $\mathbb C^n$ for some $n$. These are the analytic counterparts of (smooth) affine schemes. The sheaf $\mathcal O_X$ is defined by $\mathcal O_X(U)=\{\text{holomorphic functions on }U\}$
+\item More generally, an \textbf{analytic space} $X$, with $\mathcal O_X(U)=\{\text{holomorphic functions on }X\}$
+\end{itemize}
+\end{example}
+
+\subsection{Vector bundles on a ringed space}
+
+Let $(X,\mathcal O_X)$ be a locally ringed space like one of the examples above. A \textbf{vector bundle} over $X$ of \textbf{rank} $k$ is a sheaf $\mathcal F$ of $\mathcal O_X$-modules (i.e., for each $U$ open in $X$, $\mathcal F(U)$ is a module over $\mathcal O_X(U)$, and the sheaf axioms hold) which is \textbf{locally free} of rank $k$, i.e., such that there is an open covering $\{U_i\}$ with $\mathcal F(U_i)\cong\mathcal O_X(U_i)^k$. In the cases of affine schemes and Stein manifolds, a vector bundle $\mathcal F$ over $X$ is equivalent to a finitely generated projective module over $R=\mathcal O_X(X)$. However, this fails badly over projective schemes and compact complex manifolds, since then $R$ is much too small (it consists only of constant functions).
+
+\subsection{Classifying vector bundles}
+Suppose $\mathcal F$ is a rank $k$ vector bundle over $(X,\mathcal O_X)$, choose $\{U_i\}$ with $\mathcal F(U_i)=\mathcal O_X(U_i)^k$. Over $U_{ij}=U_i\cap U_j$, we have an isomorphism
+$\mathcal F(U_i)|_{U_{ij}}\xrightarrow{\cong}\mathcal F(U_j)|_{U_{ij}}$, which we can identify with a regular function over $U_{ij}$ with values in bundle automorphisms. This gives a Cech cocycle with values in $\GL_k(\mathcal O_X)$, and so we get the Classification theorem
+
+\begin{theorem}
+$\{\mathrm{VB}(X,\mathcal O_X)\}\cong H^1(X,\GL_k(\mathcal O_X))$. The right hand side is somewhat mysterious unless $k=1$, when it is the cohomology of the \textbf{multiplicative group} sheaf $\underline{\mathbb G_m}$ or $\mathcal O_X^\times$. So we have $\Pic(X,\mathcal O_X)\cong H^1(X,\mathcal O_X^\times)$
+\end{theorem}
+
+\subsection{Chern classes of line bundles}
+
+Suppose $X$ is an analytic manifold, a Stein manifold, a compact complex manifold, or the underlying analytic space of a projective variety over $\mathbb C$ (algebraic variety = reduced irreducible scheme). Let $X_{\text{top}}=X$ just as a topological space, the cohomology of $X$ is the target for Chern classes of topological vector bundles. Note that there is a natural map (forget analytic or algebraic structures) $\mathrm{VB}(X,O_X)\to \mathrm{VB}(X_{top})$. So via this forgetful map, we can define Chern classes. But the forgetful map need not be either injective nor surjective, i.e. many algebraic vector bundles can give rise to the same topological vector bundle, and some topological vector bundles can't be made algebraic.
+
+Another useful construction: The \textbf{exponential sequence}. This works in the analytic but not in the algebraic category. Say $X$ is a connected complex analytic space or a complex manifold, $\mathcal O$ is the sheaf of holomorphic functions, then we have an exact sequence of sheaves:
+\[0\to \mathbb Z\xhookrightarrow{2\pi i}\mathcal O\xrightarrow{\exp}\mathcal O^\times\to1\]
+This gives a long exact sequence in sheaf cohomology
+\[0\to\mathbb Z\to H^0(X,O)\to H^0(X,O^\times)\to H^1(X,\mathbb Z)\to H^1(X,\mathcal O)\to H^1(X,O^\times)=\Pic(X,O)\xrightarrow{c_1}H^2(X,\mathbb Z)\]
+There are cases where $c_1:\Pic(X,O)\to H^2(X,\mathbb Z)$ is an isomorphism, then the classification of analytic and topological line bundles is the same
+
+\begin{example}
+$X=\mathbb{P}^1_{\mathbb C}$, every analytic vector bundle is determined by its Chern class, and all Chern classes can be realized. So the analytic line bundles are all of the form $\mathcal O(n)$, $n\in\mathbb Z$
+\end{example}
+
+\begin{theorem}[Highly non-trivial, GAGA]
+For complex projective varieties, classifications of algebraic and analytic vector bundles coincide
+\end{theorem}
+
+\subsection{More on Algebraic and holomorphic vector bundles}
+
+\begin{example}
+On $X=\mathbb P^1_k$, $\Pic(\mathbb P^1_k)\cong\mathbb Z$ with line budnles denoted by $O(m)$, $m\in\mathbb Z$, whose local sections are homogeneous Laurent polynomials of degree $m$. If $k=\mathbb C$, use exponential sequence we have
+\[0\to H^1(\mathbb{P}^n_{\mathbb C},\mathcal O_X)\to H^1(\mathbb {P}^n_{\mathbb C},\mathcal O_X^\times)=\Pic(\mathbb P_{\mathbb C}^n)\xrightarrow{c_1} H^2(\mathbb P_{\mathbb C}^n,\mathbb Z)\to H^2(\mathbb P_{\mathbb C}^n,\mathcal O_X)\]
+The higher cohomology $H^j(\mathbb P^n_k,\mathcal O_X)$ vanishes for $j>0$, so the Chern class map $c_1$ is an isomorphism
+\end{example}
+
+\subsection{Similarities and differences between algebraic and topological categories}
+
+\begin{enumerate}
+\item The same topological bundles may admit many inequivalent algebraic structures. Or it may admit none at all.
+\item Exact sequences of algebraic vector bundles \textbf{do not split} in general, this is different from the projective modules over a ring.
+\end{enumerate}
+
+\begin{example}\hfill
+\begin{enumerate}
+\item 
+$E$ Elliptic curve, say over $\mathbb C$. We have the exponential exact sequence
+\[0\to \mathbb Z\xrightarrow{2\pi i}\mathbb C\xrightarrow{\exp}\mathbb C^\times\xrightarrow{0} H^1(E,\mathbb Z)\to H^1(E,\mathcal O)\to\Pic(E)\to H^2(E,\mathbb Z)\to H^2(E,\mathcal O)\]
+Here $E$ is topologically $S^1\times S^1$, so $H^1(E,\mathbb Z)=\mathbb Z^2$, $H^2(E,\mathbb Z)=\mathbb Z$, we have $H^1(E,\mathcal O)=\mathbb C$, $H^2(E,\mathcal O)=0$. So we get the short exact sequence
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & \mathbb C/\mathbb Z\times\mathbb Z \arrow[r] & \Pic(E) \arrow[r] & \mathbb Z \arrow[r] \arrow[l, bend right] & 0
+\end{tikzcd}
+\end{center}
+and $\Pic(E)\cong\mathbb T^2\times\mathbb Z$. In particular, the Chern class $c_1$ does not determine the class of a line bundle.
+\item $X=P^1_k$, every vector bundle over $X$ splits as a direct sum of line bundles. But unlike the case of complex top bundles over $S^2=P^1_{\mathbb C}$, not every rank two vector bundle splits as $V=\det(V)\oplus\text{trivial}$. For example, $\mathcal O\oplus \mathcal O$ and $\mathcal O(1)\oplus\mathcal O(-1)$ are both topologically trivial, but they are algebraically distinct.
+\item Even on $\mathbb P^1$, we have exact sequence
+\[0\to \mathcal O(-2)\to\xrightarrow{\alpha} \mathcal O(-1)\oplus \mathcal O(-1)\xrightarrow{\beta} \mathcal O\to0\]
+doesn't split. Since there are no morphisms from $\mathcal O(p)\to \mathcal O(q)$, $p>q$. Here $\beta(f,g)=x_0f+x_1g$, $\alpha(h)=(x_1h,-x_0h)$
+\end{enumerate}
+\end{example}
+
+
+\subsection{Invertible ideal sheaves and divisors}
+
+Let $X$ be an integral scheme, i.e., one such that $\mathcal O_X(U)$ is an integral domain for each affine open set $U$. In particular, $X$ is connected and reduced, there is a common field of fractions for all $\mathcal O_X(U)$, called $k(X)$, the field of rational functions
+
+\begin{example}
+$X=\mathbb P^n_k$, $k(X)=k(x_0,\cdots,x_n)$. $\mathcal K$ is the constant sheaf $k(X)$. A \textbf{fractional ideal sheaf} $\mathcal I$ is a $\mathcal O$-submodule of $\mathcal K$ containded in $f\mathcal O$ for some $f\in k(X)$. It's called invertible if $\mathcal I\mathcal J=\mathcal O$ for some other fractional ideal sheaf $\mathcal J$. Then it's a line bundle (invertible locally free sheaf) with dual line bundle $\mathcal J$
+\end{example}
+
+\begin{proposition}
+$X$ integral scheme, then there is an exact sequence
+\[1\to H^0(X,\mathcal O^\times)\to k(X)^\times\to \Cart(X)\to\Pic(X)\to1\]
+with $\Cart(X)$ the group of invertible ideal sheaves. (Note that $\Pic(X)=\Cart(X)/\sim$)
+\end{proposition}
+
+In case $X$ is integral, separated, and locally factorial (local rings are all UFDs), there is an isomorphism between Cartier and Weil divisors (integral linear com of closed integral subschemes of codimension 1)
+
+\section{Weibel chapter II on $K_0$}
+
+$M$ is an abelian monoid, $F$ is the forgetful functor, the group completion functor $G$ is the left adjoint of $F$, i.e. $\Hom(M,F(A))\cong\Hom(G(M),A)$. If $M$ is a semiring, then $G(M)$ would be a ring. $G(M)$ consists of formal expressions $[m]-[m']$, with $([m]-[m'])+([n]-[n'])=[m+n]-[m+n]'$, $([m]-[m'])\otimes([n]-[n'])=[m\otimes n]-[m\otimes n']-[m'\otimes n]+[m'\otimes n']$, and $[m]-[m']=[n]-[n']\iff m+n'+p=n+m+p$ for some $p\in M$
+
+\begin{example}
+$X$ compact Hausdorff, $M=\mathrm{VB}(X)$, either over $\mathbb R$ or $\mathbb C$, $G(M)=K^0(X)$
+\end{example}
+
+\begin{example}
+\begin{enumerate}
+\item $M=\mathbb N$, $G(M)=\mathbb Z$.
+\item $R$ is an integral domain, $M=R-\{0\}$, $G(M)=\Frac(R)^\times$
+\item $X$ is a compact Hausdorff space, $M=\mathrm{VB}(X)$, the isomorphism classes of vector bundles over $X$ (say over either $\mathbb R$ or $\mathbb C$), $G(M)$ is called $K^0(X)$
+\item $X$ scheme, $M=\mathrm{VB}(X)$, $G(M)$ is called $K^0(X)$ (may differ from the topological case, even with the same notation). When $X$ is a projective variety over $\mathbb C$, we have a forgetful map $K^0(X)\to K^0(X_{\text{top}})$
+\item $R$ is a commutative ring, $M$ is the semiring of isomorphism classes of finitely generated projective $R$-modules. The multiplication comes from $\otimes_R$, Then $K_0(R)=G(M)$ is a commutative ring. The product operation is called the \textbf{cup product}. For example, if $R=C^{\mathbb R}(S^2)$, we saw that $M$ is graded by rank and $M_n\cong\begin{cases}
+\mathbb Z,n=2\\
+\mathbb Z/2,n\geq3
+\end{cases}$. So $K_0(R)\cong\mathbb Z\oplus\mathbb Z/2$ as an abelian group, with the isomorphism given by the rank and the Stiefel-Whitney class $w_2$. Taking tensor product with a (stably) trivial bundle doesn't change $w_2$. On the other hand, if $w_2(E)\neq0$ and $w_2(F)\neq0$, then $w_2(E\oplus F)=w_2(E)+w_2(F)=0$ and $w_2(E\otimes F)=0$. So as a ring $K_0(R)=\mathbb Z[t]/(2t,t^2)$
+\item $G$ finite group, $M$ is the commutative semiring(under $\oplus,\otimes$) of isomorphism classes of finite dimensional representations of $G$, the group completion is the representation ring $R(G)$ which is a free abelian group with rank the number of conjugacy classes. $R(G)\to\mathbb Z=R(\{1\})$ by restriction is the augmentation map, kernel being the augmentation ideal. Representation ring plays an important role in equivariant K-theory. If $G=\mathbb Z/k$, all irreducible representations are characters of $G^\vee$, $R(G)=\mathbb Z[t]/(t^k-1)$, $t$ maps the generator of $G$ to $e^{\frac{2\pi i}{k}}$
+\item $G$ finite group, $M$ is the commutative semiring(under $\sqcup,\times$) of finite $G$ sets, the group completion is $A(G)$, called the Burnside ring, which free abelian group with rank the number of conjugacy classes of subgroups $H\leq G$, there is a natural ring map $A(G)\to R(G)$, sending a $G$-set $X$ to the representation of $G$ on $\mathbb CX$
+\end{enumerate}
+\end{example}
+
+\subsection{Basics of $K_0(R)$}
+
+$R$ is a ring, not necessarily commutative, $K_0(R)$ is the Grothendieck group of the monoid of isomorphism classes of finitely genearated projective $R$-modules. We can't drop the finitely generated condition because of the \textbf{Eilenberg swindle}: Suppose $P$ is a projective module over $R$, with $P\oplus Q$ a free module. Claim that $P$ is always stably free(if we don't restrict to finite rank). Since free module $(P\oplus Q)\oplus (P\oplus Q)\oplus\cdots$ can be written as $P\oplus (Q\oplus P)\oplus (Q\oplus P)\oplus\cdots=P\oplus\text{free module}$. Not only that, but sometimes for some rings, $K_0(R)=0$
+
+\begin{definition}[Karoubi]
+A ring $R$ is called \textbf{flasque}\index{Flasque ring}(French word meaning flabby) if there is an $R$-bimodule $M$, finitely generated and projective as a right $R$-module, such that $R\oplus M\cong M$ as $R$-bimodules
+\end{definition}
+
+\begin{proposition}[Karoubi]
+If $R$ is flasque, then $K_0(R)=0$. In fact, all of its K groups vanishes
+\end{proposition}
+
+\begin{proof}
+Let $P$ be a finitely generated right $R$-module, then $P\oplus(P\otimes _RM)=P\otimes_R(R\oplus M)\cong P\otimes_RM$, so $P$ is stably isomorphic to 0
+\end{proof}
+
+\begin{example}
+$\End(R^\infty)$ is flasque, with $M$ being itself
+\end{example}
+
+\subsection{Von Neumann regular rings}\index{Von Neumann regular rings}
+
+A ring $R$ (not necessarlily commutative) is called \textbf{Von Neumann regular} (the notion was introduced by Von Neumannm PNAS, 1936) if $\forall a\in R$, $\exists x\in R$ with $axa=a$, $x$ behaves like an inverse for $a$. Any division ring $D$ is von neumann regular ($x=0$ if $a=0$, and $x=a^{-1}$ if $a\neq0$), and $M_n(D)$ is also Von Neumann regular
+
+\begin{proposition}
+If $R$ is Von Neumann regular, then $\lambda:I\to$ left annihilator of $I$,  $\rho:J\to$ right annihilator of $J$. This gives order reversing maps between left and right ideals
+\end{proposition}
+
+\begin{proof}
+Obviously $I_1\subseteq I_2\Rightarrow\lambda(I_2)\subseteq\lambda(I_1)$, and similarly for $\rho$. $I\subseteq\rho\lambda(I)$, $J\subseteq\lambda\rho(J)$. So $\lambda\rho\lambda(I)\subseteq\lambda(I)$, but on the other hand $\lambda(I)\subseteq\lambda\rho\lambda(I)$, so $\lambda=\lambda\rho\lambda$, similarly $\rho=\rho\lambda\rho$
+\end{proof}
+
+\begin{proposition}\label{17:48-06/02/2022}
+If $R$ is Von Neumann regular, then each principal left ideal $Ra=Re$ for some idempotent $e$, and the right annihilator of $Ra$ is $(1-e)R$. Similarly, any $aR=eR$ for some idempotent $e$, and the left annihilator of $aR$ is $R(1-e)$. Thus there is an order revering bijection between left and right principal ideals.
+\end{proposition}
+
+\begin{proof}
+choose $x$ such that $axa=a$, then $e=xa$, $Ra=Re$. $Re$ and $(1-e)R$ are each other's annihilators
+\end{proof}
+
+\begin{proposition}
+Suppose $R$ is Von Neumann regular, then there are some orthogonal idempotentes $e,f$ such that $aR=eR$, $bR=fR$ and $aR+bR=eR+fR=(e+f)R$
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{17:48-06/02/2022}, there exists an idempotent $e$ such that $aR+bR=eR+bR=eR+(1-e)bR$, choose $f_1$ such that $(1-e)bR=f_1R$, clearly $ef_1=0$, let $f=f_1(1-e)$, then $ff_1=f_1$, so $f^2=f$. $aR+bR=eR+f_1R=eR+fR$
+\end{proof}
+
+\begin{corollary}
+If $R$ is Von Neumann regular, then every finitely generated right projective $R$-module is a direct sum of $eR$'s with $e$ being idempotents, and in particular every finitely generated right ideal is projective
+\end{corollary}
+
+It is often easy to compute $K_0$ in this case
+
+\subsection{More about $K_0$ of rings}
+
+If $R=\varinjlim R_i$, then $K_0=\varinjlim K_0(R_i)$
+
+\begin{example}
+An AF or AFD(approximately finite dimensional) rings is a ring of the form $\varinjlim R_i$, where $R_i$ is a finite dimensional semisimple algebra over $\mathbb C$. i.e. a direct sum of matrix algebras. Note that $K_0(R_i)=\mathbb Z^{n_i}$, where $n_i$ is the number of matrix summands. maps between such algebras can be described by \textit{Bratteli diagrams}\index{Bratteli diagrams}
+\begin{center}
+
+\end{center}
+Thus any countable torsion-free abelian group can arise as $K_0$ of an AF algebra examples: the CAR algebra(canonical anticommutation relations) 1--2--4--8--..., $K_0$ is $\mathbb Z[1/2]$ and gauge invariant CAR algebra(or Pascal's triangle algebra), $K_0$ is countable torsion free abelian but not finitely generated
+\end{example}
+
+\begin{lemma}[Idempotent lifting]\label{Lemma for idempotent lifting}
+$R$ ring, $I$ either nilpotent or complete ideal($\sum_{n=1}^\infty x_n$ with $x_n\in I^n$ converges to a unique element of $I$). Then any idempotent $\dot e\in R/I$ can be lifted to an idempotent $e$ in $R$. Furthermore, any two such lifts are conjugate under some $u\in 1+I$
+\end{lemma}
+
+\begin{proof}
+Choose $e_1\in R$ lifting $\dot e$, then $e_1^2-e_1\in I$. take $e=ue_1^k$
+
+If instedad, $I$ is complete, we replacfe $e_1 by ue_1$, where $u=(e_1^2+f_1^2)^{-1}$, which commutes with $e_1$ and $f_1$. Now $u(e_1^2+f_1)^2=1$. $(ue_1)^2+(uf_1)^2=u$
+\end{proof}
+
+\begin{lemma}
+$R$ is a ring, $\dot u\in R/I$ which is invertible. Then
+$
+\begin{bmatrix}
+\dot u\\
+&\dot u^{-1}
+\end{bmatrix}
+$ lift to something in $\GL_2(R)$
+\end{lemma}
+
+\begin{proof}
+$
+\begin{bmatrix}
+\dot u\\
+&\dot u^{-1}
+\end{bmatrix}=\begin{bmatrix}
+1&\dot u\\
+&1
+\end{bmatrix}\begin{bmatrix}
+1\\
+-\dot u^{-1}&1
+\end{bmatrix}\begin{bmatrix}
+1&\dot u\\
+&1
+\end{bmatrix}\begin{bmatrix}
+&-1\\
+1
+\end{bmatrix}
+$
+\end{proof}
+
+\begin{theorem}
+$R$ is a ring with ideal $I$ which is either nilpotent or complete. Then $K_0(R)\cong K_0(R/I)$, via the natural map $R\to R/I$
+\end{theorem}
+
+\begin{proof}
+Surjectivity: Let $P$ be a finitely generated projective $(R/I)$-module, then $P$ comes from an $n\times n$ idempotent matrix $\dot e$ over $R/I$. Now $\dot e\in M_n(R/I)\cong M_n(R)/M_n(I)$ and note that $M_n(I)$ is either nilpotent(if $I$ is) or complete (if $I$ is). This requires checking, but if $a\in M_n(I)$, then powers of $a$ have entries in powers of $I$, apoly Lemma \ref{Lemma for idempotent lifting} to $M_n(R),M_n(I)$ shows $P$ comes from a finitely generated $R$-module\\
+Injectivity: Suppose $e,e'$ are idempotents in $M_n(R)$ which map to conjugate idempotents in $M_n(R/I)$. Replacing $e'$ by a conjugate, can assume $e=e'\mod I$(Note: if $\dot e$ is conjugate to $\dot e'$ under $\dot u\in \GL_n(R/I)$, we can't necessairly lift $u$ to an invertible matrix in $M_n(R)$). But you can lift $\begin{bmatrix}\dot u\\
+&\dot u^{-1}\end{bmatrix}\in\GL_{2n}(R/I)$ to something invertible element in $\GL_2(R)$. So at the expense of increasing $n$, you can achieve $e-e'\in M_n(I)$. Then use the Lemma to show $e,e'$ conjugate in $M_n(R)$
+\end{proof}
+
+\subsection{The $K_0$ exact sequence and Exision for $K_0$}
+
+We now want to show that $K_0$ behaves like the begining of a ``homology theory" for rings. Axioms for homology of spaces:
+\begin{enumerate}[label=\alph*)]
+\item Long exact sequences
+\item Functoriality
+\item Homotopy invariance
+\item Normalization
+\item (depends on what homology theory you use) behavior under limits
+\item Excision
+\end{enumerate}
+
+It turns out that $K_0$ satisfies all of these (in a suitable sense) except for homotopy invariance, even that one doesn't fail by much. Now we want to explain these. Some (normalization, behavior under limits) are fairly easy. Usual homology is normalized by requiring $H_0(\text{point})=\mathbb Z$, $H_j(\text{point})=0$ for $j\neq0$. We will eventually have a whole sequence $K_j$ of functors from rings to abelian groups and the second part of this (the values of $K_j(\mathbb Z)$, $j\neq0$, $\mathbb Z$ being the ``simplest" ring(Since all rings come with a canonical ring map $\mathbb Z\to R$)) will fail. In fact, the $K_j(\mathbb Z)$ for $j>1$ are quite difficult to compute and tied up with a lot of deep number theory. But $K_0(\mathbb Z)$ is as we expect, in fact we have
+
+\begin{proposition}
+If $R$ is a PID, then $K_0(R)\cong\mathbb Z$, the isomorphism being the rank
+\end{proposition}
+
+\begin{proof}
+Any finitely generated torsion-free module over $R$ (and certainly any finitely generated projective module) is free and characterized by its rank.
+\end{proof}
+
+\textbf{Functoriality} is clear. If $\varphi:R\to S$ is a ring homomorphism sending 1 to 1, then we have an induced map $\varphi_*:K_0(R)\to K_0(S)$, and in this way $K_0$ is a functor from rings to abelian groups. The point here is that if $P$ is a finitely generated projective $R$-module, say $P\oplus Q\cong R^n$, then $(S\otimes_{\varphi}P)\oplus(S\otimes_{\varphi}Q)\cong S\otimes_{\varphi}R^n=S^n$, so $\varphi_*(P)=S\otimes_{\varphi}P$ is finitely generated projective, and we get functoriality from associativity of the tensor product. In fact we even have functoriality under \textbf{non-unital} ring homomorphisms. Suppose $\varphi:R\to S$ is a non-unital ring homomorphism. Then $\varphi(1_R)=e$ is an idempotent in $S$, and $\varphi$ sends the free $R$-module to the projective (not necessarily free) $S$-module defined by $e$. Similarly, if $P$ is a direct summand in $R^n$, then $S\otimes_{\varphi}P$ is a direct summand in $(Se)^n\subseteq S^n$, so again $\varphi_*(P)$ is finitely generated projective.
+
+Let $R$ be a aring with dieal $I$. Define a new ring (\textbf{double}) $D=\{(x,y)\in R\times R,x-y\in I\}$. Projection $p_1$ onto the first coordinate gives a split surjection of rings \begin{tikzcd}
+D \arrow[r, "p_1"'] & R \arrow[l, "\Delta"', bend right]
+\end{tikzcd}, where $\Delta(x)=(x,x)$. So as $R$-modules, $D\cong R\oplus I$. Define \textbf{relative $K_0$} by $K_0(R,I)=\ker(K_0(D)\xrightarrow{(p_1)_*} K_0(R))$.
+
+
+\begin{theorem}
+There is an exact sequence
+\[\GL(R)\to\GL(R/I)\xrightarrow{\partial} K_0(R,I)\xrightarrow{(p_2)_*} K_0(R)\to K_0(R/I)\]
+\end{theorem}
+
+``Excision": $\phi:R\to S$, $I\cong \phi(I)$, then $\phi_*:K_0(R,I)\to K_0(S,\phi(I))$ is an iso
+We can define $K_0(I)$ to be $K_0(R,I)$ for any ring $R$ containing $I$ as an ideal. $R$ could be $I_+=I\oplus \mathbb Z$ with $(i,n)\cdot(j,m)=(ij+nj+mi,nm)$
+
+\begin{proof}
+
+\end{proof}
+
+What about \textbf{homotopy invariance}?
+
+The analogue of the homotopy invariance in algebra would be invariance under taking polynomials (This is called $\mathbb A^1$ homotopy invariance in algebraic geometry, since $\mathbb A^1_k=\Spec k[t]$ is the algebraic geometry analogue of $[0,1]$, and homotopy invariance says multipliying with $[0,1]$ doesn't change anything). What happens is that if $R$ is a ring, we get a split injection \begin{tikzcd}
+K_0(R) \arrow[r] & {K_0(R[t])} \arrow[l, "t\mapsto0"', bend right]
+\end{tikzcd}. In general, this is not an isomorphism, and $K_0(R[t])\cong K_0(R)\oplus NK_0(R)$. However, if $R$ is nice enough (e.g. $\Spec R$ a smooth scheme), then $NK_0(R)=0$
+
+\section{Traces and Dimensions}
+
+While we've defined $K_0(R)$ as an abstract group, sometimes one would like \textbf{numerical invariants} that enable one to detect or even identify elements of this group. For example, if one has two vector bundles over a space (or ringed space like $\Spec R$), are there numerical invariants that enable one to determine when they are stably isomorphic? Here are some examples:
+\begin{enumerate}[label=\textcircled{\arabic*}]
+\item $R$ is a PID, $\rank:K_0(R)\xrightarrow{\cong}\mathbb Z$
+\item (much less trivial) $R=C^{\mathbb C}(S^2)$, $K_0(R)\xrightarrow[(\rank,w_2)]{\cong}\mathbb Z\oplus\mathbb Z$, or as a ring $\mathbb Z[t]/(t^2)$
+\item (still less trivial) $R=C^{\mathbb R}(S^2)$, $K_0(R)\xrightarrow[(\rank,w_2)]{\cong}\mathbb Z\oplus\mathbb Z/2$, or as a ring $\mathbb Z[t]/(2t, t^2)$
+\item $R$ is a Boolean ring, so $\Spec R$ is totally disconnected, $K_0(R)\xrightarrow{\cong} C(\Spec R,\mathbb Z)$
+\end{enumerate}
+
+Let's start with a more general notion of dimension that will encompass \textcircled{4}.
+
+\begin{definition}
+Let $R$ be a commutative ring, $H_0(R)=C(\Spec R,\mathbb Z)$. This is a free abelian group.
+\end{definition}
+
+\begin{proposition}
+Let $R$ be a commutative ring, then the \textbf{rank} or \textbf{dimension} function $K_0(R)\to H_0(R)$ is split surjective. The kernel of the map is called \textbf{reduced K-theory}, $\tilde K_0(R)$. If $R$ is an integral domain, or if $R$ has no non-trivial idempotents (this is automatic if $R_{\text{red}}=R/\operatorname{nilrad}(R)$) is an integral domain, then $H_0(R)=\mathbb Z$
+\end{proposition}
+
+\begin{example}[Topological reduced K-theory]
+Let $X$ be a connected compact Hausdorff space, $\mathbb F=\mathbb R$ or $\mathbb C$, $R=C^{\mathbb F}(X)$. Then $H_0(R)=\mathbb Z$ since $R$ has no non-trivial idempotents (even though it's very far from being an integral domain).
+\end{example}
+
+In this case, recall that isomorphism classes of rank $k$ vector bundles over $X$ are classified by $[X,BU(k)]$ or $[X,BO(k)]$, homotopy classes of maps from $X$ to the infinite Grassmannian $\varinjlim\Gr_{\mathbb F}(k,n)$. In this case, $\tilde K_0(R)$, written also $tilde K_{\mathbb F}(X)$, is the group of stable isomorphism classes of virtual vector bundles of (virtual) rank 0. Since every such class can be written as $[E]-[1_k]$, where $E$ is a rank $k$ bundle and $1_k$ is the trivial rank $k$ bundle, we see that $\tilde K_{\mathbb C}(X)=[X,BU(k)]$ and $\tilde K_{\mathbb R}(X)=[X,BO(k)]$
+
+Aside from looking just at ``rank", sometimes we can get more subtle information from ``trace". For any ring $R$ (not necessarily commutative - the noncommutative case is much more interesting), define the \textbf{Hattori-Stallings trace map} as follows. Let $[R,R]$ be the additive subgroup of $R$ generated by commutators $rs-sr$. The trace of a matrix defines an isomorphism $M_n(R)/[M_n(R),M_n(R)]\xrightarrow{\cong} R/[R,R]$. Note that these are just additive groups, the multiplicative structure has been lost. Now one gets
+\[
+\tr:K_0(R)\to R/[R,R]
+\]
+by sending $[R^ne]$ ($e$ an idempotent in $M_n(R)$), to $\tr(e)$ modulo commutators
+
+\begin{proposition}
+
+\end{proposition}
+
+\section{Lambda rings and Adams operations}
+
+Another piece of structure on $K_0(R)$ when $R$ is a commutative ring comes from the operation $E\mapsto\bigwedge^j(E)$ on vector bundles. When $j=\rank E$, this is what we previously called the \textbf{determinant}
+
+\begin{definition}
+$A$ is a \textbf{$\lambda$-ring}(for Grothendieck, a \textbf{pre-$\lambda$-ring}) if there are maps $\lambda^j:A\to A$, $j\geq0$, satisfying
+\begin{enumerate}
+\item $\lambda^0(x)=1$
+\item $\lambda^1(x)=x$
+\item $\lambda^k(x+y)=\sum_{i+j=k}\lambda^i(x)\lambda^j(y)$
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+$A=\mathbb Z$, $\lambda^j(n)=\binom{n}{j}$. It follows from the identities
+\[
+\left(\sum_{j=0}^\infty\binom{n}{j}t^j\right)\left(\sum_{k=0}^\infty\binom{m}{k}t^k\right)=(t+1)^{n+m}=\sum_{j=0}^\infty\binom{m+n}{j}t^j
+\]
+\end{example}
+
+\begin{example}
+$R$ is a commutative ring, $A=K_0(R)$ which is the group completion of $\Proj(R)$ (the semiring of isomorphism classes of finitely generated projective $R$-modules), define $\lambda^j[P]=[\wedge^j(P)]$. Note $\lambda^0[P]=[\bigwedge^0P]=[R]$, $\lambda^1[P]=[\bigwedge^1P]=[P]$, and $\lambda^k[P\oplus Q]=\sum_{i+j=n}\lambda^i[P]\lambda^j[Q]$ follows from the decomposition $\bigwedge^k(P\oplus Q)=\oplus_{i+j=n}\bigwedge^i(P)\bigwedge^j(Q)$. These operations extend to the group completion $A$ because $[P]\mapsto\sum_j\lambda^j[P]t^j$ is a monoid homomorphism from $\Proj(R)$ to $A[[t]]$, since
+\[
+\left(\sum_{j=0}^\infty\lambda^j[P]t^j\right)\left(\sum_{k=0}^\infty\lambda^k[P]t^k\right)=\sum_{n=0}^\infty\sum_{i+j=n}\lambda^i[P]\lambda^j[Q]t^n=\sum_{n=0}^\infty\lambda^{n}[P\oplus Q]t^n
+\]
+\end{example}
+
+\begin{definition}
+$I$ is \textbf{$\lambda$-ideal} if $\lambda^j(I)\subseteq I$ for all $j\geq1$. (Recall $\lambda^0:A\to\{1\}$, so we can't expect this for $j=0$). A \textbf{binomial ring} is a commutative ring $A$ contained in a $\mathbb Q$-algebra $A_\mathbb Q$ with property that if $k\geq1$, $x\in A$, then $\binom{x}{k}$ lies in $A$ and not just in $A_{\mathbb Q}$. Example $A=\mathbb Z$
+\end{definition}
+
+\begin{definition}
+$A$ be a $\lambda$-ring. We say it has a \textbf{positive structure} if
+\begin{enumerate}[label=(\roman*)]
+\item there is a $\lambda$-subring $H^0$ which is a binomial ring
+\item there is a surjective $\lambda$ ring homomorphism $\epsilon:A\to H^0$ which is identity on $H^0$, called augmentation
+\item there is a $\lambda$-subsemiring $P$ of $A$ containing $\mathbb N$, such that every element in $\tilde A=\ker\epsilon$ can be written as $p-q$ for $p,q\in P$
+\item if $p\in P$, then $\epsilon(P)\in\mathbb N$, and $\lambda^i(p)=0$ for $i>\epsilon(P)$, furthermore, $\lambda^{\epsilon(P)}(P)$ (the ``determinant" of $p$) is a unit in $A$
+\end{enumerate}
+\end{definition}
+
+When we have prositive structure, the \textbf{line elements} (analogues of line bundles) of $A$ are elements $\ell\in P$ with $\epsilon(\ell)=1$. These are a subgroup of $A^\times$. Let $L$ be the set of line elements
+
+\begin{example}
+If $R$ is a commutative ring, $A=K_0(R)$ is a $\lambda$-ring with a positive structure, where $P=\Proj(R)$, $H^0(R)=[\Spec R\to Z]$, $\epsilon$ is the dimension function, $L=\Pic(R)$
+\end{example}
+
+\begin{example}
+$G$ is a finite group, $A=R(G)$ is a $\lambda$-ring with positive structure. $P$ is the isomorphism classes of finite dimensional representations of $G$ (This is a semiring with cancellation with respect to addition, and $P$ generates $R(G)$). $\lambda^j(\pi)=\wedge^j(\pi)$, $\epsilon$ is the dimension function(by evaluating the character at 1). The group of line elements consists of 1-dimensional representations, i.e. homomorphisms $G\to\mathbb T$, so it can be identified with the Pontryagin dual group to $G_{ab}$
+\end{example}
+
+\subsection{Splitting principle}
+
+\begin{definition}
+Let $A$ be a $\lambda$-ring with positive structure $(P,\epsilon)$. We say that $A$ \textbf{satisfies the splitting principle} if given $p\in P$, there is an injection $(A,P)\hookrightarrow(\tilde A,\tilde P)$ of $\lambda$-rings such that $p$ is a sum of line elements in $\tilde P$
+\end{definition}
+
+\begin{example}[Topological splitting principle, Karoubi's book on topological K theory]
+$X$ is a compact Hausdorff space, $A=K_{\mathbb F}(X)$, $P$ is the set of vector bundles. This satisfies the splitting principle since if $E\xrightarrow pX$ is a vector bundle, $Y$ is the associated flag variety bundle over $X$ (i.e. $Y\to X$ is a fiber bundle with $Y_x$ = flag variety of $E_x$). Then $K(X)\hookrightarrow K(Y)$ and the pullback of $E$ to $Y$ splits as a direct sum of line bundles
+\end{example}
+
+In the topological setting, the advantage of the splitting principle is that it made it easy to define Chern classes. In the $\lambda$-ring setting, it gives us a formula for $\lambda^j$ using the fact that for $\ell_1,\cdots,\ell_n$ line elements, $\lambda^j(\ell_1+\cdots+\ell_n)=\sum_{k_1<\cdots<k_j}\ell_{k_1}\cdots \ell_{k_j}$
+
+\begin{example}[Splitting principle for $R(G)$, $G$ is a finite group]
+Any element of $R(G)$ is determined by its character. To determine the character, it's enough to compute all restrictions $R(G)\to R(H)$ where $H$ is a cyclic subgroup of $G$. In $R(H)$, every representation is a direct sum of 1-dimensional representations
+\end{example}
+
+\subsection{Preview of Adams operations}
+
+Out of the $\lambda$-operations, Adams constructed the \textbf{Adams operations} $\psi^j$ on topological K-theory, and these enable you to recover a good notion of dimension. He used these for his famous ``vector fields on spheres" calculation, to compute the maximal number of linear independent sections on a generic vector bundle over a sphere, and on the tangent bundle $TS^n$
+
+\begin{theorem}
+Let $A$ be a $\lambda$-ring with augmentation $\epsilon$. (We assume $H^0\subseteq A$ is a binomial ring, e.g. $\mathbb Z$, $\epsilon:A\to H^0$ is a $\lambda$-ring homomorphism which is the identity on $H^0$, and we have a generating subsemiring $P\subseteq A$ of \textbf{positive elements} such that $\epsilon:P\to\mathbb N$ and $\lambda^j(p)=0$ for $j>\epsilon(p)$ if $p\in P$. Also, every element of $\tilde A=\ker\epsilon$ is a difference of two elements of $P$ with the same $\epsilon$-value and $\lambda^{\epsilon(p)}p$ is a unit for $p\in P$. Then there are unique \textbf{Adams operations} $\psi^k:A\to A$, $k\in\mathbb N$, with the following properties:
+\begin{enumerate}[label=\alph*)]
+\item $\psi^0=\epsilon$
+\item $\psi^1=\id$
+\item $\psi^k(\ell)=\ell^k$ for $\ell$ a line element
+\item $\psi^k(x)=$ coefficient of $t^k$ in the formal power series $\epsilon(x)-t\frac{d}{dt}\log\lambda_{-t}(x)$, where $\lambda_t(x)=\sum_{k}\lambda^k(x)t^k$ and of course $\lambda_{-t}(x)=\sum_k(-1)^k\lambda^k(x)t^k$
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{proposition}
+If the $\lambda$-ring $A$ satisfies the splitting principle, then each $\psi^k$ is a ring homomorphism and $\psi^l\psi^k=\psi^{l+k}$
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{proposition}
+Assume the hypotheses of the previous proposition, and also that $\tilde A=\ker(\epsilon:A\to H^0)$ is a nilpotent ideal. (This is the case if $A=K_0(X)$ for $X$ a finite CW complex, or if $A=K_0(R)$ for $R$ an algebra of finite type over a field. So the hypothesis covers many examples of interest.) Then the eigenvalues of $\psi^k$ on $A\otimes \mathbb Q$ are powers of $k$
+\end{proposition}
+
+\begin{proof}
+So get a finite filtration of $A_{\mathbb Q}$ with $\psi^k=k^n$ on $n$-th graded piece, this proves the result
+\end{proof}
+
+Lambda operations and Adams operations play a big role in K-theory. In particular, $\psi^p$ for $p$ prime behaves very much like the Frobenius automorphism in Galois theory since $\psi^p$ is a ring homomorphism with $\psi^p(l)=\ell^p$ for line element $\ell$
+
+\section{$K_0$ in more general contexts}
+
+Aside from $K_0$ of rings, (using projective modules), we will want to study things like $K_0$ of algebraic vector bundles, which don't always split as direct sums. For this, we want to introduce K-theory not just of rings but of suitable categories, ``like" categories of vector bundles. What does ``like" mean? There are several possible answers, depending on the level of abstraction you are willing to tolerate
+\begin{enumerate}[label=\alph*)]
+\item Symmetric monoidal categories(Weibel II.5)
+\item Abelian categories(Weibel II.6)
+\item Exact categories(Weibel II.7)
+\item Waldhausen categories(Weibel II.9)
+\end{enumerate}
+
+We will concentrate on Abelian and exact categories, which cover most of the applications you need, at least at first.
+
+\textbf{Symmetric monoidal categories} are categories $\mathcal S$ with $\square:\mathcal S\times\mathcal S\to\mathcal S$, a distringuished object $e$, and natural equivalences $e\square s\cong s\square e\cong s$, $(s\square t)\square u\cong s\square (t\square u)$, $s\square t\cong t\square s$. There are some compatibility axioms
+
+\begin{example}
+$R$ is a ring, $S$ is the category of finitely generated projective $R$-modules, and $\square=\oplus$
+\end{example}
+
+From a symmetric monoidal category, one can construct a $K_0$ group. This covers K-theory of rings but also other examples
+
+\subsection{$K_0$ of abelian categories and G-theory (Weibel II.6)}
+
+Recall that an \textbf{additive category} $\mathscr C$ is a category in which $\Hom$ sets are abelian groups, composition is bilinear, and there is a distinguished initial and termial object 0 with $\Hom(0,A)=\Hom(A,0)=0$ for all $A\in ob\mathscr C$. In addition, we require finite products and coproducts, which coincide and are denoted $\oplus$ (There may or may not be inifinite products and coproducts, when these exists, they are usually not the same and we denote products by $\prod$)
+
+An \textbf{abelian category} is a bit stronger, it's an additive category $\mathscr C$ in which \textbf{every morphism has a kernel and a cokernel}, every monic is a kernel, and every eop is a cokernel. These axioms insure that exact sequence exist and have the usual properties. The \textbf{standard example} of an abelian category is the category of left (or) right $R$-modules. This example is also universal
+
+\begin{theorem}[Freyd and Mitchell]
+Every abelian category embeds in a category of modules over a ring
+\end{theorem}
+
+\subsection{$K_0$ of abelian category}
+
+$\mathscr C$ is a skeletally small abelian category, we define $K_0(\mathscr C)$ be the universal abelian group on the objects (in the skeleton) of $\mathscr C$, subject to the axioms: $[A']+[A'']=[A]$ if $0\to A'\to A\to A''\to0$ is exact ($[0]=0$ follows). Note that if $A'\to A$ is an isomorphism, then $[A]=[A']$
+
+If $\mathcal C$ and $\mathcal C'$ are abelian categories and $F:\mathcal C\to \mathcal C'$ is an \textbf{exact functor}, then $F$ induces a homomorphism $F_*:K_0(\mathcal C)\to K_0(\mathcal C')$
+
+\begin{example}[\textbf{Main example}]
+$R$ is a right Noetherian ring, and $\mathcal C$ is the category of finitely generated right $R$-modules. This is an abelian category, since a submodule or quotient of a finitely generated module is finitely generated. Define $G_0(R)$ (also writen as $K_0'(R)$) to be $K_0(\mathcal C)$
+\end{example}
+
+\subsection{The Cartan map}
+
+The \textbf{Cartan homomorphism} is the natural map $K_0(R)\to G_0(R)$ sending $[P]\in K_0(R)$, $P$ a finitely generated projective $R$-module, to the class of $P$ in $G_0(R)$
+
+\begin{proposition}
+If $R$ is a PID, then the Cartan map $\mathbb Z\cong K_0(R)\to G_0(R)$ is an isomorphism
+\end{proposition}
+
+\begin{proof}
+$M$ is a finitely generated $R$-module, $0\to F'\to F\to M\to0$ is a presentation with $F,F'$ free, then $[M]=[F]-[F']$ lies in the image of the Cartan map. So $G_0(R)$ is a quotient of $K_0(R)$ under the Cartan map. But the map is injective since $[M]\mapsto \rank M=\dim_FF\otimes_RM$, $F=\Frac(R)$, gives a splitting $G_0(R)\to K_0(R)$
+\end{proof}
+
+\subsection{Functoriality of $G_0$}
+$f:R\to S$ is a ring homomorphism of right Noetherian rings
+\begin{enumerate}[label=\alph*)]
+\item If $S$ is flat over $R$, then $f_*=-\otimes_R S:G_0(R)\to G_0(S)$ is exact. Flatness is very restrictive, so we will weaken this later to the assumtion that $S$ has a finite resolution by finitely generated projective $R$-modules, which is often the case in examples of interest.
+\item If $S$ is a finitely generated $R$-module, then we get a transfer homomorphism $f^*:G_0(S)\to G_0(R)$ by thinking of finitely generated $S$-modules as finitely generated $R$-modules
+\end{enumerate}
+
+$K_0$ has more functoriality but harder to compute, $G_0$ has less but easier to compute
+
+\subsection{Examples from algebraic geometry}
+
+Lots of interesting examples of this machinery come from algebraic geometry. If $(X,\mathcal O_X)$ is a Noetherian scheme, then the coherent sheaves $\mathcal F$ over $X$ form an abelian category $\Coh(X)$. (Recall that an $\mathcal O_X$-module is coherent if locally there is an exact sequence $\mathcal O^m\to\mathcal O^n\to\mathcal F$ for some finite $m,n$). Then $K_0(\Coh(X))$ is denoted $G_0(X)$. It behaves like a \textbf{homology} theory for schemes, whereas $K_0(X)$ behaves like a \textbf{cohomology} theory. The Cartan map $K_0(X)\to G_0(X)$ is thus related to \textbf{Poincare duality}.
+
+If $X=\Spec R$, $R$ Noetherian commutative ring, then $\Coh(X)$ is just the category of finitely generated $R$-modules, and we get back $G_0(R)$
+
+
+\begin{example}
+$R=\mathbb Z,S=\mathbb Z/p^n$, then $S$ is finitely generated as an $R$-module, but the map $R\to S$ is definitely not flat, we know that $\mathbb Z\cong K_0(R)\to G_0(R)$ is an isomorphism since $R$ is a PID, we also know that the map $\mathbb Z/p^n\to\mathbb Z/p$ induces an iso on $K_0$, since the kernel is nilpotent. Since $S$ is Artinian, every finitely generated $S$-module has finite length and has a composition series with subquotients all isomorphic to the unique simple $S$-module $\mathbb Z/p$. $G_0(\mathbb Z/p)\cong \mathbb Z$ with generator $[\mathbb Z/p]$. The Cartan map $K_0(S)\to G_0(S)$ sends $[\mathbb Z/p^n]$ to $[\mathbb Z/p^n]$, which has length $n$ and is thus equal to $n$ times the generator $[\mathbb Z/p]$. So if $n>1$, the Cartan map for $S$ is not an isomorphism.
+\end{example}
+
+\subsection{D\'evissage}
+(French word, from d\'eviser, to divide) Motto: Divide and conquer
+
+\begin{theorem}[Theorem II6.3 in Weibel, generalize the previous example]
+Let $\mathscr B\subseteq\mathscr A$ be small abelian categories. Assume
+\begin{enumerate}
+\item $\mathscr B$ is a full subcategory, and all quotients and subobjects (in $\mathscr A$) in $\mathscr B$ stay in $\mathscr B$
+\item Every object $A$ in $\mathscr A$ has a finite filtration $0\subseteq A_1\subseteq A_2\subseteq\cdots\subseteq A_n=A$ with all subquotients $A_{j+1}/A_j$ lying in $\mathscr B$
+\end{enumerate}
+Then the inclusion $\mathscr B\hookrightarrow\mathscr A$ is an exact functor and induces an isomorphism $K_0(\mathscr B)\to K_0(\mathscr A)$
+\end{theorem}
+
+\begin{proof}
+The first statement follows immediately from the assumptions. Surjectivity follows from b). since $[A]=[A_1]+[A_2/A_1]+\cdots+[A_n/A_{n-1}]$ in $K_0(\mathscr A)$. For injectivity, construct $K_0(\mathscr A)\to K_0(\mathscr B)$ similarly
+\end{proof}
+
+\begin{proposition}
+$X$ is a Noetherian scheme, $X_{\text{red}}$ is the associated reduced scheme, then $X_{\text{red}}\to X$ induces an isomorphism on $G_0$. If $X=\Spec R$, $X_{\text{red}}=\Spec(R/\nil R)$, the transfer map $G_0(R/\nil R)\to G_0(R)$ is an isomorphism
+\end{proposition}
+
+\begin{proof}
+Let $\mathscr A$ be the category of coherent $\mathcal O_X$-modules, $\mathscr B$ the subcategory of those that factor through an $\mathcal O_{X_{\text{red}}}$-module. Then $G_0(X_{\text{red}})=K_0(\mathscr B)$ and $G_0(X)=K_0(\mathscr A)$. Every object in $\mathscr A$ has as finite filtration with subquotients in $\mathscr B$, so we can apply Devissage to conclude that $K_0(\mathscr B)\to K_0(\mathscr A)$ is an isomorphism
+\end{proof}
+
+\begin{proposition}[analogue of excision for $G_0$ of schemes]
+$X$ Noetherian scheme, $Z$ closed subscheme, $i$ inclusion, $\mathscr A$ is the category of coherent $\mathcal O_X$-modules supported on $Z$, $\mathscr B=\Coh(Z)$, $\mathcal I$ is the ideal sheaf such that $\mathcal O_X/\mathcal I=\mathcal O_Z$, identify $\mathscr B$ with subcategory of $\mathscr A$ annihilated by $\mathcal I$, then $\mathscr B\to\mathscr A$ induces an isomorphism on $K_0$
+\end{proposition}
+
+\begin{proof}
+An object $\mathcal F$ in $\mathscr A$ has a finite filtration $\mathcal F\supset I\mathcal F\supset I^2F\supset\cdots$ with subquotients in $\mathscr B$
+\end{proof}
+
+\subsection{Localization}
+Let $\mathscr A$ be a small ableian category, $\mathscr B$ a \textbf{Serre subcategory}, i.e. a subcategory closed under subobjects, quotients and extensions. Define the \textbf{quotient category} $\mathscr A/\mathscr B$ as follows. The objects are the same as objects of $\mathscr A$, A morphism $A_1\to A_2$ is an equivalence of classes of diagrams
+\begin{center}
+\begin{tikzcd}
+    & A' \arrow[ld, "f"'] \arrow[rd, "g"] &     \\
+A_1 &                                     & A_2
+\end{tikzcd}
+\end{center}
+with $f$ an isomorphism mod $\mathscr B$ (i.e. $\ker f,\coker f$ lie in $\mathscr B$). Two such diagrams are equivalent if one has a commutative diagram
+\begin{center}
+\begin{tikzcd}
+    & A' \arrow[ld, "f"'] \arrow[rd, "g"]       &     \\
+A_1 & A \arrow[u] \arrow[d] \arrow[l] \arrow[r] & A_2 \\
+    & A'' \arrow[lu, "k"] \arrow[ru, "h"']      &    
+\end{tikzcd}
+\end{center}
+With $A'\leftarrow A\rightarrow A''$ isomorphisms mod $\mathscr B$
+
+This construction is universal so that there is an exact \textbf{quotient functor} $q:\mathscr A\to \mathscr A/\mathscr B$, and if $T:\mathscr A\to \mathscr C$ is an exact functor, $T(\mathscr B)=0$, then $T$ factors uniquely through $q:\mathscr A\to \mathscr A/\mathscr B$
+
+\begin{example}
+$\mathscr A$ is the category of finitely generated abelian groups chosen in small skeleton, $\mathscr B$ is the category of $p$-primary torsion groups
+\end{example}
+
+\begin{theorem}[Localization theorem]
+$\mathscr A$ small abelian category, $\mathscr B$ Serre subcategory, i.e. a subcategory closed under subobjects, quotients and extensions. Then the sequence $K_0(\mathscr B)\xrightarrow{i_*} K_0(\mathscr A)\xrightarrow{q_*} K_0(\mathscr A/\mathscr B)\to0$ is exact
+\end{theorem}
+
+\begin{proof}
+$q_*:K_0(\mathscr A)\to K_0(\mathscr A/\mathscr B)$ is surjective, and the composite $K_0(\mathscr B)\to K_0(\mathscr A)\to K_0(\mathscr A/\mathscr B)$ is 0 in $K_0(\mathscr A/\mathscr B)$, since we have an isomorphism between $\mathscr B$ and 0 in $\mathscr A/\mathscr B$ given by showing that $B\xrightarrow0B$ and $B\xrightarrow{\id} B$ are equivalent
+
+Suppose $[A_1]=[A_2]\in K_0(\mathscr A)$ goes to 0 in $K_0(\mathscr A/\mathscr B)$, thus $[A_1]\cong [A_2]$ in $K_0(\mathscr A/\mathscr B)$, we want to show $[A_1]-[A_2]=[B_1]-[B_2]$ with $B_j$ in $\mathscr B$. Suppose you have $f:A_1\to A_2$ with kernel, cokernel in $\mathscr B$, so we have an exact sequence $0\to B_1\to A_1\xrightarrow{f}A_2\to B_2\to 0$
+\end{proof}
+
+\begin{corollary}
+$R$ is a Dedekind domain with field of fractions $F$. The the localization sequence $\displaystyle\bigoplus_{0\neq\mathfrak p\text{ prime}}K_0(R/\mathfrak p)\to K_0(R)\to K_0(F)\to0$ is exact
+\end{corollary}
+
+\begin{proof}
+$\mathscr A$ is the category of finitely generated $R$-modules. By resolution theorem which we will prove later, the Cartan map $K_0(R)\to G_0(R)=K_0(\mathscr A)$ is an isomorphism. Let $\mathscr B$ the subcategory of finitely generated torsion modules, and $M$ in $\mathscr B$ has a primary decomposition $\displaystyle M=\bigoplus_{\mathfrak p}M[\mathfrak p]$, $M[\mathfrak p]$ is the $\mathfrak p$-torsion part. For fixed $\mathfrak p$, $K_0(R/\mathfrak p)\to G_0(R/\mathfrak p)$ is an isomorphism (since $R/\mathfrak p$ is a field), then Devissage.
+\end{proof}
+
+\begin{proposition}
+$R$ commutative Noetherian ring, $\mathfrak p$ is a prime ideal, then we get an exact sequence $G_0(R/\mathfrak p)\to G_0(R)\to G_0(R_{\mathfrak p})\to 0$
+\end{proposition}
+
+\begin{proof}
+Let $\mathscr A$ be a suitable small skeleton of the category of finitely generated $R$-modules. Let $\mathscr B$ be the Serre subcategory of $p$-primary torsion $R$-modules. Then $K_0(\mathscr A)=G_0(R)$ by definition, $K_0(\mathscr B)=G_0(R/\mathfrak p)$ by Devissage. We claim $G_0(R_{\mathfrak p})=K_0(\mathscr A/\mathscr B)$. This is because elements of $\mathscr A/\mathscr B$ are really $R$-modules in which maps of modules with cokernel and kernel in $\mathscr B$ are declared to be isomorphisms. This effectively means that we are inverting everything not in $\mathfrak p$
+\end{proof}
+
+\subsection{$\mathbb A^1$-homotopy invariance}
+If $R$ is a Noetherian ring, $G_0(R)\cong G_0(R[t])$. Similarly, if $X$ is a Noetherian scheme, $G_0(X)\cong G_0(\mathbb A^1_X)$(or if $X$ is a scheme over $\Spec k$, $G_0(X)=G_0(X\times A^1)$), also $G_0(R[t])\cong G_0(R[t,t^{-1}])$, etc.
+
+\begin{proof}
+We only do the case of rings, the case of schemes is analogous. Let $\mathscr A$ be the category of finitely generated $R[t]$-modules, $\mathscr B$ the subcategory where $t$ acts nilpotently, by Devissage, $K_0(\mathscr B)=G_0(R[t]/(t))=G_0(R)$. The quotient cat $\mathscr A/\mathscr B$ is equivalent to the category where $t$ acts by an isomorphism. So we get the exact sequence
+\[
+G_0(R)\xrightarrow{\pi^*} G_0(R[t])\xrightarrow{j_*} G_0(R[t,t^{-1}])\to0
+\]
+the first map $\pi^*$ is the dual to the projection $\pi:R[t]\to R$, sending $t$ to 0 (it's the transfer map viewing an $R$-module as a n $R[t]$-module with $t$ acting by 0), and the second map $j_*$ is induced by the flat inclusion $R[t]\hookrightarrow R[t,t^{-1}]$, $\pi^*$ is 0 since if $M$ is finitely generated $R$-module, we have the exact sequence of $R[t]$-modules
+\[0\to M[t]\xrightarrow{t} M[t]\to M\to0\]
+giving(in $G_0(R[t])$), $[M]+[M[t]]=[M[t]]$, i.e. $[M]=0$, thus $G_0(R[t])\cong G_0(R[t,t^{-1}])$
+% now consider inclusion $i:R\to R[t]$, claim i_* is an iso, it's injective because of the fact that i is split by \pi. The map \pi is not flat, ubt we still get a map \pi_*:G_0(R[t])\to G_0(R) splitting i_* by sending [M] to [M/tM]-[Ann_t(M)]. still need to show i_* is surjective. Suppose not, pssing to a qutotjinet ring, G_0(R)\to G_0(R[t]) is not surjective by $G_0(R/I)\to G_0(R/I)[t]$ is not surjective for any non-zero ideal I. Then R must be reduced, taking I to be nilrad, S is the set of elements that are not zero divisors. this is a multiplicative subset and S^{-1}R is a finite product of fields F_i, apply locaizatino, we get exact sequence
+% \varinjlim_{s\in S}G_0(R/sR)\to G_0(R)\to G_0(S^{-1}R)=\oplus G_0(F_i)\to0. By assumption, $G_0(R/sR)\cong G_0(R/SR[t])$, and since $F_i[t]$ is a PID, G_0(F_i[t])\cong G_0(F_i), So we get the diagram
+% \begin{center}
+
+% \end{center}
+% use 5 lemma, due to Grothendieck
+\end{proof}
+
+To sum up, we've proved the
+
+\begin{theorem}[Fundamental theorem for $G_0$]
+$R$ Noetherian ring, Then $G_0(R)\xrightarrow[i_*]{\cong} G_0(R[t])\xrightarrow[j_*]{\cong} G_0(R[t,t^{-1}])$. The corresponding statement for $K_0$ is \textbf{false}, for two reasons
+\begin{enumerate}[label=\alph*)]
+\item $K_0(R[t])$ can be bigger than $K_0(R)$ if $R$ is not regular. One has $K_0(R[t])\cong K_0(R)\oplus NK_0(R)$
+\item When $R$ isn't regular, there is another contribution to $K_0(R[t,t^{-1}])$ called $K_{-1})(R)$ (This is in addition to the cokernel $NK_0(R)$ of $K_0(R)\to K_0(R[t])$), which occurs twice, once because of $K_0(R[t^{-1}])$.
+\end{enumerate}
+\end{theorem}
+
+\subsection{Euler characteristics and the resolution theorem}
+
+Now we want to come back to the Cartan map $c:K_0(R)\to G_0(R)$ for $R$ a Noetherian ring.
+
+\begin{theorem}[Resolution theorem]
+$R$ Noetherian ring of \textbf{finite projective dimension}, i.e., such that any finitely generated $R$-module $M$ has a finite resolution
+\[0\to P_n\to P_{n-1}\to\cdots\to P_0\to M\to 0\]
+by finitely generated projective $R$-modules (the scheme is smooth and reduced), then the Cartan map $c:K_0(R)\to G_0(R)$ is an isomorphism, and $[M]=c([P_0]-[P_1]+\cdots\pm[P_n])$. This is related to the \textbf{Euler characteristic} of a resolution, which is $[P_0]-[P_1]+\cdots\pm[P_n]$. These Euler characteristics also show up in the \textbf{Wall finiteness obstruction}, which is a necessary and sufficient for a connected \textbf{finitely dominated} CW-complex to be homotopy equivalent to a finite CW-complex
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+Let $X$ be a CW-complex. We say $X$ is \textbf{finitely dominated} if there is a finite CW-complex $Y$ and there are maps \begin{tikzcd}
+X \arrow[r, "i"', shift right] & Y \arrow[l, "r"', shift right]
+\end{tikzcd} such that $r\circ i\simeq\id_X$.
+\end{definition}
+
+Obviously if $X$ is a retract $Y$, i.e., we can choose $i$ injective and $r$ so that $r\circ i=\id_X$, then $X$ is finitey dominated.
+
+The interest in this condition is that certain general topology conditions give this for free (see theory of ANR's, absolute neighborhood retracts.)
+
+\textbf{Wall's idea}: Suppose $X$ is dominated as above, then you can reduce to the case where $X$ is connected, and $C_*(\tilde X)$, the cellular chain complex of $\tilde X$, sits as a direct summand in $C_*(\tilde Y)$, as complexes of $\mathbb Z\pi_1(X)$-modules. Since $Y$ is finite, $C_*(\tilde Y)$ is finite generated free over $\mathbb Z\pi$. So $C_*(\tilde X)$ are a chain complex of finitely generated projective $\mathbb Z\pi$-modules.
+
+If $X$ is finite up to homotopy, we can choose a model for $X$ (up to homotopy) in which $C_*(\tilde X)$ is finitely generated and free.
+
+The \textbf{Wall finiteness obstruction} is the alternating sum $\sum_{i=0}^{\dim X}(-1)^i[C_i(\tilde X)]$ in $\tilde K_0(\mathbb Z\pi)=K_0(\mathbb Z\pi)/\text{copy of $\mathbb Z$ coming from free modules}$
+
+Key idea: Suppose $R$ is a ring, $M$ is an $R$-module with a finite projective resolution, or more generally, any chain complex of f.g. projective $R$-modules. Then the Euler characteristic $\sum(-1)^i[P_i]$ in $K_0(R)$ is 
+in the first case, an invariant of M
+in the second case, an invariant chain homotopy equivalent to M
+
+\begin{proof}
+For surjectivity, split up the resolutions to exact sequences, and add up to get the Euler characteristic = [M]
+\[0\to P_n\xrightarrow{\alpha_n}\to\cdots\to P_0\xrightarrow{\alpha_0}\to M\to 0\]
+For injectivity, want to show \chi(M) is independent of the choice of the resolution. Since any two resolutions are chain homotopic, construct the cone of two resolutions $P_\bullet=P'_\bullet\oplus P''_\bullet$, have short exact sequence $0\to P'\to P\to P''_{\bullet+1}\to0$, Euler characteristic is additive, $\chi(P)=\chi(P')-\chi(P'')$, but since $P$ is acyclic, so $\chi(P)=0$
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\iffalse
+
+Exact categories
+An exact cat is a full subcat containint 0 and closed under extensions
+
+\begin{example}
+A cat of f.g. R module
+C cat of f.g. proj R module, C is a exact cat in abelian cat A
+\end{example}
+
+\begin{definition}
+$\mathcal C\subseteq\mathcal A$ is a an exact category of a small abelian category $\mathcal A$, then we define $K_0(\mathcal C)$ to be the free abelian group on objects of $\mathcal C$ module relations $[P]=[P']+[P'']$. And the Cartan map is $K_0(\mathcal C)\toK_0(\mathcal A)$
+\end{definition}
+
+\begin{example}
+$R$ is a left Noetherian ring, $\mathcal A$ a small model for f.g. R modules, C=f.g., the usual example
+\end{example}
+
+\begin{example}
+$X$ is a Noetherian scheme, $\mathcal A$ is the category of coherent $\mathcal O_X$-modules, $\mathcal C$ is the category of locally free coherent $\mathcal O_X$ modules, i.e. the category of algebraic vector bundles over $X$, then $K_0(\mathcal A)=G_0(X)$, $\mathcal K_0(\mathcal C)=K_0(X)$
+\end{example}
+
+\begin{example}
+$R$ is a ring(not necessarily Noetherian). Let $\mathcal A$ be a small model for the category pseudo-coherent $R$-modules, i.e. ones with resolution by f.g. proj $R$ moduels, whrere the resoluiton dones't have to be finite. If $R$ is Noetherian, every finite generated $R$-module is pseudo-coherent. Then we define $G_0(R)=K_0(\mathcal A)$, and we get a Cartan map $K_0(R)\to G_0(R)$. And analogue for non-Noetherian schemes
+\end{example}
+
+\begin{example}
+$R$ is a ring, define $\Nil(R)$ to be the category of pairs $(P,T)$ with $P$ a finitely generated(right) $R$-module(in a small model), and $T:P\to P$ is a nilpotent $R$-module endomorphism. Morphisms are commutative diagrams
+\begin{center}
+\begin{tikzcd}
+P \arrow[r, "T"] \arrow[d, "f"] & P \arrow[d, "f"] \\
+P' \arrow[r, "T'"]              & P'              
+\end{tikzcd}
+\end{center}
+This is an exact subcategory of the larger category of pairs $(P,\alpha)$, with $\alpha$ not required to be nilpotent
+If $R$ is right Noetherian, there is a still larger abelian category of f.g. right $R$-modules
+\end{example}
+
+What is this good for? Recall that $G_0(R[t])\cong G_0(R)$ for $R$ Noetherian, and the analogue fails for $K_0$, $K_0(\Nil R)$ is the missing piece in $K_0(R[t])$, i.e. $K_0(R[t])\cong K_0(\Nil(R))$. There is an obvius summand $K_0(R)$ inside $K_0(\Nil(R))$ given by $P\mapsto(P,0)$ and $(P,T)\mapsto P$. Sometimes $K_0(\Nil(R))\cong K_0(R)$, sometimes no
+
+
+
+
+
+
+
+
+
+
+
+
+
+Recall there is an exact sequence
+\[\GL_(R)\to\GL(R/I)\to K_0(I)\to K_0(R)\to K_0(R/I)\]
+
+This suggests that $K_1(R)$ should be related to GL(R), but homology groups shooulde be commutative
+
+Guess K_1(R)\cong\Gl(R)_{ab}
+
+\begin{theorem}
+$R$ is a Euclidean domain, then $K_1(R)\cong R^\times$
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{remark}
+The determinant $\det:\GL_n(R)\to R^\times$ givs split surjection $K_1(R)\to R^\times$, the kernel is denoted $SK_1(R)$, $SK_1(R)=0$ for euclidean domain, but not generally for PID
+\end{remark}
+
+\begin{theorem}[Dieudonn\'e]
+$R$ is a division ring, there is a unique determinant map giving an isomorphism $K_1(R)\to R^\times_{ab}$
+\end{theorem}
+
+\begin{example}
+$\mathbb H$ is the quaternions, $\mathbb H^\times\cong \mathbb R^\times_+\times SU(2)$, since $SU(2)$ is simple, $K_1(\mathbb H)\cong\mathbb R^\times_+$
+\end{example}
+
+\begin{proof}
+There is a unique map such tat $det(EA=det(A)$
+\det induces an iso $K_1(R)\to R^\times_{ab}$, we have split surjection $\GL_n(R)_{ab}\to R^\times_{ab}$ with the splitting map induced by inclusion into the first component
+\end{proof}
+
+D division ring center F, dim_FD=n^2, n is the dim over F of a maximal commutative subfield. say $E$
+
+\begin{example}
+D=H^2, F=R,E=C, then n=2,dim_FD=2^2=4,dim_ED=2
+\end{example}
+
+\begin{theorem}
+$N_{red}$ is an iso
+\end{theorem}
+
+D\hookrightarrow M_n(E) by tensoring with E, $D^\times\hookrightarrow\GL_n(E)$, so the det map $GL_n(E)\to E^\times$ induces $D^\times\to E^\times$. If $E/F$ is Galois, then Gal(E/F), get N_{red}:K_1(D)=D^\times\to F^\times
+
+\begin{example}
+D=H^2, F=R,E=C, the reduced norm is a multiplicative map $D^\times\to F^\times$. On $F^\times$, for a\in F^\times, a\mapsto\det(a,\cdots,a)=a^n, sending i,j,k to 1,so N_{red}(z=a+bi+cj+dk)=z\bar z
+\end{example}
+
+\begin{proof}
+Want to show $N_{red}$ is an iso mod n.
+In general, it's neither injective nor surjective, but the kernel and cokernel are $n$-torsion. This map almost split by the inclusion $F^\times\hookrightarrow D^\times$. So \coker N_{red} is a quotient of $F^\times/(F^\times)^n$, can similarly check that $\ker N_{red}$ is n-torsion
+\end{proof}
+
+The Whitehead Group $Wh(G)$
+
+GL_1(ZG)=(ZG)^\times
+
+\begin{definition}
+Wh(G)=K_1(ZG)/(Z^\times\times G)
+\end{definition}
+
+$K_0(R\rel S)$ to be K_0 of the Waldhausen category of bounded complexes of finitely generated projective $R$-modules P_\bullet such that S^{-1}P is exact
+
+\begin{theorem}
+R=k[t], K_1(R)\cong k[t]^\times\cong k^\times, S={t,t^2,\cdots}, S^{-1}R=k[t,t^{-1}] is a PID, K_0(R rel S) is generated by [k[t]\xrightarrow tk[t]]. The exact sequence becomes
+\begin{center}
+\begin{tikzcd}
+K_1(R) \arrow[r] \arrow[d] & K_1(S^{-1}R) \arrow[r] \arrow[d]  & K_0(R rel S) \arrow[r] \arrow[d] & K_0(R) \arrow[r] \arrow[d]   & K_0(S^{-1}R) \arrow[d] \\
+k^\times \arrow[r]         & k^\times\times\mathbb Z \arrow[r] & \mathbb Z \arrow[r, "0"]         & \mathbb Z \arrow[r, "\cong"] & \mathbb Z             
+\end{tikzcd}
+\end{center}
+\end{theorem}
+
+
+Fundamental theorem
+$R$ is a ring, consider $R[t]$, $S=\{t,t^2,\cdots\}$, $S^{-1}R[t]=R[t,t^{-1}]$. We want to relate K-theory of $R$, $R[t]$ and $R[t,t^{-1}]$. Let $\Nil(R)$ be the category of pairs $(P,T)$ where $P$ is a finitely generated projective $R$-module, $T\in\End(P)$ nilpotent. This is an exact category with maps commutating diagrams
+\begin{center}
+
+\end{center}
+The category of finitely generated projective $R$-modules embeds in $\Nil(R)$ as the pairs $(P,0)$. So we have a split injection $K_0(R)\to K_0(\Nil(R))$. Note that for "nice" rings, e.g. regular Noetherian rings, this map is an isomorphism and $K_0(\Nil(R))\cong K_0(R)$
+
+Recall the localization theorem gives an exact sequence $K_1(R[t])\to K_1(R[t,t^{-1}])\xrightarrow\partial K_0(R[t] rel \{t,^2,\cdots\})\xrightarrow0 K_0(R[t])\hookrightarrow K_0(R[t,t^{-1}])$
+
+It will turn out that $K_1(R[t])\cong K_1(R)\oplus\coker(K_0(R)\to K_0(\Nil(R)))=:K_1(R)\oplus NK_1(R)$. Similarly, we have $K_0(R[t])\cong K_0(R)\oplus NK_0(R)$. If we had the algebraic analogue of homotopy invariance, $NK_j$ would be 0
+
+\begin{lemma}
+g\in GL(R[t]) is conjruent ot the identity mod t, then [g]=[1-\nu t] in K_1(R[t]) for some nilpotent $\nu\in M_n(R)$(n maybe large compare to the size of $g$)
+\end{lemma}
+
+\begin{proof}
+Think of $g$ as a poly in t with coef that are matices over R, the constant term being the identity matrix, if the polynomial is of deg 1, then g=1-\nu t, but g being invertible, $g^{-1}=1+\nu t+\cdots$ has to terminate, so \nu is nilpotent. Induction for \deg g, so assume g=1-\nu t+\gamma t^n for some nilpotent \nu, 
+\begin{center}
+g\\
+&1
+\sim
+g&\gamma t^{n-1}\\
+&1
+\sim1-\nu t&\gamma t^{n-1}\\
+-t1&1
+=1\\
+&1-t
+\nu&\gamma t^{n-2}\\
+1&0
+\end{center}
+\end{proof}
+
+\begin{theorem}
+K_1(R[t])\cong K_1(R)\oplus NK_1(R), where r$NK_1R\oplus K_0(R)\cong K_0(NilR)
+\end{theorem}
+
+\begin{proof}
+Map ker(K_1(R[t]\to K_1(R))) NK_1(R) to use lemma. For \nu nilpotent, send to 1-\nu t\in\ker(K_1(R[t]\to K_1(R)))
+\end{proof}
+
+\begin{theorem}[Fundamental theorem of K-theory]
+$K_1(R[t,t^{-1}])\cong K_1(R)\oplus NK_1(R)\oplus NK_1(R)\oplus K_0(R)$, ($NK_1(R)$ from $R[t]$ and $R[t^{-1}]$)
+\end{theorem}
+
+\begin{proof}
+Construct exact seq
+0\t oK_1(R)\to\Delta K_1(R[t])+K_1(R[t^{-1}])\to(a,b)\mapsto a-b K_1(R[t,t^{-1}])\to\partial K_0(R)\to 0
+\partial is split by the map [P]\to t\\&1
+Localization theorem gives
+K_1(R[t])\to K_1(R[t,t^{-1}])\to\partial K_0(R[t]rel S)\to K_0(R[t])\to K_0(R[t,t^{-1}])
+the last map is injective, so we have exact seq
+K_1(R[t])\to K_1(R[t,t^{-1}])\to\partial K_0(R[t]rel S)\to0
+\end{proof}
+
+\begin{lemma}
+K_0(R[t]rel S)\cong K_0(\Nil(R)), which by the last theorem is K_0(R)\oplus NK_1(R)
+\end{lemma}
+
+\begin{proof}
+K_0(R[t]rel S) is generated by length one complexes R[t]^n\to\alpha R[t]^n, wehre \alpha is iso after inverting t. If $P$ is a f.g. proj R module, Po+Q\cong R^n, then P\in K_0(R) can be identityfed with R[t]^n\to R[t]^n which is the identity on Q[t] and mult by t on P[t]
+Similarly, given nu nil, t1-nu is an iso after inverting t, sicne (t1-nu)^{-1}t^{-1}(1-nu t)^{-1}\in GL_n(R[t,t^{-1}]), so repre a class in K_0(R[t]rel S)
+A gneral S iso R[t]^n\to\alpha R[t]^n is given (since t is not a zero divisor) by an exact seq
+0\to R[t]^n\to\alpha R[t]^n\to M\to 0
+M is annilated by some power t^m of t, tensor the seq with R[t]/(t^m), we obtain
+0\to Tor_1^{R[t]}(M,R[t]/(t^m))\to(R[t]/(t^m))^n\to(R[t]/(t^m))^n\to M\to0
+But from the free resolution
+0\to R[t]\to t^m R[t]\to R[t]/(t^m)\to0
+\end{proof}
+
+Construct splitting $K_0(\Nil(R))\to K_1(R[t,t^{-1}])$, $[P,T]\mapsto[(P\oplus Q),1-Tt^{-1}\\&1]$, $P\oplus Q\cong R^n$
+
+\begin{proposition}
+R is an algebra over F_p, then NK_1(R) is a p group
+\end{proposition}
+
+\begin{proof}
+Consider $R=F_p[x]/(x^n)$, (1+tf(x,t))^{p^m=1+t^{p^m}f(x^{p^m},t^{p^m})}
+\end{proof}
+
+\begin{proposition}
+R algebra over Q, then NK_1(R) is a Q vector space
+\end{proposition}
+
+\begin{proof}
+Similar argument to reduce to $R=Q[x]/(x^n)$. Use Witt vectors
+\end{proof}
+
+\begin{definition}
+$F:\text{rings}\to \text{Groups}$ is a functor. Let $LF(R)=\coker(F(R[t]\oplus F(R[t^{-1}]))\to F(R[t,t^{-1}]))$
+Then we get a sequence Seq(F,R)
+\[0\to F(R)\xrightarrow\Delta F(R[t])\oplus F(R[t^{-1}]) \to F(R[t,t^{-1}]))\to LF(R)\to0\]
+
+F is acyclic if 
+
+The fundamental theorem syas $K_1$ is a contracted funcor with $LK_1=K_0$
+Definte $K_n=LK_{1-n}$, $NF(R)=\coker(F(R)\to F(R[t]))$
+If is regular and Noe, then the resolution theorme showed $K_0(R)=G_0(R)$ and $NK_0(R)=0,K_{-1}(R)=0$. In fact $K_{-n}(R)=0\forall n\geq1$. So negative K theory is mostly interesting for non-regular rings
+\end{definition}
+
+\begin{example}
+$R=\mathbb Z$, $I=(n)$, $R/I=\mathbb Z/n$. If $n$ has more than one prime factor, $Z/n\cong Z/p_1^{r_1}\oplus\cdots\oplus Z/p_k^{r_k}$ a product of k local rings, $K_0(R/I)=Z^k$, $K_0(R)=Z$. We will obtain a long exact sequence
+\end{example}
+
+\begin{proposition}
+If F is contracted functor, then so are LF,NF and $NLF\cong LNF$
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}[Fundamental theorem]
+$K_n(R[t,t^{-1}])\cong K_n(R)\oplus K_{n-1}(R)\oplus NK_n(R)\oplus NK_n(R)$, for $n\leq1$
+\end{theorem}
+
+\begin{corollary}
+If $F$ is a contracted functor, then $F(R[t_1,\cdots,t_n])\cong (1+N)^nF(R)$, $F(R[t_1^{\pm1},\cdots t_n^{\pm1}])\cong(1+2N+L)^nF(R)$
+\end{corollary}
+
+\begin{theorem}
+
+\end{theorem}
+
+\begin{proof}
+Use the definition of $LK_0$ to get
+\begin{center}
+\begin{tikzcd}
+0                                                   & 0 \arrow[d]                                         & 0                                           \\
+K_0(I) \arrow[r] \arrow[d]                          & K_0(R) \arrow[r] \arrow[d]                          & K_0(R/I) \arrow[d]                          \\
+{K_0(I[t]\oplus I[t^{-1}])} \arrow[d]               & {K_0(R[t]\oplus R[t^{-1}])} \arrow[d]               & {K_0(R/I[t]\oplus R/I[t^{-1}])} \arrow[d]   \\
+{K_0(I[t,t^{-1}])} \arrow[d]                        & {K_0(R[t,t^{-1}])} \arrow[d]                        & {K_0(R/I[t,t^{-1}])} \arrow[d]              \\
+K_{-1}(I) \arrow[d] \arrow[r] \arrow[u, bend right] & K_{-1}(R) \arrow[d] \arrow[r] \arrow[u, bend right] & K_{-1}(R/I) \arrow[d] \arrow[u, bend right] \\
+0                                                   & 0                                                   & 0                                          
+\end{tikzcd}
+\end{center}
+We get a boundary map $\partial:K_0(R/I)\to K_{-1}(I)$, but this comes from the boundary map $K_1(R/I[t,t^{-1}])\xrightarrow\partial K_0(I[t,t^{-1}])$
+\end{proof}
+
+\begin{definition}
+A ring $R$ is called $K_n$ regular for some $n$ if $LK_n,NK_n$ both vanish. A regular Noetherian ring is $K_n$ regular for all $n$
+\end{definition}
+
+\begin{fact}
+$K_1$ regular $\Rightarrow$ $K_0$ regular $\Rightarrow$ $K_{-1}$ regular $\Rightarrow$, None of these arrows are reversible. In general, NK groups and lower K groups can often be computed using the definition and polynomial, Laurent polynomial rings. NK groups can also be computed using the Nil category. Recall $NK_1(R)=\ker(K_0(\Nil(R))\to K_0(R))$ Applying the machinery of contracted functors, you can also get a description of $NK_0$. There are lots o interesting contracted functors, especially on commutative rings, other than K-theory functors
+\end{fact}
+
+\begin{example}
+The group of units $U(R)$ is a contracted functor, $\Pic$ is a contracted functor
+\end{example}
+
+Still another approach to negative K-theory(due to Karoubi). Show that $K_n(R)=K_n(M(R))$, where $M(R)=\lim M_k(R)$(Morita invariance) clearly true for $K_0,K_1$. This inherits to $LK_n,NK_n$. Embed $M(R)$ as an ideal in a larger ring which has identically 0 K-groups. From the exact sequence $0\to M(R)\to B(R)\to Q(R)=B(R)/M(R)\to0$
+
+
+
+There is an obvious map $\St_n(R)\to E_n(R)$
+
+\begin{lemma}
+The subgroup of $\St_n(R)$ generated by $x_{ij}(r), i<j$, maps iso to the group of strictly upper triangular matrices in $\GL_n(R)$, $n\geq3$
+\end{lemma}
+
+\begin{definition}
+1\to A\to E\to G\to1 is a central extension if A is abelian and central in E
+\end{definition}
+
+\begin{theorem}
+A group $G$ has a universal central extension $E$ iff $G$ is perfect iff $E$ is perfect and all central extensions of $E$ are trivial
+\end{theorem}
+
+\begin{proof}
+Consider presentation
+1\to R\to F\to G\to1
+F is free, then $G=[F,F]/R$, let $E=[F,F]/[F,R]$, we have $E\to G$, the kernel is central, $E$ is perfect
+\end{proof}
+
+\begin{theorem}[Milnor]
+$\St_n(R)$ is the universal central extension of $E(R)$. Define $K_2(R)$ to be the kernel of $\St(R)\to E(R)$
+\end{theorem}
+
+\begin{proof}
+$\St(R)$ is perfect
+\end{proof}
+
+\begin{corollary}
+$K_2(R)$ is naturally isomorphic to $H_2(E(R),\mathbb Z)$
+\end{corollary}
+
+\begin{theorem}
+G is a group, G has a universal central extension if $H_1(G,\mathbbb Z)=0$
+\end{theorem}
+
+
+
+
+
+
+
+\begin{definition}
+A \textit{Waldhausen category}\index{Waldhausen category} is a small(skeleton small) category $\mathscr C$ with two special classes of morphisms: cofibrations $A\rightarrowtail B$, weak equivalences $A\to B$, satisfying:
+\begin{enumerate}
+\item Every iso is both a cofibration and a weak equivalence
+\item There is a zero object, and for every $A\in\mathscr C$, $0\rightarrowtail A$ is a cofibration
+\item the pushout of a cofibration along any morphism exists and is a cofibration, i.e.
+\begin{center}
+\begin{tikzcd}
+A \arrow[r, tail] \arrow[d] & B \arrow[d] \\
+C \arrow[r, tail]           & B\cup_AC   
+\end{tikzcd}
+\end{center}
+Note that if $A=0$, $B\cup_0 C=B\coprod C$. Also the pushout square
+\begin{center}
+\begin{tikzcd}
+A \arrow[r, tail] \arrow[d] & B \arrow[d] \\
+0 \arrow[r, tail]           & B\cup_A0   
+\end{tikzcd}
+\end{center}
+gives us the cokernel $B/A$
+\item Weak equivalences are closed under compositions, and we can glue weak equivalences
+\begin{center}
+\begin{tikzcd}
+C \arrow[d, "\simeq"] & A \arrow[r] \arrow[d, "\simeq"] \arrow[l] & B \arrow[d, "\simeq"] \\
+C'                    & A' \arrow[r] \arrow[l]                    & B'                   
+\end{tikzcd}
+\end{center}
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+Let $\mathscr C$ is a Waldhausen category, then $K_0(\mathcal C)$ is the free abelian group on the objects modulo relations
+\begin{enumerate}
+\item $[A]=[A']$ if there is a weak equivalence $A\xrightarrow\simeq A'$
+\item $[C]=[B]+[C/B]$ if there is a cofibration sequence $B\rightarrowtail C\to C/B$. One gets the relation $[0]=0$, $[B\cup_AC]=[B]+[C]-[A]$ as a consequence
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+$\mathscr C\subseteq\mathscr A$ is an exact category, then $\mathscr C$ is a a Waldhausen category, with cofibration sequences the short exact sequence
+\end{example}
+
+\begin{example}\label{2021/3/22-11:10}
+$\mathscr C$ is the category of based finite CW complexes, $0=*$ is the zero object, $0\to A$ is the inclusion, cofibrations are based inclusions of subcomplexes, weak equivalences are based homotopy equivalences
+\end{example}
+
+\begin{proposition}[Waldhausen]
+$K_0(\mathscr C)=\mathbb Z$, given by the Euler characteristic $A\to\chi(A)$
+\end{proposition}
+
+\begin{proof}
+$S^{n-1}\rightarrowtail D^n\to S^n$, thus $[S^{n-1}]+[S^n]=0$, so $[S^0]$ generates $K_0(C)$, identify this with $1\in\mathbb Z$, then $[S^n]=(-1)^n$
+\end{proof}
+
+\begin{example}
+A small abelian category, $\mathscr C$ the category of bounded chain complexes, $\mathscr C$ is Waldhausen, cofibrations are monic chain maps and weak equivalences are quasi isomorphisms
+\end{example}
+
+\begin{theorem}[SGA]
+In the situation of Example \ref{2021/3/22-11:10}, the map $A_*\to\chi(A_*)$ is an iso $K_0(\mathscr C)\to K_0(\mathscr A)$
+\end{theorem}
+
+\begin{proof}
+By "Euler-Poincare principle", $\chi(A_*)=\chi(H_*(A_*))$, $0\to Z_n\to A_n\to A_{n-1}\to A_{n-1}/B_{n-1}\to0$, $0\to B_n\to Z_n\to H_n\to 0$, and add these. The Euler characteristic is also additive on cofibration sequences $B_*\rightarrowtail A_*\to A_*/B_*$
+\end{proof}
+
+\begin{theorem}[Approximation theorem]
+$F:\mathscr A\to\mathscr B$ is exact(take cofibrations to cofibrations) between Waldhausen categories. Assume
+\begin{enumerate}
+\item $f$ is a weak equivalence in $\mathscr A$ iff $F(f)$ is a weak equivalence in $\mathscr B$
+\item Any $b:F(\mathscr A)\to\mathscr B$ factors as $b'F(a')$, $b':B'\to B$ is a weak equivalence, $a:A\to A'$ is a cofibration with $F(A')=B'$
+\item can choose skeleton small?
+\end{enumerate}
+Then $F$ induces iso $K_0(\mathscr A)\to K_0(\mathscr B)$
+\end{theorem}
+
+\begin{proof}
+Consider $A=0$, we see that any $B\in\mathscr B$ is weakly equivalent to $F(A')$, thus $K_0(\mathscr A)\to K_0(\mathscr B)$ is surjective. The sets of weak equivalence classes in $\mathscr A$ and in $\mathscr B$ coincide, or in bijection under $F_*$
+\end{proof}
+
+Application: Let $R$ be a ring, we have the following Waldhausen categories:
+\begin{itemize}
+\item $\Proj(R)$, finite generated projective R moudles
+\item $\Ch^b(\Proj(R))$, bounded complexes of finitely generated R modules
+\item Perfect chain complexes, i.e. chain complexes quasi isomorphic to complexes in $\Ch^b(\Proj(R))$
+\end{itemize}
+
+
+The Approximation theorem says they have the same $K_0$, namely $K_0(R)$
+
+The real use of Waldhausen categories will be in the construction of higher K-theory, where Waldhausen "S-construction" gives a simple elegant approach covering all of these examples
+
+\begin{example}
+Fix a field $k$, say $\mathbb C$, $\mathcal A$ be the category of smooth quasi-projective varieties over $k$. This is a Waldhausen category with cofibrations being closed inclusions, weak equivalences being isomorphisms, $[\mathbb P^1]=[*]+[\mathbb A^1]$
+\end{example}
+
+\begin{example}
+$R$ is a ring, let $\End(R)$ be the category of pairs $(P,T)$, $P$ is a finitely generated projective $R$-module, $T:P\to P$, morphisms are commutative diagrams
+\begin{center}
+\begin{tikzcd}
+P \arrow[r] \arrow[d, "T"] & P' \arrow[d, "T'"] \\
+P \arrow[r]                & P'                
+\end{tikzcd}
+\end{center}
+You get $K_0(\End(R))$ containing $K_0(R)$ as a direct summand via the functor $P\mapsto(P,0)$. Compute the rest of $K_0(\End(R))$. This was studied by Grayson
+\end{example}
+
+\fi
+
+\end{document}

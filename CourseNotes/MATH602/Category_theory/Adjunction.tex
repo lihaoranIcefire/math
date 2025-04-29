@@ -1,0 +1,46 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+Let $L:\mathscr D\to\mathscr C$, $R:\mathscr C\to\mathscr D$ be functors, and there is a natural isomorphism $\Phi_{X,Y}$, $X\in\mathscr C,Y\in\mathscr D$
+\begin{center}
+\begin{tikzcd}
+{Hom_{\mathscr C}(LX,Y)} \arrow[r, "{\Phi_{X,Y}}"] \arrow[d, "{(Lf,g)}"'] & {Hom_{\mathscr D}(X,RY)} \arrow[d, "{(g,Rf)}"] \\
+{Hom_{\mathscr C}(LX',Y')} \arrow[r, "{\Phi_{X',Y'}}"]                    & {Hom_{\mathscr D}(X',RY')}                    
+\end{tikzcd}
+\end{center}
+Here $f:X'\to X$, $g:Y\to Y'$, $Hom_{\mathscr C}(Lf,g)(h)=h\circ g\circ Lf$ \par
+We say $L$ is the \textbf{left adjoint}\index{Adjoint functors} of $R$ and $R$ is the \textbf{right adjoint} of $L$
+\end{definition}
+
+\begin{example}
+Let $G:Group\to Set$ be the forgetful functor, then the functor $F:Set\to Group$, sending $S$ to $F(S)$ is the left adjoint of $G$ \par
+In the category of $R$-modules $Mod$, consider functor $F:=-\otimes B$ and functor $G:=Hom(B,-)$, then $F,G$ are adjoint pairs, i.e. $Hom(A\otimes B,C)\cong Hom(A,Hom(B,C))$
+\end{example}
+
+\begin{theorem}
+Suppose $L:\mathscr A\to \mathscr B$, $R:\mathscr B\to \mathscr A$ are a pair of adjoint functors, then there exist natural transformations $\eta:1_{\mathscr A}\to RL$ and $\varepsilon:LR\to 1_{\mathscr B}$ such that the right adjoint of $LX\xrightarrow{f}Y$ is $X\xrightarrow{R(f)\eta_X}RY$ and left adjoint of $g:X\to RY$ is $LX\xrightarrow{\varepsilon_YL(g)}Y$. Moreover, the following composites are identity, $LX\xrightarrow{L(\eta_X)}LRLX\xrightarrow{\varepsilon_{LX}}LX$, $RY\xrightarrow{\eta_{RY}}RLRY\xrightarrow{R(\varepsilon_Y)}RY$
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}
+Suppose $F,G$ is an adjunction pair, then $F$ preserve colimits, $G$ preserve limits
+\end{theorem}
+
+\begin{proof}
+Suppose $\Phi:I\to\mathscr D$ is a functor, $\displaystyle L=\varprojlim_{i\in I}\Phi(i)$ exists, applying $G$ to commutative diagram $L\xrightarrow{\varphi_i}\Phi(i)$, we get another commutative diagram $GL\xrightarrow{G\varphi_i}G\Phi(i)$. For any commutative diagram $X\xrightarrow{\psi_i}G\Phi(i)$, by adjunction, we have a commutative diagram $FX\to\Phi(i)$, which induce a map $FX\to L$, by adjunction again, we have $X\to GL$
+\end{proof}
+
+\begin{definition}
+A functor $F:\mathscr C\to\mathscr D$ is said to be \textbf{left exact}\index{Left exact} if $F$ preserve all finite limits, and \textbf{right exact}\index{Right exact} if $F$ preserve all finite colimits
+\end{definition}
+
+\begin{example}
+A left exact functor preserves all equalizers, and all kernels if the category is abelian, a right exact functor preserves all coequalizers, and all cokernels if the category is abelian, left adjoints are right exact, right adjoints are left exact, for example, $-\otimes B$ is right exact and $Hom(B,-)$ is left exact
+\end{example}
+
+\end{document}

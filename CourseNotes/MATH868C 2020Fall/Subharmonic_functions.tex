@@ -1,0 +1,82 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$\Omega\subseteq\mathbb C$ is a domain. $u:\Omega\to\mathbb R\cup\{-\infty\}$ is \textit{upper semicontinuous}\index{Upper semicontinuous} if for $y\in\mathbb R$ the set $\{u<y\}$ is open
+\end{definition}
+
+\begin{definition}
+An upper semicontinuous function $u$ is \textit{subharmonic}\index{Subharmonic function} if is not identitcally $-\infty$, and for each $U\subset\subset\Omega$ and harmonic function $h$ on $\overline U$ with $u\leq h$ on $\partial U$, we have $u\leq h$ for all $z\in U$
+\end{definition}
+
+\begin{example}
+If $u\in C^2(\Omega)$ and $\Delta u\geq0$, then $u$ is subharmonic
+\end{example}
+
+\begin{theorem}
+\begin{enumerate}
+\item If $\{u_i\}$ are subharmonic and $u=\sup u_i$ is finite and upper semicontinuous, then $u$ is subharmonic
+\item If $u_i\geq u_{i+1}$ are subharmonic, then $u=\lim u_i$ is subharmonic
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}
+\item By definition
+\item $\{u<y\}=\bigcup\{u_i<y\}$ is open, hence $u$ is upper semicontinuous. Suppose $u\leq h$ on $\partial U$ for some $U\subset\subset\Omega$ and harmonic function $h$. For any $\epsilon>0$, consider \[F_i=\{x\in\partial U|u_i(x)\geq h(x)+\epsilon\}\] are compact, thus $\bigcap F_i=\varnothing$ implies that a finite intersection is empty, hence $u\leq h+\epsilon$
+\end{enumerate}
+\end{proof}
+
+\begin{fact}
+If $u$ is subharmonic on $\Omega$, then $u\in L^1_\mathrm{loc}(\Omega)$
+\end{fact}
+
+\begin{theorem}
+Subharmonic function $u$ satisfies the sub-mean value property
+\begin{equation}\label{Sub-mean value property}
+u(z)\leq\frac{1}{2\pi}\int_0^{2\pi}u(z+re^{i\theta})d\theta
+\end{equation}
+For almost all $r$ sufficiently small
+\end{theorem}
+
+\begin{proof}
+$u$ is integrable on circle of radius $r$ about $z$ for sufficiently small $r$, we can find continuous functions $h_n\geq u_n$ on the circle such that $h_n\to u$ in $L^1$, extend $h_n$ to harmonic functions, then
+\[u(z)\leq h_n(z)=\frac{1}{2\pi}\int_0^{2\pi}h_n(z+re^{i\theta})d\theta\to\frac{1}{2\pi}\int_0^{2\pi}u(z+re^{i\theta})d\theta\]
+\end{proof}
+
+\begin{proposition}
+Subharminoc functions satisfies $\Delta u\geq0$ in the weak sense
+\[\int_\Omega u\Delta\phi\geq0,\forall\phi\in C^\infty_c(\Omega),\phi\geq0\]
+\end{proposition}
+
+\begin{proof}
+Multiply $\phi$ on both sides of \eqref{Sub-mean value property} and integrate over $\Omega$ we get
+\begin{align*}
+\int_\Omega 2\pi u(z)\phi(z)d\mu&\leq\int_\Omega\phi(z)\int_0^{2\pi}u(z+re^{i\theta})d\theta d\mu \\
+&=\int_\Omega u(z)\int_0^{2\pi}\phi(z-re^{i\theta})d\theta d\mu
+\end{align*}
+Then we get
+\begin{align*}
+0&\leq\int_\Omega u(z)\int_0^{2\pi}\phi(z-re^{i\theta})-\phi(z)d\theta d\mu \\
+&=\int_\Omega u(z)\int_0^{2\pi}-\partial_z\phi(z)re^{i\theta}-\partial_{\bar z}\phi(z)re^{-i\theta}+\partial^2_z\phi(z)r^2e^{2i\theta}+\partial^2_{\bar z}\phi(z)r^2e^{-2i\theta}+2\partial_z\partial_{\bar z}\phi(z)r^2+O(r^3)d\theta d\mu \\
+&=\int_\Omega u(z)\int_0^{2\pi}\frac{1}{2}\Delta\phi(z)r^2+O(r^3)d\theta d\mu
+\end{align*}
+Divide $\frac{r^2}{2}$ and let $r\to 0$
+\end{proof}
+
+\begin{proposition}
+Subharmonicity is a local property, i.e. suppose $u$ is upper semicontinuous on $\Omega$, and locally subharmonic, then $u$ is subharmonic on $\Omega$
+\end{proposition}
+
+\begin{proof}
+Suppose $h$ is harmonic, $U\subset\subset\Omega$, $u\leq h$ on $\partial\Omega$, consider $v=u-h$, assume $\sup_Uv=M>0$, then by the upper semicontinuity, we know that $F=\{v=M\}$ is compact in $U$, there exists $z_0\in \partial F$ obtains the least distance from $\partial U$, then for any small $r>0$, $F$ will miss an arc of positive measure if $\partial B(z_0,r)$, hence
+\[\frac{1}{2\pi}v(z_0+re^{i\theta})d\theta<M\]
+But this contradicts sub-mean value property
+\end{proof}
+
+\begin{example}
+If $f_1,\cdots,f_k\in \mathcal O(\Omega)$, not all zero, then $u=\log(|f_1|^2+\cdots+|f_k|^2)$ is subharmonic since $\log|f|$ is harmonic and $\Delta u\geq0$
+\end{example}
+
+\end{document}

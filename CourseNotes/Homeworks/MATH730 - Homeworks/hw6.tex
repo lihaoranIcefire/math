@@ -1,0 +1,46 @@
+\documentclass[12pt]{article}
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{dsfont}
+\usepackage{bbm}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{pgfplots,tikz}
+\usetikzlibrary{cd}
+
+\title{MATH730 hw6}
+\author{Haoran Li}
+\date{}
+
+\setlength{\parindent}{0cm}
+
+\begin{document}
+
+\maketitle
+\textbf{Hatcher 1.3.22.} \par
+Since $G_1,G_2$ acts proper discontinuously on $X_1, X_2$, thus, $\forall x_1\in X_1,x_2\in X_2$, there exist neighborhoods $U_1\ni x_1,U_2\ni x_2$, such that $g_1U_1\cap U_1=\varnothing,g_2U_2\cap U_2=\varnothing, \forall g_1\in G_1, g_2\in G_2$, thus $(g_1,g_2)(U_1,U_2)\cap(U_1,U_2)=(g_1U_1,g_2U_2)\cap(U_1,U_2)=(g_1U_1\cap U_1,g_2U_2\cap U_2)=\varnothing, \forall (g_1,g_2)\in G_1\times G_2$, hence $G_1\times G_2$ acts proper discontinuously on $X_1\times X_2$ \par
+Define $\varphi: X_1/G_1\times X_2/G_2\rightarrow (X_1\times X_2)/(G_1\times G_2), \, ([x_1],[x_2])\mapsto [(x_1,x_2)]$ which is well-defined, since $[x_1]=[y_1],[x_2]=[y_2]\Rightarrow y_1=g_1\cdot x_1,y_2=g_2\cdot x_2\Rightarrow (y_1,y_2)=(g_1,g_2)\cdot (x_1,x_2)\Rightarrow [(y_1,y_2)]=[(x_1,x_2)]$ \par
+Similarly, there is a well-defined map $\psi:  (X_1\times X_2)/(G_1\times G_2)\rightarrow X_1/G_1\times X_2/G_2,\, [(x_1,x_2)]\mapsto ([x_1],[x_2])$ \par
+As defined above, since $\varphi([U_1]\times[U_2])=[U_1\times U_2]\ni [(x_1,x_2)]$, we know $\varphi$ is continuous, similarly, $\psi$ is also continuous, and since $\varphi\circ\psi=\mathbbm{1},\psi\circ\varphi=\mathbbm{1}$, $X_1/G_1\times X_2/G_2$ and $(X_1\times X_2)/(G_1\times G_2)$ are homeomorphic \par
+\textbf{1.} \par
+$\Gamma(Ev(\cdot)): Aut(X)\rightarrow \pi_1(B,b)$ is an isomorphism \par
+\textbf{(a)} \par
+The main reason is that $\pi_1(S^1\times S^1)\cong \mathbb{Z}\times\mathbb{Z}$ is abelian \par
+Let $\alpha,\beta\in\pi_1(S^1\times S^1)$ be two generators and $\phi_1,\phi_2\in Aut(X)$ such that $\Gamma(Ev(\phi_1))=\alpha, \Gamma(Ev(\phi_2))=\beta$ \par
+Since any element in $\pi_1(B,b)$ can be written uniquely as $\gamma=\alpha^n\star\beta^m$, then $\Gamma(Ev(\phi_1^n\cdot\phi_2^m))=\Gamma(Ev(\phi_1))^n\star\Gamma(Ev(\phi_2))^m=\gamma$, $\forall x\in F$, we have $x\cdot\gamma=(\alpha^n\star\beta^m)\cdot x=(\beta^m\star\alpha^n)\cdot x$, and $x\cdot\gamma=x\cdot(\phi_1^n\cdot\phi_2^m)=\phi_2^m(\phi_1^n(x))$, they coincide \par
+\textbf{(b)} \par
+The main reason is that $\pi_1(S^1\vee S^1)\cong\mathbb{Z}*\mathbb{Z}$ is not abelian \par
+Let $\alpha,\beta\in\pi_1(S^1\vee S^1)$ be two generators and $\phi_1,\phi_2\in Aut(X)$ such that $\Gamma(Ev(\phi_1))=\alpha, \Gamma(Ev(\phi_2))=\beta$ \par
+Then we have $\alpha\star\beta\neq\beta\star\alpha$, consider $(\alpha\star\beta)\cdot x\neq (\beta\star\alpha)\cdot x=\phi_2(\phi_1(x))=x\cdot(\phi_1\cdot\phi_2)$, hence these two actions don't coincide \par
+\textbf{2.} \par
+Suppose $\phi: E\rightarrow E$ is a covering homomorphism, $\forall x\in E$, let $b=p(x)$ and $U$ be a evenly covered path connected neighborhood of $b$, let $p^{-1}(U)=\displaystyle\bigsqcup_{i=1}^nV_i$, $x\in V_j$, then $\phi(V_j)\subseteq p^{-1}(U)$, since $V_j\cong U$ is connected, so is $\phi(V_j)$, thus $\phi(V_j)\subseteq V_k$ for some $k$, but then $\phi|_{V_j}=p|_{V_k}^{-1}\circ p|_{V_k}$, thus $\phi(V_j)=V_k$ and $\phi$ is a local homeomorphism, For any $y\in F:=p^{-1}({b})$, there is a path $\alpha$ from $\phi(x)$ to $y$, let $\beta$ be the lift of $p\circ\alpha$ starting at $x$ against $p$, then $\phi\circ\beta$ will be the lift of $p\circ\alpha$ starting at $\phi(x)$ which is just $\alpha$, thus $\phi(\beta(1))=y$, $\phi$ is surjective, since $p$ is finitely sheeted, $\phi$ is bijective, hence $\phi$ is a homeomorphism \par
+\textbf{3.} \par
+\textbf{Lemma:} $H\leq G$ is a subgroup satisfies $H\leq g^{-1}Hg, \forall g\in G$, then $H$ is a normal subgroup \par
+\textbf{Proof:} $H\leq g^{-1}H(g^{-1})^{-1}=g^{-1}Hg$, thus $gHg^{-1}\leq H$, hence $H=g^{-1}Hg, \forall g\in G$ \par
+Suppose $p_*(\pi_1(E,x))\leq\pi_1(B,b)$ is a normal subgroup, $\forall x'\in F$, assume $\widetilde{\gamma}$ is a path from $x$ to $x'$, $\gamma=p(\widetilde{\gamma})$, then $p_*(\pi_1(E,x))=[\gamma]p_*(\pi_1(E,x))[\gamma]^{-1}=p_*(\pi_1(E,x'))$, hence there is a lift $\varphi$ of $p$ against $p$, with $\varphi(x)=x'$, thus $\varphi$ is a deck transformation \par
+Conversely, $\forall [\gamma]\in\pi_1(B,b)$, there is a lift $\widetilde{\gamma}$ starting at $x$, let $\widetilde{\gamma}(1)=x'$, since there is a deck transformation $\varphi$ with $\varphi(x)=x'$ \par
+Thus $p_*(\pi_1(E,x))\leq p_*(\pi_1(E,x'))=[\gamma]p_*(\pi_1(E,x))[\gamma]^{-1}$, by lemma we know $p_*(\pi_1(E,x))\leq\pi_1(B,b)$ is a normal subgroup
+
+\end{document}

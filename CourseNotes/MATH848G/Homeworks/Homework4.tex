@@ -1,0 +1,31 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\textbf{1.} \par
+\textbf{(i)} \par
+Notice $\ker\bar\partial_{\mathcal O(n)}=H^0(\mathbb CP^1,\mathcal O(n))$, and $\mathrm{coker}\bar\partial_{\mathcal O(n)}=0$, $G$ acts on $H^0(\mathbb CP^1,\mathcal O(n))$ by $(g\cdot f)(z)=f(g^{-1}z)$ where $f(z)$ is a homogeneous polynomial of $z_0,z_1$ of degree $n$, suppose $\displaystyle f=\sum_{k=0}^n\alpha_kz_0^kz_1^{n-k}$, with $\alpha_{k_0}\neq0$ for some $k_0$, consider $\displaystyle h_l= \mathrm{diag}(\bar {u_l},u_l), h=\sum_{l=0}^m c_lh_l$ acting on $f$, we get $(h\cdot f)(z)=\sum_{l=0}^m(h_l\cdot f)(z)=\displaystyle\sum_{l=0}^m\sum_{k=0}^n c_lu_l^{n-2k}\alpha_kz_0^kz_1^{n-k}=\sum_{k=0}^n\left(\sum_{l=0}^m c_lu_l^{n-2k}\right)\alpha_kz_0^kz_1^{n-k}$, take distinct $u_1,\cdots,u_n$ with $|u_l|=1$, and consider system of equations $\displaystyle\sum_{l=0}^n c_lu_l^{n-2k}=0,\forall k\neq k_0$, and $\displaystyle\sum_{l=0}^n c_lu_l^{n-2k_0}=\dfrac{1}{\alpha_{k_0}}$ which has a solution of $c_l$'s since determinant $\left|(u_l^{n-2k})\right|=\left|\left(u_l^{n}(u_l^{-2})^k\right)\right|=\left(\prod |u_l|^{n}\right)\left|\left((u_l^{-2})^k\right)\right|\neq0$and $(u_l^{-2})^k$ is a Vandermonde matrix, thus $(h\cdot f)(z)=z_0^{k_0}z_1^{n-k_0}$, then $z_0^{k_0}z_1^{n-k_0}\in \mathbb CGf$ \par
+Let $g=\begin{pmatrix}
+u&w \\
+-\bar w&\bar u
+\end{pmatrix}$, $g\cdot z_0^{k_0}z_1^{n-k_0}=\left(uz_0+wz_1\right)^{k_0}\left(-\bar wz_0+\bar uz_1\right)^{n-k_0}$ which in expansion has nonzero coefficient for term $z_0^n$, use the argument we have $z_0^n\in\mathbb CGf$, then $g\cdot z_0^n=\left(uz_0+wz_1\right)^n$ which in expansion has nonzero coefficients for each term $z_0^kz_1^{n-k}$, by the argument again, we know each term $z_0^kz_1^{n-k}\in\mathbb CGf$, thus $\mathbb CGf$ generates all homogeneous polynomials of degree $n$ \par
+Therefore this representation is irreducible \par
+Notice that $\mathrm{diag}(\bar z,z)(z_0^kz_1^{n-k})=z_0^kz_1^{n-k}z^{n-2k}$ thus this is a subrepresentation $\langle z_0^kz_1^{n-k}\rangle$ corresponds to $t^{n-2k}$, thus the restriction of this representation to $H$ is the direct sum of $\langle z_0^kz_1^{n-k}\rangle$ which is $t^n+\cdots+t^{-n}=\chi_n$ \par
+This question I got some hints from Artavia Josue \par
+\textbf{(ii)} \par
+Obviously $\mathbb Z[u]\subseteq\mathbb Z[t,t^{-1}]^\sigma$, on the other hand, if $f(t)=\displaystyle\sum_{n=-\infty}^\infty c_n t^n\in\mathbb Z[t,t^{-1}]^\sigma$, then $\displaystyle\sum_{n=-\infty}^\infty c_n t^{-n}=\sigma f(t)=f(t)=\sum_{n=-\infty}^\infty c_n t^{n}$, which implies that $c-n=c_{-n}$, thus $f(t)=\displaystyle c_0+\sum_{n=1}^\infty c_n(t^n+t^{-n})$, but note that\begin{align*}
+2(t+t^{-1})^{n}
+&=\displaystyle\sum_{i=0}^n\binom{n}{i}t^{n-i}t^{-i}+\sum_{i=0}^n\binom{n}{i}t^{i}t^{i-n} \\
+&=\sum_{i=0}^n\binom{n}{i}t^{n-2i}+\sum_{i=0}^n\binom{n}{i}t^{2i-n} \\
+&=\sum_{i=0}^n\binom{n}{i}(t^{n-2i}+t^{2i-n}) \\
+\end{align*}
+Thus $t^n+t^{-n}\in\mathbb Z[u]$, $\mathbb Z[u]=\mathbb Z[t,t^{-1}]^\sigma$ \\
+Each power of $u$ is a sum of characters of the form $\chi_n$ because $t^n+t^{-n}=\chi_{n+2}-\chi_n$ \\
+Therefore the image of $R(G)$ in $R(H)$ is contained $\mathbb Z[u]$ and the restriction map is injective, then consider $R(H)\to R(G)\to R(H),t^n\mapsto V_n\mapsto\chi_n$, thus $\mathbb Z[u]$ will be contained in the image, hence $R(H)\to R(G)$ is surjective and $R(G)\to R(H)$ has precisely image $\mathbb Z[u]$ \par
+By Serre duality, we know that $\dim H^1(\mathbb CP^1,\mathcal O(n))=\dim H^0(\mathbb CP^1,K\otimes\mathcal O(-n))=\dim H^0(\mathbb CP^1,\mathcal O(-n-2))$, when $n=-1$, $t^{-1}$ is mapped to $0$, when $n\leq-2$, the image of $t^n$ is $-V_{-n-2}$, which restricts to $\chi_{-n-2}$ \par
+\textbf{2.} \par
+
+
+
+
+\end{document}

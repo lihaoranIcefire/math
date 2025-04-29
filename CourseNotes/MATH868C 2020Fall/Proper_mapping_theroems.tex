@@ -1,0 +1,71 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{theorem}[Remmert theorem]
+If $f:X\to Y$ is proper and $V\subseteq X$ is an analytic subvariety of $X$, then $f(V)\subseteq Y$ is an analytic subvariety of $Y$
+\end{theorem}
+
+\begin{theorem}[Remmert-Stein theorem]
+$V\subseteq X$ is an analytic subvariety, $W\subseteq X\setminus V$ is an irreducible analytic subvariety. If $\dim V<\dim W$, then the $\overline W\subseteq X$ is an irreducible analytic subvariety
+\end{theorem}
+
+\begin{remark}
+The assumption on dimension is necessary. For example, take the graph in $\mathbb C^2\subseteq \mathbb{CP}^2$ of an entire function $f$. Suppose $f$ has essential singularity at infinity
+\end{remark}
+
+\begin{corollary}
+$X$ is an analytic space, $V$ is an analytic subvariety, $W\subseteq X\setminus V$ is an analytic subvariety. If $\dim V$ is less than the dimension of any irreducible components of $W$, then $\overline W\subseteq X$ is an analytic subvariety
+\end{corollary}
+
+\begin{theorem}[Chow's theorem]
+$V\subseteq\mathbb{CP}^n$ is an analytic subvariety, then $V$ is a projective algebraic variety
+\end{theorem}
+
+\begin{remark}
+$X$ is a Kahler manifold. $X$ is a Moisezon manifold(meaning the algebraic of dimension of $X=\dim X$). A theorem of Moisezon says Kahler + Moisezon $\Rightarrow$ projective. There is an equivalence between Hodge manifolds(Kahler manifolds with integral Kahler class) and projective algberaic manifolds
+\end{remark}
+
+\begin{corollary}
+Every compact Riemann surface is an algebraic curve
+A holomorphic map between nonsingular projective algebraic varieties is a morphism of varieties
+Every memomorphic function on $\mathbb{CP}^n$ is rational
+\end{corollary}
+
+\begin{definition}
+$\phi:X\to Y$ is holomorphic. $\mathcal E\to X$, $\mathcal F\to Y$ are sheaves of $\mathcal O_X$, $\mathcal O_Y$ modules. The sheaf $\phi^{-1}\mathcal F$ has presheaf is intuitively $\phi^{-1}\mathcal F(U)=\mathcal F(\phi(U))$. Alternatively, the espace \'etal\'e $X\times_Y\mathcal F$, at the level of stalks, $(\phi^{-1}\mathcal F)_p=\mathcal F_{\phi(p)}$. By composition with $\phi$ defines a sheaf map $\phi^{-1}\mathcal O_Y\to\mathcal O_X$, making $\mathcal O_X, \mathcal E$ into $\phi^{-1}\mathcal O_Y$ modules
+\[\phi^*\mathcal F=\mathcal O_X\otimes_{\phi^{-1}\mathcal O_Y}\phi^{-1}\mathcal F\]
+There are canonical maps $\phi^*(\phi_*\mathcal E)\to\mathcal E$, $\mathcal F\to\phi_*(\phi^*\mathcal F)$ through
+\[\mathcal E(\phi(\phi^{-1}(U)))\to\mathcal E(U),\mathcal F(U)\to\mathcal F(\phi^{-1}(\phi(U)))\]
+More generally, there is a canonical bijection $\Hom_{\mathcal O_X}(\phi^*\mathcal F,\mathcal E)\leftrightarrow\Hom_{\mathcal O_Y}(\mathcal F,\phi_*\mathcal E)$
+\end{definition}
+
+\begin{fact}
+$\phi_*$ is left exact. $\phi^*$ is right exact. $\phi^*\mathcal O_Y=\mathcal O_X$. If $\mathcal F$ is coherent, then $\phi^*\mathcal F$ is coherent. $\phi_*\mathcal E$ is not necessarily coherent even if $\mathcal E$ is. For example, let $\phi:\mathbb C\to\mathbb C^*$ be the exponential map, then $\phi_*\mathcal O_{\mathbb C}$ is infinitely generated
+\end{fact}
+
+\begin{theorem}[Grauert-Remmert, Direct image theorem]
+$\phi:X\to Y$ is finite, $\mathcal E\to X$ is coherent, then $\phi_*\mathcal E$ is coherent. Moreover, $\phi_*$ is right exact
+\end{theorem}
+
+\begin{example}
+$X=\mathbb C^2\setminus\{0\}$, $Y=\mathbb C$, $\phi(z_1,z_2)=z_1$. Let $D=\{(0,z_2)\in X\}\cong\mathbb C^*$. $\phi(D)=\{0\}$, let $\mathcal I_D$ be the ideal sheaf, $\mathcal O_X\to\mathcal O_X/\mathcal I_D\to0$, let $f=1/z_2$ is holomorphic on $D$, but is not in the image of $\phi_*\mathcal O_X\to\phi_*(\mathcal O_X/\mathcal I_D)$ by Hartogs's theorem. Thus $\phi_*$ is not right exact
+\end{example}
+
+\begin{example}
+$X=\{0\}$, $Y=\mathbb C$, $\phi$ is the inclusion. Consider injection $0\to\mathcal O_Y\xrightarrow{\times z}\mathcal O_Y$. The induced map $\phi^*\mathcal O_Y\to\phi^*\mathcal O_Y$ is zero, hence $\phi^*$ is not left exact
+\end{example}
+
+$R^i\phi_*\mathcal E(V)=H^i(\phi^{-1}(V),\mathcal E)$
+
+Problem:  $\mathcal E\to X$ is coherent, $R^i\phi_*\mathcal E\to Y$ might not be coherent
+
+\begin{theorem}[Grauert's proper coherence theorem]
+$X,Y$ are complex spaces. $\phi:X\to Y$ is proper, $\mathcal E\to X$ is coherent, then $R^i\phi_*\mathcal E\to Y$ is coherent for all $i$
+\end{theorem}
+
+\begin{note}
+If $Y$ is a point, then $X$ is compact, this gives the Cartan-Serre theorem
+\end{note}
+
+\end{document}

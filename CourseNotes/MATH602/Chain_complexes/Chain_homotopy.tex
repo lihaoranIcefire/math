@@ -1,0 +1,95 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{lemma}[Snake lemma]\label{Snake lemma}\index{Snake lemma}
+Given the following commutative diagram with exact rows, then we have an exact sequence
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r, red, dashed] & \ker a \arrow[r, red, "u_*"]\arrow[d]                & \ker b \arrow[r, "v_*", red, red]\arrow[d]                & \ker c \arrow[dddll, red, dashed, "\delta", rounded corners, to path={ --([xshift=45]\tikztostart.east)--([xshift=45,yshift=-52]\tikztostart.east)[near end]\tikztonodes--([xshift=-40,yshift=45]\tikztotarget.west)--([xshift=-40]\tikztotarget.west)-- (\tikztotarget)}]\arrow[d]      &   \\
+0 \arrow[r, dashed] & A \arrow[r, "u"] \arrow[d, "a"] & B \arrow[r, "v"] \arrow[d, "b"] & C \arrow[r] \arrow[d, "c"]        & 0 \\
+0 \arrow[r]         & A' \arrow[r, "u'"]\arrow[d]              & B' \arrow[r, "v'"] \arrow[d]             & C' \arrow[r, dashed] \arrow[d]             & 0 \\
+                    & \mathrm{coker}a \arrow[r, "u'_*", red]       & \mathrm{coker}b \arrow[r, "v'_*", red]       & \mathrm{coker}c \arrow[r, red, dashed] & 0
+\end{tikzcd}
+\end{center}
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{lemma}
+$0\to A_\bullet\to B_\bullet\to C_\bullet\to0$ is exact iff $0\to A_n\to B_n\to C_n\to0$ are exact
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}
+Suppose $0\to A_\bullet\to B_\bullet\to C_\bullet\to0$ is exact, then we have $\partial:H_nC\to H_{n-1}A$ yielding a long exact sequence
+\[\cdots\to H_nA\to H_nB\to H_nC\xrightarrow{\partial}H_{n-1}A\to H_{n-1}B\to H_{n-1}C\to\cdots\]
+\end{theorem}
+
+\begin{proof}
+Fisrtly, by Lemma \ref{Snake lemma}, we have
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & Z_nA \arrow[r] \arrow[d]       & Z_nB \arrow[r] \arrow[d]       & Z_nC \arrow[d]                 &   \\
+0 \arrow[r] & A_n \arrow[r] \arrow[d]        & B_n \arrow[r] \arrow[d]        & C_n \arrow[r] \arrow[d]        & 0 \\
+0 \arrow[r] & A_{n-1} \arrow[r] \arrow[d]    & B_{n-1} \arrow[r] \arrow[d]    & C_{n-1} \arrow[r] \arrow[d]    & 0 \\
+            & A_n/\partial A_{n-1} \arrow[r] & B_n/\partial B_{n-1} \arrow[r] & C_n/\partial C_{n-1} \arrow[r] & 0
+\end{tikzcd}
+\end{center}
+Then apply Lemma \ref{Snake lemma} again, we get
+\begin{center}
+\begin{tikzcd}
+            & H_nA \arrow[r] \arrow[d]                 & H_nB \arrow[r] \arrow[d]                 & H_nC \arrow[d] \arrow[llddd, dotted]     &   \\
+            & A_n/\partial A_{n+1} \arrow[r] \arrow[d] & B_n/\partial B_{n+1} \arrow[r] \arrow[d] & C_n/\partial C_{n+1} \arrow[r] \arrow[d] & 0 \\
+0 \arrow[r] & A_{n-1} \arrow[r] \arrow[d]              & B_{n-1} \arrow[r] \arrow[d]              & C_{n-1} \arrow[d]                        &   \\
+            & H_{n-1}A \arrow[r]                       & H_{n-1}B \arrow[r]                       & H_{n-1}C                                 &  
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\begin{lemma}[Five lemma]\label{Five lemma}
+If $b$ and $d$ are monic and $a$ is an epi, then $c$ is monic. Dually, if $b$ and $d$ are epis and $e$ is monic, then $c$ is an epi. In particular, if $a,b,d$ and $e$ are iso, then $c$ is also an iso
+\begin{center}
+\begin{tikzcd}
+A' \arrow[r,"u'"] \arrow[d, "a"',"\cong"] & B' \arrow[r,"v'"] \arrow[d, "b"',"\cong"] & C' \arrow[r,"w'"] \arrow[d, "c"'] & D' \arrow[r,"x'"] \arrow[d, "d"',"\cong"] & E' \arrow[d, "e"',"\cong"] \\
+A \arrow[r,"u"]                                     & B \arrow[r,"v"]                                     & C \arrow[r,"w"]                  & D \arrow[r,"x"]                                     & E                                    
+\end{tikzcd}
+\end{center}
+\end{lemma}
+
+\begin{definition}
+We can define a full subcategory $S(\mathscr A)$ of short exact sequences, or equivalently just $Ch_{[0,2]}\mathscr A$, and define a full subcategory $L(\mathscr A)$ of long exact sequences
+\end{definition}
+
+\begin{lemma}
+$H$ gives a functor $S(Ch\mathscr A)\to L(\mathscr A)$, sending $0\to A_\bullet\to B_\bullet\to C_\bullet\to0$ to its long exact sequence
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+$\mathscr A$ is an abelian category. $X_\bullet,Y_\bullet\in Ch\mathscr A$, define a complex $\Hom_\bullet(X_\bullet,Y_\bullet)\in Ch\mathscr Ab$ as follows: for each $k\in\mathbb Z$, $\Hom_k(X_\bullet,Y_\bullet)=\prod_{n\in\mathbb Z}\Hom(X_n,Y_{k+n})$, and $d(f_n:X_n\to Y_{n+k})_{n\in\mathbb Z}=(g_n:X_n\to Y_{n+k-1})_{n\in\mathbb Z}$ where $g_n=\partial f_n-(-1)^kf_{n-1}\partial$
+\begin{center}
+\begin{tikzcd}
+X_{n+1} \arrow[d, "f"] \arrow[r, "\partial"] \arrow[rd, "g"] & X_{n} \arrow[r, "\partial"] \arrow[d, "f_n"] \arrow[rd, "g_n"] & X_{n-1} \arrow[r, "\partial"] \arrow[d, "f_{n-1}"] \arrow[rd, "g"] & X_{n-2} \arrow[d, "f"] \\
+Y_{n+k+1} \arrow[r, "\partial"]                              & Y_{n+k} \arrow[r, "\partial"]                                  & Y_{n+k-1} \arrow[r, "\partial"]                                    & Y_{n+k-2}             
+\end{tikzcd}
+\end{center}
+$\Hom_\bullet(X_\bullet,Y_\bullet)$ is a chain complex since for any $f\in \Hom_k(X_\bullet,Y_\bullet)$
+\begin{align*}
+d^2f&=d(\partial f-(-1)^kf\partial) \\
+&=\partial(\partial f-(-1)^kf\partial)+(-1)^{k-1}(\partial f-(-1)^kf\partial)\partial \\
+&=\partial^2f-(-1)^k\partial f\partial+(-1)^k\partial f\partial+(-1)^kf\partial^2 \\
+&=0
+\end{align*}
+If $f\in \Hom_0(X_\bullet,Y_\bullet)$, then $df=\partial f-f\partial=0\Leftrightarrow f\in \Hom(X_\bullet,Y_\bullet)$, i.e. $\Hom(X_\bullet,Y_\bullet)=Z_0(\Hom_\bullet(X_\bullet,Y_\bullet))$, $f\in B_0\Hom_\bullet(X_\bullet,Y_\bullet)\Leftrightarrow f-0=f=ds=\partial s+s\partial$. i.e. $f$ is chain homotopy equivalent to $0$. Therefore we define the \textbf{chain homotopy}\index{Chain homotopy} classes of morphisms from $X_\bullet\to Y_\bullet$ to be $H_0(\Hom(X_\bullet,Y_\bullet))$
+\end{definition}
+
+\end{document}

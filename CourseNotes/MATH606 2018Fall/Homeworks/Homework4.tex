@@ -1,0 +1,58 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{problem}
+If $f\equiv c$ is a constant, then $P(x,y)=x-c$ is an irreducible polynomial such that $P(f,g)=0$, so we can assume $f,g$ are not constants, Since $\mathcal{M}(X)$ is a finite algebraic extension of $\mathbb{C}(f)$, there exists rational functions $R_0,\cdots,R_n$ such that $R_0(f)+R_1(f)g+\cdots+R_n(f)g^n=0$, then after multiplying denominators, we get a polynomial $P(x,y)\in \mathbb{C}[x,y]$ such that $P(f,g)=0$, since $\mathbb{C}[x,y]$ is a UFD, $P=P_1\cdots P_k$, where $P_i$ are prime hence irreducible, then $0=P_1(f,g)\cdots P_k(f,g)\in \mathcal{M}(X)$ which is a field, thus $P_j(f,g)=0$ for some irreducible polynomial $P_j\in \mathbb{C}[x,y]$
+\end{problem}
+
+\begin{problem}
+If $f$ is an elliptic function of order $n$, then $f(z+\omega)=f(z), \forall \omega\in\Omega$, which implies $f'(z+\omega)=f'(z), \forall \omega\in\Omega$, thus $f'$ is also elliptic, suppose $f$ has $[P_1],\cdots,[P_{k}]$ as its poles with multiplicities $r_1,\cdots,r_k$, $\sum r_i=n$, then $f'$ also has $[P_1],\cdots,[P_{k}]$ as its poles with multiplicities $r_1+1,\cdots,r_k+1$, $\sum r_i=n+k=m$, since $1\leq k\leq n$, $n+1\leq m\leq 2n$ \par
+We can find an elliptic function $f$ of order $n$ which has $[P_1],\cdots,[P_{n-m}]$ as its poles with multiplicities $1,\cdots,1,2n+1-m$, then we get $f'$ is another elliptic function which also has $[P_1],\cdots,[P_{n-m}]$ as its poles with multiplicities $2,\cdots,2,2n+2-m$, thus $f'$ is of order $m$
+\end{problem}
+
+\begin{problem}
+$\wp'(z)$ has a pole at $z=0$ of order $3$ and $\dfrac{\omega_1}{2},\dfrac{\omega_2}{2},\dfrac{\omega_3}{2}$ as simple roots, thus \[
+\wp'(z)=\lambda\dfrac{\sigma\left(z-\frac{\omega_1}{2}\right)\sigma\left(z-\frac{\omega_2}{2}\right)\sigma\left(z-\frac{\omega_3}{2}\right)}{\sigma(z)^3}\] for some $\lambda\in\mathbb{C}$, multiply by $z^3$ on both sides, and let $z\rightarrow 0$, since $\displaystyle\lim_{z\rightarrow 0}\dfrac{z}{\sigma(z)}=1, \lim_{z\rightarrow 0}z^3\wp'(z)=-2$, we have $-2=-\lambda\sigma\left(\dfrac{\omega_1}{2}\right)\sigma\left(\dfrac{\omega_2}{2}\right)\sigma\left(\dfrac{\omega_3}{2}\right)\Rightarrow \lambda \dfrac{2}{\sigma\left(\frac{\omega_1}{2}\right)\sigma\left(\frac{\omega_2}{2}\right)\sigma\left(\frac{\omega_3}{2}\right)}$\par
+Hence $\wp'(z)=\dfrac{2\sigma\left(z-\frac{\omega_1}{2}\right)\sigma\left(z-\frac{\omega_2}{2}\right)\sigma\left(z-\frac{\omega_3}{2}\right)}{\sigma\left(\frac{\omega_1}{2}\right)\sigma\left(\frac{\omega_2}{2}\right)\sigma\left(\frac{\omega_3}{2}\right)\sigma(z)^3}$
+\end{problem}
+
+\begin{problem}
+$(i)\Rightarrow(ii)$ \par
+$g_2=60G_4,g_3=140G_6\in\mathbb{R}\Rightarrow G_4,G_6\in\mathbb{R}$ \par
+Since
+\[
+\begin{aligned}
+&\wp(z)=\dfrac{1}{z^2}+\sum_{n=2}^{\infty}(2n-1)G_{2n}z^{2n-2}=\dfrac{1}{z^2}+3G_4z^2+5G_6z^4+7G_8z^6+9G_{10}z^8+\cdots \\
+&\wp'(z)=-\dfrac{2}{z^3}+\sum_{n=2}^{\infty}(2n-1)(2n-2)G_{2n}z^{2n-3}=-\dfrac{2}{z^3}+6G_4z+20G_6z^3+42G_8z^5+72G_{10}z^7+\cdots \\
+&\wp''(z)=\dfrac{6}{z^4}+\sum_{n=2}^{\infty}(2n-1)(2n-2)(2n-3)G_{2n}z^{2n-4}=\dfrac{6}{z^4}+6G_4+60G_6z^2+210G_8z^4+504G_{10}z^6+\cdots
+\end{aligned}
+\]
+So we can conclude $\wp''(z)-6\wp(z)^2+30G_4=z\varphi(z)$, where $\varphi(z)$ is a holomorphic elliptic function, hence $\wp''(z)-6\wp(z)^2+30G_4=0$, then the coefficients of $z^{2n}(n\geq 1)$ would be $(2n+1)(2n+2)(2n+3)(2n+4)G_{2n+4}-6(2n+3)G_{2n+4}$ minus terms only involving $G_4,G_6,\cdots,G_{2n+2}$ and real numbers, thus by induction, we know $G_{2n+4}\in\mathbb{R}(n\geq 1)$ \par
+$(ii)\Rightarrow(iii)$ \par
+Since $\wp(z)=\dfrac{1}{z^2}+\sum_{n=2}^{\infty}(2n-1)G_{2n}z^{2n-2}$, if $G_k\in\mathbb{R}(k\geq 3)$, then $\wp(\bar{z})=\overline{\wp(z)}$ \par
+$(iii)\Rightarrow(iv)$ \par
+The poles of $\overline{\wp(\bar{z})}=\wp(z)$ are exactly $\overline{\Omega}$, thus $\overline{\Omega}=\Omega$ \par
+$(iv)\Rightarrow(i)$ \par
+$\displaystyle g_2=60G_4=60\sum_{\omega\in\Omega^*}\dfrac{1}{\omega^4}=60\sum_{\omega\in\overline{\Omega}^*}\dfrac{1}{\omega^4}=\overline{g_2}\Rightarrow g_2\in\mathbb{R}$, similarly, $g_6\in\mathbb{R}$
+\end{problem}
+
+\begin{problem}
+If $\Omega$ is real rectangular or real rhombic, $\Omega$ is obviously a real lattice \par
+Conversely, if $\Omega$ is a real lattice, suppose $\Omega=\mathbb{Z}\omega_1+\mathbb{Z}\omega_2$, then there exists $\omega\in\Omega\setminus(\mathbb{R}\cup i\mathbb{R})$, otherwise, $\omega_1\in\mathbb{R}^*,\omega_2\in i\mathbb{R}^*$ or $\omega_2\in\mathbb{R}^*,\omega_1\in i\mathbb{R}^*$, since $\omega_1,\omega_2$ are linear independent, but then $\omega=\omega_1+\omega_2\in\Omega\setminus(\mathbb{R}\cup i\mathbb{R})$ which is a contradiction \par
+Since $\omega\in\Omega\setminus(\mathbb{R}\cup i\mathbb{R})$, $\omega+\overline{\omega}\in\mathbb{R}^*,\omega-\overline{\omega}\in i\mathbb{R}^*$, thus $\Omega\cap\mathbb{R}^*\neq\varnothing,\Omega\cap i\mathbb{R}^*\neq\varnothing$, let $\displaystyle\eta_1=\min_{\eta\in\Omega\cap(0,\infty)}\eta$, then $\Omega\cap\mathbb{R}=\mathbb{Z}\eta_1$, otherwise $\exists \eta\in \mathbb{R}\setminus\mathbb{Z}\eta_1$, then $\eta-\left\lfloor\frac{\eta}{\eta_1}\right\rfloor\eta_1\in\Omega\cap(0,\infty)$ which is a contradiction \par
+Similarly, $\Omega\cap i\mathbb{R}=\mathbb{Z}\eta_2$ for some $\eta_2\in i(0,\infty)$. If $\Omega=\mathbb{Z}\eta_1+\mathbb{Z}\eta_2$, then $\Omega$ is real rectangular, if not, $\exists \gamma\in\Omega\setminus(\mathbb{R}\cup i\mathbb{R})$, such that $\displaystyle|\gamma|=\min_{\omega\in\Omega\setminus(\mathbb{R}\cup i\mathbb{R})}|\omega|$, then $\gamma+\overline{\gamma}=\eta_1$ or $-\eta_1$, otherwise $\gamma+\overline{\gamma}=k\eta_1$ for some $|k|\geq 2$ \par
+If $k=2$, then $\gamma-\eta_1=\eta_1-\overline{\gamma}=-\overline{(\gamma-\eta_1)}\Rightarrow \gamma-\eta_1\in i\mathbb{R}\Rightarrow \gamma\in\mathbb{Z}\eta_1+\mathbb{Z}(\gamma-\eta_1)\subseteq\mathbb{Z}\eta_1+\mathbb{Z}\eta_2$ \par
+If $k>2$, then $\gamma-\eta_1\notin \mathbb{R}\cup i\mathbb{R}$ and $|\gamma-\eta_1|<|\gamma|$, similarly for $k\leq -2$, these are all contradictions \par
+Similarly, we know that $\gamma-\overline{\gamma}=\eta_2$ or $-\eta_2$ \par
+Now, for any $\omega\in\Omega\setminus(\mathbb{R}\cup i\mathbb{R})$, $\omega+\overline{\omega}=k\eta_1=k(\gamma+\overline{\gamma})$ for some $k\neq 0$, then $\omega-k\gamma=k\overline{\gamma}-\overline{\omega}=-\overline{(\omega-k\gamma)}\Rightarrow \omega-k\gamma\in i\mathbb{R}$, if $\omega\neq k\gamma$, then $\omega-k\gamma=l\eta_2=l(\gamma-\overline{\gamma})\Rightarrow \omega\in \mathbb{Z}\gamma+\mathbb{Z}\overline{\gamma}$, therefore, we have $\Omega=\mathbb{Z}\gamma+\mathbb{Z}\overline{\gamma}$, $\Omega$ is real rhombic
+\end{problem}
+
+\begin{problem}
+The number of connected components of $E_\mathbb{R}$ is one or two if $p(x)=0$ has one real root and two nonreal conjugate complex roots or three distinct real roots correspondingly \par
+Since $\dfrac{\omega_1}{2},\dfrac{\omega_2}{2},\dfrac{\omega_3}{2}$ are simple roots of $\wp'(z)$, the three simple roots of $p(x)$ are $\wp\left(\dfrac{\omega_1}{2}\right),\wp\left(\dfrac{\omega_2}{2}\right),\wp\left(\dfrac{\omega_3}{2}\right)$, since $\Omega$ is a real lattice, $G_k\in\mathbb{R}$ and $\wp(z)=\dfrac{1}{z^2}+\sum_{n=2}^{\infty}(2n-1)G_{2n}z^{2n-2}$ \par
+If $\Omega$ is real rectangular, then $\wp\left(\dfrac{\omega_1}{2}\right),\wp\left(\dfrac{\omega_2}{2}\right)$ are both real, thus $E_\mathbb{R}$ has two connected components \par
+If $\Omega$ is real rhombic, then $\wp\left(\dfrac{\omega_3}{2}\right)$ is real $\wp\left(\dfrac{\omega_1}{2}\right)\neq\wp\left(\dfrac{\omega_2}{2}\right)$ are nonreal conjugate, thus $E_\mathbb{R}$ has only one connected component \par
+\end{problem}
+
+\end{document}

@@ -1,0 +1,105 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$\Omega\subseteq\mathbb C^n$, $u:\Omega\to[-\infty,\infty)$ is plurishbharmonic if
+\begin{enumerate}
+\item $u$ is upper semi-continuous on $\Omega$, $\limsup_{z\to z_0}u(z)\leq u(z_0)$
+\item $w\in\mathbb C^n$, $z\in\Omega$, then $\tau\mapsto u(z+\tau w)$ is subharmonic, for all $\tau\in\mathbb C$ such that $z+\tau w\in\Omega$
+\end{enumerate}
+\end{definition}
+
+\begin{exercise}
+$f\in\mathcal O(\Omega)\Rightarrow \log|f|\in PSH(\Omega)$
+\end{exercise}
+
+\begin{theorem}
+$u\in C^2(\Omega)$, then $u\in PSH(\Omega)$ iff $z\in\Omega$, $D^2u(z)$ is semi-positive definite $\Rightarrow$ Pseudo-convexity
+\end{theorem}
+
+\begin{proof}
+Restrict on one line, $\dfrac{\partial^2}{\partial\tau\partial\bar\tau}u\geq0$
+\end{proof}
+
+\begin{theorem}
+$u\in PSH(\Omega)$, $\varphi\in C^\infty_0(\mathbb C^n)$, $\varphi(z)=\varphi(|z|)$, $\supp\varphi\subseteq\overline{B(0,1)}$. $\int_{\mathbb C^n}\varphi d\lambda=1$. $u_\epsilon(z)=\dfrac{1}{\epsilon^{2n}}\int_{\mathbb C}u(z-\eta)\varphi(\frac{\eta}{\epsilon})d\lambda(\eta)$, $z\in\Omega_\epsilon=\{z\in\Omega|d(z,\Omega^c)>\epsilon\}$, $u_\epsilon\in PSH(\Omega_\epsilon)\cap C^\infty(\Omega_\epsilon)$, $\forall z\in\Omega$, $u_\epsilon(z)\searrow u(z)$ as $\epsilon\searrow0$
+\end{theorem}
+
+\begin{proposition}
+$u_j\in PSH$ decreasing, then $v(x)=\lim_ju_j(x)\in PSH$
+\end{proposition}
+
+\begin{theorem}
+$\Omega\subseteq\mathbb C^n$, $\Omega'\subseteq\mathbb C^m$, $f:\Omega\to\Omega'$ is holomorphic, $u\in PSH(\Omega')$, then $u\in PSH(\Omega)$(subharmonicity define on complex manifold)
+\end{theorem}
+
+\begin{proof}
+Check $u\in PSH(\Omega')\cap C^2(\Omega')$, $\dfrac{\partial^2}{\partial z_j\partial\bar z_k}(u\circ f(z))=\dfrac{\partial^2 u}{\partial\xi_p\partial\bar\xi_q}\dfrac{\partial f_p}{\partial z_j}\overline{\dfrac{\partial f_q}{\partial z_k}}=\operatorname{Hess}_\mathbb{C}(u)(\partial f,\bar\partial f)\geq0$. $K\subseteq\Omega$ is compact, $\hat K_\Omega^p=\{z\in\Omega|u(z)\leq\sup_{y\in K}u(y),\forall u\in PSH(\Omega)\}\Rightarrow\hat K_\Omega^p\subseteq\hat K_\Omega$ (PSH-hull). $\Omega$ is pseudo-convex if $\forall K\subseteq\Omega$ compact, $\hat K_\Omega^p\subseteq\Omega$ is also compact. $\Omega$ convex $\Rightarrow$ $\Omega$ pseudoconvex $\Rightarrow$ $\Omega$ is holomorphically convex
+\end{proof}
+
+\begin{theorem}
+$\Omega\subseteq\mathbb C^n$ is open, the following are equivalent
+\begin{enumerate}[label=(\roman*)]
+\item $z\mapsto-\log\delta(z,\Omega^c)\in PSH(\Omega)$
+\item $\exists u\in PSH(\Omega)\cap C(\Omega)$ such that $\Omega^u_c=\{z\in\Omega|u(z)\leq c\}\subseteq\Omega$ compact
+\item $K\subseteq\Omega$ compact $\Rightarrow$ $\hat K^p_\Omega\subseteq\Omega$ compact
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+If $u$ satisfies (ii), then ti is called a PSH exhaustion of $\Omega$
+\end{remark}
+
+\begin{proof}
+(ii)$\Rightarrow$(iii): $K\subseteq\Omega$ compact, $\sup_{y\in K}u(y)=M<\infty$, $\hat K^p_\Omega\subseteq\{z\in\Omega|u(z)\leq M\}=\Omega^u_M\overset{\text{compact}}{\subseteq}\Omega$ \par
+(i)$\Rightarrow$(ii): $u(z)=-\log\delta(z,\Omega^c)$, check that $z\mapsto\delta(z,\Omega^c)$ is continuous, take $F(\tau)$ to be a polynomial, such that $-\log(z+\tau w,\Omega^c)\leq\operatorname{Re}F(\tau)$ on $\partial\Omega$, then there exists polynomial $f$ such that $f(z+\tau w)=F(\tau)$, then $\delta(z+\tau w,\Omega^c)\geq|e^{-f(z+\tau w)}|$ on $\partial D$, by Theorem 2.5.4, Inequality holds on $\widehat{\partial D}\supseteq\Omega$
+\end{proof}
+
+\begin{theorem}
+$\Omega\subseteq\mathbb C^n$ is pseudoconvex, $K\subseteq\Omega$ is compact, $z\in\widehat{H^p_\Omega}^c$ ($\Rightarrow\widehat{K^p_\Omega}\subseteq\Omega$ compact), then there exists $u\in C^\infty(\Omega)$ such that
+\begin{enumerate}[label=(\alph*)]
+\item $u\in PSH(\Omega)$ and $i\partial\bar\partial u>\delta\sum_{j=1}^ndz_j\wedge d\bar z_j$
+\item $\Omega_c=\{u\leq c\}\subseteq\Omega$ is compact for any $c\in\mathbb R$
+\item $|u|<0$ on $K$ and $u(z)>0$
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+You can find $v\in PSH(\Omega)\cap C(\Omega)$ such that (b) and (c) holds for $v$ (to make $v$ smooth)
+\end{remark}
+
+\begin{proof}
+$\Omega_c\{v<c\}$, $v_j(z)=\int_{\Omega_{j+1}}v(\xi)\frac{1}{\epsilon^{2n}}\varphi(\frac{z-\xi}{\epsilon})d\lambda(\xi)+\epsilon|z|^2$, $\epsilon$ small enough such that $v_j\in PSH(\Omega_j)$. Pick smooth function $\chi:\mathbb R\to\mathbb R$ non-decreasing and convex, $\chi(t)=0$, $\forall t\leq0$, $\chi(t)>0$, $\forall t>0$, $\chi'(t)>0$, $\forall t>0$. Recall: $\phi\in PSH\Rightarrow\chi\circ\phi\in PSH$ (Section 1.6). $\chi(v_j(z)-j+1)=0$, $\forall z\in\Omega_{j-2}$, $u_k(z)=v_0(z)+a_1\chi(v_1(z))+a_2\chi(v_2(z)-1)+\cdots+a_k\chi(v_k(z)-j+1)$, here $v_0(z)$ is PSH in $\Omega_{-1}$, $a_1\chi(v_1(z))$ is PSH on $\Omega_0$ provided $a_1$ is big enough, $\cdots$, thus $u_k\xrightarrow[C^\infty]{}u\in C^\infty(\Omega)\cap PSH(\Omega)$
+\end{proof}
+
+\begin{example}
+$\Omega_1,\Omega_2$ pseudoconvex $\Rightarrow$ $\Omega_1\cap\Omega_2$ pseudoconvex
+\end{example}
+
+\begin{proof}
+$u_1,u_2$ are PSH exhaustions for $\Omega_1,\Omega_2$, $v=\max(u_1|_{\Omega_1\cap\Omega_2},u_2|_{\Omega_1\cap\Omega_2})\in PSH(\Omega_1\cap\Omega_2)$ is an exhaustion of $\Omega_1\cap\Omega_2$
+\end{proof}
+
+\begin{theorem}
+$\Omega\subseteq\mathbb C^n$ is open bounded, pseudoconvex. $\forall z\in\bar\Omega$, $\exists B\ni z$ open ball such that $\Omega\cap B$ is pseudoconvex (HW: Show that balls are pseudoconvex)
+\end{theorem}
+
+\begin{proof}
+$\Rightarrow$ is trivial. $\Leftarrow$: $\partial\Omega$ is compact, $\exists\tilde B_j\subset\subset B_j$ such that $\delta(y,(B_j\cap\Omega)^c)=\delta(y,\Omega^c)$ for all $y\in\tilde B_j$, $B_j\cap\Omega$ pseudoconvex $\Rightarrow$ $-\log\delta(z,B_j^c)$ is PSH, thus $-\log(z,\Omega^c)$ is PSH on $\tilde B_j$, finite cover $\tilde B_1,\cdots,\tilde B_k$, $\exists F\subseteq\Omega$ closed such that $-\log(z,\Omega^c)\in PSH(\Omega\setminus F)$, $\exists M>-\log\delta(z,\Omega^c)$ on $F$, $\max(-\log\delta(z,\Omega^c),M)\in PSH(\Omega)$
+\end{proof}
+
+\begin{definition}
+A \textit{densely defined operator}\index{Densely defined operator} on Hilbert spaces $H_1$ is $T:\Dom T\leq H_1\to H_2$ linear, $\Dom T$ dense in $H_1$, graph of $T$ is closed
+\end{definition}
+
+\begin{theorem}
+$H_1\xrightarrow TH_2\xrightarrow SH_3$, the following hold
+\begin{itemize}
+\item $H_2=(\ker S\cap\ker T^*)\oplus\overline{\im T}\oplus\overline{\im S^*}$
+\item $\ker S=(\ker S\cap \ker T^*)\oplus\overline{\im T}$
+\item If $\|T^*x\|^2_1+\|Sx\|^2_3\geq C\|x\|^2_2$, $\forall x\in\Dom S\cap\Dom T^*\leq H_2$. then $\im T=\ker S$, moreover, $\forall v\in\ker S$, $\exists u\in T$, such that $Tu=v$ with $\|u\|^2_1\leq\frac{1}{C}\|v\|^2_2$
+\end{itemize}
+\end{theorem}
+
+\end{document}

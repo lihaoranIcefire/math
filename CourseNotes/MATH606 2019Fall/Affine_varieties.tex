@@ -1,0 +1,38 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$W,V$ are affine varieties, $\phi:W\to V$ is a morphism
+\begin{itemize}
+\item $\phi$ is \textit{dominant}\index{Dominant} if $\phi(W)$ is dense
+\item $\phi$ is \textit{quasi-finite}\index{Quasi-finite} if $\phi^{-1}(q)$ is finite for any $q\in V$
+\item $\phi$ is \textit{finite}\index{Finite} if $k[W]$ is a finite $k[V]$ algebra
+\end{itemize}
+\end{definition}
+
+\begin{lemma}
+A finite morphism $\phi:W\to V$ is quasi-finite
+\end{lemma}
+
+\begin{proof}
+Suppose $(\phi^*)^{-1}(m_p)=m_q$, i.e. $p\in\phi^{-1}(q)$, then $\phi^*(m_q)=\phi^*(\phi^*)^{-1}(m_p)\subseteq m_p$. Hence it suffices to prove that $B=k[W]/\phi^*(m_q)$ has only finitely many maximal ideals. Since $\phi$ is finite, $k[W]$ is a finite $k[V]$ algebra, making $B$ a finite dimensional vector space over $k\cong k[V]/m_q$. So $B$ has only finitely many maximal ideals (By Chinese remainder theorem, $B\to B/m_1\times\cdots \times B/m_s$ is surjective, thus $s\leq\dim B<\infty$)
+\end{proof}
+
+\begin{exercise}
+Consider hypersurface $H\subseteq\mathbb A^{n+1}$ is defined by $a_0(t)x^m+\cdots+a_m(t)=0$, $\phi:H\to\mathbb A^n$ is the projection. $\phi$ is finite $\iff$ $a_0\neq 0$ is a constant. $\phi$ is quasi-finite $\Rightarrow$ $a_0,\cdots, a_m$ don't have common zeros
+\end{exercise}
+
+\begin{lemma}
+$\phi:W\to V$ is dominant $\iff$ $\phi^*:k[W]\to k[V]$ is injective
+\end{lemma}
+
+\begin{proof}
+$f\in\ker\varphi^*\Leftrightarrow f\circ\varphi=0$, $\mathrm{im}\varphi$ dense $\Rightarrow f=0$. Conversely, $\overline{\mathrm{im}\varphi}\subsetneqq V\Rightarrow 0\neq f\in I(\overline{\mathrm{im}\varphi})$
+\end{proof}
+
+\begin{proposition}
+If $W\xrightarrow{\varphi}V$ is dominant and finite, then $\varphi$ is surjective
+\end{proposition}
+
+\end{document}

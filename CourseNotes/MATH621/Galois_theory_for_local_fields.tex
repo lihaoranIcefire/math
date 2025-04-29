@@ -1,0 +1,99 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+A finite separable extension $E/K$ is unramified if $e(E/K)=1$
+\end{definition}
+
+\begin{fact}
+If $E/K$ is unramified, then it's Galois. $\Gal(E/K)\to\Gal(k_E/k_K)$ is an isomorphism
+\end{fact}
+
+$K$ is a local field
+
+\begin{fact}
+$E/K$ finite unramified, $L/K$ finite extension, $\Hom_K(E,L)\to \Hom_{k_K}(k_E,k_L)$ is a bijection. It's an equivalence of categories: unramified extensions over $K$ to finite extensions over $k_K$
+\end{fact}
+
+Thus we have
+\[\{K\subseteq E\subseteq L, E/K\text{ unramified}\} \leftrightarrow \{\text{subextension of } k_L/k_K\}\]
+
+$K^s/K$ is the separable closure. $\forall n\in\mathbb Z_{\geq1}$, $\exists_1 K\subseteq K_n\subseteq K^s$ such that $K_n/K$ is unramified and of degree $n$. $K^{un}=\bigcup_{n\geq1}K_n$, $K^{un}/K$ is a Galois field extension and contains all possible finite unramified extensions of $K$ inside $K^s$(all are of the form $K_n$). $v$ on $K$ extends to $K^{un}$, $(K^{un},v_{un})$ is a discretely valued field(not complete in general), has $\breve K$ for its completion
+
+$\Gal(K^{un}/K)=\varprojlim\Gal(K_n/K)=\varprojlim\mathbb Z/n=\widehat{\mathbb Z}$
+
+Define the inertia group $I_K=\ker(\Gal(K^s/K)\to\Gal(K^{un}/K))\cong\Gal(K^s/K^{un})$. For all separable finite extension $E/K$, let $E_{ur}$ be the maximal unr ext of $K$ inside $E$. $\Gal(E/E_{un})=I(E/K)$, $\varprojlim\Gal(E/E_{ur})=\varprojlim I(E/K)=I_K$
+
+We have exact sequence
+\[1\to I_K\to G_K=\Gal(K^s/K)\to\Gal(K^{ur}/K)\cong\widehat{\mathbb Z}\to1\]
+
+\begin{exercise}
+$\Gal(K^{ab}/K)$ is the maximal Hausdorff and abelian quotient of $G_K$, i.e. $\ker(G_K\to\Gal(K^{ab}/K))$ is the closure of the derived subgroup of $G_K$
+\end{exercise}
+
+\begin{theorem}[Local Reciprocity]
+$\exists_1\psi_K:K^\times\to\Gal(K^{ab}/K)$ such that
+\begin{enumerate}
+\item For any uniformizer $\pi\in K$, $K^\times\to\Gal(K^{ab}/K)\to\Gal(K^{ur}/K)$ sends $\pi$ to the Frobenius $\sigma$. Thus for any $x\in\mathcal O_K^\times$, $x$ goes to the trivial element in $\Gal(K^{ur}/K)$, in fact, $\mathcal O_K^\times$ is the kernel
+\item For all finite abelian extension $L/K$ inside $K^{ab}$, $\psi_{L/K}:K^\times\to\Gal(K^{ab}/K)\to\Gal(L/K)$ has kernel $N_{L/K}(L^\times)\subseteq K^\times$ and is surjective and $\psi_{L/K}:K^\times/N_{L/K}(L^\times)\xrightarrow\cong\Gal(L/K)$
+\end{enumerate}
+\begin{center}
+\begin{tikzcd}
+K^\times \arrow[rd] \arrow[r] & \Gal(K^{ab}/K) \arrow[r] & \Gal(K^{ur}/K) \arrow[d] \\
+                              & \mathbb Z \arrow[r]      & \widehat{\mathbb Z}     
+\end{tikzcd}
+\end{center}
+\end{theorem}
+
+\begin{definition}
+By a norm subgroup of $K^\times$, we mean a subgroup of the fomr $N_{L/K}(L^\times)$ for some finite abelian extension $L/K$, write $N_L$ for this to simplify notation
+\end{definition}
+
+\begin{remark}[Norm Limitation theorem]
+If $L/K$ is an arbitrary finite separable extension, $E/K$ is the maximal abelian extension of $K$ inside $L$, then $N_L=N_E$
+\end{remark}
+
+\begin{corollary}
+$L,L'$ are finite abelian extensions of $K$
+\begin{enumerate}
+\item $N_L\subseteq N_{L'}\iff L'\subseteq L$
+\item $N_{LL'}=N_L\cap N_{L'}$
+\end{enumerate}
+\begin{center}
+\begin{tikzcd}
+K^\times \arrow[rd] \arrow[r] & K^\times/N_L \arrow[r]   & \Gal(L/K) \arrow[d] \\
+                              & \Gal(K^{ab}/K) \arrow[r] & \Gal(L'/K)         
+\end{tikzcd}
+\end{center}
+\end{corollary}
+
+\begin{proof}\hfill
+\begin{enumerate}
+\item $N_{L/K}=N_{L/L'}N_{L'/K}$
+\item $\Gal(LL'/K)\hookrightarrow\Gal(L/K)\times\Gal(L'/K)$
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+Every norm subgroup is of finite index in $K^\times$. Every subgroup $K^\times$ containing some norm subgroup is itself a norm subgroup
+\end{corollary}
+
+\begin{proof}
+Say $K^\times\supseteq M\supseteq N_L$, $K^\times/N_L\xrightarrow{\cong}\Gal(L/K)$, $M/N_L$ corresponds to $\Gal(L/L')$ for some $L'\supseteq L$. So $M$ is the kernel of $K^\times\to K^\times/N_L\to\Gal(L/K)\to\Gal(L'/K)$
+\end{proof}
+
+\begin{theorem}
+$L\to N_L$ is an inclusion reversing bijection
+So finite abelian extensions over $K$ to normal subgroups
+\end{theorem}
+
+\begin{lemma}
+$L/K$ finite extension such that $N_{L/K}(L^\times)$ is of finite index in $K^\times$, then $N_{L/K}(L^\times)$ is open in $K^\times$. If $\char{k}=0$, know every finite index subgroup of $K^\times$ is open
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\end{document}

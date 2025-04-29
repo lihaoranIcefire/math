@@ -1,0 +1,54 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+A category $\mathscr C$ is \textbf{complete}\index{Complete category} if $\mathscr C$ contains all limits, $\mathscr C$ is \textbf{cocomplete}\index{Cocomplete category} if $\mathscr C$ contains all colimits
+\end{definition}
+
+\begin{definition}
+Let $I$ be the category \begin{tikzcd}
+\bullet \arrow[r, shift left] \arrow[r, shift right] & \bullet
+\end{tikzcd}, a functor $F:I\to\mathscr C$ is just \begin{tikzcd}
+X \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & Y
+\end{tikzcd}, the limit is defined to be the \textbf{equalizer}\index{Equalizer}, the dual notion is called a \textbf{coequalizer}\index{Coequalizer}
+\end{definition}
+
+\begin{theorem}
+If a category $\mathscr C$ contains all products and equalizers, then $\mathscr C$ is complete
+\end{theorem}
+
+\begin{proof}
+The limit of $A\xrightarrow{f} B$ is the same as the equaliser of \begin{tikzcd}
+A\times B \arrow[r, "p_B"', shift right] \arrow[r, "fp_A", shift left] & B
+\end{tikzcd}
+\begin{center}
+\begin{tikzcd}
+                  & C \arrow[ldd, "g"'] \arrow[rdd, "h"] \arrow[d, dashed] &   \\
+                  & A\times B \arrow[ld, "p_A"] \arrow[rd, "p_B"']         &   \\
+A \arrow[rr, "f"] &                                                        & B
+\end{tikzcd}
+\end{center}
+Then by induction, we can find the limit of $\displaystyle A_i\to\varprojlim_{j\neq i}A_j$ which is $\displaystyle\varprojlim_iA_i$
+\end{proof}
+
+\begin{definition}
+Let $I$ be the category \begin{tikzcd}
+                  & \bullet \arrow[d] \\
+\bullet \arrow[r] & \bullet          
+\end{tikzcd}, a functor $F:I\to\mathscr C$ is just \begin{tikzcd}
+                 & Y \arrow[d, "g"'] \\
+X \arrow[r, "f"] & Z                
+\end{tikzcd}, the limit is defined to be the \textbf{fiber product(pullback)}\index{Fiber product}\index{Pullback}, the dual notion is called a \textbf{pushforward(pushout)}\index{Pushforward}\index{Pushout}
+\end{definition}
+
+\begin{definition}
+An $\mathbf{Ab}$\textbf{-category}\index{$Ab$-category} $\mathscr C$ is a category such that $Hom_{\mathscr C}(X,Y)$ are equipped with an abelian group structure, such that $f(g+h)=fg+fh$, $(f+g)h=fh+gh$
+\end{definition}
+
+\begin{remark}
+An $Ab$-category is also called a \textbf{preadditive category}\index{Preadditive category} \par
+$End_{\mathscr C}(X)$ is a ring, $Aut_{\mathscr C}(X)=End_{\mathscr C}(X)^\times$ is a group
+\end{remark}
+
+\end{document}

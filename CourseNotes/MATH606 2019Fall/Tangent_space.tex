@@ -1,0 +1,34 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+Classically, ideal $I\subseteq k[x_1,\cdots,x_n]$ corresponds to an algebraic set $V(I)\subseteq\mathbb A^n$, $p=(a_1,\cdots,a_n)\in\mathbb A^n$, then tangent space $T_pV$(view as embedded in $\mathbb A^n$) will just be
+\[\left\{(y_1,\cdots,y_n)\in\mathbb A^n\middle|\sum_{i=1}^n(y_i-a_i)\frac{\partial f}{\partial x_i}(p)=0,\forall f\in I\right\}\]
+
+\begin{definition}
+$k[\epsilon]=k[x]/(x^2)$ is a local $k$ algebra with maximal ideal $(\epsilon)$, $p\in X(k)$, then $T_pV\cong\Hom_{\loc}(\mathcal O_{V,p},k[\epsilon])$, i.e. $T_pX$ is the fiber over $p$ of $X(k[\epsilon])\to X(k)$ induced by $k[\epsilon]\to k$, $\epsilon\mapsto0$, i.e. $\alpha:A\to k[\epsilon]$ such that $A\xrightarrow\alpha k[\epsilon]\to k$ has kernel $p$(which is a maximal ideal), i.e. $\alpha^{-1}((\epsilon))=p$. For $\phi: V\to W$, $(d\phi)_p:\Hom_{\loc}(\mathcal O_{V,p},k[\epsilon])\to\Hom_{\loc}(\mathcal O_{W,\phi(p)},k[\epsilon])$ is induced by $\mathcal O_{W,\phi(p)}\to\mathcal O_{V,p}$
+\end{definition}
+
+\begin{definition}
+$A$ is a $k$ algebra, $M$ is an $A$ module, a derivation is a $k$ linear map $A\to M$ such that $D(ab)=aD(b)+D(a)b$. Denote the $k$ vector space of derivations as $\Der_k(A,M)$
+\end{definition}
+
+\begin{example}
+$R$ is a local $k$ algebra with maximal ideal $m$ and $R/m=k$, then $R\cong k\oplus m$ as a $k$ vector space since the exact sequence split
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & m \arrow[r] & R \arrow[r] & R/m\cong k \arrow[r] \arrow[l, bend right] & 0
+\end{tikzcd}
+\end{center}
+Here $k\to R$ maps 1 to 1, making $k\to R\to R/m\cong k$ a $k$ linear isomorphism. Thus $d:R\to m/m^2$, $f\mapsto f-f(m)\mod m^2$ is a $k$ derivation
+\end{example}
+
+\begin{proposition}
+$(R,m)$ is a local ring, there is a canonical isomorphism $\Hom_{\loc}(R,k[\epsilon])\to\Der_k(R,k)\to\Hom_k(m/m^2,k)$
+\end{proposition}
+
+\begin{proof}
+Given a local homomorhpim $\alpha:R\to k[\epsilon]$, $\alpha(f)=f(m)+D_\alpha(f)\epsilon$, here $D_\alpha$ would be a derivation. Given a derivation $D$, $D$ vanishes on $k$ as well as $m^2$, thus induces a linear map $m/m^2\to k$. Given a linear map $m/m^2\to k$, define derivation $R\to m/m^2$, $f\mapsto df$
+\end{proof}
+
+\end{document}

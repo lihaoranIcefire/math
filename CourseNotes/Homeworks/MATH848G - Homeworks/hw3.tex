@@ -1,0 +1,49 @@
+\documentclass[10pt]{article}
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{bbm}
+\usepackage{mathtools} %\xhookrightarrow
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+%\newcommand{cmd}[args]{def}
+
+\title{MATH848G homework 3}
+\author{Haoran Li}
+\date{}
+
+\setlength{\parindent}{0cm}
+
+\begin{document}
+
+\maketitle
+\textbf{1.} \par
+\textbf{(i)} \par
+Since $d_0(f)=df=\dfrac{\partial f}{\partial x}dx+\dfrac{\partial f}{\partial y}dy$, $d_1^*(fdx\wedge dy)=-\star d\star(fdx\wedge dy)=-\star df=-\star\left(\dfrac{\partial f}{\partial x}dx+\dfrac{\partial f}{\partial y}dy\right)=\dfrac{\partial f}{\partial y}dx-\dfrac{\partial f}{\partial x}dy$, the symbol(or in this case the principal symbol) of $D$ is $\begin{pmatrix}
+i\xi_1 & i\xi_2 \\
+i\xi_2 & -i\xi_1
+\end{pmatrix}=i\begin{pmatrix}
+\xi_1 & \xi_2 \\
+\xi_2 & -\xi_1
+\end{pmatrix}$ is invertible off the zero section, hence $D$ is elliptic \par
+Alternatively, $d_0(f)=df=\dfrac{\partial f}{\partial z}dz+\dfrac{\partial f}{\partial\bar z}d\bar z$, $d_1^*(fdz\wedge d\bar z)=i\dfrac{\partial f}{\partial z}dz-i\dfrac{\partial f}{\partial \bar z}d\bar z$, thus the symbol(principal symbol) of $D$ would be $\begin{pmatrix}
+\xi & i\xi \\
+\bar\xi & -i\bar\xi
+\end{pmatrix}$ which is invertible off the zero section, thus $D$ is elliptic \par
+\textbf{(ii)} \par
+
+\textbf{(iii)} \par
+$D^*=d_0^*+d_1$, thus $D^*D=(d_0^*+d_1)(d_0+d_1^*)=d_0^*d_0+d_0^*d_1^*+d_1d_0+d_1d_1^*=d_0^*d_0+(d_1d_0)^*+d_1d_0+d_1d_1^*=d_0^*d_0+d_1d_1^*$, then $\langle D(f+\omega),D(f+\omega)\rangle=\langle D^*D(f+\omega),(f+\omega)\rangle=\langle d_0^*d_0f,f\rangle+\langle d_1d_1^*\omega,\omega\rangle=\langle d_0f,d_0f\rangle+\langle d_1^*\omega,d_1^*\omega\rangle$, thus $D(f+\omega)=0\Leftrightarrow d_0f=d_1^*\omega=0$, $\ker D=\ker d_0\oplus\ker d_1^*\cong H_{dR}^0(S^2,\mathbb R)\oplus H_{dR}^2(S^2,\mathbb R)\cong H^0(S^2,\mathbb R)\oplus H^2(S^2,\mathbb R)$, but the cokernel of $D$ is just $H_{dR}^1(S^2,\mathbb R)\cong H^1(S^2,\mathbb R)=0$, therefore $\mathrm{ind}D=\dim\ker D-\dim\mathrm{coker}D=2$ \par
+\textbf{2.} \par
+
+
+
+
+\end{document}

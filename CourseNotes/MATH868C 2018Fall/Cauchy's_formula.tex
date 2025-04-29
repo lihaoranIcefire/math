@@ -1,0 +1,80 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$D=D(x_1,r_1)\times\cdots\times D(x_n,r_n)$ is called a \textit{polydisc}\index{Polydisc}. $\partial_0D=\partial D_1\times\cdots\times\partial D_n\subsetneq\partial D$ is the \textit{distinguished boundary}\index{Distinguished boundary} of $D$
+\end{definition}
+
+\begin{theorem}
+$u\in C(\overline D)\cap\mathcal O(D)$, then
+\[u(z)=\frac{1}{(2\pi i)^n}\int_{\partial_0D}\frac{u(\xi_1,\cdots,\xi_n)}{(\xi_1-z_1)\cdots(\xi_n-z_n)}d\xi_1\cdots d\xi_n, \forall z\in D\]
+\end{theorem}
+
+\begin{proof}
+\[u(z_1,\cdots,z_{n-1},z)=\frac{1}{2\pi i}\int_{\partial D_n}\frac{u(z_1,\cdots,z_{n-1},\xi)}{\xi_n-z_n}d\xi\]
+$z_{n-1}\mapsto u(z_1,\cdots,z_{n-2},z_{n-1},z_n^k)\Rightarrow z_{n-1}\mapsto u(z_1,\cdots,z_{n-2},z_{n-1},\xi_n)$ is uniform convergence
+\end{proof}
+
+\begin{theorem}
+$K\subseteq K$ is compact, $\exists C_{K,\alpha}>0$ such that
+\[\sup_K|\partial^\alpha u|\leq C_{K,\alpha}\sup_{K}|u|\]
+\end{theorem}
+
+\begin{proof}
+If $K=D_1\times\cdots\times D_n$, in general, cover $K$ with a finite number of polydisks
+\end{proof}
+
+\begin{corollary}
+$\{u_k\}\subseteq\mathcal O(\Omega)$
+\begin{enumerate}
+\item (Montel) $\{u_k\}$ uniformly bounded on every compact $K\subseteq \Omega$, then $\exists u\in\mathcal O(\Omega)$, $k_j\in\mathbb N$ such that $u_{k_j}\Rightarrow u$ uniformly on compact subsets
+\item If $u_j\Rightarrow u$, then $u\in\mathcal O(\Omega)$
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+\begin{enumerate}
+\item $\{\partial^\alpha u_j\}$ are equicontinuous(Arzela-Ascoli), $\{\partial^\alpha u_j\}$ is relatively compact w.r.t. uniform convergence. To finish, exhaust $\Omega$ by compact subsets, and take a diagonal process to assure relative compactness for all partial derivatives, Cauchy-Riemann conditions is satisfied for the limit
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Cauchy's estimates]
+If $|u(z)|\leq M$ on $D$, $|\partial^ju(0)|\leq Mj_1!\cdots j_m!\frac{1}{r_1^{j_1}}\cdots\frac{1}{r_m^{j_m}}$
+\end{theorem}
+
+\begin{theorem}[Hartogs' theorem]
+$f:\Omega\to\mathbb C^n$, $f$ is holomorphic in every variable separately, then $f\in\mathcal O(\Omega)$
+\end{theorem}
+
+\begin{example}
+$f(x,y)=\begin{cases}
+\frac{xy}{x^2+y^2} \\
+0
+\end{cases}$, this can't be a counterexample in complex variables since $z_1^2+z_2^2=0$ at points other than $(0,0)$
+\end{example}
+
+\begin{theorem}[Cauchy-Pompeiu formula]
+$f\in C^1(\overline U)$, $\int_{\partial U}fdz=\int_{U}d(fdz)=\int_U\bar\partial f\wedge dz=\int_U\frac{\partial f}{\partial\bar z}$
+\end{theorem}
+
+\begin{theorem}
+$f\in C^\infty_0(\mathbb C)$, $\frac{\partial u}{\partial\bar z}=f$ always has a solution $u\in C^\infty(\mathbb C)$
+\end{theorem}
+
+\begin{proof}
+\[u(z)=\frac{1}{2\pi i}\int_{\mathbb C}\frac{f(\xi)}{\xi-z}d\xi\wedge d\bar\xi\]
+\end{proof}
+
+\begin{theorem}
+$f=\sum f_jd\bar z_j$, $f_j\in C^\infty_0(\mathbb C^n)$, $\bar\partial f=0$, then there exists unique $u\in C^\infty_0(\mathbb C^n)$ such that $\bar\partial u=f$
+\end{theorem}
+
+\begin{proof}
+\[u(z)=\frac{1}{2\pi i}\int_{\mathbb C}\frac{1}{\tau-z_1}f_1(\tau,z-2,\cdots,z_n)d\tau\wedge d\bar\tau\]
+\[\bar\partial f=0\Leftrightarrow \frac{\partial f_j}{\partial\bar z_k}=\frac{\partial f_k}{\partial\bar z_j}\]
+Need to show $\frac{\partial u}{\partial\bar z_k}=f_k$. $k=1$, Cauchy-Pompeiu implies $\frac{\partial u}{\partial \bar z_1}f_1(z_1,\cdots,z_n)$, $k>1$, $\frac{\partial u}{\partial\bar z_k}=\frac{1}{2\pi i}\int_{\mathbb C}\frac{1}{\tau}\frac{\partial f_k}{\partial\bar z_1}(z_1-\tau,z_2,\cdots,z_n)d\tau\wedge d\bar\tau=\frac{1}{2\pi i}\int_{\mathbb C}\frac{1}{\tau-z_1}\frac{\partial f_k}{\partial\bar z_1}(z_1-\tau,z_2,\cdots,z_n)d\tau\wedge d\bar\tau$
+Why is $u$ compactly supported
+\end{proof}
+
+\end{document}

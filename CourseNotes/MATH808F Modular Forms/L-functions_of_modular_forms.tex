@@ -1,0 +1,21 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+For $f\in S_k(\Gamma_0(N),\chi)$ with Fourier expansion $f(z)=\sum_{n=1}^\infty a_nq^n$, $q=e^{2\pi iz}$. Define a Dirichlet seires $L(s,f)=\sum_{n=1}^\infty\frac{a_n}{n^s}$
+\end{definition}
+
+\begin{lemma}
+$|a_n|<<n^{\frac{k}{2}}$, $\forall n\geq1$. Hence $L(s,f)$ converges when $\Re(s)>\frac{k}{2}+1$
+\end{lemma}
+
+\begin{proof}
+$\forall n\geq1$, $y\in\mathbb R_{>0}$, $a_ne^{-2\pi iny}=\int_0^1f(x+iy)e^{-2\pi iny}dx$. Recall that $f(x+iy)y^{\frac{k}{2}}$ is bounded on $\mathcal H$ (More generally, any $\phi\in\mathcal A_0(\Gamma\setminus G^+_{\mathbb R})$ is bounded). Take $y=\frac{1}{n}$, we get $|a_n|\leq e^{2\pi}\int_0^1|f(x+\frac{i}{n})|dx<<n^{\frac{k}{2}}$
+\end{proof}
+
+\begin{definition}
+
+\end{definition}
+
+\end{document}

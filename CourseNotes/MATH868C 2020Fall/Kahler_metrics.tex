@@ -1,0 +1,61 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$\Omega\subseteq\mathbb C^n$. A \textit{hermitian metric} on $\Omega$ is a positive definite hermitian valued smooth function $g=(g_{i\bar j})$. The \textit{K\"ahler form}\index{K\"ahler form} associated to $g$ is $\omega=i\sum_{i,j=1}^ng_{i\bar j}dz_i\wedge d\bar z_j$, note that $\bar\omega=\omega$. We assume that $g$ is tensorial, in the sense that $\omega$ is a well-defined $(1,1)$-form on $\Omega$, $g_{i\bar j}=\left\langle\dfrac{\partial}{\partial z_i},\dfrac{\partial}{\partial\bar z_j}\right\rangle$. This gives a pointwise hermitian inner product on $(1,0)$-forms: $\alpha=\alpha_idz_i$, $\beta=\beta_jdz_j$
+\[\langle\alpha,\beta\rangle=\sum_{i,j=1}^n\alpha_i\overline{\beta_j}g^{i\bar j}\]
+$(g^{i\bar j})$ is the inverse matrix of  $(g_{ij})$. Extend this to $(p,0)$-forms by
+\[\langle\alpha_1\wedge\cdots\wedge\alpha_p,\beta_1\wedge\cdots\beta_p\rangle=\det\langle\alpha_i,\beta_j\rangle\]
+Extend this to $(p,q)$-forms by taking the product of this. This gives a complex anti-linear isometry
+\[\bar*:\Lambda^{p,q}\to\Lambda^{n-p,n-q},\alpha\wedge\bar*\beta=\langle\alpha,\beta\rangle\frac{\omega^n}{n!}\]
+$\dfrac{\omega^n}{n!}$ is the volume form. Inducing $L^2$ inner products
+\[\langle\alpha,\beta\rangle=\int_\Omega\alpha\wedge\bar*\beta\]
+Define the \textit{Lefschetz operator}\index{Lefschetz operator}
+\[L:\Lambda^{p,q}\to\Lambda^{p+1,q+1},\alpha\mapsto\omega\wedge\alpha\]
+Let $\Lambda=L^*$. Note that $L^n(1)=\omega^n$, $\Lambda^{n,n}\cong\mathbb C$
+\end{definition}
+
+\begin{example}
+If $F$ is of type $(1,1)$, write $F=\sum_{i,j}F_{i\bar j}dz_i\wedge d\bar z_j$. Then $\Lambda F=\sum_{i,j}F_{i\bar j}g^{i\bar j}$. If $\alpha$ is of type $(1,0)$
+\[i\alpha\wedge\bar\alpha\wedge\frac{\omega^{n-1}}{(n-1)!}=|\alpha|^2\frac{\omega^n}{n!}\]
+\end{example}
+
+\begin{definition}
+A hermitian metric  is called K\"ahler if $d\omega=0$ ($\omega$ is closed), equivalently, $\dfrac{\partial g_{j\bar k}}{\partial z_i}=\dfrac{\partial g_{i\bar k}}{\partial z_j}$
+\end{definition}
+
+\begin{proposition}
+$\omega$ is K\"ahler iff about any point there are coordinates such that $g$ is euclidean to order two
+\end{proposition}
+
+\begin{proof}
+We may always choose local coordinate so that $g_{i\bar j}(0)=\delta_{ij}$, $g_{i\bar j}=\delta_{ij}+A^k_{i\bar j}z_k+B^{\bar k}_{i\bar j}\bar z_k+O(|z|^2)$. The K\"ahler condition implies: $A^k_{i\bar j}=A^i_{k\bar j}$. The fact that $g_{i\bar j}$ is hermitian implies $B^{\bar k}_{i\bar j}=\overline{A^k_{j\bar i}}$. Define $w_m=z_m+\frac{1}{2}A^i_{j\bar m}z_iz_j$, then $\dfrac{\partial w_m}{\partial z_j}=\delta_{mi}+A^i_{j\bar m}z_i$. Now $\tilde g_{m\bar n}\dfrac{\partial w_m}{\partial z_i}\overline{\dfrac{\partial w_m}{\partial z_i}}=g_{i\bar j}$. This implies
+\begin{align*}
+g_{i\bar j}(z)&=\delta_{ij}+A^k_{i\bar j}z_k+B^{\bar k}_{i\bar j}\bar z_k+O(|z|^2) \\
+&=\tilde g_{i\bar j}+\tilde g_{m\bar j}A^k_{i\bar m}z_k+\tilde g_{i\bar k}\overline{A^k_{j\bar n}z_k}+O(|z|^2)
+\end{align*}
+\end{proof}
+
+\begin{proposition}[K\"ahler identities]
+$(\Omega,\omega)$ has a K\"ahler metric. Then the formal $L^2$ adjoints are given by $\bar\partial^*=-i[\Lambda,\partial],\partial^*=i[\Lambda,\bar\partial]$
+\end{proposition}
+
+\begin{proof}
+It suffices to prove these for the euclidean metric. Then is a direct computation
+\end{proof}
+
+\begin{example}
+$\Omega\subseteq\mathbb C$, $\Lambda(idz\wedge d\bar z)=1$, $f\in\mathcal D_{(0,0)}(\Omega)$, $\beta\in\mathcal D_{(0,1)}(\Omega)$, $\beta=\beta(z)d\bar z$. Then
+\begin{align*}
+\langle\bar\partial f,\beta\rangle&= \int_\Omega\partial_{\bar z}f\overline{\beta(z)}idz\wedge d\bar z\\
+&=-\int_\Omega f\overline{\partial z\beta(z)}idz\wedge d\bar z \\
+&=\int_\Omega f\overline{i\partial\beta} \\
+&=\int_\Omega f\overline{\Lambda(i\partial\beta)idz\wedge d\bar z} \\
+&=-\int_\Omega f\overline{\Lambda(i\partial\beta)}idz\wedge d\bar z \\
+&=\langle f,-i\Lambda\partial\beta\rangle \\
+&=\langle f,\bar\partial^*\beta\rangle
+\end{align*}
+\end{example}
+
+\end{document}

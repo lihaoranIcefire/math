@@ -1,0 +1,100 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{My_math_package}
+
+\begin{document}
+
+\begin{theorem}[Relative Skolem-Noether theorem]
+$S$ is a CSA/k, $R\hookrightarrow S$ is a simple $k$-algebra, suppose $f,g:R\to S$ are are homomorphisms, there there exists automorphism $\alpha:S\to S$ such that $\alpha\circ f=g$
+\end{theorem}
+
+
+
+
+Consider $A$ is a CSA/k with $E$ being a maximal subfield where $E/k$ is finite Galois with Galois group $G$, then for each $\sigma\in G$, we can find $x_\sigma\in A^\times$ such that $x_\sigma a x_\sigma^{-1}=\sigma(a)$, $\forall a\in E$. If $y_\sigma$ is another choice, then $x_\sigma,y_\sigma$ differ by $E^\times$, hence this defines $x_\sigma x_\tau=\alpha_{\sigma,\tau}x_{\sigma\tau}$
+
+$\alpha:G\times G\to E^\times$ is actually a 2-cocycle
+
+\begin{definition}
+Suppose $H$ is an abelian group with a $G$ action, $Z^2(G,H)$ consists of $\alpha:G\times G\to H$ such that $\alpha_{\rho\sigma,\tau}\cdot\alpha_{\rho,\sigma}=\rho(\alpha_{\sigma,\tau})\cdot\alpha_{\rho,\sigma\tau}$. $B^2(G,H)$ consists of $\gamma_{\sigma,\tau}=\frac{\sigma(f_\tau)\cdot f_\sigma}{f_{\sigma\tau}}$
+\end{definition}
+
+\begin{lemma}
+Suppose $A$ is a finite dimensional $k$-algebra, $E/k\subseteq A$ is a finite Galois extension with Galois group $G$, and if $\{x_\sigma\}_{\sigma\in G}\subseteq A^\times$ such that $x_\sigma a x_\sigma^{-1}=\sigma(a)$, $\forall a\in E$. Then $x_\sigma$ are $E$-linear independent in $A$
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{proposition}
+Suppose $\alpha:G\times G\to E^\times$ is a 2-cocycle, There is a $k$-algebra $(E/k,\alpha):=\oplus Ex_\sigma$ with $x_\sigma x_\tau=\alpha_{\sigma,\tau}x_{\sigma\tau}$, $x_\sigma a x_\sigma^{-1}=\sigma(a)$, $\forall a\in E$. This is a CSA/k. Moreover, $(E/k,\alpha)\cong (E/k,\beta)$ if $\alpha\sim\beta$
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}
+Consider $\phi:\Br(E/k)\to H^2(G,E^\times)$
+\end{theorem}
+
+\begin{proof}
+Consider the inverse $\phi^{-1}:H^2(G,E^\times)\to \Br(E/k)$, $[\alpha]\mapsto(E/k,\alpha)$
+\end{proof}
+
+\begin{definition}
+Suppose $H$ is a group with a $G$-action, then
+\[
+H^0(G,H)=Z^0(G,H)=H^G=\{h\in H|\sigma(h)=h,\forall\sigma\in G\}
+\]
+If $H$ is not abelian, this is a pointed set
+\end{definition}
+
+\begin{remark}
+A sequence of pointed set is $L\xrightarrow{\pi} M\xrightarrow{\rho}N$, and every element in $\ker\rho$ has an preimage in $L$. If $N=\{*\}$, then $\pi$ is surjective, but even if $L=\{*\}$, $\rho$ might be non-injective
+\end{remark}
+
+\begin{proposition}
+Suppose $1\to A\to B\to C\to1$ is an exact sequence of groups with $G$-action, then there is the long exact sequence
+\[
+1\to H^0(G,A)\xrightarrow{(1)} H^0(G,B)\xrightarrow{(2)} H^0(G,C)\xrightarrow{\delta^1}H^1(G,A)\xrightarrow{(3)} H^1(G,B)\xrightarrow{(4)} H^1(G,C)
+\]
+Moreover, if $A$ is central in $B$, then $\delta^2$ exists and we can extend this with $\xrightarrow{\delta^2}H^2(G,A)\to H^2(G,B)\to H^2(G,C)$
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{example}
+\[
+1\to E^\times\to \GL_n(E)\to\PGL_n(E)\to1
+\]
+Then we get $H^1(G,E^\times)\to H^1(G,\PGL_n(E))(\cong CSA/k)\xrightarrow{\delta^2}H^2(G,\times E)(\cong\Br(E/k))$
+\end{example}
+
+\begin{proposition}
+\begin{enumerate}
+\item For CSA/k $A,B$ with $\deg A=n$, $\deg B=m$, $\delta^2_{nm}([A\otimes_kB])=\delta_n^2([A])\delta_m^2([B])$
+\item For CSA/k $A$ with $\deg A=n$, $\delta_n^2([A])=0\iff A\cong M_n(k)$
+\item If $[E:k]=n$, then $\delta_n^2$ is surjective, and $\phi^{-1}\circ\delta_n^2([(E/k,\alpha)])=[(E/k,\alpha)^{\op}]$
+\end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+Suppose $A$ is a CSA/k with $\ind A=d$, then $\ind A^{\otimes r}\mid\binom{d}{r}$, $r\leq d$. In particular, $A^{\otimes r}$ split, and $\Br(E/k)$ are torsion
+\end{proposition}
+
+\begin{proof}
+Let $E/k$ be finite Galois extension that splits $A$, $G=\Gal(E/k)$, $V=E^{\oplus d}$, we get the following commutative diagram
+\begin{center}
+\begin{tikzcd}
+1 \arrow[r] & E^\times \arrow[r] \arrow[d, "\lambda\mapsto\lambda^r"'] & \GL(V) \arrow[r] \arrow[d, "\pi"'] & \GL(V) \arrow[r] \arrow[d]   & 1 \\
+1 \arrow[r] & E^\times \arrow[r]                                       & \GL(\bigwedge^rV) \arrow[r]        & \PGL(\bigwedge^rV) \arrow[r] & 1
+\end{tikzcd}
+\end{center}
+Here $\pi(\phi)=\bigwedge^r\phi$, so we get exact squares
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,50 @@
+\documentclass[12pt]{article}
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{dsfont}
+\usepackage{bbm}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgf,tikz,pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+
+\title{MATH673 homework5}
+\author{Haoran Li}
+\date{}
+
+\setlength{\parindent}{0cm}
+
+\begin{document}
+
+\maketitle
+\textbf{August 1996, Problem 1a} \par
+Assume $u$ attains its maximum $\displaystyle\underset{\partial\Omega}{\max}u$ at $x^0\in\partial\Omega$, since $f\geq 0$, $U$ is a domain which is bounded, maximum principle applies. Suppose $u(x)<u(x^0), \forall x\in \Omega$, then according to Hopf lemma, $\dfrac{\partial u}{\partial n}(x^0)>0$ since $\Omega$ has a smooth boundary, which contradicts $\dfrac{\partial u}{\partial n}=0$ on $\partial\Omega$. Thus $\exists y\in\Omega$, such that $u(y)=u(x^0)$, by strong maximum principle, $u$ is a constant and $f=\Delta u+a(x)\cdot\nabla u=0$ \par
+\textbf{6.} \par
+Since $f$ is bounded, assume $|f|<C$, consider $v:=u-Cw$, we have $v(x^0)=0$, $v\leq 0$ on $\partial U$ and $Lv=Lu-CLw\leq Lu-C<0$, by maximum principle, we know $v(x)<v(x^0), \forall x\in U$, by Hopf lemma, $\dfrac{\partial u}{\partial\nu}(x^0)-C\dfrac{\partial w}{\partial\nu}(x^0)=\dfrac{\partial v}{\partial\nu}(x^0)>0$, similarly, if we consider $-u-Cw$ and $-w$, we have $-\dfrac{\partial u}{\partial\nu}(x^0)-C\dfrac{\partial w}{\partial\nu}(x^0)>0$ and $-\dfrac{\partial w}{\partial\nu}(x^0)>0$. Also, since $u=0$ on $\partial U$, $\left|Du(x^0)\right|=\left|\dfrac{\partial u}{\partial\nu}(x^0)\right|$, hence we have
+\[
+\left\{
+ \begin{matrix}
+ -C\dfrac{\partial w}{\partial\nu}(x^0)>-\dfrac{\partial u}{\partial\nu}(x^0) \\
+-C\dfrac{\partial w}{\partial\nu}(x^0)>\dfrac{\partial u}{\partial\nu}(x^0)
+ \end{matrix}
+\right.
+\Rightarrow
+-C\dfrac{\partial w}{\partial\nu}(x^0)>\left|\dfrac{\partial u}{\partial\nu}(x^0)\right|
+\Rightarrow
+C\left|\dfrac{\partial w}{\partial\nu}(x^0)\right|>\left|Du(x^0)\right|
+\]
+\textbf{7.} \par
+\textbf{(a)} \par
+\[
+0=\int_U u\Delta u=\dfrac{1}{2}\int_{\partial U}u\dfrac{\partial u}{\partial\nu}-\dfrac{1}{2}\int_U |\nabla u|^2 \Rightarrow \int_U |\nabla u|^2=0 \Rightarrow |\nabla u|\equiv 0 \Rightarrow u\equiv \text{const}
+\]
+\textbf{(b)} \par
+Using maximum principle, let $x^0\in\partial U$ be a maximizer of $u$, suppose $u(x)<u(x^0), \forall x\in U$, by Hopf lemma, $\dfrac{\partial u}{\partial\nu}(x^0)>0$ which contradicts $\dfrac{\partial u}{\partial\nu}=0$ on $\partial U$, thus $\exists y\in U$, such that $u(y)=u(x^0)$, hence $u$ is a constant by strong maximum principle \par
+
+\end{document}

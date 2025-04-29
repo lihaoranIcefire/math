@@ -1,0 +1,41 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+A chain complex of \textbf{amplitude}\index{Amplitude of a chain complex} $[p,q]$ are chains of the following form
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & X_q \arrow[r, "d"] & \cdots \arrow[r, "d"] & X_p \arrow[r] & 0
+\end{tikzcd}
+\end{center}
+Let $Ch_{[p,q]}\mathscr C$ denote the full subcategory of $Ch\mathscr C$ consist of chain complexes of amplitude $[p,q]$
+\end{definition}
+
+\begin{definition}
+Suppose $\mathscr C$ is a category, we can define the \textbf{arrow category}\index{Arrow category} $Ar\mathscr{C}$, where the objects are morphisms in $\mathscr C$, and $Hom(X\xrightarrow{f}Y,Z\xrightarrow{g}W)$ consists of commutative diagrams
+\begin{center}
+\begin{tikzcd}
+X \arrow[r, "f"] \arrow[d, "u"'] & Y \arrow[d, "v"] \\
+Z \arrow[r, "g"]                 & W               
+\end{tikzcd}
+\end{center}
+Equivalently, $Ar\mathscr C=Ch_{[0,1]}\mathscr C$
+\end{definition}
+
+\begin{lemma}
+Suppose $\mathscr A$ is an abelian category, then $\ker,\mathrm{coker}:Ar\mathscr A\to\mathscr A$ are two functors given by the following diagram
+\begin{center}
+\begin{tikzcd}
+\ker f \arrow[r, hook] \arrow[d, "u_*"] & X \arrow[r, "f"] \arrow[d, "u"] & Y \arrow[r, two heads] \arrow[d, "v"] & \mathrm{coker}f \arrow[d, "v_*"] \\
+\ker g \arrow[r, hook]                  & Z \arrow[r, "g"]                & W \arrow[r, two heads]                & \mathrm{coker}g                 
+\end{tikzcd}
+\end{center}
+Let $F_1:\mathscr A\to Ar\mathscr A$, $X\mapsto 0\to X\to0$, where $X$ is of degree $1$, $F_0:\mathscr A\to Ar\mathscr A$, $X\mapsto 0\to X\to0$, where $X$ is of degree $0$. Then $\ker$ is the right adjoint to $F_1$ and $\mathrm{coker}$ is the left adjoint to $F_0$
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\end{document}

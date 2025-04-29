@@ -1,0 +1,24 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$R$ is a commutative ring, $M$ is right $R[G]$ module, $C_*(G)$ is the tuple complex, equivalently, $B_*(G)$ is the bar complex, $\bar B_*(G)=B_*(G)\otimes_{R[G]}R$, thus
+\[M\otimes_{R[G]}B_*(G)\cong M\otimes_{R}R\otimes_{R[G]}B_*(G)\cong M\otimes_R\bar B_*(G)\]
+Group homology with coefficients in $M$ is
+\begin{align*}
+H_k(G;M)&=H_k(M\otimes_{R[G]}C_*(G)) \\
+&=H_k(M\otimes_{R[G]}B_*(G)) \\
+&=H_k(M\otimes_{R}\bar B_*(G)) \\
+&=Tor_k^{R[G]}(M,R)
+\end{align*}
+The differential of $M\otimes_{\mathbb Z[G]} C_*(G)$ is given by
+\begin{align*}
+\partial(m\otimes[g_1|\cdots|g_n])&=\partial(m\otimes(1,g_1,g_1g_2,\cdots,g_1\cdots g_n)) \\
+&=mg_1\otimes[g_2|\cdots|g_n]+\sum_{i=1}^{n-1}(-1)^im\otimes[g_1|\cdots|g_ig_{i+1}|\cdots|g_n] \\
+&\quad+(-1)^nm\otimes[g_1|\cdots|g_{n-1}]
+\end{align*}
+$H_0(G;M)=M\otimes_{R[G]}R=M_G$
+\end{definition}
+
+\end{document}

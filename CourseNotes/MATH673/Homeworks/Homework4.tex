@@ -1,0 +1,163 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{customproblem}\textbf{August 2006, Problem 1} 
+Define $F(x,t,p,q,z)=q+xp-z^2$ \par
+The characteristics are
+\[
+\left\{
+\begin{array}{ll}
+\dot{x}=x \\
+\dot{t}=1 \\
+\dot{z}=xp+q=z^2
+\end{array}
+\right.
+\]
+With initial condition
+\[
+\left\{
+\begin{array}{ll}
+x(0)=x^0 \\
+t(0)=0 \\
+z(0)=f(x^0)
+\end{array}
+\right.
+\]
+Thus we get
+\[
+\left\{
+\begin{array}{ll}
+x = x^0e^s \\
+t=s \\
+z(0)=\dfrac{f(x^0)}{1-sf(x^0)}
+\end{array}
+\right.
+\]
+which is defined on $\left\{tf(xe^{-t})\neq 1\right\}$, thus $u(x,t)=\dfrac{f(xe^{-t})}{1-tf(xe^{-t})}$
+\end{customproblem}
+
+\begin{customproblem}\textbf{January 2005, Problem 2(b)}
+Define $F(x,t,p,q,z)=q+(2z+1)p$ \par
+The characteristics are
+\[
+\left\{
+\begin{array}{ll}
+\dot{x}=2z+1 \\
+\dot{t}=1 \\
+\dot{z}=0
+\end{array}
+\right.
+\]
+With initial condition
+\[
+\left\{
+\begin{array}{ll}
+x(0)=x^0 \\
+t(0)=0 \\
+z(0)=u(x^0,0)
+\end{array}
+\right.
+\]
+Thus we get
+\[
+\left\{
+\begin{array}{ll}
+x = x^0+\left(2u(x^0,0)+1\right)s \\
+t=s \\
+z(0)=u(x^0,0)
+\end{array}
+\right.
+\]
+By Rankine-Hugoniot condition, we have $0=F(u_l)-F(u_r)=\dot{s}(t)(u_l-u_r)=3\dot{s}(t)$ \par
+Thus we have a piecewise smooth solution
+\[
+u(x,t)=
+\left\{
+\begin{array}{ll}
+1,\,x<0 \\
+-2,\,x>0
+\end{array}
+\right.
+\]
+\end{customproblem}
+
+\begin{customproblem}\textbf{January 2000, Problem 2}
+Consider the initial condition to be
+\[
+g(x)=
+\left\{
+\begin{array}{ll}
+0,\,x<0 \\
+1,\,0<x<1 \\
+0,\,x>1
+\end{array}
+\right.
+\]
+Then
+\[
+X(t)=
+\left\{
+\begin{array}{ll}
+1+\frac{t}{3},\,0<t<\frac{3}{2} \\
+\sqrt[3]{\frac{9}{4}t},\,t>\frac{3}{2}
+\end{array}
+\right.
+\quad
+f\left(\frac{x}{t}\right)=
+\left\{
+\begin{array}{ll}
+\sqrt{\frac{x}{t}},\,0<x<X(t),\frac{x}{t}<1 \\
+1,\,0<x<X(t),\frac{x}{t}>1
+\end{array}
+\right.
+\]
+$\forall t\in\left[0,\frac{3}{2}\right]$, $\displaystyle\int_0^\infty u(x,t)dx=\int_0^t\sqrt{\frac{x}{t}}dx+\int_t^{1+\frac{t}{3}}1dx=\frac{2}{3}t+\left(1-\frac{2}{3}t\right)=1$ \par
+$\forall t\in\left(\frac{3}{2},\infty\right)$, $\displaystyle\int_0^\infty u(x,t)dx=\int_0^{\sqrt[3]{\frac{9}{4}t}}\sqrt{\frac{x}{t}}dx=1$ \par
+Along $x=t,0\leq t\leq\frac{3}{2}$, $u_l=1=u_r$ \par
+Along $x=1+\frac{t}{3},0\leq t\leq\frac{3}{2}$, $1=u_l>\frac{1}{3}=\dot{X}(t)>0=u_r$ \par
+Along $x=\sqrt[3]{\frac{9}{4}t},  t>\frac{3}{2}$, $u_l=t^{-\frac{1}{3}}\sqrt[3]{\frac{3}{2}}>\frac{1}{3}t^{-\frac{2}{3}}\sqrt[3]{\frac{9}{4}}=\dot{X}(t)>0=u_r$ \par
+Which shows that $u$ satisfies the entropy condition, and along $x=t,0\leq t\leq\frac{3}{2}$, $u$ is a rarefaction wave, along $X(t)$, $u$ is a shock wave \par
+\definecolor{sexdts}{rgb}{0.1803921568627451,0.49019607843137253,0.19607843137254902}
+\definecolor{zzttqq}{rgb}{0.6,0.2,0}
+\definecolor{qqqqff}{rgb}{0,0,1}
+\definecolor{rvwvcq}{rgb}{0.08235294117647059,0.396078431372549,0.7529411764705882}
+\begin{center}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm,scale=1.7]
+\begin{axis}[
+x=1cm,y=1cm,
+axis lines=middle,
+xmin=-0.5,
+xmax=3,
+ymin=-0.5000000000000001,
+ymax=5.500000000000001,
+xtick={0,1,...,3},
+ytick={0,1,...,5},]
+\clip(-0.5,-0.5) rectangle (3,5.5);
+\draw [line width=1.2pt,color=qqqqff] (0,0)-- (1.5,1.5);
+\draw [line width=1.2pt,color=zzttqq] (1,0)-- (1.5,1.5);
+\draw [line width=0.4pt,dotted,domain=0:3] plot(\x,{(-0--5.203174177424871*\x)/0.5457884651390572});
+\draw [line width=0.4pt,dotted,domain=0:3] plot(\x,{(-0--5.36859124595387*\x)/1.1782654918675832});
+\draw [line width=0.4pt,dotted,domain=0:3] plot(\x,{(-0--5.2323654248123415*\x)/1.801012102800286});
+\draw[line width=1.2pt,color=sexdts, smooth,samples=100,domain=1.5:6] plot[parametric] function{((9.0*t)/4)**(1.0/3),t};
+\draw [line width=0.4pt,dotted] (0,0)-- (2.1506674961154224,4.421170833992173);
+\draw [line width=0.4pt,dotted] (0,0)-- (1.8530930252748867,2.8281936721644305);
+\draw [line width=0.4pt,dash pattern=on 1pt off 1pt] (0,0)-- (1.25,0.75);
+\draw [line width=0.4pt,dash pattern=on 1pt off 1pt] (0,0)-- (1.114533600398763,0.3436008011962884);
+\begin{scriptsize}
+\draw [fill=rvwvcq] (0,0) circle (0.5pt);
+\draw [fill=rvwvcq] (1.5,1.5) circle (0.5pt);
+\draw [fill=rvwvcq] (1,0) circle (0.5pt);
+\end{scriptsize}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{customproblem}
+
+\begin{customproblem}\textbf{August 1998, Problem 5}
+$0=u_t+uu_x=u_t+\left(\frac{1}{2}u^2\right)_x$, since $u$ and $\xi(t)$ are both continuous, so is $u(\xi(t),t)$, there is a $C^1$ function $u_L$ in a neighborhood of $C_l$ which agrees with $u$ on $C_l$ and curve $C$, and there is a $C^1$ function $u_R$ in a neighborhood of $C_r$ which agrees with $u$ on $C_r$ and curve $C$, $\dfrac{d}{dt}u(\xi(t),t)=\dfrac{d}{dt}u_L(\xi(t),t)$ is continuous since $u_L$ and $\xi$ are both $C^1$ function, then we have $\dfrac{d}{dt}u_L(\xi(t),t)=\dfrac{d}{dt}u_R(\xi(t),t)$ $\Rightarrow $ $0=\dfrac{d}{dt}u_L(\xi(t),t)-\dfrac{d}{dt}u_R(\xi(t),t)=\left(u_x^--u_x^+\right)\xi'+\left(u_t^--u_t^+\right)$ \par
+On the other hand, since $u$ is continuous, $0=u_t^-+u^-u_x^-=u_t^-+uu_x^-=u_t^++u^+u_x^+=u_t^++uu_x^+$ $\Rightarrow$ $0=\left(u_t^-+uu_x^-\right)-\left(u_t^++uu_x^+\right)=\left(u_x^--u_x^+\right)u+\left(u_t^--u_t^+\right)$ \par
+But $u_x$ has jump discontinuity on the curve, hence $u_x^--u_x^+\neq 0$, compare to get $\xi'(t)=u$
+\end{customproblem}
+
+\end{document}

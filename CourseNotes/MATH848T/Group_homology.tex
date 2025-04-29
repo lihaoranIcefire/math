@@ -1,0 +1,81 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{theorem}
+$K(-,n)$ is a functor from of the category of groups to the category of topological spaces or to the category of CW complexes. $K(-,n)$ respects product, i.e. $K(G\times H,n)=K(G,n)\times K(H,n)$ since $\pi_n(\prod X_i)=\prod_i\pi_n(X_i)$
+\end{theorem}
+
+\begin{lemma}\label{Existence of EG}
+$G$ is a group, there exists a contractible space $X$ on which $G$ acts freely
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}
+$G$ is a group, $H_i(G)\cong H_i(K(G,1))$
+\end{theorem}
+
+\begin{proof}
+By Lemma \ref{Existence of EG}, $X\xrightarrow{p}X/G$ is a covering with deck transformation group $G$, thus $\pi_1(X/G)=G$, also, $\pi_i(X/G)=0,\forall i>1$ since
+\begin{center}
+\begin{tikzcd}
+                                 & X \arrow[d, "p"] \\
+S^n \arrow[r] \arrow[ru, dashed] & X/G             
+\end{tikzcd}
+\end{center}
+By CW approximation theorem and cellular approximation theorem, we may assume $G\times X\to X$ is cellular, $X/G$ is a CW complex, $X/G=K(G,1)$, We have free resolution $\cdots\to C^{\mathrm{cell}}_1(X)\to C^{\mathrm{cell}}_0(X)\to\mathbb Z\to0$, since $C^{\mathrm{cell}}_i(X/G)\cong C^{\mathrm{cell}}_i(X)\otimes_{\mathbb Z[G]}\mathbb Z$
+\[H_i(K(G,1))=H_i(X/G)\cong H^{\mathrm{cell}}_i(X/G)=H_i(G)\]
+Since $X/G$ is connected, $H_0(G)=\mathbb Z$
+\end{proof}
+
+\begin{remark}
+Since $G$ acts on $C_*(G)$ freely, tuple complex $C_*(G)$ on $G$ give a free resolution of $\mathbb Z$, $C_k(G)$ consists of $(k+1)$-tuples $(g_0,\cdots,g_k)$, denote $a_{ij}=g_i^{-1}g_j$, then $a_{ij}=a_{ji}^{-1}$, $a_{ij}a_{jk}=a_{ik}$ satisfies \textbf{cocycle relation}, $B_k(G)=C_k(G)\otimes_{\mathbb Z[G]}\mathbb Z$ consists of $[a_{01}|\cdots|a_{k-1,k}]$, then boundary map on $B_*(G)$ would be 
+\[\partial[a_1|\cdots|a_n]=[a_2|\cdots|a_n]+\sum_{k=1}^{n-1}(-1)^k[a_1|\cdots|a_ka_{k+1}|\cdots|a_n]+(-1)^n[a_1|\cdots|a_{n-1}]\]
+In particular, $\partial[a]=[]-[]=0$, $\partial[a_1|a_2]=[a_2]-[a_1a_2]+[a_1]$, $\partial[a_1|a_2|a_3]=[a_2|a_3]-[a_1a_2|a_3]+[a_1|a_2a_3]-[a_1|a_2]$
+\end{remark}
+
+\begin{example}
+\textbf{(a) }Since $K(\mathbb Z,1)=S^1$, $K(\mathbb Z^n,1)=\overbrace{S^1\times\cdots\times S^1}^{n}=\mathbb T^n$, $H_i(\mathbb Z^n)=H_i(\mathbb T^n)=\mathbb Z^{\binom{n}{i}}$ by Kunneth theorem \par
+\textbf{(b) }$K(\mathbb Z/2\mathbb Z,1)=\mathbb RP^\infty$, $H_i(\mathbb Z/2\mathbb Z,1)=H_i(\mathbb RP^\infty)=\begin{cases}
+\mathbb Z, &i=0 \\
+\mathbb Z/2\mathbb Z, & i>0 \text{ even} \\
+0, &i\text{ odd}
+\end{cases}$
+\end{example}
+
+\begin{lemma}
+$H_1(G)=G^{\mathrm{ab}}=G/[G,G]$
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+Given a group homomorphism $\phi:G_1\to G_2$. $\phi$ induce $\phi:K(G_1,1)\to K(G_2,1)$ which then induce $\phi_*:H_i(G_1)=H_i(K(G_1,1))\to H_i(K(G_2,1))=H_i(G_2)$. Equivalently, if $F_\bullet\xrightarrow{\varepsilon}\mathbb Z\to0$, $F'_\bullet\xrightarrow{\varepsilon}\mathbb Z\to0$ are free resolutions, $F'_\bullet$ can be viewed as $\mathbb Z[G_1]$ modules via $\phi:\mathbb Z[G_1]\to\mathbb Z[G_2]$, i.e. $g\cdot x=\phi(g)x$, since $F_i$'s are free we can find $f_\bullet:F_\bullet\to F'_\bullet$, $f(gx)=g\cdot f(x)=\phi(g)f(x)$, which induce a chain map between free resolutions and then a morphism on homology. In particular, $\phi$ induce $B_n(G_1)\to B_n(G_2)$, $[g_1|\cdots|g_n]\mapsto[\phi(g_1)|\cdots|\phi(g_n)]$
+\end{definition}
+
+\begin{example}
+$C_a:G\to G$, $g\mapsto aga^{-1}$ is the conjugation, $F_\bullet\xrightarrow{\varepsilon}\mathbb Z\to0$ is a free resolution of $\mathbb Z[G]$ modules, $f(x)=ax$, $f(gx)=agx=aga^{-1}ax=C_a(g)f(x)$ give a homomorphism $f_\bullet:F_\bullet\to F_\bullet$ which becomes the identity when tensoring with $\mathbb Z[G_1]$ and $\mathbb Z[G_2]$, thus $C_a$ induce identity on group homology
+\end{example}
+
+\begin{example}
+$G=\mathbb Z/n\mathbb Z=\langle t\rangle$, $N=1+t+\cdots+t^{n-1}$, then we have free resolution
+\[\cdots\to\mathbb Z[G]\xrightarrow{N}\mathbb Z[G]\xrightarrow{1-t}\mathbb Z[G]\xrightarrow{N}\mathbb Z[G]\xrightarrow{1-t}\mathbb Z[G]\xrightarrow{\varepsilon}\mathbb Z\to0\]
+Tensor with $\mathbb Z$, we get
+\[\cdots\to\mathbb Z\xrightarrow{n}\mathbb Z\xrightarrow{0}\mathbb Z\xrightarrow{n}\mathbb Z\xrightarrow{0}\mathbb Z\to0\]
+Hence $H_i(G)=\begin{cases}
+\mathbb Z, &i=0 \\
+\mathbb Z/n\mathbb Z, &i\text{ odd} \\
+0, &i>0\text{ even}
+\end{cases}$
+\end{example}
+
+\begin{corollary}
+$A=\mathbb Z^n\times\mathbb Z/n_1\mathbb Z\times\cdots\times\mathbb Z/n_k\mathbb Z$ is a finitely generated abelian group, use Kunneth formula, we can determine the group homology
+\end{corollary}
+
+\end{document}

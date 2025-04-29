@@ -1,0 +1,55 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$\mathscr{C},\mathscr{D}$ are categories, $F:\mathscr{C}\to\mathscr{D}$ is a \textbf{functor}\index{Functor} if it is a mapping: $\mathrm{Ob}\mathscr{C}\to\mathrm{Ob}\mathscr{D}$, $\mathscr{C}(A,B)\to\mathscr{D}(F(A),F(B))$, $F(1_A)=1_{F(A)}$, given $f:A\to B,g:B\to C$, $F(g\circ f)=F(g)\circ F(f):F(A)\to F(C)$, this kind of functor is called \textbf{covariant fucntor}, if $\mathrm{Ob}\mathscr{C}\to\mathrm{Ob}\mathscr{D}$, $\mathscr{C}(A,B)\to\mathscr{D}(F(B),F(A))$, $F(1_A)=1_{F(A)}$, given $f:A\to B,g:B\to C$, $F(g\circ f)=F(f)\circ F(g):F(C)\to F(A)$, then this is called a \textbf{contravariant functor} \par
+The \textbf{dual category}\index{Dual category} of a category $\mathscr{C}$ is denoted as $\mathscr{C}^{op}$ with the same objects but morphisms reversed, a contravariant functor is just a functor in the dual
+\end{definition}
+
+\begin{example}
+\textbf{(1): }Let $M,N$ be monoids, a functor $F:\mathscr C_M\to\mathscr C_N$ is just a homomorphism of monoids \par
+\textbf{(2): }Let $M,N$ be groups, a functor $F:\mathscr C_M\to\mathscr C_N$ is just a homomorphism of groups \par
+\textbf{(3): }Let $L/F$ be a field extension, $-\otimes L$ is a functor $Vect_F\to Vect_L, V\mapsto V\otimes_F L$, $\phi\mapsto\phi\otimes 1_L$ \par
+\textbf{(4): }Homology $H_*$ is a functor $Top\to Abgp$, $X\mapsto H_*(X)$ \par
+\textbf{(5): }Cohomology $H^*$ is a contravariant functor $Top\to Abgp$, $X\mapsto H^*(X)$ \par
+\textbf{(6): }Let $FinAbgp$ be the category of finite abelian groups, then $D:FinAbgp\to FinAbgp$, $X\mapsto Hom(X,\mathbb Q/\mathbb Z)$ is a contravariant functor, or we could use $Hom(X,\mathbb C^\times)$, this is called \textbf{Pontrjagin duality}\index{Pontrjagin duality} \par
+\textbf{(7): }$D:Vect_K\to Vect$, $V\mapsto V^*$ is a contravariant functor
+\end{example}
+
+\begin{notation}
+Suppose $f:X\to Y$ is a morphism in category $\mathscr C$, for $Z\in ob\mathscr C$, we define
+\[f_*:Hom(Z,X)\to Hom(Z,Y),\quad g\mapsto fg\]
+\[f^*:Hom(Y,Z)\to Hom(X,Z),\quad g\mapsto gf\]
+\end{notation}
+
+\begin{definition}
+A morphism $f:X\to Y$ is called a monomorphism if $f_*$ is 1-1 for all $Z\in ob\mathscr C$ \par
+A morphism $f:X\to Y$ is called a epimorphism if $f^*$ is 1-1 for all $Z\in ob\mathscr C$
+\end{definition}
+
+\begin{definition}
+In category $\mathscr C$, an object $X$ is called an \textbf{initial object}\index{Initial object} if $Hom(X,Y)$ consists of exactly one element for all $Y$, $X$ is called a \textbf{final object}\index{Final object} if $Hom(Y,X)$ consists of exactly one element for all $Y$, $X$ is called a \textbf{zero object}\index{Zero object} if it is both initial and final
+\end{definition}
+
+\begin{example}
+\textbf{(1): }In the category of sets, $\emptyset$ is an initial object, $\{1\}$ is a final object \par
+\textbf{(2): }In the category of abelian groups, $0$ is a zero object
+\end{example}
+
+\begin{definition}
+$F,G:\mathscr{C}\to\mathscr{D}$ are covariant functors, $\eta_A:F(A)\to G(A)$ is a family of morphisms such that the following diagram commutes for any $f:A\to B$ \par
+\begin{tikzcd}
+F(A) \arrow[d, "\eta_A"] \arrow[r, "F(f)"] & F(B) \arrow[d, "\eta_B"] \\
+G(A) \arrow[r, "G(f)"]                     & G(B)                    
+\end{tikzcd}
+For contravariant functors, we have the following commutative diagram for any $f:A\to B$ \par
+\begin{tikzcd}
+F(B) \arrow[d, "\eta_B"] \arrow[r, "F(f)"] & F(A) \arrow[d, "\eta_A"] \\
+G(B) \arrow[r, "G(f)"]                     & G(A)                    
+\end{tikzcd}
+$\eta$ is called a \textbf{natural transformation}\index{Natural transformation} \par
+If $\eta_A$ are isomorphisms, then $\eta$ is called a \textbf{natural isomorphism}, denoted $F\cong G$
+\end{definition}
+
+\end{document}

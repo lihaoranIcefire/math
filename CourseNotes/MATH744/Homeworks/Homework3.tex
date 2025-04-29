@@ -1,0 +1,303 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\begin{exercise}
+Give a list of all three-dimensional and four-dimensional compact, connected Lie groups, up to isomorphism
+\end{exercise}
+
+\begin{solution}
+We know the following facts: \\
+The Lie algebra a compact Lie group is reductive \\
+If $\mathfrak{g}$ is semisimple Lie algebra with $\dim\mathfrak{g}\leq4$, then $\mathfrak{g}=\mathfrak{sl}(2,\mathbb C)$ \\
+Suppose $\mathfrak{g}$ is a complex, semisimple Lie algebra, then there exists unique up to isomorphism a compact simply connected Lie group $G$ such that $\mathfrak{g}=\displaystyle\mathrm{Lie}(G)\otimes_\mathbb R\mathbb C$ \\
+If $G$ is a $3$ dimensional compact connected Lie group, let $\tilde{G}$ be its universal cover, then $\mathrm{Lie}(\tilde G)_{\mathbb C}=\mathfrak{sl}(2,\mathbb C)$ or $\mathbb C\oplus\mathbb C\oplus\mathbb C$, in the first case, $\tilde G$ is necessarily isomorphic to $SU(2,\mathbb C)$ since $\mathfrak{su}(2,\mathbb C)_\mathbb C=\mathfrak{sl}(2,\mathbb C)$, and since $Z(SU(2,\mathbb C))=\{\pm I\}$, thus $G$ can only be $SU(2,\mathbb C)$ or $PSU(2,\mathbb C)$, in the second case, $\tilde G$ is $\mathbb R^3$, hence $G=\mathbb R^3/\Lambda\cong T^3$ \\
+If $G$ is a $4$ dimensional compact connected Lie group, let $\tilde{G}$ be its universal cover, then since $\mathrm{Lie}(\tilde G)_{\mathbb C}$ is reductive, so it is necessarily $\mathfrak{sl}(2,\mathbb C)\oplus\mathbb C$ or $\mathbb C\oplus\mathbb C\oplus\mathbb C\oplus\mathbb C$, in the first case, $\tilde G\cong SU(2,\mathbb C)\times\mathbb R$ since it has $\mathfrak{sl}(2,\mathbb C)\oplus\mathbb C$ as its complexified Lie algebra, thus $G$ is $SU(2,\mathbb C)\times T^1$ or $PSU(2,\mathbb C)\times T^1$, in the second case, $\tilde G$ is $\mathbb R^4$, $G=T^4$
+\end{solution}
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+
+\end{enumerate}
+\end{exercise}
+
+\textbf{(a)} \par
+Denote $X:=(X_1,\cdots,X_n)^T$, $Y:=(Y_1,\cdots,Y_n)^T$, suppose $X'=(X_1',\cdots,X_n')^T=AX$, $Y'=(Y_1',\cdots,Y_n')^T=BY$ such that $Y'$ is also the dual basis of $X'$, where $A=(\alpha_{ij}),B=(\beta_{ij})$, then $\delta_{ij}=(X_i',Y_j')=\displaystyle\sum_{k}\alpha_{ik}\beta_{jk}$, thus $AB^T=I$, which also implies $B^TA=I$, hence 
+\begin{align*}
+\displaystyle\sum_{i}\pi(X_i')\pi(Y_i')&=\sum_{i,k,l}\alpha_{ik}\beta_{il}\pi(X_k)\pi(X_l) \\
+&=\sum_{k,l}\left(\sum_{i}\alpha_{ik}\beta_{il}\right)\pi(X_k)\pi(X_l) \\
+&=\sum_{k,l}\delta_{kl}\pi(X_k)\pi(X_l) \\
+&=\sum_{k}\pi(X_k)\pi(X_k)
+\end{align*}
+Thus $\Omega$ is independent of the choice of basis \par
+\textbf{(b)} \par
+Since $(,)$ is nondegenerate, we can choose basis $X_i$ such that $(X_i,X_i)=\varepsilon_i$, where $\varepsilon_i=\begin{cases}
+1, 1\leq i\leq p \\
+-1, p+1\leq i\leq p+q
+\end{cases}$, and $(X_i,X_j)=0,i\neq j$, then $Y_i=\varepsilon_i X_i$, $\Omega=\displaystyle\sum_i\pi(X_i)\pi(Y_i)=\sum_i\varepsilon_i\pi(X_i)^2$, let $[X_i,X_j]=\displaystyle\sum_k c^{ij}_kX_k$, $c^{ij}_k$ are the structure constants, notice $\varepsilon_kc_k^{ij}=([X_i,X_j],X_k)=(X_i,[X_j,X_k])=\varepsilon_ic_i^{jk}$, so we have \par
+\begin{equation}
+c_k^{ij}=-c_k^{ij}
+\end{equation}
+\begin{equation}
+\varepsilon_kc_k^{ij}=\varepsilon_ic_i^{jk}=\varepsilon_jc_j^{ki}
+\end{equation}
+now let's compute \par
+\begin{align*}\displaystyle
+[\Omega,\pi(X_j)]&=\sum_i\varepsilon_i\pi(X_i)^2\pi(X_j)-\sum_i\varepsilon_i\pi(X_j)\pi(X_i)^2 \\
+&=\sum_i\varepsilon_i\pi(X_i)\left([\pi(X_i),\pi(X_j)]+\pi(X_j)\pi(X_i)\right)+\sum_i\varepsilon_i\left([\pi(X_i),\pi(X_j)]-\pi(X_i)\pi(X_j)\right)\pi(X_i) \\
+&=\sum_i\varepsilon_i\pi(X_i)[\pi(X_i),\pi(X_j)]+\sum_i\varepsilon_i[\pi(X_i),\pi(X_j)]\pi(X_i) \\
+&=\sum_i\varepsilon_i\pi(X_i)\pi\left([X_i,X_j]\right)+\sum_i\varepsilon_i\pi\left([X_i,X_j]\right)\pi(X_i) \\
+&=\sum_i\varepsilon_i\pi(X_i)\pi\left(\sum_kc_k^{ij}\pi(X_k)\right)+\sum_i\varepsilon_i\pi\left(\sum_kc_k^{ij}\pi(X_k)\right)\pi(X_i) \\
+&=\sum_{i,k}\varepsilon_i c_k^{ij}\pi(X_i)\pi(X_k)+\sum_{i,k}\varepsilon_i c_k^{ij}\pi(X_k)\pi(X_i) \\
+&\xequal{(2)}\sum_{i,k}\varepsilon_i c_k^{ij}\pi(X_i)\pi(X_k)+\sum_{i,k}\varepsilon_i\varepsilon_j\varepsilon_k c_j^{ki}\pi(X_k)\pi(X_i) \\
+&=\sum_{i,k}\varepsilon_i c_k^{ij}\pi(X_i)\pi(X_k)+\sum_{k,i}\varepsilon_i\varepsilon_j\varepsilon_k c_j^{ik}\pi(X_i)\pi(X_k) \\
+&\xequal{(1)}\sum_{i,k}\varepsilon_i c_k^{ij}\pi(X_i)\pi(X_k)-\sum_{k,i}\varepsilon_i\varepsilon_j\varepsilon_k c_j^{ki}\pi(X_i)\pi(X_k) \\
+&\xequal{(2)}\sum_{i,k}\varepsilon_i c_k^{ij}\pi(X_i)\pi(X_k)-\sum_{k,i}\varepsilon_i c_k^{ij}\pi(X_i)\pi(X_k) \\
+&=0
+\end{align*}
+Thus $\Omega$ commutes with $\pi(X)$ for any $X\in\mathfrak{g}$ \par
+\textbf{(c)} \par
+For this part, we assume $\mathfrak{g}=\mathfrak{sl}(2,\mathbb C)$, pick $X_1=x=\begin{pmatrix}
+0&1 \\
+0&0
+\end{pmatrix}, X_2=y=\begin{pmatrix}
+0&0 \\
+1&0
+\end{pmatrix}, X_3=h=\begin{pmatrix}
+1&0 \\
+0&-1
+\end{pmatrix}$ be the basis of $\mathfrak{g}$, the its Cartan matrix is $\begin{pmatrix}
+0&4&0 \\
+4&0&0 \\
+0&0&8
+\end{pmatrix}$, then we have $Y_1=\dfrac{y}{4},Y_2=\dfrac{x}{4},Y_3=\dfrac{h}{8}$, $\Omega=\dfrac{1}{4}\pi(x)\pi(y)+\dfrac{1}{4}\pi(y)\pi(x)+\dfrac{1}{8}\pi(h)^2$ \\
+Since the irreducible representation of $\mathfrak{sl}(2,\mathbb C)$ of dimension $n$ is $S^{n-1}(\mathbb C^2)$, unique up to isomorphism, let $t_1=(1,0)^T,t_2=(0,1)^T$ be a basis of $\mathbb C^2$, then $t_1^{n-1},t_1^{n-2}t_2,\cdots,t_1t_2^{n-2},t_2^{n-1}$ is a basis of $S^{n-1}(\mathbb C^2)$, we have $\Omega t_1=\dfrac{3}{8}t_1,\Omega t_2=\dfrac{3}{8}t_2$, thus $\Omega t_1^k=\dfrac{3k}{8}t_1^{k}$ by induction $\Omega t_1^{k+1}=\Omega\left(t_1^kt_1\right)=t_1^k\Omega t_1+t_1\Omega t_k=\dfrac{3}{8}t_1^{k+1}+\dfrac{3k}{8}t_1^{k+1}=\dfrac{3(k+1)}{8}t_1^{k+1}$, hence $\Omega(t_1^kt_2^{m-k})=t_1^k\Omega t_2^{n-1-k}+t_2^{n-1-k}\Omega t_1^k=\dfrac{3(n-1)}{8}t_1^kt_2^{n-1-k}$, thus $\Omega$ acts by multiplying a scalar $\dfrac{3(n-1)}{8}$ \\
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+
+\end{enumerate}
+\end{exercise}
+
+Let $\Omega=\begin{pmatrix}
+0&I \\
+I&0
+\end{pmatrix}$, then $\left\{X\in SL(2n,\mathbb C)\middle|X^T\Omega X=\Omega\right\}$ is conjugate to $SO(2n,\mathbb C)$, thus then also induce isomorphic Lie algebra, hence we can identify $\mathfrak{so}(2n,\mathbb C)$ with $\left\{X\in M(2n,\mathbb C)\middle|\Omega X^T+X\Omega=0\right\}$ which is the same as $\left\{\begin{pmatrix}
+A&B \\
+C&-A^T
+\end{pmatrix}\in M(2n,\mathbb C)\middle| B^T=-B,C^T=-C\right\}=:\mathfrak{g}$, then one Cartan subalgebra of $\mathfrak{g}$ will be \\
+$\mathfrak{h}=\left\{\begin{pmatrix}
+D&0 \\
+0&-D
+\end{pmatrix}\in M(2n,\mathbb C)\middle| D=\mathrm{diag}(d_1,\cdots,d_n)\right\}$, note that $$\left[\begin{pmatrix}
+D&0 \\
+0&-D
+\end{pmatrix},\begin{pmatrix}
+E_{ij}&0 \\
+0&-E_{ji}
+\end{pmatrix}\right]=(d_i-d_j)\begin{pmatrix}
+E_{ij}&0 \\
+0&-E_{ji}
+\end{pmatrix}$$ $$\left[\begin{pmatrix}
+D&0 \\
+0&-D
+\end{pmatrix},\begin{pmatrix}
+0&E_{ij} \\
+0&0
+\end{pmatrix}\right]=(d_i+d_j)\begin{pmatrix}
+0&E_{ij} \\
+0&0
+\end{pmatrix}$$ $$\left[\begin{pmatrix}
+D&0 \\
+0&-D
+\end{pmatrix},\begin{pmatrix}
+0&0 \\
+E_{ij}&0
+\end{pmatrix}\right]=-(d_i+d_j)\begin{pmatrix}
+0&0 \\
+E_{ij}&0
+\end{pmatrix}$$Define $e_i\in\mathfrak{h}^*$ with $e_i\left(\begin{pmatrix}
+D&0 \\
+0&-D
+\end{pmatrix}\right)=d_i$, then the roots are $\Delta=\{\pm(e_i-e_j),\pm(e_i+e_j)|i< j\}$, and a set of simple roots could be $S=\{e_1-e_2,e_2-e_3\cdots,e_{n-1}-e_n,e_{n-1}+e_n\}$, we can check that $K\left(\begin{pmatrix}
+E_{ii}&0 \\
+0&-E_{ii}
+\end{pmatrix},\begin{pmatrix}
+E_{jj}&0 \\
+0&-E_{jj}
+\end{pmatrix}\right)=\delta_{ij}3(n-1)$, thus we can treat $\{e_i\}$ as an othonormal basis \\
+Thus $\langle e_{i-1}-e_i,e_i\pm e_{i+1}\rangle\langle e_i\pm e_{i+1},e_{i-1}-e_i\rangle=\dfrac{4(e_{i-1}-e_i,e_i\pm e_{i+1})^2}{(e_{i-1}-e_i,e_{i-1}-e_i)(e_i\pm e_{i+1},e_i\pm e_{i+1})}=1$, $( e_{i-1}-e_i,e_j\pm e_{j+1})=0$ for $i<j$, \\
+and $(e_{n-1}-e_n,e_{n-1}+e_n)=0$, hence the root system of $\mathfrak{so}(2n,\mathbb C)$ is of type $D_n$ \\
+\begin{center}
+\begin{tikzcd}
+                  &                   &                           &                   & \bullet                     &         \\
+\bullet \arrow[dash]{r} & \bullet \arrow[dash]{r} & \bullet \arrow[dash, dashed]{r} & \bullet \arrow[dash]{r} & \bullet \arrow[dash]{u}\arrow[dash]{r} & \bullet
+\end{tikzcd}
+\end{center}
+By abuse of notation, let $\Omega=\begin{pmatrix}
+0&I&0 \\
+I&0&0 \\
+0&0&1
+\end{pmatrix}$, then $\left\{X\in SL(2n+1,\mathbb C)\middle|X^T\Omega X=\Omega\right\}$ is conjugate to $SO(2n+1,\mathbb C)$, hence we can identify $\mathfrak{so}(2n+1,\mathbb C)$ with $\left\{X\in M(2n+1,\mathbb C)\middle|\Omega X^T+X\Omega=0\right\}$ which is the same as \\
+$\left\{\begin{pmatrix}
+A_{11}&A_{12}&A_{13} \\
+A_{21}&-A_{11}^T&A_{23}\\
+-A_{23}^T&-A_{13}^T&0
+\end{pmatrix}\in M(2n,\mathbb C)\middle| A_{12}^T=-A_{12},A_{21}^T=-A_{21}\right\}=:\mathfrak{g}$, then one Cartan subalgebra of $\mathfrak{g}$ will be \\
+$\mathfrak{h}=\left\{\begin{pmatrix}
+D&0&0 \\
+0&-D&0 \\
+0&0&0
+\end{pmatrix}\in M(2n+1,\mathbb C)\middle| D=\mathrm{diag}(d_1,\cdots,d_n)\right\}$, note that $$\left[\begin{pmatrix}
+D&0&0 \\
+0&-D&0 \\
+0&0&0
+\end{pmatrix},\begin{pmatrix}
+E_{ij}&0&0 \\
+0&-E_{ji}&0 \\
+0&0&0
+\end{pmatrix}\right]=(d_i-d_j)\begin{pmatrix}
+E_{ij}&0&0 \\
+0&-E_{ji}&0 \\
+0&0&0
+\end{pmatrix}$$ $$\left[\begin{pmatrix}
+D&0&0 \\
+0&-D&0 \\
+0&0&0
+\end{pmatrix},\begin{pmatrix}
+0&E_{ij}&0 \\
+0&0&0 \\
+0&0&0 \\
+\end{pmatrix}\right]=(d_i+d_j)\begin{pmatrix}
+0&E_{ij}&0 \\
+0&0&0 \\
+0&0&0 \\
+\end{pmatrix}$$ $$\left[\begin{pmatrix}
+D&0&0 \\
+0&-D&0 \\
+0&0&0
+\end{pmatrix},\begin{pmatrix}
+0&0&0 \\
+E_{ij}&0&0 \\
+0&0&0
+\end{pmatrix}\right]=-(d_i+d_j)\begin{pmatrix}
+0&0&0 \\
+E_{ij}&0&0 \\
+0&0&0
+\end{pmatrix}$$ $$\left[\begin{pmatrix}
+D&0&0 \\
+0&-D&0 \\
+0&0&0
+\end{pmatrix},\begin{pmatrix}
+0&0&e_i \\
+0&0&0 \\
+0&-e_i^T&0
+\end{pmatrix}\right]=d_i\begin{pmatrix}
+0&0&e_i \\
+0&0&0 \\
+0&-e_i^T&0
+\end{pmatrix}$$ $$\left[\begin{pmatrix}
+D&0&0 \\
+0&-D&0 \\
+0&0&0
+\end{pmatrix},\begin{pmatrix}
+0&0&0 \\
+0&0&e_i \\
+-e_i^T&0&0
+\end{pmatrix}\right]=-d_i\begin{pmatrix}
+0&0&0 \\
+0&0&e_i \\
+-e_i^T&0&0
+\end{pmatrix}$$Define $\delta_i\in\mathfrak{h}^*$ with $\delta_i\left(\begin{pmatrix}
+D&0 \\
+0&-D
+\end{pmatrix}\right)=d_i$, then the roots are $\Delta=\{\pm(\delta_i-\delta_j),\pm(\delta_i+\delta_j)|i< j\}\cup\{\pm\delta_i\}$, and a set of simple roots could be $S=\{\delta_1-\delta_2,\delta_2-\delta_3\cdots,\delta_{n-1}-\delta_n,\delta_n\}$, we can check that \\
+$K\left(\begin{pmatrix}
+E_{ii}&0&0 \\
+0&-E_{ii}&0 \\
+0&0&0
+\end{pmatrix},\begin{pmatrix}
+E_{jj}&0&0 \\
+0&-E_{jj}&0 \\
+0&0&0
+\end{pmatrix}\right)=\delta_{ij}(3(n-1)+2)$, thus we can treat $\{\delta_i\}$ as an othonormal basis \\
+Thus $\langle \delta_{i-1}-\delta_i,\delta_i- \delta_{i+1}\rangle\langle\delta_i- \delta_{i+1},\delta_{i-1}-\delta_i\rangle=\dfrac{4(\delta_{i-1}-\delta_i,\delta_i-\delta_{i+1})^2}{(\delta_{i-1}-\delta_i,\delta_{i-1}-\delta_i)(\delta_i- \delta_{i+1},\delta_i- \delta_{i+1})}=1$, \\
+$\langle\delta_{n-1}-\delta_n,\delta_n\rangle\langle\delta_n,\delta_{n-1}-\delta_n\rangle=\dfrac{4(\delta_{n-1}-\delta_n,\delta_n)^2}{(\delta_{n-1}-\delta_n,\delta_{n-1}-\delta_n)(\delta_n,\delta_n)}=2$, $(\delta_{i-1}-\delta_i,\delta_j-\delta_{j+1})=0$ for $i<j$, \\
+and $(\delta_{i-1}-\delta_i,\delta_n)=0$ for $i<n$, hence the root system of $\mathfrak{so}(2n+1,\mathbb C)$ is of type $B_n$ \\
+\begin{center}
+\begin{tikzcd}
+\bullet \arrow[dash]{r} & \bullet \arrow[dash]{r} & \bullet \arrow[dash, dashed]{r} & \bullet \arrow[dash]{r} & \bullet \arrow[r, Rightarrow] & \bullet
+\end{tikzcd}
+\end{center}
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+
+\end{enumerate}
+\end{exercise}
+
+Since the Weyl group acts on Weyl chambers freely, for any regular $\gamma\in V$, $w\gamma\neq\gamma,\forall w\in W$, suppose $w=s_{\gamma_0}$ for some regular $\gamma_0$, then $H_{\gamma_0}$ must contain some regular element, which is a contradiction \\
+Therefore, $w=s_\alpha$ for some $\alpha\in \Delta$ \\
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+
+\end{enumerate}
+\end{exercise}
+
+Note that $\alpha^\vee\in V^*$ is defined such that $\langle\beta,\alpha^\vee\rangle=\dfrac{2(\beta,\alpha)}{(\alpha,\alpha)}$, let $S=\{\alpha_1,\cdots,\alpha_n\}\subseteq\Delta$ be a set of simple roots which is also a basis of $V$, thus the gram matrix $((\alpha_i,\alpha_j))$ will be invertible, for any $f\in V^*$, $i=1,\cdots,n$, $\langle\alpha_i,f\rangle=\displaystyle\sum_{j}c_j\dfrac{2(\alpha_i,\alpha_j)}{(\alpha_j,\alpha_j)}=\sum_{j}\dfrac{2c_j}{(\alpha_j,\alpha_j)}(\alpha_i,\alpha_j)$, so for any choice of $\langle\alpha_i,f\rangle$ has a unique solution $\dfrac{2c_j}{(\alpha_j,\alpha_j)}$, which gives a unique solution $c_j$, thus $\langle\alpha_i,f\rangle=\displaystyle\sum_{j}c_j\dfrac{2(\alpha_i,\alpha_j)}{(\alpha_j,\alpha_j)}=\langle\alpha_i,\sum_jc_j\alpha_j^\vee\rangle$, which implies that $f=\displaystyle\sum_jc_j\alpha_j^\vee$, hence $V^*\leq\langle S^\vee\rangle\leq\langle \Delta^\vee\rangle\leq V^*\Rightarrow V^*=\langle \Delta^\vee\rangle$, for any $\alpha\in\Delta$, $i=1,\cdots,n$, $\langle\alpha_i,(c\alpha)^\vee\rangle=\dfrac{2(\alpha_i,c\alpha)}{(c\alpha,c\alpha)}=\dfrac{1}{c}\dfrac{2(\alpha_i,\alpha)}{(\alpha,\alpha)}=\dfrac{1}{c}\langle\alpha_i,\alpha^\vee\rangle=\langle\alpha_i,\dfrac{\alpha^\vee}{c}\rangle$, thus $(c\alpha)^\vee=\dfrac{\alpha^\vee}{c}$, but the only multiple of $\alpha$ that are in $\Delta$ are precisely $\alpha,-\alpha$, hence the only multiple of $\alpha^\vee$ that are in $\Delta^\vee$ are precisely $\alpha^\vee,-\alpha^\vee$ \\
+By the definition of the inner prouct on the dual Euclidean space $V^*$, we know $(\alpha^\vee,\beta^\vee)=\dfrac{4(\alpha,\beta)}{(\alpha,\alpha)(\beta,\beta)}$, thus $\dfrac{2(\alpha^\vee,\beta^\vee)}{(\alpha^\vee,\alpha^\vee)}=\dfrac{2(\alpha,\beta)}{(\beta,\beta)}\in\mathbb Z$ and $s_{\alpha^\vee}(\beta^\vee)=\beta^\vee-\dfrac{2(\alpha^\vee,\beta^\vee)}{(\alpha^\vee,\alpha^\vee)}\alpha^\vee=\beta^\vee-\dfrac{2(\alpha,\beta)}{(\beta,\beta)}\alpha^\vee$, then $s_{\alpha^\vee}(\alpha^\vee)=-\alpha^\vee$ and since $(s_\alpha(\beta),s_\alpha(\beta))=(\beta,\beta)$, we have\begin{align*}
+\left\langle\alpha_i,s_{\alpha^\vee}(\beta^\vee)\right\rangle&=\left\langle\alpha_i,\beta^\vee\right\rangle-\dfrac{2(\alpha,\beta)}{(\beta,\beta)}\left\langle\alpha_i,\alpha^\vee\right\rangle \\
+&=\dfrac{2(\alpha_i,\beta)}{(\beta,\beta)}-\dfrac{2(\alpha,\beta)}{(\beta,\beta)}\dfrac{2(\alpha_i,\alpha)}{(\alpha,\alpha)} \\
+&=\dfrac{2(\alpha_i,s_\alpha(\beta))}{(\beta,\beta)} \\
+&=\dfrac{2(\alpha_i,s_\alpha(\beta))}{(s_\alpha(\beta),s_\alpha(\beta))} \\
+&=\left\langle\alpha_i,s_\alpha(\beta)^\vee\right\rangle
+\end{align*}Thus $s_{\alpha^\vee}(\beta^\vee)=s_\alpha(\beta)^\vee\in\Delta^\vee$ \par
+Therefore, the dual $(V^*,\Delta^\vee)$ is also a root system \par
+From the calculation above, we also have $\left\langle\beta^\vee,\left(\alpha^\vee\right)^\vee\right\rangle=\dfrac{(\alpha,\beta)}{(\beta,\beta)}=\langle\alpha,\beta^\vee\rangle$ \par
+Notice that in the construction of a Dynkin diagram, the number of edges between $\alpha$ and $\beta$ equals $\langle\beta,\alpha^\vee\rangle\langle\alpha,\beta^\vee\rangle$, then the number of edges between $\alpha^\vee$ and $\beta^\vee$ equals $\left\langle\beta^\vee,\left(\alpha^\vee\right)^\vee\right\rangle\left\langle\alpha^\vee,\left(\beta^\vee\right)^\vee\right\rangle=\langle\alpha,\beta^\vee\rangle\langle\beta,\alpha^\vee\rangle$, but with the arrow reversed, therefore $A_n,D_n$ are the classical root systems that are self-dual, and $B_n,C_n$ are dual to each other \par
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+
+\end{enumerate}
+\end{exercise}
+
+Since$$(\vec{v},\vec{w})=\displaystyle\sum_{\alpha\in\Delta}\langle\vec{v},\alpha^\vee\rangle\langle\vec{w},\alpha^\vee\rangle=\sum_{\alpha\in\Delta}\langle\vec{w},\alpha^\vee\rangle\langle\vec{v},\alpha^\vee\rangle=(\vec{w},\vec{v})$$ $$(\vec{v},\vec{v})=\displaystyle\sum_{\alpha\in\Delta}\langle\vec{v},\alpha^\vee\rangle^2\geq0$$And $(\vec{v},\vec{v})=0$ iff $\langle\vec{v},\alpha^\vee\rangle=\dfrac{2(\vec{v},\alpha)}{(\alpha,\alpha)}=0,\forall\alpha\in\Delta$ iff $\vec{v}=0$, therefore $(,)$ is symmetric and positive definite, finally, we have \begin{align*}
+(s_\beta\vec{v},s_\beta\vec{w})&=\displaystyle\sum_{\alpha\in\Delta}\langle s_\beta\vec{v},\alpha^\vee\rangle\langle s_\beta\vec{w},\alpha^\vee\rangle \\
+&=\sum_{\alpha\in\Delta}\dfrac{4(s_\beta\vec{v},\alpha)(s_\beta\vec{w},\alpha)}{(\alpha,\alpha)} \\
+&=\sum_{\alpha\in\Delta}\dfrac{4(\vec{v},s_\beta\alpha)(\vec{w},s_\beta\alpha)}{(\alpha,\alpha)} \\
+&=\sum_{\alpha\in\Delta}\dfrac{4(\vec{v},s_\beta\alpha)(\vec{w},s_\beta\alpha)}{(s_\beta\alpha,s_\beta\alpha)} \\
+&=\sum_{\alpha\in\Delta}\dfrac{4(\vec{v},\alpha)(\vec{w},\alpha)}{(\alpha,\alpha)} \\
+&=(\vec{v},\vec{w})
+\end{align*}Thus $(,)$ is also $W$ invariant \par
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+
+\end{enumerate}
+\end{exercise}
+
+Suppose $(V,\Delta)$ is a root system, $\tau:V\to V,x\mapsto-x$ is a linear map, since $\alpha\in\Delta\Rightarrow-\alpha\in\Delta$, thus $\tau(\Delta)\subseteq\Delta$, also for any $\alpha,\beta\in\Delta$, $\langle\tau\alpha,(\tau\beta)^\vee\rangle=\dfrac{2(\tau\alpha,\tau\beta)}{(\tau\alpha,\tau\alpha)}=\dfrac{2(-\alpha,-\beta)}{(-\alpha,-\alpha)}=\dfrac{2(\alpha,\beta)}{(\alpha,\alpha)}=\langle\alpha,\beta^\vee\rangle$, and $\tau^2=\mathrm{id}$, thus $\tau$ is an automorphism $(V,\Delta)$ \\
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+
+\end{enumerate}
+\end{exercise}
+
+\textbf{(a)} \par
+Let $e_1=(1,0),e_2=(0,1)$ be the standard basis of $\mathbb R^2$, suppose the coordinates of $\vec{v_1},\vec{v_2}$ are $(r_1\cos\alpha,r_1,\sin\alpha)$ and $(r_2\cos(\theta+\alpha),r_2\sin(\theta+\alpha))$, since $s_i(\vec{v})=v-2\dfrac{\vec{v}\cdot\vec{v_i}}{\vec{v_i}\cdot \vec{v_i}}\vec{v_i}$, we have the matrix of $s_1$ and $s_2$ with respect to $e_1,e_2$ are $\begin{pmatrix}
+-\cos2\alpha&-\sin2\alpha \\
+-\sin2\alpha&\cos2\alpha
+\end{pmatrix}$ and $\begin{pmatrix}
+-\cos2(\theta+\alpha)&-\sin2(\theta+\alpha) \\
+-\sin2(\theta+\alpha)&\cos2(\theta+\alpha)
+\end{pmatrix}$, thus the matrix for $s_1s_2$ would be $\begin{pmatrix}
+\cos2\theta&\sin2\theta \\
+-\sin2\theta&\cos2\theta
+\end{pmatrix}$ which means that $s_1s_2$ is a rotation by $2\theta$ \par
+\textbf{(b)} \par
+In order for the group $\langle s_1,s_2\rangle$ to be finite, necessarily we need $\theta$ to be a rational multiple of $\pi$, but for any $\theta=\dfrac{p\pi}{q}$ where $p,q>0$ are relatively prime integers, $2\theta=\dfrac{p}{q}\cdot 2\pi$, if we denote $r=s_1s_2,s=s_1$, then we the relations then we have the relation $s^2=1$, $r^q=1$, and $srsr=1$, therefore $\langle s_1,s_2\rangle=\langle s,r\rangle=F(s,r)/\langle s^2,r^q,srsr\rangle\cong D_{q}$, where $D_q$ is the dihedral group, the symmetry group of a regular $q$-gon \par
+
+\end{document}

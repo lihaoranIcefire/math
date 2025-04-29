@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+%\usepackage{bbold}
+\usepackage{dsfont}
+\usepackage{bbm}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\title{MATH673 homework2}
+\author{Haoran Li}
+\date{}
+
+\setlength{\parindent}{0cm}
+
+\begin{document}
+
+\maketitle
+\textbf{2.5.15} \par
+Define $v(x,t)=u(x,t)-g(t)$ on $x\geq 0$, extend $v$ to $\{x<0\}$ by odd reflection, then we have $v(x,t)=-v(-x,t)$ on $x<0$, thus the initial boundary problem becomes
+\[
+\left\{\begin{matrix}
+v_{t}-v_{xx}=-g'(t),\,\text{in }\mathbb{R}_{+}\times(0,\infty)\\ 
+v_{t}-v_{xx}=g'(t),\,\text{in }\mathbb{R}_{-}\times(0,\infty)\\
+v=0,\,\text{on }\mathbb{R}_{+}\times\{t=0\}\\ 
+v=0,\,\text{on }\{x=0\}\times[0,\infty)
+\end{matrix}\right.
+\]
+Define $f(x,t)=
+\left\{\begin{matrix}
+-g'(t),\,x\geq 0\\ 
+g'(t),\,x<0
+\end{matrix}\right.$, we have
+\[
+\begin{aligned}
+v(x,t)
+&=\int_{0}^{t}\dfrac{1}{\sqrt{4\pi(t-s)}}\int_{\mathbb{R}}e^{-\frac{(x-y)^{2}}{4(t-s)}}f(y,s)dyds \\
+&=\int_{0}^{t}\dfrac{1}{\sqrt{4\pi(t-s)}}\left(\int_{-\infty}^{0}e^{-\frac{(x-y)^{2}}{4(t-s)}}g'(s)dy-\int_{0}^{\infty}e^{-\frac{(x-y)^{2}}{4(t-s)}}g'(s)dy\right)ds \\
+&=\dfrac{1}{\sqrt{\pi}}\int_{0}^{t}\left(\int_{-\infty}^{-\frac{x}{\sqrt{4(t-s)}}}e^{-y^{2}}dy-\int_{-\frac{x}{\sqrt{4(t-s)}}}^{\infty}e^{-y^{2}}dy\right)g'(s)ds \\
+&=\left.\dfrac{1}{\sqrt{\pi}}g(s)\left(\int_{-\infty}^{-\frac{x}{\sqrt{4(t-s)}}}e^{-y^{2}}dy-\int_{-\frac{x}{\sqrt{4(t-s)}}}^{\infty}e^{-y^{2}}dy\right)\right\vert_{0}^{t}+\dfrac{x}{\sqrt{4\pi}}\int_{0}^{t}\dfrac{1}{\left((t-s)\right)^{\frac{3}{2}}}e^{-\frac{x^{2}}{4(t-s)}}g(s)ds \\
+&=-\mathrm{sgn}(x)\dfrac{1}{\sqrt{\pi}}g(t)\int_{-\infty}^{\infty}e^{-y^{2}}dy-\dfrac{x}{\sqrt{4\pi}}\int_{0}^{t}\dfrac{1}{\left((t-s)\right)^{\frac{3}{2}}}e^{-\frac{x^{2}}{4(t-s)}}g(s)ds \\
+&=-\mathrm{sgn}(x)g(t)-\dfrac{x}{\sqrt{4\pi}}\int_{0}^{t}\dfrac{1}{\left((t-s)\right)^{\frac{3}{2}}}e^{-\frac{x^{2}}{4(t-s)}}g(s)ds 
+\end{aligned}
+\]
+Where $\mathrm{sgn}(x)=\left\{\begin{matrix}
+-1,\,x<0\\ 
+0,\,x=0\\ 
+1,\,x>0
+\end{matrix}\right.$, thus $\displaystyle u(x,t)=\dfrac{x}{\sqrt{4\pi}}\int_{0}^{t}\dfrac{1}{\left((t-s)\right)^{\frac{3}{2}}}e^{-\frac{x^{2}}{4(t-s)}}g(s)ds$ is the solution \par
+\textbf{2.5.17} \par
+\textbf{a)} \par
+Define $\displaystyle \phi(r):=\dfrac{1}{4r^{n}}\int\int_{E(0,0;r)}v(y,s)\dfrac{|y|^{2}}{s^{2}}dyds$, then
+\[
+\begin{aligned}
+\phi'(r)
+&=\dfrac{1}{r^{n+1}}\int\int_{E(0,0;r)}-nv_{s}\psi-\dfrac{n}{2s}\sum_{i=1}^{n}v_{y_{i}}y_{i}dyds \\
+&\geq\dfrac{1}{r^{n+1}}\int\int_{E(0,0;r)}-n\Delta v\psi-\dfrac{n}{2s}\sum_{i=1}^{n}v_{y_{i}}y_{i}dyds \\
+&=0
+\end{aligned}
+\]
+Since $\displaystyle\phi(r)=v(0,0)+\dfrac{1}{4r^{n}}\int\int_{E(0,0;r)}\left(v(y,s)-v(0,0)\right)\dfrac{|y|^{2}}{s^{2}}dyds\rightarrow v(0,0), \,r\rightarrow 0$, $\displaystyle v(0,0)=\lim_{s\rightarrow 0}\phi(r)\leq\lim_{s\rightarrow r}\phi(s)=\phi(r)$ \par
+Thus $\displaystyle v(x,t)\leq\dfrac{1}{4r^{n}}\int\int_{E(x,t;r)}v(y,s)\dfrac{|x-y|^{2}}{(t-s)^{2}}dyds$ \par
+\textbf{b)} \par
+Define $v_{\epsilon}(x,t)=v(x,t)+\epsilon|x|^{2}$, then $\left(\dfrac{\partial}{\partial t}-\Delta\right)v_{\epsilon}=\left(\dfrac{\partial}{\partial t}-\Delta\right)v-2n\epsilon<0$, $v_{\epsilon}$ can't attain its maximum at $(x_{0},t_{0})\in \overline{U_{T}}\setminus\Gamma_{T}$, otherwise $\dfrac{\partial}{\partial t}v_{\epsilon}(x_{0},t_{0})\geq 0, \Delta v_{\epsilon}(x_{0},t_{0})\leq 0$, then $\Delta v_{\epsilon}(x_{0},t_{0})\geq 0$, thus $\underset{\overline{U_{T}}}{\mathrm{max}}\left(v+\epsilon|x|^{2}\right)\leq\underset{\Gamma_{T}}{\mathrm{max}}\left(v+\epsilon|x|^{2}\right)\leq \underset{\Gamma_{T}}{\mathrm{max}} \,v+C\epsilon$ since $U$ is bounded, hence $\underset{\overline{U_{T}}}{\mathrm{max}}\,v=\underset{\Gamma_{T}}{\mathrm{max}} \,v$
+\textbf{c)} \par
+Since $\phi$ is convex, $\phi''(x)\geq 0$
+\[
+\left(\dfrac{\partial}{\partial t}-\Delta\right) v(x)=\left(\dfrac{\partial}{\partial t}-\Delta\right)\phi\left(v(x,t)\right)=\phi'(v)\left(\dfrac{\partial v}{\partial t}-\Delta\right)v-\phi''(v)|\nabla v|^{2}\leq 0
+\]
+Thus $v$ is a subsolution \par
+\textbf{d)} \par
+\[
+\begin{aligned}
+\left(\dfrac{\partial}{\partial t}-\Delta\right)v 
+&= \left(\dfrac{\partial}{\partial t}-\Delta\right) \left(\left|\nabla u\right|^{2}+u_{t}^{2}\right)  \\
+&= 2\nabla u \cdot \nabla u_{t}+2u_{t}u_{tt}-2\sum_{i,j}u_{x_{i}x_{j}}^{2}-2 \nabla u \cdot \nabla(\Delta u)-2|\nabla u_{t}|^{2}-2u_{t}(\Delta u)_{t} \\
+&=2\nabla u \cdot \nabla (u_{t}-\Delta u)+2u_{t}(u_{t}-\Delta u)_{t}-2\sum_{i,j}u_{x_{i}x_{j}}^{2}-2|\nabla u_{t}|^{2} \\
+&\leq 0
+\end{aligned}
+\]
+Thus $v$ is a subsolution \par
+
+
+\end{document}

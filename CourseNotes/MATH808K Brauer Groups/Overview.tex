@@ -1,0 +1,31 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{My_math_package}
+
+\begin{document}
+
+The goals of the this course:
+\begin{enumerate}
+\item Define central simple $k$-algebras(CSA/k)
+\item Classify CSA's
+\item Define the Brauer group(motivate Galois cohomology)
+\item Blackbox Galois cohomology
+\item Computing Brauer gorups of some special fields
+\end{enumerate}
+
+\begin{example}[CSA/k(Central simple $k$-algebras)]
+\begin{enumerate}
+\item $\mathcal C$ is a category, $\Hom_{\mathcal C}(A,B)$ are finite dim vector spaces, $\End_{\mathcal C}(A)$ are finite dim $k$-algebras
+\item $\mathcal C'$ is the category of finite dim vector spaces, $\End_{\mathcal C'}(k^{\oplus n})=M_n(k)$
+\item $\mathcal C$ is the cat of local Artinian $k$-algebras, $\Hom_{\mathcal C}(A,B)\subseteq\Hom_{\mathcal C'}(A,B)$
+\item $X$ proj $k$-var and $V,W$ vector bundles over $X$
+\[
+\Hom(V,W)=\Gamma(X,\Hom(V,W))=\Gamma(X,V^\vee\otimes W)=H^0(X,V^\vee\otimes W)
+\]
+\end{enumerate}
+\end{example}
+
+\begin{example}[Examples of finite $k$-algebras]
+$F/k$ finite field extension, $k[x]/(x^2)$, $k[x,y]/(x^2,y^2,xy)$, $M_n(k)$, $M_n(F)$
+\end{example}
+
+\end{document}

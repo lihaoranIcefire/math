@@ -1,0 +1,514 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\begin{exercise}
+Let $G=O(2,\mathbb R)$ be the (real) orthogonal group in dimension 2
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item Show that $\SO(2,\mathbb R)$ is isomorphic to the circle $S^1$
+\item Show that $O(2,\mathbb R)$ has two connected components, and is not abelian
+\item Show that $\{g\in O(2,\mathbb R)|\det g=-1\}$ is a single conjugacy class
+\item Show there is an exact sequence $1\to \SO(2)\to O(2)\to\mathbb Z/2\mathbb Z\to1$. Is this sequence split
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item Suppose $g=\left( {\begin{array}{cc}
+   a & b \\
+   c & d \\
+  \end{array} } \right) \in SO(2,\mathbb{R})$, then 
+  $$\left( {\begin{array}{cc}
+   1 & 0 \\
+   0 & 1 \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+   a & b \\
+   c & d \\
+  \end{array} } \right)\left( {\begin{array}{cc}
+   a & c \\
+   b & d \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+   a^2+b^2 & ac+bd \\
+   ac+bd & c^2+d^2 \\
+  \end{array} } \right)\Rightarrow \begin{cases}
+  a^2+b^2=1 \\
+  ac+bd=0 \\
+  c^2+d^2=1
+  \end{cases}$$
+ we can find $0\leq\theta-\varphi\leq2\pi$ such that $\begin{cases}
+  a=\cos{\theta} \\
+  b=\sin{\theta} \\
+  c=\cos{\varphi} \\
+  d=\sin{\varphi}
+  \end{cases}$ \\
+then $0=\cos{\theta}\cos{\varphi}+\sin{\theta}\sin{\varphi}=\cos{\theta-\varphi}$, hence $\theta-\varphi=\dfrac{\pi}{2}$ or $\dfrac{3\pi}{2}$ \par
+
+hence if $\theta-\varphi=\dfrac{\pi}{2}$, $g=\left( {\begin{array}{cc}
+   \cos{\theta} & \sin{\theta} \\
+   \sin{\theta} & -\cos{\theta} \\
+  \end{array} } \right)$, $\det{g}=1$, if $\theta-\varphi=\dfrac{3\pi}{2}$, $g=\left( {\begin{array}{cc}
+   \cos{\theta} & \sin{\theta} \\
+   -\sin{\theta} & \cos{\theta} \\
+  \end{array} } \right)$, $\det{g}=1$, thus $\phi:S^1\rightarrow SO(2,\mathbb{R})$, $\theta\mapsto\left( {\begin{array}{cc}
+   \cos{\theta} & \sin{\theta} \\
+   -\sin{\theta} & \cos{\theta} \\
+  \end{array} } \right)$ is an isomorphism
+\item From the analysis in (a), all matrices of form $\left\{\left( {\begin{array}{cc}
+   \cos{\theta} & \sin{\theta} \\
+   \sin{\theta} & -\cos{\theta} \\
+  \end{array} } \right)\right\}=O(2,\mathbb{R})\setminus SO(2,\mathbb{R})$ is path-connected, and all matrices of form $\left\{\left( {\begin{array}{cc}
+   \cos{\theta} & \sin{\theta} \\
+   -\sin{\theta} & \cos{\theta} \\
+  \end{array} } \right)\right\}=SO(2,\mathbb{R})$ is also path-connected, but $O(2,\mathbb{R})$ is not path-connected since $\det:O(2,\mathbb{R})\rightarrow\mathbb{R}$ is a continuous function but the image is $\{\pm1\}$ is not connected, thus $O(2,\mathbb{R})$ has two connected components
+\[\left( {\begin{array}{cc}
+   \dfrac{\sqrt2}{2} & \dfrac{\sqrt2}{2} \\
+   -\dfrac{\sqrt2}{2} & \dfrac{\sqrt2}{2} \\
+  \end{array} } \right)\left( {\begin{array}{cc}
+   1 & 0 \\
+   0 & -1 \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+   \dfrac{\sqrt2}{2} & -\dfrac{\sqrt2}{2} \\
+   -\dfrac{\sqrt2}{2} & -\dfrac{\sqrt2}{2} \\
+  \end{array} } \right)\neq\left( {\begin{array}{cc}
+   \dfrac{\sqrt2}{2} & \dfrac{\sqrt2}{2} \\
+   \dfrac{\sqrt2}{2} & -\dfrac{\sqrt2}{2} \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+   1 & 0 \\
+   0 & -1 \\
+  \end{array} } \right)\left( {\begin{array}{cc}
+   \dfrac{\sqrt2}{2} & \dfrac{\sqrt2}{2} \\
+   -\dfrac{\sqrt2}{2} & \dfrac{\sqrt2}{2} \\
+  \end{array} } \right)\]
+hence $O(2,\mathbb{R})$ is not abelian 
+\item $\left( {\begin{array}{cc}
+   1 & 0 \\
+   0 & -1 \\
+  \end{array} } \right)\left( {\begin{array}{cc}
+   \cos{\theta} & \sin{\theta} \\
+   -\sin{\theta} & \cos{\theta} \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+   \cos{\theta} & \sin{\theta} \\
+   \sin{\theta} & -\cos{\theta} \\
+  \end{array} } \right)$
+hence $O(2,\mathbb{R})\setminus SO(2,\mathbb{R})$ is a single conjugacy class 
+\item Notice $\det:O(2,\mathbb{R})\rightarrow\mathbb{Z}/2\mathbb{Z}\cong\{\pm1,\text{multiplication}\}$ is a surjective group homomorphism with kernel $SO(2,\mathbb{R})$, hence
+$$\begin{tikzcd}
+1 \arrow[r] & {SO(2,\mathbb{R})} \arrow[r, hook] & {O(2,\mathbb{R})} \arrow[r, "\det"] & \mathbb{Z}/2\mathbb{Z} \arrow[r] & 1
+\end{tikzcd}$$
+is an exact sequence \\
+There is a map $\mu:\mathbb{Z}/2\mathbb{Z}\rightarrow O(2,\mathbb{R})$, $\bar 1\mapsto\left( {\begin{array}{cc}
+   1 & 0 \\
+   0 & -1 \\
+  \end{array} } \right)$ which is a homomorphism such that $\det\circ\mu=1$, hence the exact sequence splits \par
+%This sequence does not split since both $SO(2,\mathbb{R})$ and $\mathbb{Z}/2\mathbb{Z}$ are abelian but $O(2,\mathbb{R})$ is not, which implies $O(2,\mathbb{R})\ncong SO(2,\mathbb{R})\times \mathbb{Z}/2\mathbb{Z}$
+\end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+
+\end{enumerate}
+\end{exercise}
+
+\textbf{(a)} \par
+Suppose $g=\left( {\begin{array}{cc}
+   a & b \\
+   c & d \\
+  \end{array} } \right) \in SO(1,1)$, then 
+  $$\left( {\begin{array}{cc}
+   1 & 0 \\
+   0 & 1 \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+   a & b \\
+   c & d \\
+  \end{array} } \right)\left( {\begin{array}{cc}
+   1 & 0 \\
+   0 & -1 \\
+  \end{array} } \right)\left( {\begin{array}{cc}
+   a & c \\
+   b & d \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+   a^2+b^2 & ac+bd \\
+   ac+bd & c^2+d^2 \\
+  \end{array} } \right)\Rightarrow \begin{cases}
+  a^2-b^2=1 \\
+  ac-bd=0 \\
+  c^2-d^2=-1
+  \end{cases}$$
+ we can find $x,y\in\mathbb{R}$ such that $\begin{cases}
+  b=\sinh{x} \\
+  c=\sinh{y}
+  \end{cases}$, and $\begin{cases}
+  a=\cosh{x} \\
+  d=\cosh{y}
+  \end{cases}$ or $\begin{cases}
+  a=-\cosh{x} \\
+  d=\cosh{y}
+  \end{cases}$ or $\begin{cases}
+  a=\cosh{x} \\
+  d=-\cosh{y}
+  \end{cases}$ or $\begin{cases}
+  a=-\cosh{x} \\
+  d=-\cosh{y}
+  \end{cases}$ \par
+then 
+$$0=\cosh{x}\sinh{y}-\sinh{x}\cosh{y}=\sinh{(y-x)}\iff y=x, \text{or}$$
+$$0=-\cosh{x}\sinh{y}-\sinh{x}\cosh{y}=-\sinh{(x+y)}\iff y=-x, \text{or}$$
+$$0=\cosh{x}\sinh{y}+\sinh{x}\cosh{y}=\sinh{(x+y)}\iff y=-x, \text{or}$$
+$$0=-\cosh{x}\sinh{y}+\sinh{x}\cosh{y}=\sinh{(x-y)}\iff y=x$$
+
+then $\det{g}=1,-1,-1,1$ correspondingly, hence $g$ can only be $\left( {\begin{array}{cc}
+   \cosh{x} & \sinh x \\
+   \sinh{x} & \cosh{x} \\
+  \end{array} } \right)$ or $\left( {\begin{array}{cc}
+   -\cosh{x} & \sinh{x} \\
+   \sinh{x} & -\cosh{x} \\
+  \end{array} } \right)$, consider $\phi:\mathbb{R}^*\rightarrow SO(1,1)$, 
+  $$x\mapsto\begin{cases}
+  \left( {\begin{array}{cc}
+   \cosh{\left(\ln{x}\right)} & \sinh{\left(\ln{x}\right)} \\
+   \sinh{\left(\ln{x}\right)} & \cosh{\left(\ln{x}\right)} \\
+  \end{array} } \right), x>0\\
+  \left( {\begin{array}{cc}
+   -\cosh{\left(\ln{\left(\dfrac{1}{-x}\right)}\right)} & \sinh{\left(\ln{\left(\dfrac{1}{-x}\right)}\right)} \\
+   \sinh{\left(\ln{\left(\dfrac{1}{-x}\right)}\right)} & -\cosh{\left(\ln{\left(\dfrac{1}{-x}\right)}\right)} \\
+  \end{array} } \right), x<0
+  \end{cases}$$
+is an isomorphism easily by checking 4 cases \par
+\textbf{(b)} \par
+Notice $\det:O(1,1)\rightarrow\mathbb{Z}/2\mathbb{Z}\cong\{\pm1,\text{multiplication}\}$ is a surjective group homomorphism with kernel $SO(1,1)$, hence $O(1,1)/SO(1,1)\cong\mathbb{Z}/2\mathbb{Z}$ \par
+\textbf{(c)} \par
+Notice $\phi$ from (a) is continuous, hence $O(1,1)^0=\left\{\left( {\begin{array}{cc}
+   \cosh{x} & \sinh x \\
+   \sinh{x} & \cosh{x} \\
+  \end{array} } \right)\right\}$, and $\dfrac{x}{|x|}:\mathbb{R}^*\rightarrow\mathbb{Z}/2\mathbb{Z}\cong\{\pm1,\text{multiplication}\}$ is a surjective group homomorphism with kernel $\mathbb{R}_{>0}$, hence $SO(1,1)/O(1,1)^0\cong\mathbb{R}^*/\mathbb{R}_{>0}$, $\left|O(1,1)/O(1,1)^0\right|=\left[O(1,1):SO(1,1)\right]\left[SO(1,1):O(1,1)^0\right]=4$, hence it is isomorphic to either $\mathbb{Z}/4\mathbb{Z}$  or $\mathbb{Z}/2\mathbb{Z}\times \mathbb{Z}/2\mathbb{Z}$, but $-I,J,-J\in O(1,1)/O(1,1)^0$ are of order 2 and $(-I)J=-J,(-I)(-J)=J,J(-J)=-I$, thus the component group $O(1,1)/O(1,1)^0\cong\mathbb{Z}/2\mathbb{Z}\times \mathbb{Z}/2\mathbb{Z}$ \par
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+
+\end{enumerate}
+\end{exercise}
+
+\textbf{(a)} \par
+Here $J\in GL(n,\mathbb{C})$, $G_J=\{g\in GL(n,\mathbb{C})|g^TJg=J\}=\{g\in GL(n,\mathbb{C})|g^T=Jg^{-1}J^{-1}\}$, $G_I=\{g\in GL(n,\mathbb{C})|g^Tg=I\}=\{g\in GL(n,\mathbb{C})|g^T=g^{-1}\}$, since $J$ is symmetric, $\exists P\in GL(n,\mathbb{C})$ such that $PJP^T=I$(corresponding to changing of basis), then we have $PG_JP^{-1}=G_I$ since $\forall g\in G_J$, we have $Jg^TJ^{-1}=g^{-1}$, then $(PgP^{-1})^{-1}=Pg^{-1}P^{-1}=PJg^TJ^{-1}P^{-1}=PJP^T(P^T)^{-1}g^TP^T(P^T)^{-1}J^{-1}P^{-1}=(PJP^T)(PgP^{-1})^T(PJP^T)^{-1}=(PgP^{-1})^T$, hence $PgP^{-1}\in G_I$, thus $G_J$ and $O(n,\mathbb{C})$ are conjugate in $GL(n,\mathbb{C})$ \par
+\textbf{(b)} \par
+Let $K=\left( {\begin{array}{cc}
+    & 1 \\
+   1 &  \\
+  \end{array} } \right)$, then $\left( {\begin{array}{cc}
+   a &  \\
+    & b \\
+  \end{array} } \right)\left( {\begin{array}{cc}
+    & 1 \\
+   1 &  \\
+  \end{array} } \right)\left( {\begin{array}{cc}
+   a &  \\
+    & b \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+    & 1 \\
+   1 &  \\
+  \end{array} } \right)$ which gives $ab=1$, if $n$ is even, let $J=\left( {\begin{array}{ccc}
+   K & & \\
+    &\ddots & \\
+     & & K\\
+  \end{array} } \right)$, then the diagonal subgroup of $G_J$ is isomorphic to $\mathbb{C}^{*\frac{n}{2}}=\mathbb{C}^{*\floor{\frac{n}{2}}}$, if $n$ is odd, if $J=\left( {\begin{array}{cccc}
+   K & & & \\
+    &\ddots & & \\
+     & & K &\\
+     & &  &0\\
+  \end{array} } \right)$, then the diagonal subgroup of $G_J$ is isomorphic to $\mathbb{C}^{*\floor{\frac{n}{2}}}$, if $J=\left( {\begin{array}{cccc}
+   K & & & \\
+    &\ddots & & \\
+     & & K &\\
+     & &  &1\\
+  \end{array} } \right)$, then the diagonal subgroup of $G_J$ is isomorphic to $\mathbb{C}^{*\floor{\frac{n}{2}}}\times\mathbb{Z}/2\mathbb{Z}$ which contains a subgroup isomorphic to $\mathbb{C}^{*\floor{\frac{n}{2}}}$ \par
+\textbf{(c)} \par
+By (a) and (b), we know that $O(n,\mathbb{C})$ contains a subgroup isomorphic to $\mathbb{C}^{*\floor{\frac{n}{2}}}$ \par
+\textbf{(d)} \par
+If $A\in\rm{Lie}$, then $e^{tA}\in O(n,\mathbb{C})$, $e^{tA^T}=\left(e^{tA}\right)^T=\left(e^{tA}\right)^{-1}=e^{-tA}$, then $A^T=\dfrac{de^{tA^T}}{dt}\left.\right|_{t=0}=\dfrac{de^{-tA}}{dt}\left.\right|_{t=0}=-A$, hence $\rm{Lie}\left(O(n,\mathbb{C})\right)=\{A\in M_n(\mathbb{C})\|A^T=-A\}$, $\dim{\rm{Lie}\left(O(n,\mathbb{C})\right)}=\dfrac{n(n-1)}{2}$ \par
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+
+\end{enumerate}
+\end{exercise}
+
+\textbf{(a)} \par
+$$
+\begin{tikzcd}
+1 \arrow[r] & {SL(n,\mathbb{C})} \arrow[r, hook] & {GL(n,\mathbb{C})} \arrow[r, "\det"] & \mathbb{C}^* \arrow[r] & 1
+\end{tikzcd}
+$$ is an exact sequence \par
+\textbf{(b)} \par
+$$
+\begin{tikzcd}
+1 \arrow[r] & \mathbb{C}^* \arrow[r, "a\mapsto aI", hook] & {GL(n,\mathbb{C})} \arrow[r, "q"] & {PGL(n,\mathbb{C})} \arrow[r] & 1
+\end{tikzcd}
+$$ is an exact sequence, where $q$ is the quotient map \par
+\textbf{(c)} \par
+$SL(n,\mathbb{C})\rightarrow GL(n,\mathbb{C})$ pass to $PSL(n,\mathbb{C})\rightarrow PGL(n,\mathbb{C})$ by quotient map, for $AZ\in PGL(n,\mathbb{C})$, $\dfrac{A}{\sqrt[n]{\det A}}Z\mapsto AZ$, hence the map is surjective, if $AZ\in PSL(n,\mathbb{C})$, and $A\in Z(PGL(n,\mathbb{C}))$, then $A=aI$, for some $a\neq0$, but since $A\in SL(n,\mathbb{C})$, $1=\det A$, $A\in Z(PSL(n,\mathbb{C}))$, hence the map is also injective \par
+\textbf{(d)} \par
+When $n$ is odd, the previous argument still works, namely $PSL(n,\mathbb{R})\cong PGL(n,\mathbb{R})$, when $n=2k$ is even, the injectivity still works, however, for $aI,A\in GL(n,\mathbb{R})$, $\det (aI\cdot A)=a^{2k}\det A$ has the same sign as $\det A$, thus there is an exact sequence 
+$$
+\begin{tikzcd}
+1 \arrow[r] & {PSL(n,\mathbb{R})} \arrow[r, hook] & {PGL(n,\mathbb{R})} \arrow[r, "\det"] & \mathbb{Z}/2\mathbb{Z} \arrow[r] & 1
+\end{tikzcd}
+$$
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+
+\end{enumerate}
+\end{exercise}
+
+\textbf{(a)} \par
+If $g=\left( {\begin{array}{cc}
+   \alpha &\beta  \\
+    \gamma & \xi \\
+  \end{array} } \right)\in SU(2)$, then 
+  $$
+  I=gg^*=\left( {\begin{array}{cc}
+   \alpha &\beta  \\
+    \gamma & \xi \\
+  \end{array} } \right)\left( {\begin{array}{cc}
+   \bar\alpha &\bar\gamma  \\
+    \bar\beta & \bar\xi \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+   |\alpha|^2+|\beta|^2 &\alpha\bar\gamma+\beta\bar\xi  \\
+    \bar\alpha\gamma+\bar\beta\xi & |\gamma|^2+|\xi|^2 \\
+  \end{array} } \right)
+  $$
+Hence $\begin{cases}
+  |\alpha|^2+|\beta|^2=1 \\
+  \alpha\bar\gamma+\beta\bar\xi=0 \\
+  |\gamma|^2+|\xi|^2 \\
+\end{cases}$, and also $1=\det g=\alpha\xi-\beta\gamma$ \par
+If $\gamma=0$, then $|\alpha|=|\xi|=1$, $\beta=0$, $\alpha\xi=1\Rightarrow \xi=\bar\alpha$ \par
+If $\gamma=0$, then $\alpha=-\dfrac{\beta\bar\xi}{\bar\gamma}$, $\beta=0$, then $1=-\dfrac{\beta|\xi|^2}{\bar\gamma}-\beta\gamma\Rightarrow-\bar\gamma=\beta$, hence $\alpha=\bar\xi$ \par
+\textbf{(b)} \par
+Since $S^3\subseteq \mathbb{C}^2=\{|\alpha|^2+|\beta|^2=1\}$ which is the same zero set, thus $SU(2)$ is topologically equivalent to $S^3$, and is therefore 3-dimensional, connected and simply connected \par
+\textbf{(c)} \par
+$$
+\begin{tikzcd}
+1 \arrow[r] & SU(2) \arrow[r, hook] & U(2) \arrow[r, "\det"] & S^1 \arrow[r] & 1
+\end{tikzcd}
+$$ is an exact sequence, there is a map $\mu:S^1\rightarrow U(2)$, $z\mapsto\left( {\begin{array}{cc}
+   1 & 0 \\
+   0 & z \\
+  \end{array} } \right)$ which is a homomorphism such that $\det\circ\mu=1$, hence the exact sequence splits \par
+%it doesn't split, if so, then $U(2)\cong SU(2)\times S^1$ which is not simply connected since $\pi_1(SU(2)\times S^1)\cong \pi_1(SU(2))\times\pi_(S^1)\cong\mathbb{Z}$ , on the other hand, $\forall U\in U(2)$, $\det U=e^{i\theta}$ for some $\theta$, then $U_t=e^{-\frac{it\theta}{2}}U$ is a deformation retraction from $U(2)$ onto $SU(2)$, hence $U(2)$ is simply-connected which is a contradiction\par
+\textbf{(d)} \par
+$$
+\left( {\begin{array}{cc}
+   \alpha &\beta  \\
+    \gamma & \xi \\
+  \end{array} } \right)+\left( {\begin{array}{cc}
+   \bar\alpha &\bar\gamma  \\
+    \bar\beta & \bar\xi \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+   \alpha+\bar\alpha &\beta+\bar\gamma  \\
+    \gamma+\bar\beta & \xi+\bar\xi \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+   0 &0  \\
+    0 & 0 \\
+  \end{array} } \right)\Rightarrow \alpha+\bar\alpha=\xi+\bar\xi=\gamma+\bar\beta=0
+$$
+and $0=trg=\alpha+\xi$, thus $\xi=-\alpha\in i\mathbb{R}$ and $\gamma=-\bar\beta$, hence $W$ is a 3-dimensional real vector space of the form
+$
+\left\{\left( {\begin{array}{cc}
+   ix &y+iz \\
+  -y+iz & -ix \\
+  \end{array} } \right)\left.\right|x,y,z\in\mathbb{R}\right\}
+$
+and $tr\left(\left( {\begin{array}{cc}
+   ix_1 &y_1+iz_1 \\
+  -y_1+iz_1 & -ix_1 \\
+  \end{array} } \right)\left( {\begin{array}{cc}
+   ix_2 &y_2+iz_2\\
+  -y_2+iz_2 & -ix_2 \\
+  \end{array} } \right)\right)=-2(x_1x_2+y_1y_2+z_1z_2)$ is a definite symmetric bilinear form \par
+
+\textbf{(e)} \par
+$\forall g\in SU(2)$, $g^*=g^{-1}$, $X,Y\in W$, $gXg^{-1}+(gXg^{-1})^*=gXg^{-1}+gX*g^*=g(X+X^*)g^*=0$, $tr(gXg^{-1})=tr(X)=0$, $(gXg^{-1},gYg^{-1})=tr(gXg^{-1}gYg^{-1})=tr(gXYg^{-1})=tr(XY)=(X,Y)$, hence $SU(2)$ acts on $W$ by conjugation, preserving the form \par
+\textbf{(f)} \par
+By calculation in (d), $\langle X,Y\rangle:=\frac{1}{2}tr(XY)$ will be the standard inner product in $\mathbb{R}^3$, and $SU(2)$ still acts on $W$ by conjugation, preserving the form, this can be regarded as a continuous homomorphism $\varphi:SU(2)\rightarrow O(3)$, since $SU(2)$ is connected by (b), hence $\varphi$ is actually a continuous homomorphism from $SU(2)$ to $SO(3)$, now compute its kernel
+$$
+\left( {\begin{array}{cc}
+   ix &0  \\
+    0 & -ix \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+   \alpha &\beta  \\
+    -\bar\beta & \bar\alpha \\
+  \end{array} } \right)\left( {\begin{array}{cc}
+   ix &0  \\
+    0 & -ix \\
+  \end{array} } \right)\left( {\begin{array}{cc}
+   \bar\alpha & -\beta  \\
+    \bar\beta & \alpha \\
+  \end{array} } \right)=ix\left( {\begin{array}{cc}
+   |\alpha|^2-|\beta|^2 &-2\alpha\beta  \\
+    -2\bar\alpha\bar\beta & |\beta|^2-|\alpha|^2 \\
+  \end{array} } \right)\Rightarrow \begin{cases}
+  \beta=0 \\
+  |\alpha|^2=1
+  \end{cases}
+$$
+and 
+$$
+\left( {\begin{array}{cc}
+    & \gamma  \\
+    -\bar\gamma &  \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+   \alpha &  \\
+     & \bar\alpha \\
+  \end{array} } \right)\left( {\begin{array}{cc}
+    & \gamma  \\
+    -\bar\gamma &  \\
+  \end{array} } \right)\left( {\begin{array}{cc}
+   \bar\alpha &   \\
+     & \alpha \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+    & \alpha^2\gamma  \\
+    -\bar\alpha^2\bar\gamma &  \\
+  \end{array} } \right)\Rightarrow \alpha^2=1\Rightarrow \alpha=\pm1
+$$
+Thus we have the exact sequence
+\begin{center}
+\begin{tikzcd}
+1 \arrow[r] & \mathbb{Z}/2\mathbb{Z} \arrow[r] & SU(2) \arrow[r, "\varphi"] & SO(3) \arrow[r] & 1
+\end{tikzcd}
+\end{center}
+
+\begin{exercise}
+Let $G=\GL(2,\mathbb F_q)$
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item Show that $G$ acts transitively on $X=\mathbb F^2_2-\{(0,0)\}$
+\item Show that the stabilizer of a point has order $q(q-1)$
+\item Show there is a bijection $G/H\leftrightarrow X$
+\item Show that $|\GL(2,\mathbb F_q)|=(q+1)q(q-1)^2$
+\item What is the order of $\PGL(2,\mathbb F_q)|$? How about $\PGL(2,\mathbb F_5)$
+\item \textit{Extra credit}: Show that $\PGL(2,\mathbb F_q)\cong A_5$
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item $\forall (x,y)\in X$, if $x=0$, then $\left( {\begin{array}{cc}
+   0 & 1 \\
+   y & 0 \\
+  \end{array} } \right)\left( {\begin{array}{c}
+   1 \\
+   0 \\
+  \end{array} } \right)=\left( {\begin{array}{c}
+   0 \\
+   y \\
+  \end{array} } \right)$, if $x\neq0$, then $\left( {\begin{array}{cc}
+   x & 0 \\
+   y & 1 \\
+  \end{array} } \right)\left( {\begin{array}{c}
+   1 \\
+   0 \\
+  \end{array} } \right)=\left( {\begin{array}{c}
+   x \\
+   y \\
+  \end{array} } \right)$, hence $\left( {\begin{array}{c}
+   1 \\
+   0 \\
+  \end{array} } \right)$ can move to any point in $X$ by an action of $G$, hence $G$ acts transitively on $X$ 
+\item If $\left( {\begin{array}{c}
+   1 \\
+   0 \\
+  \end{array} } \right)=\left( {\begin{array}{cc}
+   a & b \\
+   c & d \\
+  \end{array} } \right)\left( {\begin{array}{c}
+   1 \\
+   0 \\
+  \end{array} } \right)=\left( {\begin{array}{c}
+   a \\
+   c \\
+  \end{array} } \right)\Rightarrow\begin{cases}
+  a=1 \\
+  c=0
+  \end{cases}$, and since $0\neq\det g=ad-bc=d$, hence $|H|=q(q-1)$ 
+\item Consider $\varphi:G/H\rightarrow X$, $gH\mapsto g\left( {\begin{array}{c}
+   1 \\
+   0 \\
+  \end{array} } \right)$ which is well-defined, and surjectivity follows from (a), injectivity follows from the fact if $g\left( {\begin{array}{c}
+   1 \\
+   0 \\
+  \end{array} } \right)=g'\left( {\begin{array}{c}
+   1 \\
+   0 \\
+  \end{array} } \right)$, then $g^{-1}g'\left( {\begin{array}{c}
+   1 \\
+   0 \\
+  \end{array} } \right)=\left( {\begin{array}{c}
+   1 \\
+   0 \\
+  \end{array} } \right)\Rightarrow g^{-1}g'\in H$, hence $\varphi$ is bijective 
+\item Because of (c), $|G|=|G/H||H|=|X||H|=(q^2-1)q(q-1)=(q+1)q(q-1)^2$ 
+\item Since $Z=\{aI|a\neq0\}$, $|Z|=q-1$, $|PGL(2,\mathbb{F}_q)|=|G|/|Z|=(q+1)q(q-1)$, in particular, $|PGL(2,\mathbb{F}_5)|=120$ 
+\item From group action $GL(2,\mathbb{F}_4)$ on $\mathbb{F}_4^2\setminus\{(0,0)\}$, we can pass to a group action $PGL(2,\mathbb{F}_4)$ on $P\mathbb{F}_4$, this action is faithful since for $g=\left( {\begin{array}{cc}
+   a & b \\
+   c & d \\
+  \end{array} } \right)$, if $c\neq0$, $g\left( {\begin{array}{c}
+   1 \\
+   0 \\
+  \end{array} } \right)=\left( {\begin{array}{c}
+   a \\
+   c \\
+  \end{array} } \right)\neq\left( {\begin{array}{c}
+   1 \\
+   0 \\
+  \end{array} } \right)$ in $P\mathbb{F}_4$, if $b\neq0$,  $g\left( {\begin{array}{c}
+   0 \\
+   1 \\
+  \end{array} } \right)=\left( {\begin{array}{c}
+   b \\
+   d \\
+  \end{array} } \right)\neq\left( {\begin{array}{c}
+   0 \\
+   1 \\
+  \end{array} } \right)$ in $P\mathbb{F}_4$, hence $b=c=0$, if $a\neq d$,  $g\left( {\begin{array}{c}
+   1 \\
+   1 \\
+  \end{array} } \right)=\left( {\begin{array}{c}
+   a \\
+   d \\
+  \end{array} } \right)\neq\left( {\begin{array}{c}
+   1 \\
+   1 \\
+  \end{array} } \right)$ in $P\mathbb{F}_4$, hence $g\in Z$, thus we get a injective group $\begin{tikzcd}
+{PGL(2,\mathbb{F}_4)} \arrow[r, hook] & S_5
+\end{tikzcd}$ since $|P\mathbb{F}_4|=5$, but $|PGL(2,\mathbb{F}_4)|=60$, $|S_5|=120$, any subgroup of $S_5$ of order $60$ should be normal, intersection of normal subgroups is again a normal subgroup, but $A_5$ is a simple group, hence $A_5$ is the only subgroup of $S_5$ of order $60$, thus $PGL(2,\mathbb{F}_4)\cong A_5$ \par
+Note that $G = \PGL(2, \mathbb F_5)$ has exactly 5 5-Sylow subgroups, and it acts by conjugation on this set of 5 elements. The resulting map $G \to S_5$ is injective, and has image $A_5$. Also $\PGL(2, \mathbb F_5)$ as on the projective plane over $\mathbb F_5$, which has 6 elements. This gives a homomorphism $G \to S_6$. Now $S_6$ has an outer automorphism (unique among symmetric groups), which takes an “obvious” $S_5$ subgroup (fixing one point of the 6 element set) to a subgroup not fixing any elements of the set. The even permutations in the image give $A_5$
+\end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item By Jordan normal form theorem, $\forall g\in GL(n,\mathbb{C})$, $g$ can be decomposed uniquely as $SU=US$ where $S$ is semisimple and $U$ is unipotent, thus $\displaystyle\log U=\sum_{m=1}^{\infty}\frac{(-1)^{m+1}(U-I)^m}{m}$ is actually a finite sum, so is $e^{\log U}$, now consider $U(t)=I+t(U-I)$, when $t$ is small, $e^{\log U(t)}=U(t)$, and since $e^{\log U(t)}-U(t)$ is a matrix with entries polynomials in $t$, $e^{\log U(t)}=U(t), \forall t$, in particular, $e^{\log U}=U$, the general case follows by dividing $g$ into Jordan blocks 
+\item The image of then exponential map from  $M_n(\mathbb{R})$ to $GL(n,\mathbb{R})$ is $\{A\in GL(n,\mathbb{R})|\det A|U>0, U \text{ is any A invariant space}\}$, notice that $\det e^{A|U}=e^{trA|U}>0$, $R_\theta=\left( {\begin{array}{cc}
+   \cos\theta & \sin\theta \\
+   -\sin\theta & \cos\theta \\
+  \end{array} } \right)=\exp\left( {\begin{array}{cc}
+    & \theta \\
+   -\theta &  \\
+  \end{array} } \right)$, for any $A\in GL(n,\mathbb{R})$ with $\det A>0$, $A$ can be written in real Jordan canonical form, and then a Jordan block can be written as $SU=US$, $U$ is unipotent, and $S$ is diagonalizable with real numbers or $R_\theta$'s, for negative diagonal numbers we can pair them up and notice $R_\pi=\left( {\begin{array}{cc}
+   -1 &  \\
+    & -1 \\
+  \end{array} } \right)=\exp\left( {\begin{array}{cc}
+    & \pi \\
+   -\pi &  \\
+  \end{array} } \right)$, thus $A$ is in the image of the exponential map
+\end{enumerate}
+\end{solution}
+
+\end{document}

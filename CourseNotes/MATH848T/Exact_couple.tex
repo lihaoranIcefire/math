@@ -1,0 +1,57 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+Suppose $\mathscr A$ is an abelian category, an \textbf{exact couple}\index{Exact couple} is $(D,E,i,j,k)$
+\begin{center}
+\begin{tikzcd}
+D \arrow[rr, "i"] &                   & D \arrow[ld, "j"] \\
+                  & E \arrow[lu, "k"] &                  
+\end{tikzcd}
+\end{center}
+Such that it is exact at each term, define differential $d=jk$, then $d^2=jkjk=j(kj)k=0$, we can define the \textbf{derived couple}\index{Derived couple}
+\begin{center}
+\begin{tikzcd}
+D' \arrow[rr, "i'"] &                   & D' \arrow[ld, "j'"] \\
+                  & E' \arrow[lu, "k'"] &                  
+\end{tikzcd}
+\end{center}
+Where $D'=i(D)$, $E'=\ker k/\mathrm{im}j$, $i'(a)=i(a)$, $j'(i(a))=\overline{j(a)}$, $k'(b)=\overline{k(b)}$, then the derived couple is again an exact couple, thus we can carry this process indefinitely, giving the $n$-th derived couple $(D^{(n)},E^{(n)},i^{(n)},j^{(n)},k^{(n)})$
+\end{definition}
+
+\begin{example}
+Suppose $\cdots\subseteq F_{p-1}C_\bullet\subseteq F_{p}C_\bullet\subseteq\cdots$ is a filteration of chain complex $C_\bullet$, exact sequence $0\to F_{p-1}C_\bullet\to F_{p}C_\bullet\to (grC_\bullet)_p\to0$ give a long exact sequence
+\[\cdots\to H_n(F_{p-1}C_\bullet)\xrightarrow{i_*} H_n(F_{p}C_\bullet)\xrightarrow{j_*} H_n(F_{p}C_\bullet/ F_{p-1}C_\bullet)\xrightarrow{k_*} H_{n-1}(F_{p-1}C_\bullet)\to\cdots\]
+If we write $D^1_{p,q}:=H_{p+q}(F_pC_\bullet)$, $E^1_{pq}:=H_{p+q}(F_{p}C_\bullet/ F_{p-1}C_\bullet)$, then the long exact sequence become
+\[\cdots\to D^1_{p,q}\to D^1_{p+1,q-1}\to E^1_{p,q}\to D^1_{p,q-1}\to\cdots\]
+Consider $D^1=\bigoplus D^1_{p,q}$, $E^1=\bigoplus E^1_{p,q}$, then $(D^1,E^1,i_*,j_*,k_*)$ form an exact couple, note that $d_r:E^r_{p,q}\to E^r_{p-r,q+r-1}$
+\end{example}
+
+\begin{lemma}
+Suppose $\dim X=n$, we have
+\[F_{p}C_k(X)/F_{p-1}C_k(X)=\begin{cases}
+0, &p<k\text{ or }p>n \\
+\displaystyle \bigoplus_{U}F_{p}(C_k(U)/F_{p-1}C_k(U), &\text{otherwise}
+\end{cases}\]
+Where $U\leq X$ runs over $p$ dimensional planes
+\end{lemma}
+
+\begin{lemma}
+Suppose $\dim X=p$, $H_{p+q}(C_*(X)/F_{p-1}C_*(X))=0$ for any $q>0$
+\end{lemma}
+
+\begin{theorem}
+Consider spectral sequence
+\[E^1_{p,q}=\displaystyle \bigoplus_{U}H_{p+q}(C_*(U)/F_{p-1}C_*(U))=\begin{cases}
+\displaystyle \bigoplus_{U}\mathcal{P}(U,1), &q=0 \\
+0, & q>0
+\end{cases}\]
+Since $E^r$ converges to $H_*(X)$, if $X=\mathbb R^n,\mathbb H^n$, we have exact sequence
+\[\displaystyle0\to\bigoplus_{\dim U=n}\mathcal{P}(U,1)\to\cdots\to\bigoplus_{\dim U=0}\mathcal{P}(U,1)\xrightarrow{\varepsilon}\mathbb Z\to0\]
+If $X=S^n$, we have exact sequence
+\[\displaystyle0\to\mathbb Z\to\bigoplus_{\dim U=n}\mathcal{P}(U,1)\to\cdots\to\bigoplus_{\dim U=0}\mathcal{P}(U,1)\to\mathbb Z\to0\]
+Here the maps can be thought of as take $k$ dimensional polygons on the $k$ dimensional faces
+\end{theorem}
+
+\end{document}

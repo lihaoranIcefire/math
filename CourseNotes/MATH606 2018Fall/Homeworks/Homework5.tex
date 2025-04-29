@@ -1,0 +1,58 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{problem}
+$\left(e^{\frac{2\pi ki}{n}},0\right), (0\leq k\leq n-1)$ are branch points with degree $n$, apply Riemann-Hurwitz formula, we have $2g-2=n(2\cdot 0-2)+n(n-1)$, thus $g=\dfrac{(n-1)(n-2)}{2}$
+\end{problem}
+
+\begin{problem}
+Need to check $0\rightarrow\mathbb{C}_x\rightarrow\mathcal{M}_x\overset{\mathrm{d}}{\rightarrow}\mathcal{N}_x\rightarrow0$ is exact \par
+$\mathbb{C}_x\rightarrow\mathcal{M}_x$ is injective is easy, if we write $\displaystyle\sum_{\nu=-k}^\infty a_\nu(z-x)^\nu\in\mathcal{M}_x$, $\mathrm{d}a_0=0$ and $\displaystyle\mathrm{res}_x\left(\sum_{\nu=-k}^\infty a_\nu(z-x)^\nu\right)=0\Rightarrow a_0=0$, thus $\mathbb{C}_x\rightarrow\mathcal{M}_x\overset{\mathrm{d}}{\rightarrow}\mathcal{N}_x$ is exact, also, since $\mathrm{d}(z-x)^\nu=\nu(z-x)^{\nu-1}$, $\mathcal{M}_x\overset{\mathrm{d}}{\rightarrow}\mathcal{N}_x$ is surjective. Therefore, we have long exact sequence
+\[
+0\rightarrow\mathbb{C}(X)\rightarrow\mathcal{M}(X)\overset{\mathrm{d}}{\rightarrow}\mathcal{N}(X)\rightarrow H^1(X,\mathbb{C})\rightarrow H^1(X,\mathcal{M})=0
+\]
+Thus $H^1(X,\mathbb{C})\cong\mathcal{N}(X)/\mathrm{d}\mathcal{M}(X)$
+\end{problem}
+
+\begin{problem}
+
+\end{problem}
+
+\begin{problem}
+Define $D=(2g+1)P$, $L=L(D)$ is line bundle satisfies $\deg L>2g$, using embedding theorem, choose a basis $\{s_0,\cdots,s_N\}$ of $H^0(X,L)$, such that $s_0=s_D$, $\varphi_L: X\rightarrow\mathbb{P}^N$, by sending $x$ to $[s_0,\cdots,s_N]$, but since $s_D(x)\neq 0$, $\forall x\neq P$, hence $\varphi_L: X\setminus\{P\}\rightarrow\mathbb{C}^N$ by sending $x$ to $\left(\frac{s_1}{s_0},\cdots,\frac{s_N}{s_0}\right)$ is also an embedding
+\end{problem}
+
+\begin{problem}
+Since $\displaystyle k^{n+1}=\bigsqcup_{\alpha\in k}\alpha+k^n$, $|k^{n+1}|=|k||k^n|$, by induction and $|k|=q=p^r$, $|k^n|=q^n=p^{nr}$ \par
+On the other hand, since $P^n(k)=k^{n+1}-\{0\}\big/\sim$, 
+\[
+|P^n(k)|=\dfrac{|k^{n+1}|-1}{|k^*|}=\dfrac{q^n-1}{q-1}=\dfrac{p^{nr}-1}{p^r-1}
+\]
+\end{problem}
+
+\begin{problem}
+\textbf{(a)} \par
+Consider all the picks of two different checkers in the same row, which essentially give picks of two different columns, the two columns given by these picks are all distinct, otherwise, four of the checkers will be centered on the vertices of a rectangle with sides parallel to the sides of the board, hence the number of picks is no more than the number of picks of two different columns. Therefore, we have
+\[
+\sum_{i=1}^{k}\dfrac{x_i(x_i-1)}{2}\leq\dfrac{k(k-1)}{2}
+\]
+\textbf{(b)} \par
+First let's state a fact: If $x_i\geq 0$, then
+\[
+\displaystyle\left(\sum_{i=1}^nx_i\right)^2=\sum_{i,j=1}^{n}x_ix_j\leq\sum_{i,j=1}^{n}\left(\frac{x_i^2}{2}+\frac{x_j^2}{2}\right)=n\left(\sum_{i=1}^nx_i^2\right)
+\]
+Equality holds if and only if $x_i$ are the same \par
+For any $k$ such that $k-1=q(q-1)$ where $q\geq 1$ is some integer, if we let $q=p+1$, then $k=1+p+p^2$ \par
+Use the fact above, we know that
+\[
+\dfrac{k(k-1)}{2}\geq\sum_{i=1}^{k}\dfrac{x_i(x_i-1)}{2}=\dfrac{\sum_{i=1}^{k}x_i^2}{2}-\dfrac{\sum_{i=1}^{k}x_i}{2}\geq\dfrac{\left(\sum_{i=1}^{k}x_i\right)^2}{2k}-\dfrac{\sum_{i=1}^{k}x_i}{2}=\dfrac{n^2}{2k}-\dfrac{n}{2}
+\]
+But, when $x_i=q=p+1$, both of inequalities become equalities, thus $n=k(p+1)$ is the maximum possible value for $n$ \par
+\textbf{(i)} \par
+$k=7=1+2+2^2\Rightarrow p=2\Rightarrow n=21$ \par
+\textbf{(ii)} \par
+$k=13=1+3+3^2\Rightarrow p=3\Rightarrow n=52$ \par
+\end{problem}
+
+\end{document}

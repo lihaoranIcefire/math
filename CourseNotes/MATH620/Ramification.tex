@@ -1,0 +1,104 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$A,B$ are Dedekind domains, $F,E$ are fractional field
+\begin{center}
+\begin{tikzcd}
+B \arrow[r, hook]                 & E                 \\
+A \arrow[u, hook] \arrow[r, hook] & F \arrow[u, hook]
+\end{tikzcd}
+\end{center}
+$\beta\in B$ is maximal $\Rightarrow$ $\beta\cap A$ is maximal in $A$. $pB=\beta_1^{e_1}\cdots\beta_r^{e_r}$, $e_i>0$. $k_p=A/p\to B/\beta=k_\beta$, $B$ is a finitely generated $A$-module, $B/\beta$ is a finitely generated $k_p$ vector space, $f_i=[k_\beta:k_p]$
+\begin{itemize}
+\item  $p$ is \textit{ramified} if $e_i>1$ for some $i$
+\item  $p$ is \textit{inert} if $pB$ is a prime
+\item $p$ \textit{total split} if $e_i=1,f_i=1$
+\end{itemize}
+\end{definition}
+
+\begin{proposition}
+Suppose $pB=\beta_1^{e_1}\cdots\beta_r^{e_r}$, $e_i>0$
+\begin{enumerate}
+\item $B/pB\cong\prod_{i=1}^rB/\beta_i^{e_i}$
+\item $[E:F]=\dim_{k_p}(B/pB)=\sum_{i=1}^re_if_i\Rightarrow r\leq[E:F]$, (totally split $\Leftrightarrow$ "$=$")
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}
+\item Chinese remainder theorem
+\item If $B\cong A^n$, then $B/pB\cong A^npA^n\cong (A/p)^n\cong k_p^n$
+\end{enumerate}
+\end{proof}
+
+\begin{example}
+$2\mathbb Z[i]=(1+i)^2$ is ramified, $3\mathbb Z[i]$ is prime inert, $5\mathbb Z[i]=(2-i)(2+i)$ totally split
+\begin{center}
+\begin{tikzcd}
+{\mathbb Z[i]} \arrow[r, hook]            & {\mathbb Q[i]}            \\
+\mathbb Z \arrow[u, hook] \arrow[r, hook] & \mathbb Q \arrow[u, hook]
+\end{tikzcd}
+\end{center}
+\end{example}
+
+\begin{example}
+$f:\Spec B\to\Spec A$, $f(\beta)=\beta\cap A$, If $pB=\beta_1^{e_1}\cdots\beta_r^{e_r}$, then $f^{-1}(p)=T_p=\{\beta_1,\cdots,\beta_r\}$. If $\beta\cap A=p$, then $\beta\supseteq pB=\beta_1^{e_1}\cdots\beta_r^{e_r}$, since $\beta$, $\beta_i$ are maximal, $\beta=\beta_i$ for some $i$. $pB\subseteq\beta_i\Rightarrow pB\cap A=p\subseteq\beta_i\cap A\Rightarrow\beta_i\cap A=p$
+\begin{center}
+\begin{tikzpicture}
+\draw (0,3) to [curve through ={(1,3)(3,2)}] (4,1);
+\draw (0,2) to [curve through ={(1,1.5)(2,1)(3,2)}] (4,3);
+\draw (0,1) to [curve through ={(1,1.5)(3,2)}] (4,2);
+\draw[dashed] (1,3)--(1,0);
+\draw[dashed] (3,2)--(3,0);
+\draw (0,0)--(4,0);
+\end{tikzpicture}
+\end{center}
+In general, $A_p$ is a DVR $\Rightarrow$ PID, $A_p/pA_p\cong A/p\cong k_p$, $B_p=B\otimes_AA_p$ is torsion free since $B_p\subseteq E$, $B_p$ is finitely generated and torsion free over PID $A_p$ $\Rightarrow B_p\cong A_p^n\Rightarrow B_p/pB_p\cong(A_p/pA_p)\cong k_p^n$
+\end{example}
+
+\begin{theorem}
+If $E/F$ is Galois, then $G=\Gal(E/F)$ acts on $f^{-1}(p)=\{\beta_1,\cdots,\beta_r\}$ transitively, thus $n=\sum_{i=1}^re_if_i=ref$, $e,f,r|n$
+\end{theorem}
+
+\begin{proof}
+For any $\sigma\in G$, $f(\beta)=f(\sigma(\beta))$, preserving $e_i,f_i$
+\begin{center}
+\begin{tikzcd}
+k_p \arrow[r, hook] \arrow[d,equal] & B/\beta \arrow[d,"\sigma"] \\
+k_p \arrow[r, hook]           & B/\sigma(\beta)  
+\end{tikzcd}
+\end{center}
+Suppose $\beta,\beta'$ are not related by $G$, then $\exists x\in B$ such that
+\[x\equiv\begin{cases}
+1\mod\sigma\beta &\forall \sigma\in G \\
+0\mod\tau\beta' &\forall \tau\in G
+\end{cases}\]
+Thus
+\begin{align*}
+A\ni N_{B/A}(x)=N_{E/F}(x)=\prod_{\sigma\in G}\sigma(x)\equiv\begin{cases}
+1\mod\sigma\beta \\
+0\mod\sigma\beta'
+\end{cases} \\
+\Rightarrow N_{B/A}(x)\equiv\begin{cases}
+0\mod\sigma\beta\cap A=p \\
+1\mod\sigma\beta'\cap A=p
+\end{cases}
+\end{align*}
+Fix $\beta$, define $D_\beta=\{\sigma\in G|\sigma\beta=\beta\}$, $D_{\tau(\beta)}=\tau D_{\beta}\tau^{-1}$, $|D_\beta|=ef$. $p$ totally splits in $B$ $\Leftrightarrow$ $D_\beta=\{1\}$ for any $\beta$ \par
+If $G$ is abelian, $D_\beta$ depends only on $p$, not $\beta$ since $\tau D_{\beta}\tau^{-1}=D_\beta$
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & \beta \arrow[r] \arrow[d] & B \arrow[r] \arrow[d, "\sigma"] & k_\beta \arrow[r] \arrow[d] & 0 \\
+0 \arrow[r] & \sigma\beta \arrow[r]     & B \arrow[r]                     & k_{\sigma\beta} \arrow[r]   & 0
+\end{tikzcd}
+\end{center}
+If $\sigma\in D_\beta$, $k_\beta\to k_\beta$ is an automorphism $\Rightarrow D_\beta\to \Aut(k_\beta/k_p)$ $\Rightarrow \ker=I_\beta$, the inertia group of $\beta$, $I_{\tau\beta}=\tau I_\beta\tau^{-1}$
+\end{proof}
+
+\begin{theorem}
+$p$ ramifies in $\mathcal O_K$ $\Leftrightarrow$ $p|\disc(\mathcal O_K/\mathbb Z)$
+\end{theorem}
+
+\end{document}

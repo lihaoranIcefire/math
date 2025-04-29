@@ -1,0 +1,153 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+For any A module M, $M_n=\ker(M\xrightarrow{\pi^n}M)$, this is independent of the choice of $\pi$, consider $\Lambda_{f,n}\subseteq \bar K$, define $K_{\pi,n}$ to be $K(\Lambda_{f,n})$ which is independent of the choice of $f$(reason: $x\in \Lambda_{f,n}\cap L$ for some L/K finite, $[1]_{g,f}:\Lambda_{f,n}\to\Lambda_{g,n}$ is an isomorphism since it is an isomorphism between $F_f$ and $F_g$, so $[1]_{g,f}(x)\in\Lambda_{g,n}\cap L$, since $L$ can be arbitrary, and the smallest field extension containing $x$ is unique)
+\end{definition}
+
+Claim: $K_{\pi,n}=K(roots of f^{(n)})$, $f(x)=X^q+\pi x$, $f^{(n)}(x)=f^{\circ n}$
+
+Newton Polygon[Neukirch's book]: Suppose $f(x)=a_nx^n+\cdots+a_1x+a_0\in K[x]$, $(K,v)$ disc valued field
+draw $(i,v(a_i))$, join them so that it the joining curve is convex(the convex hull)
+i-th segment has slope $s_i$, horizontal dist $n_i$, $\sum n_i=n$. Among all the roots of $f$ in $\bar K$(count with multiplicity), exactly $n_i$ of them have valuation -$s_i$
+
+$f^{(n)}(x)\equiv x^{q^n}\mod\pi$ and $f^{(n)}(x)=x^{q^n}+\cdots+\pi^n x$. Try the Newton Polygon, exactly one with valuation $
+\infty$ which corresponds to 0, the others have positive valution $\geq1$, justifying the claim
+So $K_{\pi,n}/K$ is Galois, being the splitting field of $f^{(n)}(x)$
+
+\begin{lemma}\label{2021/3/25-12:52}
+For any $f\in F_\pi$, the module $\Lambda_{f,1}$ has $q$ distinct elements. The map $\pi:\Lambda_{f}\to\Lambda_{f}$ is surjective
+\end{lemma}
+
+\begin{proof}
+$f$ and $f'$ are coprime, so $f$ has $q$ distinct roots. And use Newton polygon, for any $\lambda\in\Lambda$ see $f(x)-\lambda=x^q-\pi x-\lambda$ has roots of valuations $\geq1$
+\end{proof}
+
+\begin{lemma}
+$K_{\pi,n}/K$ is separable
+\end{lemma}
+
+\begin{proof}
+Induction on $n$. $n=1$, $K_{\pi,1}=K(\Lambda_{f,1})$ is true by Lemma \ref{2021/3/25-12:52}. For $\alpha\in\Lambda_{f,n+1}$, need to show $\alpha$ is separable over $K$. $f(\alpha)=\pi\cdot_\phi\alpha\in\Lambda_{f,n}$, denote as $\beta$, $\alpha$ is a root of $g(x)=f(x)-\beta$, $g'=f'=qx^{q-1}+\pi$, all roots of $g'$ has valuation $\leq0$, hence $\alpha$ is not a root of $g'$, so $\alpha$ is a simple root of $g$, and $g\in K_{\pi,n}[x]$
+\end{proof}
+
+\begin{proposition}
+$\forall f\in F_\pi$ and $n\geq1$, the $A$-module $\Lambda_{f,n}$ is iso to $A/\pi^nA$. In particular, it has $q^n$ elements
+\end{proposition}
+
+\begin{proof}
+First show $|\Lambda_{f,n}|=q^n$. We have short exact sequence
+\[0\to\Lambda_{f,1}\to\Lambda_{f,n+1}\xrightarrow{\pi}\to\Lambda_{f,n}\to0\]
+The surjectivity is due to Lemma \ref{2021/3/25-12:52}. By classification theorem of finitely generated module over a PID($A$)
+\[\Lambda_{f,n}\cong A/\pi^{n_1}\oplus\cdots\oplus A/\pi^{n_k}\]
+So the $\pi$ torsion of $\Lambda_{f,n}$ is $\pi^{n_1-1}A/\pi^{n_1}\oplus\cdots\oplus \pi^{n_k-1}A/\pi^{n_k}\cong A/pi\cdots\oplus A/\pi$, $k$ copies, which is impossible since it should be $\Lambda_{f,1}$
+\end{proof}
+
+As a consequence, the group of $A$-module automorphisms of $\Lambda_{f,n}$ is equal to $(A/\pi^n)\^\times$
+
+$\Gal(K_{\pi,n}/K)$ acts on $K_{\pi,n}$, and $x\in\Lambda_{f,n}$ iff $x$ is a root of $f^{(n)}$ which is acted on by the Galois group, $f$ can be power series in $A[[x]]_+$ since the action is continuous and preserve the valuation. In fact, $\Gal(K_{\pi,n}/K)$ acts on $\Lambda_{f,n}$ preserving the $A$-module structure, so we get the lubin-Tate homomorphism $\rho_{\pi,n}:\Gal(K_{\pi,n}/K)\to(A/\pi^n)^\times$
+
+\begin{theorem}
+\begin{enumerate}
+\item $K_{\pi,n}/K$ is totally ramified with deg $(q-1)q^{n-1}$
+\item $\rho_{\pi,n}$ is an isomorphism
+\item $\pi$ is a norm from $K_{\pi,n}$, i.e. $\exists y\in K_{\pi,n}$, $N_{K_{\pi,n}/K}(y)=\pi$
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}
+\item Take a non-zero root $\pi_1\in\Lambda_{f,1}-\{0\}$ of $f$. Take $\pi_2\in\Lambda_{f,2}-\Lambda_{f,1}$ to be a root of $f(x)-\pi_1$, inductively defined $\pi_i\in\Lambda_{f,i}-\Lambda_{f,i-1}$'s. $v(\pi_1)=\frac{1}{q-1}$, use Newton polygon, $v(\pi_2)=\frac{1}{(q-1)q}$, and $v(\pi_n)=\frac{1}{(q-1)q^{n-1}}$, hence the ramification index $e(K_{\pi,n}/K)\geq(q-1)q^{n-1}$. Since $\rho_{\pi,n}$ is obviously injective, $[K_{\pi,n}:K]\leq|(A/\pi^nA)^\times|=(q-1)q^{n-1}$
+\item Also done by 1
+\item $f^{(n-1)}(\pi_n)=\pi_1$, and $\frac{f(x)}{x}\circ f^{(n-1)}(\pi_n)=0$, denote the polynomial $h$, then $\deg h=(q-1)q^{n-1}$, hence the monic minimal polynomial, justifing 3, $K_{\pi,n}=K(\pi_n)$, $N_{K_{\pi,n}/K}(\pi_n)=(-1)^{(q-1)q^{n-1}}\pi$, and the sign is $1$ unless $n=1$ and $q=2^k$
+\end{enumerate}
+\end{proof}
+
+It turns out, the maximal abelian extension $K^{ab}=K_\pi\cdot K^{ur}$(linearly disjoint, since $K_\pi$ is totally ramified), $K_\pi=\cup_{n\geq1}K_{\pi,n}$. Hence $\Gal(K^{ab}/K)=\Gal(K_\pi/K)\times\Gal(K^{ur}/K)\cong\Gal(K_\pi/K)\times\widehat{\mathbb Z}$
+
+Recall the Lubin-Tate homomorphism $\rho_{\pi,n}:\Gal(K_{\pi,n}/K)\to(A/\pi^n)^\times$ is an iso, taking inverse limit, we have iso $\rho_\pi:\Gal(K_\pi/K)\to A^\times$. So $\Gal(K^{ab}/K)\cong A^\times\widehat{\mathbb Z}$. It will turn out that the local reciprocity map $\phi:K^\times\to\Gal(K^{ab}/K)$ is given by $K^\times= \pi^Z\times A^\times\to \widehat Z\times A^\times$, $(\pi^i,a)\mapsto(i,a^{-1})$
+
+
+\begin{definition}
+$K^{LT}=K_\pi K^{ur}$, $\phi_\pi:\Gal(K^{LT}/K)$(don't yet know that $K^{LT}=K^{ab}$)
+\end{definition}
+
+\begin{lemma}
+\begin{enumerate}
+\item $(B,+)\to(B,+)$, $x\mapsto x-\sigma(x)$, is surjective, and kernel is $A$
+\item $B^\times\to B^\times$, $x\mapsto x\cdot\sigma(x)^{-1}$ is surjective and kernel is $A^\times$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\begin{enumerate}
+\item Prove by induction that  $0\to A\to B\xrightarrow{1-\sigma}B\to0$ is exact, so we prove $0\to A/\pi^n\to B/\pi^n\to B/\pi^n\to$ is exact. The case $n=1$, it's just  $0\to F_q\to \bar F_q\to \bar F_q\to0$ is exact by Galois theory. Assuming exactness for $n$, for $n+1$, $0\to B/\pi\to B/\pi^{n+1}\to B/\pi^n\to0$
+\begin{center}
+\begin{tikzcd}
+            & 0 \arrow[d]                           &                                                 & 0 \arrow[d]                               &   \\
+            & A/\pi \arrow[d] \arrow[r, dashed]     & A/\pi^{n+1} \arrow[r, dashed] \arrow[d, dashed] & A/\pi^{n} \arrow[d]                       &   \\
+0 \arrow[r] & B/\pi \arrow[r] \arrow[d, "1-\sigma"] & B/\pi^{n+1} \arrow[r] \arrow[d, "1-\sigma"]     & B/\pi^{n} \arrow[r] \arrow[d, "1-\sigma"] & 0 \\
+0 \arrow[r] & B/\pi \arrow[r] \arrow[d]             & B/\pi^{n+1} \arrow[r]                           & B/\pi^{n} \arrow[r] \arrow[d]             & 0 \\
+            & 0                                     &                                                 & 0                                         &  
+\end{tikzcd}
+\end{center}
+Then use Snake lemma. In general, the inverse limit is only left exact, but recall
+$0\to A_i\to B_i\to C_i\to0$ are short exact sequences, Mittag-Leffler condition: $\forall i$, the subgroups $\Im(A_j\to A_i)$ of $A_i$ stablizes when $j$ is large, the the inverse limit is exact. Here $B=\varprojlim B/\pi^n$ since $B$ is complete
+\item Multiplicative analogue
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+$\pi,\varpi=\pi u$, $f\in F_\pi,g\in F_\pi$. Fix $\epsilon\in B^\times$ such that $\sigma(\epsilon)\epsilon^{-1}=u\in A^\times$, by surjection $B^\times\to B^\times$, i.e. $\sigma(\epsilon)=u\epsilon$. There exists $\theta(T)\in B[[T]]_+$ such that
+\begin{enumerate}
+\item the linear coefficient of $\theta$ is $\epsilon$
+\item $\sigma\theta=\theta\circ [u]_f$
+\item $\theta$ is an iso $F_f\to F_g$(base changed from $A$ to $B$)
+\item $\theta$ is $A$-linear, i.e. $\forall a\in A$, $[a]_g\circ\theta=\theta\circ[a]_f$. Thus $\theta$ is an iso between formal $A$-modules $F_f$ and $F_g$ over $B$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Construct $\theta$ satisfying $1,2$ by applying Lemma. Given such $\theta$, let's modify it so it also satisfies $3,4$. Actually, we modify $\theta$ such that $g=\sigma\theta\circ f\circ\theta^{-1}=\theta\circ[u]_f\circ f\circ\theta^{-1}=\theta\circ f\circ[u]_f\circ\theta^{-1}=h$, $\sigma h=\sigma\theta\circ f\circ[u]_f(\sigma\theta)^{-1}=\sigma\theta\circ f\circ\theta^{-1}=h$, so $h\in A[[x]]_+$
+\end{proof}
+
+\begin{theorem}
+$K^{LT},\phi_\pi$ is independent of $\pi$
+\end{theorem}
+
+\begin{proof}
+Idea: If $\pi,\varpi$ are two different uniformizers, $f\in F_\pi,$, $f\in F_\varpi,$, they are iso whose base change from $A=O_K$ to $B=O_{\breve K}$, $\breve K$ is the completion of $K^{ur}$
+\end{proof}
+
+\begin{fact}
+If $L$ is discretely valued field, then $L$ is algebraically closed in $\hat L$, i.e. every element in $\hat L-L$ is transcendental over $L$
+\end{fact}
+
+\begin{fact}
+Suppose $L/K$ is a finite extension of discretely valued fields, then $K$ is algebraically closed in $\hat L$
+\end{fact}
+
+Frobenius reciprocity:
+\[\Hom_G(X,CoInd^G_HA)\cong\Hom_H(X,A)\]
+\[\Hom_G(Ind^G_HA,X)\cong\Hom_H(A,X)\]
+
+\begin{lemma}
+$\Ind^G:Ab\to G-modules$ takes inj to inj, $CoInd^G:$ takes proj to proj
+\end{lemma}
+
+\begin{corollary}
+The category of $G$ modules have enough inj and proj
+\end{corollary}
+
+A G module X is relatively inj if it's a direct summand of a coinduced G module. relative proj.
+
+\begin{proposition}
+$H^i(G,X)=0,\forall i\geq1$ For $X$ relative inj. $H_i(G,Y)=0,\forall i\geq1$ For $Y$ relative proj
+\end{proposition}
+
+\begin{proof}
+$P_\bullet\to\mathbb Z\to0$ free resolution. Without loss of generality, say $X=CoInd^GA$, $\Hom_G(P_\bullet,CoInd^GA)\cong\Hom_Z(P_\bullet,A)=0$
+\end{proof}
+
+\end{document}

@@ -1,0 +1,70 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+Let $\mathscr A$ be an abelian category, a ($\mathbb Z$-graded) \textbf{chain complex}\index{Chain complex} $C_\bullet$ is 
+\[\cdots\to C_{1}\xrightarrow{\partial_1}C_0\xrightarrow{\partial_0}C_{-1}\to\cdots\]
+Such that $\partial_{n}\circ\partial_{n+1}=0$, $\partial_i$ are called \textbf{boundary maps(differentials)}\index{Boundary maps} \par
+We can define chain maps, chain homotopy, boundaries, cycles, and homology groups, and we say the chain complex is exact if each homology groups is zero, the chain complexes form the \textbf{category of chain complexes}\index{Category of chain complexes} $Ch_\bullet\mathscr A$ \par
+Similarly, we can also define cochain complex $C^\bullet$
+\[\cdots\to C^{-1}\xrightarrow{d^{-1}}C^0\xrightarrow{d^0}C^1\to\cdots\]
+Such that $d^{n+1}\circ d^{n}=0$, $d^i$ are called \textbf{coboundary maps}\index{Coboundary maps}, cochain complexes form the \textbf{category of cochain complexes} $Ch^\bullet\mathscr A$ 
+\end{definition}
+
+\begin{lemma}
+$\phi:Ch^\bullet\mathscr A\to Ch_\bullet\mathscr A$, $(\phi C_\bullet)^n=C_{-n}$, $\phi(d^n)=\partial_n$
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+Suppose $X_\bullet$ is a chain complex, we can define \textbf{cycles}\index{Cycle} $Z_n(X):=\ker(X_n\xrightarrow{\partial_n} X_{n-1})$, \textbf{boundaries}\index{Boundary} $B_n(X):=\mathrm{im}(X_{n+1}\xrightarrow{\partial_n} X_{n})$ and \textbf{homology}\index{Homology} $H_n(X):=\mathrm{coker}(B_n\to Z_n)$, actually, $Z_n,B_n,H_n$ are functors $Ch\mathscr A\to\mathscr A$
+\end{definition}
+
+\begin{definition}
+$\phi:X_\bullet\to Y_\bullet$ is called a \textbf{quasi-isomorphism}\index{Quasi-isomorphism} if $H_n(\phi):H_nX\to H_nY$ are isomorphisms
+\end{definition}
+
+\begin{example}
+Consider
+\begin{center}
+\begin{tikzcd}
+X_\bullet: & 0 \arrow[r] & \mathbb Z \arrow[r, "\times 5"] \arrow[d] & \mathbb Z \arrow[r] \arrow[d, "\mod 5"] & 0 \\
+Y_\bullet: & 0 \arrow[r] & 0 \arrow[r]                               & \mathbb Z/5\mathbb Z \arrow[r]          & 0
+\end{tikzcd}
+\end{center}
+\end{example}
+
+\begin{definition}
+Pick $p\in\mathbb Z$, define the \textbf{translation}\index{Translation of a chain complex} of $X$ by $p$ is $X_\bullet[p]$ where $(X_\bullet[p])_n=X_{p+n}$, differential $X_\bullet[p]_n\to X_\bullet[p]_{n-1}$ is given by $(-1)^p\partial$
+The \textbf{translation functor} $T:Ch(\mathscr A)\to Ch(\mathscr A)$, $X\mapsto X_\bullet[1]$ is an auto morphism of $Ch(\mathscr A)$
+\end{definition}
+
+\begin{example}
+Suppose $X$ is a topological space, $R$ is a ring, $C^{\mathrm{sing}}_*(X)$ is the singular chain complex, $\Sigma X$ is the suspension of $X$, we have the Freudenthal theorem $H^k(\Sigma X)\cong H^{k-1}(X)$ for $k>0$
+\end{example}
+
+\begin{definition}
+Pick $p\in\mathbb Z$, define the \textbf{truncation}\index{Truncation of a chain complex} of $X$ at $p$ is $\tau_{\geq p} X$, where $(\tau_{\geq p} X)_k=\begin{cases}
+0, &k<p \\
+Z_pX, &k=p \\
+X_k, &k>p
+\end{cases}$, and define the cokernel of $\tau_{\geq p}X\to X$ to be $\tau_{<p}X$. We get the \textbf{truncation functors} $\tau_{\geq p}X\to X$ and $X\to\tau_{<p}X$
+Moreover, $H_*:\tau_{\geq p}X\to X$ induce isomorphisms for $k\geq p$ and zero maps for $k<p$, $H_*:X\to\tau_{<p}X$ induce isomorphisms for $k< p$ and zero maps for $k\geq p$
+\end{definition}
+
+\begin{example}
+Consider $p=0$
+\begin{center}
+\begin{tikzcd}
+X_2 \arrow[d, equal] \arrow[r] & X_1 \arrow[d, equal] \arrow[r] & Z_0X \arrow[d, hook] \arrow[r]     & 0 \arrow[d] \arrow[r]                           & 0 \arrow[d]                           \\
+X_2 \arrow[r] \arrow[d]                      & X_1 \arrow[r] \arrow[d]                      & X_0 \arrow[r] \arrow[d, two heads] & X_{-1} \arrow[r] \arrow[d, equal] & X_{-2} \arrow[d, equal] \\
+0 \arrow[r]                                  & 0 \arrow[r]                                  & X_0/Z_0 \arrow[r]                  & X_{-1} \arrow[r]                                & X_{-2}                               
+\end{tikzcd}
+\end{center}
+\end{example}
+
+\end{document}

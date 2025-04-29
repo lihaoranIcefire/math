@@ -1,0 +1,59 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{example}
+Define $A_{p,q}=C_{p+q}(V^q)\otimes_{\mathbb Z[GL(q,V)]}\mathbb Z$, $V$ is a vector space, and $C_*$ is the tuple complex, $\partial':A_{p,q}\to A_{p-1,q}$ is $\partial\otimes 1$, $\partial'':A_{p,q}\to A_{p,q-1}$, $(v_0,\cdots,v_{p+q})\mapsto\sum(-1)^i(\overline{v_0},\cdots,\widehat{\overline{v_i}},\cdots,\overline{v_{p+q}})$ where $\overline v$ is the projection of $v$ in $V/\langle v\rangle$
+\end{example}
+
+\begin{theorem}
+Recall $Tor_i(M,N)=H_i(F_*\otimes N)$ where $F_*$ is a free resolution of $M$. $Tor_i(M,N)=Tor_i(N,M)$
+\end{theorem}
+
+\begin{proof}
+Let $F_*,G_*$ be free resolutions of $M,N$, define $C_{*,*}=F_*\otimes G_*$, then
+\['E^1_{p,q}=H_q(F_p\otimes G_*)\cong F_p\otimes H_q(G_*)=\begin{cases}
+F_p\otimes N,&q=0\\
+0,&\text{otherwise}
+\end{cases}\]
+\[''E^1_{p,q}=H_p(F_*\otimes G_q)\cong H_p(F_*)\otimes G_q=\begin{cases}
+M\otimes G_q,&p=0\\
+0,&\text{otherwise}
+\end{cases}\]
+$'E^2_{p,0}=Tor_p(M,N)$, $''E^2_{0,q}=Tor_q(N,M)$, since both spectral sequences converge to $H_*(Tot)$, $Tor_i(M,N)\cong grH_i(Tot)\cong Tor_i(N,M)$
+\end{proof}
+
+\begin{theorem}[Comparison theorem]\label{Comparison theorem}
+Suppose $C_*,D_*$ are filtered chain complexes, $f_*:C_*\to D_*$ is a chain map preserving the filtration, i.e. $f_*:F_pC_*\to F_pD_*$, then it induces a map on the first page $E^1_{p,q}(C_*)=H_{p+q}(F_pC_*/F_{p-1}C_*)\to H_{p+q}(F_pD_*/F_{p-1}D_*)\cong E^1_{p,q}(D_*)$, which then induce maps on every page, including the infinity page \par
+If the induced map $f_*:E^r(C_*)\to E^r(D_*)$ is an isomorphism on some page, then $f:H_*(C)\to H_*(D)$ is also an isomorphism
+\end{theorem}
+
+\begin{corollary}
+Suppose $f:C_{*,*}\to D_{*,*}$ is a map between double complexes, and induce isomorphism $f_*:'E^1(C_*)\to 'E^1(D_*)$ or $f_*:''E^1(C_*)\to ''E^1(D_*)$, then $f:H_*(Tot(C_*))\to H_*(Tot(D_*))$ is also an isomorphism
+\end{corollary}
+
+\begin{definition}
+Suppose $M$ is a Riemannian manifold, a $\delta$ neighborhood of $p$ is the image of $B_\delta(0)\subseteq T_pM\xrightarrow{\exp}M$, denoted by $U_p=\exp(B_\delta(0))$ where any two points in $U_p$ can be connected by a unique geodesic
+\end{definition}
+
+\begin{remark}
+A prototypical example is the sphere
+\end{remark}
+
+\begin{theorem}\label{delta tuple chain complex and singular chain complex induce same homology}
+Let $C^\delta_*(M)$ denote the subcomplex of the tuple complex where each tuple lie in some $\delta$ neighborhood, the inclusion $C^\delta_*(M)\hookrightarrow C^\mathrm{sing}_*(M)$ induces an isomorphism $H^\delta_*(M)\to H^\mathrm{sing}_*(M)$
+\end{theorem}
+
+\begin{proof}
+Let $\mathcal U=\{U_i\}_{i\in I}$ be a covering of $M$ consists of $\delta$ neighborhoods, then $U_{i_0}\cap\cdots\cap U_{i_p}$ are contractible(pick a point $x$ and connect with other points by the unique geodesics, then look at the exponential map at $x$), define double complexes \par
+\[C^\delta_{p,q}=\bigoplus_{(i_0,\cdots,i_p)}C^\delta_q(U_{i_0}\cap\cdots\cap U_{i_p}),\quad C^\mathrm{sing}_{p,q}=\bigoplus_{(i_0,\cdots,i_p)}C^\mathrm{sing}_q(U_{i_0}\cap\cdots\cap U_{i_p})\]
+With $\partial'=\sum_{j=0}^p(-1)^{j}\varepsilon_{i_j}$, where $\varepsilon_i:C_n(U_{i_0}\cap\cdots\cap U_{i_p})\hookrightarrow C_n(U_{i_0}\cap\cdots\cap\widehat{U_{i_j}}\cap\cdots\cap U_{i_p})$ is inclusion, and $\partial''=(-1)^p\partial$. Then the inclusion $C^\delta_*(M)\hookrightarrow C^\mathrm{sing}_*(M)$ induces a map on the double complex \par
+It is easy to show that $\bigoplus C^\delta_q(U_{i_0}\cap U_{i_1})\to\bigoplus C^\delta_q(U_{i})\to C^\delta_q(M)\to0$ is exact, hence $H_0(C^\delta_{*,q})=C^\delta_q(M)$. Define $P_p:C^\delta_{p,q}\to C^\delta_{p+1,q}$, for any $q$ geodesic simplex $\sigma$, fix $U_j$ containing $\sigma$, sending $\sigma$ in $C^\delta_q(U_{i_0}\cap\cdots\cap U_{i_p})$ to $\sigma$ in $C^\delta_q(U_j\cap U_{i_0}\cap\cdots\cap U_{i_p})$, then $\partial P+P\partial=1$, hence $H_p(C^\delta_{*,q})=0, p>0$ \par
+Similar for $H_p(C^\mathrm{sing}_{*,q})$, then apply Theorem \ref{Comparison theorem}
+\end{proof}
+
+\begin{example}
+We are mostly interested in tuple chain complex of $S^n$ with each tuple lie in a hemisphere, due to Theorem \ref{delta tuple chain complex and singular chain complex induce same homology}, $H^{\frac{\pi}{2}}_k(S^n)=H^\mathrm{sing}_k(S^n)$ is $\mathbb Z$ when $k=0,n$ and $0$ otherwise
+\end{example}
+
+\end{document}

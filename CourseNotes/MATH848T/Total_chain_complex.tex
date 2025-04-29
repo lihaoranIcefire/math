@@ -1,0 +1,28 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{theorem}[Algebraic K\"unneth formula]\label{Algebraic Kunneth formula}
+If $C_*,D_*$ are chain complexes, then we have an exact sequence
+\[0\to\bigoplus_{p+q=n}H_p(C)\otimes H_q(D)\to H_n(C\otimes D)\to\bigoplus_{p+q=n-1}Tor(H_p(C),H_q(D)\to0\]
+\end{theorem}
+
+\begin{theorem}[Topological K\"unneth formula]
+Since $C_*(X\times Y)\cong C_*(X)\otimes C_*(Y)$, apply Theorem \ref{Algebraic Kunneth formula}, we get an exact sequence
+\[0\to\bigoplus_{p+q=n}H_p(X)\otimes H_q(Y)\to H_n(X\times Y)\to\bigoplus_{p+q=n-1}Tor(H_p(X),H_q(Y)\to0\]
+\end{theorem}
+
+\begin{example}
+Consider $C_{p,q}:=C^\mathrm{sing}_q(\overbrace{X\times\cdots\times X}^{p})$, $\partial':=\sum (-1)^i\varepsilon_i$, where $\varepsilon_i:C_q^\mathrm{sing}(X^p)\to C_q^\mathrm{sing}(X^{p-1})$ by removing the $i$-th coordinate, $\partial'':=(-1)^p\partial$
+\end{example}
+
+\begin{definition}
+Suppose $C_{*,*}$ is a double complex, there are two natural filtrations on $Tot_*$, $\displaystyle'F_pTot_n=\bigoplus_{r\leq p}C_{r,n-r}$, $\displaystyle''F_pTot_n=\bigoplus_{r\geq p}C_{n-r,r}$, hence we have two corresponding spectral sequences \par
+For $'F_pTot_*$, $'E^1_{p,q}=H_{p+q}('F_pTot_*/'F_{p-1}Tot_*)=H_q(C_{p,*})$, $\partial^1=\partial'$, $'E^2_{p,q}=H_p(H_q(C_{p,*}))$ \par
+For $''F_pTot_*$, $''E^1_{p,q}=H_{p+q}('F_pTot_*/''F_{p-1}Tot_*)=H_p(C_{*,q})$, $\partial^1=\partial''$, $''E^2_{p,q}=H_p(H_q(C_{p,*}))$ \par
+However, unlike $\partial'$ has bidegree $(-1,0)$ which matches up with that $\partial^1$ normally has bidegree $(-1,0)$, $\partial''$ has bidegree $(0,-1)$, there are two ways to work around this \par
+(1) Flip the double complex $C'_{p,q}=C_{q,p}$ \par
+(2) Flip the differential
+\end{definition}
+
+\end{document}

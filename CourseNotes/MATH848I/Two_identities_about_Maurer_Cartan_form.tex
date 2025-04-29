@@ -1,0 +1,19 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{remark}[Uniqueness of $\omega^G$]
+$\omega^G$ is the unique left invariant $\mathfrak g$ valued $1$-form on $G$ given an isomorphism $\omega^G_e:T_eG\to\mathfrak g$, $\omega^G_g=L_{g^{-1}}^*\omega^G_e$
+\end{remark}
+
+\begin{proposition}\label{Idetity 1 for Maurer-Cartan form}
+Due to the left invariance of $\omega^G$ and the fact that $R_g,L_h$ commutes, we have $L_{h*}R_{g*}X=R_{g*}L_{h*}X=R_{g*}X$, for any $X\in\mathfrak X^G(G)$, thus pushforward of conjugation $C_{g^{-1}}=L_{h}R_g$ also preserves $\mathfrak X^G(G)$, giving an automorphism of $\mathfrak g$ \par
+Similarly, it is easy to see
+\[R_g^*\omega^G=L_{g^{-1}}^*R_g^*\omega^G=Ad(g)^{-1}\omega^G\]
+\end{proposition}
+
+\begin{proposition}\label{Idetity 2 for Maurer-Cartan form}
+Given $\alpha:U\to G$, $\alpha^*\omega^G\in\Omega^1(U,\mathfrak g)$, $p:U\to G$, let $\beta(x)=\alpha(x)p(x)$, then $d\beta=R_{p*}\circ d\alpha+L_{\alpha*}\circ dp$, $\beta^*\omega^G=Ad(p)^{-1}\alpha^*\omega^G+p^*\omega^G$
+\end{proposition}
+
+\end{document}

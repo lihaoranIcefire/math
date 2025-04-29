@@ -1,0 +1,68 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{problem}
+Using the exactness of
+\[
+0\rightarrow \mathbb{C}\hookrightarrow\mathcal{O}\xrightarrow{d}\mathcal{O}\rightarrow 0
+\]
+we have exact sequence
+\[
+0\rightarrow H^{0}(\Omega,\mathbb{C})\rightarrow H^{0}(\Omega,\mathcal{O})\xrightarrow{d}H^{0}(\Omega,\mathcal{O})\rightarrow H^{1}(\Omega,\mathbb{C})\rightarrow H^{1}(\Omega,\mathcal{O})
+\]
+but according to Mittag-Leffler's theorem, we know that $H^{1}(\Omega,\mathcal{O})=0$, thus we have exact sequence
+\[
+0\rightarrow \mathbb{C}(\Omega)\rightarrow\mathcal{O}(\Omega)\xrightarrow{d}\mathcal{O}(\Omega)\rightarrow H^{1}(\Omega,\mathbb{C})\rightarrow 0
+\]
+Thus $\dim\mathrm{coker}d=\dim H^{1}(\Omega,\mathbb{C})$, also from this we know that $H^{1}(\Omega,\mathbb{C})=0$ if $\Omega$ is simply connected \par
+\textbf{(i)} \par
+For any $k\geq 0$, Take $\Omega$ to be $\mathbb{C}-\{1,\cdots,k\}$, Consider covering $$U_{1}:=\mathbb{C}-[1,\infty), U_{i}:=\mathbb{C}-(-\infty,i-1]-[i,\infty), \cdots, U_{k+1}:=\mathbb{C}-(-\infty,k], \left(\forall 2\leq i\leq k\right)$$Then $\{U_{i}\}_{i=1}^{k+1}$ forms a Leray covering since $U_{i}$ is simply connected and $H^{1}(U_{i},\mathbb{C})=0$, hence $H^{1}(\Omega,\mathbb{C})=H^{1}(\mathcal{U},\mathbb{C})$ \par
+Notice that $U_{i}\cap U_{j}=\{\mathrm{Im}z>0\}\cup\{\mathrm{Im}z<0\}, i\neq j$ \par
+For any $(c_{ij})\in Z^{1}(\mathcal{U},\mathbb{C})$, according to cocycle relation, we only need to know $\{c_{12},c_{23},\cdots,c_{k,k+1}\}$, and each $c_{i,i+1}$ has two components, let's denote as $c_{i,i+1}^{+},c_{i,i+1}^{-}\in \mathbb{C}$, thus $Z^{1}(\mathcal{U},\mathbb{C})\cong \mathbb{C}^{2k}$, on the other hand, for any $(c_{i})\in C^{0}(\mathcal{U},\mathbb{C})$, $\delta\left((c_{i})\right)=(c_{i}-c_{j})$, thus $B^{1}(\mathcal{U},\mathbb{C})$ is the subgroup of $Z^{1}(\mathcal{U},\mathbb{C})$ consists of exactly elements with $c_{i,i+1}^{+}=c_{i,i+1}^{-}$, thus $Z^{1}(\mathcal{U},\mathbb{C})\cong \mathbb{C}^{k}$ and $H^{1}(\mathcal{U},\mathbb{C})=Z^{1}(\mathcal{U},\mathbb{C})/B^{1}(\mathcal{U},\mathbb{C})\cong\mathbb{C}^{k}$, thus $\dim H^{1}(\mathcal{U},\mathbb{C})=k$ \par
+\textbf{(ii)} \par
+Take $\Omega$ to be $\mathbb{C}-\mathbb{Z}_{>0}$, and consider covering$$U_{1}:=\mathbb{C}-[1,\infty), \cdots, U_{i}:=\mathbb{C}-(-\infty,i-1]-[i,\infty), \cdots, \left(i\geq 2\right)$$Then $\{U_{i}\}_{i=1}^{\infty}$ forms a Leray covering since $U_{i}$ is simply connected and $H^{1}(U_{i},\mathcal{C})=0$, hence $H^{1}(\Omega,\mathcal{C})=H^{1}(\mathcal{U},\mathcal{C})$ \par
+Notice that $U_{i}\cap U_{j}=\{\mathrm{Im}z>0\}\cup\{\mathrm{Im}z<0\}, i\neq j$ \par
+For any $(c_{ij})\in Z^{1}(\mathcal{U},\mathbb{C})$, according to cocycle relation, we only need to know $\{c_{12},\cdots,c_{k,k+1},\cdots\}$, and each $c_{i,i+1}$ has two components, let's denote as $c_{i,i+1}^{+},c_{i,i+1}^{-}\in \mathbb{C}$, on the other hand, for any $(c_{i})\in C^{0}(\mathcal{U},\mathbb{C})$, $\delta\left((c_{i})\right)=(c_{i}-c_{j})$, thus $B^{1}(\mathcal{U},\mathbb{C})$ is the subgroup of $Z^{1}(\mathcal{U},\mathbb{C})$ consists of exactly elements with $c_{i,i+1}^{+}=c_{i,i+1}^{-}$, thus $H^{1}(\mathcal{U},\mathbb{C})=Z^{1}(\mathcal{U},\mathbb{C})/B^{1}(\mathcal{U},\mathbb{C})$ is of infinite dimension
+\end{problem}
+
+\begin{problem}
+\textbf{(a)} \par
+Suppose $\alpha_{X}(f)=0, f\in H^{0}(X,\mathcal{F})=\mathcal{F}(X)$, then $\alpha_{x}(f|_{x})=0$, $f|_{x}$ being the germ of $f$ at $x$, by the injectivity of $\alpha$, we know that $f|_{x}=0=0|_{x}$, thus $\exists U_{x} \ni x$ such that $f|_{U_{x}}=0$, and also $X=\bigcup_{x\in X} U_{x}$, thus by the sheaf axiom, we know that $f=0$, hence $\alpha_{X}$ is injective \par
+\textbf{(b)} \par
+We know that $\beta\alpha=0$, thus $\left(\beta\alpha\right)_{x}(f|_{x})=0, \forall f\in \mathcal{F}(X)$, as argued above, we know that $f=0$, thus $\beta_{X}\alpha_{X}=\left(\beta\alpha\right)_{X}=0$ \par
+On the other hand, $\forall g\in \ker\beta_{X}$, $\beta_{X}(g)=0$, thus $\beta_{x}(g|_{x})=0$, $\exists V_{x}\ni x$ such that $\beta_{V_{x}}(g)=0$, also, $\exists f_{x}\in \mathcal{F}(U_{x})$ such that $\alpha_{U_{x}}(f_{x})=g|_{U_{x}}$ where $x\in U_{x}\subset V_{x}$. Thus, for any $U_{x}\cap U_{y}\neq \varnothing$, then $\alpha_{U_{x}\cap U_{y}}(f_{x}-f_{y})=0$, but for the same reason we know that $\alpha_{U_{x}\cap U_{y}}$ is injective, thus $f_{x}=f_{y}$ on $U_{x}\cap U_{y}$, by sheaf axiom, there exists $f\in \mathcal{F}(X)$ such that $f|_{U_{x}}=f_{x}$, hence $g=\alpha(f)$, therefore $\mathrm{im}\alpha_{X}=\ker\beta_{X}$ \par
+\textbf{(c)} \par
+$\forall g\in H^{0}(X,\mathcal{G}), \forall \mathcal{U}$, $\beta_{U_{i}}(g|_{U_{i}})=\beta_{X}(g)|_{U_{i}},g-g|_{U_{i}\cap U_{j}}=0\in \ker\beta_{U_{i}\cap U_{j}}=\mathrm{im}\alpha_{U_{i}\cap U_{j}}$, and since $\alpha_{U_{i}\cap U_{j}}$ is injective, thus $\delta\circ\beta_{X}(g)=0$ \par
+On the other hand, $\forall h\in \ker\delta, \exists\mathcal{U}, \exists g_{i}\in \mathcal{G}(U_{i})$, such that $\beta_{U_{i}}(g_{i})=h|_{U_{i}}$, and $g_{i}-g_{j}|U_{i}\cap U_{j}\in\ker\beta_{U_{i}\cap U_{j}}=\mathrm{im}\alpha_{U_{i}\cap U_{j}}$, $\exists_{1}f_{ij}\in\mathcal{F}(U_{i}\cap U_{j})$ with $\alpha_{U_{i}\cap U_{j}}(f_{ij})=g_{i}-g_{j}|U_{i}\cap U_{j}$, then $\exists\mathcal{f_{i}}\in\mathcal{F}(U_{i})$ such that $f_{ij}=f_{i}-f_{j}|U_{i}\cap U_{j}$, observe that on $U_{i}\cap U_{j}$
+\[
+\begin{aligned}
+\left(\alpha_{U_{i}}(f_{i})-g_{i}\right)-\left(\alpha_{U_{j}}(f_{j})-g_{j}\right)
+&=\left(\alpha_{U_{i}}(f_{i})-\alpha_{U_{j}}(f_{j})\right)-\left(g_{i}-g_{j}\right) \\
+&=\alpha_{U_{i}\cap U_{j}}(f_{i}-f_{j})-\left(g_{i}-g_{j}\right) \\
+&=0
+\end{aligned}
+\]
+Thus $\exists g\in \mathcal{G}(X)$ such that $g|_{U_{i}}=\alpha_{U_{i}}(f_{i})-g_{i}$, then we have $\beta_{U_{i}}(g|_{U_{i}})=\beta_{U_{i}}(\alpha_{U_{i}}(f_{i})-g_{i})=\beta_{U_{i}}(g_{i})=h|_{U_{i}}$, hence $\beta_{X}(g)=h$, therefore $\mathrm{im}\beta_{X}=\ker\delta$ 
+\end{problem}
+
+\begin{problem}
+\textbf{(a)} \par
+Suppose $s_{1},s_{2}$ are nonzero meromorphic sections of $L$ over $X$, then there exists nonzero meromorphic function $f$ on $X$ such that $s_{2}=fs_{1}$, if $f$ is constant, surely $\mathrm{div}(s_{1})=\mathrm{div}(s_{2})$, otherwise, $f: X\rightarrow\mathbb{P}^{1}$ would be a non-constant proper holomorphic mapping which has as many zeros as poles, thus $\mathrm{div}(f)=0$, therefore $\mathrm{div}(s_{1})=\mathrm{div}(f)+\mathrm{div}(s_{2})=\mathrm{div}(s_{2})$, thus $\deg (L)$ is well-defined \par
+\textbf{(b)} \par
+Define $f_{1}(z)=z^{k}$ on $U_{1}$ and $f_{2}(z)=1$ on $U_{2}$, then $f_{1}=g_{12}f_{2}$, thus $f_{i}$ defines a section $s$ of $L_{k}$ over $\mathbb{P}^{1}$, hence $\deg L_{k}=\mathrm{div}(s)=k$ \par
+\textbf{(c)} \par
+Define $f_{1}(z)=g_{12}(z)$ on $U_{1}$ and $f_{2}(z)=1$ on $U_{2}$, then $f_{1}=g_{12}f_{2}$, thus $f_{i}$ defines a section $s$ of $L_{k}$ over $\mathbb{P}^{1}$, since $g_{12}(z)\neq 0$ is holomorphic on $U_{1}\cap U_{2}$, thus $f_{1}$ can only have zeros or poles at $0$, hence $\deg L_{k}=\mathrm{div}(s)=\dfrac{1}{2\pi i}\displaystyle{\int_{|z|=1}}\dfrac{g_{12}^{'}(z)}{g_{12}(z)}dz$ by argument principle
+\end{problem}
+
+\begin{problem}
+Suppose $L$ and $L^{*}$ both have non-trivial global holomorphic sections $s_{1}$ and $s_{2}$, let $D_{1}:=\mathrm{div}(S_{1})$, $D_{2}:=\mathrm{div}(S_{2})$, then $L\cong L(D_{1})$, $L^{*}\cong L(D_{2})\cong L(-D_{1})$, which is equivalent to $D_{1},D_{2}\geq 0$ and $D_{1}+D_{2}=\mathrm{div}(f)$ for some meromorphic function $f$ on $X$. Since $0\leq\deg(D_{1}+D_{2})=\deg\mathrm{div}(f)=0$, $D_{1}+D_{2}=0$, hence $D_{1}=-D_{2}\leq0\leq D_{1}$, thus $D_{1}=0$, $L\cong \mathcal{O}$ is trivial \par
+Conversely, if $L$ is trivial, constant could be a global holomorphic section on both $L$ and $L^{*}$
+\end{problem}
+
+\begin{problem}
+There exists such a sequence. \par
+Consider $K_{n}:=\{0\}\cup\{re^{i\theta}\in\mathbb{C}|r\in[\frac{1}{n},n], \theta\in[\frac{1}{n},2\pi]\}\subset\mathbb{C}$ is a compact set, we can define a holomorphic function $f_{n}$ on a open neighborhood of $K_n$ such that $f(0)=1$ and $f|_{K_n\setminus\{0\}}=0$, then using Runge's approximation theorem, we can find a polynomial $Q_{n}$ such that $|Q_n-f_n|<\dfrac{1}{n}$ on $K_n$, then define $P_n=\dfrac{Q_n}{Q_n(0)}$, we can easily verify that $P_n$ could be a desired sequence
+\end{problem}
+
+\end{document}

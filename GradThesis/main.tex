@@ -1,0 +1,308 @@
+\documentclass[12pt]{thesis}
+
+
+\usepackage{tocloft}
+\renewcommand{\cftchapfont}{\bfseries}
+\renewcommand{\cftchappagefont}{\bfseries}
+\renewcommand{\cftchappresnum}{Chapter }
+\renewcommand{\cftchapaftersnum}{:}
+\renewcommand{\cftchapnumwidth}{6em}
+
+
+%some packages may not be needed depending on your use
+\usepackage{titlesec}
+   \titleformat{\chapter}
+      {\normalfont\large}{Chapter \thechapter:}{1em}{}
+
+
+
+\usepackage{lipsum} %Remove before final draft, used to generate filler text
+
+\usepackage{cite}
+\usepackage{pdflscape} %allows turning pages to landscape
+\usepackage{indentfirst}
+\usepackage{latexsym}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage{tabls}
+\usepackage{wrapfig}%for wrapping text around figures in the document; don't need figure wrapping in this document
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{supertabular}%for large tables that do not fit on a single page; also probably won't need this
+%\usepackage{subeqn} %removed to fix error with glossaries package
+% \usepackage{subfigure}%allows creation of subfigures (i.e.  Fig #a, Fig. #b...)
+\usepackage{microtype}%readablity enhancements
+\usepackage[bookmarks, bookmarksnumbered, colorlinks=true, plainpages=false, pdfpagelabels, citecolor=blue, urlcolor=blue, filecolor=blue, linkcolor=blue]{hyperref}
+\usepackage{bookmark}%manually add missing bookmarks with \pdfbookmark
+\usepackage[toc, nonumberlist]{glossaries} %needs to be after hyperref
+\usepackage{amssymb,amsmath,amsfonts,mathrsfs,mathtools,amsthm,bm}
+\usepackage{shuffle}
+\usepackage{tikz}
+\usepackage{pgfplots} % drawing axis, addplots
+\pgfplotsset{compat=newest} % ensure position and scaling compatibility
+\usetikzlibrary{intersections} % intersections in tikz
+\usetikzlibrary{calc} % calculations in tikz, and calculate length of texts
+\usetikzlibrary{hobby} % smoothly connecting points
+\usetikzlibrary{decorations.markings} % put arrow in the middle
+\tikzset{
+    ->-/.style={decoration={markings,mark=at position #1 with {\arrow{>}}},postaction={decorate}}
+} % use as [->-=#1], put the arrow at #1, where 0 <= #1 <= 1
+\usetikzlibrary{arrows}
+\tikzset{leftrightsquig/.style={to-to, decorate, decoration={
+    zigzag,
+    segment length=5,
+    amplitude=1,
+    pre=lineto,
+    post=lineto,
+    post length=2pt,
+    pre length=2pt}}}
+\usepackage{tikz-3dplot}
+\usepackage{tikz-cd}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem*{theorem*}{Theorem}
+
+% \theoremstyle{remark}
+% \newtheorem*{remark}{remark}
+
+\DeclareMathOperator{\INV}{INV}
+\DeclareMathOperator{\Li}{Li}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\Symb}{Symb}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\dep}{dep}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\SL}{SL}
+
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{xcolor}
+% Cleveref MUST come after ams packages if AMS packages are used.
+\usepackage{cleveref}
+
+%Labelling and referencing with section numbers
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+% Default value of number of columns in a matrix
+\setcounter{MaxMatrixCols}{100}
+
+\newcommand{\tbsp}{\rule{0pt}{18pt}} %used to get a vertical distance after \hline
+\renewcommand{\baselinestretch}{2}
+\setlength{\textwidth}{5.9in}
+\setlength{\textheight}{9in}
+\setlength{\topmargin}{-.50in}
+\setlength{\oddsidemargin}{.55in}
+\setlength{\parindent}{.4in}
+\pagestyle{empty}
+
+
+\setacronymstyle{long-short} %first use of acronym gives full name
+\glsdisablehyper %turns off hyperlinking
+% \loadglsentries{definitions} %defines file with all entries
+\renewcommand{\glossarysection}[2][]{} %Hides glossary title so it can be named manually
+\makeglossaries
+
+
+\begin{document}
+\hypersetup{pageanchor=false} %Fixes hyperref error with unnumbered title pages
+\include{Abstract} %(must be first, required, non-numbered)
+\include{Titlepage} %(must follow Abstract, required, non-numbered)
+\include{Copyright} %(highly recommended, non-numbered)
+
+\hypersetup{pageanchor=true}%Pages from this point start at lower-case Roman number ii)
+\pagestyle{plain}
+\pagenumbering{roman}
+\setcounter{page}{2}
+
+%\addcontentsline{toc}{chapter}{Preface}
+%\include{Preface}  %(if present, start at lower-case Roman number ii)
+%\addcontentsline{toc}{chapter}{Foreword}
+%\include{Foreword} %(if present, lower-case Roman)
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Acknowledgements}%adds to toc so hyperref links correctly
+\include{Acknowledgements.tex} %(if present, lower-case Roman)
+
+\renewcommand{\baselinestretch}{1}
+\small\normalsize
+
+\tableofcontents %(required, lower-case Roman)
+
+% \newpage
+% \listoftables %(if present, lower-case Roman)
+
+\newpage
+\listoffigures %(if present, lower-case Roman)
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Abbreviations and Symbols} %Manually put in ToC
+\renewcommand{\baselinestretch}{1}
+
+\begin{center}
+\large{List of Abbreviations and Symbols} %Manually create centered title
+
+\vspace{1cm}
+
+\small
+
+\begin{tabular}{ m{4cm}  m{11cm} } 
+$\Li_{n_1,\cdots,n_d}(x_1,\cdots,x_d)$ & Standard multiple polylogarithms \\
+$\mathcal L_{n_1,\cdots,n_d}(x_1,\cdots,x_d)$ & Single-valued multiple polylogarithms \\
+$\widehat{\mathcal L}_{n_1,\cdots,n_d}$ & Lifted multiple polylogarithms \\
+$S_d(\mathbb C)$ & Domain for multiple polylogarithms of depth $d$ \\
+$\widetilde S_d(\mathbb C)$ & Universal cover of $S_d(\mathbb C)$ \\
+$\widehat S_d(\mathbb C)$ & Universal abelian cover of $S_d(\mathbb C)$ \\
+$\widehat{\mathbb C}$ & Universal abelian cover of $\mathbb P^1-\{0,1,\infty\}$ or $\widehat S_1(\mathbb C)$ \\
+$I_\gamma(a_0;\cdots;a_{n+1})$ & Iterated integral of logarithmic differentials $\frac{dz}{z-a_i}$ \\
+$H^i_{\mathcal M}(F,\mathbb Z(n))$ & Motivic cohomology of a field $F$ \\
+$\Delta_{1,\cdots,1}$ & Iterated coproduct or the symbol map \\
+\hline
+$x_{i\to j}^{\pm}$ & Consecutive product $(x_i\cdots x_{j-1})^{\pm}$ \\
+$0^k$ & A tuple of $k$ zeros \\
+$\widetilde I(S)$ & Hopf algebra of symbolic iterated integrals with arguments in $S$ \\
+$I(S)$ & $\widetilde I(S)$ modulo degenerates \\
+$\mathbb I^{\Symb}$ & Hopf algebra generated by iterated integral symbols \\
+$\mathbb H^{\Symb}$ & Hopf algebra generated by multiple polylogarithms symbols \\
+$\mathbb L^{\Symb}$ & Lie coalgebra by modulo products in $\mathbb H^{\Symb}$ \\
+$\overline{\mathbb H}^{\Symb}$ & $\mathbb H^{\Symb}$ ajoined by inverted multiple polylogarithms symbols \\
+$\widehat {\mathbb H}^{\Symb}_{M}$ & Sheafification of morphisms from open subsets of $M$ to $\mathbb H^{\Symb}$ \\
+$\mathbb L_{M}$ & $\widehat {\mathbb H}^{\Symb}_{M}$ modulo by products and functional relations on $M$ \\
+$\overline{\INV}$ & Goncharov inversion of multiple polylogarithms for $\overline{\mathbb H}^{\Symb}$ \\
+$\INV$ & $\overline{\INV}$ modulo $\pi i$ \\
+$\Phi$ & Map turning symbols in $\mathbb I^{\Symb}$ into symbols in $\overline{\mathbb H}^{\Symb}$\\
+$w$ & One-form map that associates one-forms to multiple polylogarithms \\
+\hline
+$V^H$ & Variation matrix associated to a free contraction Hopf algebra $H$ \\
+$V^H_{p,q}$ & The $(p,q)$-th weight block of $V^H$ \\
+$V^H_n$ & Sum of $V^H_{p,q}$ such that $p+q=n$ \\
+$\Re^H$ & Realization of symbols in $H=\mathbb I^{\Symb},\overline{\mathbb H}^{\Symb},\mathbb H^{\Symb}$ as functions \\
+$\tau_{n_1,\cdots,n_d}(a)$ & Diagonal matrix with entries powers of $a$ according to the gradings \\
+$I^w(a_{i_0};\cdots;a_{i_{n+1}})$ & Splits $I(a_{i_0};\cdots;a_{i_{n+1}})$ as products according to the letters in $w$ \\
+$\widehat V$ & Lifted variation matrix made out of lifted multiple polylogarithms \\
+$\widehat\nabla$ & Connection on the lifted variation of mixed Hodge structures \\
+$\widehat\omega$ & Connection form for the lifted variation of mixed Hodge structures \\
+\hline
+$\mathcal M_{\nu_{i}}$ & Monodromy operator for iterated integrals around $x_i=0$ \\
+$\mathcal M_{\nu_{j,k}}$ & Monodromy operator for iterated integrals around $x_j\cdots x_k=1$
+\end{tabular}
+\end{center}
+
+\normalsize
+
+\vspace{3pt}
+
+\printglossary
+
+
+\newpage
+\setlength{\parskip}{0em}
+\renewcommand{\baselinestretch}{2}
+\small\normalsize
+
+%Pages from this point start at Arabic numeral 1
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Introduction}
+
+\input{introduction.tex}
+\newpage
+
+\chapter{Preliminaries}
+
+\input{preliminaries.tex}
+\newpage
+
+\chapter{Hopf Algebra of Multiple Polylogarithms and Its Associated One Forms}
+
+\input{Hopf_algebra_of_multiple_polylogarithms.tex}
+\newpage
+
+\chapter{Variation of Mixed Hodge Structures of Multiple Polylogarithms}
+
+\input{Variation_of_mixed_Hodge_structures_of_multiple_polylogarithms.tex}
+\newpage
+
+\chapter{Monodromy of variation matrices}
+
+\input{Monodromy_of_variation_matrices.tex}
+\newpage
+
+% \appendix
+% \chapter{Backgroud}
+% \section{why}
+% \section{why?}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\appendix
+\titleformat{\chapter}
+      {\normalfont\large}{Appendix \thechapter:}{1em}{}
+\include{Appendices/AppendixA}
+\include{Appendices/AppendixB}
+
+\renewcommand{\baselinestretch}{1}
+\small\normalsize
+
+%Assuming you are using BibTeX
+\newpage
+\bibliographystyle{unsrt}
+\bibliography{Bibliography}
+
+\end{document}

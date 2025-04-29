@@ -1,0 +1,225 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+Suppose $\mathscr C$ is an abelian category, $P$ is \textbf{projective}\index{Projective object} if functor $Hom(P,-):\mathscr C\to Sets$ sends epi to epi, or equivalently
+\begin{center}
+\begin{tikzcd}
+                 & P \arrow[d, "g"] \arrow[ld, "\exists h"', dashed] \\
+X \arrow[r, "f", two heads] & Y                                                
+\end{tikzcd}
+\end{center}
+$I$ is \textbf{injective}\index{Injective object} if functor $Hom(-,Q):\mathscr C\to Sets$ sends mono to epi, or equivalently
+\begin{center}
+\begin{tikzcd}
+X \arrow[r, "f", hook] \arrow[d, "g"] & Y \arrow[ld, "\exists h", dashed] \\
+Q                                              &                                  
+\end{tikzcd}
+\end{center}
+\end{definition}
+
+\begin{lemma}\label{Coproduct of projetives is projective, product of injectives is injective}
+Coproduct of projective objects is projective, product of injective objects is injective
+\end{lemma}
+
+\begin{proof}
+Suppose $I_\alpha$ are injective, $A\hookrightarrow B$ is a monomorphism, we have
+\begin{center}
+\begin{tikzcd}
+{Hom(B,\prod I_\alpha)} \arrow[r] \arrow[d, leftrightarrow] & {Hom(A,\prod I_\alpha)} \arrow[d, leftrightarrow] \\
+{\prod Hom(B,I_\alpha)} \arrow[r]           & {\prod Hom(A,I_\alpha)}          
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\begin{definition}
+$\mathscr C$ has \textbf{enough projectives} if for any $X$, there is an epi $P\to X$ from a projective object, $\mathscr C$ has \textbf{enough injectives} if for any $X$, there is a mono $X\to Q$ to an injective object
+\end{definition}
+
+\begin{lemma}
+Suppose $\mathscr A$ is an abelian category, $Hom(P,-)$, $Hom(-,I)$ are left exact. We have
+\begin{center}
+$P$ is projective $\Leftrightarrow$ $Hom(P,-)$ is right exact $\Leftrightarrow$ $Hom(P,-)$ is exact
+\end{center}
+\begin{center}
+$I$ is injective $\Leftrightarrow$ $Hom(-,I)$ is right exact $\Leftrightarrow$ $Hom(-,I)$ is exact
+\end{center}
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{remark}
+It is obvious that $A\to B\to C\to0$ is exact iff $0\to Hom(C,D)\to Hom(B,D)\to Hom(A,D)$ is exact for all $D$, $0\to A\to B\to C$ is exact iff $0\to Hom(D,A)\to Hom(D,B)\to Hom(D,C)$ is exact for all $D$
+\end{remark}
+
+\begin{lemma}\label{Left adjoint to exact functor preserves projectives}
+Functors between abelian categories $F:\mathcal A\to\mathcal B$, $G:\mathcal B\to\mathcal A$ is an adjoint pair. If $F$ is left exact, then $G$ preserves injectives. If $G$ is right exact, then $F$ preserves projectives
+\end{lemma}
+
+\begin{proof} \hfill
+\begin{center}
+$Hom_{\mathcal B}(-,G(I))$ is right exact $\Leftrightarrow$ $Hom_{\mathcal A}(F(-),I)=Hom_{\mathcal A}(-,I)\circ F$ is right exact
+\end{center}
+\begin{center}
+$Hom_{\mathcal B}(F(P),-)$ is right exact $\Leftrightarrow$ $Hom_{\mathcal A}(P,G(-))=Hom_{\mathcal A}(P,-)\circ G$ is right exact
+\end{center}
+\end{proof}
+
+\begin{lemma}
+An $R$ module $M$ is projective iff $M$ is a direct summand of a free module
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+Exact sequence $C_\bullet$ \textbf{split}\index{Split} at if there are $s_n:C_n\to C_{n+1}$ such that $\partial_{n+1}s_n\partial_{n+1}=\partial_{n+1}$
+\end{definition}
+
+\begin{lemma}\label{Equivalent conditions for split and split exact}
+Let $C$ be a chain complex, with boundaries $B_n$ and cycles $Z_n$ in $C_n$. $C$ splits if and only if there are $R$-module decompositions $C_n\cong Z_n\oplus B_n'$ and $Z_n\cong B_n\oplus H_n'$. $C$ is split exact iff $H_n'=0$
+\end{lemma}
+
+\begin{proof}
+If $C_n\cong Z_n\oplus B_n'$ and $Z_n\cong B_n\oplus H_n'$, claim that any element in $B_n$ has a unique preimage in $B'_{n+1}$: if $x,y\in B'_{n+1}$ are such that $\partial_{n+1}x=\partial_{n+1}y$, then $\partial_{n+1}(x-y)=0\Rightarrow (x-y)\in Z_{n+1}\cap B'_{n+1}=0\Rightarrow x=y$ \par
+Hence we can define a unique bijective homomorphism $s_n:B_n\to B_{n+1}'$ sending elements to its preimage, then extend $s_n$ to $s_n:C_n\to C_{n+1}$ such that $s_n(C_n)= B'_{n+1}$, $s_{n}(H_n'\oplus B_n')=0$, then $\partial_{n+1}s_n\partial_{n+1}=\partial_{n+1}$, i.e. $C$ split \par
+If $C$ split, denote $B'_n=s_{n-1}\partial_n(C_n)$, $H_n'=\ker \partial_{n+1}s_n\cap Z_n$, we claim $C_n= Z_n\oplus B_n'$ and $Z_n=B_n\oplus H_n'$: For any $s_{n-1}\partial_n(a_n)\in Z_n$, $0=\partial_n(s_{n-1}\partial_n(a_n))=\partial_na_n\Rightarrow s_{n-1}\partial_n(a_n)=0$. For $a_n\in C_n$, $\partial_n(a_n-s_{n-1}\partial_n(a_n))=0$. For any $\partial_{n+1}a_{n+1}\in\ker \partial_{n+1}s_n$, $\partial_{n+1}(a_{n+1})=\partial_{n+1}s_n\partial_{n+1}(a_{n+1})=0$. For any $a_n\in Z_n$, $a_n-\partial_{n+1}s_n(a_n)\in\ker \partial_{n+1}s_n\cap Z_n$ \par
+It is obvious that $C$ is exact $\Leftrightarrow$ $Z_n\cong B_n\Leftrightarrow H_n'=0$
+\end{proof}
+
+\begin{lemma}\label{Splic iff nullhomotopic}
+$C_\bullet$ split iff $1_C\simeq 0$
+\end{lemma}
+
+\begin{proof}
+Suppose the identity map on $C$ is null homotopic, then there exists $s_n:C_n\to C_{n+1}$ such that $1_{C_n}=s_{n-1}\partial_n+\partial_{n+1}s_n$, then $\partial_n=\partial_ns_{n-1}\partial_n$, i.e. $C$ split, for any $a_n\in Z_n$, $a_n=(s_{n-1}\partial_n+\partial_{n+1}s_n)a_n=\partial_{n+1}(s_na_n)\in B_n$, i.e. $C$ is exact \par
+Suppose $C$ split exact, according to exercise 1.4.2, $C_n\cong Z_n\oplus B_n'\cong B_n\oplus B'_n$ with $H'_n=0$, then we can define $s_n:C_n\to C_{n+1}$ such that $s_n(B_n)= B'_{n+1}$ bijective, $s_{n}(H_n'\oplus B_n')=0$, $\partial_{n+1}s_n\partial_{n+1}=\partial_{n+1}$, thus $B'_n=s_{n-1}(B_n)=s_{n-1}\partial_n(C_n)$, $s_ns_{n-1}\partial_n(C_n)=s_n(B_n')=0$. Therefore for any element in $C_n$ which can be written as $\partial_{n+1}a_{n+1}+s_{n-1}\partial_na_n$, we have $(s_{n-1}\partial_n+\partial_{n+1}s_n)(\partial_{n+1}a_{n+1}+s_{n-1}\partial_na_n)=\partial_{n+1}a_{n+1}+s_{n-1}\partial_na_n$, i.e. $1_{C_n}=s_{n-1}\partial_n+\partial_{n+1}s_n$, the identity map on $C$ is nullhomotopic
+\end{proof}
+
+\begin{lemma}
+$P_\bullet$ is a projective in $Ch(\mathscr A)$ iff $P_\bullet$ is a split exact sequence of projectives. [Hint: To see that $P$ must be split exact, consider the surjection from $cone(\mathrm{id}_P)$ to $P[-1]$. To see that split exact complexes are projective objects, consider the special case $0\to P_1\cong P_0\to0$]
+\end{lemma}
+
+\begin{proof}
+Consider chain complex $C$ with $C_n=P_n\oplus P_{n+1}$
+\[\cdots\to P_n\oplus P_{n+1}\xrightarrow{\begin{pmatrix}
+\partial&0 \\
+1&-\partial
+\end{pmatrix}}P_{n-1}\oplus P_n\to\cdots\]
+and first coordinate projection \begin{tikzcd}C \arrow[r, two heads] & P\end{tikzcd} which is a surjection, if $P$ is projective, then there exists $s$ such that
+\begin{center}
+\begin{tikzcd}
+                       & P \arrow[ld, "s"'] \arrow[d, equal] \\
+C \arrow[r, two heads] & P                                                
+\end{tikzcd}
+\end{center}
+In order to make $s$ a chain map and the diagram commute, we must have $s:P_n\to C_n$, $x\to\begin{pmatrix}
+x \\
+s_nx
+\end{pmatrix}$ and
+\[\begin{pmatrix}
+\partial_nx \\
+s_{n-1}\partial_nx
+\end{pmatrix}=\begin{pmatrix}
+\partial_n&0 \\
+1&-\partial_{n+1}
+\end{pmatrix}\begin{pmatrix}
+x \\
+s_nx
+\end{pmatrix}=\begin{pmatrix}
+\partial_n x \\
+x-\partial_{n+1}s_nx
+\end{pmatrix}\]
+Hence $s_{n-1}\partial_n+\partial_{n+1}s_n=1$, by Lemma \ref{Splic iff nullhomotopic}, $P$ split exact \par
+To prove $P_n$ are projectives, given
+\begin{center}
+\begin{tikzcd}
+                            & P_n \arrow[d, "g_n"] \\
+B \arrow[r, "f", two heads] & A                   
+\end{tikzcd}
+\end{center}
+consider the following commutative diagram with $g_{n+1}=g_n\partial_{n+1}$
+\begin{center}
+\begin{tikzcd}
+P_{n+2} \arrow[r, "\partial_{n+2}"] \arrow[d] & P_{n+1} \arrow[r, "\partial_{n+1}"] \arrow[d, "g_{n+1}"] & P_n \arrow[r, "\partial_n"] \arrow[d, "g_n"'] \arrow[dd, "h", dashed, bend left, near start] & P_{n-1} \arrow[d] \\
+0 \arrow[r]                                   & A \arrow[r,equal]                                              & A \arrow[r]                                                                      & 0                 \\
+0 \arrow[r] \arrow[u]                         & B \arrow[u, "f"', two heads] \arrow[r,equal]                   & B \arrow[u, "f", two heads] \arrow[r]                                            & 0 \arrow[u]      
+\end{tikzcd}
+\end{center}
+Since $P_\bullet$ is projective, there exists $h:P_n\to B$ such that $fh=g_n$ \par
+Conversely, suppose $P$ is a split exact sequence of projectives, by Lemma \ref{Equivalent conditions for split and split exact}, there exist bijection $s_n:Z_n=B_n\to B_{n+1}'$ and $P_n\cong B_n\oplus B'_n$, thus $P$ is the direct sum of $0\to B'_{n+1}\to B_n\to0$, and we know the coproducts and direct summands of projective modules are projective, it suffices to consider $0\to P_1\xrightarrow{\cong}P_0\to 0$. Since $\psi_1$ is epi and $P_1$ is projective, there exists $P_1\xrightarrow{\phi_1}B_1$ such that $\xi_1=\psi_1\phi_1$, let $\phi_0=b_1\phi_1p_1^{-1}$, then $\xi_0=a_1\xi_1p_1^{-1}=a_1\psi_1\phi_1p_1^{-1}=\psi_0b_1\phi_1p_1^{-1}=\psi_0\phi_0$ and $b_0\phi_0=b_0b_1\phi_1p_1^{-1}=0$
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] \arrow[d]                         & P_1 \arrow[r,"p_1", "\cong"'] \arrow[d, "\phi_1", dashed] \arrow[dd, "\xi_1"',near end, bend right=40] & P_0 \arrow[r] \arrow[d, "\phi_0"', dashed] \arrow[dd, "\xi_0", near end, bend left=40] & 0 \arrow[d]                              \\
+B_2 \arrow[r] \arrow[d, "\psi_2"', two heads] & B_1 \arrow[r, "b_1"] \arrow[d, "\psi_1", two heads]                                     & B_0 \arrow[r, "b_0"] \arrow[d, "\psi_0"', two heads]                                          & B_{-1} \arrow[d, "\psi_{-1}", two heads] \\
+A_2 \arrow[r]                                 & A_1 \arrow[r, "a_1"]                                                                    & A_0 \arrow[r]                                                                          & A_{-1}                                  
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\begin{definition}
+A \textbf{left resolution}\index{resolution} is morphism $P_\bullet\xrightarrow{\varepsilon} M$ in $Ch_{\geq0}(\mathscr A)$, here $M$ means $0\to M\to0$ with $M$ at degree $0$, then $\cdots\to P_2\to P_1\to P_0\xrightarrow{\varepsilon}M\to0$ is exact. A projective resolution is a left resolution with projectives, an injective resolution is a right resolution with injectives
+\end{definition}
+
+\begin{lemma}
+If $\mathscr A$ has enough projectives, then for any $M$, there is a projective resolution $P_\bullet\xrightarrow{\varepsilon} M$
+\end{lemma}
+
+\begin{proof}
+First there exists exact sequence $0\to\ker\varepsilon\xrightarrow{i_0} P_0\xrightarrow{\varepsilon}M\to0$ where $P_0$ is a projective, then there exists another exact sequence $0\to\ker i_0\to P_1\to\ker\varepsilon\to0$ where $P_1$ is a projective, then we can splice them to get exact sequence $P_1\to P_0\xrightarrow{\varepsilon}M\to0$, inductively we get a projective resolution
+\end{proof}
+
+\begin{theorem}[Comparison theorem]\label{Comparison theorem}
+Suppose $P_\bullet\xrightarrow{\varepsilon} M$ is a complex with $P_n$ projectives, $Q_\bullet\xrightarrow{\eta} N$ is a left resolution, then for any $M\xrightarrow{f}N$, it can be extend to chain map $f_\bullet:P_\bullet\to Q_\bullet$, and $f_\bullet$ is unique up to homotopy
+\begin{center}
+\begin{tikzcd}
+\cdots \arrow[r, "\partial_2"] & P_1 \arrow[r, "\partial_1"] \arrow[d, "f_1"] & P_0 \arrow[r, "\varepsilon"] \arrow[d, "f_0"] & M \arrow[d, "f"] \arrow[r] & 0 \\
+\cdots \arrow[r, "\partial_2"] & Q_1 \arrow[r, "\partial_1"]                  & Q_0 \arrow[r, "\eta"]                         & N \arrow[r]                & 0
+\end{tikzcd}
+\end{center}
+\end{theorem}
+
+\begin{proof}
+Since $P_0$ is projective, there exists $P_0\xrightarrow{f_0}Q_0$ such that $f\varepsilon=\eta f_0$, then we have $\eta f_0\partial_1=f\varepsilon\partial_1=0$, $f_0\partial_1:P_1\to Z_0Q$, and $Q_1\xrightarrow{\partial_1}Z_0Q$ is epi, we have $P_1\xrightarrow{f_1}Q_1$, inductively, we can extend $f$ to a chain map $f_\bullet:P_\bullet\to Q_\bullet$ \par
+Suppose $f=0$, we need to show $f_\bullet\simeq0$, Write $P_{-1}:=M$, $Q_{-1}:=N$, $P_n=Q_n=0,\forall n<-1$, define $s_n:P_n\to Q_{n+1},\forall n<0$ to be zero. Since $\eta f_0=0$, thus $f_0:P_0\to Z_0Q$, and $Q_1\xrightarrow{\partial_1}Z_0Q$ is epi, we get $P_0\xrightarrow{s_0}Q_1$ such that $f_0=\partial_1s_0=\partial_1s_0+s_{-1}\partial_0$, then since $\partial_1f_1=f_0\partial_1=\partial_1s_0\partial_1\Rightarrow f_1-s_0\partial_1:P_1\to Z_1Q$, and $Q_2\xrightarrow{\partial_2}Z_1Q$ is epi, we get $s_1:P_1\to Q_2$ such that $\partial_2s_1=f_1-s_0\partial_1$, inductively we construct a null homotopy $s_\bullet$
+\begin{center}
+\begin{tikzcd}
+\cdots \arrow[r] & P_2 \arrow[r, "\partial_2"] \arrow[d, "f_2"] & P_1 \arrow[r, "\partial_1"] \arrow[d, "f_1"] \arrow[ld, "s_1"] & P_0 \arrow[r, "\varepsilon"] \arrow[d, "f_0"] \arrow[ld, "s_0"] & M \arrow[d, "0"] \arrow[r] \arrow[ld, "0"] & 0 \arrow[ld, "0"] \\
+\cdots \arrow[r] & Q_2 \arrow[r, "\partial_2"]                  & Q_1 \arrow[r, "\partial_1"]                                    & Q_0 \arrow[r, "\eta"]                                           & N \arrow[r]                                & 0                
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\begin{lemma}[Horseshoe lemma]\label{Horseshoe lemma}
+Suppose $P_\bullet\xrightarrow{\varepsilon} M$, $Q_\bullet\xrightarrow{\eta} N$ are projective resolutions, then any exact sequence $0\to M\xrightarrow{f}A\xrightarrow{g}N\to0$ can be extended into commutative diagram
+\begin{center}
+\begin{tikzcd}
+            & \vdots \arrow[d]            & \vdots \arrow[d]                  & \vdots \arrow[d]        &   \\
+0 \arrow[r] & P_0 \arrow[r] \arrow[d]     & P_1\oplus Q_1 \arrow[r] \arrow[d] & Q_1 \arrow[r] \arrow[d] & 0 \\
+0 \arrow[r] & P_0 \arrow[r] \arrow[d]     & P_0\oplus Q_0 \arrow[r] \arrow[d] & Q_0 \arrow[r] \arrow[d] & 0 \\
+0 \arrow[r] & M \arrow[r, "f"'] \arrow[d] & A \arrow[r, "g"'] \arrow[d]       & N \arrow[r] \arrow[d]   & 0 \\
+            & 0                           & 0                                 & 0                       &  
+\end{tikzcd}
+\end{center}
+With $(P\oplus Q)_\bullet$ being a projective resolution, every row and column are exact
+\end{lemma}
+
+\begin{proof}
+Since $A\xrightarrow{g}N$ is epi and $Q_0$ is projective, we get $Q_0\xrightarrow{s_0}A$ such that $gs_0=\partial_0$ which gives us $P_0\oplus Q_0\xrightarrow{\begin{pmatrix} f\partial_0 & s_0 \end{pmatrix}}A$, by Lemma \ref{Snake lemma}, this is epi, and we get an exact sequence $0\to Z_0P\to \ker i_0\to Z_0Q\to0$, similarly, we can construct $Q_1\xrightarrow{s_1}\ker i_0$, then $P_1\oplus Q_1\xrightarrow{\begin{pmatrix} \iota_0\partial_0 & s_1 \end{pmatrix}}\ker i_0$ is again epi by Lemma \ref{Snake lemma}, inductively, we can construct the commutative diagram
+\begin{center}
+\begin{tikzcd}
+            & \vdots \arrow[d]                       & \vdots \arrow[d]                         & \vdots \arrow[d]                                        &   \\
+0 \arrow[r] & P_1 \arrow[d, "\partial_1"'] \arrow[r] & P_1\oplus Q_1 \arrow[d] \arrow[r]        & Q_1 \arrow[d, "\partial_1"] \arrow[r] \arrow[ld, "s_1"] & 0 \\
+0 \arrow[r] & Z_0P \arrow[r,"\iota_0"] \arrow[d]               & \ker i_0 \arrow[r] \arrow[d]             & Z_0Q \arrow[r] \arrow[d]                                & 0 \\
+0 \arrow[r] & P_0 \arrow[r] \arrow[d, "\partial_0"'] & P_0\oplus Q_0 \arrow[r] \arrow[d, "i_0"] & Q_0 \arrow[r] \arrow[d, "\partial_0"] \arrow[ld, "s_0"] & 0 \\
+0 \arrow[r] & M \arrow[r, "f"'] \arrow[d]            & A \arrow[r, "g"'] \arrow[d]              & N \arrow[r] \arrow[d]                                   & 0 \\
+            & 0                                      & 0                                        & 0                                                       &  
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\end{document}

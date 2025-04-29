@@ -1,0 +1,323 @@
+\documentclass{article}
+
+\usepackage[a4paper, total={5.5in, 9in}]{geometry} %page size and margins
+% \usepackage[math]{anttor}
+\usepackage{ccfonts}
+\usepackage{fontspec}
+% \setmainfont{Courier New}
+\usepackage{imakeidx}
+\usepackage{hyperref}
+\hypersetup{
+colorlinks = true, %Allow color links
+linkcolor = blue, %Setup the color for the links
+citecolor = black, %Choose the color for citation
+}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{pgfplots} % drawing axis, addplots
+\pgfplotsset{compat=newest} % ensure position and scaling compatibility
+\usetikzlibrary{intersections} % handle intersections 
+\usetikzlibrary{calc} % using calculations in tikz
+\usepackage{tikz-cd}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\def\CROP{0}
+
+\title{MATH602 - HW3}
+\author{Haoran Li}
+\date{}
+
+\setlength{\parindent}{0pt}
+
+\makeindex[columns=2, title=Index, intoc] % Create the index
+
+\begin{document}\sloppy % reduce overlong words
+
+\maketitle
+\begin{exercise}{\textbf{1.3.2}}($3\times3$ lemma) Suppose given a commutative diagram
+\begin{center}
+\begin{tikzcd}
+            & 0 \arrow[d]                        & 0 \arrow[d]                        & 0 \arrow[d]                  &   \\
+0 \arrow[r] & A \arrow[r, "u"] \arrow[d, "a"]    & B \arrow[r, "v"] \arrow[d, "b"]    & C \arrow[r] \arrow[d, "c"]   & 0 \\
+0 \arrow[r] & A' \arrow[r, "u'"] \arrow[d, "a'"] & B' \arrow[r, "v'"] \arrow[d, "b'"] & C' \arrow[r] \arrow[d, "c'"] & 0 \\
+0 \arrow[r] & A'' \arrow[d] \arrow[r, "u''"]     & B'' \arrow[d] \arrow[r, "v''"]     & C'' \arrow[r] \arrow[d]      & 0 \\
+            & 0                                  & 0                                  & 0                            &  
+\end{tikzcd}
+\end{center}
+In an abelian category, such that every column is exact. Show the following: \par
+1. If the bottom two rows are exact, so is the top row \par
+2. If the top two rows are exact, so is the bottom row \par
+3. If the top and bottom rows are exact, and the composite $A'\to C'$ is zero, the middle row is also exact \par
+Hint: Show the remaining row is a complex, and apply exercise 1.3.1
+\end{exercise}
+
+\begin{proof}
+1. Since third column is exact, $C=\ker c$, $c(vu)=v'bu=(v'u')a=0$, $A\xrightarrow{0}C'\to C''$ must induce the unique map $A\to C$ which is $0=vu$, i.e. the first row is a complex \par
+2. Since first column is exact, $A''=\mathrm{coker}a$, $(v''u'')a'=v''b'u'=c'(v'u')=0$, $A\to A'\xrightarrow{0}C''$ must induce the unique map $A''\to C''$ which is $0=v''u''$, i.e. the third row is a complex \par
+3. If composite $A'\to C'$ is zero, then the second row is a complex \par
+Finally, apply exercise 1.3.1, two of three exact implies the remaining one is also exact
+\end{proof}
+
+\begin{exercise}{\textbf{1.3.3}}($5$-Lemma) In any commutative diagram
+\begin{center}
+\begin{tikzcd}
+A' \arrow[r,"u'"] \arrow[d, "a"',"\cong"] & B' \arrow[r,"v'"] \arrow[d, "b"',"\cong"] & C' \arrow[r,"w'"] \arrow[d, "c"'] & D' \arrow[r,"x'"] \arrow[d, "d"',"\cong"] & E' \arrow[d, "e"',"\cong"] \\
+A \arrow[r,"u"]                                     & B \arrow[r,"v"]                                     & C \arrow[r,"w"]                  & D \arrow[r,"x"]                                     & E                                    
+\end{tikzcd}
+\end{center}
+With exact rows in any abelian category, show that if $a,b,d$ and $e$ are isomorphisms, then $c$ is also an isomorphism. More precisely, show that if $b$ and $d$ are monic and $a$ is an epi, then $c$ is monic. Dually, show that if $b$ and $d$ are epis and $e$ is monic, then $c$ is an epi
+\end{exercise}
+
+\begin{proof}
+Since rows are exact, we can apply snake lemma on following commutative diagrams
+\begin{center}
+\begin{tikzcd}
+            & A' \arrow[r] \arrow[d, two heads] & B' \arrow[r, two heads] \arrow[d, tail] & \mathrm{im}v'=\ker w' \arrow[d] \arrow[r] & 0 \\
+0 \arrow[r] & A \arrow[r]                       & B \arrow[r]                             & C                                 &  
+\end{tikzcd}
+\end{center}
+\begin{center}
+\begin{tikzcd}
+            & C' \arrow[r] \arrow[d]        & D' \arrow[r, two heads] \arrow[d, two heads] & E' \arrow[d, tail] \arrow[r] & 0 \\
+0 \arrow[r] & \mathrm{coker}v\arrow[r] & D \arrow[r]                                  & E                            &  
+\end{tikzcd}
+\end{center}
+Thus $\mathrm{im}v'=\ker w'\to C$ is monic, $C'\to\mathrm{im}v=\ker w$ is epi \par
+Suppose $Y\xrightarrow{y}C'$ satisfies $cy=0$, then $0=wcy=d(w'y)$, since $d$ is monic, $w'y=0$ which induce $Y\xrightarrow{y'}\ker w'=\mathrm{im}v'$, then $Y\xrightarrow{y'}\ker w'\to C$ is zero implies $y'=0$ which in turn implies $y=0$, i.e. $c$ is monic \par
+Suppose $C\xrightarrow{z}Z$ satisfies $zc=0$, then $0=zcv'=(zv)b$, since $b$ is epi, $zv=0$ which induce 
+$\mathrm{coker}v\xrightarrow{z'}Z$, then $C'\to\mathrm{coker}v\xrightarrow{z'}C$ is zero implies $z'=0$ which in turn implies $z=0$, i.e. $c$ is epi
+\end{proof}
+
+\begin{exercise}{\textbf{1.4.1}}
+The previous example shows that even an acyclic chain complex of free $R$-modules need not to split exact \par
+1. Show that acyclic bounded below chain complexes of free $R$ modules are always split exact \par
+2. Show that an acyclic chain complex of finitely generated free abelian groups is always split exact, even when it is not bounded below
+\end{exercise}
+
+\begin{proof}
+1. Suppose $\cdots\to F_2\xrightarrow{\partial_2}F_1\xrightarrow{\partial_1}F_0\to0$ is an acyclic chain complex of free $R$-modules, since $\partial_1$ is surjective, we can define $s_0:F_0\to F_1$ sending each generator of $F_0$ to a preimage, then $\partial_1s_0\partial_1=\partial_1$ \par
+Now let's construct $s_n:F_n\to F_{n+1}$ inductively that satisfying $\partial_{n+1}=\partial_{n+1}s_n\partial_{n+1}$ \par
+Suppose we have already constructed $s_{n-1}$, we claim $F_n=\partial_{n+1}(F_{n+1})\oplus s_{n-1}\partial_n(F_n)$: if $\partial_{n+1}(a_{n+1})=s_{n-1}\partial_n(a_n)$, then $\partial_na_n=\partial_ns_{n-1}\partial_na_n=\partial_n\partial_{n+1}(a_{n+1})=0\Rightarrow s_{n-1}\partial_n(a_n)=0$. For any $a_n\in F_n$, $\partial_n(a_n-s_{n-1}\partial_n(a_1))=0\Rightarrow a_n-s_{n-1}\partial_n(a_n)\in\ker\partial_n=\mathrm{im}\partial_{n+1}$ \par
+Define $s_n:F_n\to F_{n+1}$, sending each generator of $F_n$ to a preimage of its direct sum part in $\partial_{n+1}(F_{n+1})$, then $\partial_{n+1}=\partial_{n+1}s_n\partial_{n+1}$ \par
+2. In the case of finitely generated free abelian groups, subgroups $\partial_n(F_n)$ are also finitely generated free abelian, we can define $s_{n-1}:\partial_n(F_n)\to F_n$ by sending each generator of $\partial_n(F_n)$ to a preimage, then $\partial_n=\partial_ns_{n-1}\partial_n$, similarly we have $F_n=\partial_{n+1}(F_{n+1})\oplus s_{n-1}\partial_n(F_n)$, thus $\partial_{n+1}(F_{n+1})$ is a direct summand of $F_n$, thus we can extend $s_n$ such that $s_n:F_n\to F_{n+1}$ with $s_n(s_{n-1}\partial_n(F_n))=0$, we still have $\partial_{n+1}=\partial_{n+1}s_n\partial_{n+1}$
+\end{proof}
+
+\begin{exercise}{\textbf{1.4.2}}
+Let $C$ be a chain complex, with boundaries $B_n$ and cycles $Z_n$ in $C_n$. Show that $C$ split if and only if there are $R$-module decompositions $C_n\cong Z_n\oplus B_n'$ and $Z_n\cong B_n\oplus H_n'$. Show that $C$ is split exact iff $H_n'=0$
+\end{exercise}
+
+\begin{proof}
+If $C_n\cong Z_n\oplus B_n'$ and $Z_n\cong B_n\oplus H_n'$, claim that any element in $B_n$ has a unique preimage in $B'_{n+1}$: if $x,y\in B'_{n+1}$ are such that $\partial_{n+1}x=\partial_{n+1}y$, then $\partial_{n+1}(x-y)=0\Rightarrow (x-y)\in Z_{n+1}\cap B'_{n+1}=0\Rightarrow x=y$ \par
+Hence we can define a unique bijective homomorphism $s_n:B_n\to B_{n+1}'$ sending elements to its preimage, then extend $s_n$ to $s_n:C_n\to C_{n+1}$ such that $s_n(C_n)= B'_{n+1}$, $s_{n}(H_n'\oplus B_n')=0$, then $\partial_{n+1}s_n\partial_{n+1}=\partial_{n+1}$, i.e. $C$ split \par
+If $C$ split, denote $B'_n=s_{n-1}\partial_n(C_n)$, $H_n'=\ker \partial_{n+1}s_n\cap Z_n$, we claim $C_n= Z_n\oplus B_n'$ and $Z_n=B_n\oplus H_n'$: For any $s_{n-1}\partial_n(a_n)\in Z_n$, $0=\partial_n(s_{n-1}\partial_n(a_n))=\partial_na_n\Rightarrow s_{n-1}\partial_n(a_n)=0$. For $a_n\in C_n$, $\partial_n(a_n-s_{n-1}\partial_n(a_n))=0$. For any $\partial_{n+1}a_{n+1}\in\ker \partial_{n+1}s_n$, $\partial_{n+1}(a_{n+1})=\partial_{n+1}s_n\partial_{n+1}(a_{n+1})=0$. For any $a_n\in Z_n$, $a_n-\partial_{n+1}s_n(a_n)\in\ker \partial_{n+1}s_n\cap Z_n$ \par
+It is obvious that $C$ is exact $\Leftrightarrow$ $Z_n\cong B_n\Leftrightarrow H_n'=0$
+\end{proof}
+
+\begin{exercise}{\textbf{1.4.3}}
+Show that $C$ is a split exact chain complex if and only if the identity map on $C$ is null homotopic 
+\end{exercise}
+
+\begin{proof}
+Suppose the identity map on $C$ is null homotopic, then there exists $s_n:C_n\to C_{n+1}$ such that $1_{C_n}=s_{n-1}\partial_n+\partial_{n+1}s_n$, then $\partial_n=\partial_ns_{n-1}\partial_n$, i.e. $C$ split, for any $a_n\in Z_n$, $a_n=(s_{n-1}\partial_n+\partial_{n+1}s_n)a_n=\partial_{n+1}(s_na_n)\in B_n$, i.e. $C$ is exact \par
+Suppose $C$ split exact, according to exercise 1.4.2, $C_n\cong Z_n\oplus B_n'\cong B_n\oplus B'_n$ with $H'_n=0$, then we can define $s_n:C_n\to C_{n+1}$ such that $s_n(B_n)= B'_{n+1}$ bijective, $s_{n}(H_n'\oplus B_n')=0$, $\partial_{n+1}s_n\partial_{n+1}=\partial_{n+1}$, thus $B'_n=s_{n-1}(B_n)=s_{n-1}\partial_n(C_n)$, $s_ns_{n-1}\partial_n(C_n)=s_n(B_n')=0$. Therefore for any element in $C_n$ which can be written as $\partial_{n+1}a_{n+1}+s_{n-1}\partial_na_n$, we have $(s_{n-1}\partial_n+\partial_{n+1}s_n)(\partial_{n+1}a_{n+1}+s_{n-1}\partial_na_n)=\partial_{n+1}a_{n+1}+s_{n-1}\partial_na_n$, i.e. $1_{C_n}=s_{n-1}\partial_n+\partial_{n+1}s_n$, the identity map on $C$ is nullhomotopic
+\end{proof}
+
+\begin{exercise}{\textbf{1.5.1}}
+Let $cone(C)$ denote the mapping cone of the identity map $id_C$ of $C$; it has $C_{n-1}\oplus C_n$ in degree $n$. Show that $cone(C)$ is split exact, with $s(b,c)=(-c,0)$ defining the splitting map
+\end{exercise}
+
+\begin{proof}
+Suppose $\begin{pmatrix}
+-\partial & \\
+-1 & \partial
+\end{pmatrix}\begin{pmatrix}
+b \\
+c
+\end{pmatrix}=\begin{pmatrix}
+-\partial b \\
+-b+\partial c
+\end{pmatrix}=0$ for some $(b,c)\in cone(C)_n=C_{n-1}\oplus C_n$, then $b=\partial c$, $\begin{pmatrix}
+-\partial & \\
+-1 & -\partial
+\end{pmatrix}\begin{pmatrix}
+-c \\
+0
+\end{pmatrix}=\begin{pmatrix}
+\partial c \\
+c
+\end{pmatrix}=\begin{pmatrix}
+b \\
+c
+\end{pmatrix}$, i.e. $cone(C)$ is exact, also $\begin{pmatrix}
+-\partial & \\
+-1 & -\partial
+\end{pmatrix}s_n(b,c)=(b,c)$, i.e. $cone(C)$ split
+\end{proof}
+
+\begin{exercise}{\textbf{1.5.2}}
+Let $f:C\to D$ be a map of complexes. Show that $f$ is null homotopic if and only if $f$ extends to a map $(-s,f):cone(C)\to D$
+\end{exercise}
+
+\begin{proof}
+Suppose $(-s_{n-1},f_n):cone(C)_n\to D_n$ are maps, then $(-s,f)$ is chain map iff
+\[\begin{pmatrix}
+-s_{n-1} & f_n
+\end{pmatrix}\begin{pmatrix}
+-\partial_n & \\
+-1_{C_n} & \partial_{n+1}
+\end{pmatrix}\begin{pmatrix}
+a_n \\
+a_{n+1}
+\end{pmatrix}=\partial_{n+1}\begin{pmatrix}
+-s_n & f_{n+1}
+\end{pmatrix}\begin{pmatrix}
+a_n \\
+a_{n+1}
+\end{pmatrix}\]
+Which equivalent to
+\[(s_{n-1}\partial_n+\partial_{n+1}s_n-f_n)a_n=(\partial_{n+1}f_{n+1}-f_n\partial_{n+1})a_{n+1}=0\]
+Which equivalent to $s_{n-1}\partial_n+\partial_{n+1}s_n=f_n$, i.e. $f$ is null homotopic
+\end{proof}
+
+\begin{exercise}{\textbf{1}}
+Let $X$ denote the chain complex
+\[\cdots\to0\to0\to\mathbb Q\xrightarrow{\mathrm{id}}\mathbb Q\to0\to0\to\cdots\]
+With $X_1=X_0=\mathbb Q$ and all other $X_i=0$. Consider it in the category $\mathscr C_*(\mathbf{Vect}_\mathbb{Q})$ of complexes of $\mathbb Q$-vector spaces \par
+\textbf{(a) }Compute the complex $\mathrm{Hom}_\bullet(X,X)$ \par
+\textbf{(b) }Compute the homology $H_*(\mathrm{Hom}_\bullet(X,X))$ of the above complex \par
+\textbf{(c) }Show that $X$ is not isomorphic to $0$ in $\mathscr C(\mathbf{Vect}_\mathbb{Q})$, but $X$ is isomorphic to $0$ in the homotopy category $\mathscr K(\mathbf{Vect}_\mathbb{Q})$
+\end{exercise}
+
+\begin{proof}
+\textbf{(a) }It is obvious that $Hom_n(X,X)=0$ for $|n|\geq 2$, $Hom_0(X,X)=\mathbb Q\oplus\mathbb Q$, $Hom_1(X,X)=Hom_{-1}(X,X)=\mathbb Q$, and differentials are
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & 0 \arrow[r] & \mathbb Q \arrow[r, "\begin{pmatrix} 1 \\ 1 \end{pmatrix}"] & \mathbb Q\oplus\mathbb Q \arrow[r, "\begin{pmatrix} 1 \, -1 \end{pmatrix}"] & \mathbb Q \arrow[r] & 0 \arrow[r] & 0
+\end{tikzcd}
+\end{center}
+\textbf{(b) }According to (a), it is not hard to see this is an exact sequence, hence $H_n(\mathrm{Hom}_\bullet(X,X))=0$ for all $n$ \par
+\textbf{(c) }$X$ is not isomorphic to $0$ in $\mathscr C(\mathbf{Vect}_\mathbb{Q})$ since $\mathbb Q\to 0\to\mathbb Q$ can never be $1_\mathbb{Q}$, but $X\to0$ and $0\to X$ are actually inverses to each other in $\mathscr K(\mathbf{Vect}_\mathbb{Q})$, we only need to show $X\xrightarrow{1_X} X$ is null homotopic which is true due to the following diagram
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & \mathbb Q \arrow[r, "1_{\mathbb Q}"] \arrow[d, "1_{\mathbb Q}"'] \arrow[ld] & \mathbb Q \arrow[r] \arrow[d, "1_{\mathbb Q}"] \arrow[ld, "1_{\mathbb Q}"'] & 0 \arrow[ld] \\
+0 \arrow[r] & \mathbb Q \arrow[r, "1_{\mathbb Q}"']                                       & \mathbb Q \arrow[r]                                                         & 0           
+\end{tikzcd}
+\end{center}
+Note that $1_{\mathbb Q}=1_{\mathbb Q}\circ1_{\mathbb Q}+0\circ0$, $1_{\mathbb Q}=0\circ0+1_{\mathbb Q}\circ1_{\mathbb Q}$
+\end{proof}
+
+\begin{exercise}{\textbf{2}}
+Suppose $\mathscr A$ is an abelian category. In class, I defined the category $\mathbf{Ar}(\mathscr A)$ to be the full subcategory of $\mathscr C_*(\mathscr A)$  consisting of complexes of amplitude $[0,1]$. We can think of objects in $\mathbf{Ar}(\mathscr A)$ as morphisms $f:M\to N$ in $\mathscr A$ \par
+I defined functors $F_0,F_1:\mathscr A\to\mathbf{Ar}(\mathscr A)$ where $F_i(M)$ is the complex $X_*$ with $X_i=M$ and $X_j=0$ for all $j\neq i$ (and $F_i(\phi):F_i(M)\to F_i(N)$ is the obvious morphism induced by $\phi$) \par
+\textbf{(a) }In class, I claimed that $F_1:\mathscr A\to\mathbf{Ar}(\mathscr A)$ is left adjoint to the functor $\ker:\mathbf{Ar}(\mathscr A)\to\mathscr A$ taking a morphism $f:M\to N$ to $\ker f$. Prove this \par
+\textbf{(b) }Prove similarly that $F_0$ is right adjoint to the functor $\mathrm{coker}:\mathbf{Ar}(\mathscr A)\to\mathscr A$ \par
+\textbf{(c) }Suppose
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & A \arrow[r, "u"] \arrow[d, "a"] & B \arrow[r, "v"] \arrow[d, "b"] & C \arrow[r] \arrow[d, "c"] & 0 \\
+0 \arrow[r] & A' \arrow[r, "u'"]              & B' \arrow[r, "v'"]              & C' \arrow[r]               & 0
+\end{tikzcd}
+\end{center}
+Is a commutative diagram with exact rows. Using (a) and (b), show that
+\[0\to\ker a\to\ker b\to\ker c\]
+ And
+ \[\mathrm{coker}a\to\mathrm{coker}b\to\mathrm{coker}c\to0\]
+ Are exact. (Obviously, don't use the proof of the Snake Lemma sketched in class)
+\end{exercise}
+
+\begin{proof}
+\textbf{(a) }For any $M\xrightarrow{f}N\in\mathbf{Ar}(\mathscr A)$, $W\in\mathscr A$, there is clearly bijective map $Hom(F_1(W),M\xrightarrow{f}N)\to Hom(W,\ker f)$ and $Hom$ given by the following diagram
+\begin{center}
+\begin{tikzcd}
+                       & W \arrow[r] \arrow[d] \arrow[ld, dashed] & 0 \arrow[d] \\
+\ker f \arrow[r, tail] & M \arrow[r, "f"]                         & N          
+\end{tikzcd}
+\end{center}
+This bijective correspondence is natural due to the universal property of kernel and the following diagram
+\begin{center}
+\begin{tikzcd}
+                             &                    & W \arrow[dd] \arrow[rr] \arrow[lldd, dashed] &                                                                                      & 0 \arrow[dd] &                         \\
+                             &                    &                                              & W' \arrow[dd, bend left] \arrow[rr] \arrow[lu, "g"] \arrow[lldd, dashed, bend right] &              & 0 \arrow[dd] \arrow[lu] \\
+\ker f \arrow[rr] \arrow[rd, dashed] &                    & M \arrow[rr, "f"] \arrow[rd]                 &                                                                                      & N \arrow[rd] &                         \\
+                             & \ker f' \arrow[rr] &                                              & M' \arrow[rr, "f'"]                                                                  &              & N'                     
+\end{tikzcd}
+\end{center}
+\textbf{(b) }For any $M\xrightarrow{f}N\in\mathbf{Ar}(\mathscr A)$, $W\in\mathscr A$, there is clearly bijective map $Hom(\mathrm{coker} f,W)\to Hom(M\xrightarrow{f}N,F_0(W))$ and $Hom$ given by the following diagram
+\begin{center}
+\begin{tikzcd}
+M \arrow[r, "f"] \arrow[d] & N \arrow[d] \arrow[r, two heads] & \mathrm{coker}f \arrow[ld, dashed] \\
+0 \arrow[r]                & W                                &                                   
+\end{tikzcd}
+\end{center}
+This bijective correspondence is natural due to the universal property of cokernel and the following diagram
+\begin{center}
+\begin{tikzcd}
+M \arrow[rr, "f"] \arrow[dd] &                                           & N \arrow[dd, bend right] \arrow[rr, two heads] &                                                & \mathrm{coker}f \arrow[lldd, dashed, bend left] &                                                          \\
+                             & M' \arrow[rr, "f'"] \arrow[dd] \arrow[lu] &                                                & N' \arrow[rr, two heads] \arrow[dd] \arrow[lu] &                                                 & \mathrm{coker}f' \arrow[lu, dashed] \arrow[lldd, dashed] \\
+0 \arrow[rr] \arrow[rd]      &                                           & W \arrow[rd, "g"]                              &                                                &                                                 &                                                          \\
+                             & 0 \arrow[rr]                              &                                                & W'                                             &                                                 &                                                         
+\end{tikzcd}
+\end{center}
+\textbf{(c) }By (a), we have
+\begin{center}
+\begin{tikzcd}
+                                      & \ker a \arrow[r, "u_*"] \arrow[d, "i_a", tail] & \ker b \arrow[d, "i_b", tail] \\
+M \arrow[r] \arrow[d] \arrow[ru, "f"] & A \arrow[d, "a"] \arrow[r, "u", tail]          & B \arrow[d, "b"]              \\
+0 \arrow[r]                           & A' \arrow[r, "u'", tail]                       & B'                           
+\end{tikzcd}
+\end{center}
+If $u_*f=0$, then $0=i_bu_*f=ui_af$, since $u,i_a$ are monic, $f=0$, i.e. $\ker a\xrightarrow{u_*}\ker b$ is monic \par
+By universal property of kernel, we know $\ker a\xrightarrow{u_*}\ker b\xrightarrow{v_*}\ker c$ is zero, consider $v_*f=0$ which induce unique $M\to A$ and then induce unique $M\to\ker a$, by universal property of kernel, we know $\ker a$ is $\ker v_*$
+\begin{center}
+\begin{tikzcd}
+                                                                        & \ker a \arrow[r, "u_*"] \arrow[d, "i_a", tail] & \ker b \arrow[r, "v_*"] \arrow[d, "i_b", tail] & \ker c \arrow[d, "i_c", tail] \\
+M \arrow[d] \arrow[rru, "f", bend left=67] \arrow[r] \arrow[ru, dashed] & A \arrow[r, tail] \arrow[d]                    & B \arrow[d, "a"] \arrow[r, "v", two heads]     & C \arrow[d, "b"]              \\
+0 \arrow[r]                                                             & A' \arrow[r, tail]                             & B' \arrow[r, "v'", two heads]                  & C'                           
+\end{tikzcd}
+\end{center}
+Hence $0\to\ker a\to\ker b\to\ker c$ is exact \par
+By (b), we have
+\begin{center}
+\begin{tikzcd}
+B \arrow[r, "v", two heads] \arrow[d, "b"]                  & C \arrow[r] \arrow[d, "b"]                 & 0 \arrow[d] \\
+B' \arrow[r, "v'", two heads] \arrow[d, "\pi_b", two heads] & C' \arrow[r] \arrow[d, "\pi_c", two heads] & M           \\
+\mathrm{coker}b \arrow[r, "v'^*"]                           & \mathrm{coker}c \arrow[ru, "f"']            &            
+\end{tikzcd}
+\end{center}
+If $fv'^*=0$, then $0=fv'^*\pi_b=f\pi_cv'$, since $v',\pi_c$ are epi, $f=0$, i.e. $\mathrm{coker}b\xrightarrow{v'^*}\mathrm{coker}c$ is epi \par
+By universal property cokernel, we know $\mathrm{coker}a\xrightarrow{u'^*}\mathrm{coker}b\xrightarrow{v'^*}\mathrm{coker}c$ is zero, consider $fv'^*=0$ which induce unique $C'\to M$ and then induce unique $\mathrm{coker}c\to M$, by universal property of cokernel, we know $\mathrm{coker}c$ is $\mathrm{coker}u'^*$
+\begin{center}
+\begin{tikzcd}
+A \arrow[r, "u"] \arrow[d, "a"]                  & B \arrow[r, "v", two heads] \arrow[d, "b"]                         & C \arrow[r] \arrow[d, "b"]                 & 0 \arrow[d] \\
+A' \arrow[r, "u'"] \arrow[d, "\pi_a", two heads] & B' \arrow[r, "v'", two heads] \arrow[d, "\pi_b", two heads]        & C' \arrow[r] \arrow[d, "\pi_c", two heads] & M           \\
+\mathrm{coker}a \arrow[r, "u'^*"]                & \mathrm{coker}b \arrow[r, "v'^*"] \arrow[rru, "f"', bend right=60] & \mathrm{coker}c \arrow[ru, dashed]         &            
+\end{tikzcd}
+\end{center}
+Hence $\mathrm{coker}a\to\mathrm{coker}b\to\mathrm{coker}c\to0$ is exact
+\end{proof}
+
+\end{document}

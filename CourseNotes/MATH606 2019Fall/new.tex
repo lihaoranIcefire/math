@@ -1,0 +1,563 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\paragraph{Gluing schemes in general} Suppose $\{X_i\}_{i\in I}$ is a family of schemes. For any pair $(i,j)$, let $V_{ij}\subseteq X_i$ be open subset(with induced scheme structure) and there are isomorphisms of schemes $V_{ji}\xrightarrow{\varphi_{ij}}V_{ji}$ (with $V_{ii}=X_i$, $\varphi_{ii}=\id$). For any triple $(i,j,k)$, $\varphi_{ji}|_{V_{ij}\cap V_{ik}}:V_{ij}\cap V_{ik}\to V_{ji}\cap V_{jk}$ is an isomorphism of schemes and $\varphi_{ik}=\varphi_{ij}\circ\varphi_{jk}:V_{ki}\cap V_{kj}\to V_{ik}\cap V_{ij}$. Given all this, we first construct a topological space by gluing $X_i$'s along $V_{ij}$'s. Call the resulting space $X$. Then identify $X_i$ with an open subset of $X$. By the construction $V_{ij}\cap V_{ik}$, $V_{jk}\cap V_{ji}$, $V_{ki}\cap V_{kj}$ are all identified with $X_i\cap X_j\cap X_k\subseteq X$. After these identifications $\{\mathcal O_{X_i}\}_{i\in I}$ satisfy the gluing hypothesis for sheaves discussed before, therefore they glue to give a sheaf of rings on $X$ denoted by $\mathcal O_X$. The locally ringed space $(X,\mathcal O_X)$ is a scheme, because each $x\in X$ belongs to one of $X_i$'s, so has an affine open neighborhood
+
+\begin{example}
+Projective space $\mathbb P_k^n$, $\mathbb P_A^n$. The proj construction that will be discussed later gives an alternative construction of the projective space.
+\end{example}
+
+\begin{definition}
+If there is a morphism of schemes $X\xrightarrow[]{\varphi}S$ we say $X$ \textit{lies over} $S$, or $X$ is a \textit{scheme over} $S$, or $X$ is an $S$-scheme. $S$ is called the \textit{base scheme}. $\varphi$ is called the \textit{structure morphism}. If $S=\Spec A$, the we say $X$ is a scheme over $A$ or is an $A$-scheme. E.g. $\mathbb P_A^n$ is an $A$-scheme.
+\begin{itemize}
+\item If $X$ is an $A$ scheme then $\mathcal O_X$ is a sheaf of $A$-algebras
+\item Any scheme can be regarded (uniquely) as a $\mathbb Z$-scheme.
+\end{itemize}
+\begin{definition}
+If $X,Y$ are $S$-schemes then $u:X\to Y$ is called a morophism of $S$-schemes or an $S$-morphism if
+\begin{center}
+\begin{tikzcd}
+X \arrow[r, "u"] \arrow[rd, "\varphi"] & Y \arrow[d] \\
+                                       & S          
+\end{tikzcd}
+\end{center}
+commutes. This means $\forall s\in S$ and $\forall x$ over $s$ (i.e. $\varphi(x)=s$), $u(x)$ mus be over $s$.
+\end{definition}
+\begin{itemize}
+\item We can talk about the \textit{category of $S$-schemes}
+\end{itemize}
+\end{definition}
+
+\begin{itemize}
+\item IF $f:S'\to X$ is an $S$-morphism, the pair of morphisms $(f,1_{S'})$ induces unique $S'$-morphism $S'\xrightarrow{f'}X_{S'}$ by universal property of fiber product, we have $p_1\circ f'=1_{S'}$, $p_2\circ f'=f$. We say $f'$ is the \textit{graph morphism} of $f$
+\end{itemize}
+
+\clubsuit\quad If $A$ is a local ring, then $T=\Spec A$ has a unique closed point $t$ (corresponds to the maximal ideal of $A$). Any $A$-valued point of $X$ i.e. $T\xrightarrow{q}X$ uniquely factors as $T\to\Spec \mathcal O_{X,\varphi(t)}\to X$, where the second arrow is the natural morphism. (If $U=\Spec B$ is open nbd of $\varphi(t)$ in $X$, we know $\mathcal O_{X,\varphi(t)}\cong B_{\varphi(t)}$ and the natural homomrophsim $B\to B_{\varphi(t)}$ gives a morphism $\Spec\mathcal O_{X,\varphi(t)}\to U$ and composing with $U\hookrightarrow X$ get the 2nd arrow above. Easy to see this morphism does not  depend on the choice of $U$. The image of the 2nd consists of the \textit{generalizations} of $\varphi(t)$ in $X$, i.e. these $x\in X$ such that $\varphi(t)=\overline{\{x\}}$, 2nd arrow is a homeomorphism onto its image with the induced topology from $X$)
+
+\begin{proof}
+
+\end{proof}
+
+\begin{corollary}\label{10:11-04/16/2022}
+If $A$ is a local ring, $\exists$ bijection $X(A)\leftrightarrow$ local homomorphisms $\mathcal O_{X,x}\to A$ for some $x\in X$
+\end{corollary}
+
+\begin{definition}
+$X$ any scheme. A \textit{geometric point} of $X$ is a $K$-valued point of $X$, $K$ is called the \textit{field of values} of this geometric field
+\end{definition}
+
+\clubsuit\quad By Corollary~\ref{10:11-04/16/2022}, to give a geometric point of $X$, it is equivalent to give an $x\in X$ and a field extension $K\supseteq\kappa(x)$. (A field $K$ is a local ring with the maximal ideal $(0)$, so to give $\Spec K\to X$ it is equivalent to give a local homomorphism $\mathcal O_{X,x}\xrightarrow{h}K$. But then $\ker h$ must be the maximal ideal and so $\kappa(x)=\frac{\mathcal O_{X,x}}{\ker h}\hookrightarrow K$)
+\clubsuit\quad If $X$ is a $K$-scheme then the set of $K$-valued points of $X$ are those $x\in X$ such that $\kappa(x)=K$. ($\Spec K\to X\to\Spec K$ must be identity)
+
+\paragraph{Fibers of Morphisms} $f:X\to Y$ morphism of schemes, $y\in Y$, the \textit{scheme theoretic fiber of $f$ over $y$} is defined to be $\Spec k(y)\times_YX$, The \textit{set theoretic fiber over $y$} is $f^{-1}(y)\subseteq X$
+
+\clubsuit\quad $p_2:\Spec k(y)\times_YX\to X$ is homeomorphism onto $f^{-1}(y)$
+
+\begin{proof}
+$\forall x\in f^{-1}(y)$ there is a unique point in $\Spec k(y)\times_YX$ mapping to $x$ under $p_2$
+\end{proof}
+
+\clubsuit\quad A \textit{geometric fiber} of $f:X\to Y$ is the fiber over a geometric point $\Spec K\to Y$, i.e. $\Spec K\times_YX$
+
+\paragraph{Subschemes and immersions}
+
+\clubsuit\quad $X$ scheme, $\mathcal J$ is a quasi-coherent sheaf of ideals in $\mathcal O_X$, let $Y:=\supp(\frac{\mathcal O_X}{\mathcal J})$. Then $Y$ is a closed subset of $X$ and $(Y,\mathcal O_Y)$ is a scheme, $\mathcal O_Y:=i^{-1}(\frac{\mathcal O_X}{\mathcal J})$ where $i:Y\to X$ is the inclusion.
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+$(Y,\mathcal O_Y)$ is a \textit{subscheme} of $(X,\mathcal O_X)$ if $Y\subseteq X$ is locally closed and if $U=X-(\overline{Y}-Y)$(largest open subseteq of $X$ in which $Y$ is closed), then $Y=\supp\frac{\mathcal O_{X|U}}{\mathcal J}$ for some quasi-coherent sheaf of ideals in $\mathcal O_{X|U}$. In the case $U=X$ we say $Y$ is a \textit{closed subscheme} of $X$.
+\end{definition}
+
+\clubsuit\quad $\exists$ bijection between closed subschemes of $X$ and quasi-coherent ideal sheaves of $\mathcal O_X$
+
+\begin{proof}
+This follows from the fact that if $\mathcal J,\mathcal J'$ are tow quasi-coherent sheaves of ideals with the same support $Y$ and the restriction of $\mathcal O_X/\mathcal J$, $\mathcal O_X/\mathcal J'$ to $Y$ are the same, then $\mathcal J=\mathcal J'$ (follows from $I,I'<A$ two ideals then $I=I'\iff A/I=A/I'$)
+\end{proof}
+
+\begin{remark}
+This bijection we should not the radical of ideals, because we are dealing with the \textit{scheme structures} rather than just the underlying topological space
+\end{remark}
+
+\begin{example}
+$X=\mathbb A_{\mathbb C}^1=\Spec\mathbb C[x]$, $\mathcal I_k=(x^k)\subseteq\mathbb C[x]$, $Y_k=\supp\frac{X}{\mathcal I_k}$ has a structure of a closed subscheme of $X$. $(Y,\mathcal O_{Y_k})$ are all different schemes, but hte underlying topological spaces are all the same, i.e. a single point
+\end{example}
+
+\begin{definition}
+We say a morphism $f:Y\to X$ of schemes is an \textit{immersion(closed immersion, open immersion)} if it factors as $Y\xrightarrow{g}Z\xrightarrow{i}X$, when $g$ is an isomorphism and $Z$ is a subscheme (closed subcheme, open subscheme[i.e. $Z\subseteq X$ open and $\mathcal O_Z=\mathcal O_X|_Z$]) of $X$
+\end{definition}
+
+\begin{itemize}
+\item A morphism $(Y,\mathcal O_Y)\xrightarrow{(\varphi,\theta)}(X,\mathcal O_X)$ is an open immersion iff $\forall y\in Y$, $\theta^{\#}_y:\mathcal O_{X,\varphi(y)}\to\mathcal O_{Y,y}$ is an isomorphism (here $\theta^\#:\varphi^{-1}\mathcal O_X\to\mathcal O_Y$ is the adjoint of $\theta:\mathcal O_X\to\varphi_*\mathcal O_Y$), and $\varphi$ is homeomorphic onto an open subset of $X$.
+\begin{proof}
+If $(\varphi,\theta)$ is an open immersion, then $\theta^\#$ is an isomorphism ($\varphi^{-1}\mathcal O_X\cong\mathcal O_X|_{\varphi(Y)}$), so $\theta^\#_y$ is an isomorphism. Conversely, if all $\theta^\#_y$ are isomorphisms, so is $\theta^\#$, so again $\varphi^{-1}\mathcal O_X\cong\mathcal O_X|_{\varphi(Y)}$
+\end{proof}
+\item With the same notation $(\varphi,\theta)$ is a (closed) immersion iff $\forall y\in Y$, $\theta^\#_y$ is surjective and $\varphi$ is a homeomorphism onto (closed) locally closed subset of $X$.
+\begin{proof}
+
+\end{proof}
+\item Immersions are examples of monomorphisms of schemes
+\item If $Y$ is a locally closed subset of a scheme $X$, there is a unique \textit{reduced scheme} structure on $Y$, making $Y$ a subscheme of $X$.
+\begin{proof}
+If $X=\Spec A$ and $Y$ is closed in $X$, let $I=\cap_{p\in Y}p=I(Y)$. It is a radical ideal and the largest ideal of $A$ such that $V(I)=Y$. In particular $A/I$ is reduced and $\Spec A/I$ is the desired scheme structure on $Y$. In general, replace $X$ by $X-(\overline{Y}-Y)$ so we can assume $Y\subseteq X$ is closed. Now for each open affine $U_i\subseteq X$, $Y_i=Y\cap U_i$ is closed in $U_i$, so give it a reduced scheme structure as above. $\forall i,j$, the restriction of $\mathcal O_{Y_i}$, $\mathcal O_{Y_j}$ to $Y_i\cap Y_j$ are isomorphic and these isomorphisms are compatible on triple intersections. To see this, one reduces to the case $U=\Spec A$ and $V=\Spec A_f$ for some $f\in A$ and showing that the restriction $\mathcal O_{Y\cap U}$ (constructed before) to $Y\cap V$ is isomorphic to $\mathcal O_{Y\cap V}$. This follows from this algebraic fact: If $I<A$ and $I=\cap_{p\in Y\cap U}p$, then $IA_f=\cap_{p\in Y\cap v}p$. Thus we can glue $\mathcal O_{Y_i}$'s to get $\mathcal O_Y on $Y with desired property. Uniqueness follows from construction of $\mathcal O_Y$in affine case
+\end{proof}
+\end{itemize}
+
+\paragraph{Separatedness} Recall schemes in general are $T_0$ spaces(Kolmogorov) and far from being $T_2$-space (Hausdorff). Many proofs in manifold theory use Hausdorff property. A topological space $X$ is Hausdorff $\iff$ the diagonal $\Delta\subseteq X\times X$ is closed. In scheme theory, doesn't give Hausdorff property (because the topology on $X\times X$ is not the product topology). However it turns out imposing this diagonal condition will give us much nicer classes of schemes to work with (excluding examples such as the affine lines with two origins). As Grothendieck taught, many properties of schemes are more generally and canonically expressed as properties of morphism of schemes. Separatedness is an example as we weill see, with these motivations:
+
+\begin{definition}
+If $f:X\to Y$ is a morphism of schemes, $(\id_X,\id_X)$ gives a morphism $\delta:X\to X\times_YX$ called \textit{diagonal morphism}. We will show $\delta$ is an immersion, so its image is a subscheme of $X\times_YX$ denoted by $\Delta_{X/Y}$ or simply $\Delta$ and called the \textit{diagonal} of $X$ over $Y$.
+\end{definition}
+
+\begin{itemize}
+\item $\delta$ is an immersion.
+\begin{proof}
+Cover $Y$ by open affine $\{V_i\}$ and $X$ by open affine $\{U_{ij}\}$ such that $f(U_{ij})\subseteq V_i$. Then $U_{ij}\times_{V_i}U_{ij}$ is an open affine in $X\times _X$. $\{U_{ij}\times_{V_i}U_{ij}\}$ cover $\Delta$ (but not necessarily $X\times_YX$) and $\delta^{-1}(U_{ij}\times_{V_i}U_{ij})=U_{ij}$. We are left to show $\delta|_{U_{ij}}:U_{ij}\to U_{ij}\times_{V_i}U_{ij}$ is a closed immersion. By construction, let $U_{ij}=\Spec A$, $V_i=\Spec B$, then $\varphi:A\otimes_BA\to A$, $a_1\otimes a_2\mapsto a_1a_2$ is clearly surjective and so is the claim.
+\end{proof}
+\end{itemize}
+
+\begin{definition}
+$f:X\to Y$ is \textit{separated} if $\delta$ is a closed immersion
+\end{definition}
+
+\begin{itemize}
+\item Morphism between affine schemes are separated.
+\item If $f:X\to Y$ is a monomorphism, then $f$ is separated (In particular any immersion is separated)
+\begin{proof}
+In this case $\delta$ is an isomorphism ($\Rightarrow$ closed immersion). In fact we showed $X\times_XX\cong X\times YX$ and $X\times_XX\cong X$
+\end{proof}
+\item $\mathbb P_A^n$ is separated as an $A$-scheme
+\begin{proof}
+Cover $\mathbb P_A^n\times_A\mathbb P_A^n$ by the open sets $U_i\times_AU_j$. If $i=j$ as before can see $U_i\xrightarrow{\delta}U_i\times_AU_j$ is a closed immersion. If $i\neq j$ then $U_i\times_AU_j\cong\Spec A[\frac{x_0}{x_i},\cdots,\frac{x_n}{x_i},\frac{y_0}{y_j},\cdots,\frac{y_n}{y_0}]$. The restriction of $\delta$ gives a morphism $U_i\cap U_j\xrightarrow{\delta}U_i\times_AU_j$ ($p_1\circ\delta$, $p_2\circ\delta$ are identities). The restriction is given by the ring homomorphism
+\[
+A[\frac{x_0}{x_i},\cdots,\frac{x_n}{x_i},\frac{y_0}{y_j},\cdots,\frac{y_n}{y_0}]\to A[\frac{x_0}{x_i},\cdots,\frac{x_n}{x_i}]_{\frac{x_j}{x_i}},\frac{x_k}{x_i}\mapsto\frac{x_k}{x_i},\frac{y_k}{y_i}\mapsto\frac{x_k}{x_i}/\frac{x_j}{x_i}
+\]
+Which is evidently surjective and so $\delta_{U_i\cap U_j}$ is a closed immersion
+\end{proof}
+\end{itemize}
+
+\begin{example}
+Affine line with two origins is not separated.
+\end{example}
+
+\paragraph{More on base change}
+\begin{itemize}
+\item If $U\subseteq S$ is an open subscheme, then $X_U=U\times_SX\cong f^{-1}(U)$ is an open subscheme of $X$.
+\item If $V\subseteq S'$ is an open subscheme such that $g(V)\subseteq U$ under $g:S'\to S$, then $V\times_Uf^{-1}(U)=f^{-1}_{S'}(V)$
+\end{itemize}
+
+In both above two cases, there exists a natural morphism from RHS to both factors of the products in LHS. Then apply the universal property of fiber product
+
+\begin{itemize}
+\item The property of being a closed immersion (open immersion, immersion) is stable under base change.
+\begin{proof}
+Suppose $f:X\to S$ is a closed immersion, $g:S'\to S$ ia a morphism, $\forall s'\in S'$, $\exists$ open affine neighborhood $V$ of $s'$ and $U$ of $s=g(s')$ such that $g(V)\subseteq U$. We know $f^{-1}_{S'}(V)\cong V\times_Uf^{-1}(U)$, so by the following fact $f^{-1}_{S'}(V)\to V$ is a closed immersion. Since we can cover $S'$ by open affines this shows $f_{S'}$ is a closed immersion. \\
+The case of open immersion is immediate form what said in the previous case. \\
+By combining the stability of closed and open immersion the case of immersions also follows.
+\end{proof}
+\end{itemize}
+
+\begin{fact}
+$\varphi:A\to B$ surjective homomorphism of rings and $C$ any $A$-algebra, then $C\cong C\otimes_AA\xrightarrow{1\otimes\varphi}C\otimes A_B$ is also surjective.
+\end{fact}
+
+\begin{example}
+If $Y_1,Y_2$ are two closed subschemes of $X$, given by the quasicoherent ideal sheaves $\mathcal I_1,\mathcal I_2$, then $Y_1\times_XY_2$ is a closed subscheme of $X$ given by the ideal sheave $\mathcal I_1+\mathcal I_2$, it is called the \textit{scheme theoretic intersection} of $Y_1,Y_2$. \\
+e.g. $Y_1=\Spec \mathbb C[x,y]/(x)$, $Y_2=\Spec \mathbb C[x,y]/(x-y^2)$, then $Y_1\cap Y_2=\Spec \mathbb C[x,y]/(x,y^2)$ (which is a non-reduced point)
+\end{example}
+
+\begin{definition}
+$f:X\to Y$, $W\subseteq Y$ subscheme. $f^{-1}(W):=X\times_YW$. By the previous item $f^{-1}(W)$ is isomorphic to a subscheme of $X$ (inverse image of $W$). This notation (and name) is chosen because the first projection defines a homeomorphism onto the inverse image of $W$ under $f$ (To see this, one may reduce to the affine case: $X=\Spec B$, $Y=\Spec A$, $\varphi:A\to B$, $W=V(I)$ for some $I\leq A$, Then the inverse image of $W$ is $V(\varphi(I))\cong \Spec B/\varphi(I)\cong Spec B\otimes_AA/I$)
+\end{definition}
+
+\begin{definition}
+We say a scheme $X$ is \textit{Noetherian(locally noetherian)} if $X$ has a finite open affine cover (open affine cover) $\{V_i=Spec A_i\}$ such that $A_i$ are noetherian
+\end{definition}
+
+\begin{itemize}
+\item If $X$ is locally noetherian, then $\mathcal O_X$ is coherent. ($A_i$ noetherian $\Rightarrow$ $\widetilde{A_i}$ is coherent). Moreover, any quasi-coherent sub $\mathcal O_X$-modules (in particular quasi-coherent ideal sheaves) and quotients $\mathcal O_X$-modules of a coherent $\mathcal O_X$-module $\mathcal F$ are again coherent
+\end{itemize}
+
+\begin{definition}
+$f:X\to Y$ is of \textit{finite type} if $\exists$ open affine covering $\{V_i=\Spec A_i\}$ of $Y$ such for each $i$, there is a finite open affine covering $\{U_{ij}=\Spec B_{ij}\}$ of $f^{-1}(V_i)$ such that $B_{ij}$ is a finite type $A_i$-algebra. \textit{Locally finite type morphism} is defined by dropping "finite" from open affine covering of $f^{-1}(V_i)$
+\end{definition}
+
+\begin{example}
+$\mathbb P^n_A$ is finite type over $\Spec A$
+\end{example}
+
+\begin{itemize}
+\item A morphism $f:\Spec B\to\Spec A$ is of finite type iff $B$ is finite type $A$-algebra.
+\item Suppose $X,Y$ are two $S$-schemes and $Y$ is of finite type over $S$ and $x\in X$, $y\in Y$ are over a point $s\in S$. If $(\psi,\theta),(\psi',\theta'):X\to Y$ are two $S$-morphism of schemes such that $\psi(x)=y=\psi'(x)$ and $\theta^\#_x=\theta'^\#_x$, then these two morphisms coincide in an open neighborhood of $x$.
+\begin{proof}
+The assertion is local and so we can assume $S=\Spec A$, $X=\Spec B$, $Y=\Spec C$ and the mrophisms are given by two $A$-algebra homomorphisms $\varphi,\varphi':C\to B$ and think of $x,y$ as prime ideals in $B,C$ such that $\varphi^{-1}(x)=y=\varphi'^{-1}(x)$ with $\varphi_x=\varphi'_x:C_y\to B_x$, and finally $C$ is a finite type $A$-algebra. Let $a_1,\cdots,a_n$ be generators of $C$ as $A$-algebra, and let $b_i=\varphi(c_i)$, $b_i'=\varphi(c_i')$. By assumption $b_i/1=b_i'/1$ in $B_x$, so $\exists s_i\in B-x$ such taht $s_i(b_i-b_i')=0$. Let $f=s_1\cdots s_n\in B-x$, then $b_i/1=b_i'/1$ in $B_f$ and $\iota\circ\varphi=\iota\circ\varphi'$ ($\iota:B\to B_f$) means the two morphism of schemes agree on $D(f)$
+\end{proof}
+\item In the notation of previous item, suppose morever $S$ is locally noetherian, then for any local homomorphism $\varphi:\mathcal O_{Y,y}\to\mathcal O_{X,x}$, $\exists
+$ open neighborhood $U$ of $x$ and an $S$-morphism $(\psi,\theta):U\to Y$ such that $\psi(x)=y$ and $\theta^\#_x=\varphi$
+\end{itemize}
+
+\begin{definition}
+A \textit{variety} is a reduced, separated and finite type over $k$
+\end{definition}
+
+\begin{definition}
+$X$ is \textit{affine over} $S$ if $\exists$ open affine covering $\{S_i\}$ of $S$ such that $f^{-1}(S_i)$ with induced scheme structure from $X$ is affine for each $i$. We also say the morphism $f$ affine
+\end{definition}
+
+\begin{example}
+Closed immersions are affine morphisms
+\end{example}
+
+\begin{itemize}
+\item $f:X\to S$ is affine, then it is separated.
+\item $f:X\to S$ affine and $U\subseteq S$ open, then $f^{-1}(U)\xrightarrow{f}U$ is affine. (The assertion is local, so reduce to $S=\Spec A$, $X=\Spec B$ and $f$ is given by homomorphism $\varphi:A\to B$, and $U=D(g)$ for some $g\in A$. But then $f^{-1}(U)=D(\varphi(g))$ is affine)
+\item If $f:X\to S$ affine then for any quasi-coherent $\mathcal O_X$-module $\mathcal F$, $f_*\mathcal F$ is quasi-coherent. (Reduce to $X,S$ are affine)
+\item $S$ any scheme, $\mathcal B$ quasi-coherent $\mathcal O_S$-algebra. There is a $S$-scheme $X$ affine over $S$, unique up to isomorphism, such that $\mathcal A(X)=\mathcal B$.
+\begin{proof}
+For any open affine $U\subseteq S$, let $X_U=\Spec \mathcal B(U)$. Since $\mathcal B(U)$ is an $\mathcal O_S(U)$-algebra, $X_U$ must be an $S$-scheme, and since $\mathcal B$ is quasi-coherent, $\mathcal O_{X_U}$ is identified with $\mathcal B|_U$
+\end{proof}
+\item $X$ is a scheme affine over scheme $S$. For any $S$-scheme $Y$ there is a bijection $\Hom_S(Y,X)\leftrightarrow\Hom_{\mathcal O_S-\text{alg}}(\mathcal A(X),\mathcal A(Y))$, $h\mapsto\mathcal A(h)$ (reduce to case when $X,S$ are affine, then use the characterization of morphisms to affine schemes)
+\end{itemize}
+
+\begin{definition}
+The $S$-scheme $X$ above is denoted by $X=\Spec\mathcal B$ and called the \textit{spectrum} of the $\mathcal O_S$-algebra $\mathcal B$.
+\end{definition}
+
+Similarly we have
+
+\begin{itemize}
+\item $S$ any scheme, $\mathcal B$ quasi-coherent $\mathcal O_S$-algebra, $\mathcal M$ quasi-coherent $\mathcal O_S$ module that also has a structure of $\mathcal B$ module, then $\exists$ pair $(X,\mathcal F)$ of a scheme $X$ affine over $S$ and a quasi-coherent $\mathcal O_X$ module $\mathcal F$ such that $\mathcal A(X)=\mathcal B$ and $\mathcal A(\mathcal F)=\mathcal M$. This pair is unique up to isomorphism. $\mathcal F$ is also denoted as $\widetilde{\mathcal M}$, and is called the $\mathcal O_X$-module associated to $\mathcal B$-module $\mathcal M$.
+\item Affine morphisms are stable under base change. (assertion can be reduced to the fiber product of affine schemes over an affine scheme is affine)
+\end{itemize}
+
+\paragraph{Affine cones and vector bundles} use examples of affine morphisms. If $X=\Spec A$, $\mathcal E=\widetilde M$ the $\mathcal O_X$-module associated to an $A$-module $M$ then $\Sym(\mathcal E)\cong\widetilde{\Sym(M)}$ (this follows from $\Sym(M)_f\cong\Sym(M_f),\forall f\in A$). If $X$ is any scheme and $\mathcal E$ a quasi-coherent $\mathcal O_X$-module by what said above $\Sym(\mathcal E)$ is a quasi-coherent $\mathcal O_X$-algebra.
+
+\begin{definition}
+$X$ any scheme, $\mathcal E$ quasi-coherent $\mathcal O_X$-module, $\mathbb V(\mathcal E):=\Spec\Sym(\mathcal E)$ is called the \textit{affine cone} over $X$ associated to $\mathcal E$.
+\end{definition}
+
+\begin{itemize}
+\item If $Y$ is any $X$-scheme, $\exists$ bijections
+\[
+\Hom_X(Y,\mathbb V(\mathcal E))\leftrightarrow\Hom_{\mathcal O_X-\text{alg}}(\Sym(\mathcal E),\mathcal A(Y))\leftrightarrow\Hom_{\mathcal O_X-\text{mod}}(\mathcal E,\mathcal A(Y))
+\]
+(First follows from the fact $\mathbb V(\mathcal E)$ is affine over $X$ and the second is the universal property of symmetric algebra). Now if $Y$ is an open subscheme of $X$, then any $X$-morphism $Y\to\mathbb V(\mathcal E)$ is a $Y$-section of $p^{-1}(Y)\to Y$, where $p:\mathbb V(\mathcal E)\to X$ is the structure morphism. So by the above fact $Y$-sections are in bijection with $\Hom_{\mathcal O_X}(\mathcal E,j_*\mathcal O_X|_Y)$ where $j:Y\hookrightarrow X$ is the inclusion. By adjunction this is the same as $\Hom_{\mathcal O_Y}(\mathcal E,\mathcal O_X|_Y)$. If $Y'\subseteq Y$ is a open, then clearly then restriction of $Y$-sections to $Y'$ is the result of restricting the corresponding $\mathcal O_Y$-module homomorphism $\mathcal E_Y\to\mathcal O_X|_Y$ to $Y'$. This shows that
+\item The \textit{sheaf of germs of $X$-sections} of $\mathbb V(\mathcal E)$ is canonically identified with the dual $\mathcal E^\vee$ of $\mathcal E$. In particular the $0$-homomorphism $\mathcal E\to\mathcal O_X$ corresponds to an $X$-section of $\mathbb V(\mathcal E)$ that is called the \textit{0-section}.
+\item Now let $Y=\Spec K\xrightarrow{f}X$ corresponding to some $x\in X$ and extension of fields $k(x)\to K$. The geometric points $\Spec K\to\mathbb V(\mathcal E)$ with values in the extension $K/k(x)$ have image in $p^{-1}(x)$. The set of such points is called the \textit{geometric fiber over $x$ of $\mathbb V(\mathcal E)$ rational over $K$}
+\item If $\mathcal E,\mathcal F$ are two quasi-coherent $\mathcal O_X$-module, $\mathbb V(\mathcal E\oplus\mathcal F)\cong\mathbb V(\mathcal E)\times_X\mathbb V(\mathcal F)$ (follows from $\Sym(M\oplus N)\cong\Sym(M)\otimes_A\Sym(N)$)
+\item If $g:X'\to X$ is such that $\mathbb V(g^*(\mathcal E))\cong\mathbb V(\mathcal E)_{X'}$ (follows from $\Sym(g^*\mathcal E)\cong g^*\Sym(\mathcal E)$)
+\end{itemize}
+
+\begin{definition}
+If $\mathcal E$ is locally free of rank $n$, $\mathbb V(\mathcal E)$ is called the \textit{vector bundle} associated to $\mathcal E$. (Each fiber is a vector space of dimension $n$)
+\end{definition}
+
+\begin{note}
+If $\mathcal E|_U\cong\mathcal O_X^n|_U$ for some open affine $U=\Spec A\subseteq X$, then $\mathbb V(\mathcal E_U)\cong\Spec A[x_1,\cdots,x_n]\cong U\times\mathbb A_{\mathbb Z}^n$
+\end{note}
+
+\paragraph{Proj construction} $S=\oplus_{n\geq0}S_n$ graded ring, $S_+=\oplus_{n>0}S_n$, $M=\oplus_{n\in\mathbb Z} M_n$ graded $S$-module, $M_n$ is $S_0$-module formed by homogeneous elements of $M$ of degree $n$. Given $M,S$ as above: $S^{(d)}=\oplus_{n\geq0}S_{nd},(d>0)$ is a graded ring. $M^{(d,k)}=\oplus_{n\in\mathbb Z}M_{nd+k},(d>0,0\leq k\leq d-1)$ is a graded $S^{(d)}$-module, $M^{(d)}=M^{(d,0)}$, define $M(d)$ to be the graded $S$-module with $M(d)_n=M_{d+n}$. In particular, $S(d)$ is a graded module. We say $M$ is \textit{free} (as a graded $S$-module) if it is a direct sum of $S$-modules $S(d)$ (with different $d$'s). We say $M$ admits \textit{finite presentation} (as graded $S$-module) if $\exists$ sequence of $S$-modules $P\to Q\to M\to0$ with $P,Q$ are free of finite rank and homomorphisms are all graded (i.e. have degree $0$, we say a homomorphism $u:M\to N$ of graded $S$-modules have \textit{degree $k$} if $u(M_j)\subseteq N_{j+k}$. Denote by $\Hom_S(M,N)(k)$ the direct sum over $k$ of the spaces of all degree $k$ homomorphisms). If $M,N$ are graded $S$-modules, first note that $M\otimes_{\mathbb Z}N$ is a graded $\mathbb Z$-module($\mathbb Z=\mathbb Z_0$): $(M\otimes_{\mathbb Z}N)_k=\oplus_{m+n=k}M_m\otimes_{\mathbb Z}N_n$ so $M\otimes_SN\cong(M\otimes_{\mathbb Z}N)/P$ is also graded, where $P$ is a graded sub $\mathbb Z$-module generated by all $(xs)\otimes y-x\otimes(sy)$ for $x\in M,y\in N,s\in S$. Then following are easy to prove
+
+\begin{itemize}
+\item $M(m)\otimes_SN(n)=(M\otimes_SN)(m+n)$
+\item $\Hom_S(M(m),N(n))\cong\Hom_S(M,N)(n-m)$
+\end{itemize}
+
+\begin{itemize}
+\item If $\varphi:S\to S'$ is a homomorphism of \textit{graded rings}(i.e. $\varphi(S_n)\subseteq S_n'$), then $S'$ gets a structure of a graded $S$-module
+\item If $S$ graded ring and $f\in S_d$ for some $d>0$, then $S_f$ is a graded: $(S_f)_n=\{x/f^k|x\in S_{n+kd},k\geq0\}$. Its degree $0$ elements form a ring, most of time denoted by $S_{(f)}$. Similarly if $M$ is a graded $S$-module generated by degree $0$ elements of $M_f$
+\end{itemize}
+
+\begin{definition}
+$S$ graded ring, $\Proj(S)=\{P<S \text{homogeneous and prime}|p\not\supseteq S_+\}$, the \textit{homogeneous prime spectrum} of $S$. Note $\Proj S\subseteq\Spec S$. The closed subsets are $\{V_+(E)\}_{E\subseteq S}$, where $V_+(E)=V(E)\cap\Proj S$. (So the topology is induced from $\Spec S$) Note: $V_+(0)=\Proj S$, $V_+(S)=V_+(S_+)=\varnothing$, $V_+(\cup_iE_i)=\cap_iV_+(E_i)$, $V_+(EE')=V_+(E)\cap V_+(E')$, $V_+(E)=V_+(J)$, $J$ is the homogeneous ideal generated by $E$
+\end{definition}
+
+\begin{itemize}
+\item If $J<S$ is a homogeneous ideal, $V_+(J)=V_+(\cap_{q\geq n}(J\cap S_1))$, $\forall n>0$ (If $p\in\Proj S$ contains the elements of $J$ of degree $\geq 0$, since we know $\exists f\in S_d,(d>0)$, $f\notin p$, so $\forall m\geq0$ and $x\in J\cap S_m$, $f^rx\in J\cap S_{m+rd}$, so except for finitely many $r$, $f^rx\in P\cap S_{m+rd}\Rightarrow x\in p\cap S_m$)
+\item If $J<s$ is a homogeneous ideal, $V_+(J)=V_+(\sqrt{J}\cap S_+)$ (use previous item)
+\end{itemize}
+
+\paragraph{Image of morphisms} Suppose $f:X\to Y$ is a morphism is a morphism of schemes such that $f_*\mathcal O_X$ is quasi-coherent (e.g. this is the case if $f$ is quasi-compact and separate). Let $\mathcal K$ be the kernel of the homomorphism $\theta:\mathcal O_Y\to f_*\mathcal O_X$. Then $\mathcal K$ is a quasi-coherent ideal sheaf in $\mathcal O_Y$. Let $Z$ be the closed subscheme of $Y$ defined by $\mathcal K$. Then $Z$ is the smallest subscheme of $Y$ such that $f^{-1}(Z)$ (scheme theoretic) is equal to $X$. To see the last claim, note that $\theta$ factors as $\theta:\mathcal O_Y\to\mathcal O_Y/\mathcal K\xrightarrow{\theta'}f_*\mathcal O_X$, that induces (by adjoint property) $\theta^\#:f^{-1}\mathcal O_Y\to f^{-1}\mathcal O_Y/f^{-1}\mathcal K\xrightarrow{\theta'^\#}\mathcal O_X$ ($f^{-1}$ is an exact functor). $\forall x\in X$, $\theta_x^\#$ is a local homomorphism $\Rightarrow\theta'^\#_x$ is a local homomorphism. This shows that $f$ factors as $f:X\xrightarrow{f'}Z\xrightarrow{j}Y$, where $j$ is a closed immersion. Now we have Cartesian diagonal
+
+\begin{definition}
+$Z$ is called \textit{scheme theoretic image} of $f:X\to Y$
+\end{definition}
+
+\clubsuit\quad As topological spaces $Z=\overline{f(X)}$. If $f$ is a immersion $f(X)$ is open in $Z$
+\begin{proof}
+We know that $f_*\mathcal O_X$ is a quasi-coherent
+\end{proof}
+
+\paragraph{Projective morphisms} Suppose $X$ is a $Y$-scheme, the following are equivalent
+\begin{enumerate}
+\item $X$ is $Y$-isomorphic to a closed subscheme of $\mathbb P(\mathcal E)$ where $\mathcal E$ is a quasi-coherent $\mathcal O_Y$-module of finite type.
+\item $\exists$ quasi-coherent graded $\mathcal O_Y$-algebra $\mathcal S$ such that $\mathcal S$ is of finite type and generates $\mathcal S_1$ and $X$ is $Y$-isomorphism to $\Proj\mathcal S$
+\end{enumerate}
+
+\begin{proof}
+$\Rightarrow$: Let $\mathcal I$ be the graded quasi-coherent ideal sheaf of $\Sym(\mathcal E)$
+\end{proof}
+
+\begin{definition}
+$Y$ is complete and separated, $f:X\to Y$ \textit{projective} if one the equivalent condition above is satisfied
+\end{definition}
+
+\begin{definition}
+$f:X\to Y$ is proper if $f$ is separated, finite type and universally closed
+\end{definition}
+
+\clubsuit\quad Any closed immersion is proper
+
+\clubsuit\quad Composition of proper maps are again proper
+
+\paragraph{A nice application of properness} Let $k$ be an algebraically closed field and $X$ is a connected reduced proper $k$-scheme, then $\Gamma(X,\mathcal O_X)=k$
+
+\begin{proof}
+Suppose $f\in\Gamma(X,\mathcal O_X)$. Using the bijection $\Hom_k(X,\mathbb A_k^1)\leftrightarrow\Hom_k(k[x],\Gamma(X,\mathcal O_X))$, so $f$ corresponds to morphism $\pi:X\to\mathbb A_k^1$, let $i:\mathbb A_k^1\to\mathbb P_k^1$ be an open immersion (recall construction of $\mathbb P_k^1$). So we get a morphism $i\circ\pi:X\to\mathbb P_k^1$. Since $X$ is proper over $k$ and $\mathbb P_k^1$ is separated over $k$, we find taht $i\circ\pi$ is proper, so in particular the image of $i\circ\pi$ is closed in $\mathbb P_k^1$. Since $k=\overline k$ the image is either $\mathbb P_k^1$ or a single point ($X$ is a connected). But the image is contained in $\mathbb A_k^1\subseteq\mathbb P_k^1$, so the scheme theoretically is a reduced point
+\end{proof}
+
+
+
+
+
+
+\paragraph{Dimensions} If $X=\Spec A$, $\dim X=\dim A=\max_n p_0\subsetneq p_2\subsetneq\cdots\subsetneq p_n$ is the Krull dimension
+
+\begin{example}
+$\dim\Spec k=0$, $\dim\Spec\mathbb Z=1$, $\dim\mathbb A_{\mathbb Z}^1=2$
+\end{example}
+
+\begin{itemize}
+\item $\dim X$ is the supremum of lengths of chains of irreducible closed subsets of $X=\Spec A$, which is $\dim X$ as topological space
+\item If $A$ is an integral domain, finitely generated over a field $k$, then $\dim A=\tr.\deg_kQ(A)$
+\end{itemize}
+
+\begin{definition}
+Dimension of a scheme $X$ is its dimension as a topological space. If $Y\subseteq X$ is a irreducible subset, $\codim(Y,X)$ is defined to be the supremum of lengths of increasing closed subsets $\overline{Y}=Y_0\subsetneq\cdots\subsetneq Y_n$. e.g. If $p\in\Spec A$, then $\codim(\{p\},\Spec A)=\operatorname{ht}(p)=\dim A_p$
+\end{definition}
+
+\begin{itemize}
+\item If $X=Y\cup Z$, $Y,Z\subseteq X$ closed, $\dim X=\max(\dim Y,\dim Z)$
+\item If $Y\subseteq X$ irreducible and closed, $\codim(Y,X)=\dim\mathcal O_{X,\eta}$, $\eta$ is the generic point of $Y$. And $\codim(Y,X)=0\iff Y$ is an irreducible component of $X$
+\item $A$ is a UFD, any irreducible closed subset $Y\subseteq\Spec A$ of codimension 1 is of the form $V(f)$ for some $f\in A$
+\begin{proof}
+$\exists$ height 1 prime $p\subseteq A$ such that $Y=V(p)$. Let $0\neq g\in p$, and let $f$ be an irreducible factor of $g$ so $(0)\subseteq(f)\subseteq p$ is a chain of prime ideals. Since $\operatorname{ht}p=1\Rightarrow p=(f)$
+\end{proof}
+\end{itemize}
+
+\begin{example}
+In $\Spec\frac{k[x,y,z]}{(z^2-xy)}$, $V(x,z)$ is of codimension 1 but not of the form $V(f)$
+\end{example}
+
+\clubsuit\quad  Suppose $X$ is a k-scheme locally of finite type and of pure dimension $d$(i.e. each irreducible component of $X$ has dimension $d$). If $Y\subseteq X$ irreducible closed subset, then $\codim(Y,X)+\dim Y=d$
+\begin{proof}
+Since $Y$ is irreducible it must be contained in one of the irreducible components of $X$. So we reduce to the case $X$ is an integral affine $k$-scheme. Also, by induction, we may reduce to proving that if $Z\subsetneq X$ is a maximal, irreducible, closed subset, then $\dim Z=d-1$. By Noether normalization theorem~\ref{Noether normalization theorem} $\exists$ finite and surjective morphism $f:X\to\mathbb A^d_k$, let $Z'$ be the scheme theoretic image of $f$. Since $f$ is closed, as topological spaces $Z'=f(Z)$. $f|_Z:Z\to Z'$ is also a finite morphism and by going up theorem $\dim Z=\dim Z'$. If we show that $\dim Z'=d-1$ we are done. Since $\dim Z'=\dim Z<d$, we have to show $\dim Z'<d-1$ is impossible. Let $f\in k[x_1,\cdots,x_d]$, then $(f)$ corresponds to a closed subscheme $H\subseteq\mathbb A^d$ containing $Z'$. By Krull's Hauptidealsatz~\ref{Krull's principal ideal theorem} each irreducible compnent of $H$ has dimension $d-1$, so $Z'$ being irreducible is properly contained in an irreducible component $H_1\subseteq H$. By going down theorem~\ref{Going down theorem}, $\exists$ closed irreducible subset $V\subseteq X$ containing $Z$ contradicting its maximality.
+\end{proof}
+
+\begin{theorem}[Noether normalization theorem]\label{Noether normalization theorem}
+$A$ is integral domain which is a finitely generated $k$-aglebra. If $\tr.\deg_kQ(A)=n$, $\exists x_1,\cdots,x_n\in A$ algebraically independent over $k$ such that $A$ is a finite extension of the polynomial subring $k[x_1,\cdots,x_n]$
+\end{theorem}
+
+\begin{theorem}[Krull's principal ideal theorem]\label{Krull's principal ideal theorem}
+$A$ Noetherian ring, $f\in A$ is neither a unit nor a zero divisor. Then any minimal prime ideal containing $f$ has height 1
+\end{theorem}
+
+\begin{theorem}[Going down theorem]\label{Going down theorem}
+$\varphi:B\hookrightarrow A$ finite ring extension, where $B$ integrally closed domain and $A$ is an integral domain. Given nested prime ideals $q\subseteq q'\subseteq B$ and a prime ideal $p'<A$ lying over $q'$, $\exists$ prime $p<A$ contained in $p'$ and lying over $q$
+\end{theorem}
+
+\begin{proposition}
+$A$ Noetherian integral domain. Then $A$ is a UFD $\iff$ all height 1 prime ideals are principal
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}[Krull's height theorem]\label{Krull's height theorem}
+$A$ Noetherian ring. $p<A$ minimal prime containing some given $f_1,\cdots,f_n\in A$, then $\operatorname{ht}p\leq n$. This means that if $Z$ is a irreducible component of $V(f_1,\cdots,f_n)\subseteq\Spec A$, then $\codim(Z,\Spec A)\leq n$
+\end{theorem}
+
+\begin{lemma}[Algebraic Hartog's lemma]\label{Algebraic Hartog's lemma}
+$A$ integrally closed noetherian domain, then
+\[
+A=\bigcap_{p<A,\operatorname{ht}p=1}A_p
+\]
+(Hartog's lemma in several complex variables says that holomorphic functions defined away from a codimension 2 set can be extended over)
+\end{lemma}
+
+\begin{definition}
+A scheme $X$ is called \textit{normal} (resp. \textit{locally factorial, regular}) if for $x\in X$, $\mathcal O_{X,x}$ is an integral domain integrally closed in its fraction field (resp. UFD, regular=Noetherian and $\dim\mathcal O_{X,x}=\dim_{k(x)}\frac{m_x}{m_x^2}$)
+\end{definition}
+
+These properties of $X$ are \textit{stalk-local properties}, os is reducedness. But integrality of $X$ is not stalk-local. e.g. $\Spec k\coprod\Spec k$
+
+\clubsuit\quad regular $\subset$ locally factorial $\subset$ normal $\subset$ reduced. This first inclusion is the deepest (Auslander-Buchbaum)
+
+\clubsuit\quad $X$ noetherian, integral, normal scheme, $Z$ closed subscheme, each of its irreducible components has codimension 2, then $\Gamma(X-Z,\mathcal O_X)=\Gamma(X,\mathcal O_X)$
+\begin{proof}
+Let $U=\Spec A\subseteq X$ be open affine. We know that $A$ integrally closed $\iff A_p$ integrally closed $\forall p<A$ prime $\iff A_m$integrally closed $\forall m<A$ maximal. We can apply lemma~\ref{Algebraic Hartog's lemma}, we know
+\[
+\Gamma(U-Z,\mathcal O_X)=\bigcap_{p\in U-Z,\operatorname{ht}p=1}A_p\supseteq\bigcap_{p\in U,\operatorname{ht}p=1}A_p=\Gamma(U,\mathcal O_X)=A
+\]
+Cover $X$ by open affines $\{U_i\}_{i\in I}$, then
+\[
+\Gamma(X-Z,\mathcal O_X)=\bigcap_{i\in I}\Gamma(U_i-Z,\mathcal O_X)=\Gamma(U_i,\mathcal O_X)=\Gamma(\mathcal O_X)
+\]
+\end{proof}
+
+\begin{example}
+$\Gamma(\mathbb A_k^2-0,\mathcal O_{\mathbb A^2_k})=k[x,y]=\Gamma(\mathbb A^2_k,\mathcal O_{\mathbb A^2_k})$
+\end{example}
+
+\clubsuit\quad If $X$ is a local Noetherian scheme, $x\in X$. If $\dim\mathcal O_{X,x}=d$, then $\exists g_1,\cdots,g_d\in\mathcal O_{X,x}$ such that $V(g_1,\cdots,g_d)=\{x\}$ in $\Spec\mathcal O_{X,x}$ ($\Rightarrow$ so $\exists$ open neighborhood $U\subseteq X$ of $x$ and $f_1,\cdots,f_d\in\mathcal O_X(U)$ such that $V(f_1,\cdots,f_d)=\overline{\{x\}}$ in $U$). Such $g_1,\cdots,g_d$ are called a \textit{system of parameters} for $\mathcal O_{X,x}$
+
+\begin{proof}
+
+\end{proof}
+
+\clubsuit\quad $\pi:X\to Y$ is a morphism of locally Noetherian schemes and $x\in X$, $y=\pi(x)$. Then
+\[
+\codim(x,X)\leq\codim(y,Y)+\codim(x,\pi^{-1}(y))
+\]
+
+\begin{proof}
+
+\end{proof}
+
+\begin{example}
+$\pi:\Bl_0(\mathbb A^2_k)\to\mathbb A^2_k$. If $x\in\pi^{-1}(0)$ is a closed point, then inequality is strict. If $x\notin\pi^{-1}(0)$ is a closed point, then we have equality
+\end{example}
+
+
+\begin{definition}
+We say a scheme $X$ is \textit{regular in codimension 1} if $\mathcal O_{X,x}$ is regular for all $x\in X$ with $\codim(x,X)$
+\end{definition}
+
+\begin{example}
+$X=\Spec k[x,y,z]$ is regular in codimension 1 (but not in codimension 2)
+\end{example}
+
+\begin{definition}
+A \textit{discrete valuation} over a field $K$ is a map $v:K^\times\to\mathbb Z$ such that $v(xy)=v(x)+v(y)$ and $v(x+y)\geq\min(v(x),v(y))$, define $v(0)=\infty$. \textit{Discrete valuation ring(DVR)} corresponding to $v$ is a $R=\{x\in K|v(x\geq0)\}$. It is a local ring with a unique prime ideal $m=\{x\in K|v(x>0)\}$. Note that $v(1)=v(1)+v(1)\Rightarrow v(1)=0$ and $v(x^{-1})=-v(x)$, so either $x$ or $x^{-1}$ is in $R$ $\Rightarrow K=\Frac(R)$
+\end{definition}
+
+\begin{remark}
+If we use a totally ordered abelian group $G$ in the definition, we get a valuation
+\end{remark}
+
+\begin{proposition}[Atiyah-Macdonald, Prop 9.2]
+$R$ is a noetherian local domain of dimension 1 with maximal ideal $m$, then the following are equivalent
+\begin{enumerate}
+\item $A$ is a DVR
+\item $A$ is integrally closed
+\item $A$ is regular
+\item $m$ is principle
+\end{enumerate}
+\end{proposition}
+
+\begin{corollary}
+If $X$ is noetherian and normal, then it is regular in codimension 1
+\end{corollary}
+
+\begin{definition}[Weil divisor]
+
+\end{definition}
+
+\clubsuit\quad $Y\subseteq X$ is a prime divisor, $y\in Y$ is the generic point, by assumption $\mathcal O_{X,y}$ is regular of dimension 1, so it induces a valuation $v_Y:K^\times\to\mathbb Z$ where $K=Q(\mathcal O_{X,y})=R(X)$ the field of rational functions on $X$
+
+\clubsuit\quad It follows form \textit{valuation criterion for separatedness} that a discrete valuation of $K$ uniquely determine a prime divisor
+If $x\in X$
+
+\begin{definition}
+$f\in K^\times$, if $v_Y(f)>0$ (resp. $<0$) we say $f$ has a zero (resp. pole) of order $v_Y(f)$ (resp. $-v_Y(f)$) along $Y$
+\end{definition}
+
+\clubsuit\quad Given $f\in K^\times$, $v_Y(f)=0$ for all but finitely many prime divisors $Y\subseteq X$
+
+\begin{definition}
+$f\in K^\times$, define divisor $(f):=\sum_{Y\subseteq X\text{ prime divisor}}v_Y(f)Y$. $D\in Div(X)$ is called \textit{principal} if $D=(f)$ for some $f\in K^\times$
+\end{definition}
+
+\begin{example}
+A UFD $\iff\Cl(\Spec A)=0$ and $\Spec A$ is normal. e.g. $\Cl(\mathbb A^k_n)=0$
+\end{example}
+
+\begin{example}
+A Dedekind domain (integrally closed noetherian domain of dimension 1), $\Cl(\Spec A)$ is the same as the ideal class group of $A$. e.g. $A=\mathbb R[x,y]/(x^2+y^2-1)$ is a Dedekind domain which is not a UFD. (equivalently it is not a PID)
+\end{example}
+
+\paragraph{Cartier divisors} Recall the sheaf $\mathcal R_X$ of rational functions
+
+\begin{definition}
+A \textit{Cartier divisor} on $X$ is a global section of $\mathcal R_X^\times/\mathcal O_X^\times$. Such a global section can be described by an open covering $\{U_i\}_{i\in I}$ of $X$, and $\forall i$, $f_i\in\Gamma(U_i,\mathcal R_X^\times)$
+\end{definition}
+
+\paragraph{Derived functors in algebraic goemetry} The categories that we will work with are all abelian categories: $\texttt{Ab}$ abelian groups, $\texttt{Mod}(A)$ $A$-modules. $\texttt{Ab}(X)$ sheaves of abelian groups on topological space $X$. $\texttt{Mod}(X)$ sheaves of $\mathcal O_X$-modules on a ringed space $(X,\mathcal O_X)$, $\texttt{Qcoh}(X)$ quasi-coherent $\mathcal O_X$-modules on a scheme $X$, $\texttt{Coh}(X)$ coherent $\mathcal O_X$-modules on a noetherian scheme $X$
+
+\begin{example}[Examples of additive functors]
+Let $f:X\to Y$ be a morphism of ringed spaces. $\Gamma:\texttt{Ab}(X)\to \texttt{Ab}$, left exact. $f_*:\texttt{Mod}(X)\to \texttt{Mod}(Y)$ left exact, $f^*:\texttt{Mod}(Y)\to \texttt{Mod}(X)$ right exact. $\Hom_{\mathcal O_X}(\mathcal F,-):\texttt{Mod}(X)\to\texttt{Ab}$ left exact. $\Hom_{\mathcal O_X}(-,\mathcal F):\texttt{Mod}(X)\to \texttt{Ab}$ left exact(contravariant). $\mathcal Hom_{\mathcal O_X}(\mathcal F,-):\texttt{Mod}(X)\to \texttt{Mod}(X)$ left exact. $\mathcal Hom_{\mathcal O_X}(-,\mathcal F):\texttt{Mod}(X)\to \texttt{Mod}(X)$ left exact(contravariant)
+\end{example}
+
+\clubsuit\quad $(X,\mathcal O_X)$ is a ringed space, $\texttt{Mod}(X)$ has enough injectives
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+$j:U\hookrightarrow X$ open and $\mathcal F\in \texttt{Ab}(U)$ or $\texttt{Mod}(U)$. Define $j_!\mathcal F$ to be a sheaf on $X$ associated wot the presheaf $V\mapsto\begin{cases}
+\mathcal F(V), V\subseteq U\\
+0, \text{ else}
+\end{cases}$. It is called the  sheaf obtained by \textit{extending $\mathcal F$ by zero outside $U$}, note $(j_!\mathcal F)_x=\begin{cases}
+\mathcal F_x,x\in U \\
+0, x\notin U
+\end{cases}$
+\end{definition}
+
+\clubsuit\quad If $\mathcal F$ is a sheaf on $X$, there exists a SES $0\to j_!(\mathcal F_U)\to\mathcal F\to i_*(\mathcal F_Z)\to 0$, $\forall U\xhookrightarrow{j}X$ open and $Z:=X-U\xhookrightarrow{i}X$
+
+\clubsuit\quad $f:X\to Y$ is a continuous map between topological spaces, $\mathcal F\in\texttt{Ab}(X)$, then $R^if_*\mathcal F$ is the sheaf associated to the presheaf $V\mapsto H^i(f^{-1}(V),\mathcal F|_{f^{-1}(V)})$, $\forall Y\subseteq Y$ open
+
+\begin{proof}
+Denote the sheaf associated to this presheaf by $\mathcal H^i(X,\mathcal F)$
+\end{proof}
+
+\paragraph{Preliminaries on Koszul complexes}
+
+\paragraph{Derivatives and differentials}
+
+\begin{definition}
+$A$ ring, $B$ is an $A$-algebra, $M$ is a $B$ module. An \textit{$A$-derivation} from $B$ to $M$ is a map $d:B\to M$ such that $d(b+b')=db+db'$, $d(bb')=b(db')+(db)b'$, $da=0$, $\forall a\in A,b,b'\in B$, $\Der_A(B,M)$ denotes the set of all such derivations
+\end{definition}
+
+\begin{definition}
+Given $A$-algebra $B'$ and a square zero ideal $N<B'$ with $N^2=0$, let $B=B'/N$(then $N$ can also be viewed as a $B$-module). We say that $B'$ is an \textit{extension} at the $A$-algebra $B$ by the $B$-module $N$. The extension $B'$ is \textit{trivial} denoted by $B*N$ if $B'\cong B\oplus N$ as $B$-module with multiplication $(b_1,n_1)(b_2,n_2)=(b_1b_2,b_1n_2+n_1b_2)$
+\end{definition}
+
+\clubsuit\quad Given a square zero extension $0\to N\to B'\to B\to0$ as above and an $A$-algebra $C$ with an $A$-algebra homomorphism $g:C\to B$ such that there is a lift of $g$, $h:C\to B'$, then there exists bijection between $\Der_A(C,N)$ and the set of lifts of $g$. (If $h':C\to B'$ is another lift, then $h-h'\in\Der_A(C,N)$, and if $D\in \Der_A(C,N)$, then $h+D$ is a lift of $g$)
+
+\clubsuit\quad The functor $\Der_A(B,-):\text{Mod}B\to\text{Mod}B$ is representable, i.e. there exists $B$-module $\Omega_{B/A}$ such that $\forall D\in \Der_A(B,M)$, $\exists!B$-module homomorphism $f:\Omega_{B/A}\to M$ such that $D=f\circ d$
+\begin{center}
+\begin{tikzcd}
+B \arrow[rd, "D"] \arrow[r, "d"] & \Omega_{B/A} \arrow[d, "f"] \\
+                                 & M                          
+\end{tikzcd}
+\end{center}
+
+\begin{proof}
+
+\end{proof}
+
+\clubsuit\quad If $B$ is generated by $\{b_i\}_{i\in I}$ as an $A$-algebra, then $\Omega_{B/A}$ is generated as a $B$-module by $\{db_i\}_{i\in I}$
+
+\begin{example}
+If $B=A[x_1,\cdots,x_n]$, then $\Omega_{B/A}$ is the free $B$-module with basis $dx_1,\cdots,dx_n$. ($dx_1,\cdots,dx_n$ are linearly independent by universal property and that there are $A$-derivations $D_i\in\Der_A(B,B)$ defined by $D_ix_j=\delta_{ij}$)
+\end{example}
+
+\paragraph{Formal schemes} $X$ Noetherian, $Y\subseteq X$ closed subscheme defined by quasi-coherent $\mathcal I<\mathcal O_X$. The \textit{formal completion} of $X$ along $Y$ is a ringed space $(\hat X,\mathcal O_{\hat X})$, where $\hat X=Y$
+
+\end{document}

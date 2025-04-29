@@ -1,0 +1,67 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+A \textbf{category}\index{Categroy} $\mathscr{C}$ consists of $\mathrm{Ob}\mathscr{C}$ class of \textbf{objects}\index{Object} and $\mathrm{Hom}\mathscr{C}$ class of \textbf{morphisms}\index{Morphism}, for $f:A\to B$, $g:B\to C$, $\exists g\circ f:A\to C$, the composition is associative $(h\circ g)\circ f=h\circ(g\circ f)$, $\exists 1_A:A\to A$ such that $1_Af=f, \forall f:B\to A$ and $g1_A=g, \forall g:A\to B$(thus $1_A$ is unique), we denote $Hom_{\mathscr C}(A,B)$ to be all the morphisms from $A$ to $B$
+\end{definition}
+
+\begin{definition}
+Let $\mathscr{C}$ be a category, $f:A\to B$ is an \textbf{isomorphism}\index{Isomorphism} if there exists $g:B\to A$ such that $gf=1_A$, $fg=1_B$
+\end{definition}
+
+\begin{example}
+Let $M$ be a monoid, we can view it as a category $\mathscr C_M$, where $Ob\mathscr C_M=\{*\}$, $Hom_{\mathscr{C}_M}(*,*)=M$
+\end{example}
+
+\begin{remark}
+Book recommandation: Abelian category - Fregd, it defines a category use only morphisms
+\end{remark}
+
+\begin{lemma}
+An isomorphism $f:X\to Y$ has an unique inverse, denoted $f^{-1}$
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+A category $\mathscr C$ is called a \textbf{small category}\index{Small category} if $Ob\mathscr C$ is a set
+\end{definition}
+
+\begin{definition}
+A category $\mathscr C$ is called an \textbf{essentially small category}\index{Essentially small category} if $Ob\mathscr C/\sim$ is a set, here $Ob\mathscr C/\sim$ is the isomorphic classes of objects
+\end{definition}
+
+\begin{example}
+Let $k$ be a field, then the category of finite dimensional $k$ vector fields is not small but essentially small, two $k$ vector spaces are isomorphic iff they have the same dimension
+\end{example}
+
+\begin{example}
+Let $R$ be a commutative ring, the category of $R$ modules, $RMod$  is not essentially small
+\end{example}
+
+\begin{definition}
+Let $P$ be a poset, we can view it as a category $\mathscr C_P$, where $Ob\mathscr C_p=P$, $Hom_{\mathscr C_P}(x,y)=\begin{cases}
+\{*\}, &x\leq y \\
+\varnothing, &\text{else}
+\end{cases}$
+\end{definition}
+
+\begin{exercise}
+Suppose small category $\mathscr C$ satisfies \par
+$|Hom(x,y)|\leq1$ \par
+$x\neq y\Rightarrow x\not\cong y$ \par
+Then $\mathscr C$ is poset
+\end{exercise}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+A category is a \textbf{groupoid}\index{Groupoid} if every morphism is an isomorphism, thus a groupoid with only one object is a group
+\end{definition}
+
+\end{document}

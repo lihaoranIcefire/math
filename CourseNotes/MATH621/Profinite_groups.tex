@@ -1,0 +1,71 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+Example of direct system:
+\begin{enumerate}
+\item $(\mathbb N,\geq)$
+\item $(\mathbb N,|)$
+\item $G$ is a (topological)group, $I=\{\text{finite index(open) normal subgrps of }G\}$, $N\geq N'$ if $N\subseteq N'$
+\item Fix a field extension $E/K$, $I=\{L/K\text{ finite Galois}\}$, $L\geq L'$ if $L\supseteq L'$. If $L,L'$ are both finite Galois, then so is their composite
+\end{enumerate}
+
+Let $C$ be a category(sets, groups, rings, top groups, top spaces, top rings). A profinite group is a topological group isomorphic to a inverse limit of finite groups. A profinite group is Hausdorff and compact
+
+\begin{theorem}[Tychonoff's theorem]
+A product of compact spaces is compact
+\end{theorem}
+
+\begin{theorem}
+$G$ is a topological group, $G$ is profinite iff it is Hausdorff compact and $1\in G$ has a neighborhood basis consisting of open subgroups of $G$
+\end{theorem}
+
+\begin{proof}
+$\Leftarrow$: Suppose $G=\varprojlim G_i$, $\forall i\in I$, $N_i=\ker(G\to G_i)$ give such a basis \\
+$\Rightarrow$:
+\end{proof}
+
+\begin{remark}
+In a topological group, every open subgroup is closed(being the complement of the union of its other cosets). In a compact group, a closed subgroup is open iff it's of finite index(conjugates cover $G$, then by compactness), and every open subgroup is closed hence compact
+\end{remark}
+
+\begin{example}
+$\mathbb Z_p$ with topology given by the $p$-adic value, $p^n\mathbb Z_p$ form a neighborhood basis of 0 in $\mathbb Z_p$ consisting of open subgroups. $\mathbb Z_p^\times=\displaystyle\varprojlim_n(\mathbb Z/m\mathbb Z)^\times$ has $1+p^n\mathbb Z_p$ as an open neighborhood basis of 0
+\end{example}
+
+\begin{remark}
+A topological group is called locally profinte it's locally compact and Hausdorff and 1 has a neighborhood basis consisting of open subgroups. Equivalently, $G$ has an open subgroup which is profinite
+\end{remark}
+
+\begin{example}
+$Q_p\overset{\text{open}}{\supseteq} Z_p$ is locally profinite since its not compact
+\end{example}
+
+Fact: A topological group is (locally) profinite iff it is Hausdorff, (locally compact) and totally disconnected
+
+$G$ is a topological group, $I$ is the set of open normal finite index subgroups(Note: quotient top on $G/N_i$ is discrete), so $\hat G=\varprojlim G/N_i$ defines a profinite group, called the profinite completion, and a natural continuous map $G\to\hat G$, it is an isomorphism iff $G$ is profinite. For every continuous $G\to H$, where $H$ is profinite, the it factors through $\hat G\to H$
+
+Exercise: $\hat{\mathbb Z}=\prod_p\mathbb Z_p$
+
+Infinite Galois theory: $E/K$ Galois(separable and normal), $I$ is the subset consists of $L/K$ which are finite Galois
+
+Fact(easy): As abstract groups, $\Gal(E/K)=\varprojlim\Gal(L/K)$, define Krull topology on $\Gal(E/K)$ by profinite topology given by the right hand side
+
+\begin{theorem}[Galois correspondence]
+Sub-extensions $L/K$ corresponds to closed subgroups of $\Gal(E/K)$, $L\mapsto\Gal(E/L)$, $H\mapsto E^H$, $E^H=E^{\bar H}$, finite extensions are in bijective correspondence to open subgroups, Galois extensions are in bijective correspondence to normal subgroups. If $L/K$ is Galois, then $\Gal(E/L)$ is normal in $\Gal(E/K)$, and $\Gal(L/K)\cong\Gal(E/K)/\Gal(E/L)$ as topological groups
+\end{theorem}
+
+\begin{example}
+$\Gal(\overline{\mathbb F_q}/\mathbb F_q)\cong\varprojlim_n\Gal(\mathbb F_{q^n}/\mathbb F_q)\cong\varprojlim_n\mathbb Z/n\mathbb Z$, $\mathbb Z\to\hat{\mathbb Z}$, $1\mapsto 1$ is the Frobenius element
+\end{example}
+
+remark: $G=$ profinite, $S$ is dense iff image of S in each $G_i$ is $G_i$, since $G_i$ is discrete
+
+$(\mathbb Z/m\mathbb Z)^\times\cong\Gal(\mathbb Q(\zeta_m)/\mathbb Q)$, thus $\hat{\mathbb Z}^\times\cong\Gal(\mathbb Q^{cyc}/\mathbb Q)=\Gal(\mathbb Q^{ab}/\mathbb Q)$
+But $\mathbb Q_p^\times\to\Gal(\mathbb Q_p^{ab}/\mathbb Q_p)$ only has dense image
+
+\begin{exercise}
+$G$ is locally profinite, and $\phi:G\to G'$ is continuous, $G'$ is profinite, $\phi$ has dense image, then $\hat G\cong G'$
+\end{exercise}
+
+\end{document}

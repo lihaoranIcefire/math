@@ -1,0 +1,192 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+For this section, we use the following notation:
+\begin{itemize}
+\item $G=\GL_2(\mathbb R)^+$, $G_1=\SL_2(\mathbb R)\supseteq K=\SO_2(\mathbb R)$
+\item $\mathfrak g=\Lie(G)=\mathfrak{gl}_2(\mathbb R)$, $\mathfrak g_{\mathbb C}=\mathfrak{gl}_2(\mathbb C)$, $Z_G\cong\mathbb R^\times$ is the center of $G$, $Z^+_G\cong\mathbb R_{>0}$ is the identity component. A standard basis for $\mathfrak g$ is
+\[Z=\begin{bmatrix}
+1&0\\
+0&1
+\end{bmatrix},H=\begin{bmatrix}
+1&0\\
+0&-1
+\end{bmatrix}E=\begin{bmatrix}
+0&1\\
+0&0
+\end{bmatrix},F=\begin{bmatrix}
+0&0\\
+1&0
+\end{bmatrix}\]
+Their relations are $[H,E]=2E$, $[H,F]=-2F$, $[E,F]=H$. $\Lie(K)=\mathfrak{so}_2(\mathbb R)=\mathbb R(E-F)$
+\item Representation $G\to\End_{\mathbb C}(C^\infty(G))$ is induced by the right regular representation on $G$
+\[(gf)(x)=f(xg),\forall g,x\in G,f\in C^\infty(G)\]
+This gives a representation of $\mathfrak g_{\mathbb C}\to\End_{\mathbb C}(C^\infty(G))$
+\[(Xf)(g)=\frac{d}{dt}f(ge^{tX}),\forall X\in\mathfrak g\]
+The universal enveloping algebra $U(\mathfrak g_{\mathbb C})$ can be identified with left-invariant differential operators on $G$, $Z_{\mathfrak g}$ is the center of $U(\mathfrak g_{\mathbb C})$, which can be identified with bi-invariant differential operators on $G$
+\item The Harish-Chandra isomorphism says that $Z_{\mathfrak g}\cong\mathbb C[Z,\Delta]$, where $\Delta=-\dfrac{1}{4}(H^2+2EF+2FE)$ is the casimir element. In particular, $Z_{\mathfrak g}$ induces $G$-invariant differential operators on $\mathcal H=G_1/K$, $\Delta$ induces $-y^2\left(\dfrac{\partial^2}{\partial x^2}+\dfrac{\partial^2}{\partial y^2}\right)$
+\end{itemize}
+\end{definition}
+
+\begin{definition}
+If $f\in C^\infty(G)$, $\omega:Z_G\to\mathbb C^\times$ be a unitary character, then
+\begin{itemize}
+\item $f$ is $Z_{\mathfrak g}$-finite if $Z_{\mathfrak g}f$ is finite dimensional
+\item $f$ is (right) $K$-finite if $Kf$ is finite dimensional 
+\item Define $C^\infty(G,\omega)=\{f\in C^\infty(G)|f(zg)=\omega(z)f(g),\forall z\in Z_G,g\in G\}$
+\end{itemize}
+\end{definition}
+
+\begin{theorem}
+If $P$ is an elliptic operator with analytic coefficients, then solutions to $Pf=0$ in $L^1_{\text{loc}}$ are real analytic
+\end{theorem}
+
+\begin{lemma}\label{f is Z_g finite and K finite, then f is real analytic}
+If $f\in C^\infty(G)$ is $Z_{\mathfrak g}$-finite and $K$-finite, then $f$ is real analytic
+\end{lemma}
+
+\begin{proof}
+We may assume $f$ is an eigenfunction of $K$ and $Z_{\mathfrak g}$ finite(for the general case, just take linear combination). Then $P(\tilde\Delta)f=0$ for some polynomial $P$ with constant coefficient, where
+\begin{align*}
+\tilde\Delta&=-\frac{1}{4}(H^2+2EF+2FE+Z^2) \\
+&=\underbrace{-\frac{1}{4}(H^2+2E^2+2F^2+Z^2)}_{\text{elliptic differential operator}}+\underbrace{\frac{1}{2}(E-F)^2}_{\text{scalar on $f$}}
+\end{align*}
+\end{proof}
+
+\begin{remark}
+Lemma \ref{f is Z_g finite and K finite, then f is real analytic} is true under weaker assumption that $f$ is locally integrable
+\end{remark}
+
+\begin{definition}
+Let $\Gamma\leq G_1$ be a discrete subgroup with $\Vol(\Gamma\backslash G_1)<\infty$($\Leftrightarrow\Vol(\Gamma\backslash\mathcal H)<\infty$). Let $\chi:\Gamma\to\mathbb C^\times$, $\omega:Z_G\to\mathbb C^\times$ be unitary characters that agree on $Z_\Gamma=\Gamma\cap Z_G$. An automrophic form on $G$ with character $\chi,\omega$ is a function $\phi\in C^\infty(G,\omega)$ satisfying
+\begin{enumerate}
+\item $\phi(\gamma g)=\chi(\gamma)\phi(g),\forall \gamma\in\Gamma,g\in G$
+\item $\phi$ is (right) $K$-finite
+\item $\phi$ is $Z_{\mathfrak g}$-finite
+\item $\phi$ is of moderarte growth, meaning $\exists C,N>0$ such that $|\phi(g)|<C\|g\|^N,\forall g\in G$, $\|g\|$ is the Euclidean norm of $(g,\det g^{-1})\in M_2(\mathbb R)\oplus\mathbb R\cong\mathbb R^5$
+\end{enumerate}
+Denote $\mathcal A(\Gamma\backslash G,\chi,\omega)$ the space of such functions
+\end{definition}
+
+\begin{definition}
+$\phi\in\mathcal A(\Gamma\backslash G,\chi,\omega)$ is a \textit{cusp form} if for any $g\in G$ and for any unipotent subgroup $U\subseteq G$ with $U\cap\Gamma\neq\{1\}$,$\int_{U\cap\Gamma\backslash U}\phi(ug)du=0$. Deonte $\mathcal A_0(\Gamma\backslash G,\chi,\omega)$ the space of cusp forms
+\end{definition}
+
+\begin{example}
+$\phi_f(g)=f(gi)\det(g)^{\frac{k}{2}}j(g,i)^{-k},\forall g\in G$
+\begin{center}
+\begin{tikzcd}
+M_k(\Gamma) \arrow[r, hook]                 & \mathcal A(\Gamma\backslash G/Z_G^+)                   \\
+S_k(\Gamma) \arrow[r, hook] \arrow[u, hook] & \mathcal A_0(\Gamma\backslash G/Z_G^+) \arrow[u, hook]
+\end{tikzcd}
+\end{center}
+\end{example}
+
+\begin{remark}
+Since $g$ commutes with $Z_{\mathfrak g}$ for any $g\in G$, $Z_{\mathfrak g}$-finite condition is preserved under $g$, condition 1,4 are also preserved. But condition 3 may not be preserved in general: If $f$ is $K$-finite, then $gf$ is $gKg^{-1}$-finite. At least we get a representation of $K$ on $\mathcal A,\mathcal A_0$, so they split as direct sum of $K$-eigenspaces (weight spaces)
+\end{remark}
+
+\begin{theorem}
+$\mathcal A(\Gamma\backslash G,\chi,\omega)$ and $\mathcal A_0(\Gamma\backslash G,\chi,\omega)$ are stable under the action of $U(\mathfrak g_{\mathbb C})$ (induced from the right regular representation on $C^\infty(G)$)
+\end{theorem}
+
+\begin{proof}
+Easy to see: automorphy, $Z_{\mathfrak g}$-finite, cuspidal conditions are preserved by $\mathfrak g$, $K$-finiteness is also note hard. The tricky part is $\mathfrak g$ preserves growth condition (even the exponent $N$) \\
+$\frak g$ preserves $K$-finiteness: Consider another basis of $\mathfrak{sl}_2(\mathbb C)$, $W=C^{-1}HC=\begin{bmatrix}
+0&-i\\
+i&0
+\end{bmatrix}$, $R=C^{-1}EC$, $L=C^{-1}FC$, here $C=\begin{bmatrix}
+1&-i\\
+1&i
+\end{bmatrix}$ is the Cayley transform. Then $\Lie(K)_{\mathbb C}=\mathbb C\cdot W$. If $\phi\in C^\infty(G)$ has weight $m$, i.e.
+\[\phi\left(g\begin{bmatrix}
+\cos\theta&\sin\theta\\
+-\sin\theta&\cos\theta
+\end{bmatrix}\right)=e^{im\theta}\phi(g),\forall g\in G\]
+Then $W\phi=m\phi$ since $\begin{bmatrix}
+\cos\theta&\sin\theta\\
+-\sin\theta&\cos\theta
+\end{bmatrix}=e^{i\theta W}$. Since $[W,R]=2R$, $[W,L]=-2L$, we see that $R$ raises weight by $2$, $L$ lowers weight by $2$. So $K$-finiteness is preserved by $\mathfrak g$ \\
+$\frak g$ preserves growth condition: By Harish-Chandra theorem \ref{Harish-Chandra theorem}, $\exists\alpha\in C_c^\infty(G)$ such that $\phi=\phi*\alpha$ where $(\phi*\alpha)(g)=\int_G\phi(x)\alpha(x^{-1}g)dx$. Then $\forall X\in\frak g$, $X\phi=X(\phi*\alpha)=\phi*(X\alpha)$ satisfies growth condition with same exponent as $\phi$
+\end{proof}
+
+\begin{theorem}[Harish-Chandra]\label{Harish-Chandra theorem}
+Let $f\in C^\infty(G)$ be $Z_{\mathfrak g}$-finite and $K$-finite. Let $U$ be a neighborhood of $1$ in $G$. Then $\exists\alpha\in I^\infty_c(G)$ with support in $U$ such that $f=f*\alpha$. Here \[I^\infty_c(G)=\{\alpha\in C^\infty_c(G),\alpha(kxk^{-1})=\alpha(x),\forall k\in K,x\in G\}\]
+\end{theorem}
+
+Recall: Frechet topology on $C^\infty(G)$: $X\subseteq G$ compact subset, $N\in\mathbb Z_{\geq0}$. Semi-norm
+\[\|f\|_{X,N}=\max\{|Df(x)||D\in U(\mathfrak g_{\mathbb C})\text{ of order}\leq N, x\in X\}\]
+A neighborhood base at $0$: $\{f\in C^\infty(G)|\|f\|_{X,N}<\epsilon\}$. In this topology, $f_n\to f$ if $\forall D\in U(\mathfrak g_{\mathbb C})$, $Df_n\to Df$ uniformly on any compact subset of $G$
+
+\begin{proof}
+Use Proposition \ref{f Z_g finite, K finite, decompose U(g_C)f}
+\end{proof}
+
+\begin{definition}\label{(g,k)-modules}
+A $(\mathfrak g,K)$-module is a $\mathbb C$ vector space $V$ with a representation of $\mathfrak g_{\mathbb C}$ and $K$ such that
+\begin{enumerate}
+\item Every $v\in V$ is $K$-finite
+\item $\forall X\in\Lie(K)$, $\left.\dfrac{d}{dt}\right|_{t=0}(e^{tX}v)=Xv$, $\forall v\in V$
+\item $\forall X\in\mathfrak g,k\in K,v\in V$, $k(Xv)=(\ad(k)X)(kv)=(kXk^{-1})(kv)$
+\end{enumerate}
+Denote
+\[V(n)=\{v\in V,kv=\chi_n(k)v,\forall k\in K\}\]
+Where $\chi_n\left(\begin{bmatrix}
+\cos\theta&\sin\theta\\
+-\sin\theta&\cos\theta
+\end{bmatrix}\right)=e^{in\theta}$, $\forall \theta\in\mathbb R$. A $(\mathfrak g,K)$-module $V$ is \textit{admissible} if $\dim V(n)<\infty,\forall n\in\mathbb Z$
+\end{definition}
+
+\begin{remark}
+1. $\iff$ $V=\bigoplus_{n\in\mathbb Z}V(n)$ $\iff$ $V$ is a the direct sum of finite dimensional $K$-invariant subspaces (Zorn's Lemma $\Rightarrow$ $V(n)$ has a basis consisting of $K$-eigenvectors) \\
+1. $\Rightarrow$ $t\mapsto e^{tX}\cdot v$ is differentiable $\forall X\in\Lie(K)$, $v\in V$, so 2. makes sense \\
+Proposition \ref{f Z_g finite, K finite, decompose U(g_C)f} $\Rightarrow$ $U(\mathfrak g_{\mathbb C})f$ is an admissible $(\mathfrak g,K)$-module for any $K$-finite, $Z_{\mathfrak g}$-finite $f\in C^\infty(G)$
+\end{remark}
+
+\begin{proposition}\label{f Z_g finite, K finite, decompose U(g_C)f}
+Let $f\in C^\infty(G)$ be $Z_{\mathfrak g}$-finite and $K$-finite. Let $V$ be the closure of $U(\mathfrak{g}_{\mathbb C})\cdot f$ in $C^\infty(G)$. Then $V$ is (right) $G$-invariant. Moreover, each $K$-weight space $V(n)$ of $V$ is finite dimensional and $U(\mathfrak g_{\mathbb C})\cdot f=\bigoplus_{n\in\mathbb Z}V(n)$
+\end{proposition}
+
+\begin{proof}
+Let $V_0=U(\mathfrak g_{\mathbb C})f$, so $V=\overline{V_0}$ \\
+Step 1: Show that $V$ is $G$-stable \\
+Let $\tilde V\subseteq C^\infty(G)$ be the smallest closed $G$-invariant subspace containing $V_0$. Then $V\subseteq\tilde V$. Suppose $V\neq\tilde V$. Then $\exists$ continuous nonzero linear functional $\lambda$ on $\tilde V$ such that $\lambda(V)=0$ by Hahn-Banach. Consider function $\phi(g)=\lambda(r_gf)$. Easy to check: $f$ is $Z_{\mathfrak g}$-finite, $K$-finite $\Rightarrow$ same for $\phi$. By Lemma \ref{f is Z_g finite and K finite, then f is real analytic}, $\phi$ is analytic. On the other hand, $\forall D\in U(\mathfrak g_{\mathbb C})$, $D\phi=\lambda(Df)=0$ since $Df\in V_0\Rightarrow\phi=0\Rightarrow\lambda$ vanish on the dense subspace $G\cdot f$ in $\tilde V\Rightarrow\lambda=0$, contradiction \\
+Step 2: Let $V_0(n)=\{v\in V|Wv=nv\}=V_0\cap V(n)$, we claim that $V_0=\bigoplus_{n\in\mathbb Z}V(n)$. $\forall n$, consider the projector $E_n:C^\infty(G)\to C^\infty(G)$
+\[(E_n\phi)(g)=\int_K\phi(gk^{-1})\chi_n(k)dk,\Vol(K,dk)=1\]
+$E_n$ is continuous, identity on $V(n)$, $E_nV=V(n)$, need to show $E_nV_0\subseteq V_0$. $\forall v\in V_0$, $v=\sum_{n=-M}^ME_nv$, fix $m\in[-M,M]$, let $P$ be a polynomial such that $P(m)=1$ and $P(n)=0$ for any $n\in[-M,M],n\neq m$, then
+\[V_0\ni P(W)v=\sum_{n=-M}^MP(n)E_nv=E_mv\Rightarrow E_mv\in V_0(m)\]
+Thus $V_0(n)=E_nV$, so it is dense in $V(n)=E_nV$ and $V_0=\bigoplus V_0(n)$ \\
+Step 3: Remains to show $\dim V_0(n)<\infty$ (Then by density, $V_0(n)=V(n)$ and hence $V_0=\oplus V(n)$). $f=\sum_{n=-M}^ME_nf$, $Z_{\mathfrak g}E_nf=E_nZ_{\mathfrak g}f$ is finite dimensional $\forall n\Rightarrow E_nf$ is $Z_{\mathfrak g}$-finite $\forall -M\leq n\leq M$. So we may assume $f\in V(n_0)$ for some $n_0\in\mathbb Z$. By PBW, $\{R^aL^bW^c\}_{a,b,c\geq0}$ form a $\mathbb C$-basis of $U(\mathfrak g_{\mathbb C})$ \\
+Recall
+\[-4\Delta=W^2+2W+4LR=W^2-2W+4RL\Rightarrow U(\mathfrak g_{\mathbb C})=\sum_{i>0}R^iA+\sum_{i\geq0}L^iA\]
+Where $A$ is the subalgebra generated by $Z_{\mathfrak g}$ and $W$. Let $\{f_1,\cdots,f_r\}\subseteq V(n_0)$ be a basis of $Z_{\mathfrak g}f$, then
+\begin{align*}
+V_0&=\sum_{\alpha=1}^r\left(\sum_{i>0}\mathbb CR^if_\alpha+\sum_{i\geq0}\mathbb CL^if_\alpha\right) \\
+\Rightarrow V_0(n)&=\sum_{\alpha=1}^r\left(\sum_{i>0}\mathbb CR^{\frac{n-n_0}{2}}f_\alpha+\sum_{i\geq0}\mathbb CL^{\frac{n-n_0}{2}}f_\alpha\right)
+\end{align*}
+is of finite dimensional
+\end{proof}
+
+Summary: if $f\in C^\infty(G)$ is $Z_{\mathfrak g}$ finite and $K$-finite, we have
+\begin{enumerate}
+\item $(U\mathfrak g_{\mathbb C}f)$ is an admissible $(\mathfrak g,K)$-module
+\item If $f$ has moderate growth with exponent $N>0$, then the same is true for $Df$, $\forall D\in U\mathfrak g_{\mathbb C}$
+\end{enumerate}
+In particular, $\mathcal A_0(\Gamma\backslash G,\chi,\omega)\subseteq \mathcal A(\Gamma\backslash G,\chi,\omega)$ are $(\mathfrak g,K)$-modules \\
+The $(\mathfrak g,K)$-module structure on $\mathcal A(\Gamma\backslash G,\chi,\omega)$ is complicated: $Z_{\mathfrak g}$ does not act semi-simply if $\Gamma$ has cusps. Simpler on $\mathcal A_0(\Gamma\backslash G,\chi,\omega)$, decompose into direct sum of irreducible admissible $(\mathfrak g,K)$-modules with finite multiplicity. We will prove this by $L^2$ theory
+
+\begin{lemma}[Schur]\label{Schur's lemma}
+$Z_{\mathfrak g}$ acts by a character on any irreducible admissible $(\mathfrak g,K)$-module (infinitesimal character)
+\end{lemma}
+
+\begin{proof}
+Let $n\in\mathbb Z$ with $V(n)\neq 0$. $Z_{\mathfrak g}$ commutes with $K$ action by 3. in Definition \ref{(g,k)-modules}. Admissible $\Rightarrow\dim V(n)<\infty$ $\Rightarrow$ $Z_{\mathfrak g}$ acts by a character $\eta:Z_{\mathfrak g}\to\mathbb C$ on $V(n)$. $U\mathfrak g_{\mathbb C}V(n)$ is $K$-stable by 3. Irreducible $\Rightarrow$ $V=U(\mathfrak g_{\mathbb C})V(n)\Rightarrow Z_{\mathfrak g}$ acts by $\eta$ on $V$
+\end{proof}
+
+\begin{theorem}[Harish-Chandra]\label{Another theorem of Harish-Chandra}
+Let $J\subseteq Z_{\mathfrak g}$ be an ideal of finite codimension. Then $\mathcal A(\Gamma\backslash G,\chi,\omega)[J]$ (subspace annihilated by $J$) is an admissible $(\mathfrak g,K)$-module. We will only prove the special case for $\mathcal A_0$
+\end{theorem}
+
+\end{document}

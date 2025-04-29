@@ -1,0 +1,177 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+Wirthinger presentaiton
+
+cup product
+
+Cellular cross product: $X,Y$ CW complexes, $X\times Y$ is also a CW complex with characteristic maps $\phi_\alpha\times\psi_\beta$
+
+diagonal approximation
+
+Poincare duality
+
+$H_k(M,\partial M)\cong H^{n-k}(M)$, $H_k(M)\cong H^{n-k}(M,\partial M)$
+
+Define map $C_k\to c^{n-k}$, taking $\sigma$ to 1, but not 
+
+D is a chain map up to sign, so fine for Z/2, and the sign works exactly when M is orientable
+
+\begin{theorem}[Freedman's theorem]
+Closed, simply connected, oriented 4-manifold up to homeomorphism
+to
+symmetric, bilinear, non-degenerate form up to basis change
+is surjective, and at most 2 to 1
+Moreover, if one consider only smooth manifolds, this map is 1 to 1, but no longer surjective
+In other words, smooth, simply connected, closed, oriented 4-manifolds are characterized by their cup product pairing
+\end{theorem}
+
+\begin{theorem}["The half lives, half dies" theorem]
+$M$ compact manifold of dimension $2n+1$ with boundary of dimension $2n$. Then $\rank H_n(\partial M)$ is even and $\frac{1}{2}\rank H_n(\partial M)=\rank(i_*:H_n(\partial M)\to H_n(M))=\rank(i^*:H^n(M)\to H_n(\partial M))$
+\end{theorem}
+
+\begin{theorem}
+The homotopy group functor preserves products. If $X=\prod X_\alpha$, then $\pi_n(X)=\prod_\alpha\pi_n(X_\alpha)$
+\end{theorem}
+
+\begin{example}
+Since $I^0\times I\to\mathbb R$, $(s,t)\mapsto t/s$, $(I^0,I)$ doesn't have the HEP
+\end{example}
+
+\begin{lemma}[Compression lemma]
+$A\subseteq X,B\subseteq Y$ are CW complexes, for each $k$-cell $\sigma\in X-A$, if $\pi_k(Y,B)=0$, any map $f:(X,A)\to(Y,B)$ is homotopic to a map with image in $B$
+\end{lemma}
+
+\begin{theorem}[Whitehead theorem]
+$X,Y$ are CW complexes, if $f:X\to Y$ induces isomorphism on each $\pi_n$, then $f$ is a homotopy
+\end{theorem}
+
+\begin{proof}
+Replace $f:X\to Y$ by the mapping cylinder $f:X\to M_f$, and then apply compression lemma
+\end{proof}
+
+$S^k\to S^n$ can be homotopied to a smooth map, which is locally linear, thus can miss a point
+
+\begin{lemma}[Extension lemma]
+$f:X\to Y$ such that $f|_{S^k}\to Y$ is null homotopic, then $f$ can be extended to $X\cup e^k\to Y$
+\end{lemma}
+
+\begin{theorem}[CW approximation]
+Assume
+\end{theorem}
+
+\begin{theorem}
+An $n$-connected CW model for $X$ is an $n$-connected CW complex $Z$ and a map $f:Z\to X$ such that $f_*:\pi_n(Z)\to\pi_n(X)$ are isomorphisms for $k>n$. Such a model always exists and is unique up to isomorphism
+\end{theorem}
+
+\begin{theorem}
+If $A\subseteq X$ is a CW complex, An $n$-connected CW model for $(X,A)$ is an $n$-connected CW pair $(Z,A)$ and $f:(Z,A)\to(X,A)$, such that $f|_A=id$, and $\pi_i(Z,A)\to\pi_i(X,A)$ are iso for $i>n$. Such exists and unique up to iso
+\end{theorem}
+
+\begin{theorem}
+For arbitrary $(X,A)$, there exists an $n$-connected CW model unique up to iso
+\end{theorem}
+
+\begin{proof}
+Let $Z_0$ be a CW approximation of $A$, $(Z,Z_0)$ be an n-connected CW model for $(M,Z_0)$, M mapping cylider of $Z_0\to A\to X$, then $(M,Z_0)$ is an n-connected CW approximation for $(X,A)$, then by LES and five lemma
+\end{proof}
+
+\begin{theorem}
+$n$-connected CW models is functorial, i.e. For any $n$-connected model $(Z,A)$ of $(X,A)$ and $n'$-connected model $(Z',A')$ of $(X',A')$, and $g:(X,A)\to (X',A')$, there is a unique $h:(Z,A)\to(Z',A')$ making the diagram commute
+\end{theorem}
+
+Postnikov tower: Construction: Fix $n$, the idea is to kill all higher homotopy groups by attaching cells, then by extension lemma, $X\hookrightarrow X_n$ extend to a map $X_{n+1}\to X_n$
+
+Excision fails for homotopy groups
+$\pi_4(S^3\wedge S^3)=\pi_4(S^3\times S^3)=Z_2\times Z_2$. $S^3/S^2=S^3\wedge S^3$
+$Z_2=\pi_$
+
+\begin{theorem}
+C connected, (A,C) m connected, $(B,C)$ n connected, \pi_i(A,C)\to \pi_i(X,B) is an iso if $i<m+n$ and surjective if $i=m+n$
+\end{theorem}
+
+\begin{theorem}[Freudenthal's suspension theorem]
+
+\end{theorem}
+
+Ring structure for stable homotopy: $f:S^{i+k}\to S^k$, $g:S^{j+k}\to S^k$, get $S^{i+j+k}\to S^{k}$
+
+If $G$ acts properly discontinuously on a contractible CW complex $X$, then $X/G$ is a $K(G,1)$
+
+Application of Hurewicz theorem in 3 manifold topology: M is a closed, oriented, simply connected 3 manifold. then $\pi_1=0$, H_1=[\pi_1,\pi_i]=0, H^1=0. By Poincare \pi_1=H_2=H^1=0, \pi_3=H_3=Z. Poincare conjecture says M homeomorphic to S^3
+
+\begin{example}
+If $\pi_1(A)$ is non trivial, Hurewicz theorem may fail, (S^2\vee S^1,S^1) has different \pi_2, H_2
+\end{example}
+
+\begin{exapmole}[representalbe functor for G bundles]
+Top be the category of top spaces up to homotopy equivalence, G top group, F:Top\to Sets, X\mapsto G-bundles over X, the BG is a representable functor
+\end{example}
+
+Omega spectra
+
+\begin{definition}
+An $\Omega$-spectrum is a sequence of $K_n$ of CW complexes with weak homotopy equivalences $K_n\to\Omega K_{n+1}$
+\end{definition}
+
+\begin{remark}
+The loop space of a CW complex is again a CW complex
+\end{remark}
+
+\begin{theorem}
+$h^n(X)=\langle X,K_n\rangle$ defines base pointed cohomology theory of CW complexes
+\end{theorem}
+
+\begin{example}[Eilenberg-MacLane specturm]
+
+\end{example}
+
+\begin{example}[Complex K theory]
+Let $U=\bigcup U(n)$, one can show that there is a weak homotopy equivalence $U\to\Omega^2U$, hence one get a spectrum by setting $K_i=\begin{cases}
+\Omega U &i\text{ even} \\
+U &i\text{ odd} \\
+\end{cases}$. The complex cohomology theory is periodic(Bott periodicity). $h^0(X)=K_0(X)$ is the Grothendieck group. $h^1(X)=<X,U>=<X,\Omega^2 U>=<\Sigma X,\Omega U>=K_0(\Sigma X)$
+\end{example}
+
+\begin{example}[Real K theory]
+$O \to \Omega^8O$ is a weak homotopy equivalence
+\end{example}
+
+\begin{definition}
+A spectrum is a sequence $K_n$ with maps $\Sigma K_n\to K_{n+1}$
+\end{definition}
+
+\begin{example}[Sphere spectrum]
+$K_n=S^n$, $SK_n\cong S^{n+1}$. More generally, fix $Y$, can define $K_n=\Sigma^nY$
+\end{example}
+
+\begin{theorem}
+$h_i(X)=\varinjlim\pi_{i+n}(X\wedge K_n)$, $\pi_{i+n}(X\wedge K_n)\xrightarrow S\pi_{i+n+1}(\Sigma(X\wedge K_n))=\pi_{i+n+1}(X\wedge\Sigma K_n)\to\pi_{i+n+1}(X\wedge K_{n+1})$ is a reduced base pointed homology theory
+\end{theorem}
+
+\begin{proof}
+Use Puppe sequence again, note that $\pi_{i+n}(\Sigma A\wedge K_{n})=\pi_{i+n}(\Sigma (A\wedge K_{n}))=\pi_{i+n}(A\wedge\Sigma K_{n})$
+\end{proof}
+
+\begin{theorem}
+Any homology theory with $H_*(X)=\varinjlim_p H_*(X^p)$ is induced by a spectrum
+\end{theorem}
+
+\begin{example}[Stable homotopy groups]
+$\pi_{i+n}(X\wedge S^n)=\pi_{i+n}(S^nX)$
+\end{example}
+
+\begin{definition}
+A cohomology operation is a natural transformation $H^n(-;G)\to H^n(-;G)$
+\end{definition}
+
+\begin{example}[Power operation on $H^1(-;\mathbb Z)$]
+
+\end{example}
+
+spectral sequences
+
+$F_pC_*(X)=C_*(X^p)$, E^0_{p,q}=C_{p+q}(X^p,X^{p-1})=C_{p+q}(X^p)/C_{p+q}(X^{p-1})$, $E^1_{p,q}=H_{p+q}(C_*(X^p,X^{p-1}))=H_{p+q}(X^p,X^{p-1})$
+
+\end{document}

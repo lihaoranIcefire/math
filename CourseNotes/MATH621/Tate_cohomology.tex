@@ -1,0 +1,34 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+$G$ is finite, the goal is to put homology and cohomology in the same framework
+
+\begin{fact}
+If $P$ is relatively projective module, then $\hat H^i(G,P)=0$ for all $i$
+\end{fact}
+
+Cup product for Tate cohomology
+$A\otimes_Z B$ is a $G$ module with diagonal action of $G$
+
+The cup product $\hat H^p(X,A)\otimes\hat H^q(X,B)\to\hat H^{p+q}(X,A\otimes B)$ is uniquely characterized by
+\begin{enumerate}
+\item It is functorial in $A$ and $B$
+\item For $p=q=0$, it is induced by $A^G\otimes B^G\to (A\otimes B)^G$, $a\otimes b\mapsto a\otimes b$
+\item compatible with connecting homomorphism
+If 
+\[0\to A\to A'\to A''\to0\]
+is exact such that
+\[0\to A\otimes B\to A'\otimes B\to A''\otimes B\to0\]
+is exact, the $\forall\beta\in\hat H^q(B)$
+\begin{center}
+\begin{tikzcd}
+\hat H^p(A'') \arrow[r, "-\smile\beta"] \arrow[d, "\delta"] & \hat H^p(A''\otimes B) \arrow[d, "\delta"] \\
+\hat H^{p+1}(A) \arrow[r, "-\smile\beta"]                   & \hat H^{p+1}(A\otimes B)                  
+\end{tikzcd}
+\end{center}
+Similar for $\alpha\smile-$, up to a sign $(-1)^p$ which comes from the fact that it is graded commutative
+\end{enumerate}
+
+
+\end{document}

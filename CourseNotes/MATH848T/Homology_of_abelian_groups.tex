@@ -1,0 +1,33 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+View $\Delta^n$ as $\{0\leq x_1\leq\cdots\leq x_n\leq1\}$, we can decompose $\Delta^n\times\Delta^m=\{0\leq x_1\leq\cdots\leq x_n\leq1\}\times\{0\leq x_{n+1}\leq\cdots\leq x_{n+m}\leq1\}$ into $\binom{n+m}{m}$ simplices
+\[\Delta^n\times\Delta^m=\sum_{\sigma}(-1)^{|\sigma|}\Delta_{\sigma},\quad \Delta_\sigma=\{0\leq x_{\sigma(1)}\leq\cdots\leq x_{\sigma(n+m)}\leq1\}\]
+$\sigma$ runs over $(n,m)$-shuffles. This gives $C_k(X)\times C_l(Y)\to C_{k+l}(X\times Y)$
+\end{definition}
+
+\begin{definition}
+We have $H_k(G)\times H_l(H)\to H_{k+l}(G\times H)$. If $A$ is an abelian group, we have $H_k(A)\times H_l(A)\to H_{k+l}(A\times A)\xrightarrow{+_*}H_{k+l}(A)$, $[a_1|\cdots|a_k]\otimes[a_{k+1}|\cdots|a_{k+l}]\mapsto\sum(-1)^{|\sigma|}[a_{\sigma(1)}|\cdots|a_{\sigma(k+l)}]$, $\sigma$ runs over $(k,l)$-shuffles. Making $H_*(A)$ a graded $\mathbb Z$ algebra
+\end{definition}
+
+\begin{example}
+$[a_1]\otimes[a_2]=[a_1|a_2]-[a_2|a_1]$ \par
+$[a_1|a_2]\otimes[a_3]=[a_1|a_2|a_3]-[a_1|a_3|a_2]+[a_2|a_3|a_1]$ \par
+$[a_1]\otimes[a_2|a_3]=[a_1|a_2|a_3]-[a_2|a_1|a_3]+[a_3|a_1|a_2]$
+\end{example}
+
+\begin{theorem}
+If $A$ is a free abelian group, $\bigwedge^*_{\mathbb Z}A\xrightarrow{\cong}\bigwedge^*_{\mathbb Z}H_1(A)\to H_*(A)$, $a_1\wedge\cdots\wedge a_n\mapsto\sum(-1)^{|\sigma|}[a_{\sigma(1)}|\cdots|a_{\sigma(n)}]$ is an isomorphism, $\sigma$ runs over $S_n$
+\end{theorem}
+
+\begin{proof}
+$H_k(\mathbb Z^n)=\mathbb Z^{\binom{n}{k}}=\bigwedge^k_{\mathbb Z}\mathbb Z^n$. Every abelian group is the direct limit of its finitely generated subgroups and functors $H_*$, $\bigwedge_{\mathbb Z}^*$ commute with direct limit
+\end{proof}
+
+\begin{example}
+Geometrically, the isomorphism $P:\bigwedge^n_{\mathbb Z}\mathbb Z\to H_n(\mathbb Z^n)\cong H_n(K(\mathbb Z^n,1))=H_n(\mathbb T^n)$ maps $e_1\wedge\cdots\wedge e_k$ to the triangulation of $\mathbb T^n$
+\end{example}
+
+\end{document}

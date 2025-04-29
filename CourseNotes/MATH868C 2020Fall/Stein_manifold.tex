@@ -1,0 +1,152 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+Let $M$ be a manifold. An almost complex structure on $M$ is an endomorphism $J:TM\to TM$ with $J^2=-I$. This imipliesd that $M$ has even real dimension $2n$. Let $T^{1,0}M\oplus T^{0,1}M=T_{\mathbb C}M=TM\otimes\mathbb C$ be the $\pm i$ eigenbundles of $J$. There is a real isomorphism $\rho:TM\to T^{1,0}M$ such that $\rho J=i\rho$. We say that $J$ is integrable if $T^{1,0}M$ is involutive (Frobenius theorem)
+\[[T^{1,0}M,T^{1,0}M]\subseteq T^{1,0}M\]
+\end{definition}
+
+Let $J_0$ denote the standard almost complex structure on $\mathbb R^{2n}$. Then $J$ is integrable if about every pint there is a coordinate chart $(U,\phi)$, $\phi:U\to\mathbb R^{2n}$ such that $\phi_*J=J_0\phi_*$. In this case, a local frame for $T^{1,0}M$ on $U$ is given by the complex vector fields $\dfrac{\partial}{\partial z_1},\cdots,\dfrac{\partial}{\partial z_n}$
+
+\begin{definition}
+A $2n$ dimensional manifold $M$ is a complex manifold if it admits an atlas $\{(U_\alpha,\phi_\alpha)\}$ where the transition functions $\phi_\beta\circ\phi_\alpha^{-1}$ are biholomorphisms
+\end{definition}
+
+\begin{note}
+A manifold may admit inequivalent complex structures. A complex manifold has an integrable associated almost complex structure by pulling back $J_0$
+\end{note}
+
+\begin{theorem}[Newlander-Nirenberg]
+An almost complex manifold is integrable iff it admits a complex manifold structure
+\end{theorem}
+
+\begin{definition}
+A Hermitian metric on $E$ is a smooth Hermitian inner product on the fiber of $E\to M$. We denote this $h$ or $\langle,\rangle$. If $\{s_i\}_{i=1}^r$ is a holomorphic frame, we write $h_{i\bar j}=\langle s_i,s_j\rangle$. A connection on $E$ is a linear map $d_A:\Omega^0(M,E)\to\Omega^1(M,E)$ satisfying the Leibniz rule: $d_A(fs)=df\otimes s+fd_As$. We say $d_A$ is compatible with a holomorphic structure on $E$ if $\bar\partial_A=(d_A)^{0,1}=\bar\partial_E$. We say $d_A$ is unitary if for any sections $s_1,s_2$
+\[d\langle s_1,s_2\rangle=\langle d_As_1,s_2\rangle+\langle s_1,d_As_2\rangle\]
+\end{definition}
+
+\begin{proposition}
+A Hermitian, holomorphic bundle admits a unique compatible, unitary connection. This is called the Chern connection
+\end{proposition}
+
+\begin{proof}
+$d_A=\partial_A+\bar\partial_E$ is determined by the equation
+\[\partial\langle s_1,s_2\rangle=\langle \partial_A s_1,s_2\rangle+\langle s_1,\bar\partial_A s_2\rangle\]
+In a holomorphic frame $s_i$, $\partial_A s_i=d_As_i=\omega_i^js_j$, where $\omega^j_i=h^{j\bar k}\frac{\partial h_{j\bar k}}{\partial z_j}$. Or, $\omega=h^{-1}\partial h$
+\end{proof}
+
+\begin{definition}
+The curvature of a connection $A$ is $F_A=d^2_A$. This is an endomorphism-valued 2-form, i.e. $F_A\in\Omega^2(M,\End E)$. $\bar\partial_E$ is integrable iff $\bar\partial^2_A=F^{0,2}_A=0$. If $A$ is in addition unitary, then we have that $F_A$ is of type $(1,1)$. In holomorphic local frame, $F_A=\bar\partial(h^{-1}\partial h)$. In particular, if $E$ is a line bundle, then $F_A=\bar\partial\partial\log h$. In general, if we modify the metric on $E$ by $e^{-\phi}$, then $\omega_\phi=\omega-\partial\phi$ and $F_{(\bar\partial_E,he^{-\phi})}=F_{(\bar\partial_E,h)}+\partial\bar\partial\phi$
+\end{definition}
+
+\begin{definition}
+$(\bar\partial_E,h)$ is (strictly) Nakano positive if the Hermitian form $iF_{(\bar\partial_E,h)}$ is positive definite, i.e. there is $C>0$ such that for each $\xi\in(TX)^{1,0}\otimes E$
+\[\sum_{i,j=1}^n\langle F_{i\bar j}\xi^i,\xi^j\rangle\geq C|\xi|^2\]
+Where
+\[F_{(\bar\partial_E,h)}=\sum F_{i\bar j}dz_i\wedge d\bar z_j\]
+A holomorphic line bundle $\mathcal L\to X$ is positie if it admits a Nakano positive Hermitian metric. If $\phi$ is smooth and strictly plurisubharmonic, then by replacing $\phi$ by $\chi\circ\phi$ for a suitable positive convex function, we can arrange for $F_{(\bar\partial_E,he^{-\phi})}$ to be Nakano positive
+\end{definition}
+
+\begin{theorem}
+$X$ is a complex manifold, and there is a smooth strictly plurisubharmonic exhaustion function on $X$. Let $\mathcal E\to X$ be a holomorphic vector bundle. Then for every $\alpha\in\Omega^{p,q}(X,E),q\geq1$ with $\bar\partial_E\alpha=0$, there is $u\in\Omega^{p,q-1}(X,E)$ such that $\bar\partial_Eu=\alpha$
+\end{theorem}
+
+If $\phi$ is the psh function, then $\omega=i\partial\bar\partial\phi^2$ is a complete K\"ahler metric on $X$. The K\"ahler identities are still valid for the Chern connection
+\[\bar\partial_A^*-i[\Lambda,\partial_A],\partial_A^*=i[\Lambda,\bar\partial_A]\]
+
+\begin{theorem}[Holomorphic approximation]
+$\mathcal E\to X$ as above, $K_0=\{z\in M|\phi(z)\leq0\}$. Then any holomorphic section of $\mathcal E$ defined in a neighborhood of $K_0$ can be uniformly approximated by elements of $H^0(M,\mathcal E)$
+\end{theorem}
+
+\begin{proof}
+Let $u\in H^0(U,\mathcal E)$ for $K_0\subseteq U$. For any $\epsilon>0$ we need to find $\tilde u\in H^0(X,\mathcal E)$ such that $\|\tilde u-u\|_{K_0}<\epsilon$
+\begin{claim}
+It suffices to show that if $v\in L^2(K,E)$ such that $\langle u,v\rangle_{L^2(K)}=0$ for all $u\in H^0(X,\mathcal E)$, then $\langle u,v\rangle_{L^2(K)}=0$ for all $u\in H^0(U,\mathcal E)$
+\end{claim}
+\begin{proof}[Proof of claim]
+Let $r:H^0(X,\mathcal E)\to L^2(K,E)$ be the restriction map. Suppose $u\in H^0(U,\mathcal E)$ cannot be approximated on $K$. Define a linear map
+\[T:\Span\{\im r,u\}\subseteq L^2(K,E)\to\mathbb C\]
+\[T(u)=1,T|_{\im r}=0\text{ and extending linearly}\]
+Then $T$ is continuous, and so by the Hahn-Banach theorem $T$ extends to a bounded operator on $L^2(K,E)$. But then by the Riesz representation theorem there is $v\in L^2(K,E)$ such that $T(\cdot)=\langle\cdot,v\rangle$. This would contradict the conclusion of the claim. By composing with a convex function we find smooth psh functions $\phi_m$ such that $\phi_m=\phi$ on $K_0$ and $\phi_m\to+\infty$ on $X\setminus K_0$. By the closed range property (with weight $\phi_m$):
+\[L^2(X,E,\phi_m)=H^0(X,\mathcal E)\oplus R((\bar\partial_E)^{*m})\]
+Extend $ve^\phi$ by zero to all of $X$. By the main theorem we can solbe $(\bar\partial_E)^{*m}\alpha_m=ve^\phi$. Moreover, we have estimates
+\[\|\alpha_m\|_{L^2(\phi_m)}\leq C\|ve^\phi\|_{L^2(\phi_m)}\leq C\|ve^\phi\|_{L^2(\phi)}\]
+Let $\beta_m=e^{-(\phi_m-\phi)}\alpha_m$. Then $(\bar\partial_E)^*\beta_m=ve^\phi$, and
+\[\|\beta_m\|_{L^2(\phi)}\leq\|\alpha_m\|_{L^2(\phi_m)}\leq\|ve^\phi\|_{L^2(\phi)}\]
+Let $\beta_m\to\beta$ weakly in $L^2(\phi)$. Then $\beta\equiv0$ outside $K_0$. Use
+\[|\beta_m|^2e^{-\phi}=e^{\phi_m-\phi}|\alpha_m|^2e^{-\phi_m}\]
+Moreover, $(\bar\partial_E)^*\beta=ve^\phi$ in the sense of distributions. Now by integration by parts: if $u\in H^0(U,\mathcal E)$, then
+\begin{align*}
+\langle u,v\rangle_{L^2(K_0)}&=\langle u,(\bar\partial_E)^*\beta\rangle_{L^2(K_0,\phi)} \\
+&=\langle u,(\bar\partial_E)^*\beta\rangle_{L^2(U,\phi)} \\
+&=\langle \bar\partial_Eu,\beta\rangle_{L^2(U,\phi)} \\
+&=0
+\end{align*}
+\end{proof}
+\end{proof}
+
+\begin{definition}
+An $n$-dimensional complex manifold $X$ is a \textit{Stein manifold}\index{Stein manifold} if
+\begin{enumerate}
+\item $X$ is holomorphically convex
+\item $A(X)$ separates points, i.e. for $z_1\neq z_2\in X$, $\exists f\in A(X)$ such that $f(z_1)\neq f(z_2)$
+\item For each $z_0\in X$ there are $f_1,\cdots,f_n\in A(X)$ that give a coordinate system in a neighborhood of $z$, i.e. $d_{z_0}f_1,\cdots,d_{z_0}f_n$ are linearly independent
+\end{enumerate}
+\end{definition}
+
+\begin{note}
+This is vacuous if $X$ is a domain in $\mathbb C^n$, just take coordinate functions
+\end{note}
+
+\begin{theorem}
+$X$ is a Stein iff there exists a smooth strictly psh exhaustion function on $X$
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{example}
+\begin{enumerate}
+\item A domain of holomorphy in $\mathbb C^n$ is Stein
+\item A properly embedded complex submanifold is Stein iff it can be properly embedded in a Stein manifold
+\item A positive dimensional Stein manifold is necessarily noncompact
+\item If $X=1$ (Riemann surfaces), then $X$ is Stein iff it is noncompact
+\item Let $X$ be a compact and $\mathcal L\to X$ a positive line bundle. Suppose $0\neq s\in H^0(X,\mathcal L)$ with zero set $Z(s)$. Then $X_s=X\setminus Z(s)$ is Stein
+\end{enumerate}
+\end{example}
+
+\begin{proof}
+\begin{enumerate}
+\item This will follow from the existence of a strongly psh exhaustion function
+\item Follows by considering $k\times k$ minors of $DF$
+\item This follows because holomorphic functions on compact (connected) $X$ are constant by the maximum principle
+\item ($\Leftarrow$) is a theorem of Behnke-Stein
+\item $\phi=-\log|s|^2$ is a psh exhaustion function on $X_s$
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+Let $X$ be a Stein manifold, and $\hat K\subseteq U$. Then there is a smooth psh exhaustion function $\phi$ negative on $K$ and positive on $U^c$
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{lemma}
+Suppose $X$ admits a stricly psh exhaustion function $\phi$, given $z_0\in X$ there is $U_0$ and $u_0\in A(U_0)$ such that $u_0(z_0)=0$ and $\Re u_0(z)<\phi(z)-\phi(z_0)$ for $z\neq z_0$ in $U_0$
+\end{lemma}
+
+\begin{proof}
+Fix local coordinates where $z_0=0$. By Taylor expansion
+\[\phi(z)=\phi(0)+\Re P(z)+\sum\frac{}{}(0)z_i\bar z_j+O(|z|^3)\]
+Where $P(z)$ is a polynomial of degree $\leq2$, $P(0)=0$. Now use the fact that teh hessian term is bounded below by $C|z|^2$
+\end{proof}
+
+\begin{theorem}
+Let $X$ be an $n$-dimensional Stein manifold. Then there is a proper embedding of $X$ in $\mathbb C^{2n+1}$
+\end{theorem}
+
+\end{document}

@@ -1,0 +1,139 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+$\Gamma\leq \SL_2(\mathbb R)$ is a discrete subgroup such that $\Vol(\Gamma\backslash\mathcal H)<\infty$. For $g=\begin{bmatrix}
+a&b\\
+c&d
+\end{bmatrix}\in\GL_2(\mathbb R)^+$, let $j(g,z)=cz+d$. For a function $f$ on $\mathcal H$, $k\in\mathbb Z$, define
+\[(f\cdot_k g)(z)=\det(g)^{\frac{k}{2}}j(g,z)^{-k}f(gz)\]
+Suppose $f$ is holomorphic on $\mathcal H$ and $f\cdot_k\gamma=f$, $\forall\gamma\in\Gamma$. Let $t=\sigma\infty\in P_\Gamma$, $\sigma\in\SL_2(\mathbb R)$(parabolic point), then $\sigma^{-1}\Gamma_t\sigma\cap\begin{bmatrix}
+1&* \\
+0&1
+\end{bmatrix}=\begin{bmatrix}
+1&h\mathbb Z\\
+0&1
+\end{bmatrix}$, for some $h>0$, $\Rightarrow f\cdot_k\sigma\cap\begin{bmatrix}
+1&h \\
+0&1
+\end{bmatrix}\sigma^{-1}=f\Rightarrow(f\cdot_k\sigma)\cdot_k\begin{bmatrix}
+1&h \\
+0&1
+\end{bmatrix}=f\cdot_k\sigma$ $\Rightarrow (f\cdot_k\sigma)(z+h)=(f\cdot_k\sigma)(z)$. The Fourier expansion is
+\[f\cdot_k\sigma=\sum_{n\in\mathbb Z}a_ne^{\frac{2\pi inz}{h}}\]
+
+\begin{definition}
+$f$ is meromorphic/holomorphic/vanishes at $t\in P_\Gamma$ if $a_n=0,\forall n<<0/n<0/n\leq0$
+\end{definition}
+
+\begin{definition}
+A holomorphic function $f$ on $\mathcal H$ is a holomorphic/meromorphic modular form of weight $k$ and level $\Gamma$ if it satisfies
+\begin{enumerate}
+\item $f\cdot_k\gamma=f,\forall\gamma\in\Gamma$
+\item $f$ is holomorphic/meromorphic at all $t\in P_\Gamma$
+\end{enumerate}
+It is a cusp form if furthermore it vanishes at all $t\in P_\Gamma$. Let $A_k(\Gamma)$ denote the set of meromorphic forms of weight $k$, level $\Gamma$, $M_k(\Gamma)$ denote the set of holomorphic forms of weight $k$, level $\Gamma$, $S_k(\Gamma)$ denote the set of cusp forms of weight $k$, level $\Gamma$
+\end{definition}
+
+\begin{remark}
+Since $f\cdot_k\begin{bmatrix}
+-1&0 \\
+0&-1
+\end{bmatrix}=(-1)^kf$, if $-I\in\Gamma$, then for any odd $k$, $A_k(\Gamma)=0$. $A_0(\Gamma)$ is the field of rational functions on $X(\Gamma)=\Gamma\backslash\mathcal H^*$, $M_0(\Gamma)=\mathbb C$
+\[A(\Gamma)=\bigoplus_{k\in\mathbb Z}A_k(\Gamma)\supseteq M(\Gamma)=\bigoplus_{k\in\mathbb Z}M_k(\Gamma)\]
+are graded rings, $S(\Gamma)=\bigoplus_{k\in\mathbb Z}S_k(\Gamma)$ is a graded ideal in $M(\Gamma)$
+\end{remark}
+
+\begin{example}
+Let $\Gamma=\SL_2(\mathbb Z)=\langle T,S\rangle$, $T=\begin{bmatrix}
+1&1\\
+0&1
+\end{bmatrix}$, $S=\begin{bmatrix}
+0&-1\\
+1&0
+\end{bmatrix}$, then condition is equivalent to $f(z+1)=f(z)$, $f(-\frac{1}{z})=z^kf(z)$. Using this, one can show that \textit{Ramanujan's function}
+\[\Delta(z)=q\prod_{n=1}^\infty(1-q^n)^{24},q=e^{2\pi iz}\]
+is a cusp form of weight 12, level $\Gamma=\SL_2(\mathbb Z)$. See [Bump \S1.3] for details
+\end{example}
+
+\begin{definition}[Holomorphic Eisenstein series]
+$k>2$ is an even integer
+\[E_k(z)=\frac{1}{2}\sum_{\substack{m,n\in\mathbb Z \\ (m,n)\neq(0,0)}}(mz+n)^{-k}=\zeta(k)G_k(z),z\in\mathcal H\]
+where
+\[G_k(z)=\frac{1}{2}\sum_{\substack{c,d\in\mathbb Z \\ (c,d)=1}}(cz+d)^{-k}=\sum_{\gamma\in\Gamma_\infty\backslash\Gamma}j(\gamma,z)^{-k}\]
+Use $j(\gamma_1\gamma_2,z)=j(\gamma_1,\gamma_2z)j(\gamma_2,z)$ to deduce $G_k\cdot_k\gamma=G_k,\forall\gamma\in\Gamma$ \\
+Generalizing this construction: Suppose $\forall\gamma\in\Gamma$, we have a function $\phi_\gamma(z)$ on $\mathcal H$ satisfying
+\begin{enumerate}
+\item $\phi_{\delta\gamma}(z)=\phi_\delta(\gamma z)j(\gamma,z)^{-k},\forall\gamma,\delta\in\Gamma$, $z\in\mathcal H$
+\item $\phi_{u\gamma}=\phi_\gamma$, $\forall \gamma\in\Gamma,u\in\Gamma_\infty$
+\end{enumerate}
+Consider the formal sum $\Phi(z)=\sum_{\delta\in\Gamma_\infty\backslash\Gamma}\phi_\delta(z)$, then $\Phi\cdot_k\gamma=\Phi,\forall\gamma\in\Gamma$ if the sum converges absolutely. Take $\phi_\gamma(z)=j(\gamma,z)^{-k}$, get $G_k$ as above. Take $\phi_\gamma(z)=j(\gamma,z)^{-k}e^{2\pi im\gamma z},m\in\mathbb Z_{\geq0}$, get Poincar\'e series $P_m(z)=\sum_{\gamma\in\Gamma_\infty\backslash\Gamma}j(\gamma,z)^{-k}e^{2\pi im\gamma z}$, absolutely converges when $k>2$ is even. When $m>0$, $P_m$ is a cusp form of weight $k$, level $\SL_2(\mathbb Z)$. $P_0(z)=G_k(z)$ is not cusp form. Fourier expansion
+\[E_k(z)=\zeta(k)+\frac{(2\pi)^k(-1)^{\frac{k}{2}}}{(k-1)!}\sum\sigma_{k-1}(n)q^n\]
+where $\sigma_r(n)=\sum_{d|n}d^r,q=e^{2\pi inz}$ \\
+Method:
+\begin{enumerate}
+\item Direct computation: $f(z)=\sum_{n\in\mathbb Z}a_nq^n,q=e^{2\pi iz}$, then \[a_n=\int_0^1f(x+iy)e^{-2\pi in(x+iy)}dx\] explicit formula for Fourier coefficients of $P_m(z)$
+\item Faster trick for $E_k(z)$: (see [Shimura \S2.2]) use the identity \[\pi\cot(\pi z)=z^{-1}+\sum_{m=1}^\infty\left(\frac{1}{z+m}-\frac{1}{z-m}\right)\]
+\end{enumerate}
+\end{definition}
+
+\begin{fact}
+$S_k(\SL_2(\mathbb Z))$ is spanned by $\{P_m(z),m\in\mathbb Z_{>0}\}$ when $k>2$, later we will see $S_k(\Gamma)$ is finite dimensional
+\end{fact}
+
+Define $j(z)=\dfrac{G_4(z)^3}{\Delta(z)},\forall z\in\mathcal H$. Then $j\in A_0(\SL_2(\mathbb Z))$ induces isomorphism $j:\SL_2(\mathbb Z)\backslash\mathcal H^*\to\mathbb{CP}^1$, thus $A_0(\SL_2(\mathbb Z))=\mathbb C(j)$. Fourier expansion
+\[j(z)=q^{-1}+744+196884q+21493760q^2+\cdots\]
+Clearly $M_k(\SL_2(\mathbb Z))=\mathbb C[G_4,G_6]$ as a graded ring, e.g. $\Delta=\dfrac{1}{1728}(G_4^3-G_6^2)$, see [Bump 1.3.3, 1.3.4] for simple proof
+
+\begin{lemma}\label{f is a cusp form iff f(z)Im(z)^k/2 is bounded on H}
+Let $f\in A_k(\Gamma)$, then $f\in S_k(\Gamma)\iff f(z)\operatorname{Im}(z)^{\frac{k}{2}}$ is bounded on $\mathcal H$
+\end{lemma}
+
+\begin{proof}
+Let $t=\sigma\infty\in P_\Gamma$, $\sigma=\begin{bmatrix}
+a&b \\
+c&d
+\end{bmatrix}\in\SL_2(\mathbb R)$, Fourier expansion at $t$, $(f\cdot_k\sigma)(z)=\sum_{n}a_ne^{2\pi inz/h}$
+\[|f(\sigma z)\operatorname{Im}(\sigma z)^{\frac{k}{2}}|=|(cz+d)^k(f\cdot_k\sigma)(z)|cz+d|^{-k}\operatorname{Im}(z)^{\frac{k}{2}}|=|\sum_na_ne^{2\pi inz/h}|\operatorname{Im}(z)^{\frac{k}{2}}\]
+Bounded when $\operatorname{Im}(z)\to\infty\iff a_n=0,\forall n\leq0$
+\end{proof}
+
+Suppose $f_1,f_2\in M_k(\Gamma)$, at least one in $S_k(\Gamma)$, then $f_1f_2\in S_{2k}(\Gamma)$, so $f_1f_2\operatorname{Im}(z)^k$ is bounded by Lemma \ref{f is a cusp form iff f(z)Im(z)^k/2 is bounded on H}. Also $f_1(\gamma z)\overline{f_2(\gamma z)}\operatorname{Im}(\gamma z)^k=f_1(z)\overline{f_2(z)}\operatorname{Im}(z)^k,\forall\gamma\in\Gamma$. So we have a well-defined integral
+\[(f_1,f_2)=\int_{\Gamma\backslash\mathcal H}f_1(z)\overline{f_2(z)}\operatorname{Im}(z)^k\frac{dxdy}{y^2}\]
+Which is called Peterson inner product
+
+\begin{exercise}
+$(f,E_k)=0$, $\forall f\in S_k(\SL_2(\mathbb Z))$, for $k>2$ is even
+\end{exercise}
+
+In particular, $\forall f\in S_k(\Gamma)$, the function $\tilde f(z)=f(z)\operatorname{Im}(z)^{\frac{k}{2}}$ satisfies $|\tilde f(\gamma z)|=|\tilde f(z)|$, $\forall \gamma\in\Gamma$ and $\displaystyle\int_{\Gamma\backslash\mathcal H}|\tilde f(z)|^2d\mu<\infty$. $\tilde f(z)$ is almost in $L^2(\Gamma\backslash\mathcal H)$ but not quite, since $\tilde f(\gamma z)=e(\gamma,z)^k\tilde f(z)$, $\forall\gamma\in\Gamma$ where $e(\gamma,z)=\dfrac{j(\gamma,z)}{|j(\gamma,z)|}$. $\tilde f$ is an example of a Maass (cusp) form of weight $k$, in particular, it is eigenfunction of $\Delta_k=-y^2\left(\dfrac{\partial^2}{\partial x^2}+\dfrac{\partial^2}{\partial y^2}\right)+iky\dfrac{\partial}{\partial x}$, $f$ is holomorphic $\iff$ $L_k\tilde f=0$, where $L_k=-(z-\bar z)\dfrac{\partial}{\partial \bar z}-\dfrac{k}{2}$ is the Maass lowering operator. To better understand these, consider $\Gamma\backslash\GL_2(\mathbb R)^+$ instead of $\Gamma\backslash\mathcal H$. Let $g=\begin{bmatrix}
+a&b\\
+c&d
+\end{bmatrix}\in\GL_2(\mathbb R)^+$ with $gi=z$, $e(\gamma,z)=e(\gamma,gi)=\dfrac{e(\gamma g,i)}{e(g,i)}$. Define $\phi_f(g)=\tilde f(gi)e(g,i)^{-k}=f(gi)\det(g)^{\frac{k}{2}}j(g,i)^{-k}=f(\frac{ai+b}{ci+d})(ad-bc)^{\frac{k}{2}}(ci+d)^{-k}$. Recall $f\in S_k(\Gamma)$, then we get
+\begin{enumerate}
+\item $\phi_f(\gamma g)=\phi_f(g),\forall\gamma\in\Gamma$
+\item $\phi_f\left(g\begin{bmatrix}
+\cos\theta&\sin\theta \\
+-\sin\theta&\cos\theta
+\end{bmatrix}\right)=e^{ik\theta}\phi_f(g),\forall \theta$
+\item $\displaystyle\int_{\Gamma\backslash\mathcal H}|\tilde f(z)|^2d\mu<\infty\Rightarrow \phi_f\in L^2(\Gamma\backslash\GL_2(\mathbb R)^+/Z^+)=L^2(\Gamma\backslash\SL_2(\mathbb R))$, here $Z^+=\left\{\begin{bmatrix}
+\lambda&0 \\
+0&\lambda
+\end{bmatrix}\middle|\lambda>0\right\}$, $\GL_2(\mathbb R)^+/Z^+=\SL_2(\mathbb R)$
+\end{enumerate}
+Haar measure on $\GL_2(\mathbb R)^+$: Each element in $\GL_2(\mathbb R)^+$ can be written uniquely as
+\[g=\lambda\begin{bmatrix}
+1&x \\
+0&1
+\end{bmatrix}\begin{bmatrix}
+y^{\frac{1}{2}}&0 \\
+0&y^{-\frac{1}{2}}
+\end{bmatrix}\begin{bmatrix}
+\cos\theta&\sin\theta \\
+-\sin\theta&\cos\theta
+\end{bmatrix}\]
+Here $\lambda>0$, $y>0$, $x\in\mathbb R$, $\theta\in[0,2\pi)$, this is the \textit{Iwasawa decomposition} $\SL_2(\mathbb R)=NAK$, $dg=\dfrac{d\lambda}{\lambda}\dfrac{dxdy}{y^2}d\theta$ \\
+$\phi_f\in C^\infty(\Gamma\backslash\GL_2(\mathbb R)^+)$ is a eigenfunction of $Z(\mathfrak{gl}_2)$(inducing $\Delta_k$), annihilated by certain nilpotent element in $\mathfrak{gl}_2$(inducing $L_k$) \\
+$f$ is a cusp form $\iff$ $\displaystyle\int_{U\cap\Gamma\backslash U}\phi_f(Ug)du=0,\forall g$, for all unipotent subgroup $U\subseteq\SL_2(\mathbb R)$ such that $U\cap\Gamma=\{1\}$
+
+\end{document}

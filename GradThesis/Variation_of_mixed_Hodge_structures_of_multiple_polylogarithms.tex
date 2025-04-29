@@ -1,0 +1,1105 @@
+Deligne and Beilinson first constructed the variation matrix
+\begin{equation}\label{eq: Deligne's variation matrix}
+L(z)=\begin{bmatrix}
+1\\
+\Li_1(z)&1\\
+\Li_2(z)&\log(z)&1\\
+\Li_3(z)&\frac{1}{2}\log^2(z)&\log(z)&1\\
+\vdots&\vdots&\vdots&\ddots&\ddots\\
+\Li_n(z)&\frac{1}{(n-1)!}\log^{n-1}(z)&\frac{1}{(n-2)!}\log^{n-2}(z)&\cdots&\log(z)&1\\
+\end{bmatrix}
+\end{equation}
+as the fundamental solution to the linear partial differential equation
+\begin{equation}\label{eq: }
+dL(z)=\begin{bmatrix}
+0\\
+\frac{dz}{1-z}&0\\
+&\frac{dz}{z}&0\\
+&&\frac{dz}{z}&0\\
+&&&\ddots&\ddots\\
+&&&&\frac{dz}{z}&0\\
+\end{bmatrix}L(z)
+\end{equation}
+
+They computed the monodromy matrices for $L(z)\tau(2\pi i)$ which are
+\begin{equation}
+M_{\sigma_0}=\begin{bmatrix}
+1\\
+&1\\
+&1&1\\
+&\frac{1}{2}&1&1\\
+&\vdots&\ddots&\ddots&\ddots\\
+&\frac{1}{(n-1)!}&\cdots&\frac{1}{2}&1&1\\
+\end{bmatrix},\quad M_{\sigma_1}=\begin{bmatrix}
+1\\
+-1&1\\
+&&1\\
+&&&1\\
+&&&&\ddots\\
+&&&&&1\\
+\end{bmatrix}
+\end{equation}
+Here $\sigma_0$, $\sigma_1$ are loops around $0$, $1$, generating $\pi_1(\mathbb P^1-\{0,1,\infty\})$, and
+\[
+\tau(2\pi i)=\begin{bmatrix}
+1\\
+&2\pi i\\
+&&(2\pi i)^2\\
+&&&(2\pi i)^3\\
+&&&&\ddots\\
+&&&&&(2\pi i)^n\\
+\end{bmatrix}
+\]
+
+In this chapter, we will construct variation matrices for multiple polylogarithms, describe variations of mixed Hodge structures with it. This has been done by Zhao~\cite{Zhao_MultipleZetaFunctionsMultiplePolylogarithmsAndTheirSpecialValues}, but only for multiple logarithms. And at the last section, we discuss two other potential applications of variation matrices.
+
+\section{Variation matrix}
+
+Goncharov's coproduct~\eqref{eq: Coproduct for iterated integrals} naturally defines a matrix satisfying Theorem~\ref{thm: V^I is group like}, which we will refer to as the variation matrix. This matrix is a lower-triangular unipotent square matrix, with rows and columns determined by Goncharov's coproduct formula~\eqref{eq: Coproduct for iterated integrals} on iterated integrals. Goncharov used this concept to describe a variation of mixed Hodge structures on the torsor of path in $\mathbb C-\{a_1,\cdots,a_n\}$ (see~\cite{Goncharov_MultiplePolylogarithmsAndMixedTateMotives}, Section 5).
+
+In this section, we shall first prove that the variation matrix behaves as a group-like element under the coproduct. We also derive a matrix of symbols by repeatedly applying the coproduct, and a matrix of one-forms by further apply the one-form map $w$ to these symbols.
+
+\subsection{Variation matrix for iterated integrals}
+
+\begin{definition}\label{def: variation matrix for iterated integrals}
+Suppose $\{a_i\}_{i=0}^{n+1}\subseteq S$, the rows and columns of Goncharov's variation matrix $V^{\widetilde{\mathcal  I}}$ are parameterized by tuples
+\[\mathbf i=(i_0,\cdots,i_{n+1}),\qquad 0=i_0<i_1<\cdots<i_d<i_{d+1}=n+1
+\]
+ and entries in $\widetilde{\mathcal I}(S)$. Specifically, the $(\mathbf i,\mathbf j)$ entry of $V$ is defined as
+\begin{equation}
+V^{\widetilde{\mathcal  I}}_{\mathbf i,\mathbf j}=\begin{cases}
+\prod_{p=0}^{m}I(a_{i_{k_p}};a_{i_{k_p+1}},\cdots;a_{i_{k_p+1}}), \text{if $\mathbf j=(i_{k_0},\cdots,i_{k_{m+1}})$ is a subsequence of $\mathbf i$}\\
+0,\text{otherwise}
+\end{cases}
+\end{equation}
+\end{definition}
+
+\begin{remark}
+Note that here we did not specify the order of rows and columns of the variation matrix. In fact, we can choose any ordering of the indices as long as we make sure that if $\mathbf j$ is a subsequence of $\mathbf i$, then the $\mathbf j$-th row/column is before the $\mathbf i$-th row/column.
+\end{remark}
+
+We are now ready to state the group-like hehavior of the variation matrix.
+
+\begin{theorem}\label{thm: V^I is group like}
+We have $\Delta (V^{\widetilde{\mathcal  I}})^T=(V^{\widetilde{\mathcal  I}})^T\otimes (V^{\widetilde{\mathcal  I}})^T$. Here $\cdot^T$ means matrix transpose.
+\end{theorem}
+
+\begin{proof}
+% We denote $\mathbf j\leq\mathbf i$ if $\mathbf j=(i_{k_0},\cdots,i_{k_{m+1}})$ is a subsequence of $\mathbf i=(i_0,\cdots,i_{n+1})$ with $k_0=i_0$, $k_{m+1}=i_{n+1}$, we also define $|\mathbf i|=n$ and $\mathbf i\cap\mathbf j(p)=(i_{k_p}, i_{k_p+1},\cdots,i_{k_{p+1}})$, we also write $I_{\mathbf i}=I(a_{i_0};a_{i_1},\cdots,a_{i_n};a_{i_{n+1}})$ for short. Now suppose $\mathbf j\leq\mathbf i$, we then have
+% \begin{multline}
+% \Delta V^{\widetilde{\mathcal  I}}_{\mathbf i,\mathbf j}=\prod_{p=0}^{|\mathbf j|}\Delta I_{i\cap j(p)}=\prod_{p=0}^{|\mathbf j|}\left(\sum_{\mathbf k\leq\mathbf i\cap\mathbf j(p)}I_{\mathbf k}\otimes\prod_{r=0}^{|\mathbf k|}I_{(\mathbf i\cap\mathbf j(p))\cap\mathbf k(r)}\right)=\\
+% \sum_{\mathbf j\leq\mathbf l\leq\mathbf i}\left(\prod_{p=0}^{|\mathbf j|}I_{\mathbf l\cap\mathbf j(p)}\otimes\prod_{q=0}^{|\mathbf l|}I_{\mathbf i\cap\mathbf l(q)}\right)=\sum_{\mathbf j\leq\mathbf l\leq\mathbf i}V^{\widetilde{\mathcal  I}}_{\mathbf l,\mathbf j}\otimes V^{\widetilde{\mathcal  I}}_{\mathbf i,\mathbf l}
+% \end{multline}
+This is a direct corollary of Theorem~\ref{thm: Coassociativity of variation matrix}.
+\end{proof}
+
+We say that $V^{\widetilde{\mathcal  I}}$ is a profinite matrix because for a fixed $\mathbf i=(i_0,\cdots,i_{n+1})$ we can define the variation (square) matrix for $I(a_{i_0},\cdots,a_{i_{n+1}})$ to be the submatrix with rows and columns indexed by all indices $\mathbf j=(i_{k_0},\cdots,i_{k_{m+1}})$ with $k_0=0$, $k_{m+1}=n+1$.
+
+\begin{example}
+The variation matrix for $I(a_0;a_1,a_2;a_3)$ is
+\begin{equation}
+\begin{bmatrix}
+1&0&0&0\\
+I(a_0;a_1;a_3)&1&0&0\\
+I(a_0;a_2;a_3)&0&1&0\\
+I(a_0;a_1,a_2;a_3)&I(a_1;a_2;a_3)&I(a_0;a_1;a_2)&1\\
+\end{bmatrix}
+\end{equation}
+\end{example}
+
+\subsection{Variation matrix for free contraction Hopf algebras}
+
+We would like to generalize the concept of variation matrix by defining it for a free contraction Hopf algebra $H$, equipped with a total graded ordering $\prec$ on its generators. This generalization allows us to state and derive results about the variation matrix in a more abstract setting, making it easier to explore its properties.
+
+\begin{definition}
+Suppose $H$ is a free contraction Hopf algebra with $\mathfrak W$ being the set of generators, and there is a total graded ordering $\prec$ on $\mathfrak W$. The \textit{variation matrix} is a matrix $V^H$ where
+\begin{itemize}
+\item the first column is all of its generators in order.
+\item the rest of the matrix are determined by the coproduct formula
+\[
+\Delta(v)=\sum_{w\in\mathfrak W}w\otimes V^H_{v,w}
+\]
+\end{itemize}
+We call the entry of $V^H_{v,w}$ the \textit{complementary entry} of $w$ with respect to $v$. If in addition $\mathfrak W$ is isomorphic to $(\mathbb Z^{\infty}_{\geq0},\prec)$ in~\ref{sec: multiple polylog ordering} as a totally ordered graded countable set. Then we can parameterize the rows and columns of $V^H$ by indices in $\mathbb Z^{\infty}_{\geq0}$.
+\end{definition}
+
+\begin{remark}
+Note that $V^H_{v,w}=0$ if $\dim(v)\neq\dim(w)$ or if $v\prec w$, so $V^H$ is a lower right triangular unipotent matrix, and there are only finitely many entries in each row and column if the coproduct formula is finite.
+\end{remark}
+
+Using this definition, the variation matrix from Definition~\ref{def: variation matrix for iterated integrals} becomes a variation matrix with $H=\widetilde I(S)$.
+
+While writing down the entire variation matrix is impractical due to it profinite nature, it is feasible to express its submatrices truncated at specific entries, allowing us to study the matrix while retaining essential information about its structure.
+
+\begin{definition}
+The variation matrix of an element $v$ is the submatrix of $V^H$ with the rows whose first entry appears in the coproduct of $\Delta(v)$, and columns of the same indices as rows.
+\end{definition}
+
+Since the definition of the variation matrix relies on the coproduct, the group-like property is now obtained automatically. This simplifies our analysis, as the matrix inherently satisfies this key structural property.
+% It is worth noting that Theorem~\ref{thm: Coassociativity of variation matrix} is fundamental different
+
+\begin{theorem}\label{thm: Coassociativity of variation matrix}
+The variation matrix satisfies $\Delta(V^H)^T=(V^H)^T\otimes (V^H)^T$
+\end{theorem}
+
+\begin{proof}
+The proof simply uses coassociativity of the coproduct. First, note that
+\[
+\Delta^2(v)=\sum_ww\otimes \Delta(V^H_{v,w})
+\]
+On the other hand
+\begin{align*}
+\Delta^2(v)&=\sum_w\Delta(w)\otimes V^H_{v,w}\\
+&=\sum_w\left(\sum_uu\otimes V^H_{w,u}\right)\otimes V^H_{v,w}\\
+&=\sum_{w,u}u\otimes V^H_{w,u}\otimes V^H_{v,w}\\
+&=\sum_{u,w}w\otimes V^H_{u,w}\otimes V^H_{v,u}\\
+&=\sum_{w}w\otimes\left(\sum_u V^H_{u,w}\otimes V^H_{v,u}\right)\\
+\end{align*}
+Comparing both we have
+\begin{equation}
+\Delta(V^H_{v,w})=\sum_u V^H_{u,w}\otimes V^H_{v,u}
+\end{equation}
+This concludes the theorem.
+\end{proof}
+
+Recall the Definition~\ref{def: ISymb}. $H=\mathbb I^{\Symb}$ produces a variation matrix $V^{\mathbb I}$. Apply the Hopf algebra morphism $\Phi$ and map $\INV$, we will subsequently derive variation matrices $V^{\overline{\mathbb H}}=\Phi(V^{\mathbb I})$ and $V^{\mathbb H}=\INV(V^{\overline{\mathbb H}})$. Each of these three variation matrices can be useful in different scenarios, depending on the specific properties or structures we wish to emphasize or explore.
+
+\begin{example}\label{ex: V^I for I(0;a0,0,a2;a3)}
+The $V^{\mathbb I}$ variation matrix of $I(0;a_1,0,a_2;a_3)$ is
+\begin{equation}
+\begin{bmatrix}
+1&0&0&0&0&0\\
+I(0;a_2;a_3)&1&0&0&0&0\\
+I(0;a_1;a_3)&0&1&0&0&0\\
+I(0;a_1,a_2;a_3)&I(0;a_1;a_2)&I(a_1;a_2;a_3)&1&0&0\\
+I(0;a_1,0;a_3)&0&I(a_1;0;a_3)&0&1&0\\
+I(0;a_1,0,a_2;a_3)&I(0;a_1,0;a_2)&I(a_1;0,a_2;a_3)&I(a_1;0;a_2)&I(0;a_2;a_3)&1
+\end{bmatrix}
+\end{equation}
+\end{example}
+
+\begin{example}\label{ex: V^Hbar and V^H or [x1,x2]_{2,1}}
+The $V^{\overline{\mathbb H}}$ variation matrix of $[x_1,x_2]_{2,1}$ is
+\begin{equation}
+\begin{bmatrix}
+1&0&0&0&0&0\\
+[x_2]_1&1&0&0&0&0\\
+[x_1x_2]_1&0&1&0&0&0\\
+[x_1,x_2]_{1,1}&[x_1]_1&[x_2]_1-[x_1^{-1}]_1&1&0&0\\
+[x_1x_2]_2&0&[x_1x_2]_0&0&1&0\\
+[x_2,x_2]_{2,1}&[x_1]_2&[x_1^{-1}]_2-[x_2]_2+[x_2]_1[x_1x_2]_0&[x_1]_0&[x_2]_1&1
+\end{bmatrix}
+\end{equation}
+The $V^{\mathbb H}$ variation matrix of $[x_1,x_2]_{2,1}$ is
+\begin{equation}
+\begin{bmatrix}
+1&0&0&0&0&0\\
+[x_2]_1&1&0&0&0&0\\
+[x_1x_2]_1&0&1&0&0&0\\
+[x_1,x_2]_{1,1}&[x_1]_1&[x_2]_1-[x_1]_1-[x_1]_0&1&0&0\\
+[x_1x_2]_2&0&[x_1x_2]_0&0&1&0\\
+[x_2,x_2]_{2,1}&[x_1]_2&-[x_1]_2-[x_2]_2-\frac{1}{2}[x_1]_0^2+[x_2]_1[x_1x_2]_0&[x_1]_0&[x_2]_1&1
+\end{bmatrix}
+\end{equation}
+\end{example}
+
+To better prepare for the monodromy computations in Chapter 5, we will now discuss the structure of $V^{\mathbb I}$ in much greater detail. To streamline this discussion, we will introduce some shorthand notations that will make the expressions more manageable and concise.
+
+\begin{definition}\label{def: I^w}
+Inspired by Zhao~\cite{Zhao_MultipleZetaFunctionsMultiplePolylogarithmsAndTheirSpecialValues}. For a word $w=\sigma_{j_1}\cdots\sigma_{j_m}$ we define $I^w(a_{i_0};a_{i_1},\cdots,a_{i_n};a_{i_{n+1}})$ to be $0$ if $(j_1,\cdots,j_m)$ is a not subsequence of $(i_1,\cdots,i_n)$ and otherwise the sum of all possible
+\[
+I(a_{i_0};\cdots;a_{j_1})I(a_{j_1};\cdots;a_{j_2})\cdots I(a_{j_m};\cdots;a_{i_{n+1}})
+\]
+\end{definition}
+
+\begin{example}\label{ex: shorthand for product of iterated integrals}
+\begin{align*}
+I^{\sigma_1\sigma_0^2}(0;a_1,0,0,a_2,0;1)&=I(0;a_1)I(a_1;0)I(0;0)I(0;a_2,0;1)\\
+&+I(0;a_1)I(a_1;0)I(0;0,a_2;0)I(0;1)\\
+&+I(0;a_1)I(a_1;0;0)I(0;a_2;0)I(0;1)
+\end{align*}
+\end{example}
+
+With this shorthand, \eqref{eq: Coproduct for iterated integrals} now reads
+\begin{multline}\label{eq: coproduct for iterated integrals reformulated}
+\Delta I(a_0;a_1,\cdots;a_n;a_{n+1})=\\
+\sum_{0=i_0<i_1<\cdots<i_k<i_{k+1}=n+1}I(a_{i_0};a_{i_1},\cdots,a_{i_k};a_{i_{k+1}})\otimes I^{\sigma_{i_1}\cdots\sigma_{i_k}}(a_0;a_1,\cdots;a_n;a_{n+1})
+\end{multline}
+Since $0$ could appear multiple times in the iterated integral, so the coproduct~\eqref{eq: coproduct for iterated integrals reformulated} may have collapsing terms and degenerates. For example, we just have
+\begin{multline}
+\Delta' I(0;a_1,0,0;1)=I(0;a_1,0;1)\otimes\left(I(a_1;0;0)+I(0;0;1)\right) + I(0;a_1;1)\otimes I(a_1;0,0;1)
+\end{multline}
+where
+\[
+I(0;0,0;1)\otimes I(0;a_1;0),\quad I(0;0;1)\otimes I(0;a_1;0)I(0;0;1),\quad I(0;0;1)\otimes I(0;a_1,0;0)
+\]
+are degenerates, and
+\[
+I(0;a_1,0;1)\otimes I(a_1;0;0),\quad I(0;a_1,0;1)\otimes I(0;0;1)
+\]
+simply collapsed into $I(0;a_1,0;1)\otimes\left(I(a_1;0;0)+I(0;0;1)\right)$.
+
+We are now ready to describe the variation matrix of
+\[
+(-1)^dI(0;a_1,0^{n_1-1},\cdots,a_d,0^{n_d-1};1)
+\]
+in $\mathbb I^{\Symb}(d)$. The inclusion of the sign $(-1)^d$ accounts for the sign in~\eqref{eq: Li as iterated integrals}. Given the profinite nature of the variation matrix, this description provides a complete description of $V^{\mathbb I}$. We summarize this in the following Proposition.
+
+\begin{proposition}\label{prop: structure of variation matrix}
+The first column of the variation matrix of 
+\[
+(-1)^dI(0;a_1,0^{n_1-1},\cdots,a_d,0^{n_d-1};1)
+\]
+consist of entries of the form
+\[
+(-1)^kI(0;a_{i_1},0^{m_{i_1}-1},\cdots,a_{i_k},0^{m_{i_k}-1};1)
+\]
+where $(i_1,\cdots,i_k)$ is a subsequence of $(1,\cdots,d)$ and $m_{i_\alpha}\leq n_{i_\alpha}$. They are ordered by the corresponding words $\sigma_{i_1}\sigma_0^{m_{i_1}-1}\cdots\sigma_{i_k}\sigma_0^{m_{i_k}-1}$, where we define $\sigma_{i_1}\sigma_0^{m_{i_1}-1}\cdots\sigma_{i_k}\sigma_0^{m_{i_k}-1}\prec\sigma_{j_1}\sigma_0^{p_{j_1}-1}\cdots\sigma_{j_l}\sigma_0^{p_{j_l}-1}$ if
+\begin{itemize}
+\item $m_{i_1}+\cdots+m_{i_k}<p_{j_1}+\cdots+p_{j_l}$
+\item  else if $\sigma_{i_{k-r+1}}\sigma_0^{m_{i_{k-r+1}}-1}\cdots\sigma_{i_k}\sigma_0^{m_{i_k}-1}=\sigma_{j_{l-r+1}}\sigma_0^{p_{j_{l-r+1}}-1}\cdots\sigma_{j_l}\sigma_0^{m_{i_l}-1}$ and $i_{k-r}<j_{l-r}$
+\item  else if $\sigma_0^{m_{i_{k-r}}-1}\sigma_{i_{k-r+1}}\cdots\sigma_{i_k}\sigma_0^{m_{i_k}-1}=\sigma_0^{p_{j_{l-r}}-1}\sigma_{j_{l-r+1}}\cdots\sigma_{j_l}\sigma_0^{m_{i_l}-1}$ and $m_{i_{k-r}}>p_{j_{l-r}}$
+\end{itemize}
+Note that this order is accordance with the order in Definition~\ref{def: order on polylog}.
+
+We then turn our attention to the remaining entries. It is not hard to see that the complementary entry of $(-1)^kI(0;a_{i_1},0^{m_{i_1}-1},\cdots,a_{i_k},0^{m_{i_k}-1};1)$ with respect to $(-1)^lI(0;a_{j_1},0^{p_{j_1}-1},\cdots,a_{j_l},0^{p_{j_l}-1};1)$ is
+\[
+(-1)^{l-k}I^{\sigma_{i_1}\sigma_0^{m_{i_1}-1}\cdots\sigma_{i_k}\sigma_0^{m_{i_k}-1}}(0;a_{j_1},0^{p_{j_1}-1},\cdots,a_{j_l},0^{p_{j_l}-1};1)
+\]
+Where $(i_1,\cdots,i_k)$ is subsequence of $(j_1,\cdots,j_l)$, $(j_1,\cdots,j_l)$ is subsequence of $(1,\cdots,d)$, and $m_\alpha\leq p_\alpha\leq n_\alpha$.
+\end{proposition}
+
+\begin{remark}
+The words $\sigma_{i_1}\sigma_0^{m_{i_1}-1}\cdots\sigma_{i_k}\sigma_0^{m_{i_k}-1}$ and $\sigma_{j_1}\sigma_0^{p_{j_1}-1}\cdots\sigma_{j_l}\sigma_0^{p_{j_l}-1}$ indicate the column and row index of
+\[
+(-1)^{l-k}I^{\sigma_{i_1}\sigma_0^{m_{i_1}-1}\cdots\sigma_{i_k}\sigma_0^{m_{i_k}-1}}(0;a_{j_1},0^{p_{j_1}-1},\cdots,a_{j_l},0^{p_{j_l}-1};1)
+\]
+Since $m_\alpha<p_\alpha,$ for all $\alpha$, the variation matrix is evidently a lower-triangular unipotent matrix.
+\end{remark}
+
+\begin{example}
+We update Example~\ref{ex: V^I for I(0;a0,0,a2;a3)}. The variation matrix of $(-1)^2I(0;a_1,0,a_2;1)$ is
+\begin{equation}
+\begin{bmatrix}
+1&0&0&0&0&0\\
+-I(0;a_2;1)&1&0&0&0&0\\
+-I(0;a_1;1)&0&1&0&0&0\\
+I(0;a_1,a_2;1)&-I(0;a_1;a_2)&-I(a_1;a_2;1)&1&0&0\\
+-I(0;a_1,0;1)&0&I(a_1;0;1)&0&1&0\\
+I(0;a_1,0,a_2;1)&-I(0;a_1,0;a_2)&-I(a_1;0,a_2;1)&I(a_1;0;a_2)&-I(0;a_2;1)&1
+\end{bmatrix}
+\end{equation}
+where
+\begin{align*}
+&-I(0;a_1;a_2)=(-1)I^{\sigma_2}(0;a_1,a_2;1),\quad-I(a_1;a_2;1)=(-1)I^{\sigma_1}(0;a_1,a_2;1),\\
+&I(a_1;0;1)=I^{\sigma_1}(0;a_1,0;1),\quad-I(0;a_1,0;a_2)=(-1)I^{\sigma_2}(0;a_1,0,a_2;1),\\
+&-I(a_1;0,a_2;1)=(-1)I^{\sigma_1}(0;a_1,0,a_2;1),\quad I(a_1;0;a_2)=I^{\sigma_1\sigma_2}(0;a_1,0,a_2;1),\\
+&-I(0;a_2;1)=(-1)I^{\sigma_1\sigma_0}(0;a_1,0,a_2;1).
+\end{align*}
+\end{example}
+
+\subsection{Grading on variation matrix by weights}
+
+The entries of the variation matrix $V^{\mathbb H}$ have various weights, and we can divide them into different \textit{weight blocks}. We start by dividing the rows according to weights in the first column. Following this, we apply the same divisions to the columns, ensuring that the weight of the $(p,q)$-th block is $p-q$. Notably, the $(p,p)$-th block is the identity matrix.
+
+\begin{example}
+\[
+\left[
+\begin{array}{c|cc|cc|c}
+1&0&0&0&0&0\\
+\hline
+{[x_2]_1}&1&0&0&0&0\\
+{[x_1x_2]_1}&0&1&0&0&0\\
+\hline
+{[x_1,x_2]_{1,1}}&[x_1]_1&[x_2]_1-[x_1]_1-[x_1]_0&1&0&0\\
+{[x_1x_2]_2}&0&{[x_1x_2]_0}&0&1&0\\
+\hline
+{[x_1,x_2]_{2,1}}&[x_1]_2&-\frac{1}{2}[x_1]_0^2+[x_1x_2]_0[x_2]_1-[x_1]_2-[x_2]_2&[x_1]_0&[x_2]_1&1
+\end{array}
+\right]
+\]
+\end{example}
+
+Following Zhao's notation, we now define the $\tau$ matrix. The matrix $\tau(2\pi i)$ will play an important role in formulating Theorem~\ref{thm: lifted variation thm} and~\ref{thm: Zhao's variation thm}.
+
+\begin{definition}
+$\tau_{n_1,\cdots,n_d}(a)$ is defined to be the diagonal square matrix of the same size and blocking as the variation matrix of $[x_1,\cdots,x_d]_{n_1,\cdots,n_d}$, where the $(p,p)$-th block is the $a^p$ times the identity matrix.
+\end{definition}
+
+\begin{example}
+\[
+\tau_{2,1}(2\pi i)=\left[
+\begin{array}{c|cc|cc|c}
+1&0&0&0&0&0\\
+\hline
+0&(2\pi i)&0&0&0&0\\
+0&0&(2\pi i)&0&0&0\\
+\hline
+0&0&0&(2\pi i)^2&0&0\\
+0&0&0&0&(2\pi i)^2&0\\
+\hline
+0&0&0&0&0&(2\pi i)^3
+\end{array}
+\right]
+\]
+\end{example}
+
+For simplicity, given a matrix $V$, we shall use $V_{p,q}$ to refer to its $(p,q)$-th block, and $V_k=\sum_{p+q=k}V_{p,q}$ to denote the submatrix consisting of all weight blocks of weight $k$.
+
+The following useful lemma is straightforward.
+
+\begin{lemma}\label{lem: tau^{-1}M tau}
+Suppose $M$ is a matrix of the same dimension as the variation matrix, then $(\tau(a)^{-1}M\tau(a))_{p,q}=(2\pi i)^{q-p}M_{p,q}$.
+\end{lemma}
+
+Recall the symbol map $\Delta_{1,\cdots,1}$ is the repeated coproduct. A direct corollary of Theorem~\ref{thm: Coassociativity of variation matrix} derives a matrix computation of symbols of multiple polylogarithms.
+
+\begin{corollary}\label{cor: iterated coproduct of the variation matrix}
+Suppose $k_1+\cdots+k_m=n$, we have
+\[
+\Delta_{k_1,\cdots,k_m}(V^T)=V_{k_1}^T\otimes\cdots\otimes V^T_{k_m}
+\]
+In particular, by the definition of the symbol map $\Delta_{1,\cdots,1}$, the symbol of the top right entry of $V^T$ is equal to the top right entry of $\Delta_{1,\cdots,1}(V^T)=(V_1^T)^{\otimes n}$.
+\end{corollary}
+
+\begin{example}
+We calculate $V_1^T\otimes V_1^T\otimes V_1^T$ for the variation matrix $V$ of $[x_1,x_2]_{2,1}$
+\begin{multline}
+\begin{bmatrix}
+0&[x_2]_1&[x_1x_2]_1&0&0&0\\
+0&0&0&[x_1]_1&0&0\\
+0&0&1&-[x_1]_0-[x_1]_1+[x_2]_1&[x_1x_2]_0&0\\
+0&0&0&0&0&[x_1]_0\\
+0&0&0&0&0&[x_2]_1\\
+0&0&0&0&0&0
+\end{bmatrix}^{\otimes 3}
+\end{multline}
+and the top right entry is the symbol of $[x_1,x_2]_{1,1}$.
+\begin{multline}
+\Delta_{1,1,1}([x_1,x_2]_{2,1})=[x_2]_1\otimes[x_1]_1\otimes[x_1]_0-[x_1 x_2]_1\otimes [x_1]_0\otimes [x_1]_0+[x_1 x_2]_1\otimes [x_1x_2]_0\otimes [x_2]_1\\
+-[x_1 x_2]_1\otimes
+   [x_1]_1\otimes [x_1]_0+[x_1 x_2]_1\otimes [x_2]_1\otimes [x_1]_0
+\end{multline}
+Note that this is the same as~\eqref{ex: symbol of Li_{2,1}(x_1,x_2)}.
+\end{example}
+
+\subsection{Difference between $V^{\overline{\mathbb H}}$ and $V^{\mathbb H}$}
+
+Recall that $\INV$ gets rid of powers of $\pi i$, while $\overline\INV$ corresponds to the full Goncharov inversion, it is natural to ask how much do $\overline{\INV}(V^{\overline{\mathbb H}})$ and $V^{\mathbb H}=\INV(V^{\overline{\mathbb H}})$ differ. We now demonstrate that they differ only by a constant matrix multiplication. To establish this, we first need to prove a simple proposition.
+
+\begin{proposition}\label{prop: dV=omega V}
+Suppose $V$ is a variation matrix and denote $\omega=dV_1$. We then have $dV=\omega V$.
+\end{proposition}
+
+\begin{proof}
+According to Corollary~\ref{cor: iterated coproduct of the variation matrix}, $\Delta_{n-1,1}V_n^T=V_{n-1}^T\otimes V_1^T$. By Lemma~\ref{lem: differential = Delta_{d-1,1}}, we know that $dV_n^T=V_{n-1}^T(dV_1^T)$, i.e. $dV_n=\omega V_{n-1}$. If we tally up all weights, we have $dV=\omega V$.
+\end{proof}
+
+\begin{lemma}\label{lem: differential = Delta_{d-1,1}} The $d=\varphi\circ\Delta_{n-1,1}$ on $\mathbb H^{\Symb}_n$, where $\varphi$ takes $x\otimes y$ to $xdy$.
+\end{lemma}
+
+\begin{proof} It is easy to show that $\varphi\circ\Delta_{n-1,1}[y_1,\dots,y_n|t_1,\dots,t_n]$ equals the right hand side of~\eqref{eq: differential of the generating series}. We just need to check if it still holds for products, let $P_1$ and $P_2$ be symbols in weight  $k$ and $l$, respectively. We then have (for $n=k+l$)
+\begin{multline}
+\varphi\circ\Delta_{n-1,1}(P_1 P_2)=\varphi\big(\Delta_{k-1,1}(P_1)(P_2\otimes 1)+(P_1\otimes 1)\Delta_{l-1,1}(P_2)\big)\\
+=P_2~d P_1+P_1~d P_2=d (P_1P_2).
+\end{multline}
+The result follows. 
+\end{proof}
+
+\begin{theorem}\label{thm: V^{Hbar} = V^{H}C}
+$\overline{\INV}(V^{\overline{\mathbb H}})=V^{\mathbb H}C$ for some constant matrix $C$ with entries in $\mathbb Q[\pi i]$.
+\end{theorem}
+
+\begin{proof}
+Since differential gets rid of constants, by Proposition~\ref{prop: dV=omega V}  we have
+\[
+d\overline{\INV}(V^{\overline{\mathbb H}})=d\INV(V^{\overline{\mathbb H}})=dV^{\mathbb H}=\omega V^{\mathbb H}
+\]
+For convenience we denote $\overline{\INV}(V^{\overline{\mathbb H}}), V^{\mathbb H}$ as $V_1, V_2$ respectively. We then have
+\begin{equation*}
+d(V_2^{-1}V_1)=-V_2^{-1}(dV_2)V_2^{-1}V_1+V_2^{-1}(dV_1)=-V_2^{-1}\omega V_2V_2^{-1}V_1+V_2^{-1}\omega V_1=0
+\end{equation*}
+Thanks to Lemma~\ref{lem: df=0 => f=const} we know $V_2^{-1}V_1$ equals to some constant matrix $C$ with entries in $\mathbb Q[\pi i]$.
+
+We can evaluate $C$ by simply replacing $[\mathbf x]_{\mathbf n}$ with 0 on both sides of the equation $\overline{\INV}(V^{\overline{\mathbb H}})=V^{\mathbb H}C$. This corresponds to evaluating the regularized values of $\Li_{\mathbf n}(\mathbf x)$, $\log(x)$ at the origin. As a result
+\[
+\left.\overline{\INV}(V^{\overline{\mathbb H}})\right|_{[\mathbf x]_{\mathbf n}\to 0}=\left.V^{\mathbb H}\right|_{[\mathbf x]_{\mathbf n}\to 0}C=IC=C
+\]
+\end{proof}
+
+We can actually do better with a matrix $\widetilde C$ that express as this difference totally rationally.
+
+\begin{corollary}
+$\overline{\INV}(V^{\overline{\mathbb H}})\tau(2\pi i)=V^{\mathbb H}\tau(2\pi i)\widetilde C$ for some constant matrix $\widetilde C$ with entries in $\mathbb Q$.
+\end{corollary}
+
+\begin{proof}
+We take $\widetilde C=\tau(2\pi i)^{-1}C\tau(2\pi i)$, and under Theorem~\ref{thm: V^{Hbar} = V^{H}C} we have
+\[
+\overline{\INV}(V^{\overline{\mathbb H}})\tau(2\pi i)=V^{\mathbb H}C\tau(2\pi i)=V^{\mathbb H}\tau(2\pi i)\widetilde C
+\]
+We only need to justify that $\widetilde C$ is rational. It is not hard to see that Theorem~\ref{thm: Goncharov's inversion formula} tells us that the $(p,q)$-th block $C_{p,q}$ is of weight $p-q$, so it equals to $(2\pi i)^{p-q}$ times some rational matrix. On the other hand, according to Lemma~\ref{lem: tau^{-1}M tau}, we know that $\widetilde C_{p,q}$ is equal to $(2\pi i)^{q-p}C_{p,q}$, which would be rational, and therefore so is $\widetilde C$.
+\end{proof}
+
+\begin{example}
+\begin{multline}
+\overline{\INV}\left(\begin{bmatrix}
+1&0&0&0\\
+[x_2]_1&1&0&0\\
+[x_1x_2]_1&0&1&0\\
+[x_1,x_2]_{1,1}&[x_1]_1-[x_1^{-1}]_1+[x_2]_1&0&1
+\end{bmatrix}\right)\\
+=\begin{bmatrix}
+1&0&0&0\\
+[x_2]_1&1&0&0\\
+[x_1x_2]_1&0&1&0\\
+[x_1,x_2]_{1,1}&[x_1]_1&\pi i-[x_1]_0-[x_1]_1+[x_2]_1&1
+\end{bmatrix}\\
+=\begin{bmatrix}
+1&0&0&0\\
+[x_2]_1&1&0&0\\
+[x_1x_2]_1&0&1&0\\
+[x_1,x_2]_{1,1}&[x_1]_1&-[x_1]_0-[x_1]_1+[x_2]_1&1
+\end{bmatrix}\begin{bmatrix}
+1&0&0&0\\
+0&1&0&0\\
+0&0&1&0\\
+0&0&\pi i&1
+\end{bmatrix}
+\end{multline}
+and
+\[
+\widetilde C=\tau_{1,1}(2\pi i)^{-1}\begin{bmatrix}
+1&0&0&0\\
+0&1&0&0\\
+0&0&1&0\\
+0&0&\pi i&1
+\end{bmatrix}\tau_{1,1}(2\pi i)=\begin{bmatrix}
+1&0&0&0\\
+0&1&0&0\\
+0&0&1&0\\
+0&0&1&1
+\end{bmatrix}
+\]
+\end{example}
+
+\section{Variation of mixed Hodge structures encoded by multiple polylogarithms}
+
+Zhao extended Goncharov's idea by treating iterated integrals as actual functions on $S_d(\mathbb C)$. He defined a variation of mixed Hodge structures on $S_d(\mathbb C)$ using filtrations on the matrix columns. Since these functions are multi-valued, he had to demonstrate that their monodromies are rational. He gave explicit formulas for the monodromy for multiple logarithms (i.e. $\Li_{1,\cdots,1}$). We will deal with the general case in Chapter 5.
+
+In this section, we first review Zhao's contruction. Then we demonstrate that $V^{\mathbb H}$ under the one-form map gives the connection form of a flat connection on $\widehat S_d(\mathbb C)$. Finally, we will prove that the flat sections of this connection form a lifted variation matrix $\widehat V$ which encodes a variation of mixed Hodge structures over $\widehat S_d(\mathbb C)$. Moreover, the entries of first column of $\widehat V$ define lifted multiple polylogarithms $\widehat{\mathcal L}_{n_1,\cdots,n_d}$.
+
+\subsection{Realization of variation matrix}
+
+We write $H(d)$ for the elements of depth $d$ (see Definition~\ref{def: free contraction Hopf algebra}) in a free contraction Hopf algebra $H$.
+
+We can ``realize'' the entries of these variation matrices as actual multi-valued multiple polylogarithmic functions. We call this process the realization map.
+
+\begin{definition}\label{def: Re_I}
+The realization map $\Re_{\mathbb I}:\mathbb I^{\Symb}(d)\to\mathcal O(\widetilde S_d(\mathbb C))$ is defined via Proposition~\ref{prop: realization of iterated integrals} under the choice of $a_i=(x_i\cdots x_d)^{-1}$ with $0<x_i<1$, so that $1<a_d<\cdots<a_1$. And we choose the canonical path $\gamma$ such that $\gamma((0,1))\subseteq\{\operatorname{Im}z<0\}$ (See Figure~\ref{fig: Realization map R^I}).
+\end{definition}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=1]
+\foreach \x/\y/\p/\labelpos/\labeltext in {0/0/o/above/{$0$}, 1/0/one/above/{$1$}, 2/0/ad/above/{$a_d$}, 4/0/aj/above/{$a_j$}, 6/0/ai/above/{$a_i$}, 8/0/a1/above/{$a_1$}}{
+    \coordinate (\p) at (\x,\y);
+    \draw[fill] (\p) circle (0.04);
+    \node at (\p)[\labelpos] {\labeltext};
+}
+\node at (3,0) {$\cdots$};
+\node at (5,0) {$\cdots$};
+\draw[->-=0.5] (ai) to [curve through={(5,-.5)}](aj);
+\node at (5,-.5)[below] {$\gamma$};
+\end{tikzpicture}
+\caption{Realization map $\Re^{\mathbb I}$}
+\label{fig: Realization map R^I}
+\end{figure}
+
+$\Re_{\mathbb I}$ annihilates degenerate elements and $\Re_{\mathbb I}(I(0;a_1,0^{n_1-1},\cdots,a_d,0^{n_d-1};1))=\Li_{n_1,\cdots,n_d}(x_1,\cdots,x_d)$ as expected.
+
+\begin{definition}
+Similarly, realization map $\Re_{\overline{\mathbb H}}:\overline{\mathbb H}(d)\to\mathcal O(\tilde S_d(\mathbb C))$ can be defined by
+\begin{equation}
+\Re_{\overline{\mathbb H}}([x_1,\cdots,x_d]_{n_1,\cdots,x_d})=\Li_{n_1,\cdots,n_d}(x_1,\cdots,x_d)
+\end{equation}
+and
+\begin{equation}
+\Re_{\overline{\mathbb H}}([x_d^{-1},\cdots,x_1^{-1}]_{n_d,\cdots,x_1})=\Li_{n_d,\cdots,n_1}(x_d^{-1},\cdots,x_1^{-1})
+\end{equation}
+which can simplified using Theorem~\ref{thm: Goncharov's inversion formula}. We could also define $\Re_{\mathbb H}:\mathbb H(d)\to\mathcal O(\tilde S_d(\mathbb C))$ to be the restriction $\Re_{\overline{\mathbb H}}|_{\mathbb H}$.
+\end{definition}
+
+$\Re^{\mathbb I}$, $\Re^{\overline{\mathbb H}}$, $\Re^{\mathbb H}$ simply regard symbols as actual multi-valued functions, the difference is that they have different domains. Recall that $\Phi$ takes an iterated integral in $\mathbb I^{\Symb}$ and turns it into multiple polylogarithms in $\overline{\mathbb H}$, we have a more precise relation between $\Re^{\mathbb I}$, $\Re^{\overline{\mathbb H}}$, $\Re^{\mathbb H}$.
+
+\begin{proposition}
+For fixed $d$, the following diagram commutes
+\begin{center}
+\begin{tikzcd}
+\mathbb I^{\Symb}(d) \arrow[rd, "\Re"'] \arrow[r, "\Phi"] & \overline{\mathbb H}^{\Symb}(d) \arrow[d, "\Re"] \arrow[r, "\overline{\INV}"] & \mathbb H^{\Symb}[\pi i](d) \arrow[ld, "\Re"] \\
+                                                    & \mathcal O(\tilde S_d(\mathbb C))                                &                                     
+\end{tikzcd}
+\end{center}
+\end{proposition}
+
+\begin{example}
+Suppose $V^{\overline{\mathbb H}}$, $V^{\mathbb H}$ are truncated at $[x_1,x_2]_{2,1}$ as in Example~\ref{ex: V^Hbar and V^H or [x1,x2]_{2,1}}, then $\Re_{\overline{\mathbb H}}(V^{\overline{\mathbb H}})$ would be
+\begin{equation}
+\begin{bmatrix}
+1&0&0&0&0&0\\
+\Li_1(x_2)&1&0&0&0&0\\
+\Li_1(x_1x_2)&0&1&0&0&0\\
+\Li_{1,1}(x_1,x_2)&\Li_1(x_1)&\Li_1(x_2)-\Li_1(x_1^{-1})&1&0&0\\
+\Li_2(x_1x_2)&0&\log(x_1)+\log(x_2)&0&1&0\\
+\Li_{2,1}(x_1,x_2)&\Li_2(x_1)&\substack{\Li_2(x_1^{-1})-\Li_2(x_2)+\\\Li_1(x_2)(\log(x_1)+\log(x_2))}&[x_1]_0&\Li_1(x_2)&1
+\end{bmatrix}
+\end{equation}
+and $\Re_{\mathbb H}(V^{\mathbb H})$ would be
+\begin{equation}
+\begin{bmatrix}
+1&0&0&0&0&0\\
+\Li_1(x_2)&1&0&0&0&0\\
+\Li_1(x_1x_2)&0&1&0&0&0\\
+\Li_{1,1}(x_1,x_2)&\Li_1(x_1)&\Li_1(x_2)-\Li_1(x_1)-\log(x_1)&1&0&0\\
+\Li_2(x_1x_2)&0&\log(x_1)+\log(x_2)&0&1&0\\
+\Li_{2,1}(x_1,x_2)&\Li_2(x_1)&\substack{-\Li_2(x_1)-\Li_2(x_2)-\frac{1}{2}\log^2(x_1)+\\\Li_1(x_2)(\log(x_1)+\log(x_2))}&\log(x_1)&\Li_1(x_2)&1
+\end{bmatrix}
+\end{equation}
+\end{example}
+
+\subsection{Variation of mixed Hodge structures of lifted multiple polylogarithms}
+
+As it turns out, the one-forms that we described in Definition~\ref{def: one-forms}, can be interpreted as the differential one-forms inside a connection form of a flat connection of a vector bundle over $\widehat S_d(\mathbb C)$ whose flat sections are defined to be the lifted multiple polylogarithms. Furthermore, we can define a variation of mixed Hodge structures on this vector bundle by defining filtrations on these lifted multiple polylogarithms. This is described in~\cite{Zhao_MultipleZetaFunctionsMultiplePolylogarithmsAndTheirSpecialValues}. However, Zhao only states and proves it explicitly for multiple logarithms $\Li_{1,\cdots,1}$.
+
+For simplicity, denote either $\Re(V^{\overline{\mathbb H}})$ or $\Re(V^{\mathbb H})$ truncated at $\Li_{n_1,\cdots,n_d}(x_1,\cdots,x_d)$ by $V$. Suppose $V$ is a $N\times N$ matrix and let $\{\mu_p\}$ be integers such that the $(p,q)$-weight block is the submatrix with indices $(i,j)$ satisfying $\mu_{p-1}<i\leq\mu_p$, $\mu_{q-1}<j\leq\mu_q$. Additionally, let $\omega=dV_1$ be the differential of $V_1$, where $V_1$ is the submatrix of $V$ consisting of weight 1 blocks. Zhao's connection theorem says
+
+\begin{theorem}\cite{Zhao_MultipleZetaFunctionsMultiplePolylogarithmsAndTheirSpecialValues}\label{thm: Zhao's connection}
+$\nabla=d-\omega$ defines a flat connection on the trivial bundle $S_d(\mathbb C)\times\mathbb C^N\to S_d(\mathbb C)$, and the columns of $V\tau(2\pi i)$ generate the global sections of the local system corresponding to $\nabla$.
+\end{theorem}
+
+\begin{proof}
+We simply need to prove that $\nabla\circ\nabla V\tau(2\pi i)=0$. By Proposition~\ref{prop: dV=omega V}, we have $dV=\omega\wedge V$, so
+\[
+0=d^2V=d(\omega\wedge V)=d\omega\wedge V-\omega\wedge(\omega\wedge V)=(d\omega-\omega\wedge\omega)\wedge V
+\]
+Since $V$ is invertible, $d\omega-\omega\wedge\omega=0$, i.e. $\omega$ is a flat connection form, and $\nabla$ is a flat connection as in Definition~\ref{def: curvature} with the columns generating the global sections of the local system corresponding to $\nabla$.
+\end{proof}
+
+Using this, Zhao also stated his variation theorem
+
+\begin{theorem}\label{thm: Zhao's variation thm}\cite{Zhao_MultipleZetaFunctionsMultiplePolylogarithmsAndTheirSpecialValues}
+The columns $\{C_j\}_{j=1}^N$ of $V\tau(2\pi i)$ define a variation of Hodge structures over $S_d(\mathbb C)$ as follows: Let $\{e_i\}_{i=1}^N$ denote the standard basis of $\mathbb C^N$. The Hodge filtration and weight filtration are given by
+\begin{equation}
+F^{-p}=\mathbb C\langle\{e_i\}_{i=1}^{\mu_p}\rangle,\quad W_{1-2m}=W_{-2m}=\mathbb Q\langle\{C_j\}_{j\geq \mu_m}\rangle.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The $k$-th graded weight piece $\gr^W_k$ is the $(k,k)$-th weight block of $V\tau(2\pi i)$, which is $(2\pi i)^k$ times the identity matrix, thus obviously a direct sum of Hodge structures. To ensure that the weight filtration is well-defined under analytic continuation amounts to showing that the monodromies preserve the weight filtration. Zhao~\cite{Zhao_AnalyticContinuationOfMultiplePolylogarithms} gives explicit formulas for the monodromy in the case $\mathbf n=(1,\dots,1)$. We tackle the general case in chapter 5. Finally, Griffith transversality follows directly from the fact that $dV=\omega V$, which implies $d C_i=\omega C_i\subseteq\mathbb C\langle\{e_j\}_{j=1}^{\mu_{p-1}}\rangle\otimes\Omega_X^1$ for any $\mu_{p-1}<i\leq\mu_p$.
+\end{proof}
+
+\begin{example}
+% \[
+% \left[
+% \begin{array}{c|cc|cc|c}
+% 1&0&0&0&0&0\\
+% \hline
+% {[x_2]_1}&(2\pi i)&0&0&0&0\\
+% {[x_1x_2]_1}&0&(2\pi i)&0&0&0\\
+% \hline
+% {[x_1,x_2]_{1,1}}&(2\pi i)[x_1]_1&(2\pi i)([x_2]_1-[x_1]_1-[x_1]_0)&(2\pi i)^2&0&0\\
+% {[x_1x_2]_2}&0&{(2\pi i)([x_1x_2]_0)}&0&(2\pi i)^2&0\\
+% \hline
+% {[x_1,x_2]_{2,1}}&(2\pi i)[x_2]_2&(2\pi i)(-[x_1]_2-[x_2]_2-\frac{1}{2}[x_1]_0^2+[x_2]_1[x_1x_2]_0)&(2\pi i)^2[x_1]_0&0&(2\pi i)^3
+% \end{array}
+% \right]
+% \]
+% \[
+% \left[
+% \begin{array}{c|cc|cc|c}
+% 1&0&0&0&0&0\\
+% \hline
+% {\Li_1(x_2)}&(2\pi i)&0&0&0&0\\
+% {\Li_1(x_1x_2)}&0&(2\pi i)&0&0&0\\
+% \hline
+% {\Li_{1,1}(x_1,x_2)}&(2\pi i)\Li_1(x_1)&(2\pi i)(\Li_1(x_2)-\Li_1(x_1)-\log(x_1))&(2\pi i)^2&0&0\\
+% {\Li_2(x_1x_2)}&0&(2\pi i)\log(x_1x_2)&0&(2\pi i)^2&0\\
+% \hline
+% {\Li_{2,1}(x_1,x_2)}&(2\pi i)\Li_2(x_1)&(2\pi i)(-\Li_2(x_1)-\Li_2(x_2)-\frac{1}{2}\log^2(x_1)+\Li_1(x_2)\log(x_1x_2))&(2\pi i)^2\log(x_1)&0&(2\pi i)^3
+% \end{array}
+% \right]
+% \]
+Consider $V^{\mathbb H}$ truncated at $[x_1,x_2]_{1,1}$, we have
+\[
+V=\left[
+\begin{array}{c|cc|c}
+1&0&0&0\\
+\hline
+\Li_1(x_2)&1&0&0\\
+\Li_1(x_1x_2)&0&1&0\\
+\hline
+\Li_{1,1}(x_1,x_2)&\Li_1(x_1)&f(x_1,x_2)&1
+\end{array}
+\right]
+\]
+\[
+V\tau(2\pi i)=\left[
+\begin{array}{c|cc|c}
+1&0&0&0\\
+\hline
+\Li_1(x_2)&(2\pi i)&0&0\\
+\Li_1(x_1x_2)&0&(2\pi i)&0\\
+\hline
+\Li_{1,1}(x_1,x_2)&(2\pi i)\Li_1(x_1)&(2\pi i)f(x_1,x_2)&(2\pi i)^2
+\end{array}
+\right]
+\]
+where $f(x_1,x_2)$ denotes $-\log(x_1)-\Li_1(x_1)+\Li_1(x_2)$. The connection form is given by
+\[
+\omega=dV_1=\left[
+\begin{array}{c|cc|c}
+0&0&0&0\\
+\hline
+-v_2&0&0&0\\
+-v_{1,2}&0&0&0\\
+\hline
+0&-v_1&-u_1+v_1-v_2&0
+\end{array}
+\right]
+\]
+$V\tau(2\pi i)$ encodes a variation of mixed Hodge structures, with the Hodge filtration being
+\begin{itemize}
+\item $F^{n}=0$ for $n>=0$
+\item $F^{-1}=\mathbb C\left\{\begin{bmatrix}
+1\\0\\0\\0
+\end{bmatrix}\right\}$
+\item $F^{-2}=\mathbb C\left\{\begin{bmatrix}
+1\\0\\0\\0
+\end{bmatrix},\begin{bmatrix}
+0\\1\\0\\0
+\end{bmatrix},\begin{bmatrix}
+0\\0\\1\\0
+\end{bmatrix}\right\}$
+\item $F^{n}=\mathbb C^4$, for $n\leq-3$
+\end{itemize}
+And the weight filtration being
+\begin{itemize}
+\item $W_{m}=0$ for $m<-6$
+\item $W_{-5}=W_{-6}=\mathbb Q\left\{\begin{bmatrix}
+0\\0\\0\\(2\pi i)^2
+\end{bmatrix}\right\}$
+\item $W_{-3}=W_{-4}=\mathbb C\left\{\begin{bmatrix}
+0\\(2\pi i)\\0\\(2\pi i)\Li_1(x_1)
+\end{bmatrix},\begin{bmatrix}
+0\\0\\(2\pi i)\\(2\pi i)f(x_1,x_2)
+\end{bmatrix},\begin{bmatrix}
+0\\0\\0\\(2\pi i)^2
+\end{bmatrix}\right\}$
+\item $W_{n}=\mathbb Q\left\{\begin{bmatrix}
+1\\\Li_1(x_2)\\\Li_1(x_1x_2)\\\Li_{1,1}(x_1,x_2)
+\end{bmatrix},\begin{bmatrix}
+\begin{bmatrix}
+0\\(2\pi i)\\0\\(2\pi i)\Li_1(x_1)
+\end{bmatrix},\begin{bmatrix}
+0\\0\\(2\pi i)\\(2\pi i)f(x_1,x_2)
+\end{bmatrix},\begin{bmatrix}
+0\\0\\0\\(2\pi i)^2
+\end{bmatrix}
+\end{bmatrix}\right\}$, for $n\geq-2$.
+\end{itemize}
+\end{example}
+
+We have shown that $\nabla=d-\omega$ is a flat connection on the trivial vector bundle $S_d(\mathbb C)\times\mathbb C^N\to S_d(\mathbb C)$, with entries of $V$ being its flat sections. Therefore, its pullback $\pi^*\nabla=d-\pi^*\omega$, under the projection $\pi:\widehat S_d(\mathbb C)\to S_d(\mathbb C)$, is also a flat connection on the pullback trivial vector bundle, with connection form $\Omega=\pi^*V_1$ .
+
+Recall that the symbols on entries of $V^T$ are $(V_1^T)^{\otimes n}$ from Corollary~\ref{cor: iterated coproduct of the variation matrix}. It is natural to ask for the one-forms of the entries in $V$. We answer this with the following lemma.
+
+\begin{lemma}\cite[Proposition 4.9]{ZDHZ_HopfAlgebrasOfMultiplePolylogarithmsAndHolomorphicOneForms}
+We have
+\begin{equation}\label{eq:wVn}
+    w(V_n)=\frac{1}{n!}\sum_{k+l=n-1}(-1)^k\binom{n-1}{k}\Omega^k\omega\Omega^l.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Since $\Delta(V^T)=V^T\otimes V^T$, it follows that $\Delta_{n-1,1} V_n^T=V_{n-1}^T\otimes \Omega^T$. Therefore,
+\begin{equation}
+    \Delta_{1,\dots,1}(V^T)=I+\Omega^T+\Omega^T\otimes\Omega^T+\Omega^T\otimes\Omega^T\otimes\Omega^T+\cdots,
+\end{equation}
+from which it follows that
+\begin{equation}\label{eq: w(v^T)}
+w(V_n^T)=\frac{(-1)^{n+1}}{n!}\sum_{i=1}^n(-1)^{i-1}\binom{n-1}{i-1}(\Omega^T)^{i-1}\omega^T(\Omega^T)^{n-i}.
+\end{equation}
+Hence,
+\begin{equation}
+    w(V_n)=\frac{(-1)^{n+1}}{n!}\sum_{i=1}^n(-1)^{i-1}\binom{n-1}{i-1}\Omega^{n-i}\omega\Omega^{i-1}.
+\end{equation}
+The result follows after reindexing $k=n-i$.
+\end{proof}
+
+Interestingly, up to some constants, $w(V)$ as a connection form is also flat.
+
+\begin{theorem}\label{thm: omegaHat_n = (n-1)w(V_n)}\cite[Corollary 4.17]{ZDHZ_HopfAlgebrasOfMultiplePolylogarithmsAndHolomorphicOneForms}
+Define $\widehat\omega_n=(n-1)w(V_n)$, $\widehat\omega=\sum_n\widehat\omega_n$. Then $-\widehat\omega$ is a flat connection form. More specifically, it is the connection form of conjugated connection of $\pi^*\nabla$ under the automorphism $s\mapsto e^{\Omega}s$.
+\end{theorem}
+
+\begin{proof}
+According to Proposition~\ref{prop: conjugate connection}, the following lemma proves that $-\widehat\omega$ is the conjugated flat connections.
+\end{proof}
+
+We prove this in the following lemma with a slightly more general assumption of $\Omega$ only being nilpotent.
+
+\begin{lemma}
+Suppose $\Omega$ is any nilpotent matrix and $\omega=d \Omega$, then
+\begin{equation}\label{eq:OmegaHatFormula}
+\widehat{\omega}=d e^{-\Omega}e^\Omega+e^{-\Omega}\omega e^\Omega=\sum_{n\geq1}\frac{n-1}{n!}\sum_{k+l=n-1}(-1)^{k}\binom{n-1}{k}\Omega^{k}\omega\Omega^{l}.
+\end{equation}
+\end{lemma}
+\begin{proof} First we compute
+\begin{equation}
+\begin{aligned}
+d e^{-\Omega}e^\Omega+e^{-\Omega}\omega e^\Omega&=d\left(\sum_{j\geq0}(-1)^j\frac{\Omega^j}{j!}\right)\left(\sum_{r\geq0}\frac{\Omega^r}{r!}\right)+\left(\sum_{k\geq0}(-1)^k\frac{\Omega^k}{k!}\right)\omega\left(\sum_{l\geq0}\frac{\Omega^l}{l!}\right) \\
+&=\left(\sum_{p,q\geq0}\frac{(-1)^{p+q+1}}{(p+q+1)!}\Omega^p\omega\Omega^q\right)\left(\sum_{r\geq0}\frac{\Omega^r}{r!}\right)+\left(\sum_{k\geq0}(-1)^k\frac{\Omega^k}{k!}\right)\omega\left(\sum_{l\geq0}\frac{\Omega^l}{l!}\right) \\
+&=\sum_{n\geq1}\left(\sum_{\substack{p+q+r=n-1\\p,q,r\geq0}}\frac{(-1)^{p+q+1}}{(p+q+1)!r!}\Omega^p\omega\Omega^{q+r}+\sum_{\substack{k+l=n-1\\k,l\geq0}}\frac{(-1)^k}{k!l!}\Omega^k\omega\Omega^l\right).
+\end{aligned}
+\end{equation}
+The interior sum simplifies to
+\begin{equation}
+\begin{aligned}
+\sum_{k+l=n-1}\Omega^k\omega\Omega^l\left(\sum_{q+r=l}\frac{(-1)^{k+q+1}}{(k+q+1)!r!}+\frac{(-1)^k}{k!l!}\right)
+%&=\sum_{k+l=n-1}\Omega^k\omega\Omega^l\left(\frac{(-1)^k}{k!l!}+\frac{(-1)^{n}}{n!}\sum_{r=0}^l(-1)^{r}\binom{n}{r}\right) \\
+%&=\sum_{k+l=n-1}\Omega^k\omega\Omega^l\left(\frac{(-1)^k}{k!l!}+\frac{(-1)^{n}}{n!}(-1)^l\binom{n-1}{l}\right) \\
+=\frac{n-1}{n!}\sum_{k+l=n-1}(-1)^{k}\binom{n-1}{k}\Omega^k\omega\Omega^l,
+\end{aligned}
+\end{equation}
+\end{proof}
+
+Let's denote the this conjugated flat connection as $\widehat \nabla$, and refer to it as the ``lifted'' connection, according to Proposition~\ref{prop: conjugate connection},  $\widehat V=e^{-\Omega}(\pi^*V)$ are the flat sections under $\widehat\nabla$. We refer to it as the ``lifted'' variation matrices, and we define the entries of the first column of $\widehat V$ to be the lifted multiple polylogarithms.
+
+\begin{definition}\label{def: LHat}
+The lifted multiple polylogarithm $\widehat{\mathcal L}_{n_1,\cdots,n_d}$ is defined as the entry in the first column of $\widehat V$ that corresponds to the entry for $\Li_{n_1,\cdots,n_d}$ in the first column of $V$.
+\end{definition}
+
+\begin{example}
+The variation matrix $\widehat V$ for $\Li_{1,1}(x_1,x_2)$ is
+\[
+\left[
+\begin{array}{c|cc|c}
+1&0&0&0\\
+\hline
+0&1&0&0\\
+0&0&1&0\\
+\hline
+\widehat{\mathcal L}_{1,1}(x_1,x_2)&0&0&1
+\end{array}
+\right]
+\]
+and the connection form is
+\[
+\left[
+\begin{array}{c|cc|c}
+0&0&0&0\\
+\hline
+0&0&0&0\\
+0&0&0&0\\
+\hline
+w_{1,1}(x_1,x_2)&0&0&0
+\end{array}
+\right]
+\]
+Note that $\widehat{\mathcal L}_1$ and $\widehat{\omega}_1$ are 0.
+\end{example}
+
+We summerize previous discussions as the lifted connection theorem for reference.
+
+\begin{theorem}\label{thm: lifted connection}
+$\widehat\nabla=d-\widehat\omega$ is a flat connection on $\widehat S_d(\mathbb C)\times\mathbb C^N\to \widehat S_d(\mathbb C)$, and the columns of $\widehat V\tau(2\pi i)$ generate the global sections of the local system corresponding to $\widehat\nabla$.
+\end{theorem}
+
+\begin{proof}
+This is simply Theorem~\ref{thm: omegaHat_n = (n-1)w(V_n)}.
+\end{proof}
+
+Because the one-form map factors through projection map $P$ (see Remark~\ref{thm: one-form map factor through Gangl's projection map P}), it gets rid of products. Therefore the connection form can be obtained simply by replacing $\Li_{n_1,\cdots,n_d}$ with $(n-1)w_{n_1,\cdots,n_d}$ (Theorem~\ref{thm: omegaHat_n = (n-1)w(V_n)}), and then modulo products.
+
+There is a nice description of the entries of the lifted variation matrix $\widehat V$ due to the author (not included in~\cite{ZDHZ_HopfAlgebrasOfMultiplePolylogarithmsAndHolomorphicOneForms}).
+
+\begin{theorem}\label{thm: lifted connection form is made up of one-forms}
+Entries of $\widehat V$ are obtained by simply replacing $\Li_{n_1,\cdots,n_d}$ with $\widehat{\mathcal L}_{n_1,\cdots,n_d}$ for $n_1+\cdots+n_d\geq2$, and $\log$, $\Li_1$ with zeros.
+\end{theorem}
+
+\begin{proof}
+If we represent the replacement by $\phi$, then by Lemma~\ref{lem: for Vhat} below, we see that $\widehat V=\phi(V)$, and $\widehat V_1=0$. Then we use the fact that $\phi$ is multiplicative and that $\widehat{\mathcal L}_{n_1,\cdots,n_d}$ is the defined the bottom left corner of the lifted variation matrix of $\Li_{n_1,\cdots,n_d}$, i.e. $\widehat{\mathcal L}_{n_1,\cdots,n_d}=\phi(\Li_{n_1,\cdots,n_d})$.
+\end{proof}
+
+\begin{example}\label{ex: make-up of VHat and OmegaHat}
+Consider the variation matrix $V^{\mathbb H}$ and lifted variation matrix $\widehat V$ for $\Li_{2,2,1}(x_1,x_2,x_3)$. Since they are huge matrices, we will only look at the complementary entry of $\Li_1(x_2x_3)$ with respect to $\Li_{2,2,1}(x_1,x_2,x_3)$, which are respectively
+\[
+-\Li_2(x_1) \Li_2(x_2)-\Li_2(x_1) \Li_2(x_3)-\frac{1}{2}\Li_2(x_1)\log^2(x_2)+\Li_1(x_3)\Li_2(x_1)(\log (x_2)+\log(x_3))
+\]
+and
+\[
+-\widehat{\mathcal L}_2(u_1,v_1) \widehat{\mathcal L}_2(u_2,v_2)-\widehat{\mathcal L}_2(u_1,v_1) \widehat{\mathcal L}_2(u_3,v_3)
+\]
+\end{example}
+
+\begin{lemma}\label{lem: for Vhat}
+Suppose $H$ is a graded connected Hopf algebra, consider
+\[
+\phi_{n,k}:H_n\xrightarrow{\Delta_{1,\cdots,1,n-k}}H_1^{\otimes k}\otimes H_{n-k}\xrightarrow{m^{\circ k}}H_n
+\]
+We define $\phi:H\to H$ as the direct sum of $\phi_n:H_n\to H_n$, $\phi=\sum_{k=0}^n(-1)^k\phi_{n,k}/k!$, note that $\phi_0=\id$. We claim that $\phi$ is multiplicative.
+\end{lemma}
+
+\begin{proof}
+Suppose $a\in H_n,b\in H_m$. Recall if $\mathbf n=(n_1,\dots,n_d)\in\mathbb Z_{\geq0}^d$ with $|\mathbf n|=n$, $\Delta_{n_1,\cdots,n_d}(a)=\sum_ia^{\mathbf n}_{i1}\otimes\cdots\otimes a^{\mathbf n}_{id}$. Denote $a^{\mathbf n}=\sum_ia^{\mathbf n}_{i1}\cdots a^{\mathbf n}_{id}$ so that $\phi_{n,k}(a)=a^{(1,\dots,1,n-k)}$. Now it is not hard to see that
+\begin{align*}
+\Delta_{r_1,\dots,r_d}(ab)&=\sum_{\substack{\mathbf n+\mathbf m=\mathbf r\\\mathbf n,\mathbf m\in\mathbb Z^d_{\geq0}}}\left(\sum_ia^{\mathbf n}_{i1}\otimes\cdots\otimes a^{\mathbf n}_{id}\right)\left(\sum_jb^{\mathbf m}_{j1}\otimes\cdots\otimes b^{\mathbf m}_{jd}\right)\\
+&=\sum_{\substack{\mathbf n+\mathbf m=\mathbf r\\\mathbf n,\mathbf m\in\mathbb Z^d_{\geq0}}}\sum_i\sum_ja^{\mathbf n}_{i1}b^{\mathbf m}_{j1}\otimes\cdots\otimes a^{\mathbf n}_{id}b^{\mathbf m}_{jd},
+\end{align*}
+and
+\[
+m^{\circ d}\circ\Delta_{r_1,\dots,r_d}(ab)=\sum_{\substack{\mathbf n+\mathbf m=\mathbf r\\\mathbf n,\mathbf m\in\mathbb Z^d_{\geq0}}}\sum_i\sum_ja^{\mathbf n}_{i1}\cdots a^{\mathbf n}_{id}\cdot b^{\mathbf m}_{j1}\cdots b^{\mathbf m}_{jd}=\sum_{\substack{\mathbf n+\mathbf m=\mathbf r\\\mathbf n,\mathbf m\in\mathbb Z^d_{\geq0}}}a^{\mathbf n}b^{\mathbf m}
+\]
+In particular, we get
+\begin{equation}
+\phi_r(ab)=\sum_{p=0}^r\frac{(-1)^p}{p!}\phi_{r,p}(ab)=\sum_{p=0}^r\frac{(-1)^p}{p!}\sum_{\substack{k+l=p\\k,l\geq0}}\binom{p}{k}a^{(1,\dots,1,n-k)}b^{(1,\dots,1,m-l)}
+\end{equation}
+On the other hand, we have
+\begin{equation}
+\begin{aligned}
+\phi_n(a)\phi_m(b)&=\left(\sum_{k=0}^n\frac{(-1)^k}{k!}\phi_{n,k}(a)\right)\left(\sum_{l=0}^m\frac{(-1)^l}{l!}\phi_{m,l}(b)\right)\\
+&=\sum_{p=0}^r\sum_{\substack{k+l=p\\k,l\geq0}}\frac{(-1)^p}{k!l!}a^{(1,\dots,1,n-k)}b^{(1,\dots,1,m-l)}
+\end{aligned}
+\end{equation}
+Both equations above are equivalent.
+\end{proof}
+
+\begin{remark}
+Note that $\phi_1=0$. This explains why $\Li_1,\log$ are replaced with zero in Theorem~\ref{thm: lifted connection form is made up of one-forms}.
+\end{remark}
+
+We are now able to generalize Zhao's variation theorem to a lifted variation theorem.
+
+\begin{theorem}\label{thm: lifted variation thm}(\cite{ZDHZ_HopfAlgebrasOfMultiplePolylogarithmsAndHolomorphicOneForms},  Theorem 5.8)
+The columns $\{C_j\}_{j=1}^N$ of $\widehat{V}\tau(2\pi i)$ define a variation of Hodge structures over $\widehat S_d(\mathbb C)$ with Hodge filtration and weight filtration given by
+\begin{equation}
+F^{-p}=\mathbb C\langle\{e_i\}_{i=1}^{\mu_p}\rangle,\quad W_{1-2m}=W_{-2m}=\mathbb Q\langle\{C_j\}_{j\geq \mu_m}\rangle
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Griffith transversality follows from the fact that $d\widehat V=\widehat\omega\widehat V$. All else follows from Theorem~\ref{thm: Zhao's variation thm}.
+\end{proof}
+
+\section{Applications of variation matrix}
+
+\subsection{Single-valued multiple polylogarithms}
+
+We first recall the definition of single-valued polylogarithms from~\cite{Zagier_TheDilogarithm}.
+
+\begin{definition}\label{def: single valued polylogarithm}
+The single-valued polylogarithm $\widehat{\mathcal L}_n(z)$ is defined to be
+\begin{equation}
+\operatorname{ReIm}_n\left(\sum_{r=0}^{n-1}\frac{2^rB_r}{r!}\Li_{n-r}(z)\log^r|z|\right)
+\end{equation}
+Here $\operatorname{ReIm}$ is $\operatorname{Re}$ when $n$ is odd and $\operatorname{Im}$ when $n$ is even, $B_r$ are Bernoulli numbers.
+\end{definition}
+
+This notion can be further generalized using the variation matrix.
+
+\begin{definition}\cite{Zhao_MultipleZetaFunctionsMultiplePolylogarithmsAndTheirSpecialValues}
+The single-valued multiple polylogarithm $\mathcal L_{n_1,\cdots,n_d}$ is defined to be $\dfrac{i^{2\lfloor(n_1+\cdots+n_d)/2\rfloor-1}}{2}$ multiplies the bottom left entry of $\log\left(\tau(i)V\tau(-1)\overline V^{-1}\tau(i)\right)$, where $V=\Re(V^{\overline{\mathbb H}})$ or $V=\Re(V^{\mathbb H})$ is the variation matrix of $\Li_{n_1,\cdots,n_d}(x_1,\cdots,x_d)$.
+\end{definition}
+
+\begin{remark}
+To see it is single-valued, consider monodromy $\mathcal M V\tau(2\pi i)=V\tau(2\pi i)\widetilde M$, where $\widetilde M$ is a rational matrix, then
+\begin{equation}
+\begin{aligned}
+\mathcal M&\log\left(\tau(i)V\tau(-1)\overline V^{-1}\tau(i)\right)\\
+&=\log\left(\tau(i)V\tau(2\pi i)\widetilde M\tau(2\pi i)^{-1}\tau(-1)\overline{V\tau(2\pi i)\widetilde M\tau(2\pi i)^{-1}}^{-1}\tau(i)\right)\\
+&=\log\left(\tau(i)V\tau(2\pi i)\widetilde M\tau(1/2\pi i)\tau(-1)\tau(-2\pi i)\widetilde M^{-1}\tau(-1/2\pi i)\overline V^{-1}\tau(i)\right)\\
+&=\log\left(\tau(i)V\tau(-1)\overline V^{-1}\tau(i)\right)
+\end{aligned}
+\end{equation}
+Note that $\tau(a)\tau(b)=\tau(ab)$, $\tau(a)^k=\tau(a^k)$ for $k\in\mathbb Z$ and $\overline{\tau(a)}=\tau(\overline a)$ .
+\end{remark}
+
+\begin{example}
+Consider the variation matrix of $\Li_{1,1}(x_1,x_2)$
+\[
+V=\begin{bmatrix}
+1&0&0&0\\
+\Li_1(x_2)&1&0&0\\
+\Li_1(x_1x_2)&0&1&0\\
+\Li_{1,1}(x_1,x_2)&\Li_1(x_1)&-\log(x_1)-\Li_1(x_1)+\Li_1(x_2)&1
+\end{bmatrix}
+\]
+we have
+\begin{multline}
+\log\left(\tau(i)V\tau(-1)\overline V^{-1}\tau(i)\right)=\\
+\begin{bmatrix}
+0&0&0&0\\
+2i\mathcal L_1(x_2)&0&0&0\\
+2i\mathcal L_1(x_1x_2)&0&0&0\\
+-2i\mathcal L_{1,1}(x_1,x_2)&2i\mathcal L_1(x_1)&2i(\log|x_1|-\mathcal L_1(x_1)+\mathcal L_1(x_2))&0
+\end{bmatrix}
+\end{multline}
+where $\mathcal L_1(x)=\operatorname{Re}\Li_1(x)=-\log|1-x|$ and
+\begin{multline}
+\mathcal L_{1,1}(x_1,x_2)=\operatorname{Im}\Li_{1,1}(x_1,x_2)+\operatorname{Im}\Li_1(x_1x_2)\operatorname{Re}\log(x_1)\\
+-\operatorname{Im}\Li_1(x_2)\operatorname{Re}\Li_1(x_1)+\operatorname{Im}\Li_1(x_1x_2)\operatorname{Re}\Li_1(x_1)-\operatorname{Im}\Li_1(x_1x_2)\operatorname{Re}\Li_1(x_2)
+\end{multline}
+$\operatorname{Re},\operatorname{Im}$ denotes the real and imaginary parts.
+\end{example}
+
+In~\cite{Zickert_HolomorphicPolylogarithmsAndBlochComplexes} (Theorem 2.10, 4.7), Zickert proved that $\mathcal L_{n}\circ\pi$ coincides with the real or imaginary part of $\widehat{\mathcal L}_n$ on $\widehat{\mathcal B}_n(\mathbb C)$.
+% making $\widehat{\mathcal L}_n$ a candidate for the regulator from the motivic cohomology $H^1_{\mathcal M}(\mathbb C;\mathbb Z(n))$ to the Deligne cohomology $H^1_{\mathcal D}(\mathbb C;\mathbb Z(n))=\mathbb C/(2\pi i)^n\mathbb Z$.
+
+Here we would like to give an alternative formulation of this result in terms of the variation matrices. Let us assume $\widehat V$ to be the variation matrix in depth 1.
+\begin{equation}
+\begin{bmatrix}
+1\\
+0&1\\
+\widehat{\mathcal L}_2(u,v)&0&1\\
+\widehat{\mathcal L}_3(u,v)&0&0&1\\
+\widehat{\mathcal L}_4(u,v)&0&0&0&1\\
+\vdots&\vdots&\vdots&\vdots&\ddots
+\end{bmatrix}
+\end{equation}
+Immediately we notice $\widehat V_i\widehat V_j=0$ for $i,j\geq2$, so we have
+\[
+\widehat V^{-1}=(I+\widehat V_1+\widehat V_2+\cdots)^{-1}=I-\widehat V_1-\widehat V_2-\cdots
+\]
+\[
+\log(\widehat V)=\log(I+\widehat V_1+\widehat V_2+\cdots)=\widehat V_1+\widehat V_2+\cdots
+\]
+
+Then we can make the following simplifications
+\begin{equation}\label{eq: simplification of regulator}
+\begin{aligned}
+&\log\left(\tau(i)V\tau(-1)\overline V^{-1}\tau(i)\right)\\
+&=\log\left(\tau(i)e^\Omega\widehat V\tau(-1)\overline{(e^\Omega\widehat V)}^{-1}\tau(i)\right) \\
+&=\log\left(\tau(i)e^\Omega\widehat V\tau(-1)\overline{\widehat V}^{-1}e^{-\overline\Omega}\tau(i)\right) \\
+&=\log\left(e^{i\Omega}\left(I+\sum_{k\geq2}i^k\widehat V_k\right)\left(I-\sum_{k\geq2}(-i)^k\overline{\widehat V_k}\right)e^{i\overline\Omega}\right) \\
+&=\log\left(e^{i\Omega}\left(I+\sum_{k\geq2}i^k\left(\widehat V_k-(-1)^{k}\overline{\widehat V_k}\right)\right)e^{i\overline\Omega}\right) \\
+\end{aligned}
+\end{equation}
+The third equality is a bit tricky, but this can be verified by comparing with the $(p,q)$-th weight blocks. 
+
+For simplicity, we denote $W_k=\left(\widehat V_k-(-1)^{k}\overline{\widehat V_k}\right)$. Then $\exp\left(\sum_{k\geq2}i^kW_k\right)=I+\sum_{k\geq2}i^kW_k$. Apply Baker-Campbell-Hausdorff formula to the previous result
+\[
+\log\left(e^{i\Omega}\exp\left(\sum_{k\geq2}i^kW_k\right)e^{i\overline\Omega}\right)
+\]
+which renders sums of folded Lie brackets of the format
+\[
+[\cdots,[i^kW_k,[\cdots]],\cdots],\quad [\cdots]
+\]
+where the omitted arguments are either $\Omega$ or $\overline\Omega$.
+
+\begin{example}\label{ex: ReIm of LHat}
+We work out all the Lie brackets up to weight 4.
+\begin{equation}
+\begin{aligned}
+&\log\left(e^{i\Omega}\exp\left(\sum_{k\geq2}i^kW_k\right)e^{i\overline\Omega}\right)-I-\sum_{k\geq2}i^kW_k\\
+&=i\left(\Omega+\overline\Omega\right)+i^2\left(W_2+\frac{1}{2}[\Omega,\overline\Omega]\right) \\
+&+i^3\left(W_3+\frac{1}{2}[\Omega -\overline{\Omega},W_2]+\frac{1}{12}[\Omega -\overline{\Omega},[\Omega ,\overline{\Omega}]]\right) \\
+&+i^4\left(
+W_4+\frac{1}{2}[\Omega -\overline{\Omega},W_3]+\frac{1}{8}[\Omega -\overline{\Omega},[\Omega -\overline{\Omega},W_2]]-\frac{1}{24}[\Omega+\overline{\Omega},[\Omega+\overline{\Omega},W_2]]\right.\\
+&\left.\qquad\qquad-\frac{1}{96}\left([\Omega+\overline{\Omega},[\Omega+\overline{\Omega},[\Omega ,\overline{\Omega}]]]-[\Omega-\overline{\Omega},[\Omega-\overline{\Omega},[\Omega ,\overline{\Omega}]]]\right)
+\right)\\
+&+\cdots
+\end{aligned}
+\end{equation}
+\end{example}
+
+If we restrict our attention to the bottom left entry, we will show that~\eqref{eq: simplification of regulator} establishes an equality between the left hand side $\mathcal L\circ\pi(u,v)$ and the right hand side which is the real or imaginary part of $\widehat{\mathcal L}(u,v)$ plus a bunch of folded Lie brackets (see Example~\ref{ex: ReIm of LHat}).
+
+Imitating Zickert~\cite{Zickert_HolomorphicPolylogarithmsAndBlochComplexes}, let us show that these folded Lie brackets can be realized as a composition of maps that always starts with $\widehat\delta_n:\widehat{\mathcal B}_n(\mathbb C)\to\widehat{\mathcal B}_{n-1}(\mathbb C)\otimes\mathbb C$ for $n>2$ or $\widehat\delta_2:\widehat{\mathcal B}_2(\mathbb C)\to\bigwedge^2\mathbb C$. First we define $\Psi_s, s<n-1$ similar to~\cite{Zickert_HolomorphicPolylogarithmsAndBlochComplexes} as $(\delta_{n-s+1}\otimes1\otimes\cdots\otimes1)\cdots(\widehat\delta_{n-1}\otimes1)\circ\widehat\delta_n$
+\begin{equation}
+\begin{aligned}
+&\Psi_s:\mathbb Z[\widehat{\mathbb C}]\to\widehat{\mathcal B}_{n-s}(\widehat{\mathbb C})\otimes\mathbb C^{\otimes s},\quad[(u,v)]\mapsto[(u,v)]\otimes u^{\otimes s},\quad s<n-2\\
+&\Psi_{n-2}:\mathbb Z[\widehat{\mathbb C}]\to\wedge^2\mathbb C\otimes\mathbb C^{\otimes(n-2)},\quad(u\wedge v)\otimes u^{\otimes s}
+\end{aligned}
+\end{equation}
+So $\Psi_s(\widehat V^T)=\widehat V^T\otimes{\Omega^T}^{\otimes s}, s<n-2$, $\Psi_{n-2}(\widehat V^T)=(\Omega^T\wedge\Omega^T)\otimes{\Omega^T}^{\otimes s}$.
+
+$\Psi_s$ always starts with $\widehat\delta_n$, then any of these Lie brackets can start some $\Psi_s$. For example, $[\Omega,[\overline\Omega,[i^3W_3,[\Omega,\overline\Omega]]]]$ can be realized as the composition of maps
+\begin{center}
+\begin{tikzcd}
+\widehat V_7^T \arrow[r, "\Psi_4"] & \widehat V_3^T\otimes{\Omega^T}^{\otimes 3} \arrow[d, "\cdot^T\circ(i^k(\id-(-1)^k\overline\cdot)\otimes\id\otimes\id\otimes\overline\cdot\otimes\overline\cdot)"] &                                                             \\
+                                   & \overline\Omega\otimes\overline\Omega\otimes\Omega\otimes\Omega\otimes i^3W_3 \arrow[r]                                                                           & {[\Omega,[\overline\Omega,[W_3,[\Omega,\overline\Omega]]]]}
+\end{tikzcd}
+\end{center}
+Here $\overline\cdot$ stands for conjugation, $\cdot^T$ stands for transpose, and the last map is a sum of products of $i^3W_3,\Omega,\overline\Omega$. Similarly $[\Omega,\overline\Omega]$ can be realized as
+\begin{center}
+\begin{tikzcd}
+\widehat V_4^T \arrow[r, "\cdot^T\circ\Psi_3"] & {\Omega}^{\otimes2}\otimes(\Omega\wedge\Omega) \arrow[r] & {[\Omega,[\Omega,[\Omega,\overline\Omega]]]}
+\end{tikzcd}
+\end{center}
+The last map is a sum of products of $\Omega,\overline\Omega$.
+
+Now that if we decompose $\Omega,\overline\Omega$ into $\operatorname{Re}\Omega\pm i\operatorname{Im}\Omega$. Then the coefficients obtained by applying Baker-Campbell-Hausdorff formula should correspond to the coefficients in Theorem 2.10 in~\cite{Zickert_HolomorphicPolylogarithmsAndBlochComplexes}.
+
+\subsection{Recursion of one-forms}
+
+In~\cite{ZackThesis}, Greenberg found a recursion formula of the one-forms. We say a one-form is of weight $n$ if it can be written as $\sum_ip_i du_i+\sum_{j,k}q_{j,k}dv_{j,k}$, where $p_i,q_{j,k}$ are polynomials in $u,v$ variables of degree $n-1$. We use  $\left(\Omega_{[u_i,v_{j,k}]/\mathbb Q}\right)_n$ to denote weight $n$ one-forms.
+
+\begin{example}
+\begin{equation}
+\left(\Omega_{[u_i,v_{j,k}]/\mathbb Q}\right)_1=\bigoplus_{i,j,k}\mathbb Qdu_i+\mathbb Qdv_{j,k}
+\end{equation}
+\begin{equation}
+\left(\Omega_{[u_i,v_{j,k}]/\mathbb Q}\right)_2=\oplus_{i,j,k}(\mathbb Qu_j+\mathbb Qv_{j,k})du_i\oplus\oplus_{i,j,k,l}(\mathbb Qu_i+\mathbb Qv_{i,j})dv_{k,l}
+\end{equation}
+\end{example}
+
+% \begin{theorem}
+% One forms in $\left(\Omega_{[u_i,v_{j,k}]/\mathbb Q}\right)_n$ can be written as the linear combination of one-forms in $\left(\Omega_{[u_i,v_{j,k}]/\mathbb Q}\right)_{n-1}$ with coefficients in $\left(\Omega_{[u_i,v_{j,k}]/\mathbb Q}\right)_1$.
+% \end{theorem}
+
+We provide a reformulation of the recursion formula in terms of the variation matrix.
+
+\begin{theorem}
+Suppose $\Omega=V^{\mathbb H}_1$, $\omega=d\Omega$, Then the bottom left entry of the following direct identity is the recursion formula
+\begin{equation}\label{eq: recursion formula}
+[n!w(V_n),\Omega]=(n+1)!w(v_{n+1})
+\end{equation}
+Note that the first argument on the left hand side Lie bracket and the right hand side is $n!w(V_n)$, $(n+1)!w(V_{n_1})$ respectively according to~\eqref{eq: w(v^T)}.
+\end{theorem}
+
+\begin{proof}
+According to~\eqref{eq: w(v^T)}, \eqref{eq: recursion formula} is really the following direct computation.
+\begin{equation}
+\begin{aligned}
+&\left[\sum_{k+l=n-1}(-1)^{k+1}\binom{n-1}{k}\Omega^k\omega\Omega^l,\Omega\right]=\sum_{k+l=n}(-1)^{k+1}\binom{n}{k}\Omega^k\omega\Omega^l
+\end{aligned}
+\end{equation}
+\end{proof}
+
+\begin{example}
+Take the variation matrix for $\Li_{2,1}(x_1,x_2)$ for an example, we have
+\[
+w(V)=\begin{bmatrix}
+0&0&0&0&0&0\\
+-v_2&0&0&0&0&0\\
+-v_{1,2}&0&0&0&0&0\\
+w_{1,1}(x_1,x_2)&-v_1&v_1-v_2-u_1&0&0&0\\
+w_2(x_1x_2)&0&u_1+u_2&0&0&0\\
+w_{2,1}(x_1,x_2)&w_2(x_1)&-w_2(x_1)-w_2(x_2)&u_1&-v_2&0
+\end{bmatrix}
+\]
+\[
+\Omega=\begin{bmatrix}
+0&0&0&0&0&0\\
+-v_2&0&0&0&0&0\\
+-v_{1,2}&0&0&0&0&0\\
+0&-v_1&v_1-v_2-u_1&0&0&0\\
+0&0&u_1+u_2&0&0&0\\
+0&0&0&u_1&-v_2&0
+\end{bmatrix}
+\]
+So the bottom left entry of $[2w(V_2),\Omega]=6w(V_3)$ gives
+\begin{equation}
+w_{2,1}(x_1,x_2)=\frac{1}{3}\left(-v_2w_2(x_1)+v_{1,2}(w_2(x_1)+w_2(x_2))-u_1w_{1,1}(x_1,x_2)+v_2w_2(x_1x_2)\right)
+\end{equation}
+\end{example}

@@ -1,0 +1,49 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+A differential operator\index{differential operator} $P$ of order $m$ is of the form $p(x,D)=\displaystyle\sum_{|\alpha|\leq m}a_\alpha(x)D^\alpha$, where $a_\alpha(x)$ are functions and $D_j:=\dfrac{1}{i}\partial_j$, the symbol $p(x,\xi)$ associated with it is defined as $p(x,\xi)=\displaystyle\sum_{|\alpha|\leq m}a_\alpha(x)\xi^\alpha$, then we necessarily get the estimate, the principal symbol of $p(x,\xi)$ is $\sigma(P)(x,\xi)=\displaystyle\sum_{|\alpha|= m}a_\alpha(x)\xi^\alpha$ \par
+If a differential operator $P$ of order $m$  is acting on functions on $\mathbb C^n\cong\mathbb R^{2n}$, then we may consider it as the form $p(x,D)=\displaystyle\sum_{|\alpha+\beta|\leq m}a_{\alpha,\beta}(x)D^\alpha\bar D^\beta$, and $D_j:=\dfrac{\partial}{\partial z_j}$, $\bar D_j:=\dfrac{\partial}{\partial \bar z_j}$, the symbol $p(x,\xi)$ associated with it is defined as $p(x,\xi)=\displaystyle\sum_{|\alpha+\beta|\leq m}a_{\alpha,\beta}(x)\xi^\alpha\bar \xi^\beta$
+\end{definition}
+
+\begin{definition}
+On a manifold $M$, a differential operator of order $m$ is a linear map $P: C^\infty(M)\rightarrow C^\infty(M)$ which in local charts has the above form \par
+More generally, Let $E\to M, F\to M$ be vector bundles, a differential operator $P: \Gamma(E)\rightarrow\Gamma(F)$ of order $m$ is a linear operator of the above form in local trivializations \par
+Notice $C^\infty(M)=\Gamma\left(\bigwedge^0T^*M\right)$, another example is exterior derivative $d: \Gamma\left(\bigwedge^kT^*M\right)\to\Gamma\left(\bigwedge^{k+1}T^*M\right)$ which is a first order differential operator
+\end{definition}
+
+We can generalize the notion of differential operators(DO) to Pseudodifferential operators($\psi$DO) via symbols \par
+
+\begin{definition}
+Let $\Omega\subseteq\mathbb R^n$ is an open set, the symbols\index{Symbol} of order $m$ is the space
+\[
+S^m(\Omega):=\left\{
+f(x,\xi)\in C^\infty\left(\Omega\times\mathbb R^n\right) \middle| 
+\begin{array}{l}
+\forall\alpha,\beta,K\Subset\Omega,\exists C_{K,\alpha,\beta}, \\
+\left|D_{x}^{\alpha}D_{\xi}^{\beta}f(x,\xi)\right|\leq C_{K,\alpha,\beta}\left(1+|\xi|\right)^{m-|\beta|}
+\end{array}
+\right\}
+\]
+Given symbol $p(x,\xi)\in S^m(\Omega)$, it defines a pseudodifferential operator $p(x,D)$ of order $m$\index{Pseudodifferential operator}, such that $\left(p(x,D)f\right)(x)=\displaystyle\frac{1}{(2\pi)^n}\int p(x,\xi)\widehat{f}(\xi)e^{ix\cdot\xi}d\xi$ \par
+All pseudodifferential operators of order $m$ are difined this way, deonted as $\Psi^m(\Omega)$
+\end{definition}
+\begin{remark}
+It might be more natural to think of $f\in C^\infty\left(\Omega\times(\mathbb R^n)^*\right)$ in the manifold setting
+\end{remark}
+
+\begin{theorem}
+Let $\Omega,\Omega'$ be open subsets of $\mathbb R^n$, $\Phi: \Omega\rightarrow\Omega'$ is a diffeomorphism, induces a bijection of $S^m(\Omega)\rightarrow S^m(\Omega')$
+\end{theorem}
+\begin{proof}
+Since $\Phi: \Omega\rightarrow\Omega'$ is a diffeomorphism, $(\Phi_*)_x: T_x\Omega\rightarrow T_{\Phi(x)}\Omega'$ and $(\Phi^*)_x: T^*_{\Phi(x)}\Omega'\rightarrow T^*_x\Omega$ are isomorphisms
+\end{proof}
+\begin{corollary}
+Let $M$ be a smooth manifold, $S^m(M)\subseteq \Gamma(T^*M)$ is well-defined
+\end{corollary}
+\begin{definition}
+The principal symbol\index{Principal symbol} of symbol $p(x,\xi)$ of order $m$ is defined as $\displaystyle\lim_{|\xi|\to\infty}\frac{p(x,\xi)}{|\xi|^m}$
+\end{definition}
+
+\end{document}

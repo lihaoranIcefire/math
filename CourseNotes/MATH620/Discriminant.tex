@@ -1,0 +1,185 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+An \textit{algebraic number field}\index{Algebraic number field} $K$ is a finite field extension of $\mathbb Q$, thus $K=\mathbb Q[\alpha]$ for some algebraic number $\alpha$, its ring of algebraic integers is denoted $\mathcal O_K$
+\begin{center}
+\begin{tikzcd}
+\mathcal O_K \arrow[r, hook]              & K                         \\
+\mathbb Z \arrow[r, hook] \arrow[u, hook] & \mathbb Q \arrow[u, hook]
+\end{tikzcd}
+\end{center}
+More generally, if $E/F$ is a finite separable field extension, $B,A$ are their ring of integers
+\begin{center}
+\begin{tikzcd}
+B \arrow[r, hook]                 & E                 \\
+A \arrow[r, hook] \arrow[u, hook] & F \arrow[u, hook]
+\end{tikzcd}
+\end{center}
+\end{definition}
+
+\begin{definition}
+The minimal polynomial of $\alpha$ is
+\[f(x)=\prod_{i=1}^n(x-\alpha_i)=\prod_{i=1}^r(x-\alpha_i)\cdot\prod_{j=1}^s(x-\alpha_{r+j})\cdot\prod_{j=1}^s(x-\overline{\alpha_{r+j}})\]
+$\alpha=\alpha_1,\cdots,\alpha_r$ are the real roots and $\alpha_{r+1},\alpha_{r+s+1}=\overline{\alpha_{r+1}},\cdots,\alpha_{r+s},\alpha_{r+2s}=\overline{\alpha_{r+s}}$ are the complex roots. Then
+\begin{align*}
+K\otimes_{\mathbb Q}\mathbb R=\mathbb Q[\alpha]\otimes_{\mathbb Q}\mathbb R&\cong\frac{\mathbb Q[x]}{f(x)}\otimes\mathbb R \\
+&\cong\dfrac{\mathbb R[x]}{f(x)} \\
+&\cong\prod_{i=1}^r\frac{\mathbb R[x]}{x-\alpha_i}\times\prod_{j=1}^s\frac{\mathbb R[x]}{(x-\beta_j)(x-\overline{\beta_j})} \\
+&\cong \mathbb R^r\times\mathbb C^s
+\end{align*}
+$\alpha\mapsto\alpha_i$ corresponds to all the real embeddings $\sigma_i: K\hookrightarrow\mathbb R$. $\alpha\mapsto\alpha_{r+i}$, $\alpha\mapsto\overline{\alpha_{r+i}}$ corresponds all the conjugate complex embeddings $\sigma_{r+i},\sigma_{r+s+i}=\overline{\sigma_i}:K\hookrightarrow\mathbb C$. $n=[K:\mathbb Q]=\deg f=r+2s$
+\end{definition}
+
+\begin{note}
+$(r,s)$ is called the signature of $K$
+\end{note}
+
+\begin{example}
+$\mathbb Q(\sqrt 5)\hookrightarrow\mathbb R\times\mathbb R$ give the two real embeddings. $\mathbb Q(\sqrt{-5})\hookrightarrow\mathbb C$ give the two conjugate complex embeddings
+\end{example}
+
+\begin{definition}
+$[E:F]=n$, then $B\cong A^n$ as an $A$ module, assume $\beta_1,\cdots,\beta_n$ is a basis, define
+\[D(\beta_1,\cdots,\beta_n)=\det(\Tr_{B/A}(\beta_i\beta_j))\in A\]
+The \textit{discriminant}\index{Discriminant} $\disc(B/A)=D(\beta_1,\cdots,\beta_n)$ is well-defined in $A/(A^\times)^2$. In particular, $\disc(\mathcal O_K/\mathbb Z)$ is a well-defined integer
+\end{definition}
+
+\begin{lemma}
+$\gamma_1,\cdots,\gamma_n\in\mathcal O_K$ is an $\mathbb Z$-basis for $\mathcal O_K$ iff $D(\gamma_1,\cdots,\gamma_n)=\disc(\mathcal O_K/\mathbb Z)$. More generally, if $A$ is integrally closed and Noetherian, $\gamma_1,\cdots,\gamma_n\in B$ is an $A$-basis of $B$ iff $D(\gamma_1,\cdots,\gamma_n)=\disc(B/A)$
+\end{lemma}
+
+\begin{proof}
+Write $\gamma_i=\sum c_{ji}\beta_j$, then $\det(\Tr(\gamma_i\gamma_j))=(\det C)^2\disc(\mathcal O_K/\mathbb Z)$. Thus $D(\gamma_1,\cdots,\gamma_n)=\disc(\mathcal O_K/\mathbb Z)\Leftrightarrow \det C=\pm1\Leftrightarrow C\in\GL_n(\mathbb Z)\Leftrightarrow\gamma_1,\cdots,\gamma_n$ is an $\mathbb Z$-basis
+\end{proof}
+
+\begin{example}
+$K=\mathbb Q(\sqrt d)$, $d$ is square free. $\mathcal O_K$ has $\{1,\sqrt d\}$ as an $\mathbb Z$-basis if $d\equiv2,3\mod4$
+\[\disc(\mathcal O_K/\mathbb Z)=\det\Tr_{\mathcal O_K/\mathbb Z}\begin{pmatrix}
+1&\sqrt d \\
+\sqrt d&d
+\end{pmatrix}=\det\begin{pmatrix}
+2&0 \\
+0&2d
+\end{pmatrix}=4d\]
+$\mathcal O_K$ has $\{1,\frac{1+\sqrt{d}}{2}\}$ as an $\mathbb Z$-basis if $d\equiv1\mod4$
+\[\disc(\mathcal O_K/\mathbb Z)=\det\Tr_{\mathcal O_K/\mathbb Z}\begin{pmatrix}
+1&\frac{1+\sqrt d}{2} \\
+\frac{1+\sqrt d}{2}&\frac{1+2\sqrt d+d}{4}
+\end{pmatrix}=\det\begin{pmatrix}
+2&1 \\
+1&\frac{2+2d}{4}
+\end{pmatrix}=d\]
+Therefore $7$ can never be a discriminant
+\end{example}
+
+\begin{proposition}
+$\gamma_1,\cdots,\gamma_n\in\mathcal O_K$, $N=\mathbb Z\gamma_1+\cdots+\mathbb Z\gamma_n\leq\mathcal O_K$ has finite index in $\mathcal O_K$ iff $D(\gamma_1,\cdots,\gamma_n)\neq0$, $D(\gamma_1,\cdots,\gamma_n)=[\mathcal O_K:N]^2\disc(\mathcal O_K/\mathbb Z)$
+\end{proposition}
+
+\begin{proof}
+Suppose $\beta_1,\cdots,\beta_n$ is an $\mathbb Z$-basis, $D(\beta-1,\cdots,\beta_n)=\disc(\mathcal O_K/\mathbb Z)$, $\gamma_i=\sum c_{ji}\beta_j$, $\det C=[\mathcal O_K:N]$
+\end{proof}
+
+\begin{proposition}
+If $D(\gamma_1,\cdots,\gamma_n)$ is square free, then $\gamma_1,\cdots,\gamma_n$ is an $\mathbb Z$-basis
+\end{proposition}
+
+\begin{example}
+$K=\mathbb Q(\alpha)$, $\alpha$ is a root of irreducible polynomial $x^3-x-1$, $D(1,\alpha,\alpha^2)=-23$ which is square free, hence $\mathcal O_K=\mathbb Z+\mathbb Z\alpha+\mathbb Z\alpha^2=\mathbb Z[\alpha]$
+\end{example}
+
+\begin{proposition}
+$[E:F]=n$ is separable, $\Omega$ is the Galois closure of $E$, $\Hom_F(E,\Omega)=\{\sigma_1,\cdots,\sigma_n\}$ are distinct $F$-embeddings of $E$
+\begin{center}
+\begin{tikzcd}
+B \arrow[r, hook]                 & E                 \\
+A \arrow[r, hook] \arrow[u, hook] & F \arrow[u, hook]
+\end{tikzcd}
+\end{center}
+If $\beta_1,\cdots,\beta_n$ is an $F$-basis of $E$, then $D(\beta_1,\cdots,\beta_n)=\det(\sigma_i(\beta_j))^2\neq0$
+\end{proposition}
+
+\begin{proof}
+Deonte $Q=\sigma_i(\beta_j)$, then
+\begin{align*}
+D(\beta_1,\cdots,\beta_n)&=\det(\Tr_{E/F}(\beta_i\beta_j)) \\
+&=\det(\sum\sigma_k(\beta_i\beta_j)) \\
+&=\det(\sum\sigma_k(\beta_i)\sigma_k(\beta_j)) \\
+&=\det(Q^TQ) \\
+&=\det(\sigma_i(\beta_j))^2 \\
+&\overset{\text{Theorem \ref{Dedekind's theorem}}}{\neq}0
+\end{align*}
+\end{proof}
+
+\begin{theorem}[Dedekind's theorem]\label{Dedekind's theorem}
+$G$ is group, $\Omega$ is a field, $\sigma_1,\cdots,\sigma_n$ are distinct homomorphisms $G\to\Omega^\times$, then $\sigma_i$'s are linear independent over $\Omega$
+\end{theorem}
+
+\begin{definition}
+Assume $A,B$ are integrally closed in $F,E$, $\beta_1,\cdots,\beta_n\in B$ is an $F$-basis of $E$, $C=A\beta_1+\cdots+A\beta_n\leq B$, $C^*=\{\beta\in E|\Tr_{E/F}(\beta\beta_i)\in A\}$, $\beta\in B\Rightarrow\beta\beta_i\in B\Rightarrow\Tr(\beta\beta_i)\in A\Rightarrow C\leq B\leq C^*$, $C^*=A\beta_1'+\cdots+A\beta_n'$, $\beta_1',\cdots,\beta_n'$ is a dual basis. For $\alpha\in E$, $\alpha=\sum\Tr_{E/F}(\alpha\beta_i)\beta_i'$
+\begin{center}
+\begin{tikzcd}
+B \arrow[r, hook]                 & E                 \\
+A \arrow[r, hook] \arrow[u, hook] & F \arrow[u, hook]
+\end{tikzcd}
+\end{center}
+\end{definition}
+
+\begin{example}\label{Example of dual basis}
+$E=F(\beta)$, $f\in A[x]$ is the minimal polynomial of $\beta\in B$, $\deg f=n$, $C=A[\beta]\leq B$, Euler discovered
+\[\Tr_{E/F}(\beta^i/f'(\beta))=\begin{cases}
+0&0\leq i\leq n-1 \\
+1&i=n-1
+\end{cases},\det\Tr_{E/F}(\frac{\beta^i\beta^j}{f'(\beta)})=(-1)^n\]
+$\dfrac{\beta^{n-1-i}}{f'(\beta)}$ is the dual basis of $\beta^i$
+\end{example}
+
+\begin{proposition}
+In Example \ref{Example of dual basis}, suppose $f(x)=\prod_{i=1}^n(x-\beta_i)\in\bar E[x]$, $f'(x)=\sum_{i=1}^n\prod_{j\neq i}(x-\beta_j)$. Then
+\[D(1,\beta,\cdots,\beta^{n-1})=\prod_{1\leq i<j\leq n}(\beta_i-\beta_j)^2=(-1)^{\frac{n(n-1)}{2}}=N_{E/F}(f'(\beta))\]
+\end{proposition}
+
+\begin{proof}
+\begin{align*}
+D(1,\beta,\cdots,\beta^{n-1})&=\det(\sigma_i(\beta^j))^2 \\
+&=\det(\beta_i^j)^2 \\
+&=\prod_{1\leq i<j\leq n}(\beta_i-\beta_j)^2 \\
+&=(-1)^{\frac{n(n-1)}{2}}\prod_i\prod_{j\neq i}(\beta_i-\beta_j) \\
+&=(-1)^{\frac{n(n-1)}{2}}\prod_if'(\beta_i) \\
+&=(-1)^{\frac{n(n-1)}{2}}N(f'(\beta))
+\end{align*}
+\end{proof}
+
+\begin{remark}
+$\Delta=\prod_{1\leq i<j\leq n}(\beta_i-\beta_j)^2$ is the determinant $\disc(f)=\disc(E/F)$
+\end{remark}
+
+\begin{lemma}
+$f(x)=x^n+ax+b$, $\disc(f)=(-1)^{\frac{n(n-1)}{2}}(n^nb^{n-1}+(-1)^n(n-1)^{n-1}a^n)$
+\end{lemma}
+
+\begin{example}
+$K=\mathbb Q(\beta)$, $\beta$ is a root of $f(x)=x^5-x-1\in\mathbb Z[x]$, $\disc(f)=2869=19\times151$ is square free, hence $[\mathcal O_K:\mathbb Z[\beta]]=1$, $\mathcal O_K=\mathbb Z[\beta]$
+\end{example}
+
+\begin{proposition} \hfill
+\begin{enumerate}[label=(\arabic*)]
+\item $K=\mathbb Q(\alpha)$, $\sgn\disc(K/\mathbb Q)=(-1)^s$
+\item (Stickelberger) $\disc(\mathbb O_K/\mathbb Z)\equiv0,1\mod4$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \hfill
+\begin{enumerate}[label=(\arabic*)]
+\item $1,\alpha,\cdots,\alpha^n$ is a basis for $K$, since $\disc(K/\mathbb Q)\in\mathbb Q^\times/(\mathbb Q^\times)^2$ $\sgn D(1,\alpha,\cdots,\alpha^n)=\sgn\det(\sigma_j(\alpha^i))^2=\sgn\prod_{1\leq i<j\leq n}(\alpha_i-\alpha_j)^2=\sgn\prod_{1\leq j\leq s}(\alpha_{r+j}-\bar\alpha_{r+j})^2=(-1)^s$
+\item $\beta_1,\cdots,\beta_n$ is an $\mathbb Z$-basis of $\mathcal O_K$, $\disc(\mathcal O_K/\mathbb Z)=\det(\sigma_i(\beta^j))^2$, $\Gal(\overline{\mathbb Q}/\mathbb Q)$ acts on $\Hom(K,\overline{\mathbb Q})$, $K\xhookrightarrow{\sigma}\overline{\mathbb Q}\xrightarrow\tau\overline{\mathbb Q}$. $\det A=\sum_{\tau\in S_n}\sgn(\tau)\prod_{i=1}^na_{i\tau(i)}=P-N$, $P$ for those $\tau\in A_n$, $N$ for those aren't, so $\disc(\mathcal O_K/\mathbb Z)=(P-N)^2=(P+N)^2-4PN$, $\eta\in\Gal(\overline{\mathbb Q}/\mathbb Q)$ induce a permutation $\pi_\eta$ on $\Hom(K,\overline{\mathbb Q})$, if $\pi_\eta$ is even, $\pi_\eta(P)=P,\pi_\eta(N)=N$, if $\pi_\eta$ is odd, then $\pi_\eta$ swich $P,N$, and $P+N,PN$ are integral over $\mathbb Z$, thus $P+N,PN\in\mathbb Z$, hence $\disc(\mathbb O_K/\mathbb Z)\equiv0,1\mod4$
+\end{enumerate}
+\end{proof}
+
+\begin{definition}
+For any nonzero ideal $I\leq\mathcal O_K$, since $I\cap \mathbb Z=m\mathbb Z$, $\mathcal O_K/m\mathcal O_K\cong(\mathbb Z/m\mathbb Z)^m\to\mathcal O_K/I$ is surjective, hence the \textit{norm}\index{Ideal norm} $N(I)=|\mathcal O_K/I|<\infty$. The \textit{Dedekind zeta function}\index{Dedekind zeta function} of an algebraic number field is $\zeta_K(s)=\displaystyle\sum_{I\neq0}\dfrac{1}{N(I)^s}=\prod_{p}\dfrac{1}{1-N(p)^{-s}}$
+\end{definition}
+
+\end{document}

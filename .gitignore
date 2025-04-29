@@ -1,0 +1,8 @@
+# vscode settings
+.vscode/
+
+# Apple configs
+.DS_Store
+
+# css styling file
+md_style.css

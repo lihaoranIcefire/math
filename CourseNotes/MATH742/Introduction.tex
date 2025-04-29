@@ -1,0 +1,36 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{theorem}
+$D\subseteq\mathbb R^n$ is open bounded with smooth boundary, $f\in C^\infty(\partial D)$, then Dirichlet problem
+\[\begin{cases}
+\Delta u=0&\text{in }D \\
+u=f&\text{on }\partial D
+\end{cases}\]
+has a unique solution $u\in C^\infty(\overline D)$. In the case $D=B(0,r)$, the solution is given by Poisson kernel
+\[P[f](x)=\int_{\partial B(0,r)}f(\xi)\dfrac{r^2-|x|^2}{r\omega_{n-1}|x-\xi|^2}d\sigma(\xi)\]
+The uniqueness is guaranteed by integration by parts
+\end{theorem}
+
+\begin{remark}
+Note that this always work as long as $\partial D\in C^\infty$
+\end{remark}
+
+\begin{theorem}
+$M$ is a compact Riemannian manifold without boundary, $f\in C^\infty(M)$, if $\Delta u=f$ on $M$, then integration by parts demands $\displaystyle0=\int_M\Delta udx=\int_Mfdx$, then $\Delta u=f$ on $M$ has unique solution up to addting constants. Here $\Delta=\Tr\nabla^2_{X,Y}$ is the trace of Hessian, where $\nabla^2_{X,Y}=\nabla_X\nabla_Y-\nabla_YX$
+\end{theorem}
+
+\begin{theorem}
+$M$ is a smooth manifold, the \textit{de Rham complex}\index{de Rham complex} is
+\[0\to\mathcal C^\infty(M)\xrightarrow d\Omega^1(M)\xrightarrow d\Omega^2(M)\xrightarrow d\cdots\]
+Define the cohomology to be \textit{de Rham cohomology} $H^k_{\mathrm{dR}}(X,\mathbb R)$, then
+\[H^k_{\mathrm{dR}}(X,\mathbb R)\cong H^k_{\mathrm{sing}}(X,\mathbb R)=H^k(X,\mathbb R)\]
+Where $H^k(X,\mathbb R)$ is the sheaf cohomology which is not so surprising by sheaf theory
+\end{theorem}
+
+\begin{theorem}
+$s\in\Omega^k(X)$, the solution set $S$ of $\Delta s=0$ has $\dim S=\dim H^k(X,\mathbb R)$. Actually $S\hookrightarrow H^k(X,\mathbb R)$ with an explicit map
+\end{theorem}
+
+\end{document}

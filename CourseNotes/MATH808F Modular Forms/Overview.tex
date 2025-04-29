@@ -1,0 +1,82 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$G$ is a Lie group, $K\leq G$ is a closed subgroup, $X=G/K$ is then a homogeneous space with transitive left $G$-action, $\Gamma\leq G$ is a discrete subgroup. The so called \textit{automorphic functions}\index{Automorphic functions} are $\mathbb C$-valued functions $f$ on $X$ such that
+\begin{equation}\label{Automorphic function}
+f(\gamma\cdot x)=f(x),\quad\forall x\in X,\gamma\in\Gamma
+\end{equation}
+Loosely speaking, \textit{automorphic forms}\index{Automorphic forms} (for $\Gamma$) on $X$ are automorphic functions that are also eigenfunctions for invariant differential operators on $X$ (+ some technical growth conditions when necessary)
+\end{definition}
+
+\begin{question}
+How to decompose automorphic functions into sums (or integrals) of automorphic forms
+\end{question}
+
+\begin{example}
+$\Gamma=\mathbb Z$, $X=G=\mathbb R$, automorphic functions are functions on $\mathbb R/\mathbb Z=\mathbb T$, automorphic forms are $e^{2\pi inx}$, $n\in\mathbb Z$. Fourier analysis tells us $L^2(\mathbb R/\mathbb Z)=\displaystyle\widehat\bigoplus_{n\in\mathbb Z}\mathbb Ce^{2\pi inx}$
+\end{example}
+
+\begin{example}
+$G=\SL_2(\mathbb R)$, $K=\SO(2)$, $\Gamma\leq\SL_2(\mathbb Z)$ is a finite index subgroup, $G/K=\mathcal H=\{\operatorname{Im}z>0\}$ is the Poincar\'e upper half plane. $G$-invariant differential operators on $\mathcal H$ are polynomials with constant coefficients of the hyperbolic Laplacian $\Delta=-y^2\left(\dfrac{\partial^2}{\partial x^2}+\dfrac{\partial^2}{\partial y^2}\right)$, Examples of automorphic forms in this setting: Maass forms. $\Gamma$ are sometimes called "modular groups", the corresponding automorphic forms on $\mathcal H$ are called \textit{modular forms}\index{Modular forms}
+\end{example}
+
+\begin{note}
+$\mathcal H$ has the structure of a complex manifold, it is natural to look for holomorphic automorphic forms
+\end{note}
+
+\begin{example}
+\[j(z)=q^{-1}+744+196884q+21493760q^2+\cdots\]
+Where $q=e^{2\pi iz}$, $z\in\mathcal H$, is invariant under $\SL_2(\mathbb Z)$, hence a modular form
+\end{example}
+
+\begin{definition}
+$G$ induces a right action on $\mathbb C(X)$ by $(f\cdot g)(x)=f(gx)$, \eqref{Automorphic function} becomes $f\cdot \gamma=f$, $\forall \gamma\in\Gamma$. More generally, we can allow a nontrivial \textit{automorphy factor}\index{Automorphy factor} $(f\cdot_cg)=c_g(x)f(gx)$, $\forall g\in G$, here $c_g:X\to\mathbb C^\times$
+\end{definition}
+
+\begin{exercise}
+For the action to be well-defined, the family of functions $c_g$ must satisfy $c_{g_1g_2}(x)=c_{g_2}(x)c_{g_1}(g_2x)$, so called cocycle condition, $\forall g_1,g_2\in G$, $x\in X$
+\end{exercise}
+
+\begin{exercise}
+For $g=\begin{bmatrix}
+a&b\\
+c&d
+\end{bmatrix}$, denote $j(g,z)=cz+d$, $G=\SL(2,\mathbb R)$ acting on $\mathcal H$ by $g\cdot z=\dfrac{az+b}{cz+d}$. For $k\in\mathbb Z$, we consider the automorphy factor $c_g(z)=(cz+d)^{-k}$. Show $c_g$ satisfies the cocycle condition
+\end{exercise}
+
+\begin{definition}
+Then we get an action $(f\cdot_kg)(z)=(cz+d)^{-k}f\left(\dfrac{az+b}{cz+d}\right)$, $z\in\mathcal H$. For a modular group $\Gamma\leq \SL_2(\mathbb Z)$, holomorphic function $f$ on $\mathcal H$ is called a \textit{holomorphic modular form} of \textit{weight} $k$ and \textit{level} $\Gamma$ (one may also need to add some boundness condition) if $f\cdot_k\gamma=f$, $\forall\gamma\in\Gamma$ which is equivalent to $f\left(\dfrac{az+b}{cz+d}\right)=(cz+d)^kf(z)$
+\end{definition}
+
+\begin{remark}
+To unify these examples for $G=\SL_2(\mathbb R)$ to acts on $\mathcal H$ and "get rid of" the automorphy factors, it is better to consider $\Gamma\backslash G$. The advantage is $\Gamma\backslash G$ has a large symmetry group coming from right multiplication of $G$, (whereas $\Gamma\backslash\mathcal H$ does not have so many automorphisms). The invariant differential operators on $\Gamma\backslash\mathcal H$ come from $Z(\mathfrak g)$, then center of the universal enveloping algebra of $\Lie(G)$. The automorphic forms in the above examples all correspond to certain $C^\infty$ functions on $\Gamma\backslash G$, their automorphy factors are determined by their behavior under right $K=\SO(2,\mathbb R)$ action
+\end{remark}
+
+\begin{example}
+Classical Maass forms on $\Gamma\backslash\mathcal H$ correspond to certain right $K$-invariant functions on $\Gamma\backslash G$. The basic problem of decomposing automorphic functions motivates the more refined problem of decomposiing the right regular representation of $G$ on $L^2(\Gamma\backslash G)$
+\end{example}
+
+\begin{theorem}
+Assume $\Gamma\backslash G$ is compact (equivalently, $\Gamma\backslash\mathcal H$ is compact. Modular groups which unfortunately do not satisfy this assumption, is one of the difficulty of the subject), then
+\begin{align*}
+L^2(\Gamma\backslash G)&=\bigoplus_{\pi}\pi\otimes\Hom_G(\pi,L^2(\Gamma\backslash G)) \\
+&=\bigoplus_{\pi}\pi^{\oplus m_\pi}
+\end{align*}
+$\pi$ run over irreducible representations of $G$, $m_\pi=\dim\Hom_G(\pi,L^2(\Gamma\backslash G))<\infty$. Each multiplicity space $\Hom_G(\pi,L^2(\Gamma\backslash G))$ can be identified with a space of certain automorphic forms (The automorphy factors, eigenvalues of Laplacian are determined by the $G$-representations $\pi$)
+\end{theorem}
+
+\begin{remark}
+In general we only assume that $\Gamma\backslash\mathcal H$ has finite volume, then we still have a decomposition of a subspae of $L^2(\Gamma\backslash G)$ (the discrete spectrum) whose orthogonal complement (the continuous spectrum) can be analyzed using theory of Eisenstein series. This is not the end of the story! Now comes the (arguably) more interesting part: when $\Gamma\leq G$ is arithmetic (e.g. modular groups, groups coming from indefinite quaternion algebras over $\mathbb Q$), then we can decompse each multiplicity space $\Hom_G(\pi,L^2(\Gamma\backslash G))$ further under the action of a big algebra on $L^2(\Gamma\backslash G)$ commuting with the right regular $G$-representation, this is the so-called "Hecke algebra". Where does this extra symmetry come from? Let $N_G(\Gamma)=\{g\in G|g\Gamma g^{-1}=\Gamma\}$ be the normarlizer, then $N_G(\Gamma)$ acts on $\Gamma\backslash G$ by left multiplication (so obviously commute with right $G$-action). This action factors through the quotient group $\Gamma\backslash N_G(\Gamma)$ and also induces automorphisms of $\Gamma\backslash\mathcal H$. Thus we ge4t an action of $\Gamma\backslash N_G(\Gamma)$ on $L^2(\Gamma\backslash G)$ that commutes with right $G$-regular representations. So $\Gamma\backslash N_G(\Gamma)$ acts on the multiplicity spaces $\Hom_G(\pi,L^2(\Gamma\backslash G))$ and decompose it further. The group $\Gamma\backslash N_G(\Gamma)$ is small (finite if $\Gamma\backslash G$ is compact, not sure if only finite volume), so the resulting decomposition is not so interesting. However, the action of $\Gamma\backslash N_G(\Gamma)$ on $\Gamma\backslash \mathcal H$ (and $\Gamma\backslash G$) can be extended to certain correspondences on $\Gamma\backslash \mathcal H$ (and $\Gamma\backslash G$)
+\end{remark}
+
+\begin{definition}
+Two discrete subgroups $\Gamma_1,\Gamma_2$ of $G$ are \textit{commensurable}, denoted $\Gamma_1\approx\Gamma_2$, if their intersection $\Gamma_1\cap\Gamma_2$ has fintie index in both of them. For $\Gamma\leq G$, let $\tilde\Gamma=\{g\in G|g\Gamma g^{-1}=\Gamma\}$ be the \textit{commensurator} of $\Gamma$ (this generalizes normalizer), elements in $\tilde\Gamma$ define correspondences on $\Gamma\backslash \mathcal H$ (and $\Gamma\backslash G$), which induces action of the convolution algebra $\mathbb C[\Gamma\backslash\tilde\Gamma/\Gamma]$ on $L^2(\Gamma\backslash G)$, and also on the cohomology of $\Gamma\backslash \mathcal H$. For modular groups $\Gamma$, we have $\tilde\Gamma=\SL_2(\mathbb Q)$ which is large. For non-arithmetic groups $\Gamma$, $\tilde\Gamma/\Gamma$ is finite (This dichotomy between arithmetic and non-arithmetic cofinte volume subgroups follows from a general result of Margulis)
+\end{definition}
+
+\begin{remark}
+We will be mainly interested in congruence subgroups of $\SL_2(\mathbb Z)$, i.e. subgroups that contain $\Gamma(N)=\ker(\SL_2(\mathbb Z)\to\SL_2(\mathbb Z/N\mathbb Z))$. In particular, such groups are modular, hence arithmetic. For each congruence subgroup $\Gamma\leq\SL_2(\mathbb Z)$, we have $G$ and $H_\Gamma=\mathbb C[\Gamma\backslash\tilde\Gamma/\Gamma]$ left and right acting on $L^2(\Gamma\backslash G)$, $\tilde\Gamma=\SL_2(\mathbb Q)$. Put all these together (for the various congruence subgroups), $G=\SL_2(\mathbb R)$ and $\varprojlim_\Gamma H_\Gamma=C^\infty_c(\SL_2(\mathbb A_f))$ left and right act on $\varinjlim_\Gamma L^2(\Gamma\backslash G)=L^2(\SL_2(\mathbb Q)\backslash\SL_2(\mathbb A))$ ($\varprojlim_\Gamma\Gamma\backslash G=\SL_2(\mathbb Q)\backslash\SL_2(\mathbb A)$), decompose $L^2(\SL_2(\mathbb Q)\backslash\SL_2(\mathbb A))$ into $\SL_2(\mathbb A)$ representations, the irreducible summands are $L^2$-automorphic representations (Actually, we'll work with $\GL_2$ instead, which is technically simpler). For (nice) irreducible representaion $\pi$ of $\GL_2(\mathbb A)$, Jacquet-Langlands associate an Euler prduct $L(s,\pi)=\prod_pL_p(s,\pi)$, (at least formally, may have convergence issues). This is done using tensor product theorem, which says roughly $\pi=\bigotimes_p\pi_p$ (restricted tensor product), $\pi_p$ is the irreducible representation of $\GL_2(\mathbb Q_p)$, $L_p(s,\pi)$ is defined using only the factor $\pi_p$. Whether $\pi$ occurs in decomposition of $L^2(\GL_2(\mathbb Q)\cdot Z(\mathbb A))\backslash\GL_2(\mathbb A))$ can be determinded by analytic properties of $L(s,\pi)$. This is basically the converse theorem. If $\pi$ occurs as a direct summand, then $\dim\Hom_{\GL_2(\mathbb A)}(\pi,L^2(\GL_2(\mathbb Q)\cdot Z(\mathbb A))\backslash\GL_2(\mathbb A)))=1$ (Multiplicity one theorem)
+\end{remark}
+
+\end{document}

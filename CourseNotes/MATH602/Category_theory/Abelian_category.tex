@@ -1,0 +1,71 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+The \textbf{biproducts}\index{Biproduct} $(A_1\oplus\cdots\oplus A_n,p_1,\cdots,p_n,i_1,\cdots,i_n)$ of $A_1,\cdots,A_n$ is such that $(A_1\oplus\cdots\oplus A_n,p_1,\cdots,p_n)$ is the product of $A_1,\cdots,A_n$ and $(A_1\oplus\cdots\oplus A_n,i_1,\cdots,i_n)$ is the coproduct of $A_1,\cdots,A_n$
+\end{definition}
+
+\begin{lemma}
+Suppose $\mathscr A$ is an $Ab$ category, then for any $A_1,\cdots,A_n$, if the product $\prod A_i$ exists, then it is a biproduct, similarly, if the coproduct $\coprod A_i$ exsits, then it is a biproduct
+\end{lemma}
+
+\begin{proof}
+Suppose $(A\times B,p_A,p_B)$ is the product of $A,B$, then we can define morphisms $i_A=(1_A,0):A\to A\times B$, $i_B=(0,1_B):B\to A\times B$
+\begin{center}
+\begin{tikzcd}
+  & A \arrow[ld, "1_A"'] \arrow[rd, "0"] \arrow[d, "{i_A}", dashed] &   \\
+A & A\times B \arrow[l, "p_A"] \arrow[r, "p_B"']                                               & B
+\end{tikzcd}
+\begin{tikzcd}
+  & B \arrow[ld, "0"'] \arrow[rd, "1_B"] \arrow[d, "{i_B}", dashed] &   \\
+A & A\times B \arrow[l, "p_A"] \arrow[r, "p_B"']                                               & B
+\end{tikzcd}
+\end{center}
+Thus $p_Ai_A=1_A$, $p_Bi_A=0$, $p_Ai_B=0$, $p_Bi_B=1_B$, also if we consider the following commutative diagram
+\begin{center}
+\begin{tikzcd}
+  & A\times B \arrow[ld, "p_A"', bend right=49] \arrow[d, "i_Ap_A+i_Bp_B", dashed] \arrow[rd, "p_B", bend left=49] &   \\
+A & A\times B \arrow[l, "p_A"'] \arrow[r, "p_B"]                                                                   & B
+\end{tikzcd}
+\end{center}
+By the uniqueness of the induced map, $i_Ap_A+i_Bp_B=1_{A\times B}$, let's show that $(A\times B,i_A,i_B)$ is the coproduct of $A,B$, suppose $h:A\times B\to C$ is a morphism such that $hi_A=f$, $hi_B=g$, then $h=h(i_Ap_A+i_Bp_B)=hi_Ap_A+hi_Bp_B=fp_A+gp_B$
+\begin{center}
+\begin{tikzcd}
+                                               & C                                                                                                      &                                                   \\
+A \arrow[ru, "f"] \arrow[r, "i_A", shift left] & A\times B \arrow[u, "\exists_1h"', dashed] \arrow[l, "p_A", shift left] \arrow[r, "p_B"', shift right] & B \arrow[lu, "g"'] \arrow[l, "i_B"', shift right]
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\begin{definition}
+An \textbf{additive category}\index{Additive category} is an $Ab$ category with all finite biproducts, including empty biproduct $0$, the zero object
+\end{definition}
+
+\begin{definition}
+An \textbf{abelian category}\index{Abelian category} $\mathscr A$ is an additive category satisfying \par
+\textbf{(AB1) }Every map has a kernel and a cokernel \par
+\textbf{(AB2) }Every monomorphism is the kernel of its cokernel, every epimorphism is the cokernel of its kernel
+\end{definition}
+
+\begin{example}
+The category of free $\mathbb Z$ modules(free abelian groups) is not an abelian category, $\mathbb Z\xrightarrow{\times2}\mathbb Z$ has $0$ as its cokernel but this is not the kernel of $\mathbb Z\to0$
+\end{example}
+
+\begin{example}[A category with two different $Ab$ structures]
+Consider rings $\mathbb Q[x]$, $\mathbb Q[x,y]$ as abelian categories with a single object and morphisms being the elements, multiplication as composition, addition gives an abelian group structure \par
+$\mathbb Q[x]$, $\mathbb Q[x,y]$ as categories are isomorphic to its underlying monoids, since $\mathbb Q[x]$, $\mathbb Q[x,y]$ are UFD's, and $\mathbb Q[x]=\{0\}\bigcup\mathbb Q^\times\times\bigoplus_f\mathbb N$, $\mathbb Q[x,y]=\{0\}\bigcup\mathbb Q^\times\times\bigoplus_g\mathbb N$ , where $f,g$ run over all irreducible polynomials of $\mathbb Q[x]\setminus\mathbb Q$ and $\mathbb Q[x,y]\setminus\mathbb Q$ which are both countably many, thus as monoids they are both isomorphic to $\{0\}\bigcup\mathbb Q^\times\times\bigoplus_{i\in\mathbb N}\mathbb N$, Where $0\circ0=0$, $0\circ(q,(i_0,i_1,\cdots))=(q,(i_0,i_1,\cdots))\circ0=0$, $(q,(i_0,i_1,\cdots))\circ(q',(i_0',i_1',\cdots))=(qq',(i_0+i_0',i_1+i_1',\cdots))$ with $(1,(0,0,\cdots))$ as the identity \par
+but $\mathbb Q[x]$, $\mathbb Q[x,y]$ are not isomorphic as rings
+\end{example}
+
+\begin{remark}
+Being an abelian category is purely a property of a category \par
+If all finite products and coproducts are biproducts, i.e. $X\sqcup Y=X\times Y$, with some other exactness properties, then the abelian group structure on $Hom(X,Y)$ comes from this \par
+See Freyd - Abelian category
+\end{remark}
+
+\begin{definition}
+Define the \textbf{diagonal functor} $\Delta:\mathscr C\to\mathscr C^I$ mapping $A$ to the constant functor $K_A$
+\end{definition}
+
+\end{document}

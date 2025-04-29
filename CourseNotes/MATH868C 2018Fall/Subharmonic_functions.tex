@@ -1,0 +1,69 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$\Omega\subseteq\mathbb C$ is an open set, $h\in C^2(\Omega)$ is \textit{harmonic}\index{Harmonic function} if $\Delta h=\dfrac{4\partial^2}{\partial z\partial\bar z}h=0$, denote the set of harmonic functions $H(\Omega)$
+\end{definition}
+
+\begin{definition}
+$u:\Omega\to[-\infty,+\infty)$ is subharmonic, denoted $u\in SH(\Omega)$ if
+\begin{itemize}
+\item $u$ is upper semi-continuous, i.e. $\{u<r\}$ is open
+\item For any compact $K\subseteq\Omega$, and $h\in H(\Int K)\cap C(K)$ such that $u\leq h$ on $\partial K$, then $u\leq h$ on $K$
+\end{itemize}
+\end{definition}
+
+\begin{theorem}
+$\{u_j\}\subseteq SH(\Omega)$, $v=\displaystyle\sup_{j} u_j$. If $v$ is upper semi-continuous, then $v\in SH(\Omega)$, $u=\displaystyle\inf_{j}u_j$ is upper semi-continuous generally doesn't imply $u\in SH(\Omega)$, but if $\{u_j\}$ is decreasing, then $u\in SH(\Omega)$
+\end{theorem}
+
+\begin{theorem}
+$u:\Omega\to[-\infty,+\infty)$ is upper semi-continuous. The following are equivalent
+\begin{enumerate}
+\item $u\in SH(\Omega)$
+\item For any $\overline D\subseteq\Omega$, and any polynomial $f(z)$, if $u\leq \operatorname{Re}f$ on $\partial D$, then $u\leq\operatorname{Re}f$
+\item $\Omega_\delta=\{z\in\Omega|\mathrm{dist}(z,\partial\Omega)>\delta\}\subseteq\Omega$, for $z\in\Omega_\delta$ \[2\pi u(z)\int_0^\delta d\mu(r)\leq\int_0^\delta\int_0^{2\pi}u(z+re^{i\theta})d\theta d\mu(r)\] here $d\mu$ is any measure on $[0,\delta]$, take $d\mu(r)=rdr$, the average of the disk, take $d\mu(r)$ to be Dirac measure, the average of the circle
+\end{enumerate}
+
+\end{theorem}
+
+\begin{proof}
+1. $\Rightarrow$ 2. is by definition. 2. $\Rightarrow$ 3.
+\begin{itemize}
+\item If $p(z)=\sum_{j=0}^ka_j z^j$, then $\displaystyle2\pi\operatorname{Re}p(z)\int_0^\delta d\mu(r)=\int_0^\delta\int_0^{2\pi}\operatorname{Re}p(z+re^{i\theta}d\theta d\mu(r))$
+\item $\varphi\in C(\partial D(z,r))$, $r\in[0,\delta]$ such that $u\leq\varphi$ on $\partial D(z,r)$. Fourier: $\exists p_k=\sum_{j=0}^la_j^kz^j$ such that $\varphi\leq\operatorname{Re}p_k\leq\varphi+\frac{1}{k}$ (Rudin). $u\leq \operatorname{Re}p_k$ on $\partial D(z,r)$, by 2. $u(z)\leq\operatorname{Re}p_k(z)$, then $2\pi u(z)\leq2\pi\operatorname{Re}p_k(z)=\int_0^{2\pi}\operatorname{Re}p_k(z+re^{i\theta})d\theta\to\int_0^{2\pi}\varphi(z+re^{i\theta})d\theta$ as $k\to\infty$
+\item $u:X\to[-\infty,\infty)$ is upper semi-continuous and bounded above, $\{f_j\}\subseteq C(X)$ such that $f_j\searrow u$, then there exists $\{\varphi_j\}\subseteq C(\partial D(z,r))$ such that $\varphi_j\searrow u$ on $\partial D(z,r)$, then $2\pi u(z)\leq\int_0^{2\pi}\varphi_j(z+re^{i\theta})d\theta\to\int_0^{2\pi}u(z+re^{i\theta})d\theta$, integrate this over $[0,\delta]$ of $d\mu$
+\end{itemize}
+3. $\Rightarrow$ 1. Assume 1. doesn't hold, $\exists K\subseteq\Omega$ compact, $h\in C(K)\cap H(\Int K)$ such that $u\leq h$ on $\partial K$ but $u(z)>h(z)$ for some $z\in K$, define $F=\{z\in K|u(z)=\max_K(u-h)\}\neq\varnothing$ and closed, compact, thus $\exists x\in F$ such that $\mathrm{dist}(x,\partial K)$ is a minimizer. For some $r$, an open part of $\partial D(z,r)$ lies outside $F$, $\int_0^{2\pi}(u-h)(x+re^{i\theta})d\theta<(u-h)(x)$ which is a contradiction
+\end{proof}
+
+\begin{corollary}
+$f\in\mathcal O(\Omega)\Rightarrow\log|f|\in SH(\Omega)$, if $f=0$, $\log|f|=-\infty$
+\end{corollary}
+
+\begin{proof}
+$\overline D\subseteq\Omega$, $p=\sum_{j=0}^ka_jz^j$, if $\log|f|\leq \operatorname{Re}p$ on $\partial D$, then $|f|\leq e^{\operatorname{Re}p}\Leftrightarrow |f|\leq|e^p|$ on $\partial D\Rightarrow |\frac{f}{e^p}|\leq1$ on $\partial D\Rightarrow\cdots$
+\end{proof}
+
+\begin{corollary}
+$\varphi:\mathbb R\to\mathbb R$ is convex and increasing, $u\in SH(\Omega)$, then $\varphi\circ u\in SH(\Omega)$
+\end{corollary}
+
+\begin{proof}
+Sub-mean value inequality + Jensen inequality
+\end{proof}
+
+\begin{theorem}
+$u\in SH(\Omega)$ $u\not\equiv-\infty$ on a component of $\Omega$, then $u\in L^1_{\loc}(\Omega)$. $\Delta u\geq0$ as a distribution, i.e. $\int_\Omega u\Delta v\geq0$ $\forall v\in C^2_0(\Omega),v\geq0$
+\end{theorem}
+
+\begin{proof}
+$r=\mathrm{dist}(\supp v,\partial\Omega)$, $x\in\Omega_r$, $2\pi u(x)\leq\int_0^{2\pi}u(x+\delta e^{i\theta})d\theta$, $\delta\in[0,r]$. $2\pi\int_\Omega u(x)v(x)d\lambda\leq\int_\Omega\int_0^{2\pi}u(x+\delta e^{i\theta})v(x)d\theta d\lambda(x)\Rightarrow0\leq\int_\Omega u(x)\int_0^{2\pi}u(x+\delta e^{i\theta})\frac{v(x-\delta e^{}i\theta)-v(x)}{\delta^2}d\theta d\lambda$ as $\delta\to0$, $0\leq\int_\Omega u(x)2\pi\Delta v(x)d\lambda$
+\end{proof}
+
+\begin{theorem}[Implicit function theorem]
+$(w,z)=(w_1,\cdots,w_m,z_1,\cdots, z_n)$, $f_j(w,z)$ are analytic in a neighborhood of $(w^0,z^0)\in\mathbb C^{m+n}$, suppose $f_j(w^0,z^0)=0$, $\det(\frac{\partial f_j}{\partial w_k})\neq0$ at $(w^0,z^0)$, then $\exists w(z)$ analytic in a neighborhood of $z^0$ with $w(z^0)=w^0$, $F(w(z),z)=0$
+\end{theorem}
+
+\end{document}

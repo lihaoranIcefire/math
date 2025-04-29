@@ -1,0 +1,45 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+A functor $F$ in $\mathscr C^\vee$ is called \textbf{representable}\index{Representable functor} if there exists $X\in ob\mathscr C$ such that $h(X)\cong F$, here $h$ is the Yoneda embedding. In other words, there exists a natural isomorphism $Hom_{\mathscr C}(Y,X)\to F(Y)$, since $h$ is fully faithful, if $F\cong h(X)\cong h(X')$, the natural isomorphism $h(X)\cong h(X')$ comes from an isomorphism $\phi:X\to X'$, hence $X$ is unique to isomorphism
+\end{definition}
+
+\begin{definition}
+Let $I$ be a small category, $\mathscr C$ be a category, for any $X\in ob\mathscr C$, we can define the \textbf{constant functor}\index{Constant functor} $K_X:I\to\mathscr C$, $i\mapsto X$, $i\xrightarrow{f}j\mapsto1_X$, hence $K:\mathscr C\to\mathscr C^I$, $X\mapsto K_X$ is a functor, a natural transformation $f$ between constant functors $K_X\to K_Y$ is just a morphism $f:X\to Y$
+\end{definition}
+
+\begin{definition}
+Suppose $F:I\to\mathscr C$ is a functor, we get a presheaf $P$, $P(X)=Hom_{\mathscr C^I}(K_X,F)$ \par
+If $P$ is representable, i.e. $h(L)\cong P$, we write $L=\varprojlim F$ which is called the \textbf{limit}\index{Limit} of $F$ \par
+We also have a functor $F^{op}:I^{op}\to\mathscr C^{op}$. The \textbf{colimit}\index{Colimit} is defined to be $\varprojlim F^{op}$
+\end{definition}
+
+\begin{remark}
+Unravel $Hom_{\mathscr C^I}(K_X,F)=P(X)\cong Hom_{\mathscr C}(X,L)$ \par
+If we take $X=L$, $1_X$ corresponds to a natural transformation $\phi:K_L\to F$, i.e. $\phi_i:L\to F(i)$ such that the following diagram commutes
+\begin{center}
+\begin{tikzcd}
+X \arrow[r, "\phi_i"] \arrow[rd, "\phi_j"'] & F(i) \arrow[d, "F(i\to j)"] \\
+                                            & F(j)                       
+\end{tikzcd}
+\end{center}
+Each natural transformation $\psi:K_X\to F$ corresponds to a unique morphism $\widehat\psi:X\to L$, due to naturality, the following diagram commutes
+\begin{center}
+\begin{tikzcd}
+X \arrow[d, "\widehat\psi"'] \arrow[rd, "\psi_i"] &      \\
+L \arrow[r, "\phi_i"]                             & F(i)
+\end{tikzcd}
+\end{center}
+\end{remark}
+
+\begin{definition}
+A category $I$ is called  \textbf{discrete}\index{Discrete category} if all morphisms are just identities, it is clear that a discrete category is the same as a class of objects, and a functor $F:I\to\mathscr C$ is the same as giving $X_i=F(i)$
+\end{definition}
+
+\begin{example}
+Suppose $I$ is a discrete category, $F:I\to\mathscr C$ is a functor, we also get functor $F^{op}:I^{op}\to\mathscr C^{op}$. The \textbf{product}\index{Product} is defined to be the limit $\displaystyle\prod_{i\in I}X_i:=\varprojlim F$, and the \textbf{coproduct}\index{Coproduct} is $\varprojlim F^{op}$
+\end{example}
+
+\end{document}

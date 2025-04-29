@@ -1,0 +1,91 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{example}
+$GL(n,\mathbb C)< GL(2n,\mathbb R)$ is a real Lie group, $GL(n,\mathbb C)=\{g\in GL(2n,\mathbb R)|gJ=Jg$, where $J=\begin{pmatrix}
+0&-1 \\
+1&0 \\
+&&0&-1 \\
+&&1&0 \\
+&&&&\ddots
+\end{pmatrix}$
+\end{example}
+
+\begin{example}
+Given an inner product matrix $B$, $O(B)=\{g^TBg=B\}$ is a real Lie group, $O(2)=\{g^Tg=I\}$ with $B=I$, $O(2)=SO(2)\rtimes\left\langle\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix}\right\rangle$
+\end{example}
+
+\begin{example}
+$\mathrm{Isom^+}(\mathbb E^n)=\{(r,t)\}$, $(r,t)x=rx+t$, $(I,0)$ is the identity, $(r,t)(r',t')=(rr',rt'+t)$, $(r,t)^{-1}=(r^{-1},-rt)$ is a real Lie group, $\mathrm{Isom^+}(\mathbb E^n)=\left\{\begin{pmatrix}
+1&0 \\
+t&r
+\end{pmatrix}\right\}\subseteq GL(n+1,\mathbb R)$
+\end{example}
+
+\begin{definition}
+Let $G$ be a Lie group, left multiplication by $g$, denoted by $L_g$ is an isomorphism, $L_g$ acts on $\mathfrak{X}(G)$ by pushforward, $(L_{g*}X)_h=(dL_g)_{g^{-1}h}(X_{g^{-1}h})$, a vector field $X\in\mathfrak{X}(G)$ is left invariant if $L_{g*}X=X$, let $\mathfrak{X}^G(G)$ denote all the left invariant vector fields, $\mathfrak{X}^G(G)\cong T_eG$ is the Lie algebra, $T_e(G)\to \mathfrak{X}^G(G)$, $v\mapsto X$ with $X_g=(dL_g)_e(v)$ is a Lie algebra isomorphism
+\end{definition}
+
+\begin{example}
+For $O(B)$, a curve $\gamma(s)$ through $I$ should satisfy $\gamma(s)^TB\gamma(s)=B\Rightarrow \gamma'(0)^TB+B\gamma'(0)=0$, $\mathfrak{o}(B)=\{X\in M_n(\mathbb R)|X^T=-X\}$, $\mathfrak{o}(2)=\left\{\begin{pmatrix}
+0 & -\theta \\
+\theta &0
+\end{pmatrix}\right\}$
+\end{example}
+
+\begin{example}
+For $G=\mathrm{Isom^+}(\mathbb E^2)$, $\mathfrak g=\left\{\begin{pmatrix}
+0&0&0 \\
+t_1&0&-\theta \\
+t_2&\theta&0
+\end{pmatrix}\right\}$
+\end{example}
+
+\begin{definition}
+$\Omega^n(M,V)=\Gamma(T^nM\otimes V)$ are $\mathbf{V}$\textbf{-valued differential forms}\index{V-valued differential forms} \par
+If $V=\mathfrak g$ is a Lie algebra, we can also define the "wedge" product, for any $w,v\in\Omega^1(M,\mathfrak g)$, $[w,v](X,Y)=[w(X),v(Y)]-[w(Y),v(X)]$, this is kind of like wedge product, with product replaced by $[,]$
+\end{definition}
+
+\begin{definition}
+Define \textbf{Maurer-Cartan form}\index{Maurer-Cartan form} $\omega^G\in\Omega^1(G,\mathfrak g)$ to be $\omega^G_g:T_eG\to\mathfrak g$ such that $\omega^G_g(v)=X$ where $X\in\mathfrak{X}^G(G)$ with $X_g=v\in T_gG$
+\end{definition}
+
+\begin{proposition}
+$\omega^G$ is left invariant, i.e. $L_g^*\omega^G=\omega^G$
+\end{proposition}
+
+\begin{proof}
+\begin{align*}
+(L_g^*\omega^G)_h(v)&=\omega^G_{gh}((dL_g)_h(v)) \\
+&=\omega^G_{gh}((dL_g)_h(X_h)) \\
+&=\omega^G_{gh}((L_{g*}X)_{gh}) \\
+&=\omega^G_{gh}(X_{gh}) \\
+&=X
+\end{align*}
+Here $X\in\mathfrak g$ such that $X_h=v$, i.e. $\omega^G_h(v)=X$
+\end{proof}
+
+\begin{proposition}
+$d\omega^G+\dfrac{1}{2}[\omega^G,\omega^G]=0$
+\end{proposition}
+
+\begin{proof}
+First suppose $X,Y\in\mathfrak g$, then $\omega^G_g([X,Y])=Z\in\mathfrak g$ with $Z_g=[X,Y]_g$, by definition, $Z=[X,Y]$ \par
+In general, let $X=f^iZ_i$, $Y=g^jZ_j$ with $Z_i\in\mathfrak g$ being a basis, then
+\begin{align*}
+\omega^G([X,Y])&=\omega^G(f^iZ_i(g^j)Z_j-g^jZ_j(f^i)Z_i+f^ig^j[Z_i,Z_j]) \\
+&=(f^iZ_i(g^j)-g^iZ_i(f^j))\omega^G(Z_j)+f^ig^j\omega^G([Z_i,Z_j]) \\
+&=(f^iZ_i(g^j)-g^iZ_i(f^j))Z_j+f^ig^j[Z_i,Z_j] \\
+&=X(\omega^G(Y))-Y(\omega^G(X))+[\omega^G(X),\omega^G(Y)]
+\end{align*}
+\end{proof}
+
+\begin{theorem}
+Given a smooth manifold $M$ and $\omega\in\Omega^1(M,\mathfrak g)$, if $d\omega+\dfrac{1}{2}[\omega,\omega]=0$, then for any $p\in M$, there exists a neighborhood $U$ and $f:U\to G$ such that $f^*\omega^G|_U=\omega|_U$, and $f$ is unique up to a composition with $L_g$ for some $g$
+\end{theorem}
+
+\end{document}

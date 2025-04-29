@@ -1,0 +1,91 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+$\mathcal A$ is an abelian category with enough projectives, a \textbf{Cartan-Eilenberg resolution}\index{Cartan-Eilenberg resolution} $P_{**}$ of chain complex $A_*$ is an upper half plane double complex consist of projectives and a augmentation $P_{*0}\xrightarrow\varepsilon A_*$ such that
+\begin{enumerate}[label=\arabic*., leftmargin=*]
+\item If $A_p=0$, then $P_{p,*}=0$
+\item $B^h_p(P)\xrightarrow{B_p(\varepsilon)} B_p(A_*)$, $H^h_p(P)\xrightarrow{H_p(\varepsilon)} H_p(A_*)$ are projective resolutions
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+Every chain complex $A_*$ has a Cartan-Eilenberg resolution, and $Z^h_p(P)\xrightarrow{Z_p(\varepsilon)} Z_p(A_*)$, $P_{p*}\xrightarrow{\varepsilon_p} A_p$ are projective resolutions
+\end{lemma}
+
+\begin{lemma}
+$f:A\to B$ is a chain map, $P\to A$, $Q\to B$ are Cartan-Eilenberg resolutions, there exists a double complex map $\widetilde f:P\to Q$ over $f$
+\end{lemma}
+
+\begin{definition}
+$f,g:D\to E$ are maps between double complexes, a chain homotopy from $f$ to $g$ consists of $s^h:D_{pq}\to E_{p+1,q}$ and $s^v:D_{pq}\to E_{p,q+1}$ satisfying
+\[f-g=(s^hd^h+d^hs^h)=(s^vd^v+d^vs^v)\]
+\[s^vd^h+d^hs^v=s^hd^v+d^vs^h=0\]
+So that $s^h+s^v:Tot(D)_n\to Tot(E)_{n+1}$ is a chain homotopy between $Tot(f),Tot(g):Tot^\oplus(D)\to Tot^\oplus(E)$
+\end{definition}
+
+\begin{lemma}\label{Chain homotopy between Cartna-Eilenberg resolutions}
+$f,g:A\to B$ are chain homotopic, $P\to A$, $Q\to B$ are Cartan-Eilenberg resolutions, $\tilde f,\tilde g:P\to Q$ are over $f,g$, then $\tilde f,\tilde g$ are chain homotopic \par
+Any two Cartan-Eilenberg resolutions of $P\to A$, $Q\to A$ are chain homotopic. $F$ is an additive functor, then $Tot^\oplus(F(P))$, $Tot^\oplus(F(Q))$ are chain homotopic
+\end{lemma}
+
+\begin{definition}
+$\mathcal A,\mathcal B$ are abelian categories, $\mathcal A$ has enough projectives, $F:\mathcal A\to\mathcal B$ is an additive functor, $f:A\to B$ is a chain map. Define $\mathbb L_iF(A)=H_i(Tot^\oplus(F(P)))$, by Lemma \ref{Chain homotopy between Cartna-Eilenberg resolutions}, $\mathbb L_iF(A)$ is independent of the choice of $P$, $\mathbb L_iF(f)=H_i(Tot(F(f)))$. $\mathbb L_iF:\mathbf{Ch}\mathcal A\to \mathcal B$ is the left hyper-derived functor of $F$
+\end{definition}
+
+\begin{lemma}
+$0\to A\to B\to C\to0$ is a short exact sequence of bounded below chain complexes, then we have a long exact sequence
+\[\cdots\to\mathbb L_{i+1}F(C)\xrightarrow{\delta}\mathbb L_iF(A)\to\mathbb L_iF(B)\to\mathbb L_i(C)\xrightarrow\delta\cdots\]
+\end{lemma}
+
+\begin{proposition}[Hyperhomology spectral sequence]\label{Hyperhomology spectral sequence}\index{Hyperhomology spectral sequence}
+$L_pF(H_q(A))\Rightarrow\mathbb L_{p+q}F(A)$. If $A$ is bounded below, then $H_p(L_qF(A))\Rightarrow\mathbb L_{p+q}F(A)$
+\end{proposition}
+
+\begin{proof}
+Consider the double complex $P$ of a Cartan-Eilenberg resolution $P\to A$. Since $H^h_p(P)\to H_pA$ is a projective resolution, we have
+\[L_pF(H_q(A))=H^v_pF(H^h_q(P))=H^v_pH^h_q(F(P))=''E^2_{pq}\Rightarrow H_{p+q}F(P)=\mathbb L_{p+q}F(A)\]
+If $A$ is bounded belwo, then
+\[H_p(L_qF(A))=H^h_pH^v_q(F(P))='E^2_{pq}\Rightarrow H_{p+q}F(P)=\mathbb L_{p+q}F(A)\]
+\end{proof}
+
+\begin{corollary} \hfill
+\begin{enumerate}[label=\arabic*., leftmargin=*]
+\item If $A$ is exact, then $\mathbb L_iF(A)=0$
+\item If $f:A\to B$ is a quasi-isomorphism, then $\mathbb L_*F(f):\mathbb L_*F(A)\to \mathbb L_*F(B)$ are isomorphisms
+\item If $A$ is bounded below and $A_p$ are $F$ acyclic, then $\mathbb L_pF(A)=H_pF(A)$
+\end{enumerate}
+\end{corollary}
+
+\begin{theorem}[Grothendieck spectral sequence]\label{Grothendieck spectral sequence}\index{Grothendieck spectral sequence}
+$\mathcal A,\mathcal B$ have enough projectives, $F:\mathcal B\to\mathcal C$, $G:\mathcal{A}\to \mathcal{B}$ are right exact functors and $G$ sends projectives to $F$-acyclic objects, then
+\[(L_pF)(L_qG)(A)\Rightarrow L_{p+q}(FG)(A)\]
+\end{theorem}
+
+\begin{proof}
+Suppose $P\to A$ is a projective resolution, then by Proposition \ref{Hyperhomology spectral sequence}, we have
+\[(L_pF)(L_qG)(A)\cong L_pF(H_qG(P))\Rightarrow \mathbb L_{p+q}(FG)(A)\]
+\[H_p(L_qF(G(P)))\Rightarrow \mathbb L_{p+q}(FG)(A)\]
+Since $G(A)$ is $F$-acyclic, $'E^{pq}_2=0$ for $q\neq0$ and
+\[E^{p0}_2=H_p(FG(P))=L_p(FG)(A)\cong\mathbb L_p(FG)(A)\]
+\end{proof}
+
+\begin{corollary}[Hochschild-Serre spectral sequence]\label{Hochschild-Serre spectral sequence}\index{Hochschild-Serre spectral sequence}
+$N\trianglelefteq G$ is a normal subgroup, $A$ is a $\mathbb ZG$ module, then
+\[H_p(G/N;H_q(N;A))\Rightarrow H_{p+q}(G;A)\]
+\end{corollary}
+
+\begin{proof}
+Consider right exact functors
+\[F=-\otimes_{\mathbb Z[G/N]}\mathbb Z:\mathbb Z[G/N]\text{-mod}\to\mathbb Z\text{-mod}\]
+\[G=-\otimes_{\mathbb Z[N]}\mathbb Z=-\otimes_{\mathbb Z[G]}\mathbb Z[G/N]:\mathbb Z[G]\text{-mod}\to\mathbb Z[G/N]\text{-mod}\]
+The left derived functors of $FG=-\otimes_{\mathbb Z[G]}\mathbb Z$ is $L_*(FG)(A)=Tor_*^{\mathbb Z[G]}(A,\mathbb Z)=H_*(G;A)$. For any $\mathbb Z[G]$ module $A$ and $\mathbb Z[G/N]$ module $B$, we have natural isomorphism
+\[Hom_{\mathbb Z[G/N]}(A\otimes_{\mathbb Z[G]}\mathbb Z[G/N],B)\cong Hom_{\mathbb Z[G]}(A,B)=Hom_{\mathbb Z[G]}(A,U(B))\]
+Hence $G$ is left adjoint to forgetful functor $U$ which is exact, by Lemma \ref{Left adjoint to exact functor preserves projectives}, $G$ preserves projectives which are exactly $F$-acyclic objects. Apply Theorem \ref{Grothendieck spectral sequence} we have
+\begin{align*}
+H_p(G/N;H_q(N;A))=(L_pF)(L_qG)(A)\Rightarrow L_{p+q}(FG)(A)=H_{p+q}(G;A)
+\end{align*}
+\end{proof}
+
+\end{document}

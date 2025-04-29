@@ -1,0 +1,48 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{My_math_package}
+
+\begin{document}
+
+For $a,b\in k^\times$, consider
+\[
+\begin{bmatrix}
+y_0\\y_1\\y_2
+\end{bmatrix}=\begin{bmatrix}
+0&b&0\\
+a&0&0\\
+0&0&ab
+\end{bmatrix}=\begin{bmatrix}
+x_0\\x_1\\x_2
+\end{bmatrix}=\begin{bmatrix}
+bx_1\\ax_0\\abx_2
+\end{bmatrix}
+\]
+Then conics $V(ay_0^2+by_1^2-y_2^2)=V(a(bx_1)^2+b(ax_0)^2-(abx_2)^2)=V(ax_0^2+bx_1^2-abx_2^2)$
+
+\begin{proposition}
+$(a,b),(c,d)$ are two quaternion algebras over $k$, then $(a,b)\cong(c,d)$ iff $C_{a,b}=V(ax_0^2+bx_1^2-x_2^2)$ and $C_{c,d}=V(cx_0^2+dx_1^2-x_2^2)$ define the same conics up to $PGL_2(k)$
+\end{proposition}
+
+\begin{proposition}
+$(a,b)/k$ split iff $C_{a,b}(k)\neq\varnothing$
+\end{proposition}
+
+Let's briefly recall Hensel's lemma
+\begin{lemma}[Hensel's lemma]\label{Hensel's lemma}
+$f(x)\in\mathbb Z_p[x]$, $a\in\mathbb Z_p$, $f(a)\equiv0\mod p$, $f'(a)\not\equiv0\mod p$, then there exists $\alpha\in\mathbb Z_p$ such that $f(\alpha)=0$ in $\mathbb Z_p$ and $\alpha\equiv a\mod p$
+\end{lemma}
+
+\begin{example}[Non-isomorphic quaternion algebras with divisions]
+$Q_1=(-1,7)/\mathbb Q\not\cong Q_2=(-1,3)/\mathbb Q$.
+\begin{itemize}
+\item Check $Q_1$ has division, suppose not, then $7=z^2+w^2$ has a solution, but since $0=z^2+w^2$ has no non-trivial solution in $\mathbb F_7$, hence we have $7=(7\alpha)^2+(7\gamma)^2=49(\alpha^2+\gamma^2)$ which is impossible
+\item Check $Q_2$ has division, suppose not, then $3=z^2+w^2$ has a solution, but since $0=z^2+w^2$ has no non-trivial solution in $\mathbb F_3$, hence we have $3=(3\alpha)^2+(3\gamma)^2=9(\alpha^2+\gamma^2)$ which is impossible
+\item $(-1,3)/\mathbb Q_7$ split, consider $x^2+y^2-3z^2-3w^2=0$, let $y=z=1$, $w=0$ and $f(x)=x^2-2$, then $f(3)\equiv0\mod 7$ and $f'(3)\equiv1\mod7$, by Hensel's lemma~\ref{Hensel's lemma} we know there exists $\mathbb Q_7\ni\alpha\equiv3$ such that $f(\alpha)=0$
+\end{itemize}
+\end{example}
+
+\begin{example}
+Quaternion algebras over $\mathbb F_q(q=p^n,p\neq 2)$ split, just consider $1^2-ax^2-by^2+0^2=0\Rightarrow ax^2=1-by^2$, write $S_a=\{ax^2\}$, $S_b=\{1-by^2\}$, then $|S_a|=|S_b|=|\{x^2\}|=\frac{q-1}{2}+1=\frac{q+1}{2}$, so $S_a$ and $S_b$ cannot be disjoint
+\end{example}
+
+\end{document}

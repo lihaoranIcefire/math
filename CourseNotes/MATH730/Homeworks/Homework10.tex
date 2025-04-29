@@ -1,0 +1,51 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\textbf{Hatcher 2.1.11.} \par
+Suppose $r:X\rightarrow A$ is a retraction, $i: A\rightarrow X$ is the inclusion, then $r\circ i=\mathrm{id}_A$, $i_*[\sum n_\alpha\sigma^n_\alpha]=[\sum n_\alpha i\circ\sigma^n_\alpha]$, if $[\sum n_\alpha i\circ\sigma^n_\alpha]=0$, $\sum n_\alpha i\circ\sigma^n_\alpha=\partial\left(\sum n_\beta \tau^{n+1}_\beta\right)$ where $\tau^{n+1}_\beta:\Delta^{n+1}\rightarrow X$ \ par
+Then we have $\sum n_\alpha\sigma^n_\alpha=r\left(\sum n_\alpha i\circ\sigma^n_\alpha\right)=r\left(\partial\left(\sum n_\beta \tau^{n+1}_\beta\right)\right)=\partial\left(\sum n_\beta r\circ\tau^{n+1}_\beta\right)$, $r\circ\tau^{n+1}_\beta:\Delta^{n+1}\rightarrow A$ \par
+Hence $[\sum n_\alpha\sigma^n_\alpha]=0$, $i_*$ is injective \par
+\textbf{Hatcher 2.1.30.} \par
+If $\alpha:A\rightarrow B$ is an isomorphism, so is $\alpha^{-1}:B\rightarrow A$, then we can write the remaining map as a composition of the others, so it is also an isomorphism \par
+\textbf{1.} \par
+Suppose $h_n$ is a chain homotopy between $f_n$ and $g_n$, then $g_n-f_n=\partial^D_{n+1}h_n+h_{n-1}\partial^C_n$ \par
+$\forall [f_n(c)]\in H_n(f)$, where $c\in\ker\partial^C_n$, $g_n(c)=f_n(c)+\partial^D_{n+1}h_n(c)+h_{n-1}\partial^C_n(c)=f_n(c)+\partial^D_{n+1}h_n(c)$, since $\partial^D_{n+1}h_n(c)\in\partial^D_{n+1}(D_{n+1})$, $[f_n(c)]=[g_n(c)]\in H_n(g)$, $H_n(f)\subseteq H_n(g)$, similarly, $H_n(g)\subseteq H_n(f)$, thus $H_n(f)= H_n(g)$ \par
+\textbf{2.} \par
+$(a)\Rightarrow (b):$ Since the sequence is split exact, the following diagram commutes \par
+\begin{center}
+\begin{tikzcd}
+& & &B \arrow[dd,"\varphi"] \arrow[dr,"p"] & & \\
+&0 \arrow[r]
+&A \arrow[ur,"i"] \arrow[dr,"\iota_A"]
+&
+&C \arrow[r]
+&0 \\
+& & &A\oplus C \arrow[ur,"\pi"] & & \\
+\end{tikzcd}
+\end{center}
+Where $\pi$ is the projection, $\iota_A$ is the inclusion \par
+Define $s=\varphi^{-1}\iota_C$, where $\iota_C: C\rightarrow A\oplus C$ is the inclusion, then $p\circ s=p\circ\varphi^{-1}\circ\iota_C=\pi\circ\varphi^{-1}\circ\varphi\circ\iota_C=\pi\circ\iota_C=\mathrm{id}_C$ \par
+$(b)\Rightarrow (c):$ $\forall b\in B$, let $b_1=b-s\circ p(c)$, then $p(b_1)=p(b)-p\circ s\circ p(b)=p(b)-p(b)=0$, $\Rightarrow b\in\ker p=\mathrm{im} i$, since $i$ is injective, $\exists_1 a\in A$, such that $i(a)=b$, define $a:=r(b)$, then we have $r\circ i(a)=a, \forall a\in A$, hence $r\circ i=\mathrm{id}_A$ \par
+$(c)\Rightarrow (a):$ $\forall b\in B$, define $\varphi: B\rightarrow A\oplus C, b\mapsto (r(b),p(b))$, $\forall a\in A, a=r\circ i(a)\in r(B)$, also $C=p(B)$, thus $A\oplus C\subseteq\varphi(B)$, $\varphi$ is surjective \par
+On the other hand, if $\varphi(b)=0$, then $r(b)=p(b)=0$, $\exists a\in A$ such that $i(a)=b$, but then $a=r\circ i(a)=r(b)=0\Rightarrow b=i(a)=0$, hence $\varphi$ is also injective, $\varphi$ is an isomorphism \par
+$\forall b\in B, \pi\circ\varphi(b)=\pi(r(b),p(b))=p(b)$, $\forall a\in A, \varphi\circ i(a)=(r\circ i(a),p\circ i(a))=(a,0)=\iota_A(a)$, thus the diagram above commutes \par
+\textbf{3.} \par
+If $C=0$, then $A\rightarrow B$ is obviously surjective and $D\rightarrow E$ is obviously injective \par
+Conversely, since $A\xrightarrow{\alpha}B\xrightarrow{\beta}C\xrightarrow{\gamma}D\xrightarrow{\xi}E$ is exact, if $\alpha$ is surjective, $\xi$ is injective, $\forall c\in C$, we have 
+\[
+\begin{aligned}
+\xi\circ\gamma(c)=0
+&\Rightarrow \gamma(c)=0 \\
+&\Rightarrow \exists b\in B, \text{such that } \beta(b)=c \\
+&\Rightarrow \exists a\in A, \text{such that } \alpha(a)=b \\
+&\Rightarrow c=\beta\circ\alpha(a)=0
+\end{aligned}
+\]
+Hence $C=0$ \par
+\textbf{4.} \par
+Define $\varepsilon: C_0(X)\rightarrow \mathbb{Z}$ by sending $\sum n_\alpha\sigma^0_\alpha$ to $\sum n_\alpha$ \par
+$\forall \sigma: \Delta^1\rightarrow X$, $\varepsilon(\partial\sigma)=\varepsilon\left(\sigma|[v_1]-\sigma|[v_0]\right)=1-1=0$, thus $\varepsilon\circ\partial=0$ \par
+Also, $\forall \sum n_\alpha\sigma^0_\alpha\in C_0(X)$, if $\varepsilon(\sum n_\alpha\sigma^0_\alpha)=\sum n_\alpha=0$, then there are same number of $\sigma^0_\alpha$'s with coefficients $1$ and coefficients $-1$, and for each pair, there is a path$: \Delta^1\rightarrow X$ from the one with coefficient $-1$ to the one with coefficient $1$, then the sum of these paths $\xi\in C_1(X)$, and $\partial\xi=\sum n_\alpha\sigma^0_\alpha$, hence $C_1(X)\xrightarrow{\partial}C_0{X}\xrightarrow{\varepsilon}\mathbb{Z}\rightarrow 0$ is exact, $H_0(X)=C_0(X)/\mathrm{im}\partial=C_0(X)/\ker\varepsilon\cong\mathbb{Z}$ \par
+
+\end{document}

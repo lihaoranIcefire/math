@@ -1,0 +1,40 @@
+\documentclass[10pt]{article}
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{bbm}
+\usepackage{mathtools} %\xhookrightarrow
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+%\newcommand{cmd}[args]{def}
+
+\title{MATH848G homework 2}
+\author{Haoran Li}
+\date{}
+
+\setlength{\parindent}{0cm}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} \par
+First we show that the $n$-th derivative of $p(x,\xi)=p(\xi)=\xi(1+\xi^2)^{-\frac{1}{2}}$ has the form $Q_{n+1}(\xi)(1+\xi^2)^{-\frac{2n+1}{2}}$ where $Q_{n+1}(\xi)$ is polynomial of $\xi$ with degree no more than $n+1$, notice $\left[Q_{n+1}(\xi)(1+\xi^2)^{-\frac{2n+1}{2}}\right]'=Q_{n+1}'(\xi)(1+\xi^2)^{-\frac{2n+1}{2}}-(2n+1)\xi Q_{n+1}(\xi)(1+\xi^2)^{-\frac{2n+3}{2}}=\left[(1+\xi^2)Q_{n+1}'(\xi)-(2n+1)\xi Q_{n+1}(\xi)\right](1+\xi^2)^{-\frac{2(n+1)+1}{2}}$, we can define $Q_1(\xi)=\xi$ and $Q_{n+2}(\xi)=(1+\xi^2)Q_{n+1}'(\xi)-(2n+1)\xi Q_{n+1}(\xi)$ inductively, then $|Q_{n+1}(\xi)|\leq C_n(1+|\xi|)^{n+1}$ for some constant $C_n$ only depends on $n$, and $(1+\xi^2)^{-\frac{1}{2}}\geq \sqrt2(1+|\xi|)^{-1}$, thus $\left|Q_{n+1}(\xi)(1+\xi^2)^{-\frac{2n+1}{2}}\right|\leq \sqrt2 C_n(1+|\xi|)^{-n}$, also $|p(x,\xi)|>\frac{1}{2}$ when $\xi$ is sufficiently large, thus $P$ is an elliptic pseudo-differential operator of order $0$, the symbol for $I-P^2$ is $\dfrac{1}{1+\xi^2}$, it is not a smoothing operator since since $\widehat{e^{-|x|}}(\xi)=\dfrac{2}{1+\xi^2}$ and apply Fourier inversion theorem then kernel corresponding to operator $I-P^2$ is $\displaystyle K(x,y)=\dfrac{1}{2\pi}\int_{\mathbb R}\dfrac{e^{i(x-y)\xi}}{1+\xi^2}d\xi=\dfrac{1}{2}e^{-|x-y|}$ which is not smooth along the diagonal \par
+$P$ is not Fredholm on $L^2(\mathbb R)$, because Fourier transform is an isometry on $L^2(\mathbb R)$, $P$ corresponds to multiplication by $\dfrac{\xi}{\sqrt{1+\xi^2}}$ on $L^2(\mathbb R)$, it is easy to see $\ker P=0$, as for cokernel of $P$, consider functions $\xi^\alpha\mathbbm1_{[-1,1]}$ with $-\frac{1}{2}<\alpha\leq\frac{1}{2}$, they belong to $L^2(\mathbb{R})$ but without preimages in $L^2(\mathbb R)$, and any nonzero linear combination of them also doesn't have a preimage, so they are linearly independent representatives of cokernel of $P$, hence cokernel of infinite dimension and $P$ is not Fredholm on $L^2(\mathbb R)$ \par
+Suppose $f$ is a periodic function on $\mathbb R$ of period $2\pi$, then \par
+$P(x,D)f=\displaystyle\int_{\mathbb R}\frac{\xi}{\sqrt{1+\xi^2}}\widehat{f}(\xi)e^{ix\xi}d\xi=\int_{\mathbb R}\frac{\xi}{\sqrt{1+\xi^2}}e^{-i2\pi\xi}\widehat{f}(\xi)e^{i(x+2\pi)\xi}d\xi=$\par
+$\displaystyle\int_{\mathbb R}\frac{\xi}{\sqrt{1+\xi^2}}\widehat{f}(\xi)e^{i(x+2\pi)\xi}d\xi=P(x+2\pi,D)f$, hence $P(x,D)f$ is also a periodic function on $\mathbb R$ of period $2\pi$, thus we may define $P$ as an operator on $S^1\cong \mathbb R/2\pi\mathbb Z$, notice $P(x,D)(e^{inx})=\displaystyle\int_{\mathbb R}\frac{\xi}{\sqrt{1+\xi^2}}\widehat{e^{inx}}(\xi)e^{ix\xi}d\xi=\int_{\mathbb R}\frac{\xi}{\sqrt{1+\xi^2}}\delta_n(\xi)e^{ix\xi}d\xi=\frac{n}{\sqrt{1+n^2}}e^{inx}$, $\displaystyle P(x,D)\left(\sum c_ne^{inx}\right)=\sum\frac{nc_n}{\sqrt{1+n^2}}e^{inx}$ then it is easy to see $\mathrm{ind} P=\dim\ker P-\dim\mathrm{coker} P=1-1=0$ \par
+
+\textbf{2.} \par
+After Fourier transform, $P_K$ corresponds to multiplication by $K^2-n^2$, suppose for a $\|f\|_{H^2(S^1)}=\sum (1+|n|^2)^2|\widehat{f}(n)|^2=1$, we have $\|(P_{K_2}-P_{K_1})f\|_{L^2(S^1)}=\sum |(K_2^2-K_1^2)\widehat{f}(n)|^2=(K_2^2-K_1^2)^2\sum |\widehat{f}(n)|^2\leq (K_2^2-K_1^2)^2$, thus $P_K$ varies continuously with $K$, when $K=0$, the periodic functions in the kernel of $P_0$ are only constants, i.e. $\dim \ker P_0=1$, on the other hand, consider linear operator $T:L^2(S^1)\rightarrow\mathbb R, f\mapsto \int_{0}^{2\pi}fdx$, notice $\ker T=\left\{f\in L^2(S^1)|\int_{0}^{2\pi}fdx=0\right\}=\mathrm{im} P_0$ since for such $f$, periodic function $\int_{0}^{x}\int_{0}^{y}f(z)dzdy-\int_0^{2\pi}zf(z)dz$ is a preimage, hence cokernel of $P_0$ is of dimension 1, thus $\mathrm{ind} P=\dim\ker P-\dim\mathrm{coker} P=1-1=0$ \par
+More directly, $\displaystyle\sum \dfrac{\frac{1}{2\pi}\int_0^{2\pi}f(y)e^{-iny}dy}{K^2-n^2}e^{inx}$ will be a solution when $K$ is not an integer \par
+
+
+\end{document}, 
