@@ -6,3 +6,6 @@
 
 # css styling file
 md_style.css
+
+# environments
+.venv

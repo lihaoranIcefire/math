@@ -1,0 +1,76 @@
+\contentsline {section}{\numberline {1}Lecture 1 - System of linear equations}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Linear systems}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Geometric interpretation}{4}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Lecture 2 - Matrices and row echelon form}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Matrices}{7}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Row echelon form}{9}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Lecture 3 - Matrix algebra}{12}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Matrix addition and scalar multiplication}{12}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Matrix multiplication}{13}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Partitioned matrix}{15}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Lecture 4 - Matrix equations and linear independence}{17}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Vector and matrix equations}{17}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Span}{18}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Linear independence}{18}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Lecture 5 - Geometric interpretation of solutions of linear systems}{19}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Geometric interpretation of vectors}{19}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Basis}{20}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Geometric meaning of spans}{20}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Parametric vector form}{21}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Geometric interpretation of solution set to linear system}{21}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Lecture 6 - Linear transformations}{23}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Linear transformations and matrix transformations}{23}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Properties of linear transformations}{25}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Composition of linear transformations}{27}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Lecture 7 - Matrix transpose and matrix inverse}{27}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Matrix transpose}{27}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Matrix inverse}{29}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Properties of matrix transposes and inverses}{30}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Lecture 8 - Determinant}{32}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Geometric definition of determninants}{32}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Properties of determinants}{34}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Cofactor expansion}{36}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Lecture 9 - Vector spaces and subspaces}{39}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Vector space}{39}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Subspace}{42}{subsection.9.2}%
+\contentsline {section}{\numberline {10}Lecture 10 - Null spaces, Column spaces, Row spaces, Rank and Nullity}{43}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Null space, Column Space and Row space}{43}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Rank and Nullity}{44}{subsection.10.2}%
+\contentsline {section}{\numberline {11}Lecture 11 - Linear transformations in general}{45}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Linear transformation}{45}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Matrices of linear transformations}{46}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Change of basis}{49}{subsection.11.3}%
+\contentsline {section}{\numberline {12}Lecture 12 - Eigendecomposition}{51}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Eigenvalues, eigenvectors and eigenspaces}{51}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Characteristic polynomials}{52}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}Similarity}{54}{subsection.12.3}%
+\contentsline {subsection}{\numberline {12.4}Eigendecomposition and diagonalization}{54}{subsection.12.4}%
+\contentsline {section}{\numberline {13}Lecture 13 - Orthogonalization}{57}{section.13}%
+\contentsline {subsection}{\numberline {13.1}Orthogonal and orthonormal basis}{57}{subsection.13.1}%
+\contentsline {subsection}{\numberline {13.2}Gram-Schmidt process}{57}{subsection.13.2}%
+\contentsline {subsection}{\numberline {13.3}Orthogonal matrix and QR factorization}{59}{subsection.13.3}%
+\contentsline {section}{\numberline {14}Lecture 14 - Least-square problem}{60}{section.14}%
+\contentsline {subsection}{\numberline {14.1}Least-square solutions}{60}{subsection.14.1}%
+\contentsline {subsection}{\numberline {14.2}Machine Learning and approximation}{61}{subsection.14.2}%
+\contentsline {section}{\numberline {15}Lecture 15 - Complex eigenvalues}{62}{section.15}%
+\contentsline {subsection}{\numberline {15.1}Complex numbers}{62}{subsection.15.1}%
+\contentsline {subsection}{\numberline {15.2}Eigen-decomposition over the complex numbers}{62}{subsection.15.2}%
+\contentsline {section}{\numberline {16}Lecture 16 - Orthogonal diagonalization}{63}{section.16}%
+\contentsline {subsection}{\numberline {16.1}Orthogonal diagonalization}{63}{subsection.16.1}%
+\contentsline {subsection}{\numberline {16.2}Spectral decomposition}{65}{subsection.16.2}%
+\contentsline {section}{\numberline {17}Appendix}{65}{section.17}%
+\contentsline {section}{\numberline {18}Online Assignments}{65}{section.18}%
+\contentsline {subsection}{\numberline {18.1}Online Assignment 1}{65}{subsection.18.1}%
+\contentsline {subsection}{\numberline {18.2}Online Assignment 2}{68}{subsection.18.2}%
+\contentsline {subsection}{\numberline {18.3}Online Assignment 3}{70}{subsection.18.3}%
+\contentsline {subsection}{\numberline {18.4}Online Assignment 4}{72}{subsection.18.4}%
+\contentsline {subsection}{\numberline {18.5}Online Assignment 5}{74}{subsection.18.5}%
+\contentsline {subsection}{\numberline {18.6}Online Assignment 6}{76}{subsection.18.6}%
+\contentsline {subsection}{\numberline {18.7}Online Assignment 7}{78}{subsection.18.7}%
+\contentsline {subsection}{\numberline {18.8}Online Assignment 8}{79}{subsection.18.8}%
+\contentsline {subsection}{\numberline {18.9}Online Assignment 9}{81}{subsection.18.9}%
+\contentsline {subsection}{\numberline {18.10}Online Assignment 10}{83}{subsection.18.10}%
+\contentsline {section}{\numberline {19}Exams}{84}{section.19}%
+\contentsline {subsection}{\numberline {19.1}Exam 1}{84}{subsection.19.1}%
+\contentsline {subsection}{\numberline {19.2}Exam 2}{87}{subsection.19.2}%
+\contentsline {subsection}{\numberline {19.3}Final}{90}{subsection.19.3}%
